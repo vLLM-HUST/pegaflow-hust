@@ -42,6 +42,21 @@ fn test_gpu_pool(device_id: i32) -> Arc<GpuWorkerPool> {
         .clone()
 }
 
+/// Build a registration with explicit hybrid-cache group ids per layer.
+fn gpu_registration_with_groups(
+    device_id: i32,
+    tp_rank: usize,
+    layers_and_groups: &[(&str, u32)],
+) -> GpuRegistration {
+    let layers: Vec<&str> = layers_and_groups.iter().map(|(name, _)| *name).collect();
+    let mut registration = gpu_registration(device_id, tp_rank, &layers);
+    registration.layer_groups = layers_and_groups
+        .iter()
+        .map(|(name, group)| ((*name).to_string(), *group))
+        .collect();
+    registration
+}
+
 fn gpu_registration_with_segment_bytes(
     device_id: i32,
     tp_rank: usize,
@@ -68,6 +83,7 @@ fn gpu_registration_with_segment_bytes(
         numa_node: NumaNode::UNKNOWN,
         transfer_mode: TransferMode::Direct,
         kv_caches,
+        layer_groups: HashMap::new(),
     }
 }
 
