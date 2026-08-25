@@ -48,6 +48,10 @@ message RegisterContextRequest {
   // Set by the connector for MLA; the engine derives per-layer page offsets
   // from the registered layouts. See spec.md.
   bool page_first = 18;
+  // Per-layer vLLM cache-group id (hybrid KV cache models). Empty for
+  // single-group deployments: every layer registers in group 0, keeping
+  // existing single-group caches byte-identical (see block::group_hash).
+  repeated uint32 layer_group_ids = 19;
 }
 
 message RegisterContextResponse {
@@ -77,13 +81,29 @@ message LoadRequest {
   uint32 tp_rank = 2;
   int32 device_id = 3;
   string load_state_shm = 4;
-  repeated string layer_names = 5;
+  repeated LoadGroup groups = 5;
   repeated LeaseLoad loads = 6;
+}
+
+message LoadGroup {
+  repeated string layer_names = 1;
+}
+
+message LoadBlockIds {
+  repeated LoadBlockTarget targets = 1;
+}
+
+message LoadBlockTarget {
+  // Absent for cache groups that have no physical destination for this
+  // logical block (for example historical recurrent-state blocks in HMA).
+  oneof target {
+    uint32 block_id = 1;
+  }
 }
 
 message LeaseLoad {
   bytes lease = 1;
-  repeated uint32 block_ids = 2;
+  repeated LoadBlockIds block_ids_by_group = 2;
 }
 
 message LoadResponse {
@@ -94,6 +114,15 @@ message QueryRequest {
   string instance_id = 1;
   repeated bytes block_hashes = 2;
   string req_id = 3;
+  // Keep the query in Loading until the full remaining prefix is fetchable
+  // from a remote node via MetaServer + RDMA. Does not observe saves landing
+  // in the local engine; no effect when RDMA is not configured. (T6: passed
+  // through on group 0; membership set-fetch semantics not yet wired.)
+  bool wait_for_full_prefix = 4;
+  // Hybrid-cache storage group to query. 0 (default) is the attention group
+  // and uses prefix semantics. Groups > 0 use membership semantics
+  // (official #433); T6 stage 1 rejects group_id > 0.
+  uint32 group_id = 5;
 }
 
 message QueryResponse {
@@ -108,6 +137,9 @@ message QueryLoading {}
 message QueryReady {
   uint64 num_hit_blocks = 1;
   bytes lease = 2;
+  // Membership queries only: indices into QueryRequest.block_hashes whose
+  // block is cached, in ascending order. Empty for prefix queries.
+  repeated uint32 hit_positions = 3;
 }
 
 message ReleaseRequest {
