@@ -58,7 +58,10 @@ class QueryLoading:
 class QueryReady:
     num_hit_blocks: int
     lease: bytes
-    def __init__(self, num_hit_blocks: int, lease: bytes) -> None: ...
+    hit_positions: list[int]
+    def __init__(
+        self, num_hit_blocks: int, lease: bytes, hit_positions: list[int] = ...
+    ) -> None: ...
 
 class EngineRpcClient:
     """gRPC client for remote PegaEngine server communication.
@@ -111,6 +114,7 @@ class EngineRpcClient:
         segments_list: list[int],
         transfer_backend: str,
         page_first: bool,
+        layer_group_ids: list[int] | None = None,
     ) -> tuple[bool, str]:
         """Register all KV cache layers on a GPU with a single RPC call.
 
@@ -184,8 +188,8 @@ class EngineRpcClient:
         tp_rank: int,
         device_id: int,
         load_state_shm: str,
-        layer_names: list[str],
-        loads: list[tuple[bytes, list[int]]],
+        layer_groups: list[list[str]],
+        loads: list[tuple[bytes, list[list[int | None]]]],
     ) -> tuple[bool, str]:
         """Load KV blocks from the engine.
 
@@ -198,8 +202,9 @@ class EngineRpcClient:
             tp_rank: Tensor parallel rank.
             device_id: CUDA device ID.
             load_state_shm: Shared memory name from PyLoadState.shm_name().
-            layer_names: List of layer names to load.
-            loads: List of (lease, destination block IDs) pairs.
+            layer_groups: Cache-group ordered lists of layer names to load.
+            loads: List of (lease, block_ids_by_group) pairs; None marks a
+                group with no physical destination for that logical block.
 
         Returns:
             Tuple of (ok, message) indicating success/failure.
@@ -215,6 +220,8 @@ class EngineRpcClient:
         instance_id: str,
         block_hashes: list[bytes],
         req_id: str,
+        wait_for_full_prefix: bool = False,
+        group_id: int = 0,
     ) -> QueryLoading | QueryReady:
         """Query prefix cache hits with SSD prefetch support.
 
@@ -222,12 +229,16 @@ class EngineRpcClient:
         Ready hits are owned by an opaque lease consumed by load or release.
         Contract: instance_id must be registered, req_id must be non-empty
         and stable across retries for the same request, and block_hashes may
-        be empty.
+        be empty. group_id > 0 selects membership semantics (official #433);
+        the T6 fork rejects group_id > 0 at the server.
 
         Args:
             instance_id: Model instance ID.
             block_hashes: List of block hashes to check.
             req_id: Request ID for tracking and prefetch correlation.
+            wait_for_full_prefix: Keep the query Loading until the full
+                remaining prefix is fetchable.
+            group_id: Storage group to query (0 = dense attention prefix).
 
         Returns:
             QueryLoading while backing fetch is in progress, otherwise QueryReady.

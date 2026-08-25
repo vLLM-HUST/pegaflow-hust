@@ -54,17 +54,23 @@ class FakeEngineClient:
         tp_rank: int,
         device_id: int,
         load_state_shm: str,
-        layer_names,
+        layer_groups,
         loads,
     ) -> tuple[bool, str]:
-        block_ids = [block_id for _, ids in loads for block_id in ids]
+        block_ids = [
+            block_id
+            for _, ids_by_group in loads
+            for ids in ids_by_group
+            for block_id in ids
+            if block_id is not None
+        ]
         self.load_calls.append(
             (
                 instance_id,
                 tp_rank,
                 device_id,
                 load_state_shm,
-                list(layer_names),
+                [list(group) for group in layer_groups],
                 list(block_ids),
             )
         )
@@ -74,7 +80,12 @@ class FakeEngineClient:
             return (False, "simulated load failure")
         return (True, "ok")
 
-    def register_context_batch(self, *args) -> tuple[bool, str]:
+    def register_context_batch(
+        self,
+        *args,
+        layer_group_ids=None,
+        **kwargs,
+    ) -> tuple[bool, str]:
         self.register_calls.append(args)
         if self.register_exception is not None:
             raise self.register_exception
