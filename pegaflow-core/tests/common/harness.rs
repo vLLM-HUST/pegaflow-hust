@@ -436,8 +436,8 @@ impl TestEnv {
                 0,
                 0,
                 &shm_name,
-                &layer_names,
-                &[(lease, block_ids)],
+                &[layer_names],
+                &[(lease, vec![block_ids.iter().map(|&id| Some(id)).collect()])],
             )
             .expect("submit load");
         wait_for_load(&load_state, LOAD_WAIT_TIMEOUT).await;
@@ -456,8 +456,8 @@ impl TestEnv {
                 0,
                 0,
                 &shm_name,
-                &layer_names,
-                &[(lease, block_ids)],
+                &[layer_names],
+                &[(lease, vec![block_ids.iter().map(|&id| Some(id)).collect()])],
             )
             .expect_err("load should fail");
         assert!(
