@@ -17,7 +17,7 @@
 set -euo pipefail
 
 HUST=/workspace/HUST
-SERVE=$HUST/t6-v4-serve.sh
+SERVE="$(cd "$(dirname "$0")" && pwd)/t6-v4-serve.sh"
 # workload 需要 deepseek-v4-deploy 环境的 python (serve 脚本内部自行 activate)
 source /root/miniconda3/bin/activate deepseek-v4-deploy
 WORKLOAD="python $HUST/pegaflow-hust/scripts/run_perf_t6_workload.py"

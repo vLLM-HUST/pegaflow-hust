@@ -39,7 +39,7 @@ from pathlib import Path
 sys.path.insert(0, str(Path(__file__).resolve().parent))
 import run_perf_t6_workload as W  # noqa: E402  (reuse prompts/call/parse)
 
-SERVE = "/workspace/HUST/t6-v4-serve.sh"
+SERVE = str(Path(__file__).resolve().parent / "t6-v4-serve.sh")
 METRICS_URL = "http://127.0.0.1:9091/metrics"
 METRIC_NAMES = [
     "pegaflow_pool_used_bytes",
