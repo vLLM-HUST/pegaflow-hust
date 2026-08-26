@@ -254,6 +254,7 @@ class WorkerConnector:
         self._failed_load_reqs: set[str] = set()
 
         self._registered_layers: list[str] = []
+        self._subblock_skip_warned: set[str] = set()  # 每层只警告一次的子块跳保存
         # Page-first storage: all layers of a block in one host page, one slot
         # per tp_rank. Saves distribute by block stripe instead of by layer.
         self._page_first: bool = False
@@ -1061,13 +1062,16 @@ class WorkerConnector:
                             # the layer's save this step instead of failing
                             # the batch; the dense hash-group prefix saves
                             # (block size == scheduler block) are unaffected.
-                            logger.warning(
-                                "[PegaKVConnector] skipping save for %s: blocks=%d "
-                                "hashes=%d (T6 sub-block granularity)",
-                                layer_name,
-                                len(block_ids),
-                                len(block_hashes),
-                            )
+                            if layer_name not in self._subblock_skip_warned:
+                                self._subblock_skip_warned.add(layer_name)
+                                logger.warning(
+                                    "[PegaKVConnector] skipping save for %s: blocks=%d "
+                                    "hashes=%d (T6 sub-block granularity; further "
+                                    "skips for this layer are silent)",
+                                    layer_name,
+                                    len(block_ids),
+                                    len(block_hashes),
+                                )
                             continue
                         raise RuntimeError(
                             f"save block/hash count mismatch for {layer_name}: "
