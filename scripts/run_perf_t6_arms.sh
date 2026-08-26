@@ -16,11 +16,12 @@
 #                                     [--arms native,isolated-share,always-share]
 set -euo pipefail
 
-HUST=/workspace/HUST
+REPO_ROOT=$(cd "$(dirname "$0")/.." && pwd)
 SERVE="$(cd "$(dirname "$0")" && pwd)/t6-v4-serve.sh"
-# workload 需要 deepseek-v4-deploy 环境的 python (serve 脚本内部自行 activate)
-source /root/miniconda3/bin/activate deepseek-v4-deploy
-WORKLOAD="python $HUST/pegaflow-hust/scripts/run_perf_t6_workload.py"
+CONDA_ENV="${CONDA_ENV:-deepseek-v4-deploy}"
+# workload 需要 conda 环境的 python (serve 脚本内部自行 activate)
+source ${CONDA_ROOT:-/root/miniconda3}/bin/activate $CONDA_ENV
+WORKLOAD="python $(cd "$(dirname "$0")" && pwd)/run_perf_t6_workload.py"
 CODEX_JSON="${CODEX_JSON:-}"
 ARMS="${ARMS:-native,isolated-share,always-share}"
 VLLM_PORT=8900

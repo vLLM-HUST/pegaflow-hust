@@ -139,7 +139,7 @@ def run_arm(label: str, pegaflow: bool, args) -> dict:
     for t, trial in enumerate(trials):
         prompts = W.agent_turn_prompts(trial)[: args.max_turns]
         rows += W.run_prompts(f"DUAL[{t}]", prompts, log_path if pegaflow else "/dev/null",
-                              min(8, args.max_tokens), args.port, args.warm_delay)
+                              min(8, args.max_tokens), args.port, args.warm_delay, args.model)
     time.sleep(3)
     after_v = fetch_vllm_prefix_metrics()
     after_p = fetch_metrics() if pegaflow else {}
@@ -250,7 +250,7 @@ def run_tier(pool_gb: int, args) -> dict:
         prompts = W.agent_turn_prompts(trial)[: args.max_turns]
         rows += W.run_prompts(
             f"DEDUP-AGENT[{t}]", prompts, log_path,
-            min(8, args.max_tokens), args.port, args.warm_delay)
+            min(8, args.max_tokens), args.port, args.warm_delay, args.model)
     time.sleep(3)  # 让指标计数落定
     after = fetch_metrics()
 
@@ -296,6 +296,7 @@ def main() -> None:
     parser.add_argument("--pool-gb", type=int, default=8,
                         help="E2: PegaFlow 臂池容量 (需 >= 前缀集 7GB)")
     parser.add_argument("--port", type=int, default=8900, help="vLLM 端口")
+    parser.add_argument("--model", default="dsv4", help="served-model-name")
     parser.add_argument("--max-tokens", type=int, default=8, help="生成 token 上限")
     parser.add_argument("--warm-delay", type=float, default=3.0,
                         help="cold 后等待 save 排空的秒数")

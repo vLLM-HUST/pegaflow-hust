@@ -2,16 +2,20 @@
 # T6: DeepSeek-V4-Flash TP8 + PegaFlow connector 启动脚本 (独立于 deepseek-v4-deploy)
 #
 # 用法:
-#   bash /workspace/HUST/t6-v4-serve.sh              # PegaFlow on (T6 主臂)
-#   bash /workspace/HUST/t6-v4-serve.sh --no-pegaflow  # PegaFlow off (对照臂, KV 每 rank 冗余)
+#   bash scripts/t6-v4-serve.sh                       # PegaFlow on (T6 主臂)
+#   bash scripts/t6-v4-serve.sh --no-pegaflow          # PegaFlow off (对照臂, KV 每 rank 冗余)
 #
 # 环境: deepseek-v4-deploy (vllm v0.27.1 + vllm-ascend main, torch 2.11, CANN 9.0)
 # 参考: deepseek-v4-deploy/run_vllm_serve.sh (已验证部署) + pegaflow connector (兼容 vllm 0.27 抽象方法 ✓)
 set -e
-cd /workspace/HUST
+# 仓库根 = 本脚本上级目录 (scripts/t6-v4-serve.sh -> repo root)
+REPO_ROOT=$(cd "$(dirname "$0")/.." && pwd)
+PEGAFLOW_HUST=$REPO_ROOT
 
-PEGAFLOW_HUST=/workspace/HUST/pegaflow-hust
-MODEL=/workspace/HUST/models/DeepSeek-V4-Flash-w8a8-mtp
+# 机器相关路径/环境均可被环境变量覆盖 (默认值 = 本机部署约定)
+MODEL=${MODEL:-/workspace/HUST/models/DeepSeek-V4-Flash-w8a8-mtp}
+CONDA_ENV=${CONDA_ENV:-deepseek-v4-deploy}
+ASCEND_HOME_PATH=${ASCEND_HOME_PATH:-/usr/local/Ascend/cann-9.0.0}
 # 可被环境变量覆盖: 四臂验证 (native / isolated-share / always-share) 需
 # 每域独立 server (端口+池) 或共享单 server。
 PEGAFLOW_PORT=${PEGAFLOW_PORT:-50080}
@@ -21,10 +25,10 @@ MAX_MODEL_LEN=${MAX_MODEL_LEN:-133120}
 NO_PEGAFLOW=0
 [ "$1" = "--no-pegaflow" ] && NO_PEGAFLOW=1
 
-source /root/miniconda3/bin/activate deepseek-v4-deploy
+source ${CONDA_ROOT:-/root/miniconda3}/bin/activate $CONDA_ENV
 
 # ---- CANN 9.0 (torch-npu 2.11 已验证组合; 9.1-beta.3 会崩) ----
-export ASCEND_HOME_PATH=/usr/local/Ascend/cann-9.0.0
+export ASCEND_HOME_PATH=$ASCEND_HOME_PATH
 export ASCEND_TOOLKIT_HOME=$ASCEND_HOME_PATH
 export LD_LIBRARY_PATH=$ASCEND_HOME_PATH/aarch64-linux/lib64:$ASCEND_HOME_PATH/aarch64-linux/lib64/plugin/opskernel:$LD_LIBRARY_PATH
 export PYTHONPATH=$ASCEND_HOME_PATH/python/site-packages:$PYTHONPATH

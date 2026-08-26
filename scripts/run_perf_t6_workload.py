@@ -161,11 +161,11 @@ def parse_lookups(log_path: str) -> dict[str, dict]:
 # API + 测量
 # ---------------------------------------------------------------------------
 
-def call(messages, max_tokens=16, port=None):
+def call(messages, max_tokens=16, port=None, model=None):
     """POST /v1/chat/completions, 返回 (resp, 延迟秒, req_id)。"""
     port = port or PORT
     data = json.dumps({
-        "model": MODEL, "messages": messages, "max_tokens": max_tokens,
+        "model": model or MODEL, "messages": messages, "max_tokens": max_tokens,
         "temperature": 0.0, "stream": False,
     }).encode()
     req = urllib.request.Request(
@@ -202,7 +202,8 @@ def report_hit(req_id: str, log_path: str, latency: float, tag: str) -> dict:
 
 
 def run_prompts(name: str, prompts: list[str], log_path: str,
-                max_tokens: int, port: int, warm_delay: float = 0.0) -> list[dict]:
+                max_tokens: int, port: int, warm_delay: float = 0.0,
+                model: str | None = None) -> list[dict]:
     """一组提示, 每提示 2 次 (cold → warm)。
 
     warm_delay: cold 之后等 save 异步 D2H 排空再发 warm (否则尾部块还在
@@ -212,11 +213,11 @@ def run_prompts(name: str, prompts: list[str], log_path: str,
     rows = []
     for i, prompt in enumerate(prompts):
         m = msg(prompt)
-        resp, lat, req_id = call(m, max_tokens=max_tokens, port=port)
+        resp, lat, req_id = call(m, max_tokens=max_tokens, port=port, model=model)
         rows.append(report_hit(req_id, log_path, lat, f"{name}[{i}]-cold"))
         if warm_delay:
             time.sleep(warm_delay)
-        resp, lat, req_id = call(m, max_tokens=max_tokens, port=port)
+        resp, lat, req_id = call(m, max_tokens=max_tokens, port=port, model=model)
         rows.append(report_hit(req_id, log_path, lat, f"{name}[{i}]-warm"))
     return rows
 
@@ -233,6 +234,7 @@ def main() -> None:
     parser.add_argument("--domains", choices=("all", "chat", "agent"),
                         default="all", help="本次运行的域 (isolated 臂: 每次一个域)")
     parser.add_argument("--port", type=int, default=PORT, help="vLLM 端口")
+    parser.add_argument("--model", default=MODEL, help="served-model-name (默认 dsv4)")
     parser.add_argument("--log", default="/tmp/t6-server-vllm.log",
                         help="connector 日志; native 臂无日志, 传 /dev/null")
     parser.add_argument("--codex-json", default="",
@@ -260,7 +262,7 @@ def main() -> None:
     if args.domains in ("all", "chat"):
         for name, prompts in CHAT_FAMILIES:
             all_rows += run_prompts(name, prompts, args.log, args.max_tokens,
-                                    args.port, args.warm_delay)
+                                    args.port, args.warm_delay, args.model)
 
     if args.domains in ("all", "agent"):
         if not args.codex_json:
@@ -273,7 +275,8 @@ def main() -> None:
             # 限制轮数避免超长: 每 trial 最多 25 轮, 每轮 history 截断到 60K token 量级
             prompts = [p for p in prompts[:25]]
             all_rows += run_prompts(f"AGENT[{t}]", prompts, args.log,
-                                    min(8, args.max_tokens), args.port, args.warm_delay)
+                                    min(8, args.max_tokens), args.port, args.warm_delay,
+                                    args.model)
 
     # 汇总: warm 请求命中率 + TTFT
     print("\n== 汇总 (warm) ==")
