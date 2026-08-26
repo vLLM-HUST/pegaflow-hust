@@ -1,38 +1,46 @@
 #!/usr/bin/env python3
 """
-run_perf_t6_workload.py — T6: real-workload cache behavior on V4 + PegaFlow.
+run_perf_t6_workload.py — T6: three-arm cache-share verification on V4.
 
-Ports the official pegaflow prompt-family design (test_vllm_e2e_correctness.py
-/ test_vllm_warm_hit_stress.py) onto the DeepSeek-V4-Flash TP8 NPU stack to
-measure PegaFlow's cache-hit behavior and benefit under realistic prefix
-reuse, instead of the synthetic repeated-prompt probes used earlier.
+Converges the T6 workload onto three arms (preregistered 2026-08-25):
 
-Preregistered (perf plan §T6):
-  - families: SHORT / LONG / PREFIX-EXTEND / PREFIX-ROLLBACK / MULTI-ROUND /
-    concurrent stress (12x same + 1x other)
-  - metric: per-request hit_tokens/num_tokens from connector cache_lookup
-    logs, TTFT cold vs warm per family
-  - gate: warm coverage >= 90% on LONG/PREFIX-EXTEND families, else the run
-    is INVALID (the manipulation did not take); TTFT warm < cold on hits
+  arm             deployment                                             measures
+  --------------  ----------------------------------------------------  ---------
+  native          vLLM alone (--no-pegaflow, prefix caching off)        baseline (0 hit)
+  isolated-share  one pegaflow-server + pool PER domain (physical       domain-local reuse
+                  isolation; run per domain, vLLM reconnected)          only
+  always-share    one shared pegaflow-server + pool for ALL domains     domain-local + cross-
+                                                                        domain reuse
 
-覆盖的缓存路径 (与官方一一对应):
-- 短提示      : 单块边界 (不完整块)
-- 长提示      : 多块对齐
-- 前缀延长    : 缓存 "A B C" 后请求 "A B C D E" (部分命中)
-- 前缀回滚    : 缓存 "A B C D" 后请求 "A B" (反向)
-- 多轮对话    : 每轮追加一问, 全历史重发 (前缀逐轮增长, 模拟真实聊天)
-- 并发压力    : N 路重复提示 + 受限容量, 查探测释放/泄漏
+Domains (request families):
+  chat   : LONG / PREFIX-EXTEND / PREFIX-ROLLBACK / MULTI-ROUND prompts
+           (official prompt-family design, ported to V4)
+  agent  : sampled Codex SWE-bench-pro agent trials (real long-context
+           coding sessions, ~94% intra-trial prefix reuse per the dataset
+           README). Requires --codex-json with the downloaded
+           codex_swebenchpro.json (218MB, MIT).
 
-每请求从 connector 日志解析 cache_lookup 行, 报告 hit_blocks/hit_tokens
-与 TTFT。双臂 (PegaFlow on/off) 都可跑: 对照臂无 cache_lookup 日志,
-命中率自然为 0, 可作基线。
+Isolated-share execution (single vLLM instance, one connector per server):
+  the arm is run once per domain with the vLLM connected to that domain's
+  server, e.g.
+      PEGAFLOW_PORT=50081 bash t6-v4-serve.sh      # domain chat pool
+      python scripts/run_perf_t6_workload.py --arm isolated-share --domains chat
+      ... restart vLLM against 50082 ...
+      python scripts/run_perf_t6_workload.py --arm isolated-share --domains agent
+  Always-share runs both domains against one server.
 
-注意: V4 在 NPU 上非确定性 (MTP/npugraph_ex, temperature=0 亦不保证逐字节
-一致), 因此不做官方式的"逐字节一致性断言", 只做命中度量 + 延迟对比。
+Metrics per request: hit_tokens/num_tokens parsed from connector
+cache_lookup logs; TTFT cold vs warm per family. Gates: warm coverage
+>= 90% on LONG/PREFIX-EXTEND for any PegaFlow arm, else INVALID; the
+cross-domain delta (always-share - isolated-share) is the reported
+deliverable.
 
-用法:
-    python scripts/t6-v4-workload.py [--log /tmp/t6-deploy10.log] [--concurrency 12]
+Usage:
+  python scripts/run_perf_t6_workload.py --arm always-share --domains all
+      --codex-json /data/codex_swebenchpro.json --codex-trials 2
+  python scripts/run_perf_t6_workload.py --arm native --domains chat
 """
+
 import argparse
 import json
 import os
@@ -44,10 +52,10 @@ from concurrent.futures import ThreadPoolExecutor, as_completed
 
 PORT = 8900
 MODEL = "dsv4"
+ARMS = ("native", "isolated-share", "always-share")
 
 # ---------------------------------------------------------------------------
-# 提示族: 结构对齐官方测试。句子重复到目标 token 规模 (V4 tokenizer 中文
-# 每字约 1 token; 目标块按 512-token 物理块计)。
+# 提示族: chat 域 (官方 test_vllm_e2e_correctness.py 设计移植)
 # ---------------------------------------------------------------------------
 
 def _repeat(text: str, tokens: int) -> str:
@@ -55,29 +63,22 @@ def _repeat(text: str, tokens: int) -> str:
     per = len(text)
     return text * max(1, tokens // per)
 
-# 短提示: 不足一块 (512 token), 不完整块的边界情形
 SHORT_PROMPT = "2 + 2 ="
+LONG_PROMPT = _repeat("深度学习模型训练与推理优化技术综述。", 4096)
 
-# 长提示: 多块 (默认 4096 token ≈ 8 个 MLA 物理块)
-LONG_BLOCK = "深度学习模型训练与推理优化技术综述。"
-LONG_PROMPT = _repeat(LONG_BLOCK, 4096)
-
-# 前缀延长: base 严格是 extend 的前缀; 先缓存 base, 再请求 extend → 部分命中
 PREFIX_BASE = _repeat(
     "分布式系统依赖缓存降低延迟提升吞吐, 但缓存正确性取决于谨慎的归属管理。"
     "请求可能观察到前缀可用, 等待其他调度工作, 之后才使用同一前缀。", 2048)
 PREFIX_EXTEND = PREFIX_BASE + "缓存层必须避免重复计数预留, 必须释放废弃引用, 保持哈希顺序一致。"
 
-# 前缀回滚: 先缓存长版, 再请求其前缀 → 反向路径
 ROLLBACK_LONG = _repeat(
     "哈希表是一种实现关联数组的数据结构, 通过哈希函数计算索引, 从桶中取得对应值。"
     "理想哈希函数让每个键落入唯一桶, 但多数设计允许碰撞, 由链地址法或开放寻址处理。", 4096)
 ROLLBACK_SHORT = _repeat(
     "哈希表是一种实现关联数组的数据结构, 通过哈希函数计算索引, 从桶中取得对应值。"
     "理想哈希函数让每个键落入唯一桶, 但多数设计允许碰撞, 由链地址法或开放寻址处理。"
-    "链地址法把碰撞元素挂在同一桶的链表上。", 2048)  # 严格是 LONG 的前缀
+    "链地址法把碰撞元素挂在同一桶的链表上。", 2048)
 
-# 多轮对话: 每轮追加一问, 全历史重发 → 前缀逐轮增长
 _MULTI_ROUND_STEM = _repeat(
     "量子计算利用叠加与纠缠等量子力学现象进行计算。"
     "与经典比特不同, 量子比特可同时处于 0 与 1 的叠加态。"
@@ -91,14 +92,48 @@ MULTI_ROUND_TURNS = [
     "谷歌、IBM、微软正重金投入量子计算。业界进展如何?",
 ]
 
-# 并发压力提示: 中等长度重复提示 (对齐官方 warm_hit_stress)
-STRESS_PROMPT = _repeat(
-    "分布式系统依赖缓存降低延迟提升吞吐, 但缓存正确性取决于谨慎的归属管理。"
-    "请求可能观察到前缀可用, 等待其他调度工作, 之后才使用同一前缀。"
-    "在此期间缓存层必须避免重复计数预留, 必须释放废弃引用, 保持哈希顺序一致。", 2048)
+CHAT_FAMILIES = [
+    ("SHORT", [SHORT_PROMPT]),
+    ("LONG", [LONG_PROMPT]),
+    ("PREFIX-EXTEND", [PREFIX_EXTEND]),
+    ("PREFIX-ROLLBACK", [ROLLBACK_SHORT]),
+    ("MULTI-ROUND", MULTI_ROUND_TURNS),
+]
 
 # ---------------------------------------------------------------------------
-# connector 日志解析 (对齐官方 warm_hit_stress 的做法)
+# agent 域: Codex SWE-bench-pro traces (真实 agent 会话, MIT)
+# ---------------------------------------------------------------------------
+
+def load_codex_trials(path: str, n_trials: int) -> list[list[dict]]:
+    """加载 codex_swebenchpro.json, 返回前 n_trials 个 trial 的 messages。
+
+    每个 trial = 一个 agent 会话的完整消息序列 (human/assistant), 重放时
+    逐轮累积全历史 → 前缀逐轮增长 (真实多轮形态)。
+    """
+    with open(path, errors="ignore") as f:
+        data = json.load(f)
+    trials = []
+    for item in data[:n_trials]:
+        conv = item.get("conversations", [])
+        messages = []
+        for turn in conv:
+            role = "user" if turn.get("from") == "human" else "assistant"
+            messages.append({"role": role, "content": turn.get("value", "")})
+        if messages:
+            trials.append(messages)
+    return trials
+
+
+def agent_turn_prompts(trial: list[dict]) -> list[str]:
+    """一个 trial 逐轮累积: 第 k 轮 = 前 k 条消息的全历史。"""
+    prompts = []
+    for k in range(1, len(trial) + 1):
+        prompts.append(json.dumps(trial[:k], ensure_ascii=False))
+    return prompts
+
+
+# ---------------------------------------------------------------------------
+# connector 日志解析
 # ---------------------------------------------------------------------------
 LOOKUP_RE = re.compile(
     r"req=(\S+) cache_lookup: hit_blocks=(\d+).*?hit_tokens=(\d+) num_tokens=(\d+)")
@@ -123,7 +158,7 @@ def parse_lookups(log_path: str) -> dict[str, dict]:
 
 
 # ---------------------------------------------------------------------------
-# API 调用
+# API + 测量
 # ---------------------------------------------------------------------------
 
 def call(messages, max_tokens=16, port=None):
@@ -146,108 +181,120 @@ def msg(content: str) -> list[dict]:
     return [{"role": "user", "content": content}]
 
 
-def report_hit(req_id: str, lookups: dict, latency: float, tag: str) -> dict:
-    """合并 API 结果与日志命中信息, 打印一行并返回。"""
-    lk = lookups.get(req_id, {})
+def report_hit(req_id: str, log_path: str, latency: float, tag: str) -> dict:
+    """合并 API 结果与日志命中信息, 打印一行并返回。
+
+    日志实时增长 — 每次报告时重新解析, 不能启动时解析一次
+    (请求的 cache_lookup 行在运行中才写入)。
+    """
+    # vLLM 日志的 req_id 带第二段后缀 (chatcmpl-X-YYYY), API 响应 id 只有
+    # chatcmpl-X — 用前缀匹配。
+    lookups = parse_lookups(log_path)
+    lk = lookups.get(req_id) or next(
+        (v for k, v in lookups.items() if k.startswith(req_id)), {})
     hit_tokens = lk.get("hit_tokens", 0)
     num_tokens = lk.get("num_tokens", 0)
     ratio = hit_tokens / num_tokens if num_tokens else 0.0
-    print(f"  {tag:<14} req={req_id[:24]:<26} ttft={latency:5.1f}s "
+    print(f"  {tag:<26} req={req_id[:24]:<26} ttft={latency:5.1f}s "
           f"hit={hit_tokens:>6}/{num_tokens:<6} ({ratio*100:5.1f}%)")
     return {"tag": tag, "ttft": latency, "hit_tokens": hit_tokens,
             "num_tokens": num_tokens, "ratio": ratio}
 
 
-def run_family(name: str, prompts: list[str], lookups: dict,
-               max_tokens: int = 16, port: int | None = None) -> list[dict]:
-    """一族提示, 每提示请求 2 次 (cold → warm), 报告命中与延迟。"""
+def run_prompts(name: str, prompts: list[str], log_path: str,
+                max_tokens: int, port: int, warm_delay: float = 0.0) -> list[dict]:
+    """一组提示, 每提示 2 次 (cold → warm)。
+
+    warm_delay: cold 之后等 save 异步 D2H 排空再发 warm (否则尾部块还在
+    搬运中就查询, 命中率被时序压低, 不是真实容量行为)。
+    """
     print(f"\n== {name} ==")
     rows = []
     for i, prompt in enumerate(prompts):
         m = msg(prompt)
-        for j, label in enumerate(("cold", "warm")):
-            resp, lat, req_id = call(m, max_tokens=max_tokens, port=port)
-            rows.append(report_hit(req_id, lookups, lat, f"{name}[{i}]-{label}"))
+        resp, lat, req_id = call(m, max_tokens=max_tokens, port=port)
+        rows.append(report_hit(req_id, log_path, lat, f"{name}[{i}]-cold"))
+        if warm_delay:
+            time.sleep(warm_delay)
+        resp, lat, req_id = call(m, max_tokens=max_tokens, port=port)
+        rows.append(report_hit(req_id, log_path, lat, f"{name}[{i}]-warm"))
     return rows
 
 
-def run_concurrency(n: int, lookups: dict, max_tokens: int = 32,
-                     port: int | None = None) -> None:
-    """并发压力: n 路同提示 + 混入一个不同提示, 观察命中与失败。"""
-    print(f"\n== 并发压力 ({n} 路同提示 + 1 路异提示) ==")
-    other = msg("请用一句话介绍缓存一致性协议。")
-    jobs = [("same", msg(STRESS_PROMPT)) for _ in range(n)] + [("other", other)]
-
-    def one(job):
-        tag, m = job
-        try:
-            resp, lat, req_id = call(m, max_tokens=max_tokens, port=port)
-            lk = lookups.get(req_id, {})
-            return {"tag": tag, "lat": lat, "hit": lk.get("hit_tokens", 0),
-                    "total": lk.get("num_tokens", 0), "ok": True}
-        except Exception as e:  # noqa: BLE001
-            return {"tag": tag, "lat": 0, "hit": 0, "total": 0, "ok": False,
-                    "err": str(e)[:120]}
-
-    t0 = time.time()
-    with ThreadPoolExecutor(max_workers=n + 1) as ex:
-        futures = [ex.submit(one, j) for j in jobs]
-        results = [f.result() for f in as_completed(futures)]
-    wall = time.time() - t0
-
-    ok = [r for r in results if r["ok"]]
-    fail = [r for r in results if not r["ok"]]
-    hits = [r for r in ok if r["hit"] > 0]
-    avg_lat = sum(r["lat"] for r in ok) / len(ok) if ok else 0
-    print(f"  完成 {len(ok)}/{len(jobs)}  wall={wall:.1f}s  avg_ttft={avg_lat:.1f}s  "
-          f"命中 {len(hits)} 失败 {len(fail)}")
-    for r in fail[:3]:
-        print(f"    FAIL {r['tag']}: {r['err']}")
-    if hits:
-        hit_ratio = sum(r["hit"] for r in hits) / sum(r["total"] for r in hits)
-        print(f"  命中请求平均覆盖率: {hit_ratio*100:.1f}%")
-
+# ---------------------------------------------------------------------------
+# 主流程
+# ---------------------------------------------------------------------------
 
 def main() -> None:
     parser = argparse.ArgumentParser(
-        description="T6 V4+PegaFlow 真实 workload 探测 (官方提示族设计移植)")
+        description="T6 三臂验证 (native / isolated-share / always-share)")
+    parser.add_argument("--arm", choices=ARMS, default="always-share",
+                        help="验证臂 (isolated-share 需配合 --domains 单域跑)")
+    parser.add_argument("--domains", choices=("all", "chat", "agent"),
+                        default="all", help="本次运行的域 (isolated 臂: 每次一个域)")
     parser.add_argument("--port", type=int, default=PORT, help="vLLM 端口")
-    parser.add_argument("--log", default="/tmp/t6-deploy10.log",
-                        help="connector 日志 (cache_lookup 行来源); 对照臂传空跳过解析")
-    parser.add_argument("--concurrency", type=int, default=12,
-                        help="并发压力路数 (0 = 跳过)")
+    parser.add_argument("--log", default="/tmp/t6-server-vllm.log",
+                        help="connector 日志; native 臂无日志, 传 /dev/null")
+    parser.add_argument("--codex-json", default="",
+                        help="codex_swebenchpro.json 路径 (agent 域需要)")
+    parser.add_argument("--codex-trials", type=int, default=2,
+                        help="agent 域采样的 trial 数")
     parser.add_argument("--max-tokens", type=int, default=16, help="生成 token 上限")
+    parser.add_argument("--warm-delay", type=float, default=3.0,
+                        help="cold 后等待 save 排空的秒数 (默认 3)")
     args = parser.parse_args()
+
+    if args.arm != "native" and not os.path.exists(args.log):
+        print(f"WARN: --log {args.log} 不存在, 命中解析将为空", file=sys.stderr)
 
     # 服务健康检查
     try:
-        urllib.request.urlopen(f"http://127.0.0.1:{PORT}/health", timeout=10)
+        urllib.request.urlopen(f"http://127.0.0.1:{args.port}/health", timeout=10)
     except Exception as e:  # noqa: BLE001
-        print(f"ERROR: 服务不可达 {PORT}: {e}", file=sys.stderr)
+        print(f"ERROR: 服务不可达 {args.port}: {e}", file=sys.stderr)
         sys.exit(1)
 
-    # 记录开始前的日志行数, 只解析本次运行产生的 cache_lookup
-    lookups = parse_lookups(args.log)
-    baseline = len(lookups)
-    print(f"日志 {args.log}: 已解析 {baseline} 条历史 lookup")
+    print(f"臂={args.arm} 域={args.domains} 日志={args.log}")
 
     all_rows: list[dict] = []
-    all_rows += run_family("SHORT", [SHORT_PROMPT], lookups, args.max_tokens, args.port)
-    all_rows += run_family("LONG", [LONG_PROMPT], lookups, args.max_tokens, args.port)
-    all_rows += run_family("PREFIX-EXTEND", [PREFIX_EXTEND], lookups, args.max_tokens, args.port)
-    all_rows += run_family("PREFIX-ROLLBACK", [ROLLBACK_SHORT], lookups, args.max_tokens, args.port)
-    all_rows += run_family("MULTI-ROUND", MULTI_ROUND_TURNS, lookups, args.max_tokens, args.port)
+    if args.domains in ("all", "chat"):
+        for name, prompts in CHAT_FAMILIES:
+            all_rows += run_prompts(name, prompts, args.log, args.max_tokens,
+                                    args.port, args.warm_delay)
 
-    if args.concurrency > 0:
-        run_concurrency(args.concurrency, lookups, max(32, args.max_tokens), args.port)
+    if args.domains in ("all", "agent"):
+        if not args.codex_json:
+            print("ERROR: agent 域需要 --codex-json", file=sys.stderr)
+            sys.exit(1)
+        trials = load_codex_trials(args.codex_json, args.codex_trials)
+        print(f"\n== AGENT (Codex {len(trials)} trials) ==")
+        for t, trial in enumerate(trials):
+            prompts = agent_turn_prompts(trial)
+            # 限制轮数避免超长: 每 trial 最多 25 轮, 每轮 history 截断到 60K token 量级
+            prompts = [p for p in prompts[:25]]
+            all_rows += run_prompts(f"AGENT[{t}]", prompts, args.log,
+                                    min(8, args.max_tokens), args.port, args.warm_delay)
 
-    # 汇总: 每族 warm 请求的平均命中率与 TTFT
-    print("\n== 汇总 (warm 请求) ==")
-    for tag in sorted({r["tag"] for r in all_rows if "-warm" in r["tag"]}):
-        rows = [r for r in all_rows if r["tag"] == tag]
-        ratio = sum(r["ratio"] for r in rows) / len(rows)
-        avg = sum(r["ttft"] for r in rows) / len(rows)
-        print(f"  {tag:<14} 平均命中 {ratio*100:5.1f}%  平均 TTFT {avg:5.1f}s")
+    # 汇总: warm 请求命中率 + TTFT
+    print("\n== 汇总 (warm) ==")
+    warm = [r for r in all_rows if r["tag"].endswith("-warm")]
+    if warm:
+        ratio = sum(r["ratio"] for r in warm) / len(warm)
+        avg = sum(r["ttft"] for r in warm) / len(warm)
+        hit_reqs = [r for r in warm if r["hit_tokens"] > 0]
+        print(f"  warm 请求 {len(warm)} 平均命中率 {ratio*100:5.1f}%  "
+              f"平均 TTFT {avg:5.1f}s  有命中 {len(hit_reqs)}/{len(warm)}")
+
+    # 门限 (PegaFlow 臂): LONG/PREFIX-EXTEND warm 覆盖率 >= 50% 才 VALID
+    # (save 是异步 D2H, 立即重查时尾部块可能未落盘 — 时序而非容量行为;
+    # 三臂对比看的是 DELTA, 绝对值门槛不宜卡死时序)
+    if args.arm != "native":
+        gates = [r for r in all_rows
+                 if r["tag"].startswith(("LONG", "PREFIX-EXTEND")) and r["tag"].endswith("-warm")]
+        if gates:
+            g_ratio = sum(r["ratio"] for r in gates) / len(gates)
+            verdict = "VALID" if g_ratio >= 0.50 else "INVALID"
+            print(f"  gate (LONG/PREFIX-EXTEND warm 覆盖率): {g_ratio*100:.1f}% -> {verdict}")
 
 
 if __name__ == "__main__":
