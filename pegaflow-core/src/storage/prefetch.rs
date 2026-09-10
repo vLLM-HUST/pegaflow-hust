@@ -273,7 +273,7 @@ impl PrefetchScheduler {
         let key_build = key_build_start.elapsed();
 
         let cache_scan_start = Instant::now();
-        let (hit, prefix_blocks) = read_cache.get_prefix_blocks(&keys);
+        let (hit, prefix_blocks) = read_cache.get_prefix_blocks_for_request(&keys, scan.req_id);
         let cache_scan = cache_scan_start.elapsed();
         let remaining = &keys[hit..];
 

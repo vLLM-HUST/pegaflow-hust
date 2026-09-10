@@ -48,6 +48,11 @@ pub(crate) struct CoreMetrics {
     pub cache_block_evictions_still_referenced: Counter<u64>,
     pub cache_eviction_reclaimed_bytes: Counter<u64>,
 
+    // Generic object lifecycle and residency
+    pub object_lifecycle_total: Counter<u64>,
+    pub object_resident_bytes: UpDownCounter<i64>,
+    pub object_age_seconds: Histogram<f64>,
+
     // GPU <-> CPU transfer
     pub save_bytes: Counter<u64>,
     pub save_duration_seconds: Histogram<f64>,
@@ -211,6 +216,45 @@ pub(crate) fn record_cache_tier_block_requests(ram: usize, rdma: usize, ssd: usi
     }
 }
 
+pub(crate) fn record_object_lifecycle(
+    event: &'static str,
+    location: &'static str,
+    outcome: &'static str,
+    count: usize,
+) {
+    if count == 0 {
+        return;
+    }
+    core_metrics().object_lifecycle_total.add(
+        count as u64,
+        &[
+            KeyValue::new("event", event),
+            KeyValue::new("location", location),
+            KeyValue::new("outcome", outcome),
+        ],
+    );
+}
+
+pub(crate) fn record_object_resident_bytes(location: &'static str, delta: i64) {
+    core_metrics()
+        .object_resident_bytes
+        .add(delta, &[KeyValue::new("location", location)]);
+}
+
+pub(crate) fn record_object_age(
+    event: &'static str,
+    location: &'static str,
+    age: std::time::Duration,
+) {
+    core_metrics().object_age_seconds.record(
+        age.as_secs_f64(),
+        &[
+            KeyValue::new("event", event),
+            KeyValue::new("location", location),
+        ],
+    );
+}
+
 pub(crate) fn core_metrics() -> &'static CoreMetrics {
     static METRICS: OnceLock<CoreMetrics> = OnceLock::new();
     METRICS.get_or_init(|| {
@@ -289,6 +333,25 @@ pub(crate) fn core_metrics() -> &'static CoreMetrics {
                 .u64_counter("pegaflow_cache_eviction_reclaimed_bytes")
                 .with_unit("bytes")
                 .with_description("Estimated bytes actually reclaimed in pinned allocator after cache eviction")
+                .build(),
+
+            // Generic object lifecycle and residency
+            object_lifecycle_total: meter
+                .u64_counter("pegaflow_object_lifecycle_total")
+                .with_description(
+                    "Object lifecycle events by event, resident location, and outcome",
+                )
+                .build(),
+            object_resident_bytes: meter
+                .i64_up_down_counter("pegaflow_object_resident_bytes")
+                .with_unit("bytes")
+                .with_description("Current object bytes by resident location")
+                .build(),
+            object_age_seconds: meter
+                .f64_histogram("pegaflow_object_age_seconds")
+                .with_unit("s")
+                .with_description("Object age observed at lookup or eviction")
+                .with_boundaries(duration_seconds_boundaries())
                 .build(),
 
             // Transfer

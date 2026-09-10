@@ -21,9 +21,9 @@ use pegaflow_common::NumaNode;
 use opentelemetry::KeyValue;
 
 use super::{AllocateFn, PrefetchResult, RdmaTransport};
-use crate::block::{BlockKey, RawBlock, SealedBlock, Segment};
+use crate::block::{BlockKey, RawBlock, SealedBlock, Segment, object_id};
 use crate::internode::MetaServerClient;
-use crate::metrics::core_metrics;
+use crate::metrics::{core_metrics, record_object_lifecycle};
 
 /// Minimum usable transfer timeout. If the server's lock timeout minus the
 /// safety margin falls below this, we use this floor to avoid instant timeouts.
@@ -32,6 +32,30 @@ const MIN_TRANSFER_TIMEOUT: Duration = Duration::from_secs(10);
 /// Safety margin subtracted from the server's lock timeout. The client must
 /// finish the RDMA transfer before the server releases the lock.
 const LOCK_TIMEOUT_MARGIN: Duration = Duration::from_secs(60);
+
+fn record_remote_read_objects(
+    request_id: &str,
+    namespace: &str,
+    blocks: &[TransferBlockInfo],
+    outcome: &'static str,
+) {
+    record_object_lifecycle("remote_read", "remote_cpu_pool", outcome, blocks.len());
+    for block in blocks {
+        let key = BlockKey::new(namespace.to_string(), block.block_hash.clone());
+        let bytes = block
+            .slots
+            .iter()
+            .map(|slot| slot.k_size.saturating_add(slot.v_size))
+            .sum::<u64>();
+        debug!(
+            "object_lifecycle: event=remote_read request_id={} object_id={} location=remote_cpu_pool outcome={} bytes={}",
+            request_id,
+            object_id(&key),
+            outcome,
+            bytes
+        );
+    }
+}
 
 /// RDMA remote block fetch backing store.
 ///
@@ -181,6 +205,7 @@ async fn rdma_fetch_task(
         namespace,
         block_hashes,
         advertise_addr,
+        req_id,
     )
     .await
     {
@@ -205,6 +230,7 @@ async fn rdma_fetch_task(
         .flat_map(|b| &b.slots)
         .map(|s| s.k_size + s.v_size)
         .sum();
+    record_remote_read_objects(req_id, namespace, &blocks, "started");
     let (result, transfer_timing) = match fetch_blocks_via_rdma(
         rdma,
         allocate_fn,
@@ -217,6 +243,7 @@ async fn rdma_fetch_task(
     {
         Ok(r) => r,
         Err(e) => {
+            record_remote_read_objects(req_id, namespace, &blocks, "error");
             warn!("RDMA transfer from {remote_addr} failed: {e}");
             rdma.engine().invalidate_connection(remote_addr);
             spawn_release_lock(client, transfer_session_id);
@@ -226,6 +253,7 @@ async fn rdma_fetch_task(
             return Vec::new();
         }
     };
+    record_remote_read_objects(req_id, namespace, &blocks, "ok");
 
     // 4. Release transfer lock (fire-and-forget: spawns a detached task)
     spawn_release_lock(client, transfer_session_id);
@@ -617,6 +645,7 @@ async fn query_remote_blocks(
     namespace: &str,
     block_hashes: &[Vec<u8>],
     advertise_addr: &str,
+    req_id: &str,
 ) -> Result<(EngineClient<Channel>, QueryBlocksForTransferResponse), String> {
     let mut client = get_or_create_channel(grpc_channels, remote_addr)?;
 
@@ -624,6 +653,7 @@ async fn query_remote_blocks(
         namespace: namespace.to_string(),
         block_hashes: block_hashes.to_vec(),
         requester_id: advertise_addr.to_string(),
+        request_id: req_id.to_string(),
     };
 
     let response = client

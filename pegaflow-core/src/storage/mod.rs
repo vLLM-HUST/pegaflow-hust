@@ -16,10 +16,12 @@ use std::time::Duration;
 use crate::backing::{AllocateFn, DEFAULT_MAX_PREFETCH_BLOCKS, SsdBackingStore, SsdCacheConfig};
 #[cfg(feature = "rdma")]
 use crate::backing::{RdmaFetchStore, RdmaTransport};
-use crate::block::{BlockKey, PrefetchStatus, SealedBlock};
+use crate::block::{BlockKey, PrefetchStatus, SealedBlock, object_id};
 use crate::internode::MetaServerClient;
 use crate::internode::metaserver_client::MetaServerClientConfig;
-use crate::metrics::core_metrics;
+use crate::metrics::{
+    core_metrics, record_object_age, record_object_lifecycle, record_object_resident_bytes,
+};
 use crate::pinned_pool::{PinnedAllocation, PinnedAllocator};
 use pegaflow_common::NumaNode;
 
@@ -33,6 +35,22 @@ use write_path::{InsertDeps, WritePipeline};
 // turns an eviction burst into a command flood that overflows the removal queue.
 const RECLAIM_BATCH_SIZE: usize = 512;
 pub const DEFAULT_RDMA_QPS_PER_PEER: usize = 2;
+
+fn record_memory_eviction(key: &BlockKey, block: &Arc<SealedBlock>, reason: &'static str) {
+    let bytes = block.memory_footprint();
+    let age = block.materialized_age();
+    record_object_lifecycle("evict", "memory", reason, 1);
+    record_object_resident_bytes("memory", -(bytes as i64));
+    record_object_age("evict", "memory", age);
+    debug!(
+        "object_lifecycle: event=evict object_id={} location=memory outcome={} bytes={} age_seconds={:.9} strong_refs={}",
+        object_id(key),
+        reason,
+        bytes,
+        age.as_secs_f64(),
+        Arc::strong_count(block)
+    );
+}
 
 #[derive(Debug, Default, Clone, Copy, PartialEq, Eq)]
 pub struct MemoryCacheCleanupStats {
@@ -387,7 +405,7 @@ impl StorageEngine {
 
         let mut evicted_bytes = 0u64;
         let mut still_referenced_blocks = 0u64;
-        for (_key, block) in &evicted {
+        for (key, block) in &evicted {
             let bytes = block.memory_footprint();
             evicted_bytes = evicted_bytes.saturating_add(bytes);
             if Arc::strong_count(block) > 1 {
@@ -396,6 +414,7 @@ impl StorageEngine {
             core_metrics()
                 .cache_resident_bytes
                 .add(-(bytes as i64), &[]);
+            record_memory_eviction(key, block, "cleanup");
         }
 
         let evicted_blocks = evicted.len();
@@ -481,13 +500,14 @@ impl StorageEngine {
 
             let mut batch_bytes = 0u64;
             let mut still_referenced = 0u64;
-            for (_key, block) in &evicted {
+            for (key, block) in &evicted {
                 let b = block.memory_footprint();
                 batch_bytes = batch_bytes.saturating_add(b);
                 if Arc::strong_count(block) > 1 {
                     still_referenced += 1;
                 }
                 core_metrics().cache_resident_bytes.add(-(b as i64), &[]);
+                record_memory_eviction(key, block, "memory_pressure");
             }
 
             if still_referenced > 0 {
@@ -553,11 +573,20 @@ impl StorageEngine {
     // ---- Cross-node transfer: serving side ----
 
     /// Look up specific blocks by key (non-prefix). For cross-node transfer.
+    #[cfg(test)]
     pub(crate) fn get_blocks_for_transfer(
         &self,
         keys: &[BlockKey],
     ) -> Vec<(BlockKey, Arc<SealedBlock>)> {
         self.read_cache.get_blocks(keys)
+    }
+
+    pub(crate) fn get_blocks_for_transfer_with_request(
+        &self,
+        keys: &[BlockKey],
+        request_id: &str,
+    ) -> Vec<(BlockKey, Arc<SealedBlock>)> {
+        self.read_cache.get_blocks_for_request(keys, request_id)
     }
 
     /// Lock blocks for a transfer session, returning the session ID.

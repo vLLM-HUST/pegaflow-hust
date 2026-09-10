@@ -798,17 +798,20 @@ impl PegaEngine {
         namespace: &str,
         block_hashes: &[Vec<u8>],
         requester_id: &str,
+        request_id: &str,
     ) -> (String, Vec<(BlockKey, Arc<SealedBlock>)>) {
         let keys: Vec<BlockKey> = block_hashes
             .iter()
             .map(|h| BlockKey::new(namespace.to_string(), h.clone()))
             .collect();
 
-        let found = self.storage.get_blocks_for_transfer(&keys);
+        let found = self
+            .storage
+            .get_blocks_for_transfer_with_request(&keys, request_id);
         let session_id = self.storage.lock_blocks_for_transfer(requester_id, &found);
 
         debug!(
-            "query_blocks_for_transfer: namespace={namespace} requested={} found={} session={session_id}",
+            "query_blocks_for_transfer: request_id={request_id} namespace={namespace} requested={} found={} session={session_id}",
             block_hashes.len(),
             found.len(),
         );

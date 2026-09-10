@@ -244,6 +244,7 @@ impl<'a> LayerBlock<'a> {
 pub struct SealedBlock {
     slots: Box<[RawBlock]>,
     footprint: u64,
+    materialized_at: Instant,
     /// Per-slot NUMA affinity; always covers every slot (`len == slots.len()`).
     /// Used by the SSD write path and advertised on cross-node transfer.
     slot_numas: Vec<NumaNode>,
@@ -256,6 +257,11 @@ impl SealedBlock {
 
     pub(crate) fn memory_footprint(&self) -> u64 {
         self.footprint
+    }
+
+    /// Time since this immutable object was materialized in the local process.
+    pub(crate) fn materialized_age(&self) -> std::time::Duration {
+        self.materialized_at.elapsed()
     }
 
     /// Get all slots (for serialization / cross-node transfer)
@@ -283,6 +289,7 @@ impl SealedBlock {
         Self {
             slots: blocks.into_boxed_slice(),
             footprint,
+            materialized_at: Instant::now(),
             slot_numas,
         }
     }
@@ -296,6 +303,7 @@ impl SealedBlock {
         Self {
             slots,
             footprint,
+            materialized_at: Instant::now(),
             slot_numas,
         }
     }
@@ -328,6 +336,22 @@ impl SealedBlock {
             vec![numa_node; total_slots],
         ))
     }
+}
+
+/// Stable printable object identity for audit logs.
+///
+/// Metrics intentionally do not use this value as a label because object IDs
+/// are high-cardinality. Logs retain the full namespace and content hash.
+pub(crate) fn object_id(key: &BlockKey) -> String {
+    const HEX: &[u8; 16] = b"0123456789abcdef";
+    let mut result = String::with_capacity(key.namespace.len() + 1 + key.hash.len() * 2);
+    result.push_str(&key.namespace);
+    result.push(':');
+    for byte in &key.hash {
+        result.push(HEX[(byte >> 4) as usize] as char);
+        result.push(HEX[(byte & 0x0f) as usize] as char);
+    }
+    result
 }
 
 // ============================================================================
@@ -439,5 +463,22 @@ impl InflightBlock {
             self.footprint,
             self.slot_numas,
         )
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn object_identity_contains_full_namespace_and_hash() {
+        let key = BlockKey::new("model/instance".to_string(), vec![0x00, 0x0f, 0xa5, 0xff]);
+        assert_eq!(object_id(&key), "model/instance:000fa5ff");
+    }
+
+    #[test]
+    fn sealed_block_tracks_local_materialization_age() {
+        let block = SealedBlock::from_slots(Vec::new());
+        assert!(block.materialized_age() <= std::time::Duration::from_secs(1));
     }
 }

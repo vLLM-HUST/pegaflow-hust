@@ -2,9 +2,11 @@ use std::sync::Arc;
 
 use parking_lot::Mutex;
 
-use crate::block::{BlockKey, SealedBlock};
+use crate::block::{BlockKey, SealedBlock, object_id};
 use crate::cache::{CacheInsertOutcome, TinyLfuCache};
-use crate::metrics::core_metrics;
+use crate::metrics::{
+    core_metrics, record_object_age, record_object_lifecycle, record_object_resident_bytes,
+};
 
 pub(super) struct ReadCache {
     inner: Mutex<ReadCacheInner>,
@@ -33,7 +35,17 @@ impl ReadCache {
     }
 
     /// Scan cache for a prefix of `keys`, stopping at the first miss.
+    #[cfg(test)]
     pub(super) fn get_prefix_blocks(&self, keys: &[BlockKey]) -> (usize, Vec<Arc<SealedBlock>>) {
+        self.get_prefix_blocks_for_request(keys, "")
+    }
+
+    /// Prefix lookup with request identity retained in per-object audit logs.
+    pub(super) fn get_prefix_blocks_for_request(
+        &self,
+        keys: &[BlockKey],
+        request_id: &str,
+    ) -> (usize, Vec<Arc<SealedBlock>>) {
         let mut hit = 0usize;
         let mut blocks = Vec::with_capacity(keys.len());
         {
@@ -46,6 +58,12 @@ impl ReadCache {
                     break;
                 }
             }
+        }
+        for (key, block) in keys.iter().zip(&blocks) {
+            record_lookup(key, request_id, "prefix", Some(block));
+        }
+        if let Some(missed_key) = keys.get(hit) {
+            record_lookup(missed_key, request_id, "prefix", None);
         }
         (hit, blocks)
     }
@@ -66,13 +84,31 @@ impl ReadCache {
 
     /// Look up specific blocks by key without prefix-scan semantics (does not
     /// stop at first miss). Used by the serving side of cross-node transfer.
+    #[cfg(test)]
     pub(super) fn get_blocks(&self, keys: &[BlockKey]) -> Vec<(BlockKey, Arc<SealedBlock>)> {
+        self.get_blocks_for_request(keys, "")
+    }
+
+    /// Non-prefix lookup with request identity retained in per-object audit logs.
+    pub(super) fn get_blocks_for_request(
+        &self,
+        keys: &[BlockKey],
+        request_id: &str,
+    ) -> Vec<(BlockKey, Arc<SealedBlock>)> {
         let mut inner = self.inner.lock();
         let mut found = Vec::new();
+        let mut observations = Vec::with_capacity(keys.len());
         for key in keys {
             if let Some(block) = inner.cache.get(key) {
+                observations.push((key, Some(Arc::clone(&block))));
                 found.push((key.clone(), Arc::clone(&block)));
+            } else {
+                observations.push((key, None));
             }
+        }
+        drop(inner);
+        for (key, block) in observations {
+            record_lookup(key, request_id, "direct", block.as_ref());
         }
         found
     }
@@ -91,17 +127,67 @@ impl ReadCache {
 
 fn insert_block(inner: &mut ReadCacheInner, key: BlockKey, block: Arc<SealedBlock>) {
     let footprint_bytes = block.memory_footprint();
+    let identity = object_id(&key);
     match inner.cache.insert(key, block) {
         CacheInsertOutcome::InsertedNew => {
             let m = core_metrics();
             m.cache_block_insertions.add(1, &[]);
             m.cache_resident_bytes.add(footprint_bytes as i64, &[]);
+            record_object_lifecycle("insert", "memory", "new", 1);
+            record_object_resident_bytes("memory", footprint_bytes as i64);
+            log::debug!(
+                "object_lifecycle: event=insert object_id={} location=memory outcome=new bytes={}",
+                identity,
+                footprint_bytes
+            );
         }
-        CacheInsertOutcome::AlreadyExists => {}
+        CacheInsertOutcome::AlreadyExists => {
+            record_object_lifecycle("insert", "memory", "already_exists", 1);
+            log::debug!(
+                "object_lifecycle: event=insert object_id={} location=memory outcome=already_exists bytes={}",
+                identity,
+                footprint_bytes
+            );
+        }
         CacheInsertOutcome::Rejected => {
             core_metrics().cache_block_admission_rejections.add(1, &[]);
+            record_object_lifecycle("insert", "memory", "rejected", 1);
+            log::debug!(
+                "object_lifecycle: event=insert object_id={} location=memory outcome=rejected bytes={}",
+                identity,
+                footprint_bytes
+            );
         }
     }
+}
+
+fn record_lookup(
+    key: &BlockKey,
+    request_id: &str,
+    scope: &'static str,
+    block: Option<&Arc<SealedBlock>>,
+) {
+    let outcome = if block.is_some() { "hit" } else { "miss" };
+    record_object_lifecycle("lookup", "memory", outcome, 1);
+    let age_seconds = block.map(|value| {
+        let age = value.materialized_age();
+        record_object_age("lookup", "memory", age);
+        age.as_secs_f64()
+    });
+    log::debug!(
+        "object_lifecycle: event=lookup request_id={} object_id={} location=memory scope={} outcome={} age_seconds={}",
+        if request_id.is_empty() {
+            "unavailable"
+        } else {
+            request_id
+        },
+        object_id(key),
+        scope,
+        outcome,
+        age_seconds
+            .map(|value| format!("{value:.9}"))
+            .unwrap_or_else(|| "unavailable".to_string())
+    );
 }
 
 #[cfg(test)]

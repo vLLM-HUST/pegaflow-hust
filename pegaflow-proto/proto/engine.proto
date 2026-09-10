@@ -170,6 +170,7 @@ message QueryBlocksForTransferRequest {
   string namespace = 1;
   repeated bytes block_hashes = 2;
   string requester_id = 3;             // For lock tracking / logging
+  string request_id = 4;               // End-to-end serving request identity
 }
 
 message QueryBlocksForTransferResponse {

@@ -6,9 +6,9 @@ use std::sync::mpsc::{Receiver, Sender};
 use tokio::sync::oneshot;
 
 use crate::backing::SsdBackingStore;
-use crate::block::{BlockKey, InflightBlock, SealedBlock, SlotInsertResult};
+use crate::block::{BlockKey, InflightBlock, SealedBlock, SlotInsertResult, object_id};
 use crate::internode::MetaServerClient;
-use crate::metrics::core_metrics;
+use crate::metrics::{core_metrics, record_object_lifecycle};
 use crate::offload::InsertEntries;
 use pegaflow_common::NumaNode;
 
@@ -145,12 +145,28 @@ fn process_insert_batch(
         if let Some(deps) = &deps
             && deps.read_cache.contains_keys(std::slice::from_ref(&key))[0]
         {
+            record_object_lifecycle("create", "cpu_pool", "already_resident", 1);
+            debug!(
+                "object_lifecycle: event=create object_id={} location=cpu_pool outcome=already_resident",
+                object_id(&key)
+            );
             continue;
         }
 
         if !inflight.contains_key(&key) {
+            record_object_lifecycle("create", "cpu_pool", "new", 1);
+            debug!(
+                "object_lifecycle: event=create object_id={} location=cpu_pool outcome=new",
+                object_id(&key)
+            );
             match SealedBlock::from_ordered_slot_inserts(slots, total_slots, numa_node) {
                 Ok(sealed) => {
+                    record_object_lifecycle("seal", "cpu_pool", "ok", 1);
+                    debug!(
+                        "object_lifecycle: event=seal object_id={} location=cpu_pool outcome=ok bytes={}",
+                        object_id(&key),
+                        sealed.memory_footprint()
+                    );
                     ordered_fast_path_seals += 1;
                     sealed_blocks.push((key, Arc::new(sealed)));
                     continue;
@@ -261,6 +277,12 @@ fn insert_partial_slots(
         *inflight_bytes_removed = inflight_bytes_removed.saturating_add(total_footprint);
         let sealed = Arc::new(inflight_block.seal());
 
+        record_object_lifecycle("seal", "cpu_pool", "ok", 1);
+        debug!(
+            "object_lifecycle: event=seal object_id={} location=cpu_pool outcome=ok bytes={}",
+            object_id(&key),
+            sealed.memory_footprint()
+        );
         sealed_blocks.push((key, sealed));
     }
 }
@@ -295,6 +317,14 @@ fn register_block_hashes(
     namespace: &str,
     blocks: &[(BlockKey, Arc<SealedBlock>)],
 ) {
+    record_object_lifecycle("register", "memory", "queued", blocks.len());
+    for (key, block) in blocks {
+        debug!(
+            "object_lifecycle: event=register object_id={} location=memory outcome=queued bytes={}",
+            object_id(key),
+            block.memory_footprint()
+        );
+    }
     let hashes: Vec<Vec<u8>> = blocks.iter().map(|(key, _)| key.hash.clone()).collect();
     client.try_register_namespace(namespace.to_string(), hashes);
 }

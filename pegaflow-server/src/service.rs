@@ -715,8 +715,8 @@ impl Engine for GrpcEngineService {
         let hash_count = req.block_hashes.len();
 
         debug!(
-            "RPC [query_blocks_for_transfer]: namespace={} hashes={} requester={}",
-            req.namespace, hash_count, req.requester_id,
+            "RPC [query_blocks_for_transfer]: request_id={} namespace={} hashes={} requester={}",
+            req.request_id, req.namespace, hash_count, req.requester_id,
         );
 
         if !self.engine.has_rdma_transport() {
@@ -730,6 +730,7 @@ impl Engine for GrpcEngineService {
                 &req.namespace,
                 &req.block_hashes,
                 &req.requester_id,
+                &req.request_id,
             );
 
             let blocks: Vec<TransferBlockInfo> = found_blocks
