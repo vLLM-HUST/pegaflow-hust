@@ -49,7 +49,7 @@ class SaveTask:
     request_ids: list[str]
 
 
-_KVCacheLayout = Literal["KV-first", "blocks-first"]
+_KVCacheLayout = Literal["KV-first", "KV-planes-first", "blocks-first"]
 
 
 @dataclass(frozen=True)
@@ -90,6 +90,17 @@ def _infer_kv_cache_registration(
             num_blocks = shape[1]
             bytes_per_block = stride[1] * element_size
             kv_stride_bytes = stride[0] * element_size
+            segments = 2
+        elif len(shape) >= 2 and shape[1] == 2 and stride[1] > stride[0]:
+            # vLLM's standardized LHBNC layout exposes one layer as logical
+            # [B, 2, N, C], but stores it physically as [2, B, N, C].  All K
+            # blocks therefore precede all V blocks.  Treating stride[0] as a
+            # complete single-segment block silently copies K only; describe
+            # the two planes explicitly so the engine also copies V.
+            layout = "KV-planes-first"
+            num_blocks = shape[0]
+            bytes_per_block = stride[0] * element_size
+            kv_stride_bytes = stride[1] * element_size
             segments = 2
         else:
             layout = "blocks-first"

@@ -61,6 +61,44 @@ def test_non_mla_kv_first_uses_legacy_block_stride():
     assert info.physical_blocks_per_logical_block == 1
 
 
+def test_non_mla_lhbnc_layout_copies_both_kv_planes():
+    """Logical [B, 2, N, C] can be physically ordered [2, B, N, C]."""
+    info = _infer_kv_cache_registration(
+        FakeTensor(
+            shape=(6, 2, 64, 32),
+            stride=(64 * 32, 6 * 64 * 32, 32, 1),
+            element_size=2,
+        ),
+        logical_block_size=128,
+    )
+
+    assert info.layout == "KV-planes-first"
+    assert info.num_blocks == 6
+    assert info.bytes_per_block == 64 * 32 * 2
+    assert info.kv_stride_bytes == 6 * 64 * 32 * 2
+    assert info.segments == 2
+    assert info.physical_blocks_per_logical_block == 1
+
+
+def test_non_mla_lbhnc_layout_keeps_contiguous_kv_block():
+    """Logical [B, 2, N, C] is one segment when B is physically outermost."""
+    info = _infer_kv_cache_registration(
+        FakeTensor(
+            shape=(6, 2, 64, 32),
+            stride=(2 * 64 * 32, 64 * 32, 32, 1),
+            element_size=2,
+        ),
+        logical_block_size=128,
+    )
+
+    assert info.layout == "blocks-first"
+    assert info.num_blocks == 6
+    assert info.bytes_per_block == 2 * 64 * 32 * 2
+    assert info.kv_stride_bytes == 0
+    assert info.segments == 1
+    assert info.physical_blocks_per_logical_block == 1
+
+
 def test_mla_prefers_blocks_first_when_first_dimension_is_two():
     info = _infer_kv_cache_registration(
         FakeTensor(
