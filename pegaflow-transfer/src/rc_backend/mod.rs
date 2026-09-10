@@ -406,6 +406,10 @@ impl RcBackend {
         self.state.lock().num_qps()
     }
 
+    pub(crate) fn num_connections(&self) -> usize {
+        self.state.lock().num_connections()
+    }
+
     /// One receiver per NIC that had work; each yields bytes transferred on that NIC.
     pub(crate) fn batch_transfer_async(
         &self,

@@ -152,6 +152,7 @@ fn duration_seconds_boundaries() -> Vec<f64> {
 #[cfg(feature = "rdma")]
 struct RdmaGaugeHandles {
     _qps: ObservableGauge<u64>,
+    _peer_connections: ObservableGauge<u64>,
 }
 
 #[cfg(feature = "rdma")]
@@ -161,17 +162,28 @@ static RDMA_GAUGES: OnceLock<RdmaGaugeHandles> = OnceLock::new();
 /// Must be called after [`RdmaTransport`] is created; safe to call multiple times (no-op after first).
 #[cfg(feature = "rdma")]
 pub(crate) fn register_rdma_gauges(transport: &Arc<RdmaTransport>) {
-    let t = Arc::clone(transport);
+    let qps_transport = Arc::clone(transport);
+    let connections_transport = Arc::clone(transport);
     RDMA_GAUGES.get_or_init(|| {
         let meter = init_meter();
         let qps = meter
             .u64_observable_gauge("pegaflow_rdma_qps")
             .with_description("Active RC queue pairs across all RDMA NICs")
             .with_callback(move |observer| {
-                observer.observe(t.engine().num_qps() as u64, &[]);
+                observer.observe(qps_transport.engine().num_qps() as u64, &[]);
             })
             .build();
-        RdmaGaugeHandles { _qps: qps }
+        let peer_connections = meter
+            .u64_observable_gauge("pegaflow_rdma_peer_connections")
+            .with_description("Established remote peer connections")
+            .with_callback(move |observer| {
+                observer.observe(connections_transport.engine().num_connections() as u64, &[]);
+            })
+            .build();
+        RdmaGaugeHandles {
+            _qps: qps,
+            _peer_connections: peer_connections,
+        }
     });
 }
 

@@ -188,6 +188,14 @@ impl TransferEngine {
     pub fn num_qps(&self) -> usize {
         self.backend.num_qps()
     }
+
+    /// Number of established remote peer connections.
+    ///
+    /// A connection can contain multiple queue pairs on each NIC, so this is
+    /// intentionally distinct from num_qps.
+    pub fn num_connections(&self) -> usize {
+        self.backend.num_connections()
+    }
 }
 
 #[cfg(test)]

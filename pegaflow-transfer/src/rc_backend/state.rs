@@ -129,9 +129,26 @@ pub(super) struct RcBackendState {
     pub(super) connecting: HashSet<String>,
 }
 
+/// Count queue pairs from established per-connection session-vector lengths.
+///
+/// Each item represents one PerNicState sessions value. Counting the
+/// surrounding hash-map entries would count NIC/peer connection groups, not
+/// the RC queue pairs within those groups.
+fn count_queue_pairs(session_group_lengths: impl IntoIterator<Item = usize>) -> usize {
+    session_group_lengths.into_iter().sum()
+}
+
 impl RcBackendState {
     pub(super) fn num_qps(&self) -> usize {
-        self.nics.iter().map(|n| n.sessions.len()).sum()
+        count_queue_pairs(
+            self.nics
+                .iter()
+                .flat_map(|nic| nic.sessions.values().map(Vec::len)),
+        )
+    }
+
+    pub(super) fn num_connections(&self) -> usize {
+        self.addr_connections.len()
     }
 
     pub(super) fn new(nic_count: usize) -> Self {
@@ -223,5 +240,38 @@ mod tests {
 
         let miss = nic.find_remote_rkey(remote_qpn, 0x2500, 0x10);
         assert!(miss.is_none());
+    }
+
+    #[test]
+    fn queue_pair_count_includes_every_session_in_one_nic() {
+        // Three peer connection groups with qps_per_peer=2 on one NIC.
+        assert_eq!(count_queue_pairs([2, 2, 2]), 6);
+        // Two peer connection groups with qps_per_peer=4 on one NIC.
+        assert_eq!(count_queue_pairs([4, 4]), 8);
+    }
+
+    #[test]
+    fn queue_pair_count_includes_every_session_across_nics() {
+        // One peer, two NICs, qps_per_peer=2.
+        assert_eq!(count_queue_pairs([2, 2]), 4);
+        // Two peers, two NICs, qps_per_peer=4.
+        assert_eq!(count_queue_pairs([4, 4, 4, 4]), 16);
+    }
+
+    #[test]
+    fn connection_count_uses_established_remote_addresses() {
+        let mut state = RcBackendState::new(2);
+        for address in ["10.0.0.1:1234", "10.0.0.2:1234"] {
+            state.addr_connections.insert(
+                address.to_string(),
+                AddrConnection {
+                    remote_first_qpns: Vec::new(),
+                    local_nics: Vec::new(),
+                    rr_counters: Vec::new(),
+                },
+            );
+        }
+
+        assert_eq!(state.num_connections(), 2);
     }
 }
