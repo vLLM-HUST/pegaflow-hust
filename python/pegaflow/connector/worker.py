@@ -273,8 +273,9 @@ class WorkerConnector:
         # Following vllm-ascend's _flatten_kv_value pattern: each tensor has
         # its own backing storage and may be independently allocated (K and V
         # live in separate allocations on Ascend).
-        # Deduplicate by untyped_storage().data_ptr() — a single NPU allocation
-        # may back multiple layers (tied weights / aliased KV).
+        # Deduplicate exact tensor views, not whole storages. vLLM commonly
+        # exposes every layer as a different-offset view into one large KV
+        # allocation; collapsing those views would register only layer zero.
         flat_kv_caches: dict[str, torch.Tensor] = {}
         seen_ptrs: set[int] = set()
         for layer_name, kv_cache in kv_caches.items():
@@ -1017,14 +1018,19 @@ def _resolve_ipc_wrapper_factory(device: torch.device):
 
 
 def _safe_data_ptr(tensor) -> int:
-    """Return ``data_ptr()`` even when the tensor is a stub/fake.
+    """Return a view-aware ``data_ptr()`` for registration deduplication.
 
-    Unit tests inject ``FakeTensor`` objects that lack ``untyped_storage()``.
-    Return a unique id via ``id(tensor)`` in that case so dedup still works.
+    vLLM can allocate every layer's KV cache in one large storage and expose
+    individual layers as views with distinct ``storage_offset()`` values.  The
+    storage base pointer is therefore not a tensor identity: deduplicating on
+    it silently drops every layer after the first.  ``Tensor.data_ptr()``
+    includes the view offset, while still deduplicating exact aliases.
+
+    Unit tests also inject lightweight tensor stubs that lack ``data_ptr()``;
+    use object identity for those stubs.
     """
     try:
-        storage = tensor.untyped_storage()
-        return storage.data_ptr()
+        return tensor.data_ptr()
     except AttributeError:
         return id(tensor)
 

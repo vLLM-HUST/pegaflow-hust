@@ -286,6 +286,71 @@ class FakeCudaIPCWrapper:
         pass
 
 
+class FakeSharedStorage:
+    def __init__(self, base_ptr: int = 4096) -> None:
+        self._base_ptr = base_ptr
+
+    def data_ptr(self) -> int:
+        return self._base_ptr
+
+
+class FakeSharedStorageTensor(FakeTensor):
+    """Tensor view whose data pointer includes an offset into shared storage."""
+
+    def __init__(self, storage: FakeSharedStorage, storage_offset: int) -> None:
+        self._storage = storage
+        self._storage_offset = storage_offset
+
+    def untyped_storage(self) -> FakeSharedStorage:
+        return self._storage
+
+    def storage_offset(self) -> int:
+        return self._storage_offset
+
+    def data_ptr(self) -> int:
+        return self._storage.data_ptr() + self._storage_offset * self.element_size()
+
+
+def test_register_keeps_distinct_views_of_shared_storage(monkeypatch):
+    """Cross-layer allocations must register every offset layer view."""
+    worker, client, _ = _make_worker()
+    shared = FakeSharedStorage()
+
+    monkeypatch.setattr("pegaflow.connector.worker.CudaIPCWrapper", FakeCudaIPCWrapper)
+
+    worker.register_kv_caches(
+        {
+            "layer.0": FakeSharedStorageTensor(shared, storage_offset=0),
+            "layer.1": FakeSharedStorageTensor(shared, storage_offset=16),
+        }
+    )
+
+    assert worker._registered_layers == ["layer.0", "layer.1"]
+    assert client.register_calls[0][7] == ["layer.0", "layer.1"]
+
+    worker.shutdown()
+
+
+def test_register_deduplicates_exact_view_aliases(monkeypatch):
+    """Two names for the exact same tensor view remain a single slot."""
+    worker, client, _ = _make_worker()
+    shared = FakeSharedStorage()
+
+    monkeypatch.setattr("pegaflow.connector.worker.CudaIPCWrapper", FakeCudaIPCWrapper)
+
+    worker.register_kv_caches(
+        {
+            "layer.0": FakeSharedStorageTensor(shared, storage_offset=0),
+            "layer.0.alias": FakeSharedStorageTensor(shared, storage_offset=0),
+        }
+    )
+
+    assert worker._registered_layers == ["layer.0"]
+    assert client.register_calls[0][7] == ["layer.0"]
+
+    worker.shutdown()
+
+
 def test_register_version_mismatch_raises_startup_error(monkeypatch):
     worker, client, _ = _make_worker()
     client.register_response = (
