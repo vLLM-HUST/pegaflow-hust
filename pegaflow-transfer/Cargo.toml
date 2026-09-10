@@ -19,6 +19,7 @@ sideway.workspace = true
 rdma-mummy-sys.workspace = true
 log.workspace = true
 pegaflow-common.workspace = true
+opentelemetry.workspace = true
 thiserror = "2.0"
 serde.workspace = true
 bincode = { version = "2.0.1", features = ["serde"] }
@@ -47,4 +48,3 @@ path = "src/bin/cpu_bench.rs"
 name = "pegaflow-cpu-bench-v2"
 path = "src/bin/cpu_bench_v2.rs"
 required-features = ["cuda"]
-

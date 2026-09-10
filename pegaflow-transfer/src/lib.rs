@@ -1,5 +1,6 @@
 mod engine;
 mod error;
+mod metrics;
 mod rc_backend;
 pub mod rdma_topo;
 

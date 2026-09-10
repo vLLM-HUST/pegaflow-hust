@@ -1,6 +1,7 @@
 use std::collections::HashMap;
 use std::sync::Arc;
 use std::sync::mpsc as std_mpsc;
+use std::time::Instant;
 
 use mea::oneshot;
 use std::thread;
@@ -23,6 +24,7 @@ use sideway::ibverbs::queue_pair::{
 use super::runtime::RcRuntime;
 use crate::engine::{RcEndpoint, TransferOp};
 use crate::error::{Result, TransferError};
+use crate::metrics;
 
 const MAX_WR_CHAIN_OPS: usize = 4;
 const MAX_SEND_WR: u32 = 128;
@@ -46,8 +48,29 @@ enum SessionCommand {
     Transfer {
         ops: Vec<RdmaOp>,
         op: TransferOp,
+        enqueued_at: Instant,
+        shape: BatchShape,
         done_tx: oneshot::Sender<Result<usize>>,
     },
+}
+
+#[derive(Clone, Copy, Debug, PartialEq, Eq)]
+struct BatchShape {
+    descriptors: usize,
+    bytes: usize,
+}
+
+fn batch_shape(lengths: impl IntoIterator<Item = usize>) -> BatchShape {
+    lengths.into_iter().fold(
+        BatchShape {
+            descriptors: 0,
+            bytes: 0,
+        },
+        |shape, len| BatchShape {
+            descriptors: shape.descriptors.saturating_add(1),
+            bytes: shape.bytes.saturating_add(len),
+        },
+    )
 }
 
 pub(crate) struct RcSession {
@@ -196,11 +219,29 @@ impl RcSession {
         op: TransferOp,
     ) -> Result<oneshot::Receiver<Result<usize>>> {
         let (done_tx, done_rx) = oneshot::channel();
-        self.cmd_tx
-            .send(SessionCommand::Transfer { ops, op, done_tx })
-            .map_err(|_| {
-                TransferError::Backend("session worker channel disconnected".to_string())
-            })?;
+        let shape = batch_shape(ops.iter().map(|rdma_op| rdma_op.len));
+        let enqueued_at = Instant::now();
+        metrics::record_enqueue(op);
+        if self
+            .cmd_tx
+            .send(SessionCommand::Transfer {
+                ops,
+                op,
+                enqueued_at,
+                shape,
+                done_tx,
+            })
+            .is_err()
+        {
+            metrics::record_enqueue_failure(op);
+            return Err(TransferError::Backend(
+                "session worker channel disconnected".to_string(),
+            ));
+        }
+        debug!(
+            "rdma_batch_enqueue: local_qpn={} op={op:?} descriptors={} bytes={}",
+            self.local_endpoint.qp_num, shape.descriptors, shape.bytes
+        );
         Ok(done_rx)
     }
 
@@ -223,8 +264,39 @@ impl RcSession {
                 );
                 while let Ok(command) = cmd_rx.recv() {
                     match command {
-                        SessionCommand::Transfer { ops, op, done_tx } => {
+                        SessionCommand::Transfer {
+                            ops,
+                            op,
+                            enqueued_at,
+                            shape,
+                            done_tx,
+                        } => {
+                            let queue_delay = enqueued_at.elapsed();
+                            metrics::record_dequeue(op, queue_delay);
+                            debug!(
+                                "rdma_batch_dequeue: local_qpn={} op={op:?} descriptors={} bytes={} queue_delay_us={:.3}",
+                                session.local_endpoint.qp_num,
+                                shape.descriptors,
+                                shape.bytes,
+                                queue_delay.as_secs_f64() * 1_000_000.0
+                            );
+                            let service_started = Instant::now();
                             let result = Self::execute_batch(&session, ops, op);
+                            let service_duration = service_started.elapsed();
+                            metrics::record_batch_complete(
+                                op,
+                                service_duration,
+                                result.is_ok(),
+                            );
+                            debug!(
+                                "rdma_batch_complete: local_qpn={} op={op:?} descriptors={} requested_bytes={} completed_bytes={} service_us={:.3} status={}",
+                                session.local_endpoint.qp_num,
+                                shape.descriptors,
+                                shape.bytes,
+                                result.as_ref().copied().unwrap_or(0),
+                                service_duration.as_secs_f64() * 1_000_000.0,
+                                if result.is_ok() { "ok" } else { "error" }
+                            );
                             if done_tx.send(result).is_err() {
                                 debug!(
                                     "session worker reply receiver dropped: local_qpn={}",
@@ -278,6 +350,12 @@ impl RcSession {
         guard
             .post()
             .map_err(|e| TransferError::Backend(e.to_string()))?;
+        metrics::record_post(
+            op,
+            ops.len(),
+            ops.iter()
+                .fold(0usize, |total, rdma_op| total.saturating_add(rdma_op.len)),
+        );
         Ok(ops.len())
     }
 
@@ -289,7 +367,7 @@ impl RcSession {
 
         let mut next_idx = 0usize;
         let mut next_wr_id = 1_u64;
-        let mut inflight: HashMap<u64, usize> = HashMap::new();
+        let mut inflight: HashMap<u64, (usize, Instant)> = HashMap::new();
         let mut transferred = 0usize;
 
         while next_idx < total_ops || !inflight.is_empty() {
@@ -308,8 +386,9 @@ impl RcSession {
                 if posted == 0 {
                     break;
                 }
+                let posted_at = Instant::now();
                 for rdma_op in &ops[next_idx..next_idx + posted] {
-                    inflight.insert(next_wr_id, rdma_op.len);
+                    inflight.insert(next_wr_id, (rdma_op.len, posted_at));
                     next_wr_id = next_wr_id.wrapping_add(1);
                 }
                 next_idx += posted;
@@ -320,7 +399,7 @@ impl RcSession {
                     let mut did_work = false;
                     for wc in &mut poller {
                         did_work = true;
-                        let Some(bytes) = inflight.remove(&wc.wr_id()) else {
+                        let Some((bytes, posted_at)) = inflight.remove(&wc.wr_id()) else {
                             continue;
                         };
                         if wc.status() != WorkCompletionStatus::Success as u32 {
@@ -333,6 +412,7 @@ impl RcSession {
                             )));
                         }
                         transferred = transferred.saturating_add(bytes);
+                        metrics::record_completion(op, bytes, posted_at.elapsed());
                     }
                     if !did_work {
                         std::hint::spin_loop();
@@ -351,5 +431,28 @@ impl RcSession {
         }
 
         Ok(transferred)
+    }
+}
+
+#[cfg(test)]
+mod tests {
+    use super::*;
+
+    #[test]
+    fn batch_shape_counts_descriptors_and_bytes_without_overflow() {
+        assert_eq!(
+            batch_shape([4096, 8192, 16_384]),
+            BatchShape {
+                descriptors: 3,
+                bytes: 28_672,
+            }
+        );
+        assert_eq!(
+            batch_shape([usize::MAX, 1]),
+            BatchShape {
+                descriptors: 2,
+                bytes: usize::MAX,
+            }
+        );
     }
 }
