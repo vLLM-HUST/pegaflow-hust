@@ -70,19 +70,19 @@ fn transfer_metrics() -> &'static TransferMetrics {
         let meter = global::meter("pegaflow-transfer");
         TransferMetrics {
             batches_enqueued: meter
-                .u64_counter("pegaflow_rdma_batches_enqueued_total")
+                .u64_counter("pegaflow_rdma_batches_enqueued")
                 .with_description("RDMA transfer batches accepted by session worker queues")
                 .build(),
             batches_dequeued: meter
-                .u64_counter("pegaflow_rdma_batches_dequeued_total")
+                .u64_counter("pegaflow_rdma_batches_dequeued")
                 .with_description("RDMA transfer batches dequeued by session workers")
                 .build(),
             batch_enqueue_failures: meter
-                .u64_counter("pegaflow_rdma_batch_enqueue_failures_total")
+                .u64_counter("pegaflow_rdma_batch_enqueue_failures")
                 .with_description("RDMA transfer batches rejected by disconnected session workers")
                 .build(),
             batches_completed: meter
-                .u64_counter("pegaflow_rdma_batches_completed_total")
+                .u64_counter("pegaflow_rdma_batches_completed")
                 .with_description("RDMA transfer batches completed by status")
                 .build(),
             queued_batches: meter
@@ -94,37 +94,37 @@ fn transfer_metrics() -> &'static TransferMetrics {
                 .with_description("Current RDMA transfer batches executing in session workers")
                 .build(),
             queue_delay_seconds: meter
-                .f64_histogram("pegaflow_rdma_queue_delay_seconds")
+                .f64_histogram("pegaflow_rdma_queue_delay")
                 .with_unit("s")
                 .with_description("Delay from RDMA batch enqueue to session worker dequeue")
                 .with_boundaries(latency_boundaries())
                 .build(),
             service_duration_seconds: meter
-                .f64_histogram("pegaflow_rdma_service_duration_seconds")
+                .f64_histogram("pegaflow_rdma_service_duration")
                 .with_unit("s")
                 .with_description("RDMA batch service time from dequeue through CQ completion")
                 .with_boundaries(latency_boundaries())
                 .build(),
             descriptors_posted: meter
-                .u64_counter("pegaflow_rdma_descriptors_posted_total")
+                .u64_counter("pegaflow_rdma_descriptors_posted")
                 .with_description("RDMA work requests successfully posted")
                 .build(),
             bytes_posted: meter
-                .u64_counter("pegaflow_rdma_bytes_posted_total")
+                .u64_counter("pegaflow_rdma_bytes_posted")
                 .with_unit("bytes")
                 .with_description("RDMA READ or WRITE bytes successfully posted")
                 .build(),
             descriptors_completed: meter
-                .u64_counter("pegaflow_rdma_descriptors_completed_total")
+                .u64_counter("pegaflow_rdma_descriptors_completed")
                 .with_description("Successful RDMA work completions consumed from CQs")
                 .build(),
             bytes_completed: meter
-                .u64_counter("pegaflow_rdma_bytes_completed_total")
+                .u64_counter("pegaflow_rdma_bytes_completed")
                 .with_unit("bytes")
                 .with_description("Successful RDMA READ or WRITE bytes completed")
                 .build(),
             cq_completion_delay_seconds: meter
-                .f64_histogram("pegaflow_rdma_cq_completion_delay_seconds")
+                .f64_histogram("pegaflow_rdma_cq_completion_delay")
                 .with_unit("s")
                 .with_description("Delay from work-request post through successful CQ completion")
                 .with_boundaries(latency_boundaries())
@@ -213,5 +213,29 @@ mod tests {
         assert_eq!(boundaries.first().copied(), Some(0.000_001));
         assert_eq!(boundaries.last().copied(), Some(60.0));
         assert!(boundaries.windows(2).all(|pair| pair[0] < pair[1]));
+    }
+
+    #[test]
+    fn instrument_names_do_not_preapply_prometheus_unit_or_counter_suffixes() {
+        let source = include_str!("metrics.rs");
+        for forbidden in [
+            "pegaflow_rdma_batches_enqueued_total",
+            "pegaflow_rdma_batches_dequeued_total",
+            "pegaflow_rdma_batch_enqueue_failures_total",
+            "pegaflow_rdma_batches_completed_total",
+            "pegaflow_rdma_descriptors_posted_total",
+            "pegaflow_rdma_bytes_posted_total",
+            "pegaflow_rdma_descriptors_completed_total",
+            "pegaflow_rdma_bytes_completed_total",
+        ] {
+            assert!(!source.contains(&format!(".u64_counter(\"{forbidden}\")")));
+        }
+        for forbidden in [
+            "pegaflow_rdma_queue_delay_seconds",
+            "pegaflow_rdma_service_duration_seconds",
+            "pegaflow_rdma_cq_completion_delay_seconds",
+        ] {
+            assert!(!source.contains(&format!(".f64_histogram(\"{forbidden}\")")));
+        }
     }
 }

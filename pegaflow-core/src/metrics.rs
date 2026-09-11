@@ -337,7 +337,7 @@ pub(crate) fn core_metrics() -> &'static CoreMetrics {
 
             // Generic object lifecycle and residency
             object_lifecycle_total: meter
-                .u64_counter("pegaflow_object_lifecycle_total")
+                .u64_counter("pegaflow_object_lifecycle")
                 .with_description(
                     "Object lifecycle events by event, resident location, and outcome",
                 )
@@ -348,7 +348,7 @@ pub(crate) fn core_metrics() -> &'static CoreMetrics {
                 .with_description("Current object bytes by resident location")
                 .build(),
             object_age_seconds: meter
-                .f64_histogram("pegaflow_object_age_seconds")
+                .f64_histogram("pegaflow_object_age")
                 .with_unit("s")
                 .with_description("Object age observed at lookup or eviction")
                 .with_boundaries(duration_seconds_boundaries())
@@ -515,4 +515,14 @@ pub(crate) fn core_metrics() -> &'static CoreMetrics {
                 .build(),
         }
     })
+}
+
+#[cfg(test)]
+mod instrument_name_tests {
+    #[test]
+    fn object_instruments_leave_prometheus_suffixes_to_the_exporter() {
+        let source = include_str!("metrics.rs");
+        assert!(!source.contains(".u64_counter(\"pegaflow_object_lifecycle_total\")"));
+        assert!(!source.contains(".f64_histogram(\"pegaflow_object_age_seconds\")"));
+    }
 }
