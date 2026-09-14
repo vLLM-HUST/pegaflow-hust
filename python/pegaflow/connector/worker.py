@@ -225,6 +225,7 @@ class WorkerConnector:
         # probe is explicitly enabled so normal serving retains no additional
         # tensor objects and pays no checksum cost.
         self._diag_kv_checksum = os.environ.get("PEGA_DIAG_KV_CHECKSUM", "0") == "1"
+        self._diag_kv_all_layers = os.environ.get("PEGA_DIAG_KV_CHECKSUM_LAYERS", "first") == "all"
         self._diag_kv_caches: dict[str, torch.Tensor] = {}
 
         self._finished_requests: set[str] = set()
@@ -703,6 +704,8 @@ class WorkerConnector:
         first_layer = self._registered_layers[0]
         if layer_name != first_layer:
             return
+        if self._diag_kv_checksum:
+            self._log_diag_attention_metadata(layer_name, attn_metadata)
         # Delegate to wait_for_save so all save logic stays in one place.
         # Guard with a flag to avoid double-submission when an Ascend backend
         # is patched to call both save_kv_layer and wait_for_save.
@@ -838,13 +841,14 @@ class WorkerConnector:
             _device_synchronize(self._torch_device)
 
             if self._diag_kv_checksum:
-                first_layer = next(iter(saves_by_layer))
-                self._log_diag_kv_checksums(
-                    "save",
-                    all_request_ids,
-                    saves_by_layer[first_layer][0],
-                    layer_name=first_layer,
-                )
+                selected_layers = list(saves_by_layer)
+                if not self._diag_kv_all_layers:
+                    selected_layers = selected_layers[:1]
+                for selected_layer in selected_layers:
+                    self._log_diag_kv_checksums(
+                        "save", all_request_ids, saves_by_layer[selected_layer][0],
+                        layer_name=selected_layer,
+                    )
 
             saves_list: list[tuple[str, list[int], list[bytes]]] = []
             total_blocks = 0
@@ -932,7 +936,10 @@ class WorkerConnector:
         if layer_name is None:
             if not self._registered_layers:
                 return
-            layer_name = self._registered_layers[0]
+            selected_layers = self._registered_layers if self._diag_kv_all_layers else self._registered_layers[:1]
+            for selected_layer in selected_layers:
+                self._log_diag_kv_checksums(event, request_ids, block_ids, layer_name=selected_layer)
+            return
         kv_cache = self._diag_kv_caches.get(layer_name)
         if kv_cache is None:
             logger.error(
@@ -973,6 +980,29 @@ class WorkerConnector:
                 request_ids,
                 block_ids,
             )
+
+    def _log_diag_attention_metadata(self, layer_name: str, metadata: Any) -> None:
+        """Record prefill consumer coordinates without changing attention inputs."""
+        if isinstance(metadata, dict):
+            metadata = metadata.get(layer_name)
+        if metadata is None or getattr(metadata, "num_actual_tokens", 0) <= 1:
+            return
+        try:
+            slots = getattr(metadata, "slot_mapping", None)
+            tables = getattr(metadata, "block_tables", None)
+            logger.info(
+                "[PegaKVConnector.ATTN_DIAG] layer=%s tokens=%s state=%s "
+                "seq_lens=%s query_start=%s block_tables=%s slot_head=%s slot_tail=%s",
+                layer_name, metadata.num_actual_tokens,
+                str(getattr(metadata, "attn_state", None)),
+                getattr(metadata, "seq_lens_list", None),
+                metadata.query_start_loc.detach().cpu().tolist(),
+                tables.detach().cpu().tolist() if tables is not None else None,
+                slots[:8].detach().cpu().tolist() if slots is not None else None,
+                slots[-8:].detach().cpu().tolist() if slots is not None else None,
+            )
+        except Exception:
+            logger.exception("[PegaKVConnector.ATTN_DIAG] failed layer=%s", layer_name)
 
     def _complete_save_requests(self, request_ids: list[str]) -> None:
         completed_reqs: list[str] = []
