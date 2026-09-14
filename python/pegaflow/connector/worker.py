@@ -2,6 +2,8 @@
 Worker-side connector logic.
 """
 
+import hashlib
+import os
 import pickle
 import queue
 import threading
@@ -219,6 +221,12 @@ class WorkerConnector:
         self._cross_layer_mode = False
         self._cross_layer_key = _CROSS_LAYER_KEY
 
+        # Expensive, opt-in correctness probe. Keep references only when the
+        # probe is explicitly enabled so normal serving retains no additional
+        # tensor objects and pays no checksum cost.
+        self._diag_kv_checksum = os.environ.get("PEGA_DIAG_KV_CHECKSUM", "0") == "1"
+        self._diag_kv_caches: dict[str, torch.Tensor] = {}
+
         self._finished_requests: set[str] = set()
 
         # Stats collection
@@ -305,6 +313,9 @@ class WorkerConnector:
                     seen_ptrs.add(ptr)
                     flat_kv_caches[layer_name] = kv_cache
         kv_caches = flat_kv_caches
+
+        if self._diag_kv_checksum:
+            self._diag_kv_caches = dict(kv_caches)
 
         self._registered_layers = list(kv_caches.keys())
         self._page_first = self._use_page_first()
@@ -423,10 +434,11 @@ class WorkerConnector:
                 finished_sending = done_saves
 
         timeout_triggered = False
+        load_stats_to_record: list[tuple[float, int, bool]] = []
+        completed_load_checksums: list[tuple[list[str], list[int]]] = []
         with self._load_completion_lock:
             completed_reqs: set[str] = set()
             completed_shms: list[str] = []
-            load_stats_to_record: list[tuple[float, int, bool]] = []
             now = time.perf_counter()
 
             for shm_name, req_ids in self._pending_load_reqs.items():
@@ -457,6 +469,10 @@ class WorkerConnector:
                             "[PegaKVConnector] async_load_completed: reqs=%s",
                             req_ids,
                         )
+                        if self._diag_kv_checksum and meta is not None:
+                            completed_load_checksums.append(
+                                (sorted(req_ids), list(meta[2]))
+                            )
 
                     if meta is not None:
                         start_time, num_blocks, _ = meta
@@ -506,6 +522,9 @@ class WorkerConnector:
             with self._stats_lock:
                 for duration, num_blocks, success in load_stats_to_record:
                     self._stats.record_load(duration, num_blocks, success)
+
+        for req_ids, block_ids in completed_load_checksums:
+            self._log_diag_kv_checksums("load", req_ids, block_ids)
 
         if finished_sending:
             logger.debug(
@@ -818,6 +837,15 @@ class WorkerConnector:
             # Otherwise we may copy uninitialized memory (attention kernel is async)
             _device_synchronize(self._torch_device)
 
+            if self._diag_kv_checksum:
+                first_layer = next(iter(saves_by_layer))
+                self._log_diag_kv_checksums(
+                    "save",
+                    all_request_ids,
+                    saves_by_layer[first_layer][0],
+                    layer_name=first_layer,
+                )
+
             saves_list: list[tuple[str, list[int], list[bytes]]] = []
             total_blocks = 0
             for layer_name, (block_ids, block_hashes) in saves_by_layer.items():
@@ -889,6 +917,62 @@ class WorkerConnector:
 
         # Always complete the request save lifecycle, even if save failed.
         self._complete_save_requests(all_request_ids)
+
+    def _log_diag_kv_checksums(
+        self,
+        event: str,
+        request_ids: list[str],
+        block_ids: list[int],
+        *,
+        layer_name: str | None = None,
+    ) -> None:
+        """Log K+V bytes for one layer at a save/load correctness boundary."""
+        if not self._diag_kv_checksum or not block_ids:
+            return
+        if layer_name is None:
+            if not self._registered_layers:
+                return
+            layer_name = self._registered_layers[0]
+        kv_cache = self._diag_kv_caches.get(layer_name)
+        if kv_cache is None:
+            logger.error(
+                "[PegaKVConnector.KV_CHECKSUM] event=%s missing_layer=%s reqs=%s",
+                event,
+                layer_name,
+                request_ids,
+            )
+            return
+
+        try:
+            _ensure_npu_device_set(self._torch_device)
+            _device_synchronize(self._torch_device)
+            checksums = []
+            for block_id in block_ids:
+                host_bytes = (
+                    kv_cache[block_id]
+                    .detach()
+                    .to("cpu")
+                    .contiguous()
+                    .view(torch.uint8)
+                    .numpy()
+                    .tobytes()
+                )
+                checksums.append((block_id, hashlib.sha256(host_bytes).hexdigest()))
+            logger.info(
+                "[PegaKVConnector.KV_CHECKSUM] event=%s reqs=%s layer=%s blocks=%s",
+                event,
+                request_ids,
+                layer_name,
+                checksums,
+            )
+        except Exception:
+            logger.exception(
+                "[PegaKVConnector.KV_CHECKSUM] event=%s failed layer=%s reqs=%s blocks=%s",
+                event,
+                layer_name,
+                request_ids,
+                block_ids,
+            )
 
     def _complete_save_requests(self, request_ids: list[str]) -> None:
         completed_reqs: list[str] = []
