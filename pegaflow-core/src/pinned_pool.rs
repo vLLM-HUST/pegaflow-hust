@@ -254,13 +254,13 @@ impl PinnedMemoryPool {
 
     /// Allocate RDMA-registerable host pages and map them into Ascend address space.
     ///
-    /// Resolves the best NPU device for the given NUMA node, falling back to
-    /// device 0 when the NUMA→device mapping is unknown.
+    /// Resolves an allowed NPU device for the given NUMA node, falling back to
+    /// the first allowed device when no allowed local device is known.
     #[cfg(all(feature = "ascend", not(feature = "cuda")))]
     fn allocate_ascend_registered_fallback(size: usize, node: NumaNode) -> PinnedMemory {
         use crate::pinned_mem::PinnedMemory;
         // Resolve device_id from NUMA node via the topology cache.
-        // When NUMA info is unavailable, default to device 0 (single-NPU systems).
+        // The process scope also applies to nodes without a local allowed NPU.
         let device_id = crate::topology::resolve_device_for_numa(node);
         info!(
             "Ascend pinned pool on NUMA node {} → using device {}",

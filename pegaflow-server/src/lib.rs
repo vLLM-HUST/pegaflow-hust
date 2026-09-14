@@ -55,7 +55,8 @@ pub struct Cli {
     #[arg(long, default_value = "127.0.0.1:50055")]
     pub addr: SocketAddr,
 
-    /// Device IDs to initialize (comma-separated, e.g., "0,1,2,3"). Supports both NPU and CUDA.
+    /// Device IDs allowed for initialization, IPC import and pinned-memory registration.
+    /// Comma-separated, e.g., "0,1,2,3". Supports both NPU and CUDA.
     /// If not specified, auto-detects and initializes all available GPUs.
     #[arg(long, value_delimiter = ',')]
     pub devices: Vec<i32>,
@@ -300,29 +301,31 @@ pub(crate) fn ensure_torch_npu(py: Python<'_>) {
     let _ = py.import("torch_npu");
 }
 
-fn init_device() -> Result<(), std::io::Error> {
-    // On Ascend, initialize the ACL runtime and set device 0 as the
+fn init_device(device_id: i32) -> Result<(), std::io::Error> {
+    // On Ascend, initialize the ACL runtime and set an allowed device as the
     // active device for the calling (main) thread. This must happen
     // before any ACL API calls in pegaflow-core.
     #[cfg(feature = "ascend")]
     {
         pegaflow_core::device::ascend::ensure_acl_initialized()
             .map_err(|e| std::io::Error::other(format!("aclInit failed: {e}")))?;
-        // Set device 0 as the default for the main thread so that
+        // Set the selected device as the default for the main thread so that
         // subsequent ACL operations (e.g. aclrtMallocHost in pinned_mem)
         // succeed without an explicit per-thread set_device.
-        let device = pegaflow_core::device::ascend::AscendDevice::new(0)
-            .map_err(|e| std::io::Error::other(format!("AscendDevice::new(0) failed: {e}")))?;
+        let device = pegaflow_core::device::ascend::AscendDevice::new(device_id).map_err(|e| {
+            std::io::Error::other(format!("AscendDevice::new({device_id}) failed: {e}"))
+        })?;
         device
             .set_current()
-            .map_err(|e| std::io::Error::other(format!("aclrtSetDevice(0) failed: {e}")))?;
-        log::info!("Ascend ACL runtime initialized, device 0 set as current");
+            .map_err(|e| std::io::Error::other(format!("aclrtSetDevice({device_id}) failed: {e}")))?;
+        log::info!("Ascend ACL runtime initialized, device {device_id} set as current");
     }
     // On CUDA, initialise the driver. cudarc::driver::init() is a no-op
     // if the driver is already loaded, but calling it ensures the CUDA
     // driver symbols are resolved before any other CUDA API calls.
     #[cfg(not(feature = "ascend"))]
     {
+        let _ = device_id;
         use cudarc::driver::result as cuda_driver;
         let _ = cuda_driver::init();
     }
@@ -482,7 +485,10 @@ pub fn run() -> Result<(), Box<dyn Error>> {
     pegaflow_core::set_trace_sample_rate(cli.trace_sample_rate);
 
     // Initialize device in the main thread before starting Tokio runtime
-    init_device()?;
+    if !cli.devices.is_empty() {
+        pegaflow_core::configure_device_scope(&cli.devices).map_err(std::io::Error::other)?;
+    }
+    init_device(cli.devices.first().copied().unwrap_or(0))?;
     #[cfg(feature = "ascend")]
     check_ascend_version::preflight()?;
     #[cfg(not(feature = "ascend"))]
@@ -503,6 +509,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
         return Err("No devices available".into());
     }
 
+    pegaflow_core::configure_device_scope(&devices).map_err(std::io::Error::other)?;
     init_python_device(&devices)?;
     info!(
         "Device runtime initialized for {} device(s): {:?}",

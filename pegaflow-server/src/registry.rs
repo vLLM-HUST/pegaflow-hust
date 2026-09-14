@@ -183,6 +183,8 @@ impl CudaTensorRegistry {
     }
 
     fn materialize_tensor(device_id: i32, wrapper_bytes: &[u8]) -> PyResult<LayerTensor> {
+        pegaflow_core::validate_device_scope(device_id)
+            .map_err(pyo3::exceptions::PyValueError::new_err)?;
         Python::attach(|py| {
             let torch = py.import("torch")?;
             crate::ensure_torch_npu(py);

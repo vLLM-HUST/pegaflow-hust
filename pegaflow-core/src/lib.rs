@@ -49,6 +49,7 @@ pub use pinned_pool::PinnedAllocation;
 pub use seal_offload::SlotMeta;
 pub use storage::{DEFAULT_RDMA_QPS_PER_PEER, MemoryCacheCleanupStats, StorageConfig};
 pub use sync_state::{LoadState, LoadStateError};
+pub use topology::{configure_device_scope, validate_device_scope};
 pub use trace::{set_trace_sample_rate, should_sample};
 pub use transfer::TransferMode;
 
@@ -191,6 +192,7 @@ impl PegaEngine {
         numa_node: NumaNode,
         transfer_mode: TransferMode,
     ) -> Result<Arc<GpuWorkerPool>, EngineError> {
+        validate_device_scope(device_id).map_err(EngineError::InvalidArgument)?;
         let mut pools = self.gpu_pools.lock().unwrap();
         if let Some(pool) = pools.get(&device_id) {
             return Ok(Arc::clone(pool));
