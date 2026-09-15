@@ -8,6 +8,7 @@ use bytesize::ByteSize;
 #[cfg(not(feature = "rdma"))]
 use log::warn;
 use log::{debug, info};
+use parking_lot::Mutex;
 use std::collections::HashSet;
 use std::num::NonZeroU64;
 use std::sync::{Arc, Weak};
@@ -113,6 +114,7 @@ impl Default for StorageConfig {
 
 pub(crate) struct StorageEngine {
     allocator: Arc<PinnedAllocator>,
+    reclaim_lock: Mutex<()>,
     read_cache: Arc<ReadCache>,
     prefetch: PrefetchScheduler,
     write_pipeline: Arc<WritePipeline>,
@@ -256,6 +258,7 @@ impl StorageEngine {
 
             Self {
                 allocator,
+                reclaim_lock: Mutex::new(()),
                 read_cache: read_cache.clone(),
                 prefetch,
                 write_pipeline: write_pipeline.clone(),
@@ -313,6 +316,14 @@ impl StorageEngine {
         let requested_bytes = size.get();
         let node = numa_node.unwrap_or(NumaNode::UNKNOWN);
 
+        if let Some(alloc) = self.allocator.allocate(size, node) {
+            return Some(alloc);
+        }
+
+        // An evicted batch owns its blocks until accounting and unregistering
+        // finish. A competing reclaimer must not interpret that temporarily
+        // empty cache as irrecoverable exhaustion. Keep the fast path unlocked.
+        let _reclaim = self.reclaim_lock.lock();
         loop {
             if let Some(alloc) = self.allocator.allocate(size, node) {
                 return Some(alloc);
@@ -389,6 +400,7 @@ impl StorageEngine {
     /// outstanding references may remain allocated until those holders release
     /// the last `Arc`.
     pub(crate) fn cleanup_memory_cache(&self) -> MemoryCacheCleanupStats {
+        let _reclaim = self.reclaim_lock.lock();
         let used_before = self.allocator.usage().0;
         let evicted = self.read_cache.remove_all();
         if evicted.is_empty() {
@@ -690,6 +702,35 @@ mod tests {
         // Try to allocate more than the entire pool
         let result = storage.allocate(NonZeroU64::new(1 << 30).unwrap(), None);
         assert!(result.is_none(), "should fail, not loop forever");
+    }
+
+    #[tokio::test]
+    async fn allocation_waits_for_concurrent_reclaim_to_release_memory() {
+        let storage = make_engine();
+        let held = storage
+            .allocate(NonZeroU64::new(1 << 20).unwrap(), None)
+            .unwrap();
+        // Model a reclaim batch already removed from the LRU but not yet dropped.
+        let reclaim = storage.reclaim_lock.lock();
+        let (started_tx, started_rx) = std::sync::mpsc::channel();
+        let (done_tx, done_rx) = std::sync::mpsc::channel();
+        let other = Arc::clone(&storage);
+        let allocation = std::thread::spawn(move || {
+            started_tx.send(()).unwrap();
+            let result = other.allocate(NonZeroU64::new(4096).unwrap(), None);
+            done_tx.send(result.is_some()).unwrap();
+            result
+        });
+        started_rx.recv_timeout(Duration::from_secs(5)).unwrap();
+        let premature = done_rx.recv_timeout(Duration::from_millis(250));
+        drop(held);
+        drop(reclaim);
+        let result = allocation.join().unwrap();
+        assert!(
+            matches!(premature, Err(std::sync::mpsc::RecvTimeoutError::Timeout)),
+            "allocation must not report exhaustion while another reclaimer holds memory"
+        );
+        assert!(result.is_some());
     }
 
     #[tokio::test]
