@@ -26,6 +26,8 @@ const EXPECTED_COHORT_SIZE: usize = 4;
 const BURST_OFFSET_MS: u64 = 15;
 const SMOOTH_OFFSETS_MS: [u64; EXPECTED_COHORT_SIZE] = [0, 10, 20, 30];
 const MAX_BURST_POSTING_SPREAD: Duration = Duration::from_millis(1);
+#[cfg(feature = "rdma")]
+const PRECISE_WAIT_GUARD: Duration = Duration::from_millis(2);
 
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
@@ -538,13 +540,16 @@ impl Issue23CausalExperiment {
     ) -> Result<Issue23Completion, String> {
         let plan = self.request_plan(&stable_request_id, &operations)?;
         let eligible_at = Instant::now();
-        self.write_event(&bundle_timing_event(
-            "bundle_eligible",
-            &stable_request_id,
-            &raw_request_id,
-            &plan,
-            None,
-        ))?;
+        self.write_event_at(
+            &bundle_timing_event(
+                "bundle_eligible",
+                &stable_request_id,
+                &raw_request_id,
+                &plan,
+                None,
+            ),
+            eligible_at,
+        )?;
 
         let (result_tx, result_rx) = oneshot::channel();
         let bundle = PreparedIssue23Bundle {
@@ -578,10 +583,10 @@ impl Issue23CausalExperiment {
         };
 
         if let Some(cohort) = ready {
-            let experiment = Arc::clone(self);
-            tokio::spawn(async move {
-                experiment.run_cohort(rdma, remote_addr, cohort).await;
-            });
+            // The fourth eligible request is already the cohort coordinator.
+            // Running the short scheduling loop here avoids adding an
+            // unrelated executor-spawn delay to the frozen T_g deadline.
+            Arc::clone(self).run_cohort(rdma, remote_addr, cohort).await;
         }
 
         result_rx
@@ -605,8 +610,7 @@ impl Issue23CausalExperiment {
 
         match self.config.schedule {
             Issue23Schedule::Burst => {
-                tokio::time::sleep_until((tg + Duration::from_millis(BURST_OFFSET_MS)).into())
-                    .await;
+                wait_until_precise(tg + Duration::from_millis(BURST_OFFSET_MS)).await;
                 let mut posted = Vec::with_capacity(cohort.len());
                 for bundle in cohort {
                     posted.push(self.post_bundle(&rdma, &remote_addr, bundle));
@@ -636,7 +640,7 @@ impl Issue23CausalExperiment {
                 for bundle in cohort {
                     let release_at =
                         tg + Duration::from_millis(SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot]);
-                    tokio::time::sleep_until(release_at.into()).await;
+                    wait_until_precise(release_at).await;
                     posts.push(self.post_bundle(&rdma, &remote_addr, bundle));
                 }
                 for post in posts {
@@ -704,16 +708,19 @@ impl Issue23CausalExperiment {
         let posted_at = Instant::now();
         let submit = posted_at.duration_since(post_start);
         let trace_error = self
-            .write_event(&bundle_timing_event(
-                "bundle_posted",
-                &bundle.stable_request_id,
-                &bundle.raw_request_id,
-                &bundle.plan,
-                Some(match self.config.schedule {
-                    Issue23Schedule::Burst => BURST_OFFSET_MS,
-                    Issue23Schedule::Smooth => SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot],
-                }),
-            ))
+            .write_event_at(
+                &bundle_timing_event(
+                    "bundle_posted",
+                    &bundle.stable_request_id,
+                    &bundle.raw_request_id,
+                    &bundle.plan,
+                    Some(match self.config.schedule {
+                        Issue23Schedule::Burst => BURST_OFFSET_MS,
+                        Issue23Schedule::Smooth => SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot],
+                    }),
+                ),
+                posted_at,
+            )
             .err();
         Ok(PendingBundle {
             stable_request_id: bundle.stable_request_id,
@@ -761,14 +768,17 @@ impl Issue23CausalExperiment {
         let completed_at = Instant::now();
         let status = if result.is_ok() { "ok" } else { "error" };
         let completed_bytes = result.as_ref().copied().unwrap_or_default();
-        let trace_result = self.write_event(&serde_json::json!({
-            "event": "bundle_completed",
-            "request_id": pending.stable_request_id,
-            "raw_request_id": pending.raw_request_id,
-            "cohort_id": pending.cohort_id,
-            "status": status,
-            "completed_payload_bytes": completed_bytes,
-        }));
+        let trace_result = self.write_event_at(
+            &serde_json::json!({
+                "event": "bundle_completed",
+                "request_id": pending.stable_request_id,
+                "raw_request_id": pending.raw_request_id,
+                "cohort_id": pending.cohort_id,
+                "status": status,
+                "completed_payload_bytes": completed_bytes,
+            }),
+            completed_at,
+        );
         let result = result
             .and_then(|bytes| pending.trace_error.map_or(Ok(bytes), Err))
             .map(|_| Issue23Completion {
@@ -781,6 +791,10 @@ impl Issue23CausalExperiment {
     }
 
     fn write_event<T: Serialize>(&self, event: &T) -> Result<(), String> {
+        self.write_event_at(event, Instant::now())
+    }
+
+    fn write_event_at<T: Serialize>(&self, event: &T, event_at: Instant) -> Result<(), String> {
         let mut value = serde_json::to_value(event)
             .map_err(|error| format!("serialize Issue23 trace event: {error}"))?;
         let object = value
@@ -792,7 +806,7 @@ impl Issue23CausalExperiment {
         );
         object.insert(
             "monotonic_ns".into(),
-            serde_json::json!(self.trace_origin.elapsed().as_nanos()),
+            serde_json::json!(event_at.duration_since(self.trace_origin).as_nanos()),
         );
         let mut trace = self.trace.lock();
         serde_json::to_writer(&mut *trace, &value)
@@ -801,6 +815,18 @@ impl Issue23CausalExperiment {
             .write_all(b"\n")
             .and_then(|_| trace.flush())
             .map_err(|error| format!("flush Issue23 trace: {error}"))
+    }
+}
+
+#[cfg(feature = "rdma")]
+async fn wait_until_precise(deadline: Instant) {
+    if let Some(coarse_deadline) = deadline.checked_sub(PRECISE_WAIT_GUARD)
+        && Instant::now() < coarse_deadline
+    {
+        tokio::time::sleep_until(coarse_deadline.into()).await;
+    }
+    while Instant::now() < deadline {
+        std::hint::spin_loop();
     }
 }
 
@@ -1026,6 +1052,26 @@ mod tests {
         assert_eq!(event["scheduled_offset_ms"], 10);
         assert!(event.get("operation_ids").is_none());
         assert!(serde_json::to_vec(&event).unwrap().len() < 512);
+    }
+
+    #[test]
+    fn trace_event_uses_the_captured_event_instant() {
+        let temp = tempfile::tempdir().unwrap();
+        let trace_path = temp.path().join("trace.jsonl");
+        let experiment = Issue23CausalExperiment::new(Issue23ExperimentConfig {
+            plan: None,
+            backend: Issue23Backend::Rdma,
+            schedule: Issue23Schedule::Smooth,
+            trace_path: trace_path.clone(),
+        })
+        .unwrap();
+        let captured_at = experiment.trace_origin + Duration::from_millis(7);
+        experiment
+            .write_event_at(&serde_json::json!({"event": "captured"}), captured_at)
+            .unwrap();
+        let trace = std::fs::read_to_string(trace_path).unwrap();
+        let event: serde_json::Value = serde_json::from_str(trace.lines().last().unwrap()).unwrap();
+        assert_eq!(event["monotonic_ns"], 7_000_000);
     }
 
     #[test]
