@@ -31,6 +31,7 @@ use proto::engine::engine_server::EngineServer;
 use pyo3::{Py, PyAny, PyErr, Python, types::PyAnyMethods};
 use std::error::Error;
 use std::net::SocketAddr;
+use std::path::PathBuf;
 use std::sync::Arc;
 use std::time::Duration;
 use tokio::sync::Notify;
@@ -185,6 +186,39 @@ pub struct Cli {
     /// locked for at most this duration before being force-released (crash recovery).
     #[arg(long, default_value_t = 120)]
     pub transfer_lock_timeout_secs: u64,
+
+    /// Unique JSONL trace path for the opt-in Issue #23 transport experiment.
+    /// Supplying only this flag enables preparation/capture mode.
+    #[arg(long)]
+    pub issue23_trace_path: Option<PathBuf>,
+
+    /// Frozen transfer plan. Requires --issue23-backend, --issue23-schedule,
+    /// and --issue23-trace-path. The experiment remains inactive until the
+    /// controller calls POST /issue23/activate.
+    #[arg(long)]
+    pub issue23_plan: Option<PathBuf>,
+
+    #[arg(long, value_parser = parse_issue23_backend)]
+    pub issue23_backend: Option<pegaflow_core::Issue23Backend>,
+
+    #[arg(long, value_parser = parse_issue23_schedule)]
+    pub issue23_schedule: Option<pegaflow_core::Issue23Schedule>,
+}
+
+fn parse_issue23_backend(value: &str) -> Result<pegaflow_core::Issue23Backend, String> {
+    match value {
+        "rdma" => Ok(pegaflow_core::Issue23Backend::Rdma),
+        "local_copy" => Ok(pegaflow_core::Issue23Backend::LocalCopy),
+        _ => Err("expected rdma or local_copy".into()),
+    }
+}
+
+fn parse_issue23_schedule(value: &str) -> Result<pegaflow_core::Issue23Schedule, String> {
+    match value {
+        "smooth" => Ok(pegaflow_core::Issue23Schedule::Smooth),
+        "burst" => Ok(pegaflow_core::Issue23Schedule::Burst),
+        _ => Err("expected smooth or burst".into()),
+    }
 }
 
 fn parse_hll_bucket_bits(s: &str) -> Result<u8, String> {
@@ -315,9 +349,9 @@ fn init_device(device_id: i32) -> Result<(), std::io::Error> {
         let device = pegaflow_core::device::ascend::AscendDevice::new(device_id).map_err(|e| {
             std::io::Error::other(format!("AscendDevice::new({device_id}) failed: {e}"))
         })?;
-        device
-            .set_current()
-            .map_err(|e| std::io::Error::other(format!("aclrtSetDevice({device_id}) failed: {e}")))?;
+        device.set_current().map_err(|e| {
+            std::io::Error::other(format!("aclrtSetDevice({device_id}) failed: {e}"))
+        })?;
         log::info!("Ascend ACL runtime initialized, device {device_id} set as current");
     }
     // On CUDA, initialise the driver. cudarc::driver::init() is a no-op
@@ -586,6 +620,56 @@ pub fn run() -> Result<(), Box<dyn Error>> {
         None
     };
 
+    let issue23_experiment = match (
+        cli.issue23_plan.as_ref(),
+        cli.issue23_backend,
+        cli.issue23_schedule,
+        cli.issue23_trace_path.as_ref(),
+    ) {
+        (None, None, None, None) => None,
+        (None, None, None, Some(trace_path)) => Some(pegaflow_core::Issue23ExperimentConfig {
+            plan: None,
+            backend: pegaflow_core::Issue23Backend::Rdma,
+            schedule: pegaflow_core::Issue23Schedule::Smooth,
+            trace_path: trace_path.clone(),
+        }),
+        (Some(plan_path), Some(backend), Some(schedule), Some(trace_path)) => {
+            let bytes = std::fs::read(plan_path).map_err(|error| {
+                std::io::Error::other(format!(
+                    "read Issue23 plan {}: {error}",
+                    plan_path.display()
+                ))
+            })?;
+            let plan: pegaflow_core::Issue23TransferPlan =
+                serde_json::from_slice(&bytes).map_err(|error| {
+                    std::io::Error::other(format!(
+                        "parse Issue23 plan {}: {error}",
+                        plan_path.display()
+                    ))
+                })?;
+            plan.validate().map_err(std::io::Error::other)?;
+            if plan.qps_per_peer != cli.qps_per_peer {
+                return Err(std::io::Error::other(format!(
+                    "Issue23 plan qps_per_peer={} differs from --qps-per-peer={}",
+                    plan.qps_per_peer, cli.qps_per_peer
+                ))
+                .into());
+            }
+            Some(pegaflow_core::Issue23ExperimentConfig {
+                plan: Some(plan),
+                backend,
+                schedule,
+                trace_path: trace_path.clone(),
+            })
+        }
+        _ => {
+            return Err(std::io::Error::other(
+                "Issue23 arm mode requires --issue23-plan, --issue23-backend, --issue23-schedule, and --issue23-trace-path together; capture mode accepts only --issue23-trace-path",
+            )
+            .into());
+        }
+    };
+
     let storage_config = pegaflow_core::StorageConfig {
         enable_lfu_admission: cli.enable_lfu_admission,
         hint_value_size_bytes: cli.hint_value_size,
@@ -600,6 +684,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
         advertise_addr,
         metaserver_queue_depth: cli.metaserver_queue_depth,
         pool_shards: cli.pool_shards,
+        issue23_experiment,
     };
 
     if cli.pool_shards > 1 {

@@ -19,6 +19,7 @@ pub mod device;
 mod gpu_worker;
 mod instance;
 mod internode;
+mod issue23_causal;
 mod layout;
 mod lease;
 pub use pegaflow_common::logging;
@@ -41,6 +42,9 @@ pub use block::{
 use instance::GpuRegistration;
 pub use instance::{GpuContext, InstanceContext};
 pub use internode::{DEFAULT_METASERVER_QUEUE_DEPTH, MetaServerClient, MetaServerClientConfig};
+pub use issue23_causal::{
+    Issue23Backend, Issue23ExperimentConfig, Issue23Schedule, Issue23TransferPlan,
+};
 use layout::KVCacheLayout;
 pub use lease::QueryLeaseId;
 pub use pegaflow_common::NumaNode;
@@ -774,6 +778,14 @@ impl PegaEngine {
     pub async fn flush_all(&self) {
         self.storage.flush_write_pipeline().await;
         self.storage.flush_ssd().await;
+    }
+
+    /// Flush pending saves, then make the restored cache invisible to normal
+    /// lookup while retaining it as the frozen Issue #23 hidden source/shadow.
+    pub async fn activate_issue23_experiment(&self) -> Result<(usize, u64), String> {
+        self.storage.flush_write_pipeline().await;
+        let stats = self.storage.activate_issue23_experiment()?;
+        Ok((stats.hidden_blocks, stats.hidden_bytes))
     }
 
     /// Remove stale inflight blocks and failed_remote entries (background GC).

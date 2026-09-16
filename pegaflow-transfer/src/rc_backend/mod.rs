@@ -106,6 +106,18 @@ pub(crate) struct RcBackend {
     qps_per_peer: usize,
 }
 
+/// A fully validated RDMA batch whose memory-region and QP lookups have
+/// already completed, but whose work requests have not yet been posted.
+///
+/// Keeping preparation separate from submission lets experiment controllers
+/// hold several request bundles at the transport boundary and release them at
+/// one common instant without charging address lookup time to posting spread.
+pub(crate) struct PreparedBatch {
+    op: TransferOp,
+    work: Vec<(Arc<RcSession>, Vec<RdmaOp>)>,
+    descriptor_count: usize,
+}
+
 impl RcBackend {
     pub(crate) fn new(nic_names: &[String], qps_per_peer: usize) -> Result<Self> {
         crate::init_logging();
@@ -417,8 +429,28 @@ impl RcBackend {
         remote_addr: &str,
         descs: &[TransferDesc],
     ) -> Result<Vec<oneshot::Receiver<Result<usize>>>> {
+        let prepared = self.prepare_batch_transfer(op, remote_addr, descs, None)?;
+        self.submit_prepared_batch(prepared)
+    }
+
+    /// Resolve memory regions and QP assignments without posting work.
+    ///
+    /// `qp_rotation` is an experiment-only deterministic override for the
+    /// first QP bucket. Normal callers pass `None` and retain the production
+    /// round-robin policy.
+    pub(crate) fn prepare_batch_transfer(
+        &self,
+        op: TransferOp,
+        remote_addr: &str,
+        descs: &[TransferDesc],
+        qp_rotation: Option<usize>,
+    ) -> Result<PreparedBatch> {
         if descs.is_empty() {
-            return Ok(Vec::new());
+            return Ok(PreparedBatch {
+                op,
+                work: Vec::new(),
+                descriptor_count: 0,
+            });
         }
 
         let nic_count = self.nic_count();
@@ -472,7 +504,8 @@ impl RcBackend {
                 let n = sessions.len();
                 // Rotate the starting bucket each call so small batches still
                 // hit different QPs across calls.
-                let rot = conn.rr_counters[nic_idx].fetch_add(1, Ordering::Relaxed);
+                let rot = qp_rotation
+                    .unwrap_or_else(|| conn.rr_counters[nic_idx].fetch_add(1, Ordering::Relaxed));
 
                 let per_bucket = nic_descs.len().div_ceil(n);
                 let mut buckets: Vec<Vec<RdmaOp>> =
@@ -518,7 +551,7 @@ impl RcBackend {
         let lookup_dur = lookup_start.elapsed();
 
         debug!(
-            "batch_transfer_async_{:?}: nics_active={}/{}, chunks={}, lookup_ms={:.3}",
+            "prepare_batch_transfer_{:?}: nics_active={}/{}, chunks={}, lookup_ms={:.3}",
             op,
             nic_work.len(),
             nic_count,
@@ -526,11 +559,39 @@ impl RcBackend {
             lookup_dur.as_secs_f64() * 1000.0,
         );
 
-        // --- Submit outside lock ---
-        let mut receivers = Vec::with_capacity(nic_work.len());
-        for (session, prepared) in nic_work {
-            receivers.push(session.transfer_batch_async(prepared, op)?);
+        Ok(PreparedBatch {
+            op,
+            work: nic_work,
+            descriptor_count: descs.len(),
+        })
+    }
+
+    /// Post a batch previously returned by [`Self::prepare_batch_transfer`].
+    pub(crate) fn submit_prepared_batch(
+        &self,
+        prepared: PreparedBatch,
+    ) -> Result<Vec<oneshot::Receiver<Result<usize>>>> {
+        let mut receivers = Vec::with_capacity(prepared.work.len());
+        for (session, ops) in prepared.work {
+            match session.transfer_batch_async(ops, prepared.op) {
+                Ok(receiver) => receivers.push(receiver),
+                Err(error) => {
+                    // A preceding QP batch may already be queued. Preserve an
+                    // awaitable error alongside those receivers so callers
+                    // keep the transfer buffers alive until every successful
+                    // enqueue has reached a terminal completion.
+                    let (error_tx, error_rx) = oneshot::channel();
+                    let _ = error_tx.send(Err(error));
+                    receivers.push(error_rx);
+                }
+            }
         }
+        debug!(
+            "submit_prepared_batch_{:?}: qp_batches={} descriptors={}",
+            prepared.op,
+            receivers.len(),
+            prepared.descriptor_count,
+        );
         Ok(receivers)
     }
 }

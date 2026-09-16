@@ -20,6 +20,9 @@ use crate::backing::{RdmaFetchStore, RdmaTransport};
 use crate::block::{BlockKey, PrefetchStatus, SealedBlock, object_id};
 use crate::internode::MetaServerClient;
 use crate::internode::metaserver_client::MetaServerClientConfig;
+use crate::issue23_causal::{
+    Issue23ActivationStats, Issue23CausalExperiment, Issue23ExperimentConfig,
+};
 use crate::metrics::{
     core_metrics, record_object_age, record_object_lifecycle, record_object_resident_bytes,
 };
@@ -90,6 +93,8 @@ pub struct StorageConfig {
     pub metaserver_queue_depth: usize,
     /// Number of shards for the pinned memory pool (reduces allocator lock contention).
     pub pool_shards: usize,
+    /// Opt-in frozen transport experiment. None leaves the production path unchanged.
+    pub issue23_experiment: Option<Issue23ExperimentConfig>,
 }
 
 impl Default for StorageConfig {
@@ -108,6 +113,7 @@ impl Default for StorageConfig {
             advertise_addr: None,
             metaserver_queue_depth: crate::internode::DEFAULT_METASERVER_QUEUE_DEPTH,
             pool_shards: 1,
+            issue23_experiment: None,
         }
     }
 }
@@ -124,6 +130,7 @@ pub(crate) struct StorageEngine {
     blockwise_alloc: bool,
     metaserver_client: Option<Arc<MetaServerClient>>,
     transfer_lock: Arc<transfer_lock::TransferLockManager>,
+    issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
 }
 
 impl StorageEngine {
@@ -142,6 +149,11 @@ impl StorageEngine {
         let rdma_qps_per_peer = config.rdma_qps_per_peer;
         let blockwise_alloc = config.blockwise_alloc;
         let transfer_lock_timeout = config.transfer_lock_timeout;
+        let issue23_experiment = config
+            .issue23_experiment
+            .clone()
+            .map(Issue23CausalExperiment::new)
+            .transpose()?;
 
         // Create MetaServer client if configured
         let metaserver_client = config.metaserver_addr.as_ref().map(|addr| {
@@ -244,13 +256,18 @@ impl StorageEngine {
                     Arc::clone(rdma),
                     allocate_fn.clone(),
                     advertise,
+                    issue23_experiment.clone(),
                 ))))
             });
             #[cfg(not(feature = "rdma"))]
             let rdma_fetch = None;
 
-            let prefetch =
-                PrefetchScheduler::new(ssd_store.clone(), rdma_fetch, max_prefetch_blocks);
+            let prefetch = PrefetchScheduler::new(
+                ssd_store.clone(),
+                rdma_fetch,
+                max_prefetch_blocks,
+                issue23_experiment.clone(),
+            );
 
             let transfer_lock = Arc::new(transfer_lock::TransferLockManager::new(
                 transfer_lock_timeout,
@@ -268,6 +285,7 @@ impl StorageEngine {
                 blockwise_alloc,
                 metaserver_client,
                 transfer_lock,
+                issue23_experiment,
             }
         });
 
@@ -473,6 +491,23 @@ impl StorageEngine {
         self.prefetch
             .check_and_prefetch(&self.read_cache, req_id, namespace, hashes)
             .await
+    }
+
+    /// Atomically remove the restored cache from normal lookup visibility and
+    /// retain it as the Issue #23 hidden source/shadow reservation.
+    pub(crate) fn activate_issue23_experiment(&self) -> Result<Issue23ActivationStats, String> {
+        let experiment = self
+            .issue23_experiment
+            .as_ref()
+            .ok_or_else(|| "Issue23 experiment is not configured".to_string())?;
+        let visible = self.read_cache.snapshot_all();
+        if !visible.is_empty() {
+            return Err(format!(
+                "Issue23 activation requires an empty visible cache, found {} blocks",
+                visible.len()
+            ));
+        }
+        experiment.activate_staged_hidden()
     }
 
     fn reclaim_until_allocator_can_allocate(

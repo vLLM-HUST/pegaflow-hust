@@ -123,6 +123,10 @@ impl ReadCache {
     pub(super) fn remove_all(&self) -> Vec<(BlockKey, Arc<SealedBlock>)> {
         self.inner.lock().cache.remove_all()
     }
+
+    pub(super) fn snapshot_all(&self) -> Vec<(BlockKey, Arc<SealedBlock>)> {
+        self.inner.lock().cache.snapshot_all()
+    }
 }
 
 fn insert_block(inner: &mut ReadCacheInner, key: BlockKey, block: Arc<SealedBlock>) {

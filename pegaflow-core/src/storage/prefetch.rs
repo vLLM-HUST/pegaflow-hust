@@ -13,6 +13,7 @@ use tokio::task::JoinHandle;
 use crate::backing::RdmaFetchStore;
 use crate::backing::{PrefetchResult, SsdBackingStore};
 use crate::block::{BlockKey, PrefetchStatus, SealedBlock};
+use crate::issue23_causal::Issue23CausalExperiment;
 use crate::metrics::core_metrics;
 
 use super::read_cache::ReadCache;
@@ -156,6 +157,7 @@ pub(super) struct PrefetchScheduler {
     ssd_store: Option<Arc<SsdBackingStore>>,
     rdma_fetch: Option<RdmaFetch>,
     max_prefetch_blocks: usize,
+    issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
 }
 
 impl PrefetchScheduler {
@@ -163,6 +165,7 @@ impl PrefetchScheduler {
         ssd_store: Option<Arc<SsdBackingStore>>,
         rdma_fetch: Option<RdmaFetch>,
         max_prefetch_blocks: usize,
+        issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
     ) -> Self {
         Self {
             state: Arc::new(Mutex::new(PrefetchState {
@@ -173,6 +176,7 @@ impl PrefetchScheduler {
             ssd_store,
             rdma_fetch,
             max_prefetch_blocks,
+            issue23_experiment,
         }
     }
 
@@ -250,7 +254,16 @@ impl PrefetchScheduler {
             );
         }
 
-        read_cache.batch_insert(result.cache_inserts);
+        if let Some(experiment) = &self.issue23_experiment {
+            if !experiment.is_active()
+                && let Err(error) = experiment.stage_hidden_blocks(&result.cache_inserts)
+            {
+                warn!("Issue23 hidden snapshot staging failed: {error}");
+            }
+            debug_assert!(!experiment.should_cache_remote_fetch());
+        } else {
+            read_cache.batch_insert(result.cache_inserts);
+        }
         PollResult::Ready(PrefetchStatus::Ready {
             blocks: result.ready_blocks,
             missing: result.missing,

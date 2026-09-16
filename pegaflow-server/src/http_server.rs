@@ -66,6 +66,13 @@ struct MemoryCacheCleanupResponse {
     still_referenced_blocks: u64,
 }
 
+#[derive(Serialize)]
+struct Issue23ActivationResponse {
+    status: &'static str,
+    hidden_blocks: usize,
+    hidden_bytes: u64,
+}
+
 /// POST /instances/cleanup[?id=<instance_id>]
 ///
 /// Without `id`: remove all instances and release all IPC tensors.
@@ -155,6 +162,27 @@ async fn cleanup_memory_cache_handler(
     })
 }
 
+/// POST /issue23/activate
+///
+/// Flushes all preparation saves, validates the complete frozen object set,
+/// hides it from normal cache lookup, and enables the configured transport
+/// gate. The endpoint exists on every build but fails closed unless the server
+/// was started with an Issue #23 experiment configuration.
+async fn activate_issue23_handler(State(state): State<AppState>) -> impl IntoResponse {
+    match state.engine.activate_issue23_experiment().await {
+        Ok((hidden_blocks, hidden_bytes)) => (
+            StatusCode::OK,
+            Json(Issue23ActivationResponse {
+                status: "PASS",
+                hidden_blocks,
+                hidden_bytes,
+            })
+            .into_response(),
+        ),
+        Err(error) => (StatusCode::PRECONDITION_FAILED, error.into_response()),
+    }
+}
+
 /// Start HTTP server for health check, optional Prometheus metrics, and instance management.
 pub async fn start_http_server(
     addr: std::net::SocketAddr,
@@ -180,7 +208,8 @@ pub async fn start_http_server(
         .route("/health", get(health_handler))
         .route("/instances", get(list_instances_handler))
         .route("/instances/cleanup", post(cleanup_handler))
-        .route("/cache/memory/cleanup", post(cleanup_memory_cache_handler));
+        .route("/cache/memory/cleanup", post(cleanup_memory_cache_handler))
+        .route("/issue23/activate", post(activate_issue23_handler));
 
     if enable_prometheus {
         app = app.route("/metrics", get(metrics_handler));

@@ -3,7 +3,7 @@ use std::ptr::NonNull;
 use serde::{Deserialize, Serialize};
 
 use crate::error::{Result, TransferError};
-use crate::rc_backend::{GetOrPrepareResult, RcBackend};
+use crate::rc_backend::{GetOrPrepareResult, PreparedBatch, RcBackend};
 
 /// RDMA operation type.
 #[derive(Clone, Copy, Debug, PartialEq, Eq)]
@@ -25,6 +25,12 @@ pub struct TransferDesc {
     pub local_ptr: NonNull<u8>,
     pub remote_ptr: NonNull<u8>,
     pub len: usize,
+}
+
+/// Opaque transfer batch prepared through all address and QP lookups but not
+/// yet submitted to an RDMA worker.
+pub struct PreparedTransferBatch {
+    inner: PreparedBatch,
 }
 
 /// RC queue pair endpoint info exchanged during handshake.
@@ -182,6 +188,29 @@ impl TransferEngine {
         descs: &[TransferDesc],
     ) -> Result<Vec<mea::oneshot::Receiver<Result<usize>>>> {
         self.backend.batch_transfer_async(op, remote_addr, descs)
+    }
+
+    /// Prepare an RDMA batch without posting it. The optional deterministic
+    /// QP rotation is used only by frozen experiments; production callers
+    /// should continue using [`Self::batch_transfer_async`].
+    pub fn prepare_batch_transfer(
+        &self,
+        op: TransferOp,
+        remote_addr: &str,
+        descs: &[TransferDesc],
+        qp_rotation: Option<usize>,
+    ) -> Result<PreparedTransferBatch> {
+        self.backend
+            .prepare_batch_transfer(op, remote_addr, descs, qp_rotation)
+            .map(|inner| PreparedTransferBatch { inner })
+    }
+
+    /// Post a batch returned by [`Self::prepare_batch_transfer`].
+    pub fn submit_prepared_batch(
+        &self,
+        prepared: PreparedTransferBatch,
+    ) -> Result<Vec<mea::oneshot::Receiver<Result<usize>>>> {
+        self.backend.submit_prepared_batch(prepared.inner)
     }
 
     /// Number of active RC queue pairs across all NICs.

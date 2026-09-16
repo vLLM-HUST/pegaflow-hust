@@ -105,6 +105,13 @@ impl TinyLfuCache<BlockKey, ArcSealedBlock> {
     pub(crate) fn remove_all(&mut self) -> Vec<(BlockKey, ArcSealedBlock)> {
         self.lru.drain().collect()
     }
+
+    pub(crate) fn snapshot_all(&self) -> Vec<(BlockKey, ArcSealedBlock)> {
+        self.lru
+            .iter()
+            .map(|(key, block)| (key.clone(), Arc::clone(block)))
+            .collect()
+    }
 }
 
 pub(crate) type ArcSealedBlock = Arc<SealedBlock>;

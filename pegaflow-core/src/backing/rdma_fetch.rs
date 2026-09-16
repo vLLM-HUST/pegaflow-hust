@@ -23,6 +23,10 @@ use opentelemetry::KeyValue;
 use super::{AllocateFn, PrefetchResult, RdmaTransport};
 use crate::block::{BlockKey, RawBlock, SealedBlock, Segment, object_id};
 use crate::internode::MetaServerClient;
+use crate::issue23_causal::{
+    Issue23Backend, Issue23CausalExperiment, ObservedOperation, encode_hex, operation_id,
+    stable_request_id,
+};
 use crate::metrics::{core_metrics, record_object_lifecycle};
 
 /// Minimum usable transfer timeout. If the server's lock timeout minus the
@@ -74,6 +78,7 @@ pub(crate) struct RdmaFetchStore {
     /// peer would each create QPs and race on the server, causing all but
     /// the last handshake's QPs to be invalidated.
     connect_group: Arc<Group<String, ()>>,
+    issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
 }
 
 impl RdmaFetchStore {
@@ -82,6 +87,7 @@ impl RdmaFetchStore {
         rdma_transport: Arc<RdmaTransport>,
         allocate_fn: AllocateFn,
         advertise_addr: String,
+        issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
     ) -> Self {
         info!("RDMA remote fetch enabled (advertise={})", advertise_addr);
         Self {
@@ -91,6 +97,7 @@ impl RdmaFetchStore {
             advertise_addr,
             grpc_channels: Arc::new(DashMap::new()),
             connect_group: Arc::new(Group::new()),
+            issue23_experiment,
         }
     }
 
@@ -150,6 +157,7 @@ impl RdmaFetchStore {
             &self.advertise_addr,
             namespace,
             hashes,
+            self.issue23_experiment.clone(),
         )
         .await
     }
@@ -166,7 +174,7 @@ impl RdmaFetchStore {
     reason = "RDMA task arguments are the per-fetch context passed from the scheduler"
 )]
 async fn rdma_fetch_task(
-    rdma: &RdmaTransport,
+    rdma: &Arc<RdmaTransport>,
     allocate_fn: &AllocateFn,
     grpc_channels: &DashMap<String, EngineClient<Channel>>,
     connect_group: &Group<String, ()>,
@@ -175,6 +183,7 @@ async fn rdma_fetch_task(
     advertise_addr: &str,
     namespace: &str,
     block_hashes: &[Vec<u8>],
+    issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
 ) -> PrefetchResult {
     let t0 = Instant::now();
 
@@ -236,8 +245,11 @@ async fn rdma_fetch_task(
         allocate_fn,
         namespace,
         remote_addr,
+        advertise_addr,
         &blocks,
         transfer_timeout,
+        req_id,
+        issue23_experiment,
     )
     .await
     {
@@ -351,19 +363,48 @@ type StagedBlock = (Vec<u8>, Vec<StagedSlot>);
 
 /// Allocate local memory, build TransferDescs, execute RDMA READ, build SealedBlocks.
 async fn fetch_blocks_via_rdma(
-    rdma: &RdmaTransport,
+    rdma: &Arc<RdmaTransport>,
     allocate_fn: &AllocateFn,
     namespace: &str,
     remote_addr: &str,
+    destination_addr: &str,
     blocks: &[TransferBlockInfo],
     transfer_timeout: Duration,
+    req_id: &str,
+    issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
 ) -> Result<(PrefetchResult, TransferTiming), String> {
     if blocks.is_empty() {
         return Ok((Vec::new(), TransferTiming::default()));
     }
 
-    let bytes_per_numa = sum_segment_bytes_by_numa(blocks)?;
-    let mut numa_slabs = allocate_numa_slabs(allocate_fn, bytes_per_numa)?;
+    // Experiment bundles use one allocation per logical block. During
+    // snapshot restore this lets duplicate prefix blocks drop without a small
+    // unique suffix pinning an entire request-sized slab. The normal
+    // production path retains its faster per-NUMA batch slab.
+    let mut block_slabs = if issue23_experiment.is_some() {
+        Some(
+            blocks
+                .iter()
+                .map(|block| {
+                    allocate_numa_slabs(
+                        allocate_fn,
+                        sum_segment_bytes_by_numa(std::slice::from_ref(block))?,
+                    )
+                })
+                .collect::<Result<Vec<_>, String>>()?,
+        )
+    } else {
+        None
+    };
+    let mut numa_slabs = if block_slabs.is_none() {
+        allocate_numa_slabs(allocate_fn, sum_segment_bytes_by_numa(blocks)?)?
+    } else {
+        HashMap::new()
+    };
+    let numa_slab_count = block_slabs.as_ref().map_or_else(
+        || numa_slabs.len(),
+        |slabs| slabs.iter().map(HashMap::len).sum(),
+    );
 
     // (block_hash, Vec<(slot_segments, slot_numa)>) — for building SealedBlock afterwards.
     // The per-slot NUMA is preserved so a re-served fetched block advertises real topology.
@@ -371,16 +412,27 @@ async fn fetch_blocks_via_rdma(
     let mut slot_count = 0usize;
     let build_start = Instant::now();
 
-    // Build TransferDescs and submit RDMA READ inside a sync block so that
-    // all_descs (which contains NonNull<u8>, !Send) is dropped before any .await.
-    let (receivers, mut timing) = {
+    // Build the exact logical operation manifest before the transport
+    // boundary. NonNull pointers are converted to integer addresses before
+    // any await so the frozen cohort can move between async tasks safely.
+    let (mut operations, rdma_batch, mut timing) = {
         let mut all_descs: Vec<TransferDesc> = Vec::new();
+        let stable_id = issue23_experiment
+            .as_ref()
+            .map(|_| stable_request_id(req_id))
+            .transpose()?;
+        let mut operations = Vec::new();
 
-        for block_info in blocks {
+        for (block_index, block_info) in blocks.iter().enumerate() {
             slot_count += block_info.slots.len();
             let mut slot_allocs = Vec::with_capacity(block_info.slots.len());
+            let slabs = if let Some(per_block) = block_slabs.as_mut() {
+                &mut per_block[block_index]
+            } else {
+                &mut numa_slabs
+            };
 
-            for slot in &block_info.slots {
+            for (slot_index, slot) in block_info.slots.iter().enumerate() {
                 let mut segments = Vec::new();
                 let numa = NumaNode(slot.numa_node);
 
@@ -388,8 +440,7 @@ async fn fetch_blocks_via_rdma(
                 if slot.k_size > 0 {
                     let len = usize::try_from(slot.k_size)
                         .map_err(|_| format!("K size exceeds usize: {}", slot.k_size))?;
-                    let (local_ptr, alloc) =
-                        alloc_segment_from_slab(&mut numa_slabs, numa, len, "K")?;
+                    let (local_ptr, alloc) = alloc_segment_from_slab(slabs, numa, len, "K")?;
                     let remote_ptr = NonNull::new(slot.k_ptr as *mut u8)
                         .ok_or_else(|| "remote K ptr is null".to_string())?;
                     all_descs.push(TransferDesc {
@@ -397,6 +448,26 @@ async fn fetch_blocks_via_rdma(
                         remote_ptr,
                         len,
                     });
+                    if let Some(stable_id) = stable_id.as_deref() {
+                        operations.push(ObservedOperation {
+                            operation_id: operation_id(
+                                stable_id,
+                                &block_info.block_hash,
+                                slot_index,
+                                "k",
+                            ),
+                            block_hash_hex: encode_hex(&block_info.block_hash),
+                            slot_index,
+                            segment: "k".into(),
+                            source: remote_addr.to_string(),
+                            destination: destination_addr.to_string(),
+                            transfer_type: "load".into(),
+                            logical_payload_bytes: len,
+                            qp_index: operations.len() % 2,
+                            local_addr: local_ptr.as_ptr() as u64,
+                            remote_addr: remote_ptr.as_ptr() as u64,
+                        });
+                    }
                     segments.push(SegmentAlloc {
                         ptr_addr: local_ptr.as_ptr() as u64,
                         alloc,
@@ -408,8 +479,7 @@ async fn fetch_blocks_via_rdma(
                 if slot.v_size > 0 && slot.v_ptr != 0 {
                     let len = usize::try_from(slot.v_size)
                         .map_err(|_| format!("V size exceeds usize: {}", slot.v_size))?;
-                    let (local_ptr, alloc) =
-                        alloc_segment_from_slab(&mut numa_slabs, numa, len, "V")?;
+                    let (local_ptr, alloc) = alloc_segment_from_slab(slabs, numa, len, "V")?;
                     let remote_ptr = NonNull::new(slot.v_ptr as *mut u8)
                         .ok_or_else(|| "remote V ptr is null".to_string())?;
                     all_descs.push(TransferDesc {
@@ -417,6 +487,26 @@ async fn fetch_blocks_via_rdma(
                         remote_ptr,
                         len,
                     });
+                    if let Some(stable_id) = stable_id.as_deref() {
+                        operations.push(ObservedOperation {
+                            operation_id: operation_id(
+                                stable_id,
+                                &block_info.block_hash,
+                                slot_index,
+                                "v",
+                            ),
+                            block_hash_hex: encode_hex(&block_info.block_hash),
+                            slot_index,
+                            segment: "v".into(),
+                            source: remote_addr.to_string(),
+                            destination: destination_addr.to_string(),
+                            transfer_type: "load".into(),
+                            logical_payload_bytes: len,
+                            qp_index: operations.len() % 2,
+                            local_addr: local_ptr.as_ptr() as u64,
+                            remote_addr: remote_ptr.as_ptr() as u64,
+                        });
+                    }
                     segments.push(SegmentAlloc {
                         ptr_addr: local_ptr.as_ptr() as u64,
                         alloc,
@@ -434,45 +524,121 @@ async fn fetch_blocks_via_rdma(
             let timing = TransferTiming {
                 build_transfer_tasks: build_start.elapsed(),
                 slot_count,
-                numa_slab_count: numa_slabs.len(),
+                numa_slab_count,
                 ..TransferTiming::default()
             };
             return Ok((Vec::new(), timing));
         }
 
         let transfer_desc_count = all_descs.len();
-
-        // Submit RDMA READ; all_descs is dropped at the end of this block.
-        let submit_start = Instant::now();
-        let receivers = rdma
-            .engine()
-            .batch_transfer_async(TransferOp::Read, remote_addr, &all_descs)
-            .map_err(|e| format!("RDMA batch_transfer_async failed: {e}"))?;
-        let submit_transfer = submit_start.elapsed();
+        let rdma_batch = if issue23_experiment
+            .as_ref()
+            .is_some_and(|experiment| experiment.is_active())
+        {
+            Some(
+                rdma.engine()
+                    .prepare_batch_transfer(TransferOp::Read, remote_addr, &all_descs, Some(0))
+                    .map_err(|e| format!("RDMA prepare_batch_transfer failed: {e}"))?,
+            )
+        } else {
+            None
+        };
 
         let timing = TransferTiming {
-            build_transfer_tasks: build_start.elapsed().saturating_sub(submit_transfer),
-            submit_transfer,
+            build_transfer_tasks: build_start.elapsed(),
             transfer_desc_count,
             slot_count,
-            numa_slab_count: numa_slabs.len(),
+            numa_slab_count,
             ..TransferTiming::default()
         };
-        (receivers, timing)
+        (operations, rdma_batch, timing)
     };
 
-    let wait_start = Instant::now();
-    tokio::time::timeout(transfer_timeout, async {
-        for rx in receivers {
-            rx.await
-                .map_err(|_| "RDMA transfer channel closed".to_string())?
-                .map_err(|e| format!("RDMA transfer failed: {e}"))?;
+    if let Some(experiment) = &issue23_experiment {
+        let stable_id = experiment.capture_bundle(req_id, &operations)?;
+        if experiment.is_active() && experiment.backend() == Issue23Backend::LocalCopy {
+            for operation in &mut operations {
+                operation.remote_addr = experiment.local_source(
+                    &operation.block_hash_hex,
+                    operation.slot_index,
+                    &operation.segment,
+                    operation.logical_payload_bytes,
+                )?;
+            }
         }
-        Ok::<(), String>(())
-    })
-    .await
-    .map_err(|_| "RDMA transfer timed out".to_string())??;
-    timing.rdma_wait = wait_start.elapsed();
+        if experiment.is_active() {
+            // Do not cancel a prepared bundle after it crosses the cohort
+            // gate: the coordinator owns raw staged addresses until the
+            // common completion callback fires. The arm-level controller has
+            // a fail-closed deadline and tears down the process on a missing
+            // cohort, which is the only memory-safe cancellation boundary.
+            let completion = experiment
+                .gate_bundle(
+                    Arc::clone(rdma),
+                    remote_addr.to_string(),
+                    req_id.to_string(),
+                    stable_id,
+                    operations,
+                    rdma_batch,
+                )
+                .await?;
+            timing.submit_transfer = completion.submit;
+            timing.rdma_wait = completion.eligible_wait + completion.transport_wait;
+        } else {
+            let submit_start = Instant::now();
+            let receivers = {
+                let descs: Vec<TransferDesc> = operations
+                    .iter()
+                    .map(|operation| TransferDesc {
+                        local_ptr: NonNull::new(operation.local_addr as *mut u8)
+                            .expect("allocated local pointer must be non-null"),
+                        remote_ptr: NonNull::new(operation.remote_addr as *mut u8)
+                            .expect("queried remote pointer must be non-null"),
+                        len: operation.logical_payload_bytes,
+                    })
+                    .collect();
+                rdma.engine()
+                    .batch_transfer_async(TransferOp::Read, remote_addr, &descs)
+                    .map_err(|e| format!("RDMA batch_transfer_async failed: {e}"))?
+            };
+            timing.submit_transfer = submit_start.elapsed();
+            let wait_start = Instant::now();
+            wait_for_rdma(receivers, transfer_timeout).await?;
+            timing.rdma_wait = wait_start.elapsed();
+        }
+    } else {
+        // Production path: build descriptors from the staged layout and submit
+        // exactly as before when no experiment configuration is present.
+        let submit_start = Instant::now();
+        let receivers = {
+            let mut descs = Vec::new();
+            for (block_info, (_, slot_allocs)) in blocks.iter().zip(&block_allocs) {
+                for (slot_info, (segments, _)) in block_info.slots.iter().zip(slot_allocs) {
+                    for (segment_index, segment) in segments.iter().enumerate() {
+                        let remote_addr = if segment_index == 0 {
+                            slot_info.k_ptr
+                        } else {
+                            slot_info.v_ptr
+                        };
+                        descs.push(TransferDesc {
+                            local_ptr: NonNull::new(segment.ptr_addr as *mut u8)
+                                .expect("allocated local pointer must be non-null"),
+                            remote_ptr: NonNull::new(remote_addr as *mut u8)
+                                .expect("queried remote pointer must be non-null"),
+                            len: segment.size,
+                        });
+                    }
+                }
+            }
+            rdma.engine()
+                .batch_transfer_async(TransferOp::Read, remote_addr, &descs)
+                .map_err(|e| format!("RDMA batch_transfer_async failed: {e}"))?
+        };
+        timing.submit_transfer = submit_start.elapsed();
+        let wait_start = Instant::now();
+        wait_for_rdma(receivers, transfer_timeout).await?;
+        timing.rdma_wait = wait_start.elapsed();
+    }
 
     // Build SealedBlocks from allocated memory
     let rebuild_start = Instant::now();
@@ -499,6 +665,29 @@ async fn fetch_blocks_via_rdma(
     timing.rebuild = rebuild_start.elapsed();
 
     Ok((result, timing))
+}
+
+async fn wait_for_rdma(
+    receivers: Vec<mea::oneshot::Receiver<pegaflow_transfer::Result<usize>>>,
+    transfer_timeout: Duration,
+) -> Result<(), String> {
+    tokio::time::timeout(transfer_timeout, async {
+        let mut first_error = None;
+        for receiver in receivers {
+            match receiver.await {
+                Ok(Ok(_)) => {}
+                Ok(Err(error)) => {
+                    first_error.get_or_insert_with(|| format!("RDMA transfer failed: {error}"));
+                }
+                Err(_) => {
+                    first_error.get_or_insert_with(|| "RDMA transfer channel closed".to_string());
+                }
+            }
+        }
+        first_error.map_or(Ok(()), Err)
+    })
+    .await
+    .map_err(|_| "RDMA transfer timed out".to_string())?
 }
 
 fn sum_segment_bytes_by_numa(
