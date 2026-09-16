@@ -611,10 +611,7 @@ impl Issue23CausalExperiment {
         match self.config.schedule {
             Issue23Schedule::Burst => {
                 wait_until_precise(tg + Duration::from_millis(BURST_OFFSET_MS)).await;
-                let mut posted = Vec::with_capacity(cohort.len());
-                for bundle in cohort {
-                    posted.push(self.post_bundle(&rdma, &remote_addr, bundle));
-                }
+                let posted = self.post_burst_cohort(&rdma, &remote_addr, cohort).await;
                 let successful_posts: Vec<_> = posted
                     .iter()
                     .filter_map(|post| post.as_ref().ok().map(|pending| pending.posted_at))
@@ -648,6 +645,45 @@ impl Issue23CausalExperiment {
                 }
             }
         }
+    }
+
+    #[cfg(feature = "rdma")]
+    async fn post_burst_cohort(
+        self: &Arc<Self>,
+        rdma: &Arc<RdmaTransport>,
+        remote_addr: &str,
+        cohort: Vec<PreparedIssue23Bundle>,
+    ) -> Vec<Result<PendingBundle, FailedBundle>> {
+        // Prepare all blocking workers before releasing the barrier. This
+        // makes the frozen burst deadline the common release point instead of
+        // serializing four submit_prepared_batch calls on one runtime worker.
+        let barrier = Arc::new(std::sync::Barrier::new(cohort.len() + 1));
+        let mut tasks = Vec::with_capacity(cohort.len());
+        for bundle in cohort {
+            let experiment = Arc::clone(self);
+            let rdma = Arc::clone(rdma);
+            let remote_addr = remote_addr.to_owned();
+            let barrier = Arc::clone(&barrier);
+            tasks.push(tokio::task::spawn_blocking(move || {
+                barrier.wait();
+                experiment.post_bundle(&rdma, &remote_addr, bundle)
+            }));
+        }
+        barrier.wait();
+
+        let mut posted = Vec::with_capacity(tasks.len());
+        for task in tasks {
+            match task.await {
+                Ok(post) => posted.push(post),
+                Err(error) => {
+                    let _ = self.write_event(&serde_json::json!({
+                        "event": "cohort_post_task_failed",
+                        "error": error.to_string(),
+                    }));
+                }
+            }
+        }
+        posted
     }
 
     #[cfg(feature = "rdma")]
