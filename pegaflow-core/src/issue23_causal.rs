@@ -130,6 +130,36 @@ pub(crate) struct Issue23Completion {
     pub(crate) transport_wait: Duration,
 }
 
+fn bundle_timing_event(
+    event: &str,
+    stable_request_id: &str,
+    raw_request_id: &str,
+    plan: &Issue23RequestPlan,
+    scheduled_offset_ms: Option<u64>,
+) -> serde_json::Value {
+    let logical_payload_bytes = plan
+        .operations
+        .iter()
+        .map(|operation| operation.logical_payload_bytes as u64)
+        .sum::<u64>();
+    let mut value = serde_json::json!({
+        "event": event,
+        "request_id": stable_request_id,
+        "raw_request_id": raw_request_id,
+        "cohort_id": plan.cohort_id,
+        "smooth_slot": plan.smooth_slot,
+        "operation_count": plan.operations.len(),
+        "logical_payload_bytes": logical_payload_bytes,
+    });
+    if let Some(offset) = scheduled_offset_ms {
+        value
+            .as_object_mut()
+            .expect("bundle timing event is an object")
+            .insert("scheduled_offset_ms".into(), serde_json::json!(offset));
+    }
+    value
+}
+
 #[cfg(feature = "rdma")]
 pub(crate) struct PreparedIssue23Bundle {
     stable_request_id: String,
@@ -508,14 +538,13 @@ impl Issue23CausalExperiment {
     ) -> Result<Issue23Completion, String> {
         let plan = self.request_plan(&stable_request_id, &operations)?;
         let eligible_at = Instant::now();
-        self.write_event(&serde_json::json!({
-            "event": "bundle_eligible",
-            "request_id": stable_request_id,
-            "raw_request_id": raw_request_id,
-            "cohort_id": plan.cohort_id,
-            "smooth_slot": plan.smooth_slot,
-            "operation_ids": plan.operations.iter().map(|op| op.operation_id.as_str()).collect::<Vec<_>>(),
-        }))?;
+        self.write_event(&bundle_timing_event(
+            "bundle_eligible",
+            &stable_request_id,
+            &raw_request_id,
+            &plan,
+            None,
+        ))?;
 
         let (result_tx, result_rx) = oneshot::channel();
         let bundle = PreparedIssue23Bundle {
@@ -675,18 +704,16 @@ impl Issue23CausalExperiment {
         let posted_at = Instant::now();
         let submit = posted_at.duration_since(post_start);
         let trace_error = self
-            .write_event(&serde_json::json!({
-            "event": "bundle_posted",
-            "request_id": bundle.stable_request_id,
-            "raw_request_id": bundle.raw_request_id,
-            "cohort_id": bundle.plan.cohort_id,
-            "smooth_slot": bundle.plan.smooth_slot,
-            "scheduled_offset_ms": match self.config.schedule {
-                Issue23Schedule::Burst => BURST_OFFSET_MS,
-                Issue23Schedule::Smooth => SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot],
-            },
-            "operation_ids": bundle.plan.operations.iter().map(|op| op.operation_id.as_str()).collect::<Vec<_>>(),
-            }))
+            .write_event(&bundle_timing_event(
+                "bundle_posted",
+                &bundle.stable_request_id,
+                &bundle.raw_request_id,
+                &bundle.plan,
+                Some(match self.config.schedule {
+                    Issue23Schedule::Burst => BURST_OFFSET_MS,
+                    Issue23Schedule::Smooth => SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot],
+                }),
+            ))
             .err();
         Ok(PendingBundle {
             stable_request_id: bundle.stable_request_id,
@@ -985,6 +1012,20 @@ mod tests {
             serde_json::to_value(decoded).unwrap(),
             serde_json::to_value(plan).unwrap()
         );
+    }
+
+    #[test]
+    fn timing_event_size_is_independent_of_operation_identity_volume() {
+        let mut plan = valid_plan().requests.remove(0);
+        plan.operations = (0..2304)
+            .map(|index| operation("req-0", &format!("{index:064x}"), index))
+            .collect();
+        let event = bundle_timing_event("bundle_posted", "req-0", "raw-0", &plan, Some(10));
+        assert_eq!(event["operation_count"], 2304);
+        assert_eq!(event["logical_payload_bytes"], 2304 * 64);
+        assert_eq!(event["scheduled_offset_ms"], 10);
+        assert!(event.get("operation_ids").is_none());
+        assert!(serde_json::to_vec(&event).unwrap().len() < 512);
     }
 
     #[test]
