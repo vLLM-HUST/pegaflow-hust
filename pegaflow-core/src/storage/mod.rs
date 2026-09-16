@@ -295,6 +295,10 @@ impl StorageEngine {
                 read_cache: engine.read_cache.clone(),
                 ssd_store: engine.ssd_store.clone(),
                 metaserver_client: engine.metaserver_client.clone(),
+                publish_sealed_blocks: engine
+                    .issue23_experiment
+                    .as_ref()
+                    .is_none_or(|experiment| !experiment.has_frozen_plan()),
             });
             let weak_deps = Arc::downgrade(&deps);
             // Keep deps alive by leaking it into the thread. The worker holds

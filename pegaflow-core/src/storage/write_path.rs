@@ -69,6 +69,10 @@ pub(super) struct InsertDeps {
     pub(super) read_cache: Arc<ReadCache>,
     pub(super) ssd_store: Option<Arc<SsdBackingStore>>,
     pub(super) metaserver_client: Option<Arc<MetaServerClient>>,
+    /// A frozen Issue23 destination must never make decode-side saves visible.
+    /// Otherwise a later request can satisfy its prefix locally and bypass the
+    /// frozen transfer bundle entirely.
+    pub(super) publish_sealed_blocks: bool,
 }
 
 pub(super) fn insert_worker_loop(rx: Receiver<InsertWorkerCommand>, deps: Weak<InsertDeps>) {
@@ -215,8 +219,15 @@ fn process_insert_batch(
     if !sealed_blocks.is_empty()
         && let Some(deps) = &deps
     {
-        deps.read_cache.batch_insert_refs(&sealed_blocks);
-        send_backing_batches(deps, namespace, &sealed_blocks);
+        if deps.publish_sealed_blocks {
+            deps.read_cache.batch_insert_refs(&sealed_blocks);
+            send_backing_batches(deps, namespace, &sealed_blocks);
+        } else {
+            debug!(
+                "discarding {} sealed destination-local blocks for frozen Issue23 transfer plan",
+                sealed_blocks.len()
+            );
+        }
     }
 
     ordered_fast_path_seals
@@ -383,7 +394,36 @@ mod tests {
             read_cache: engine.read_cache.clone(),
             ssd_store: engine.ssd_store.clone(),
             metaserver_client: None,
+            publish_sealed_blocks: true,
         })
+    }
+
+    #[tokio::test]
+    async fn frozen_destination_save_is_not_published_to_read_cache() {
+        let engine =
+            StorageEngine::new_with_config(1 << 20, false, StorageConfig::default(), &[]).unwrap();
+        let deps = Arc::new(InsertDeps {
+            read_cache: engine.read_cache.clone(),
+            ssd_store: engine.ssd_store.clone(),
+            metaserver_client: None,
+            publish_sealed_blocks: false,
+        });
+        let weak_deps = Arc::downgrade(&deps);
+        let key = BlockKey::new("ns".into(), vec![8, 8, 8]);
+        let entries: InsertEntries = vec![(key.clone(), vec![(0, make_raw_block(&engine, 64))])];
+        let mut inflight = HashMap::new();
+
+        process_insert_batch(
+            &mut inflight,
+            &weak_deps,
+            entries,
+            1,
+            NumaNode::UNKNOWN,
+            "ns",
+        );
+
+        assert!(inflight.is_empty());
+        assert!(!engine.read_cache.contains_keys(std::slice::from_ref(&key))[0]);
     }
 
     #[tokio::test]
