@@ -188,7 +188,7 @@ pub(crate) struct Issue23CausalExperiment {
     active: AtomicBool,
     hidden: RwLock<HashMap<Vec<u8>, Arc<SealedBlock>>>,
     #[cfg(feature = "rdma")]
-    gate: tokio::sync::Mutex<CohortGateState>,
+    gate: Mutex<CohortGateState>,
 }
 
 impl Issue23TransferPlan {
@@ -341,7 +341,7 @@ impl Issue23CausalExperiment {
             active: AtomicBool::new(false),
             hidden: RwLock::new(HashMap::new()),
             #[cfg(feature = "rdma")]
-            gate: tokio::sync::Mutex::new(CohortGateState::default()),
+            gate: Mutex::new(CohortGateState::default()),
         });
         experiment.write_event(&serde_json::json!({
             "event": "experiment_opened",
@@ -605,7 +605,7 @@ impl Issue23CausalExperiment {
         };
 
         let ready = {
-            let mut gate = self.gate.lock().await;
+            let mut gate = self.gate.lock();
             let cohort = gate.cohorts.entry(plan.cohort_id.clone()).or_default();
             if cohort
                 .iter()
@@ -675,15 +675,33 @@ impl Issue23CausalExperiment {
                 }
             }
             Issue23Schedule::Smooth => {
-                let mut posts = Vec::with_capacity(cohort.len());
+                // Give every smooth slot its own blocking scheduler. Keeping the
+                // deadline wait and synchronous RDMA enqueue off the async
+                // request worker prevents one descheduled slot from collapsing
+                // the rest of the cohort onto the same late timestamp.
+                let mut tasks = Vec::with_capacity(cohort.len());
                 for bundle in cohort {
                     let release_at =
                         tg + Duration::from_millis(SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot]);
-                    wait_until_precise(release_at).await;
-                    posts.push(self.post_bundle(&rdma, &remote_addr, bundle));
+                    let experiment = Arc::clone(&self);
+                    let rdma = Arc::clone(&rdma);
+                    let remote_addr = remote_addr.clone();
+                    tasks.push(tokio::task::spawn_blocking(move || {
+                        wait_until_precise_blocking(release_at);
+                        experiment.post_bundle(&rdma, &remote_addr, bundle)
+                    }));
                 }
-                for post in posts {
-                    self.finish_post(post).await;
+                for task in tasks {
+                    match task.await {
+                        Ok(post) => self.finish_post(post).await,
+                        Err(error) => {
+                            let _ = self.write_event(&serde_json::json!({
+                                "event": "cohort_post_task_failed",
+                                "schedule": "smooth",
+                                "error": error.to_string(),
+                            }));
+                        }
+                    }
                 }
             }
         }
@@ -902,6 +920,19 @@ async fn wait_until_precise(deadline: Instant) {
         && Instant::now() < coarse_deadline
     {
         tokio::time::sleep_until(coarse_deadline.into()).await;
+    }
+    while Instant::now() < deadline {
+        std::hint::spin_loop();
+    }
+}
+
+#[cfg(feature = "rdma")]
+fn wait_until_precise_blocking(deadline: Instant) {
+    if let Some(coarse_deadline) = deadline.checked_sub(PRECISE_WAIT_GUARD) {
+        let now = Instant::now();
+        if now < coarse_deadline {
+            std::thread::sleep(coarse_deadline.duration_since(now));
+        }
     }
     while Instant::now() < deadline {
         std::hint::spin_loop();
