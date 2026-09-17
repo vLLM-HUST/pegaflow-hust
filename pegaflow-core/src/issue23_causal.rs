@@ -11,6 +11,8 @@ use std::io::Write;
 use std::path::PathBuf;
 use std::sync::Arc;
 use std::sync::atomic::{AtomicBool, Ordering};
+#[cfg(feature = "rdma")]
+use std::sync::mpsc;
 use std::time::{Duration, Instant, SystemTime, UNIX_EPOCH};
 
 use parking_lot::{Mutex, RwLock};
@@ -33,6 +35,79 @@ const MAX_BURST_POSTING_SPREAD: Duration = Duration::from_millis(1);
 // Spinning for the final 10 ms is cheap at the frozen 0.5 QPS offered load and
 // keeps the recorded successful-post timestamp tied to the frozen deadline.
 const PRECISE_WAIT_GUARD: Duration = Duration::from_millis(10);
+#[cfg(feature = "rdma")]
+const SMOOTH_SCHEDULER_PRIORITY: libc::c_int = 10;
+
+#[cfg(feature = "rdma")]
+type SmoothSchedulerJob = Box<dyn FnOnce() + Send + 'static>;
+
+/// A pre-started scheduler for the three delayed smooth slots.
+///
+/// Keeping one SCHED_FIFO thread blocked on a channel between cohorts avoids
+/// both Tokio blocking-pool cold starts and millisecond-scale preemption while
+/// the final deadline guard is spinning.  The Issue23 path is opt-in and the
+/// thread is runnable for only about 30 ms per cohort at the frozen 0.5 QPS.
+#[cfg(feature = "rdma")]
+struct SmoothScheduler {
+    sender: mpsc::Sender<SmoothSchedulerJob>,
+    realtime_error: Option<String>,
+}
+
+#[cfg(feature = "rdma")]
+impl SmoothScheduler {
+    fn new() -> Result<Self, String> {
+        let (sender, receiver) = mpsc::channel::<SmoothSchedulerJob>();
+        let (startup_sender, startup_receiver) = mpsc::sync_channel(1);
+        std::thread::Builder::new()
+            .name("issue23-smooth-scheduler".into())
+            .spawn(move || {
+                let realtime = configure_realtime_scheduler();
+                let _ = startup_sender.send(realtime.clone());
+                for job in receiver {
+                    job();
+                }
+            })
+            .map_err(|error| format!("start Issue23 smooth scheduler: {error}"))?;
+        let realtime_error = startup_receiver
+            .recv()
+            .map_err(|_| "Issue23 smooth scheduler exited during startup".to_string())?
+            .err();
+        Ok(Self {
+            sender,
+            realtime_error,
+        })
+    }
+
+    fn submit(&self, job: SmoothSchedulerJob) -> Result<(), String> {
+        self.sender
+            .send(job)
+            .map_err(|_| "Issue23 smooth scheduler is unavailable".to_string())
+    }
+
+    fn require_realtime(&self) -> Result<(), String> {
+        self.realtime_error.as_ref().map_or(Ok(()), |error| {
+            Err(format!(
+                "Issue23 smooth scheduler could not enable SCHED_FIFO: {error}"
+            ))
+        })
+    }
+}
+
+#[cfg(feature = "rdma")]
+fn configure_realtime_scheduler() -> Result<(), String> {
+    let parameter = libc::sched_param {
+        sched_priority: SMOOTH_SCHEDULER_PRIORITY,
+    };
+    // SAFETY: pthread_self returns the calling thread, parameter points to a
+    // valid sched_param for the duration of the call, and SCHED_FIFO accepts
+    // the configured positive priority on Linux.
+    let result =
+        unsafe { libc::pthread_setschedparam(libc::pthread_self(), libc::SCHED_FIFO, &parameter) };
+    if result != 0 {
+        return Err(std::io::Error::from_raw_os_error(result).to_string());
+    }
+    Ok(())
+}
 
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
@@ -175,6 +250,7 @@ pub(crate) struct PreparedIssue23Bundle {
     eligible_at: Instant,
     operations: Vec<ObservedOperation>,
     rdma_batch: Option<pegaflow_transfer::PreparedTransferBatch>,
+    posted_event: serde_json::Value,
     result_tx: oneshot::Sender<Result<Issue23Completion, String>>,
 }
 
@@ -194,6 +270,8 @@ pub(crate) struct Issue23CausalExperiment {
     hidden: RwLock<HashMap<Vec<u8>, Arc<SealedBlock>>>,
     #[cfg(feature = "rdma")]
     gate: Mutex<CohortGateState>,
+    #[cfg(feature = "rdma")]
+    smooth_scheduler: Option<SmoothScheduler>,
 }
 
 impl Issue23TransferPlan {
@@ -337,6 +415,10 @@ impl Issue23CausalExperiment {
             })
             .unwrap_or_default();
         let expected_hidden = expected_hidden_layout(config.plan.as_ref())?;
+        #[cfg(feature = "rdma")]
+        let smooth_scheduler = (config.schedule == Issue23Schedule::Smooth)
+            .then(SmoothScheduler::new)
+            .transpose()?;
         let experiment = Arc::new(Self {
             config,
             requests,
@@ -347,13 +429,36 @@ impl Issue23CausalExperiment {
             hidden: RwLock::new(HashMap::new()),
             #[cfg(feature = "rdma")]
             gate: Mutex::new(CohortGateState::default()),
+            #[cfg(feature = "rdma")]
+            smooth_scheduler,
         });
+        #[cfg(feature = "rdma")]
+        let (scheduler_policy, scheduler_priority, scheduler_error) = experiment
+            .smooth_scheduler
+            .as_ref()
+            .map_or((None, None, None), |scheduler| {
+                (
+                    Some(if scheduler.realtime_error.is_none() {
+                        "sched_fifo"
+                    } else {
+                        "unavailable"
+                    }),
+                    Some(SMOOTH_SCHEDULER_PRIORITY),
+                    scheduler.realtime_error.as_deref(),
+                )
+            });
+        #[cfg(not(feature = "rdma"))]
+        let (scheduler_policy, scheduler_priority, scheduler_error) =
+            (None::<&str>, None::<libc::c_int>, None::<&str>);
         experiment.write_event(&serde_json::json!({
             "event": "experiment_opened",
             "protocol_id": experiment.config.plan.as_ref().map(|plan| plan.protocol_id.as_str()),
             "block_id": experiment.config.plan.as_ref().map(|plan| plan.block_id.as_str()),
             "backend": experiment.config.backend,
             "schedule": experiment.config.schedule,
+            "smooth_scheduler_policy": scheduler_policy,
+            "smooth_scheduler_priority": scheduler_priority,
+            "smooth_scheduler_error": scheduler_error,
         }))?;
         Ok(experiment)
     }
@@ -458,6 +563,12 @@ impl Issue23CausalExperiment {
         }
         if self.is_active() {
             return Err("Issue23 experiment is already active".into());
+        }
+        #[cfg(feature = "rdma")]
+        if let Some(scheduler) = &self.smooth_scheduler {
+            // A normal-timeshare fallback would make a failed timing treatment
+            // look like valid experiment data. Refuse activation instead.
+            scheduler.require_realtime()?;
         }
         let hidden = self.hidden.read();
         if hidden.len() != self.expected_hidden.len() {
@@ -599,6 +710,16 @@ impl Issue23CausalExperiment {
         )?;
 
         let (result_tx, result_rx) = oneshot::channel();
+        let posted_event = bundle_timing_event(
+            "bundle_posted",
+            &stable_request_id,
+            &raw_request_id,
+            &plan,
+            Some(match self.config.schedule {
+                Issue23Schedule::Burst => BURST_OFFSET_MS,
+                Issue23Schedule::Smooth => SMOOTH_OFFSETS_MS[plan.smooth_slot],
+            }),
+        );
         let bundle = PreparedIssue23Bundle {
             stable_request_id,
             raw_request_id,
@@ -606,6 +727,7 @@ impl Issue23CausalExperiment {
             eligible_at,
             operations,
             rdma_batch,
+            posted_event,
             result_tx,
         };
 
@@ -681,41 +803,66 @@ impl Issue23CausalExperiment {
             }
             Issue23Schedule::Smooth => {
                 // T_g is the fourth bundle's eligibility timestamp, so slot 0
-                // is due immediately. Submit it on this already-running cohort
-                // coordinator instead of first paying spawn_blocking cold-start
-                // latency. The remaining slots have independent blocking
-                // schedulers so one transport submit cannot collapse later
-                // deadlines onto the same timestamp.
+                // is due immediately. The remaining slots are handed to the
+                // pre-started realtime scheduler before slot 0 is submitted;
+                // it dispatches them serially at 10/20/30 ms. A single worker
+                // avoids competing busy-spinners and cannot be preempted by the
+                // service's normal-timeshare threads during a deadline guard.
                 let mut bundles = cohort.into_iter();
                 let slot_zero = bundles
                     .next()
                     .expect("validated smooth cohort contains slot zero");
                 debug_assert_eq!(slot_zero.plan.smooth_slot, 0);
-                let slot_zero_post = self.post_bundle(&rdma, &remote_addr, slot_zero);
-
-                let mut tasks = Vec::with_capacity(EXPECTED_COHORT_SIZE - 1);
-                for bundle in bundles {
-                    let release_at =
-                        tg + Duration::from_millis(SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot]);
-                    let experiment = Arc::clone(&self);
-                    let rdma = Arc::clone(&rdma);
-                    let remote_addr = remote_addr.clone();
-                    tasks.push(tokio::task::spawn_blocking(move || {
+                let delayed: Vec<_> = bundles.collect();
+                let scheduler = self
+                    .smooth_scheduler
+                    .as_ref()
+                    .expect("smooth experiment has a scheduler");
+                let experiment = Arc::clone(&self);
+                let delayed_rdma = Arc::clone(&rdma);
+                let delayed_remote_addr = remote_addr.clone();
+                let runtime = tokio::runtime::Handle::current();
+                let (scheduled_sender, scheduled_receiver) = oneshot::channel();
+                let submit_result = scheduler.submit(Box::new(move || {
+                    // Local-copy arms enqueue their memcpy worker from
+                    // post_bundle, so make the originating runtime available
+                    // on this dedicated OS thread too.
+                    let _runtime_guard = runtime.enter();
+                    let mut posts = Vec::with_capacity(delayed.len());
+                    for bundle in delayed {
+                        let release_at =
+                            tg + Duration::from_millis(SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot]);
                         wait_until_precise_blocking(release_at);
-                        experiment.post_bundle(&rdma, &remote_addr, bundle)
+                        posts.push(experiment.post_bundle(
+                            &delayed_rdma,
+                            &delayed_remote_addr,
+                            bundle,
+                        ));
+                    }
+                    let _ = scheduled_sender.send(posts);
+                }));
+
+                let slot_zero_post = self.post_bundle(&rdma, &remote_addr, slot_zero);
+                if let Err(error) = submit_result {
+                    let _ = self.write_event(&serde_json::json!({
+                        "event": "cohort_post_task_failed",
+                        "schedule": "smooth",
+                        "error": error,
                     }));
                 }
                 self.finish_post(slot_zero_post).await;
-                for task in tasks {
-                    match task.await {
-                        Ok(post) => self.finish_post(post).await,
-                        Err(error) => {
-                            let _ = self.write_event(&serde_json::json!({
-                                "event": "cohort_post_task_failed",
-                                "schedule": "smooth",
-                                "error": error.to_string(),
-                            }));
+                match scheduled_receiver.await {
+                    Ok(posts) => {
+                        for post in posts {
+                            self.finish_post(post).await;
                         }
+                    }
+                    Err(error) => {
+                        let _ = self.write_event(&serde_json::json!({
+                            "event": "cohort_post_task_failed",
+                            "schedule": "smooth",
+                            "error": error.to_string(),
+                        }));
                     }
                 }
             }
@@ -818,21 +965,6 @@ impl Issue23CausalExperiment {
         };
         let posted_at = Instant::now();
         let submit = posted_at.duration_since(post_start);
-        let trace_error = self
-            .write_event_at(
-                &bundle_timing_event(
-                    "bundle_posted",
-                    &bundle.stable_request_id,
-                    &bundle.raw_request_id,
-                    &bundle.plan,
-                    Some(match self.config.schedule {
-                        Issue23Schedule::Burst => BURST_OFFSET_MS,
-                        Issue23Schedule::Smooth => SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot],
-                    }),
-                ),
-                posted_at,
-            )
-            .err();
         Ok(PendingBundle {
             stable_request_id: bundle.stable_request_id,
             raw_request_id: bundle.raw_request_id,
@@ -841,7 +973,7 @@ impl Issue23CausalExperiment {
             posted_at,
             submit,
             completion,
-            trace_error,
+            posted_event: bundle.posted_event,
             result_tx: bundle.result_tx,
         })
     }
@@ -855,6 +987,7 @@ impl Issue23CausalExperiment {
                 return;
             }
         };
+        let posted_trace_result = self.write_event_at(&pending.posted_event, pending.posted_at);
         let result = match pending.completion {
             PendingCompletion::Rdma(receivers) => {
                 let mut bytes = 0usize;
@@ -891,7 +1024,7 @@ impl Issue23CausalExperiment {
             completed_at,
         );
         let result = result
-            .and_then(|bytes| pending.trace_error.map_or(Ok(bytes), Err))
+            .and_then(|bytes| posted_trace_result.map(|_| bytes))
             .map(|_| Issue23Completion {
                 eligible_wait: pending.posted_at.duration_since(pending.eligible_at),
                 submit: pending.submit,
@@ -979,7 +1112,7 @@ struct PendingBundle {
     posted_at: Instant,
     submit: Duration,
     completion: PendingCompletion,
-    trace_error: Option<String>,
+    posted_event: serde_json::Value,
     result_tx: oneshot::Sender<Result<Issue23Completion, String>>,
 }
 
@@ -1232,6 +1365,34 @@ mod tests {
         let trace = std::fs::read_to_string(trace_path).unwrap();
         let event: serde_json::Value = serde_json::from_str(trace.lines().last().unwrap()).unwrap();
         assert_eq!(event["monotonic_ns"], 7_000_000);
+    }
+
+    #[cfg(feature = "rdma")]
+    #[test]
+    fn smooth_scheduler_uses_its_prestarted_worker() {
+        let scheduler = SmoothScheduler::new().unwrap();
+        let realtime_available = scheduler.realtime_error.is_none();
+        let (sender, receiver) = mpsc::sync_channel(1);
+        scheduler
+            .submit(Box::new(move || {
+                let mut policy = 0;
+                let mut parameter = libc::sched_param { sched_priority: 0 };
+                // SAFETY: both output pointers are valid for the duration of
+                // the call and pthread_self identifies the current worker.
+                let result = unsafe {
+                    libc::pthread_getschedparam(libc::pthread_self(), &mut policy, &mut parameter)
+                };
+                sender
+                    .send((result, policy, parameter.sched_priority))
+                    .unwrap();
+            }))
+            .unwrap();
+        let (result, policy, priority) = receiver.recv().unwrap();
+        assert_eq!(result, 0);
+        if realtime_available {
+            assert_eq!(policy, libc::SCHED_FIFO);
+            assert_eq!(priority, SMOOTH_SCHEDULER_PRIORITY);
+        }
     }
 
     #[test]
