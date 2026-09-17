@@ -105,6 +105,7 @@ impl RdmaFetchStore {
     /// Returns `(node_addr, prefix_len)`, or `None` if no remote node has any.
     pub(crate) async fn query_prefix(
         &self,
+        req_id: &str,
         namespace: &str,
         hashes: &[Vec<u8>],
     ) -> Option<(String, usize)> {
@@ -125,13 +126,24 @@ impl RdmaFetchStore {
             .filter(|n| n.node != self.advertise_addr)
             .max_by_key(|n| n.prefix_len)?;
 
-        let prefix_len = best.prefix_len as usize;
+        let remote_prefix_len = best.prefix_len as usize;
+        let prefix_len = if let Some(experiment) = &self.issue23_experiment {
+            match experiment.frozen_remote_prefix_len(req_id, hashes, remote_prefix_len) {
+                Ok(prefix_len) => prefix_len,
+                Err(error) => {
+                    warn!("Frozen remote prefix validation failed: {error}");
+                    return None;
+                }
+            }
+        } else {
+            remote_prefix_len
+        };
         if prefix_len == 0 {
             return None;
         }
 
         debug!(
-            "Remote prefix query: namespace={namespace} best_node={} prefix={prefix_len}/{}",
+            "Remote prefix query: namespace={namespace} best_node={} prefix={prefix_len}/{} remote_prefix={remote_prefix_len}",
             best.node,
             hashes.len()
         );

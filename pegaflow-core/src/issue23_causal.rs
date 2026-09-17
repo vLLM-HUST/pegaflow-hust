@@ -369,6 +369,48 @@ impl Issue23CausalExperiment {
         self.config.plan.is_some()
     }
 
+    pub(crate) fn frozen_remote_prefix_len(
+        &self,
+        raw_request_id: &str,
+        requested_hashes: &[Vec<u8>],
+        available_prefix_len: usize,
+    ) -> Result<usize, String> {
+        if !self.has_frozen_plan() {
+            return Ok(available_prefix_len);
+        }
+        if available_prefix_len > requested_hashes.len() {
+            return Err(format!(
+                "remote prefix length {available_prefix_len} exceeds requested block count {}",
+                requested_hashes.len()
+            ));
+        }
+
+        let stable_request_id = stable_request_id(raw_request_id)?;
+        let plan = self.requests.get(&stable_request_id).ok_or_else(|| {
+            format!("request {stable_request_id} is absent from the frozen transfer plan")
+        })?;
+        let mut planned_hashes = Vec::new();
+        let mut seen = HashSet::new();
+        for operation in &plan.operations {
+            let hash = decode_hex(&operation.block_hash_hex)?;
+            if seen.insert(hash.clone()) {
+                planned_hashes.push(hash);
+            }
+        }
+        if planned_hashes.len() > available_prefix_len {
+            return Err(format!(
+                "request {stable_request_id} remote prefix is shorter than the frozen plan: available={available_prefix_len} expected={}",
+                planned_hashes.len()
+            ));
+        }
+        if requested_hashes.get(..planned_hashes.len()) != Some(planned_hashes.as_slice()) {
+            return Err(format!(
+                "request {stable_request_id} remote prefix hashes differ from the frozen plan"
+            ));
+        }
+        Ok(planned_hashes.len())
+    }
+
     /// Retain one hidden copy of every unique restored object while leaving it
     /// invisible to the normal read cache. Duplicate transfers are validated
     /// and immediately released after their serving lease completes.
@@ -1063,6 +1105,42 @@ mod tests {
         let layout = expected_hidden_layout(Some(&plan)).unwrap();
         assert_eq!(layout.len(), 3);
         assert_eq!(layout.get(&vec![0]), Some(&64));
+    }
+
+    #[test]
+    fn frozen_remote_prefix_uses_the_request_manifest_before_transfer() {
+        let mut plan = valid_plan();
+        plan.requests[0]
+            .operations
+            .push(operation("req-0", "01", 1));
+        let temp = tempfile::tempdir().unwrap();
+        let experiment = Issue23CausalExperiment::new(Issue23ExperimentConfig {
+            plan: Some(plan),
+            backend: Issue23Backend::Rdma,
+            schedule: Issue23Schedule::Smooth,
+            trace_path: temp.path().join("trace.jsonl"),
+        })
+        .unwrap();
+
+        let requested = vec![vec![0], vec![1], vec![2]];
+        assert_eq!(
+            experiment
+                .frozen_remote_prefix_len("cmpl-req-0-0-deadbeef", &requested, 3)
+                .unwrap(),
+            2
+        );
+        assert!(
+            experiment
+                .frozen_remote_prefix_len("cmpl-req-0-0-deadbeef", &requested, 1)
+                .unwrap_err()
+                .contains("shorter than the frozen plan")
+        );
+        assert!(
+            experiment
+                .frozen_remote_prefix_len("cmpl-req-0-0-deadbeef", &[vec![0], vec![2], vec![1]], 3,)
+                .unwrap_err()
+                .contains("hashes differ")
+        );
     }
 
     #[test]

@@ -40,7 +40,10 @@ impl RdmaFetch {
         namespace: &str,
         remaining_hashes: &[Vec<u8>],
     ) -> Option<(usize, PrefetchResult)> {
-        let (node, found) = self.0.query_prefix(namespace, remaining_hashes).await?;
+        let (node, found) = self
+            .0
+            .query_prefix(req_id, namespace, remaining_hashes)
+            .await?;
         let blocks = self
             .0
             .fetch_blocks(&node, req_id, namespace, &remaining_hashes[..found])
