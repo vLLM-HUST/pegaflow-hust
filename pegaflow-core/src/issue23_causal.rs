@@ -41,7 +41,7 @@ const SMOOTH_SCHEDULER_PRIORITY: libc::c_int = 10;
 #[cfg(feature = "rdma")]
 type SmoothSchedulerJob = Box<dyn FnOnce() + Send + 'static>;
 
-/// A pre-started scheduler for the three delayed smooth slots.
+/// A pre-started scheduler for all four smooth slots.
 ///
 /// Keeping one SCHED_FIFO thread blocked on a channel between cohorts avoids
 /// both Tokio blocking-pool cold starts and millisecond-scale preemption while
@@ -803,17 +803,12 @@ impl Issue23CausalExperiment {
             }
             Issue23Schedule::Smooth => {
                 // T_g is the fourth bundle's eligibility timestamp, so slot 0
-                // is due immediately. The remaining slots are handed to the
-                // pre-started realtime scheduler before slot 0 is submitted;
-                // it dispatches them serially at 10/20/30 ms. A single worker
-                // avoids competing busy-spinners and cannot be preempted by the
-                // service's normal-timeshare threads during a deadline guard.
-                let mut bundles = cohort.into_iter();
-                let slot_zero = bundles
-                    .next()
-                    .expect("validated smooth cohort contains slot zero");
-                debug_assert_eq!(slot_zero.plan.smooth_slot, 0);
-                let delayed: Vec<_> = bundles.collect();
+                // is due immediately. Hand the complete sorted cohort to the
+                // pre-started realtime scheduler: publishing slot 0 on this
+                // normal-timeshare coordinator would leave it vulnerable to
+                // the same millisecond-scale preemption that the scheduler is
+                // intended to exclude. One worker dispatches all four slots
+                // serially at 0/10/20/30 ms.
                 let scheduler = self
                     .smooth_scheduler
                     .as_ref()
@@ -828,21 +823,22 @@ impl Issue23CausalExperiment {
                     // post_bundle, so make the originating runtime available
                     // on this dedicated OS thread too.
                     let _runtime_guard = runtime.enter();
-                    let mut posts = Vec::with_capacity(delayed.len());
-                    for bundle in delayed {
-                        let release_at =
-                            tg + Duration::from_millis(SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot]);
-                        wait_until_precise_blocking(release_at);
-                        posts.push(experiment.post_bundle(
-                            &delayed_rdma,
-                            &delayed_remote_addr,
-                            bundle,
-                        ));
-                    }
+                    let mut posts = Vec::with_capacity(cohort.len());
+                    release_smooth_slots(
+                        tg,
+                        cohort,
+                        |bundle| bundle.plan.smooth_slot,
+                        |bundle| {
+                            posts.push(experiment.post_bundle(
+                                &delayed_rdma,
+                                &delayed_remote_addr,
+                                bundle,
+                            ));
+                        },
+                    );
                     let _ = scheduled_sender.send(posts);
                 }));
 
-                let slot_zero_post = self.post_bundle(&rdma, &remote_addr, slot_zero);
                 if let Err(error) = submit_result {
                     let _ = self.write_event(&serde_json::json!({
                         "event": "cohort_post_task_failed",
@@ -850,7 +846,6 @@ impl Issue23CausalExperiment {
                         "error": error,
                     }));
                 }
-                self.finish_post(slot_zero_post).await;
                 match scheduled_receiver.await {
                     Ok(posts) => {
                         for post in posts {
@@ -1084,6 +1079,20 @@ fn wait_until_precise_blocking(deadline: Instant) {
     }
     while Instant::now() < deadline {
         std::hint::spin_loop();
+    }
+}
+
+#[cfg(feature = "rdma")]
+fn release_smooth_slots<T>(
+    tg: Instant,
+    bundles: Vec<T>,
+    mut smooth_slot: impl FnMut(&T) -> usize,
+    mut release: impl FnMut(T),
+) {
+    for bundle in bundles {
+        let release_at = tg + Duration::from_millis(SMOOTH_OFFSETS_MS[smooth_slot(&bundle)]);
+        wait_until_precise_blocking(release_at);
+        release(bundle);
     }
 }
 
@@ -1369,10 +1378,12 @@ mod tests {
 
     #[cfg(feature = "rdma")]
     #[test]
-    fn smooth_scheduler_uses_its_prestarted_worker() {
+    fn smooth_scheduler_releases_all_four_slots_on_its_prestarted_worker() {
         let scheduler = SmoothScheduler::new().unwrap();
         let realtime_available = scheduler.realtime_error.is_none();
-        let (sender, receiver) = mpsc::sync_channel(1);
+        let caller_thread = std::thread::current().id();
+        let release_at = Instant::now() + Duration::from_millis(5);
+        let (sender, receiver) = mpsc::sync_channel(EXPECTED_COHORT_SIZE);
         scheduler
             .submit(Box::new(move || {
                 let mut policy = 0;
@@ -1382,16 +1393,34 @@ mod tests {
                 let result = unsafe {
                     libc::pthread_getschedparam(libc::pthread_self(), &mut policy, &mut parameter)
                 };
-                sender
-                    .send((result, policy, parameter.sched_priority))
-                    .unwrap();
+                let worker_thread = std::thread::current().id();
+                release_smooth_slots(
+                    release_at,
+                    vec![0usize, 1, 2, 3],
+                    |slot| *slot,
+                    |slot| {
+                        sender
+                            .send((
+                                slot,
+                                worker_thread,
+                                result,
+                                policy,
+                                parameter.sched_priority,
+                            ))
+                            .unwrap();
+                    },
+                );
             }))
             .unwrap();
-        let (result, policy, priority) = receiver.recv().unwrap();
-        assert_eq!(result, 0);
-        if realtime_available {
-            assert_eq!(policy, libc::SCHED_FIFO);
-            assert_eq!(priority, SMOOTH_SCHEDULER_PRIORITY);
+        for expected_slot in 0..EXPECTED_COHORT_SIZE {
+            let (slot, worker_thread, result, policy, priority) = receiver.recv().unwrap();
+            assert_eq!(slot, expected_slot);
+            assert_ne!(worker_thread, caller_thread);
+            assert_eq!(result, 0);
+            if realtime_available {
+                assert_eq!(policy, libc::SCHED_FIFO);
+                assert_eq!(priority, SMOOTH_SCHEDULER_PRIORITY);
+            }
         }
     }
 
