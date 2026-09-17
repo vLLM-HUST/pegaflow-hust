@@ -27,7 +27,12 @@ const BURST_OFFSET_MS: u64 = 15;
 const SMOOTH_OFFSETS_MS: [u64; EXPECTED_COHORT_SIZE] = [0, 10, 20, 30];
 const MAX_BURST_POSTING_SPREAD: Duration = Duration::from_millis(1);
 #[cfg(feature = "rdma")]
-const PRECISE_WAIT_GUARD: Duration = Duration::from_millis(2);
+// The experiment engine is CPU-affined with other service workers.  A 2 ms
+// guard was not sufficient to cover an observed scheduler wake-up delay, even
+// though the subsequent synchronous transport submit took less than 1 ms.
+// Spinning for the final 10 ms is cheap at the frozen 0.5 QPS offered load and
+// keeps the recorded successful-post timestamp tied to the frozen deadline.
+const PRECISE_WAIT_GUARD: Duration = Duration::from_millis(10);
 
 #[derive(Clone, Copy, Debug, Deserialize, Serialize, PartialEq, Eq)]
 #[serde(rename_all = "snake_case")]
@@ -675,12 +680,21 @@ impl Issue23CausalExperiment {
                 }
             }
             Issue23Schedule::Smooth => {
-                // Give every smooth slot its own blocking scheduler. Keeping the
-                // deadline wait and synchronous RDMA enqueue off the async
-                // request worker prevents one descheduled slot from collapsing
-                // the rest of the cohort onto the same late timestamp.
-                let mut tasks = Vec::with_capacity(cohort.len());
-                for bundle in cohort {
+                // T_g is the fourth bundle's eligibility timestamp, so slot 0
+                // is due immediately. Submit it on this already-running cohort
+                // coordinator instead of first paying spawn_blocking cold-start
+                // latency. The remaining slots have independent blocking
+                // schedulers so one transport submit cannot collapse later
+                // deadlines onto the same timestamp.
+                let mut bundles = cohort.into_iter();
+                let slot_zero = bundles
+                    .next()
+                    .expect("validated smooth cohort contains slot zero");
+                debug_assert_eq!(slot_zero.plan.smooth_slot, 0);
+                let slot_zero_post = self.post_bundle(&rdma, &remote_addr, slot_zero);
+
+                let mut tasks = Vec::with_capacity(EXPECTED_COHORT_SIZE - 1);
+                for bundle in bundles {
                     let release_at =
                         tg + Duration::from_millis(SMOOTH_OFFSETS_MS[bundle.plan.smooth_slot]);
                     let experiment = Arc::clone(&self);
@@ -691,6 +705,7 @@ impl Issue23CausalExperiment {
                         experiment.post_bundle(&rdma, &remote_addr, bundle)
                     }));
                 }
+                self.finish_post(slot_zero_post).await;
                 for task in tasks {
                     match task.await {
                         Ok(post) => self.finish_post(post).await,
