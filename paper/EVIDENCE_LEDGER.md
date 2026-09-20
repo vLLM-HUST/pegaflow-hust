@@ -1,4 +1,6 @@
-# PegaFlow paper evidence ledger
+# TailGuard paper evidence ledger
+
+TailGuard is the research topic; PegaFlow is its system and repository carrier.
 
 This ledger is fail-closed. An execution label describes how an artifact was
 produced; it does not make the artifact paper-admissible. Issue #18 records that
