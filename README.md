@@ -24,16 +24,15 @@ external operator.
 - **Production-ready observability** — built-in Prometheus metrics and OTLP export, not an afterthought
 - **Pluggable** — works with vLLM as a drop-in KV connector
 
-## Research ownership
+## Research identity and ownership
 
-Chen Zijia (`@mynameisczj`) and Chen Yanbo (`@cybber695`) jointly advance the
-Ascend research path in this repository. Chen Zijia focuses on transfer-side
-packing, layout, operator, and PTO/PyPTO opportunities; Chen Yanbo focuses on
-serving integration, KV lifecycle correctness, and end-to-end evaluation.
-PegaFlow remains independently maintained from their other projects. If its
-results later support the same paper as another carrier, the evidence may be
-combined at the paper-family level without merging repositories or claim
-ledgers.
+**TailGuard** is the current research topic carried by this repository:
+tail-predictable host-memory pooling for disaggregated LLM serving. PegaFlow
+remains the software, system, and repository name.
+
+Chen Yanbo (`@cybber695`) is the current topic owner and executor. Chen Zijia's
+(`@mynameisczj`) earlier contributions remain part of the Git and paper-evidence
+history, but he is not a current owner or executor.
 
 ## News
 
