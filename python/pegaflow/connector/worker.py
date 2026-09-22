@@ -10,6 +10,7 @@ import threading
 import time
 from collections.abc import Iterable
 from dataclasses import dataclass
+from pathlib import Path
 from typing import TYPE_CHECKING, Any, Literal
 
 import torch
@@ -198,6 +199,14 @@ class WorkerConnector:
         self._save_completion_lock = threading.Lock()
         self._save_completion_events: dict[str, threading.Event] = {}
         self._sync_save_on_finish = os.environ.get("PEGAFLOW_SYNC_SAVE_ON_FINISH", "0") == "1"
+        ack_dir = os.environ.get("PEGAFLOW_SAVE_ACK_DIR", "").strip()
+        self._save_ack_dir = Path(ack_dir) if ack_dir else None
+        if self._save_ack_dir is not None:
+            if not self._sync_save_on_finish:
+                raise RuntimeError(
+                    "PEGAFLOW_SAVE_ACK_DIR requires PEGAFLOW_SYNC_SAVE_ON_FINISH=1"
+                )
+            self._save_ack_dir.mkdir(parents=True, exist_ok=True)
         self._current_metadata: PegaConnectorMetadata | None = None
 
         self._pending_loads: dict[str, PyLoadState] = {}
@@ -423,6 +432,16 @@ class WorkerConnector:
         finished_sending: set[str] | None = None
         finished_recving: set[str] | None = None
 
+        # vLLM's no-forward path deliberately skips wait_for_save(). Final
+        # save intents are generated after request_finished(), so submit them
+        # here before waiting for request completion.
+        if (
+            self._sync_save_on_finish
+            and self._current_metadata is not None
+            and self._current_metadata.save_intents
+        ):
+            self.wait_for_save()
+
         if self._sync_save_on_finish and finished_req_ids:
             with self._save_completion_lock:
                 save_events = [
@@ -450,8 +469,12 @@ class WorkerConnector:
                 raise RuntimeError(f"visible save failed: {details}")
 
         with self._save_completion_lock:
-            # 1. Add newly finished requests (if they have pending saves) to tracking
-            self._finished_requests.update(finished_req_ids & self._req_pending_saves)
+            # In synchronous mode, remember a finished request even when its
+            # final save intent only arrives in the following no-forward step.
+            if self._sync_save_on_finish:
+                self._finished_requests.update(finished_req_ids)
+            else:
+                self._finished_requests.update(finished_req_ids & self._req_pending_saves)
             # 2. Identify requests whose saves have completed
             done_saves = self._completed_saves & self._finished_requests
             done_saves.update(self._completed_saves & finished_req_ids)
@@ -461,6 +484,10 @@ class WorkerConnector:
                 self._completed_saves -= done_saves
                 self._finished_requests -= done_saves
                 finished_sending = done_saves
+
+        if finished_sending and self._save_ack_dir is not None:
+            for req_id in sorted(finished_sending):
+                self._write_save_ack(req_id)
 
         timeout_triggered = False
         load_stats_to_record: list[tuple[float, int, bool]] = []
@@ -772,9 +799,36 @@ class WorkerConnector:
                     req_id, intent.block_ids, len(intent.block_hashes),
                 )
 
+        if self._sync_save_on_finish:
+            with self._save_completion_lock:
+                prior_events = [
+                    (req_id, event)
+                    for req_id in request_ids
+                    if (event := self._save_completion_events.get(req_id)) is not None
+                ]
+            for req_id, event in prior_events:
+                if not event.wait(timeout=self.LOAD_TIMEOUT_SECONDS):
+                    raise RuntimeError(
+                        f"timed out waiting for prior visible save: request={req_id}"
+                    )
+            with self._save_completion_lock:
+                prior_failures = {
+                    req_id: self._failed_saves.pop(req_id)
+                    for req_id in request_ids
+                    if req_id in self._failed_saves
+                }
+            if prior_failures:
+                details = "; ".join(
+                    f"request={req_id}: {error}"
+                    for req_id, error in sorted(prior_failures.items())
+                )
+                raise RuntimeError(f"prior visible save failed: {details}")
+
         with self._save_completion_lock:
             for req_id in request_ids:
                 if req_id not in self._req_pending_saves:
+                    # A later save supersedes an earlier completed generation.
+                    self._completed_saves.discard(req_id)
                     self._req_pending_saves.add(req_id)
                     self._save_completion_events[req_id] = threading.Event()
 
@@ -821,6 +875,7 @@ class WorkerConnector:
         _ensure_npu_device_set(self._torch_device)
         saves_by_layer: dict[str, tuple[list[int], list[bytes]]] = {}
         all_request_ids: list[str] = []
+        save_failure: str | None = None
 
         for task in batch:
             all_request_ids.extend(task.request_ids)
@@ -893,8 +948,6 @@ class WorkerConnector:
 
             save_start = time.perf_counter()
             success = False
-            save_failure: str | None = None
-
             try:
                 ok, message = self._ctx.engine_client.save(
                     self._ctx.instance_id,
@@ -953,6 +1006,56 @@ class WorkerConnector:
         # Normal serving preserves the historical best-effort behavior. The
         # experiment's synchronous mode surfaces failures to get_finished.
         self._complete_save_requests(all_request_ids, failure=save_failure)
+
+    @staticmethod
+    def _stable_request_id_for_ack(raw_request_id: str) -> str:
+        body = raw_request_id.removeprefix("cmpl-")
+        prefix, separator, suffix = body.rpartition("-")
+        if (
+            not separator
+            or len(suffix) != 8
+            or any(character not in "0123456789abcdefABCDEF" for character in suffix)
+        ):
+            raise RuntimeError(
+                f"request id {raw_request_id!r} lacks the frozen vLLM suffix"
+            )
+        stable_request_id = prefix.removesuffix("-0")
+        if stable_request_id == prefix or not stable_request_id:
+            raise RuntimeError(
+                f"request id {raw_request_id!r} lacks the frozen completion index"
+            )
+        if any(
+            not (character.isascii() and (character.isalnum() or character in "._-"))
+            for character in stable_request_id
+        ):
+            raise RuntimeError(
+                f"request id {raw_request_id!r} is unsafe for a visibility marker"
+            )
+        return stable_request_id
+
+    def _write_save_ack(self, raw_request_id: str) -> None:
+        assert self._save_ack_dir is not None
+        stable_request_id = self._stable_request_id_for_ack(raw_request_id)
+        rank = self._ctx.effective_tp_rank
+        marker = self._save_ack_dir / f"{stable_request_id}.tp{rank}.visible"
+        temporary = self._save_ack_dir / (
+            f".{stable_request_id}.tp{rank}.{os.getpid()}.{time.monotonic_ns()}.tmp"
+        )
+        try:
+            temporary.write_text(
+                f"raw_request_id={raw_request_id}\ntp_rank={rank}\n",
+                encoding="utf-8",
+            )
+            os.replace(temporary, marker)
+        except Exception:
+            temporary.unlink(missing_ok=True)
+            raise
+        logger.info(
+            "[PegaKVConnector] visible_save_ack: request=%s rank=%d marker=%s",
+            stable_request_id,
+            rank,
+            marker,
+        )
 
     def _log_diag_kv_checksums(
         self,

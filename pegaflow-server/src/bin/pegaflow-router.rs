@@ -11,6 +11,7 @@ use std::sync::{
     atomic::{AtomicUsize, Ordering},
 };
 use std::time::Instant;
+use std::{path::PathBuf, time::Duration};
 
 use axum::{
     Json, Router,
@@ -38,10 +39,22 @@ struct RouterState {
     // Track in-flight requests per node
     p_inflight: Arc<Vec<AtomicUsize>>,
     d_inflight: Arc<Vec<AtomicUsize>>,
+    prefill_ack: Option<Arc<PrefillAckConfig>>,
+}
+
+#[derive(Clone)]
+struct PrefillAckConfig {
+    directory: PathBuf,
+    ranks: usize,
+    timeout: Duration,
 }
 
 impl RouterState {
-    fn new(prefill_endpoints: Vec<String>, decode_endpoints: Vec<String>) -> Self {
+    fn new(
+        prefill_endpoints: Vec<String>,
+        decode_endpoints: Vec<String>,
+        prefill_ack: Option<PrefillAckConfig>,
+    ) -> Self {
         let prefill_clients = prefill_endpoints
             .iter()
             .map(|_| {
@@ -78,6 +91,7 @@ impl RouterState {
             d_index: Arc::new(AtomicUsize::new(0)),
             p_inflight: Arc::new(p_inflight),
             d_inflight: Arc::new(d_inflight),
+            prefill_ack: prefill_ack.map(Arc::new),
         }
     }
 
@@ -123,6 +137,57 @@ impl RouterState {
             .map(|c| c.load(Ordering::Relaxed))
             .collect();
         format!("P={:?} D={:?}", p_counts, d_counts)
+    }
+}
+
+fn validate_marker_request_id(request_id: &str) -> Result<(), String> {
+    if request_id.is_empty()
+        || request_id
+            .bytes()
+            .any(|byte| !(byte.is_ascii_alphanumeric() || matches!(byte, b'.' | b'_' | b'-')))
+    {
+        return Err(format!(
+            "request id {request_id:?} is unsafe for a visibility marker"
+        ));
+    }
+    Ok(())
+}
+
+async fn wait_for_prefill_ack(
+    config: &PrefillAckConfig,
+    request_id: &str,
+) -> Result<Duration, String> {
+    validate_marker_request_id(request_id)?;
+    let started = Instant::now();
+    loop {
+        let mut all_visible = true;
+        for rank in 0..config.ranks {
+            let marker = config
+                .directory
+                .join(format!("{request_id}.tp{rank}.visible"));
+            match tokio::fs::try_exists(&marker).await {
+                Ok(true) => {}
+                Ok(false) => all_visible = false,
+                Err(error) => {
+                    return Err(format!(
+                        "cannot inspect visibility marker {}: {error}",
+                        marker.display()
+                    ));
+                }
+            }
+        }
+        if all_visible {
+            return Ok(started.elapsed());
+        }
+        if started.elapsed() >= config.timeout {
+            return Err(format!(
+                "timed out after {:.3}s waiting for {} TP visibility markers in {}",
+                config.timeout.as_secs_f64(),
+                config.ranks,
+                config.directory.display()
+            ));
+        }
+        tokio::time::sleep(Duration::from_millis(2)).await;
     }
 }
 
@@ -210,16 +275,37 @@ async fn handle_completion(
         }
     };
 
-    // P node finished
-    state.finish_p(p_idx);
-
     if !p_status.is_success() {
+        state.finish_p(p_idx);
         error!(
             "P error: req={} status={} body={:?}",
             req_id, p_status, p_result
         );
         return (p_status, Json(p_result)).into_response();
     }
+
+    if let Some(config) = &state.prefill_ack {
+        match wait_for_prefill_ack(config, &req_id).await {
+            Ok(wait) => info!(
+                "prefill visible: req={} ranks={} ack_wait={}ms",
+                req_id,
+                config.ranks,
+                wait.as_millis()
+            ),
+            Err(reason) => {
+                state.finish_p(p_idx);
+                error!("prefill visibility failed: req={} error={}", req_id, reason);
+                return (
+                    StatusCode::GATEWAY_TIMEOUT,
+                    Json(json!({"error": format!("Prefill visibility error: {reason}")})),
+                )
+                    .into_response();
+            }
+        }
+    }
+
+    // P node and its publication acknowledgement finished.
+    state.finish_p(p_idx);
 
     let prefill_latency = arrive_time.elapsed().as_millis();
     info!(
@@ -386,6 +472,18 @@ struct Args {
     /// Decode endpoints
     #[arg(long, required = true, num_args = 1..)]
     decode: Vec<String>,
+
+    /// Directory containing request-specific P-side visibility markers
+    #[arg(long)]
+    prefill_ack_dir: Option<PathBuf>,
+
+    /// Number of TP-rank visibility markers required before dispatching to D
+    #[arg(long, default_value_t = 0)]
+    prefill_ack_ranks: usize,
+
+    /// Fail-closed timeout for request-specific visibility acknowledgement
+    #[arg(long, default_value_t = 120)]
+    prefill_ack_timeout_seconds: u64,
 }
 
 #[tokio::main]
@@ -395,7 +493,28 @@ async fn main() {
 
     let args = Args::parse();
 
-    let state = RouterState::new(args.prefill.clone(), args.decode.clone());
+    let prefill_ack = match (&args.prefill_ack_dir, args.prefill_ack_ranks) {
+        (Some(directory), ranks) if ranks > 0 && args.prefill_ack_timeout_seconds > 0 => {
+            Some(PrefillAckConfig {
+                directory: directory.clone(),
+                ranks,
+                timeout: Duration::from_secs(args.prefill_ack_timeout_seconds),
+            })
+        }
+        (None, 0) => None,
+        _ => {
+            error!(
+                "--prefill-ack-dir, positive --prefill-ack-ranks, and positive \
+                 --prefill-ack-timeout-seconds must be configured together"
+            );
+            std::process::exit(64);
+        }
+    };
+    let state = RouterState::new(
+        args.prefill.clone(),
+        args.decode.clone(),
+        prefill_ack.clone(),
+    );
 
     let app = Router::new()
         .route("/v1/chat/completions", post(chat_completions))
@@ -406,7 +525,28 @@ async fn main() {
     info!("Starting on {}", addr);
     info!("Prefill nodes: {:?}", args.prefill);
     info!("Decode nodes: {:?}", args.decode);
+    if let Some(config) = prefill_ack {
+        info!(
+            "Prefill visibility acknowledgements: dir={} ranks={} timeout={}s",
+            config.directory.display(),
+            config.ranks,
+            config.timeout.as_secs()
+        );
+    }
 
     let listener = TcpListener::bind(&addr).await.unwrap();
     axum::serve(listener, app).await.unwrap();
+}
+
+#[cfg(test)]
+mod tests {
+    use super::validate_marker_request_id;
+
+    #[test]
+    fn visibility_marker_request_ids_are_path_safe() {
+        assert!(validate_marker_request_id("issue23-p9-smoke-measure-0001").is_ok());
+        assert!(validate_marker_request_id("../escape").is_err());
+        assert!(validate_marker_request_id("").is_err());
+        assert!(validate_marker_request_id("request/child").is_err());
+    }
 }

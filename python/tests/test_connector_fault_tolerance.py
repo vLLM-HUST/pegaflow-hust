@@ -27,6 +27,7 @@ from pegaflow.connector.common import (  # noqa: E402
     ConnectorContext,
     LoadIntent,
     PegaConnectorMetadata,
+    SaveIntent,
 )
 from pegaflow.connector.worker import WorkerConnector  # noqa: E402
 
@@ -289,6 +290,56 @@ def test_sync_save_on_finish_fails_closed_on_rpc_error():
         worker.get_finished({"req-failed"})
 
     worker.shutdown()
+
+
+def test_sync_save_submits_finish_time_metadata_on_no_forward_path():
+    worker, _client, _ = _make_worker()
+    worker._sync_save_on_finish = True
+    worker._current_metadata = PegaConnectorMetadata(
+        save_intents={
+            "cmpl-issue23-measure-0001-0-deadbeef": SaveIntent(
+                block_ids=(1,),
+                block_hashes=(b"hash",),
+            )
+        }
+    )
+    worker.wait_for_save = MagicMock()
+
+    worker.get_finished(set())
+
+    worker.wait_for_save.assert_called_once_with()
+    worker.shutdown()
+
+
+def test_visible_save_ack_uses_stable_request_id(tmp_path):
+    worker, _client, _ = _make_worker()
+    worker._sync_save_on_finish = True
+    worker._save_ack_dir = tmp_path
+    raw_request_id = "cmpl-issue23-measure-0001-0-deadbeef"
+    with worker._save_completion_lock:
+        worker._completed_saves.add(raw_request_id)
+
+    finished_sending, _ = worker.get_finished({raw_request_id})
+
+    assert finished_sending == {raw_request_id}
+    marker = tmp_path / "issue23-measure-0001.tp0.visible"
+    assert marker.read_text(encoding="utf-8") == (
+        f"raw_request_id={raw_request_id}\ntp_rank=0\n"
+    )
+    worker.shutdown()
+
+
+@pytest.mark.parametrize(
+    "request_id",
+    [
+        "cmpl-missing-suffix",
+        "cmpl-request-1-deadbeef",
+        "cmpl-../escape-0-deadbeef",
+    ],
+)
+def test_visible_save_ack_rejects_unfrozen_or_unsafe_request_id(request_id):
+    with pytest.raises(RuntimeError):
+        WorkerConnector._stable_request_id_for_ack(request_id)
 
 
 def test_load_uses_registered_layer_names_before_forward_context_names():

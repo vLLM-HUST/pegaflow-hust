@@ -279,6 +279,11 @@ class PegaKVConnector(KVConnectorBase_V1):
     def take_events(self) -> Iterable:
         return ()
 
+    def has_pending_push_work(self) -> bool:
+        if not self._scheduler:
+            return False
+        return self._scheduler.has_pending_push_work()
+
     def get_num_new_matched_tokens(
         self,
         request,

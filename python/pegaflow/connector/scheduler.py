@@ -541,6 +541,10 @@ class SchedulerConnector:
                 self._cleanup_request(req_id)
                 self._held_requests.discard(req_id)
 
+    def has_pending_push_work(self) -> bool:
+        """Keep vLLM stepping until finish-time save work is acknowledged."""
+        return bool(self._final_save_intents or self._pending_saves)
+
     def request_finished(
         self,
         request: "Request",

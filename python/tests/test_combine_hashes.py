@@ -378,6 +378,24 @@ class TestDecodeHashRefresh:
         assert intent2.block_ids == (14, 15)
         assert intent2.block_hashes == (new_hashes[0], new_hashes[1])
 
+    def test_pending_save_work_keeps_scheduler_alive_until_ack(self):
+        sc = self._make_connector()
+        assert not sc.has_pending_push_work()
+
+        sc._final_save_intents["r1"] = SaveIntent(
+            block_ids=(1,), block_hashes=(_hash(1),)
+        )
+        assert sc.has_pending_push_work()
+
+        sc._final_save_intents.clear()
+        sc._pending_saves.add("r1")
+        assert sc.has_pending_push_work()
+
+        sc.update_connector_output(
+            SimpleNamespace(finished_sending={"r1"}, finished_recving=None)
+        )
+        assert not sc.has_pending_push_work()
+
     def test_cleanup_removes_request_ref(self):
         """_cleanup_request removes the stored Request reference."""
         sc = self._make_connector()
