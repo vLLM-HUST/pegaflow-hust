@@ -398,18 +398,28 @@ impl Engine for GrpcEngineService {
                 instance_id, tp_rank, pp_rank, device_id, layer_count, total_blocks, total_hashes
             );
 
-            // Spawn the save work independently so it survives client disconnect
-            // (vLLM SIGKILL).  The connector is fire-and-forget for saves.
-            let engine = self.engine.clone();
-            let sid = instance_id.clone();
-            tokio::spawn(async move {
-                if let Err(e) = engine
-                    .batch_save_kv_blocks_from_ipc(&sid, tp_rank, pp_rank, device_id, saves)
+            if std::env::var_os("PEGAFLOW_SYNC_SAVE").is_some() {
+                self.engine
+                    .batch_save_kv_blocks_from_ipc(&instance_id, tp_rank, pp_rank, device_id, saves)
                     .await
-                {
-                    log::error!("Background save failed for instance {sid}: {e}");
-                }
-            });
+                    .map_err(|error| Status::internal(format!("save failed: {error}")))?;
+                self.engine.flush_visible_saves().await.map_err(|error| {
+                    Status::unavailable(format!("save publication barrier failed: {error}"))
+                })?;
+            } else {
+                // Spawn the save work independently so it survives client disconnect
+                // (vLLM SIGKILL). Normal serving remains fire-and-forget.
+                let engine = self.engine.clone();
+                let sid = instance_id.clone();
+                tokio::spawn(async move {
+                    if let Err(e) = engine
+                        .batch_save_kv_blocks_from_ipc(&sid, tp_rank, pp_rank, device_id, saves)
+                        .await
+                    {
+                        log::error!("Background save failed for instance {sid}: {e}");
+                    }
+                });
+            }
 
             Ok(Response::new(SaveResponse {
                 status: Some(Self::build_simple_response()),

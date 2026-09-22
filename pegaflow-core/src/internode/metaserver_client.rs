@@ -1,4 +1,8 @@
 use std::collections::HashMap;
+use std::sync::{
+    Arc,
+    atomic::{AtomicU64, Ordering},
+};
 
 use log::{debug, error, info, warn};
 use pegaflow_proto::proto::engine::meta_server_client::MetaServerClient as MetaServerGrpcClient;
@@ -118,6 +122,7 @@ impl BlockHashBatch {
 enum MetaServerCommand {
     Insert(BlockHashBatch),
     Remove(BlockHashBatch),
+    Flush(oneshot::Sender<Result<(), String>>),
     Shutdown(oneshot::Sender<()>),
 }
 
@@ -125,6 +130,9 @@ enum MetaServerCommand {
 pub struct MetaServerClient {
     /// Fire-and-forget command channel for insert/remove operations.
     command_tx: mpsc::Sender<MetaServerCommand>,
+    /// Sticky count of publications that were dropped or rejected. A visibility
+    /// barrier must not report success after any earlier publication was lost.
+    publication_failures: Arc<AtomicU64>,
     /// Lazy-connect query client
     #[cfg(feature = "rdma")]
     query_client: MetaServerGrpcClient<Channel>,
@@ -136,11 +144,13 @@ impl MetaServerClient {
     /// Must be called from within a tokio runtime context.
     pub fn new(config: MetaServerClientConfig) -> Self {
         let (command_tx, rx) = mpsc::channel(config.queue_depth);
+        let publication_failures = Arc::new(AtomicU64::new(0));
 
         tokio::spawn(registration_loop(
             rx,
             config.metaserver_addr.clone(),
             config.advertise_addr,
+            Arc::clone(&publication_failures),
         ));
 
         // Lazy-connect query client: connects on first RPC, not here
@@ -159,6 +169,7 @@ impl MetaServerClient {
 
         Self {
             command_tx,
+            publication_failures,
             #[cfg(feature = "rdma")]
             query_client,
         }
@@ -184,6 +195,8 @@ impl MetaServerClient {
                     .add(count as u64, &[]);
             }
             Err(mpsc::error::TrySendError::Full(_)) => {
+                self.publication_failures
+                    .fetch_add(count as u64, Ordering::Relaxed);
                 warn!(
                     "MetaServer registration queue full, dropping {} hashes",
                     count
@@ -193,6 +206,8 @@ impl MetaServerClient {
                     .add(count as u64, &[]);
             }
             Err(mpsc::error::TrySendError::Closed(_)) => {
+                self.publication_failures
+                    .fetch_add(count as u64, Ordering::Relaxed);
                 error!(
                     "MetaServer registration loop has exited, dropping {} hashes",
                     count
@@ -240,6 +255,26 @@ impl MetaServerClient {
                     .add(count as u64, &[]);
             }
         }
+    }
+
+    /// Wait until every registration command queued before this barrier has
+    /// been acknowledged by MetaServer.
+    pub(crate) async fn flush(&self) -> Result<(), String> {
+        let (done_tx, done_rx) = oneshot::channel();
+        self.command_tx
+            .send(MetaServerCommand::Flush(done_tx))
+            .await
+            .map_err(|_| "MetaServer registration loop has exited".to_string())?;
+        done_rx
+            .await
+            .map_err(|_| "MetaServer registration barrier was dropped".to_string())??;
+        let failures = self.publication_failures.load(Ordering::Relaxed);
+        if failures > 0 {
+            return Err(format!(
+                "MetaServer publication barrier observed {failures} previously lost block hashes"
+            ));
+        }
+        Ok(())
     }
 
     /// Best-effort graceful unregister of this server's MetaServer node session.
@@ -294,6 +329,7 @@ async fn registration_loop(
     mut rx: mpsc::Receiver<MetaServerCommand>,
     metaserver_addr: String,
     advertise_addr: String,
+    publication_failures: Arc<AtomicU64>,
 ) {
     let mut client: Option<MetaServerGrpcClient<Channel>> = None;
     let node_id = Uuid::new_v4().to_string();
@@ -339,6 +375,7 @@ async fn registration_loop(
         let mut mixed_ops: Option<HashMap<(String, Vec<u8>), bool>> = None; // true=insert
         let mut saw_insert = false;
         let mut saw_remove = false;
+        let mut flush_waiters = Vec::new();
 
         // Drain all pending commands. Pure insert/remove batches stay grouped by
         // namespace; mixed streams switch to last-write-wins netting.
@@ -366,6 +403,7 @@ async fn registration_loop(
                         append_groups(&mut removes, batch.groups);
                     }
                 }
+                MetaServerCommand::Flush(done) => flush_waiters.push(done),
                 MetaServerCommand::Shutdown(done) => {
                     unregister_current_session(
                         &mut client,
@@ -393,6 +431,12 @@ async fn registration_loop(
 
         let insert_total: usize = inserts.values().map(|v| v.len()).sum();
         let remove_total: usize = removes.values().map(|v| v.len()).sum();
+        if insert_total == 0 && remove_total == 0 {
+            for done in flush_waiters {
+                let _ = done.send(Ok(()));
+            }
+            continue;
+        }
         if ensure_heartbeat_registered(
             &mut client,
             &metaserver_addr,
@@ -403,12 +447,18 @@ async fn registration_loop(
         .await
         .is_err()
         {
+            publication_failures.fetch_add(insert_total as u64, Ordering::Relaxed);
             core_metrics()
                 .metaserver_registration_failures
                 .add(insert_total as u64, &[]);
             core_metrics()
                 .metaserver_removal_failures
                 .add(remove_total as u64, &[]);
+            for done in flush_waiters {
+                let _ = done.send(Err(
+                    "MetaServer node is not registered; publications are not visible".to_string(),
+                ));
+            }
             continue;
         }
 
@@ -458,6 +508,7 @@ async fn registration_loop(
 
         if let Some((idx, offset)) = insert_failed_at {
             let dropped = unsent_after_failure(&insert_namespaces, idx, offset);
+            publication_failures.fetch_add(dropped as u64, Ordering::Relaxed);
             core_metrics()
                 .metaserver_registration_failures
                 .add(dropped as u64, &[]);
@@ -468,6 +519,11 @@ async fn registration_loop(
                     .add(remove_total as u64, &[]);
             }
             client = None;
+            for done in flush_waiters {
+                let _ = done.send(Err(format!(
+                    "MetaServer publication failed with {dropped} block hashes unsent"
+                )));
+            }
             continue;
         }
 
@@ -519,6 +575,15 @@ async fn registration_loop(
                 .metaserver_removal_failures
                 .add(dropped as u64, &[]);
             client = None;
+            for done in flush_waiters {
+                let _ = done.send(Err(format!(
+                    "MetaServer removal failed with {dropped} block hashes unsent"
+                )));
+            }
+        } else {
+            for done in flush_waiters {
+                let _ = done.send(Ok(()));
+            }
         }
     }
 
@@ -954,6 +1019,50 @@ mod tests {
         let _ = shutdown_tx.send(());
     }
 
+    #[tokio::test]
+    async fn flush_waits_for_prior_publications() {
+        let (addr, service, shutdown_tx) = start_fake_metaserver().await;
+        let client = MetaServerClient::new(MetaServerClientConfig::new(
+            addr,
+            "node-a:50055".to_string(),
+        ));
+        wait_for_count(&service.heartbeat_notify, &service.heartbeat_count, 1).await;
+
+        client.try_register_namespace("ns".to_string(), vec![vec![1], vec![2]]);
+        client.flush().await.expect("publication barrier");
+
+        assert_eq!(
+            collect_requests(&service.insert_requests),
+            expected_requests(&[("ns", vec![1]), ("ns", vec![2])])
+        );
+        client.shutdown().await;
+        let _ = shutdown_tx.send(());
+    }
+
+    #[tokio::test]
+    async fn flush_fails_after_an_earlier_publication_was_lost() {
+        let (addr, service, shutdown_tx) = start_fake_metaserver().await;
+        service
+            .fail_insert_with_stale_session
+            .store(1, Ordering::SeqCst);
+        let client = MetaServerClient::new(MetaServerClientConfig::new(
+            addr,
+            "node-a:50055".to_string(),
+        ));
+        wait_for_count(&service.heartbeat_notify, &service.heartbeat_count, 1).await;
+
+        client.try_register_namespace("ns".to_string(), vec![vec![1]]);
+        wait_for_count(&service.heartbeat_notify, &service.heartbeat_count, 2).await;
+
+        let error = client
+            .flush()
+            .await
+            .expect_err("lost publication must fail barrier");
+        assert!(error.contains("previously lost block hashes"), "{error}");
+        client.shutdown().await;
+        let _ = shutdown_tx.send(());
+    }
+
     #[test]
     fn unsent_after_failure_counts_only_unsent_tail() {
         let ns = |name: &str, n: usize| (name.to_string(), vec![vec![0u8]; n]);
@@ -1063,7 +1172,12 @@ mod tests {
         )))
         .unwrap();
 
-        let loop_task = tokio::spawn(registration_loop(rx, addr, "node-a:50055".to_string()));
+        let loop_task = tokio::spawn(registration_loop(
+            rx,
+            addr,
+            "node-a:50055".to_string(),
+            Arc::new(AtomicU64::new(0)),
+        ));
 
         wait_for_count(&service.insert_notify, &service.insert_count, 2).await;
         wait_for_count(&service.remove_notify, &service.remove_count, 2).await;

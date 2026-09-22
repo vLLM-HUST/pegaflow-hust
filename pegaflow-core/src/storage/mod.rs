@@ -295,10 +295,7 @@ impl StorageEngine {
                 read_cache: engine.read_cache.clone(),
                 ssd_store: engine.ssd_store.clone(),
                 metaserver_client: engine.metaserver_client.clone(),
-                publish_sealed_blocks: engine
-                    .issue23_experiment
-                    .as_ref()
-                    .is_none_or(|experiment| !experiment.has_frozen_plan()),
+                publish_sealed_blocks: engine.issue23_experiment.is_none(),
             });
             let weak_deps = Arc::downgrade(&deps);
             // Keep deps alive by leaking it into the thread. The worker holds
@@ -388,6 +385,15 @@ impl StorageEngine {
         if let Some(rx) = self.write_pipeline.flush() {
             let _ = rx.await;
         }
+    }
+
+    /// Flush cache insertion and wait for MetaServer publication visibility.
+    pub(crate) async fn flush_visible_saves(&self) -> Result<(), String> {
+        self.flush_write_pipeline().await;
+        if let Some(client) = &self.metaserver_client {
+            client.flush().await?;
+        }
+        Ok(())
     }
 
     /// Flush the SSD writer: waits until all enqueued writes are committed.

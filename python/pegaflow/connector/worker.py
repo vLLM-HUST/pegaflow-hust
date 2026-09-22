@@ -194,8 +194,10 @@ class WorkerConnector:
 
         self._req_pending_saves: set[str] = set()
         self._completed_saves: set[str] = set()
+        self._failed_saves: dict[str, str] = {}
         self._save_completion_lock = threading.Lock()
         self._save_completion_events: dict[str, threading.Event] = {}
+        self._sync_save_on_finish = os.environ.get("PEGAFLOW_SYNC_SAVE_ON_FINISH", "0") == "1"
         self._current_metadata: PegaConnectorMetadata | None = None
 
         self._pending_loads: dict[str, PyLoadState] = {}
@@ -420,6 +422,32 @@ class WorkerConnector:
     def get_finished(self, finished_req_ids: set[str]) -> tuple[set[str] | None, set[str] | None]:
         finished_sending: set[str] | None = None
         finished_recving: set[str] | None = None
+
+        if self._sync_save_on_finish and finished_req_ids:
+            with self._save_completion_lock:
+                save_events = [
+                    (req_id, event)
+                    for req_id in finished_req_ids
+                    if (event := self._save_completion_events.get(req_id)) is not None
+                ]
+            for req_id, event in save_events:
+                if not event.wait(timeout=self.LOAD_TIMEOUT_SECONDS):
+                    raise RuntimeError(
+                        f"timed out waiting for visible save completion: request={req_id}"
+                    )
+
+            with self._save_completion_lock:
+                failed_saves = {
+                    req_id: self._failed_saves.pop(req_id)
+                    for req_id in finished_req_ids
+                    if req_id in self._failed_saves
+                }
+            if failed_saves:
+                details = "; ".join(
+                    f"request={req_id}: {error}"
+                    for req_id, error in sorted(failed_saves.items())
+                )
+                raise RuntimeError(f"visible save failed: {details}")
 
         with self._save_completion_lock:
             # 1. Add newly finished requests (if they have pending saves) to tracking
@@ -865,6 +893,7 @@ class WorkerConnector:
 
             save_start = time.perf_counter()
             success = False
+            save_failure: str | None = None
 
             try:
                 ok, message = self._ctx.engine_client.save(
@@ -876,6 +905,7 @@ class WorkerConnector:
                 )
 
                 if not ok:
+                    save_failure = message
                     logger.error(
                         "[PegaKVConnector] Save batch failed: %s (continuing without save)",
                         message,
@@ -900,6 +930,7 @@ class WorkerConnector:
                         total_blocks,
                     )
             except Exception as e:
+                save_failure = str(e)
                 logger.error(
                     "[PegaKVConnector] Save RPC exception: %s (continuing without save)",
                     e,
@@ -919,8 +950,9 @@ class WorkerConnector:
             with self._stats_lock:
                 self._stats.record_save(save_duration, total_blocks, success)
 
-        # Always complete the request save lifecycle, even if save failed.
-        self._complete_save_requests(all_request_ids)
+        # Normal serving preserves the historical best-effort behavior. The
+        # experiment's synchronous mode surfaces failures to get_finished.
+        self._complete_save_requests(all_request_ids, failure=save_failure)
 
     def _log_diag_kv_checksums(
         self,
@@ -1004,14 +1036,19 @@ class WorkerConnector:
         except Exception:
             logger.exception("[PegaKVConnector.ATTN_DIAG] failed layer=%s", layer_name)
 
-    def _complete_save_requests(self, request_ids: list[str]) -> None:
+    def _complete_save_requests(
+        self, request_ids: list[str], failure: str | None = None
+    ) -> None:
         completed_reqs: list[str] = []
 
         with self._save_completion_lock:
             for req_id in request_ids:
                 if req_id in self._req_pending_saves:
                     self._req_pending_saves.discard(req_id)
-                    self._completed_saves.add(req_id)
+                    if failure is not None and self._sync_save_on_finish:
+                        self._failed_saves[req_id] = failure
+                    else:
+                        self._completed_saves.add(req_id)
                     completed_reqs.append(req_id)
                     event = self._save_completion_events.pop(req_id, None)
                     if event:

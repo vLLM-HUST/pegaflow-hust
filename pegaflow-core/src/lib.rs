@@ -771,6 +771,12 @@ impl PegaEngine {
         self.storage.flush_write_pipeline().await;
     }
 
+    /// Wait until prior saves are inserted locally and their block hashes are
+    /// acknowledged by MetaServer.
+    pub async fn flush_visible_saves(&self) -> Result<(), String> {
+        self.storage.flush_visible_saves().await
+    }
+
     /// Flush write pipeline and SSD writer.
     ///
     /// Guarantees that all saves submitted before this call are both

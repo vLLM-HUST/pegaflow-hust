@@ -245,6 +245,52 @@ def test_get_block_ids_with_load_errors_drains_between_calls():
     worker.shutdown()
 
 
+def test_sync_save_on_finish_waits_before_reporting_completion():
+    worker, _client, _ = _make_worker()
+    worker._sync_save_on_finish = True
+    save_done = MagicMock()
+    save_done.wait.return_value = True
+    with worker._save_completion_lock:
+        worker._save_completion_events["req-visible"] = save_done
+        worker._req_pending_saves.add("req-visible")
+        worker._completed_saves.add("req-visible")
+
+    finished_sending, _ = worker.get_finished({"req-visible"})
+
+    save_done.wait.assert_called_once_with(timeout=worker.LOAD_TIMEOUT_SECONDS)
+    assert finished_sending == {"req-visible"}
+    worker.shutdown()
+
+
+def test_sync_save_on_finish_fails_closed_on_timeout():
+    worker, _client, _ = _make_worker()
+    worker._sync_save_on_finish = True
+    save_done = MagicMock()
+    save_done.wait.return_value = False
+    with worker._save_completion_lock:
+        worker._save_completion_events["req-timeout"] = save_done
+
+    with pytest.raises(RuntimeError, match="visible save completion"):
+        worker.get_finished({"req-timeout"})
+
+    worker.shutdown()
+
+
+def test_sync_save_on_finish_fails_closed_on_rpc_error():
+    worker, _client, _ = _make_worker()
+    worker._sync_save_on_finish = True
+    with worker._save_completion_lock:
+        worker._req_pending_saves.add("req-failed")
+        worker._save_completion_events["req-failed"] = MagicMock()
+
+    worker._complete_save_requests(["req-failed"], failure="publication barrier failed")
+
+    with pytest.raises(RuntimeError, match="visible save failed.*publication barrier failed"):
+        worker.get_finished({"req-failed"})
+
+    worker.shutdown()
+
+
 def test_load_uses_registered_layer_names_before_forward_context_names():
     """Load must use the same layer names registered with the server."""
     worker, client, _ = _make_worker()
