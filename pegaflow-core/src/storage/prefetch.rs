@@ -39,16 +39,20 @@ impl RdmaFetch {
         req_id: &str,
         namespace: &str,
         remaining_hashes: &[Vec<u8>],
-    ) -> Option<(usize, PrefetchResult)> {
-        let (node, found) = self
+    ) -> Result<Option<(usize, PrefetchResult)>, ()> {
+        let Some((node, found)) = self
             .0
             .query_prefix(req_id, namespace, remaining_hashes)
-            .await?;
+            .await
+        else {
+            return Ok(None);
+        };
         let blocks = self
             .0
             .fetch_blocks(&node, req_id, namespace, &remaining_hashes[..found])
-            .await;
-        Some((found, blocks))
+            .await
+            .ok_or(())?;
+        Ok(Some((found, blocks)))
     }
 }
 
@@ -59,8 +63,8 @@ impl RdmaFetch {
         _req_id: &str,
         _namespace: &str,
         _remaining_hashes: &[Vec<u8>],
-    ) -> Option<(usize, PrefetchResult)> {
-        None
+    ) -> Result<Option<(usize, PrefetchResult)>, ()> {
+        Ok(None)
     }
 }
 
@@ -511,26 +515,38 @@ async fn run_prefetch_task(deps: PrefetchTaskDeps, input: PrefetchTaskInput) -> 
     } = input;
     let remaining_hashes: Vec<Vec<u8>> = remaining_keys.iter().map(|k| k.hash.clone()).collect();
 
-    if let Some(rdma) = deps.rdma_fetch
-        && let Some((found, blocks)) = rdma
+    if let Some(rdma) = deps.rdma_fetch {
+        match rdma
             .try_fetch_prefix(&req_id, &namespace, &remaining_hashes)
             .await
-    {
-        record_tier_attribution(
-            total,
-            hit,
-            found,
-            Some(PrefetchSource::Rdma.as_attribution()),
-            emit_tier_metrics,
-        );
-        return build_ready_result(
-            prefix_blocks,
-            total,
-            Some(PrefetchSource::Rdma),
-            found,
-            &remaining_keys[..found],
-            blocks,
-        );
+        {
+            Ok(Some((found, blocks))) => {
+                record_tier_attribution(
+                    total,
+                    hit,
+                    found,
+                    Some(PrefetchSource::Rdma.as_attribution()),
+                    emit_tier_metrics,
+                );
+                return build_ready_result(
+                    prefix_blocks,
+                    total,
+                    Some(PrefetchSource::Rdma),
+                    found,
+                    &remaining_keys[..found],
+                    blocks,
+                );
+            }
+            Err(()) => {
+                // Fix this request's remote-read choice after an admission
+                // denial. A later poll must not start fetching its suffix.
+                deps.prefetch_state
+                    .lock()
+                    .failed_remote
+                    .insert(req_id.clone(), Instant::now());
+            }
+            Ok(None) => {}
+        }
     }
 
     if let Some(ssd) = deps.ssd_store {
@@ -641,5 +657,37 @@ mod tests {
         assert!(Arc::ptr_eq(&result.ready_blocks[0], &b1));
         assert_eq!(result.missing, 2);
         assert_eq!(result.cache_inserts.len(), 2);
+    }
+
+    #[tokio::test]
+    async fn no_remote_read_keeps_local_prefix_and_returns_missing_suffix() {
+        let local = block();
+        let result = run_prefetch_task(
+            PrefetchTaskDeps {
+                rdma_fetch: None,
+                ssd_store: None,
+                prefetch_state: Arc::new(Mutex::new(PrefetchState {
+                    active: HashMap::new(),
+                    reserved_ssd_prefetch_blocks: 0,
+                    failed_remote: HashMap::new(),
+                })),
+                max_prefetch_blocks: 0,
+            },
+            PrefetchTaskInput {
+                req_id: "request".into(),
+                namespace: "ns".into(),
+                remaining_keys: vec![key(2), key(3)],
+                prefix_blocks: vec![Arc::clone(&local)],
+                total: 3,
+                hit: 1,
+                emit_tier_metrics: false,
+            },
+        )
+        .await;
+
+        assert_eq!(result.ready_blocks.len(), 1);
+        assert!(Arc::ptr_eq(&result.ready_blocks[0], &local));
+        assert_eq!(result.missing, 2);
+        assert!(result.cache_inserts.is_empty());
     }
 }

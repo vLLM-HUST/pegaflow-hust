@@ -163,6 +163,19 @@ pub struct Cli {
     #[arg(long, default_value_t = pegaflow_core::DEFAULT_RDMA_QPS_PER_PEER)]
     pub qps_per_peer: usize,
 
+    /// Opt-in TailGuard remote-read rate in bytes/second (e.g. 8gb).
+    /// Supply all three TailGuard limits together; otherwise admission is disabled.
+    #[arg(long, value_parser = parse_memory_size)]
+    pub tailguard_remote_read_rate: Option<usize>,
+
+    /// Maximum remote-read burst bytes in the TailGuard token bucket.
+    #[arg(long, value_parser = parse_memory_size)]
+    pub tailguard_remote_read_burst: Option<usize>,
+
+    /// Maximum simultaneously admitted remote-read bytes.
+    #[arg(long, value_parser = parse_memory_size)]
+    pub tailguard_remote_read_max_inflight: Option<usize>,
+
     /// MetaServer address for cross-node block hash registration (e.g. http://127.0.0.1:50056).
     /// When set, sealed block hashes are automatically registered with the MetaServer.
     #[arg(long)]
@@ -510,6 +523,30 @@ fn init_metrics(
     })
 }
 
+fn tailguard_remote_read_config(
+    cli: &Cli,
+) -> Result<Option<pegaflow_core::TailGuardRemoteReadConfig>, std::io::Error> {
+    match (
+        cli.tailguard_remote_read_rate,
+        cli.tailguard_remote_read_burst,
+        cli.tailguard_remote_read_max_inflight,
+    ) {
+        (None, None, None) => Ok(None),
+        (Some(rate), Some(burst), Some(max_inflight)) => {
+            let config = pegaflow_core::TailGuardRemoteReadConfig {
+                bytes_per_second: u64::try_from(rate).map_err(std::io::Error::other)?,
+                burst_bytes: u64::try_from(burst).map_err(std::io::Error::other)?,
+                max_inflight_bytes: u64::try_from(max_inflight).map_err(std::io::Error::other)?,
+            };
+            config.validate().map_err(std::io::Error::other)?;
+            Ok(Some(config))
+        }
+        _ => Err(std::io::Error::other(
+            "TailGuard remote-read admission requires rate, burst, and max-inflight together",
+        )),
+    }
+}
+
 /// Main entry point for pegaflow-server
 pub fn run() -> Result<(), Box<dyn Error>> {
     let cli = Cli::parse();
@@ -670,6 +707,8 @@ pub fn run() -> Result<(), Box<dyn Error>> {
         }
     };
 
+    let tailguard_remote_read = tailguard_remote_read_config(&cli)?;
+
     let storage_config = pegaflow_core::StorageConfig {
         enable_lfu_admission: cli.enable_lfu_admission,
         hint_value_size_bytes: cli.hint_value_size,
@@ -685,6 +724,7 @@ pub fn run() -> Result<(), Box<dyn Error>> {
         metaserver_queue_depth: cli.metaserver_queue_depth,
         pool_shards: cli.pool_shards,
         issue23_experiment,
+        tailguard_remote_read,
     };
 
     if cli.pool_shards > 1 {
@@ -862,6 +902,30 @@ mod tests {
             parse_hll_windows(&cli.metric_hll_windows).unwrap(),
             expected_hll_windows()
         );
+        assert!(tailguard_remote_read_config(&cli).unwrap().is_none());
+    }
+
+    #[test]
+    fn tailguard_cli_requires_all_limits() {
+        let incomplete =
+            Cli::try_parse_from(["pegaflow-server", "--tailguard-remote-read-rate", "1gb"])
+                .unwrap();
+        assert!(tailguard_remote_read_config(&incomplete).is_err());
+
+        let complete = Cli::try_parse_from([
+            "pegaflow-server",
+            "--tailguard-remote-read-rate",
+            "1gb",
+            "--tailguard-remote-read-burst",
+            "2gb",
+            "--tailguard-remote-read-max-inflight",
+            "3gb",
+        ])
+        .unwrap();
+        let config = tailguard_remote_read_config(&complete).unwrap().unwrap();
+        assert_eq!(config.bytes_per_second, 1024 * 1024 * 1024);
+        assert_eq!(config.burst_bytes, 2 * 1024 * 1024 * 1024);
+        assert_eq!(config.max_inflight_bytes, 3 * 1024 * 1024 * 1024);
     }
 
     #[test]

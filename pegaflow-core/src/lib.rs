@@ -30,6 +30,7 @@ mod pinned_pool;
 mod seal_offload;
 mod storage;
 pub mod sync_state;
+mod tailguard;
 pub mod transfer;
 
 pub use backing::{
@@ -53,6 +54,7 @@ pub use pinned_pool::PinnedAllocation;
 pub use seal_offload::SlotMeta;
 pub use storage::{DEFAULT_RDMA_QPS_PER_PEER, MemoryCacheCleanupStats, StorageConfig};
 pub use sync_state::{LoadState, LoadStateError};
+pub use tailguard::TailGuardRemoteReadConfig;
 pub use topology::{configure_device_scope, validate_device_scope};
 pub use trace::{set_trace_sample_rate, should_sample};
 pub use transfer::TransferMode;

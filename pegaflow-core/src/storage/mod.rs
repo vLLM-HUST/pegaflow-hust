@@ -27,6 +27,9 @@ use crate::metrics::{
     core_metrics, record_object_age, record_object_lifecycle, record_object_resident_bytes,
 };
 use crate::pinned_pool::{PinnedAllocation, PinnedAllocator};
+use crate::tailguard::TailGuardRemoteReadConfig;
+#[cfg(feature = "rdma")]
+use crate::tailguard::TailGuardRemoteReadController;
 use pegaflow_common::NumaNode;
 
 use prefetch::PrefetchScheduler;
@@ -95,6 +98,8 @@ pub struct StorageConfig {
     pub pool_shards: usize,
     /// Opt-in frozen transport experiment. None leaves the production path unchanged.
     pub issue23_experiment: Option<Issue23ExperimentConfig>,
+    /// Opt-in demand remote-read admission; denied reads fall back to recomputation.
+    pub tailguard_remote_read: Option<TailGuardRemoteReadConfig>,
 }
 
 impl Default for StorageConfig {
@@ -114,6 +119,7 @@ impl Default for StorageConfig {
             metaserver_queue_depth: crate::internode::DEFAULT_METASERVER_QUEUE_DEPTH,
             pool_shards: 1,
             issue23_experiment: None,
+            tailguard_remote_read: None,
         }
     }
 }
@@ -154,6 +160,22 @@ impl StorageEngine {
             .clone()
             .map(Issue23CausalExperiment::new)
             .transpose()?;
+        #[cfg(feature = "rdma")]
+        let tailguard_remote_read = config
+            .tailguard_remote_read
+            .clone()
+            .map(TailGuardRemoteReadController::new)
+            .transpose()?;
+        #[cfg(feature = "rdma")]
+        if tailguard_remote_read.is_some() && issue23_experiment.is_some() {
+            return Err(
+                "TailGuard remote-read admission cannot run with frozen Issue23 experiments".into(),
+            );
+        }
+        #[cfg(not(feature = "rdma"))]
+        if config.tailguard_remote_read.is_some() {
+            return Err("TailGuard remote-read admission requires the rdma feature".into());
+        }
 
         // Create MetaServer client if configured
         let metaserver_client = config.metaserver_addr.as_ref().map(|addr| {
@@ -223,6 +245,10 @@ impl StorageEngine {
         } else {
             None
         };
+        #[cfg(feature = "rdma")]
+        if tailguard_remote_read.is_some() && rdma_transport.is_none() {
+            return Err("TailGuard remote-read admission requires configured RDMA NICs".into());
+        }
 
         #[cfg(not(feature = "rdma"))]
         if rdma_nics.is_some() {
@@ -257,6 +283,7 @@ impl StorageEngine {
                     allocate_fn.clone(),
                     advertise,
                     issue23_experiment.clone(),
+                    tailguard_remote_read.clone(),
                 ))))
             });
             #[cfg(not(feature = "rdma"))]

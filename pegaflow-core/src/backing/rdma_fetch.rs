@@ -28,6 +28,7 @@ use crate::issue23_causal::{
     stable_request_id,
 };
 use crate::metrics::{core_metrics, record_object_lifecycle};
+use crate::tailguard::TailGuardRemoteReadController;
 
 /// Minimum usable transfer timeout. If the server's lock timeout minus the
 /// safety margin falls below this, we use this floor to avoid instant timeouts.
@@ -79,6 +80,7 @@ pub(crate) struct RdmaFetchStore {
     /// the last handshake's QPs to be invalidated.
     connect_group: Arc<Group<String, ()>>,
     issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
+    tailguard_remote_read: Option<Arc<TailGuardRemoteReadController>>,
 }
 
 impl RdmaFetchStore {
@@ -88,6 +90,7 @@ impl RdmaFetchStore {
         allocate_fn: AllocateFn,
         advertise_addr: String,
         issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
+        tailguard_remote_read: Option<Arc<TailGuardRemoteReadController>>,
     ) -> Self {
         info!("RDMA remote fetch enabled (advertise={})", advertise_addr);
         Self {
@@ -98,6 +101,7 @@ impl RdmaFetchStore {
             grpc_channels: Arc::new(DashMap::new()),
             connect_group: Arc::new(Group::new()),
             issue23_experiment,
+            tailguard_remote_read,
         }
     }
 
@@ -158,7 +162,7 @@ impl RdmaFetchStore {
         req_id: &str,
         namespace: &str,
         hashes: &[Vec<u8>],
-    ) -> PrefetchResult {
+    ) -> Option<PrefetchResult> {
         rdma_fetch_task(
             &self.rdma_transport,
             &self.allocate_fn,
@@ -170,6 +174,7 @@ impl RdmaFetchStore {
             namespace,
             hashes,
             self.issue23_experiment.clone(),
+            self.tailguard_remote_read.clone(),
         )
         .await
     }
@@ -196,7 +201,8 @@ async fn rdma_fetch_task(
     namespace: &str,
     block_hashes: &[Vec<u8>],
     issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
-) -> PrefetchResult {
+    tailguard_remote_read: Option<Arc<TailGuardRemoteReadController>>,
+) -> Option<PrefetchResult> {
     let t0 = Instant::now();
 
     // 1. Ensure RDMA connection (singleflight: at most one handshake per remote_addr)
@@ -214,7 +220,7 @@ async fn rdma_fetch_task(
         core_metrics()
             .rdma_fetch_total
             .add(1, &[KeyValue::new("status", "error")]);
-        return Vec::new();
+        return Some(Vec::new());
     }
     let connect_elapsed = connect_start.elapsed();
 
@@ -236,7 +242,7 @@ async fn rdma_fetch_task(
             core_metrics()
                 .rdma_fetch_total
                 .add(1, &[KeyValue::new("status", "error")]);
-            return Vec::new();
+            return Some(Vec::new());
         }
     };
     let query_elapsed = query_start.elapsed();
@@ -246,11 +252,30 @@ async fn rdma_fetch_task(
     // 3. RDMA READ all blocks + build SealedBlocks
     let transfer_timeout = transfer_timeout_from_server(response.lock_timeout_secs);
     let blocks = response.blocks;
-    let total_bytes: u64 = blocks
-        .iter()
-        .flat_map(|b| &b.slots)
-        .map(|s| s.k_size + s.v_size)
-        .sum();
+    let total_bytes: u64 = blocks.iter().flat_map(|b| &b.slots).fold(0, |total, slot| {
+        total.saturating_add(slot.k_size.saturating_add(slot.v_size))
+    });
+    // The source lock is already held, but no destination allocation or RDMA
+    // operation exists yet. A denial releases the lock and makes the remaining
+    // prefix a miss, preserving any local CPU prefix found by PrefetchScheduler.
+    let _tailguard_permit = if let Some(controller) = &tailguard_remote_read {
+        match controller.try_reserve(total_bytes) {
+            Ok(permit) => Some(permit),
+            Err(reason) => {
+                info!(
+                    "TailGuard remote read skipped: req_id={req_id} bytes={total_bytes} reason={}",
+                    reason.as_str()
+                );
+                spawn_release_lock(client, transfer_session_id);
+                core_metrics()
+                    .rdma_fetch_total
+                    .add(1, &[KeyValue::new("status", "denied")]);
+                return None;
+            }
+        }
+    } else {
+        None
+    };
     record_remote_read_objects(req_id, namespace, &blocks, "started");
     let (result, transfer_timing) = match fetch_blocks_via_rdma(
         rdma,
@@ -274,7 +299,7 @@ async fn rdma_fetch_task(
             core_metrics()
                 .rdma_fetch_total
                 .add(1, &[KeyValue::new("status", "error")]);
-            return Vec::new();
+            return Some(Vec::new());
         }
     };
     record_remote_read_objects(req_id, namespace, &blocks, "ok");
@@ -313,7 +338,7 @@ async fn rdma_fetch_task(
     m.rdma_fetch_duration_seconds
         .record(elapsed.as_secs_f64(), ok);
     m.rdma_fetch_bytes.add(total_bytes, ok);
-    result
+    Some(result)
 }
 
 /// Ensure an RDMA connection to `remote_addr` exists, using singleflight to

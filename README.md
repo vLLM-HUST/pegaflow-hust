@@ -30,6 +30,10 @@ external operator.
 tail-predictable host-memory pooling for disaggregated LLM serving. PegaFlow
 remains the software, system, and repository name.
 
+The first opt-in demand remote-read admission path is documented in
+[TailGuard in PegaFlow](docs/tailguard.md). The former standalone TailGuard
+repository remains an experiment archive, not an active runtime dependency.
+
 Chen Yanbo (`@cybber695`) is the current topic owner and executor. Chen Zijia's
 (`@mynameisczj`) earlier contributions remain part of the Git and paper-evidence
 history, but he is not a current owner or executor.
