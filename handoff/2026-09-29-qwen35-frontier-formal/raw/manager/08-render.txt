@@ -1,0 +1,7 @@
+[
+  {
+    "content": "{\n  \"kv_transfer_config\": {\n    \"kv_connector\": \"PegaKVConnector\",\n    \"kv_connector_extra_config\": {\n      \"pegaflow.host\": \"http://127.0.0.1\",\n      \"pegaflow.mode\": \"read_write\",\n      \"pegaflow.port\": 50055\n    },\n    \"kv_connector_module_path\": \"pegaflow.connector\",\n    \"kv_role\": \"kv_both\"\n  }\n}",
+    "media_type": "application/json",
+    "name": "pegaflow-vllm-connector.json"
+  }
+]

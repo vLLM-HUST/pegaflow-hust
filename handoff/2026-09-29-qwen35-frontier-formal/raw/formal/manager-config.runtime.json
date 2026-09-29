@@ -1,0 +1,9 @@
+{
+  "health_url": "http://127.0.0.1:9091/health",
+  "grpc_endpoint": "http://127.0.0.1:50055",
+  "connector": "PegaKVConnector",
+  "kv_role": "kv_both",
+  "kv_connector_extra_config": {
+    "pegaflow.mode": "read_write"
+  }
+}

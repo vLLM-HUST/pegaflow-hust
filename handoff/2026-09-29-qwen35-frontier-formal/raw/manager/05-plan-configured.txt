@@ -1,0 +1,40 @@
+{
+  "actions": [
+    {
+      "details": {
+        "enabled": false
+      },
+      "lifecycle_owner": "vllm",
+      "mutating": false,
+      "operation": "render_connector_config",
+      "target": "vllm"
+    },
+    {
+      "details": {
+        "protocol": "http-health"
+      },
+      "lifecycle_owner": "external_operator",
+      "mutating": false,
+      "operation": "check_service",
+      "target": "pegaflow-server"
+    }
+  ],
+  "extension_id": "org.vllm-hust.pegaflow",
+  "generated_config": {
+    "kv_transfer_config": {
+      "kv_connector": "PegaKVConnector",
+      "kv_connector_extra_config": {
+        "pegaflow.host": "http://127.0.0.1",
+        "pegaflow.mode": "read_write",
+        "pegaflow.port": 50055
+      },
+      "kv_connector_module_path": "pegaflow.connector",
+      "kv_role": "kv_both"
+    }
+  },
+  "provider": "pegaflow",
+  "warnings": [
+    "PegaFlow lifecycle and stored KV data remain owned by the external operator; the Manager will not start, stop, clear, upgrade, or delete them.",
+    "PD and NIXL connectors are outside this first profile."
+  ]
+}

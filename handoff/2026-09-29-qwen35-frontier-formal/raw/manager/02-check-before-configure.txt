@@ -1,0 +1,16 @@
+{
+  "extension_id": "org.vllm-hust.pegaflow",
+  "provider": "pegaflow",
+  "states": [
+    "installed",
+    "discovered",
+    "compatible",
+    "degraded"
+  ],
+  "evidence": [
+    "host version 0.23.3 satisfies the declared range",
+    "protocol pegaflow-engine 0.23.3 satisfies the declared range",
+    "protocol vllm-kv-transfer-config is not independently versioned; compatibility is governed by host ranges and acceptance evidence",
+    "grpc_endpoint is required"
+  ]
+}

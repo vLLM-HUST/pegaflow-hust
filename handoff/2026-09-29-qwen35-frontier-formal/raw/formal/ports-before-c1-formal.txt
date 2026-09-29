@@ -1,0 +1,28 @@
+Active Internet connections (only servers)
+Proto Recv-Q Send-Q Local Address           Foreign Address         State       PID/Program name    
+tcp        0      0 127.0.0.1:33784         0.0.0.0:*               LISTEN      495749/python       
+tcp        0      0 127.0.0.1:50055         0.0.0.0:*               LISTEN      494930/pegaflow-ser 
+tcp        0      0 127.0.0.1:9091          0.0.0.0:*               LISTEN      494930/pegaflow-ser 
+tcp        0      0 127.0.0.1:6060          0.0.0.0:*               LISTEN      70/./coder          
+tcp        0      0 127.0.0.1:2112          0.0.0.0:*               LISTEN      70/./coder          
+tcp        0      0 127.0.0.1:2113          0.0.0.0:*               LISTEN      70/./coder          
+tcp        0      0 10.244.1.53:44707       0.0.0.0:*               LISTEN      496689/VLLM::Worker 
+tcp        0      0 10.244.1.53:44613       0.0.0.0:*               LISTEN      496689/VLLM::Worker 
+tcp        0      0 10.244.1.53:41009       0.0.0.0:*               LISTEN      496689/VLLM::Worker 
+tcp        0      0 10.244.1.53:45771       0.0.0.0:*               LISTEN      496688/VLLM::Worker 
+tcp        0      0 10.244.1.53:45647       0.0.0.0:*               LISTEN      496689/VLLM::Worker 
+tcp        0      0 127.0.0.1:27897         0.0.0.0:*               LISTEN      194/sshd: root@nott 
+tcp        0      0 10.244.1.53:36621       0.0.0.0:*               LISTEN      496688/VLLM::Worker 
+tcp        0      0 10.244.1.53:35473       0.0.0.0:*               LISTEN      496688/VLLM::Worker 
+tcp        0      0 10.244.1.53:32787       0.0.0.0:*               LISTEN      496689/VLLM::Worker 
+tcp        0      0 10.244.1.53:40855       0.0.0.0:*               LISTEN      496688/VLLM::Worker 
+tcp        0      0 10.244.1.53:39391       0.0.0.0:*               LISTEN      496689/VLLM::Worker 
+tcp        0      0 10.244.1.53:39671       0.0.0.0:*               LISTEN      496689/VLLM::Worker 
+tcp        0      0 0.0.0.0:22              0.0.0.0:*               LISTEN      137/sshd: /usr/sbin 
+tcp        0      0 10.244.1.53:39819       0.0.0.0:*               LISTEN      496688/VLLM::Worker 
+tcp        0      0 10.244.1.53:38285       0.0.0.0:*               LISTEN      496689/VLLM::Worker 
+tcp        0      0 10.244.1.53:38709       0.0.0.0:*               LISTEN      496688/VLLM::Worker 
+tcp        0      0 10.244.1.53:36969       0.0.0.0:*               LISTEN      496688/VLLM::Worker 
+tcp        0      0 10.244.1.53:37775       0.0.0.0:*               LISTEN      496688/VLLM::Worker 
+tcp6       0      0 :::55639                :::*                    LISTEN      496688/VLLM::Worker 
+tcp6       0      0 :::22                   :::*                    LISTEN      137/sshd: /usr/sbin 

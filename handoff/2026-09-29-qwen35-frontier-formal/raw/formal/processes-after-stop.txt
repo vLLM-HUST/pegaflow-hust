@@ -1,0 +1,14 @@
+    PID    PPID                  STARTED COMMAND
+      1       0 Mon Sep 28 15:37:02 2026 ./coder agent
+     70       1 Mon Sep 28 15:37:02 2026 ./coder agent --no-reap
+    137       1 Mon Sep 28 15:37:02 2026 sshd: /usr/sbin/sshd -e -o PermitRootLogin=prohibit-password -o PubkeyAuthentication=yes -o AuthorizedKeysFile=/etc/ssh/authorized_keys.generated %h/.ssh/authorized_keys -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o PermitUserEnvironment=yes [listener] 0 of 10-100 startups
+    194     137 Mon Sep 28 15:37:04 2026 sshd: root@notty
+    205     194 Mon Sep 28 15:37:04 2026 sleep infinity
+    990       1 Mon Sep 28 15:37:23 2026 /root/.local/bin/codex.direct -c features.code_mode_host=true app-server --listen unix://
+   1081     137 Mon Sep 28 15:37:24 2026 sshd: root@notty
+   1101    1081 Mon Sep 28 15:37:24 2026 /root/.local/bin/codex.direct app-server proxy
+   2554     990 Mon Sep 28 15:39:52 2026 /root/.codex/packages/standalone/releases/0.157.1-aarch64-unknown-linux-musl/bin/codex-code-mode-host
+ 556464     990 Tue Sep 29 02:40:10 2026 /bin/bash -c set -euo pipefail formal=/root/pegaflow-qwen35-qualification/formal date -u +%FT%TZ > "$formal/pegaflow-stopped-utc.txt" npu-smi info > "$formal/npu-after-stop.txt" ps -eo pid,ppid,lstart,args > "$formal/processes-after-stop.txt" netstat -ltnp 2>/dev/null > "$formal/ports-after-stop.txt" || true ! rg ':50055|:33784' "$formal/ports-after-stop.txt" rg -c 'No running processes found' "$formal/npu-after-stop.txt" find "$formal" -type f ! -name SHA256SUMS -printf '%P\0' | sort -z | xargs -0 -I{} sha256sum "$formal/{}" | sed "s#  $formal/#  #" > "$formal/SHA256SUMS" sha256sum -c "$formal/SHA256SUMS" --ignore-missing >/tmp/pegaflow-formal-sha-check.txt printf 'manifest=%s files; ' "$(wc -l < "$formal/SHA256SUMS")" tail -1 /tmp/pegaflow-formal-sha-check.txt
+ 556483     990 Tue Sep 29 02:40:11 2026 /bin/bash -lc git push origin audit/vamos-evidence-closure-20260928 && git status --short && git rev-parse HEAD
+ 556512  556464 Tue Sep 29 02:40:11 2026 ps -eo pid,ppid,lstart,args
+ 556516  556483 Tue Sep 29 02:40:11 2026 [grep]

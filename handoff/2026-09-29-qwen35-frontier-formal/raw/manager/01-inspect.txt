@@ -1,0 +1,70 @@
+{
+  "activation": {
+    "additional_config": [],
+    "entry_points": [
+      {
+        "group": "vllm.general_plugins",
+        "name": "pegaflow"
+      }
+    ],
+    "environment": []
+  },
+  "activation_blocker": null,
+  "activation_ready": true,
+  "bundle_id": "org.vllm-hust.pegaflow",
+  "bundle_version": "0.2.0.dev0",
+  "components": [],
+  "distribution": "vllm-hust-pegaflow-provider",
+  "distribution_version": "0.2.0.dev0",
+  "enabled": false,
+  "experimental": true,
+  "host": {
+    "api_range": null,
+    "name": "pegaflow-llm-npu",
+    "provider": "pegaflow",
+    "version_range": "==0.23.3"
+  },
+  "implementation": [
+    {
+      "console_scripts": [
+        "pegaflow-server",
+        "pegaflow-metaserver"
+      ],
+      "service": "PegaFlow Server",
+      "source_repository": "https://github.com/vLLM-HUST/pegaflow-hust",
+      "type": "external_service"
+    },
+    {
+      "group": "vllm.general_plugins",
+      "name": "pegaflow",
+      "type": "python_entry_point"
+    }
+  ],
+  "kind": "kv_service_adapter",
+  "lifecycle_owner": "external_operator",
+  "manifest_path": "/usr/local/python3.12.13/lib/python3.12/site-packages/vllm_hust_pegaflow_provider/manifests/vllm-hust-extension-v0.2.json",
+  "protocols": [
+    {
+      "name": "pegaflow-engine",
+      "version_range": "==0.23.3"
+    },
+    {
+      "name": "vllm-kv-transfer-config",
+      "version_range": null
+    }
+  ],
+  "requires_services": [
+    {
+      "endpoint_config": "health_url",
+      "optional": false,
+      "protocol": "http-health",
+      "service_id": "pegaflow-server",
+      "version_range": null
+    }
+  ],
+  "runtime": {
+    "isolation": "external_service",
+    "process_scope": "external_service_and_vllm_connector",
+    "type": "composite"
+  }
+}

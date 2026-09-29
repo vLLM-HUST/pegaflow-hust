@@ -1,0 +1,10 @@
+81396ce9ce7d7322969b3da081d7ddfdedc875000bd7c14c8994d6b44fdf5fec  /root/pegaflow-qwen35-qualification/manager/01-inspect.txt
+3b6d934c90217944a0e612db3e9d45fe26ee20283608bef2f0a83a271004ce6c  /root/pegaflow-qwen35-qualification/manager/02-check-before-configure.txt
+53c234e5e8472b6ac51c1ae1cab3fe06fad053beb8ebfd8977b010655bfdd3c3  /root/pegaflow-qwen35-qualification/manager/03-plan-before-configure.exit
+0a1e53de75f3305c300ab3d4c31f885f0c15ac5f125d6826029ae9ab0f998f31  /root/pegaflow-qwen35-qualification/manager/03-plan-before-configure.txt
+58feadd501268aa5ffc6ab0722e24fb12c0ce5494ce86d8819626a1e46a749e6  /root/pegaflow-qwen35-qualification/manager/04-configure.txt
+65f5a08f2d9231e0c06c8794c1d5348ef8c65075cbe2794d8c57fea9af2b9ff6  /root/pegaflow-qwen35-qualification/manager/05-plan-configured.txt
+4a8cd379e63d8d9a79a8d818bf26a0c80f919384d5792e27671088726f7bec2a  /root/pegaflow-qwen35-qualification/manager/06-enable.txt
+f7201f77a6a042fe7a13fe9be92e9fb0cd1f786b8ae095b85eb9a31524d85c85  /root/pegaflow-qwen35-qualification/manager/07-status.txt
+eaaf1b987aec5e916fa668b76862b9512e8cf1d0c672a151b966b60bc8188481  /root/pegaflow-qwen35-qualification/manager/08-render.txt
+e42673e0f645e2017ee53ad8e64993f97516faeaba5c9bb0cec1a58fc74c3f3e  /root/pegaflow-qwen35-qualification/manager/SHA256SUMS
