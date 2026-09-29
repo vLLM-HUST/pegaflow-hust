@@ -1,6 +1,7 @@
 from __future__ import annotations
 
 import json
+import tomllib
 from pathlib import Path
 from types import SimpleNamespace
 
@@ -12,6 +13,16 @@ from vllm_hust_pegaflow_provider.provider import PegaFlowProvider
 
 ROOT = Path(__file__).resolve().parents[1]
 MANIFEST = ROOT / "src/vllm_hust_pegaflow_provider/manifests/vllm-hust-extension-v0.2.json"
+
+
+def test_provider_publishes_declared_activation_entry_point() -> None:
+    manifest = load_manifest(MANIFEST)
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
+    published = project["entry-points"]["vllm.general_plugins"]
+
+    for entry_point in manifest.activation.entry_points:
+        assert entry_point.group == "vllm.general_plugins"
+        assert entry_point.name in published
 
 
 def test_manifest_preserves_external_service_boundary() -> None:

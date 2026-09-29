@@ -20,6 +20,9 @@ test = ["pytest>=8", "ruff>=0.12"]
 [project.entry-points."vllm_hust_ext.providers"]
 pegaflow = "vllm_hust_pegaflow_provider.provider:PegaFlowProvider"
 
+[project.entry-points."vllm.general_plugins"]
+pegaflow = "pegaflow.vllm_plugin:register"
+
 [tool.hatch.build.targets.wheel]
 packages = ["src/vllm_hust_pegaflow_provider"]
 
