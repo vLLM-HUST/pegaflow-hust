@@ -3,11 +3,12 @@
 from __future__ import annotations
 
 import pytest
-import torch
 
 from .unit_stubs import install_connector_unit_stubs
 
 install_connector_unit_stubs()
+
+import torch  # noqa: E402
 
 from pegaflow.connector.worker import (  # noqa: E402
     _expand_hybrid_registration_caches,
@@ -21,21 +22,33 @@ class FakeTensor:
         self._stride = stride
         self._element_size = element_size
 
-    def stride(self) -> tuple[int, ...]:
-        return self._stride
+    def stride(self, dim: int | None = None) -> tuple[int, ...] | int:
+        return self._stride if dim is None else self._stride[dim]
 
     def element_size(self) -> int:
         return self._element_size
+
+
+def make_tensor(shape: tuple[int, ...]):
+    if hasattr(torch, "empty"):
+        return torch.empty(shape, dtype=torch.bfloat16)
+
+    stride = []
+    size = 1
+    for dimension in reversed(shape):
+        stride.append(size)
+        size *= dimension
+    return FakeTensor(shape, tuple(reversed(stride)))
 
 
 def test_hybrid_recurrent_states_keep_independent_page_strides():
     caches, groups, recurrent = _expand_hybrid_registration_caches(
         {
             "linear_attn": [
-                torch.empty((4, 8), dtype=torch.bfloat16),
-                torch.empty((4, 3, 5), dtype=torch.bfloat16),
+                make_tensor((4, 8)),
+                make_tensor((4, 3, 5)),
             ],
-            "full_attn": torch.empty((4, 2, 8), dtype=torch.bfloat16),
+            "full_attn": make_tensor((4, 2, 8)),
         },
         {"linear_attn": 1, "full_attn": 0},
         frozenset({"linear_attn"}),
@@ -53,17 +66,15 @@ def test_hybrid_recurrent_states_keep_independent_page_strides():
         "linear_attn::state1": 1,
         "full_attn": 0,
     }
-    assert recurrent == frozenset(
-        {"linear_attn::state0", "linear_attn::state1"}
-    )
+    assert recurrent == frozenset({"linear_attn::state0", "linear_attn::state1"})
 
 
 def test_hybrid_attention_tuple_keeps_both_allocations():
     caches, groups, recurrent = _expand_hybrid_registration_caches(
         {
             "full_attn": (
-                torch.empty((4, 8), dtype=torch.bfloat16),
-                torch.empty((4, 12), dtype=torch.bfloat16),
+                make_tensor((4, 8)),
+                make_tensor((4, 12)),
             )
         },
         {"full_attn": 0},

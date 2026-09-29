@@ -1,5 +1,5 @@
 [files]
-extend-exclude = ["results/"]
+extend-exclude = ["results/", "handoff/**/raw/"]
 
 [default.extend-words]
 # Rust std library path (std::f64::consts)

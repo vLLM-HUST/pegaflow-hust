@@ -1,11 +1,11 @@
 from __future__ import annotations
 
 import json
-import tomllib
 from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
+import tomllib
 from vllm_hust_ext.manifest import load_manifest
 
 from vllm_hust_pegaflow_provider import provider as provider_module

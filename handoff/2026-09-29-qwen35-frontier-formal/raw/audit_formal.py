@@ -5,7 +5,6 @@ import math
 import re
 from pathlib import Path
 
-
 FORMAL = Path(__file__).resolve().parent / "formal"
 CONCURRENCIES = (1, 2, 4, 8, 16)
 NATIVE = {
