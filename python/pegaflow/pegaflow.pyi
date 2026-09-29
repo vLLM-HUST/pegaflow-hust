@@ -229,8 +229,8 @@ class EngineRpcClient:
         Ready hits are owned by an opaque lease consumed by load or release.
         Contract: instance_id must be registered, req_id must be non-empty
         and stable across retries for the same request, and block_hashes may
-        be empty. group_id > 0 selects membership semantics (official #433);
-        the T6 fork rejects group_id > 0 at the server.
+        be empty. group_id > 0 selects position-aligned resident-cache
+        membership semantics; remote set fetch is not supported for groups.
 
         Args:
             instance_id: Model instance ID.

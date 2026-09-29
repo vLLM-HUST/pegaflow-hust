@@ -24,6 +24,7 @@ from pegaflow.connector.common import (
     logger,
     parse_env_int,
 )
+from pegaflow.debug_save import debug_save_enabled
 from pegaflow.ipc_wrapper import CudaIPCWrapper
 from pegaflow.npu_ipc_wrapper import NpuIPCWrapper
 from pegaflow.pegaflow import PyLoadState
@@ -712,11 +713,10 @@ class WorkerConnector:
                 for group_index in recurrent_groups:
                     block_ids_by_group[group_index] = [None] * len(block_ids_by_group[group_index])
             elif self._cache_groups.group_count > 1:
-                # T6 (DeepSeek-V4): non-hash groups save and seal under their
-                # own storage group ids but are not restored yet — group > 0
-                # membership queries are deferred. Null their load
-                # destinations so the load RPC validates and transfers only
-                # the hash group (group 0) prefix. Lengths are aligned to the
+                # Non-recurrent heterogeneous groups save and seal under their
+                # own storage ids but do not have checkpoint semantics, so
+                # they remain save-only. Null their destinations so this load
+                # transfers only the hash-group prefix. Lengths are aligned to the
                 # hash group's destination count: the engine validates one
                 # target per leased block per group, and heterogeneous block
                 # sizes give the other groups different destination counts.
@@ -1104,10 +1104,7 @@ class WorkerConnector:
         if saves_by_layer:
             # Ensure all GPU kernels have completed before reading KV cache
             # Otherwise we may copy uninitialized memory (attention kernel is async)
-            if self._torch_device is not None and self._torch_device.type == "npu":
-                torch.npu.synchronize(self._torch_device)
-            else:
-                torch.cuda.synchronize(self._torch_device)
+            _device_synchronize(self._torch_device)
 
             if self._diag_kv_checksum:
                 selected_layers = list(saves_by_layer)
@@ -1474,3 +1471,15 @@ def _ensure_npu_device_set(device):
     """
     if device is not None and device.type == "npu":
         torch.npu.set_device(device)
+
+
+def _device_synchronize(device):  # type: ignore[type-arg]
+    """Synchronize the current stream on the given accelerator."""
+    if device is None:
+        return
+    if device.type == "cuda":
+        torch.cuda.synchronize(device)
+    elif device.type == "npu":
+        torch.npu.synchronize(device)
+    else:
+        raise RuntimeError(f"Unsupported device type '{device.type}'")

@@ -264,7 +264,7 @@ def test_sync_save_on_finish_waits_before_reporting_completion():
     save_done.wait.return_value = True
     with worker._save_completion_lock:
         worker._save_completion_events["req-visible"] = save_done
-        worker._req_pending_saves.add("req-visible")
+        worker._req_pending_save_tasks["req-visible"] = 1
         worker._completed_saves.add("req-visible")
 
     finished_sending, _ = worker.get_finished({"req-visible"})
@@ -292,7 +292,7 @@ def test_sync_save_on_finish_fails_closed_on_rpc_error():
     worker, _client, _ = _make_worker()
     worker._sync_save_on_finish = True
     with worker._save_completion_lock:
-        worker._req_pending_saves.add("req-failed")
+        worker._req_pending_save_tasks["req-failed"] = 1
         worker._save_completion_events["req-failed"] = MagicMock()
 
     worker._complete_save_requests(["req-failed"], failure="publication barrier failed")

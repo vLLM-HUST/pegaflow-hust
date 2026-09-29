@@ -959,7 +959,7 @@ class SchedulerConnector:
 
     def has_pending_push_work(self) -> bool:
         """Keep vLLM stepping until finish-time save work is acknowledged."""
-        return bool(self._final_save_intents or self._pending_saves)
+        return bool(self._deferred_save_intents or self._pending_saves)
 
     def request_finished(
         self,

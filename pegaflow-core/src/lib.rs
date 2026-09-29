@@ -49,7 +49,7 @@ pub use issue23_causal::{
 use layout::KVCacheLayout;
 pub use lease::QueryLeaseId;
 pub use pegaflow_common::NumaNode;
-use pegaflow_common::NumaTopology;
+use pegaflow_common::{NumaTopology, group_hash};
 pub use pinned_pool::PinnedAllocation;
 pub use seal_offload::SlotMeta;
 pub use storage::{DEFAULT_RDMA_QPS_PER_PEER, MemoryCacheCleanupStats, StorageConfig};
@@ -569,6 +569,28 @@ impl PegaEngine {
         }
 
         Ok(status)
+    }
+
+    /// Return one resident-cache membership result per hash for a storage group.
+    ///
+    /// Recurrent cache groups are sparse by design, so unlike a prefix lookup
+    /// this must continue after a miss. The caller chooses a common checkpoint
+    /// and turns only the selected blocks into a query lease.
+    pub fn query_group_membership(
+        &self,
+        instance_id: &str,
+        group_id: u32,
+        block_hashes: &[Vec<u8>],
+    ) -> Result<Vec<Option<Arc<SealedBlock>>>, EngineError> {
+        let instance = self.get_instance(instance_id)?;
+        let topology = instance.sealed_topology()?;
+        topology.group_total_slots(group_id)?;
+
+        let encoded: Vec<Vec<u8>> = block_hashes
+            .iter()
+            .map(|hash| group_hash(hash, group_id))
+            .collect();
+        Ok(self.storage.get_membership(instance.namespace(), &encoded))
     }
 
     /// Create an opaque lease that owns query-ready blocks.

@@ -382,12 +382,12 @@ class TestDecodeHashRefresh:
         sc = self._make_connector()
         assert not sc.has_pending_push_work()
 
-        sc._final_save_intents["r1"] = SaveIntent(
+        sc._deferred_save_intents["r1"] = SaveIntent(
             block_ids=(1,), block_hashes=(_hash(1),)
         )
         assert sc.has_pending_push_work()
 
-        sc._final_save_intents.clear()
+        sc._deferred_save_intents.clear()
         sc._pending_saves.add("r1")
         assert sc.has_pending_push_work()
 

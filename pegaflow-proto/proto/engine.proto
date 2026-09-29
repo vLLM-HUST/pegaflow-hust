@@ -116,12 +116,12 @@ message QueryRequest {
   string req_id = 3;
   // Keep the query in Loading until the full remaining prefix is fetchable
   // from a remote node via MetaServer + RDMA. Does not observe saves landing
-  // in the local engine; no effect when RDMA is not configured. (T6: passed
-  // through on group 0; membership set-fetch semantics not yet wired.)
+  // in the local engine; no effect when RDMA is not configured. Membership
+  // queries are resident-cache lookups and currently ignore this flag.
   bool wait_for_full_prefix = 4;
   // Hybrid-cache storage group to query. 0 (default) is the attention group
-  // and uses prefix semantics. Groups > 0 use membership semantics
-  // (official #433); T6 stage 1 rejects group_id > 0.
+  // and uses prefix semantics. Groups > 0 use position-aligned resident-cache
+  // membership semantics; remote all-or-nothing set fetch is not implemented.
   uint32 group_id = 5;
 }
 
