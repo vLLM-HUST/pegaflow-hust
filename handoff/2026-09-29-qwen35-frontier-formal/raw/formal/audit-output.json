@@ -1,0 +1,180 @@
+{
+  "geomean_gain_percent": 6.342297886583825,
+  "geomean_ratio": 1.0634229788658383,
+  "native_baseline": "swe-unified-native-20260927",
+  "points": [
+    {
+      "candidate_output_tokens_per_second": 65.52333333333333,
+      "concurrency": 1,
+      "drain_seconds": 13.54524896107614,
+      "failed_requests": 0,
+      "gain_percent": -28.425434816909622,
+      "native_output_tokens_per_second": 91.54555555555555,
+      "output_tokens_in_window": 58971,
+      "p90_decode_tokens_per_second_per_user": 113.9060417414391,
+      "pegaflow_mechanism_delta": {
+        "pegaflow_cache_block_hits_total": 858.0,
+        "pegaflow_cache_block_insertions_total": 276.0,
+        "pegaflow_cache_block_misses_total": 84.0,
+        "pegaflow_load_bytes_total": 9142075392.0,
+        "pegaflow_save_bytes_total": 4709646336.0
+      },
+      "ratio": 0.7157456518309038,
+      "request_token_consistency": true,
+      "requests_completed_in_window": 117,
+      "requests_drained": 1,
+      "requests_sha256": "ae4b8c6bb0a2c1034bfe0adc90e83bf0b6eee6930efbf74f11e96bf0bbf8a871",
+      "requests_started": 118,
+      "summary_sha256": "19531ad3d091a9c660b8f07b51fed9238b80f782fb91cb42e1a07fe493f527c2",
+      "vllm_mechanism_delta": {
+        "external_prefix_cache_hits_total": 1757184.0,
+        "external_prefix_cache_queries_total": 2048776.0,
+        "pega_load_failure_total": 0.0,
+        "pega_load_success_total": 204.0,
+        "pega_save_failure_total": 0.0,
+        "pega_save_success_total": 204.0,
+        "spec_decode_num_accepted_tokens_total": 40220.0,
+        "spec_decode_num_draft_tokens_total": 40546.0
+      }
+    },
+    {
+      "candidate_output_tokens_per_second": 167.14333333333335,
+      "concurrency": 2,
+      "drain_seconds": 71.96483208052814,
+      "failed_requests": 0,
+      "gain_percent": 9.443502680994431,
+      "native_output_tokens_per_second": 152.7211111111111,
+      "output_tokens_in_window": 150429,
+      "p90_decode_tokens_per_second_per_user": 109.48681228877716,
+      "pegaflow_mechanism_delta": {
+        "pegaflow_cache_block_hits_total": 3149.0,
+        "pegaflow_cache_block_insertions_total": 648.0,
+        "pegaflow_cache_block_misses_total": 149.0,
+        "pegaflow_load_bytes_total": 23919886336.0,
+        "pegaflow_save_bytes_total": 11012243456.0
+      },
+      "ratio": 1.0944350268099443,
+      "request_token_consistency": true,
+      "requests_completed_in_window": 250,
+      "requests_drained": 2,
+      "requests_sha256": "2fa3d62add327bd8b5020596e29cdc09a40ff643617289808698622d8b2199e8",
+      "requests_started": 252,
+      "summary_sha256": "5a388fa1e7f32fa57c310df5d60e497372d09ebac2cd35b6cc0675127b4d1f21",
+      "vllm_mechanism_delta": {
+        "external_prefix_cache_hits_total": 6449152.0,
+        "external_prefix_cache_queries_total": 7020606.0,
+        "pega_load_failure_total": 0.0,
+        "pega_load_success_total": 454.0,
+        "pega_save_failure_total": 0.0,
+        "pega_save_success_total": 412.0,
+        "spec_decode_num_accepted_tokens_total": 106222.0,
+        "spec_decode_num_draft_tokens_total": 106602.0
+      }
+    },
+    {
+      "candidate_output_tokens_per_second": 237.96777777777777,
+      "concurrency": 4,
+      "drain_seconds": 9.317573784850538,
+      "failed_requests": 0,
+      "gain_percent": 9.422770375214572,
+      "native_output_tokens_per_second": 217.47555555555556,
+      "output_tokens_in_window": 214171,
+      "p90_decode_tokens_per_second_per_user": 87.30566240630844,
+      "pegaflow_mechanism_delta": {
+        "pegaflow_cache_block_hits_total": 4754.0,
+        "pegaflow_cache_block_insertions_total": 877.0,
+        "pegaflow_cache_block_misses_total": 199.0,
+        "pegaflow_load_bytes_total": 34366160896.0,
+        "pegaflow_save_bytes_total": 14894170112.0
+      },
+      "ratio": 1.0942277037521457,
+      "request_token_consistency": true,
+      "requests_completed_in_window": 350,
+      "requests_drained": 4,
+      "requests_sha256": "1e718a86f7e7537f78de70f98e7623ea92f1efcb8913c43a186e5029e8e5715b",
+      "requests_started": 354,
+      "summary_sha256": "7fdc3dd053bbf5bf050affab2cb1b822b1fc74a7d17045769af812ae19c07fea",
+      "vllm_mechanism_delta": {
+        "external_prefix_cache_hits_total": 9736192.0,
+        "external_prefix_cache_queries_total": 10507529.0,
+        "pega_load_failure_total": 0.0,
+        "pega_load_success_total": 628.0,
+        "pega_save_failure_total": 0.0,
+        "pega_save_success_total": 544.0,
+        "spec_decode_num_accepted_tokens_total": 143522.0,
+        "spec_decode_num_draft_tokens_total": 144856.0
+      }
+    },
+    {
+      "candidate_output_tokens_per_second": 361.4411111111111,
+      "concurrency": 8,
+      "drain_seconds": 20.224161724559963,
+      "failed_requests": 0,
+      "gain_percent": 24.161055893983118,
+      "native_output_tokens_per_second": 291.1066666666667,
+      "output_tokens_in_window": 325297,
+      "p90_decode_tokens_per_second_per_user": 73.03849278224763,
+      "pegaflow_mechanism_delta": {
+        "pegaflow_cache_block_hits_total": 6723.0,
+        "pegaflow_cache_block_insertions_total": 1312.0,
+        "pegaflow_cache_block_misses_total": 287.0,
+        "pegaflow_load_bytes_total": 50241994752.0,
+        "pegaflow_save_bytes_total": 22139846656.0
+      },
+      "ratio": 1.2416105589398312,
+      "request_token_consistency": true,
+      "requests_completed_in_window": 519,
+      "requests_drained": 8,
+      "requests_sha256": "cb7fa552d237ec744f3375fac5341610f177252b1eb7a328cf43a494e4b03363",
+      "requests_started": 527,
+      "summary_sha256": "50af413bf2a123bb059a01474048531da6986857667d041181d291098e61bbf6",
+      "vllm_mechanism_delta": {
+        "external_prefix_cache_hits_total": 13768704.0,
+        "external_prefix_cache_queries_total": 14896561.0,
+        "pega_load_failure_total": 0.0,
+        "pega_load_success_total": 922.0,
+        "pega_save_failure_total": 0.0,
+        "pega_save_success_total": 784.0,
+        "spec_decode_num_accepted_tokens_total": 218838.0,
+        "spec_decode_num_draft_tokens_total": 221212.0
+      }
+    },
+    {
+      "candidate_output_tokens_per_second": 459.71555555555557,
+      "concurrency": 16,
+      "drain_seconds": 41.10535300709307,
+      "failed_requests": 0,
+      "gain_percent": 27.787506756235047,
+      "native_output_tokens_per_second": 359.75,
+      "output_tokens_in_window": 413744,
+      "p90_decode_tokens_per_second_per_user": 46.37622765934938,
+      "pegaflow_mechanism_delta": {
+        "pegaflow_cache_block_hits_total": 6644.0,
+        "pegaflow_cache_block_insertions_total": 1831.0,
+        "pegaflow_cache_block_misses_total": 433.0,
+        "pegaflow_load_bytes_total": 59623899136.0,
+        "pegaflow_save_bytes_total": 30804475904.0
+      },
+      "ratio": 1.2778750675623505,
+      "request_token_consistency": true,
+      "requests_completed_in_window": 690,
+      "requests_drained": 16,
+      "requests_sha256": "e243f8cd5e8fef221815bd7515117e599f4f9e5c86b3cf0d5dd99dc29cd00faf",
+      "requests_started": 706,
+      "summary_sha256": "976796009de569a50c45f455e309e310b14b44d51401b4a9727a03003c4c1961",
+      "vllm_mechanism_delta": {
+        "external_prefix_cache_hits_total": 13606912.0,
+        "external_prefix_cache_queries_total": 15208430.0,
+        "pega_load_failure_total": 0.0,
+        "pega_load_success_total": 1178.0,
+        "pega_save_failure_total": 0.0,
+        "pega_save_success_total": 1106.0,
+        "spec_decode_num_accepted_tokens_total": 285463.0,
+        "spec_decode_num_draft_tokens_total": 290082.0
+      }
+    }
+  ],
+  "prepared_workload_sha256": "8044561ffa1bb430bea8f778ef814d96649321e1a92654b95f64263b996d5e85",
+  "protocol": "swe-prefix-reuse/v1",
+  "tokenizer_fingerprint": "3f9ca78537850303ee04bfa6640c020be89723c62f37121c0f27a4c0babc53e0"
+}

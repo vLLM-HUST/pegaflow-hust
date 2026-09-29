@@ -1,0 +1,36 @@
+# HELP pegaflow_hll_cardinality Estimated distinct blocks seen in the sliding window
+# TYPE pegaflow_hll_cardinality gauge
+pegaflow_hll_cardinality{window="15m",otel_scope_name="pegaflow-core"} 0
+pegaflow_hll_cardinality{window="1d",otel_scope_name="pegaflow-core"} 0
+pegaflow_hll_cardinality{window="1h",otel_scope_name="pegaflow-core"} 0
+# HELP pegaflow_hll_total_requests Total block requests in the sliding window
+# TYPE pegaflow_hll_total_requests gauge
+pegaflow_hll_total_requests{window="15m",otel_scope_name="pegaflow-core"} 0
+pegaflow_hll_total_requests{window="1d",otel_scope_name="pegaflow-core"} 0
+pegaflow_hll_total_requests{window="1h",otel_scope_name="pegaflow-core"} 0
+# HELP pegaflow_pool_capacity_bytes Total pinned pool capacity in bytes
+# TYPE pegaflow_pool_capacity_bytes gauge
+pegaflow_pool_capacity_bytes{otel_scope_name="pegaflow-core"} 32212254720
+# HELP pegaflow_rpc_duration_seconds RPC latency in seconds
+# TYPE pegaflow_rpc_duration_seconds histogram
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.0005"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.001"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.002"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.005"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.01"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.02"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.05"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.1"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.2"} 1
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.5"} 2
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="1"} 2
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="2"} 2
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="+Inf"} 2
+pegaflow_rpc_duration_seconds_sum{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc"} 0.437552002
+pegaflow_rpc_duration_seconds_count{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc"} 2
+# HELP pegaflow_rpc_requests_total Total RPC requests handled by pegaflow server
+# TYPE pegaflow_rpc_requests_total counter
+pegaflow_rpc_requests_total{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc"} 2
+# HELP target_info Target metadata
+# TYPE target_info gauge
+target_info{service_name="unknown_service",telemetry_sdk_language="rust",telemetry_sdk_name="opentelemetry",telemetry_sdk_version="0.31.0"} 1

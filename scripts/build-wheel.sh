@@ -48,6 +48,6 @@ maturin build $RELEASE_FLAG "${EXTRA_ARGS[@]}"
 
 echo ""
 echo "==> Done! Wheel built at:"
-ls -lh "$PROJECT_ROOT/target/wheels/"pegaflow-*.whl | tail -1
+ls -lh "$PROJECT_ROOT/target/wheels/"pegaflow_*.whl | tail -1
 echo ""
-echo "To install: pip install $(ls -t $PROJECT_ROOT/target/wheels/pegaflow-*.whl | head -1)"
+echo "To install: pip install $(ls -t $PROJECT_ROOT/target/wheels/pegaflow_*.whl | head -1)"

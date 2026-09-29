@@ -113,6 +113,12 @@ impl ReadCache {
         found
     }
 
+    /// Return a result for every key instead of stopping at the first gap.
+    pub(super) fn get_blocks_aligned(&self, keys: &[BlockKey]) -> Vec<Option<Arc<SealedBlock>>> {
+        let mut inner = self.inner.lock();
+        keys.iter().map(|key| inner.cache.get(key)).collect()
+    }
+
     pub(super) fn remove_lru_batch(&self, batch_size: usize) -> Vec<(BlockKey, Arc<SealedBlock>)> {
         let mut inner = self.inner.lock();
         (0..batch_size)
@@ -276,6 +282,24 @@ mod tests {
         // get_prefix_blocks: stops at key 1 (first miss), returns only key 0
         let (prefix_hit, _) = cache.get_prefix_blocks(&keys);
         assert_eq!(prefix_hit, 1);
+    }
+
+    #[test]
+    fn get_blocks_aligned_preserves_sparse_membership_positions() {
+        let cache = make_cache();
+        let keys: Vec<BlockKey> = (0u8..5)
+            .map(|i| BlockKey::new("recurrent".into(), vec![i]))
+            .collect();
+        for key in [keys[1].clone(), keys[4].clone()] {
+            cache.batch_insert(vec![(key, make_block())]);
+        }
+
+        let result = cache.get_blocks_aligned(&keys);
+        assert_eq!(result.len(), keys.len());
+        assert_eq!(
+            result.iter().map(Option::is_some).collect::<Vec<_>>(),
+            vec![false, true, false, false, true]
+        );
     }
 
     #[test]

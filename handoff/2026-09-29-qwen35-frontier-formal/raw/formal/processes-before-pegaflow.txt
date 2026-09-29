@@ -1,0 +1,12 @@
+    PID    PPID                  STARTED COMMAND
+      1       0 Mon Sep 28 15:37:02 2026 ./coder agent
+     70       1 Mon Sep 28 15:37:02 2026 ./coder agent --no-reap
+    137       1 Mon Sep 28 15:37:02 2026 sshd: /usr/sbin/sshd -e -o PermitRootLogin=prohibit-password -o PubkeyAuthentication=yes -o AuthorizedKeysFile=/etc/ssh/authorized_keys.generated %h/.ssh/authorized_keys -o PasswordAuthentication=no -o KbdInteractiveAuthentication=no -o PermitUserEnvironment=yes [listener] 0 of 10-100 startups
+    194     137 Mon Sep 28 15:37:04 2026 sshd: root@notty
+    205     194 Mon Sep 28 15:37:04 2026 sleep infinity
+    990       1 Mon Sep 28 15:37:23 2026 /root/.local/bin/codex.direct -c features.code_mode_host=true app-server --listen unix://
+   1081     137 Mon Sep 28 15:37:24 2026 sshd: root@notty
+   1101    1081 Mon Sep 28 15:37:24 2026 /root/.local/bin/codex.direct app-server proxy
+   2554     990 Mon Sep 28 15:39:52 2026 /root/.codex/packages/standalone/releases/0.157.1-aarch64-unknown-linux-musl/bin/codex-code-mode-host
+ 494900     990 Tue Sep 29 01:13:07 2026 /bin/bash -c set -euo pipefail base=/root/pegaflow-qwen35-qualification formal="$base/formal" mkdir -p "$formal" date -u +%FT%TZ > "$formal/formal-start-utc.txt" hostname > "$formal/hostname.txt" uname -a > "$formal/uname.txt" df -h > "$formal/disk-before.txt" free -h > "$formal/memory-before.txt" npu-smi info > "$formal/npu-before-pegaflow.txt" ps -eo pid,ppid,lstart,args > "$formal/processes-before-pegaflow.txt" netstat -ltnp 2>/dev/null > "$formal/ports-before-pegaflow.txt" || true exec pegaflow-server --addr 127.0.0.1:50055 --http-addr 127.0.0.1:9091 --devices 2,3 --pool-size 30gb --enable-prometheus --log-level info 2>&1 | tee "$formal/pegaflow-server.log"
+ 494926  494900 Tue Sep 29 01:13:07 2026 ps -eo pid,ppid,lstart,args

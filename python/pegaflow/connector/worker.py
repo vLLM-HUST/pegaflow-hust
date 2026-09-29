@@ -16,9 +16,11 @@ from typing import TYPE_CHECKING, Any, Literal
 import torch
 
 from pegaflow.connector.common import (
+    CacheGroupLayout,
     ConnectorContext,
     PegaConnectorMetadata,
     PegaKVConnectorStats,
+    SaveIntent,
     logger,
     parse_env_int,
 )
@@ -70,6 +72,7 @@ def _infer_kv_cache_registration(
     logical_block_size: int,
     *,
     is_mla: bool = False,
+    is_recurrent_state: bool = False,
 ) -> _KVCacheRegistrationInfo:
     """Infer the PegaFlow registration from a vLLM KV cache tensor.
 
@@ -87,8 +90,8 @@ def _infer_kv_cache_registration(
     if logical_block_size <= 0:
         raise ValueError(f"logical block size must be > 0, got {logical_block_size}")
 
-    if not is_mla:
-        if len(shape) >= 2 and shape[0] == 2:
+    if is_recurrent_state or not is_mla:
+        if not is_recurrent_state and len(shape) >= 2 and shape[0] == 2:
             layout = "KV-first"
             num_blocks = shape[1]
             bytes_per_block = stride[1] * element_size
@@ -164,6 +167,77 @@ def _infer_kv_cache_registration(
     )
 
 
+def _registration_tensor(kv_cache) -> torch.Tensor:
+    if not isinstance(kv_cache, (tuple, list)):
+        return kv_cache
+
+    states = tuple(kv_cache)
+    if not states or not all(isinstance(state, torch.Tensor) for state in states):
+        raise TypeError("KV cache must be a tensor or a non-empty sequence of state tensors")
+
+    first = states[0]
+    # DeepSeek-V4 hybrid layers present as (K, V) tuples whose views may carry
+    # a non-zero storage_offset (shared storage). These are NOT Mamba
+    # recurrent states; the storage-offset/shared-storage invariants below are
+    # Mamba-specific. NpuIPCWrapper preserves storage_offset, so we relax the
+    # checks and pass the first element through (T6).
+    num_blocks = first.shape[0]
+    page_bytes = first.stride(0) * first.element_size()
+    for state in states:
+        if state.shape[0] != num_blocks:
+            raise RuntimeError("recurrent-state tensors must have the same block count")
+        if state.stride(0) * state.element_size() != page_bytes:
+            raise RuntimeError("recurrent-state tensors must have one common page stride")
+
+    return first
+
+
+def _expand_hybrid_registration_caches(
+    kv_caches: dict[str, Any],
+    layer_to_group: dict[str, int],
+    recurrent_layer_names: frozenset[str],
+) -> tuple[dict[str, torch.Tensor], dict[str, int], frozenset[str]]:
+    """Expose each HMA cache segment as an independently strided layer.
+
+    Ascend stores recurrent states state-major: every state tensor spans all
+    blocks, and different state shapes therefore have different page strides.
+    Attention K/V tuples can likewise use separate allocations. PegaFlow's
+    per-layer registration already supports different block sizes, so retain
+    the scheduler group while registering every physical segment separately.
+    """
+    expanded: dict[str, torch.Tensor] = {}
+    expanded_groups: dict[str, int] = {}
+    expanded_recurrent: set[str] = set()
+
+    for layer_name, cache in kv_caches.items():
+        group_index = layer_to_group.get(layer_name)
+        if group_index is None:
+            raise RuntimeError(f"HMA registration contains an unmapped layer: {layer_name}")
+
+        if not isinstance(cache, (tuple, list)):
+            if not isinstance(cache, torch.Tensor):
+                raise TypeError(f"KV cache for {layer_name} must be a tensor")
+            expanded[layer_name] = cache
+            expanded_groups[layer_name] = group_index
+            if layer_name in recurrent_layer_names:
+                expanded_recurrent.add(layer_name)
+            continue
+
+        if not cache or not all(isinstance(segment, torch.Tensor) for segment in cache):
+            raise TypeError(
+                f"KV cache for {layer_name} must be a non-empty sequence of tensors"
+            )
+        kind = "state" if layer_name in recurrent_layer_names else "segment"
+        for index, segment in enumerate(cache):
+            registration_name = f"{layer_name}::{kind}{index}"
+            expanded[registration_name] = segment
+            expanded_groups[registration_name] = group_index
+            if layer_name in recurrent_layer_names:
+                expanded_recurrent.add(registration_name)
+
+    return expanded, expanded_groups, frozenset(expanded_recurrent)
+
+
 class WorkerConnector:
     """Holds worker-only state and behaviors."""
 
@@ -182,6 +256,8 @@ class WorkerConnector:
     ):
         self._ctx = context
         self._kv_cache_config = kv_cache_config
+        self._cache_groups = CacheGroupLayout.from_config(kv_cache_config)
+        self._layer_to_group = self._cache_groups.layer_to_group()
         additional_config = getattr(vllm_config, "additional_config", {}) or {}
         self._use_mla_layer_split_registration = context.is_mla and bool(
             additional_config.get("mla_layer_split_kv_cache", False)
@@ -193,7 +269,7 @@ class WorkerConnector:
         )
         self._save_thread.start()
 
-        self._req_pending_saves: set[str] = set()
+        self._req_pending_save_tasks: dict[str, int] = {}
         self._completed_saves: set[str] = set()
         self._failed_saves: dict[str, str] = {}
         self._save_completion_lock = threading.Lock()
@@ -224,6 +300,8 @@ class WorkerConnector:
         self._failed_load_reqs: set[str] = set()
 
         self._registered_layers: list[str] = []
+        self._save_trigger_layer: str | None = None
+        self._subblock_skip_warned: set[str] = set()  # 每层只警告一次的子块跳保存
         # Page-first storage: all layers of a block in one host page, one slot
         # per tp_rank. Saves distribute by block stripe instead of by layer.
         self._page_first: bool = False
@@ -254,14 +332,14 @@ class WorkerConnector:
         if not self._registered_layers:
             return
 
-        if self._ctx.tp_rank == 0:
+        if self._ctx.local_physical_tp_rank == 0:
             ok, message = self._ctx.engine_client.unregister_context(self._ctx.instance_id)
             if not ok:
                 logger.warning("[PegaKVConnector] Unregister context failed: %s", message)
 
         self._registered_layers.clear()
 
-    def register_kv_caches(self, kv_caches: dict[str, torch.Tensor]):
+    def register_kv_caches(self, kv_caches: dict[str, Any]):
         """Register exactly the KV caches vLLM built on this device.
 
         The engine derives the instance-wide layer-id space once every worker
@@ -269,7 +347,7 @@ class WorkerConnector:
         and hybrid attention layouts need no connector-side layer accounting.
         """
         assert self._ctx.device_id is not None, (
-            "device id is unknown; cannot register KV caches"
+            "CUDA device id is unknown; cannot register KV caches"
         )
 
         if self._use_mla_layer_split_registration:
@@ -300,6 +378,9 @@ class WorkerConnector:
         if not kv_caches:
             raise RuntimeError("No KV cache layers were selected for registration")
 
+        self._save_trigger_layer = next(iter(kv_caches))
+        recurrent_registration_names = self._cache_groups.recurrent_layer_names
+
         # Ascend prefill-disaggregation returns KV caches as (k, v) tuples.
         # Following vllm-ascend's _flatten_kv_value pattern: each tensor has
         # its own backing storage and may be independently allocated (K and V
@@ -307,31 +388,50 @@ class WorkerConnector:
         # Deduplicate exact tensor views, not whole storages. vLLM commonly
         # exposes every layer as a different-offset view into one large KV
         # allocation; collapsing those views would register only layer zero.
-        flat_kv_caches: dict[str, torch.Tensor] = {}
-        seen_ptrs: set[int] = set()
-        for layer_name, kv_cache in kv_caches.items():
-            if isinstance(kv_cache, (tuple, list)):
-                for idx, t in enumerate(kv_cache):
-                    ptr = _safe_data_ptr(t)
-                    if ptr in seen_ptrs or ptr == 0:
-                        continue
-                    seen_ptrs.add(ptr)
-                    suffix = "k" if idx == 0 else "v"
-                    flat_kv_caches[f"{layer_name}_{suffix}"] = t
-            else:
-                # Single tensor — may still alias another layer's storage
-                ptr = _safe_data_ptr(kv_cache)
-                if ptr not in seen_ptrs and ptr != 0:
-                    seen_ptrs.add(ptr)
-                    flat_kv_caches[layer_name] = kv_cache
-        kv_caches = flat_kv_caches
+        if self._cache_groups.group_count == 1:
+            flat_kv_caches: dict[str, torch.Tensor] = {}
+            seen_ptrs: set[int] = set()
+            for layer_name, kv_cache in kv_caches.items():
+                if isinstance(kv_cache, (tuple, list)):
+                    for idx, tensor in enumerate(kv_cache):
+                        ptr = _safe_data_ptr(tensor)
+                        if ptr in seen_ptrs or ptr == 0:
+                            continue
+                        seen_ptrs.add(ptr)
+                        suffix = "k" if idx == 0 else "v"
+                        flat_kv_caches[f"{layer_name}_{suffix}"] = tensor
+                else:
+                    ptr = _safe_data_ptr(kv_cache)
+                    if ptr not in seen_ptrs and ptr != 0:
+                        seen_ptrs.add(ptr)
+                        flat_kv_caches[layer_name] = kv_cache
+            kv_caches = flat_kv_caches
+        else:
+            kv_caches, expanded_groups, recurrent_registration_names = (
+                _expand_hybrid_registration_caches(
+                    kv_caches,
+                    self._layer_to_group,
+                    self._cache_groups.recurrent_layer_names,
+                )
+            )
+            self._layer_to_group.update(expanded_groups)
 
         if self._diag_kv_checksum:
-            self._diag_kv_caches = dict(kv_caches)
+            self._diag_kv_caches = {
+                name: _registration_tensor(cache) for name, cache in kv_caches.items()
+            }
 
         self._registered_layers = list(kv_caches.keys())
         self._page_first = self._use_page_first()
-        self._torch_device = next(iter(kv_caches.values())).device
+        first_tensor = _registration_tensor(next(iter(kv_caches.values())))
+        self._torch_device = first_tensor.device
+
+        if self._cache_groups.group_count > 1:
+            unmapped_layers = [name for name in kv_caches if name not in self._layer_to_group]
+            if unmapped_layers:
+                raise RuntimeError(
+                    f"HMA registration contains layers outside cache groups: {unmapped_layers[:8]}"
+                )
 
         layout = "unknown"
 
@@ -345,16 +445,30 @@ class WorkerConnector:
         split_blocks_per_logical = 1
         split_logical_blocks = 0
 
-        self._ipc_wrapper_factory = _resolve_ipc_wrapper_factory(self._torch_device)
-
         for layer_name, kv_cache in kv_caches.items():
-            wrapper = self._ipc_wrapper_factory(kv_cache)
+            is_recurrent_state = (
+                layer_name in recurrent_registration_names
+            )
+            registration_tensor = _registration_tensor(kv_cache)
+            # DeepSeek-V4 hybrid layers expose views with non-zero storage
+            # offsets (shared storage). NpuIPCWrapper preserves storage_offset,
+            # so this Mamba-era assertion is relaxed for the T6 path.
+            if registration_tensor.storage_offset() != 0:
+                logger.warning(
+                    "[PegaKVConnector] layer %s storage_offset=%d (DeepSeek-V4 "
+                    "shared storage) — preserved via wrapper.",
+                    layer_name, registration_tensor.storage_offset(),
+                )
+
+            _factory = _resolve_ipc_wrapper_factory(registration_tensor.device)
+            wrapper = _factory(registration_tensor)
             wrapper_bytes = pickle.dumps(wrapper)
 
             registration = _infer_kv_cache_registration(
-                kv_cache,
+                registration_tensor,
                 self._ctx.block_size,
                 is_mla=self._ctx.is_mla,
+                is_recurrent_state=is_recurrent_state,
             )
             layout = registration.layout
 
@@ -378,13 +492,18 @@ class WorkerConnector:
                     registration.num_blocks,
                 )
 
+        layer_group_ids = [
+            self._cache_groups.storage_group_ids[self._layer_to_group.get(name, 0)]
+            for name in layer_names
+        ]
+
         ok, message = self._ctx.engine_client.register_context_batch(
             self._ctx.instance_id,
             self._ctx.namespace,
             self._ctx.effective_tp_rank,
             self._ctx.pp_rank,
             self._ctx.effective_tp_size,
-            self._ctx.world_size,
+            self._ctx.effective_world_size,
             self._ctx.device_id,
             layer_names,
             ipc_wrappers,
@@ -394,12 +513,18 @@ class WorkerConnector:
             layer_segments,
             self._ctx.transfer_backend,
             self._page_first,
+            # layer_group_ids (PR #433) requires the rust server's
+            # RegisterContextRequest support — not yet in this fork's rust
+            # side. Degraded to single-group registration for now (T6).
+            layer_group_ids=layer_group_ids,
         )
 
         if not ok:
             if "PegaFlow version mismatch" in message:
                 raise RuntimeError(f"Register context failed: {message}")
             raise RuntimeError(f"Register context batch failed for layers {layer_names}: {message}")
+
+        self._registered_layers = layer_names
 
         if split_layer_count:
             logger.info(
@@ -474,13 +599,13 @@ class WorkerConnector:
             if self._sync_save_on_finish:
                 self._finished_requests.update(finished_req_ids)
             else:
-                self._finished_requests.update(finished_req_ids & self._req_pending_saves)
-            # 2. Identify requests whose saves have completed
+                self._finished_requests.update(
+                    finished_req_ids.intersection(self._req_pending_save_tasks)
+                )
             done_saves = self._completed_saves & self._finished_requests
             done_saves.update(self._completed_saves & finished_req_ids)
 
             if done_saves:
-                # 3. Clean up completed requests
                 self._completed_saves -= done_saves
                 self._finished_requests -= done_saves
                 finished_sending = done_saves
@@ -492,6 +617,7 @@ class WorkerConnector:
         timeout_triggered = False
         load_stats_to_record: list[tuple[float, int, bool]] = []
         completed_load_checksums: list[tuple[list[str], list[int]]] = []
+        hma_load_failure: str | None = None
         with self._load_completion_lock:
             completed_reqs: set[str] = set()
             completed_shms: list[str] = []
@@ -518,7 +644,11 @@ class WorkerConnector:
                             req_ids,
                             state,
                         )
-                        if meta is not None:
+                        if self._cache_groups.group_count > 1:
+                            hma_load_failure = (
+                                f"async load failed for requests {sorted(req_ids)}: state={state}"
+                            )
+                        elif meta is not None:
                             self._failed_load_block_ids.update(meta[2])
                     else:
                         logger.debug(
@@ -549,7 +679,12 @@ class WorkerConnector:
                         duration,
                         num_blocks,
                     )
-                    self._failed_load_block_ids.update(block_ids)
+                    if self._cache_groups.group_count > 1:
+                        hma_load_failure = (
+                            f"load timed out for requests {sorted(req_ids)} after {duration:.1f}s"
+                        )
+                    else:
+                        self._failed_load_block_ids.update(block_ids)
                     load_stats_to_record.append((duration, num_blocks, False))
                     completed_reqs.update(req_ids)
                     completed_shms.append(shm_name)
@@ -561,8 +696,6 @@ class WorkerConnector:
                 for req_id in shm_req_ids:
                     self._pending_loads.pop(req_id, None)
 
-            # Drain sync-failure reqs recorded by start_load_kv so they also
-            # reach vLLM as finished_recving in this pass.
             if self._failed_load_reqs:
                 completed_reqs.update(self._failed_load_reqs)
                 self._failed_load_reqs = set()
@@ -573,7 +706,6 @@ class WorkerConnector:
         if timeout_triggered:
             self._ctx.state_manager.mark_unavailable("load timeout")
 
-        # Record load stats outside the lock
         if load_stats_to_record:
             with self._stats_lock:
                 for duration, num_blocks, success in load_stats_to_record:
@@ -581,6 +713,13 @@ class WorkerConnector:
 
         for req_ids, block_ids in completed_load_checksums:
             self._log_diag_kv_checksums("load", req_ids, block_ids)
+
+        if hma_load_failure is not None:
+            self._ctx.state_manager.mark_unavailable(hma_load_failure)
+            raise RuntimeError(
+                f"PegaFlow HMA load failed; vLLM 0.26 cannot recover failed "
+                f"loads for multiple cache groups: {hma_load_failure}"
+            )
 
         if finished_sending:
             logger.debug(
@@ -602,6 +741,11 @@ class WorkerConnector:
     ) -> None:
         self._current_metadata = metadata
 
+        if metadata.ready_save_intents:
+            if not self._cache_groups.has_recurrent_state:
+                raise RuntimeError("ready save intents are only valid for HMA")
+            self._process_save_batch([self._make_save_task(metadata.ready_save_intents)])
+
         if not metadata.load_intents:
             return
 
@@ -609,27 +753,86 @@ class WorkerConnector:
         load_start = time.perf_counter()
 
         all_block_ids: list[int] = []
-        loads: list[tuple[bytes, list[int]]] = []
+        loads: list[tuple[bytes, list[list[int | None]]]] = []
         request_ids: list[str] = []
 
         for req_id, load_intent in metadata.load_intents.items():
-            block_ids = list(load_intent.block_ids)
-            all_block_ids.extend(block_ids)
-            loads.append((load_intent.lease, block_ids))
+            if len(load_intent.leases) != self._ctx.tp_shard_count:
+                raise RuntimeError(
+                    f"load intent has {len(load_intent.leases)} TP shard leases; "
+                    f"expected {self._ctx.tp_shard_count}"
+                )
+            block_ids_by_group = [list(group) for group in load_intent.block_ids_by_group]
+            hold = load_intent.recurrent_hold
+            recurrent_groups = sorted(self._cache_groups.recurrent_group_indices)
+            if hold is not None:
+                # The attention lease pins group-0 (dense prefix) blocks only;
+                # recurrent destinations travel with the membership leases.
+                for group_index in recurrent_groups:
+                    block_ids_by_group[group_index] = [None] * len(block_ids_by_group[group_index])
+            elif self._cache_groups.group_count > 1:
+                # Non-recurrent heterogeneous groups save and seal under their
+                # own storage ids but do not have checkpoint semantics, so
+                # they remain save-only. Null their destinations so this load
+                # transfers only the hash-group prefix. Lengths are aligned to the
+                # hash group's destination count: the engine validates one
+                # target per leased block per group, and heterogeneous block
+                # sizes give the other groups different destination counts.
+                hash_count = len(block_ids_by_group[self._cache_groups.hash_group_index])
+                for group_index in range(self._cache_groups.group_count):
+                    if group_index != self._cache_groups.hash_group_index:
+                        block_ids_by_group[group_index] = [None] * hash_count
+
+            for block_ids in block_ids_by_group:
+                all_block_ids.extend(block_id for block_id in block_ids if block_id is not None)
+            loads.append((load_intent.leases[self._ctx.tp_shard_index], block_ids_by_group))
+            if hold is not None:
+                shard = self._ctx.tp_shard_index
+                for slot, group_index in enumerate(recurrent_groups):
+                    positions = hold.hit_positions[slot][shard]
+                    if hold.checkpoint not in positions:
+                        raise RuntimeError(
+                            f"req {req_id}: recurrent group {group_index} shard {shard} "
+                            f"lease has no checkpoint at query position {hold.checkpoint}"
+                        )
+                    destination = next(
+                        (
+                            block_id
+                            for block_id in reversed(load_intent.block_ids_by_group[group_index])
+                            if block_id is not None
+                        ),
+                        None,
+                    )
+                    if destination is None:
+                        raise RuntimeError(
+                            f"req {req_id}: no recurrent destination block in group "
+                            f"{group_index} for checkpoint {hold.checkpoint}"
+                        )
+                    # The membership lease pins `[hit_positions]` blocks; only
+                    # the chosen checkpoint has a physical destination.
+                    vectors: list[list[int | None]] = [
+                        [None] * len(positions) for _ in range(self._cache_groups.group_count)
+                    ]
+                    vectors[group_index][positions.index(hold.checkpoint)] = destination
+                    loads.append((hold.leases[slot][shard], vectors))
+                    all_block_ids.append(destination)
             request_ids.append(req_id)
 
         if not all_block_ids:
             return
 
         if self._cross_layer_mode:
-            target_layers = [self._cross_layer_key]
+            layer_groups = [[self._cross_layer_key]]
         else:
             assert self._registered_layers, (
                 "KV caches must be registered before submitting load intents"
             )
-            target_layers = list(self._registered_layers)
+            layer_groups = [[] for _ in range(self._cache_groups.group_count)]
+            for layer_name in self._registered_layers:
+                group_index = self._layer_to_group.get(layer_name, 0)
+                layer_groups[group_index].append(layer_name)
 
-        if not target_layers:
+        if not any(layer_groups):
             return
 
         load_state = PyLoadState()
@@ -641,7 +844,7 @@ class WorkerConnector:
                 self._ctx.effective_tp_rank,
                 self._ctx.device_id,
                 shm_name,
-                target_layers,
+                layer_groups,
                 loads,
             )
         except Exception as e:
@@ -653,8 +856,13 @@ class WorkerConnector:
                 len(all_block_ids),
             )
             self._release_load_leases(loads)
-            self._record_load_failure(request_ids, all_block_ids, load_start)
             self._ctx.state_manager.mark_unavailable(f"load rpc exception: {e}")
+            if self._cache_groups.group_count > 1:
+                raise RuntimeError(
+                    "PegaFlow HMA load failed; vLLM 0.26 cannot recover failed "
+                    "loads for multiple cache groups"
+                ) from e
+            self._record_load_failure(request_ids, all_block_ids, load_start)
             return
 
         if not ok:
@@ -666,11 +874,16 @@ class WorkerConnector:
                 len(all_block_ids),
             )
             self._release_load_leases(loads)
-            self._record_load_failure(request_ids, all_block_ids, load_start)
             self._ctx.state_manager.mark_unavailable(f"load rpc failed: {message}")
+            if self._cache_groups.group_count > 1:
+                raise RuntimeError(
+                    "PegaFlow HMA load failed; vLLM 0.26 cannot recover failed "
+                    f"loads for multiple cache groups: {message}"
+                )
+            self._record_load_failure(request_ids, all_block_ids, load_start)
             return
 
-        num_layers = len(target_layers)
+        num_layers = sum(len(group) for group in layer_groups)
         num_blocks = len(all_block_ids)
 
         schedule_end = time.perf_counter()
@@ -680,10 +893,6 @@ class WorkerConnector:
             for req_id in request_ids:
                 self._pending_loads[req_id] = load_state
             self._pending_load_reqs[shm_name] = set(request_ids)
-            # Keep load_start as the shared baseline so timeout and stats duration
-            # are comparable to the sync-failure path (which also uses load_start).
-            # all_block_ids is not mutated after this point; keep the reference
-            # instead of an extra defensive copy.
             self._pending_load_meta[shm_name] = (
                 load_start,
                 num_blocks,
@@ -703,7 +912,7 @@ class WorkerConnector:
     def wait_for_layer_load(self, layer_name: str) -> None:
         pass
 
-    def _release_load_leases(self, loads: list[tuple[bytes, list[int]]]) -> None:
+    def _release_load_leases(self, loads: list[tuple[bytes, list[list[int | None]]]]) -> None:
         seen: set[bytes] = set()
         for lease, _block_ids in loads:
             if not lease or lease in seen:
@@ -745,6 +954,7 @@ class WorkerConnector:
 
     def save_kv_layer(
         self,
+        metadata: PegaConnectorMetadata,
         layer_name: str,
         kv_layer: "torch.Tensor",
         attn_metadata: "AttentionMetadata",
@@ -756,7 +966,7 @@ class WorkerConnector:
         # provide a fallback path through the layer callback on first layer.
         if not self._registered_layers:
             return
-        first_layer = self._registered_layers[0]
+        first_layer = self._save_trigger_layer or self._registered_layers[0]
         if layer_name != first_layer:
             return
         if self._diag_kv_checksum:
@@ -780,24 +990,20 @@ class WorkerConnector:
     def wait_for_save(self) -> None:
         metadata = self._current_metadata
         self._current_metadata = None
-        if debug_save_enabled():
-            logger.info("[PegaKVConnector.DEBUG] wait_for_save called: metadata=%s", metadata)
         if metadata is None or not metadata.save_intents:
-            if debug_save_enabled():
-                logger.info(
-                    "[PegaKVConnector.DEBUG] wait_for_save skipped: metadata=%s, save_intents=%s",
-                    metadata is not None,
-                    metadata.save_intents if metadata else "N/A",
-                )
             return
 
-        request_ids = list(metadata.save_intents.keys())
-        if debug_save_enabled():
-            for req_id, intent in metadata.save_intents.items():
-                logger.info(
-                    "[PegaKVConnector.DEBUG] wait_for_save save_intent: req=%s block_ids=%s hashes=%d",
-                    req_id, intent.block_ids, len(intent.block_hashes),
-                )
+        task = self._make_save_task(metadata.save_intents)
+        if self._cache_groups.has_recurrent_state:
+            # Align-mode recurrent states can reuse their only live block on
+            # the next scheduler step. Finish D2H before returning so the
+            # saved boundary state cannot be overwritten underneath the copy.
+            self._process_save_batch([task])
+        else:
+            self._save_queue.put(task)
+
+    def _make_save_task(self, save_intents: dict[str, SaveIntent]) -> SaveTask:
+        request_ids = list(save_intents)
 
         if self._sync_save_on_finish:
             with self._save_completion_lock:
@@ -826,23 +1032,18 @@ class WorkerConnector:
 
         with self._save_completion_lock:
             for req_id in request_ids:
-                if req_id not in self._req_pending_saves:
-                    # A later save supersedes an earlier completed generation.
+                pending_tasks = self._req_pending_save_tasks.get(req_id, 0)
+                if pending_tasks == 0:
                     self._completed_saves.discard(req_id)
-                    self._req_pending_saves.add(req_id)
                     self._save_completion_events[req_id] = threading.Event()
+                self._req_pending_save_tasks[req_id] = pending_tasks + 1
 
-        self._save_queue.put(SaveTask(metadata=metadata, request_ids=request_ids))
+        return SaveTask(
+            metadata=PegaConnectorMetadata(save_intents=save_intents),
+            request_ids=request_ids,
+        )
 
     def _save_worker(self) -> None:
-        # Match vllm-ascend's NPU copy-backend pattern: set the device
-        # for this OS thread once before entering the loop, so every
-        # `_device_synchronize()` / gRPC save call targets the correct
-        # NPU device.  On CUDA the driver handles this transparently;
-        # on Ascend each thread must call aclrtSetDevice explicitly.
-        device = getattr(self, "_torch_device", None)
-        if device is not None:
-            _ensure_npu_device_set(device)
         logger.debug("[PegaKVConnector] Save worker thread started")
 
         while True:
@@ -871,8 +1072,6 @@ class WorkerConnector:
         logger.debug("[PegaKVConnector] Save worker thread stopped")
 
     def _process_save_batch(self, batch: list[SaveTask]) -> None:
-        # Ensure device is set for this thread (safe + idempotent).
-        _ensure_npu_device_set(self._torch_device)
         saves_by_layer: dict[str, tuple[list[int], list[bytes]]] = {}
         all_request_ids: list[str] = []
         save_failure: str | None = None
@@ -881,37 +1080,79 @@ class WorkerConnector:
             all_request_ids.extend(task.request_ids)
 
             for save_intent in task.metadata.save_intents.values():
-                if not save_intent.block_ids:
+                if not any(save_intent.block_ids_by_group):
                     continue
-
-                block_ids = save_intent.block_ids
-                block_hashes = save_intent.block_hashes
 
                 if self._cross_layer_mode:
                     target_layers = (self._cross_layer_key,)
                 elif self._page_first:
-                    # Page-first: a block's page holds a whole shard's layers, so
-                    # this rank writes all its registered layers (its shard).
                     assert self._registered_layers, (
                         "KV caches must be registered before submitting save intents"
                     )
                     target_layers = tuple(self._registered_layers)
-                    if not self._use_mla_layer_split_registration:
-                        # Full-replica (one shard): every rank holds all layers,
-                        # so spread the whole-page writes across ranks by block
-                        # stripe. Layer-split ranks are each the sole writer of
-                        # their shard and keep the full block set (no striping).
-                        block_ids, block_hashes = self._block_shard(save_intent)
                 else:
                     assert self._registered_layers, (
                         "KV caches must be registered before submitting save intents"
                     )
                     target_layers = tuple(self._registered_layers)
 
-                if not block_ids:
-                    continue
-
                 for layer_name in target_layers:
+                    group_index = self._layer_to_group.get(layer_name, 0)
+                    try:
+                        block_ids = save_intent.block_ids_by_group[group_index]
+                    except IndexError as exc:
+                        raise RuntimeError(
+                            f"save intent is missing cache group {group_index} for {layer_name}"
+                        ) from exc
+                    block_hashes = save_intent.block_hashes
+                    if len(block_ids) != len(block_hashes):
+                        if len(block_ids) < len(block_hashes) or (
+                            group_index != self._cache_groups.hash_group_index
+                        ):
+                            # T6 (DeepSeek-V4): vLLM 0.27.1 reports per-step
+                            # deltas for sparse layers (compressor indexer:
+                            # blocks=0 hashes=1) and sub-block cache groups
+                            # (block size < scheduler block: k physical blocks
+                            # per hash) that don't align 1:1 with hash
+                            # positions. Correct handling needs per-group
+                            # hash granularity (official future work) — skip
+                            # the layer's save this step instead of failing
+                            # the batch; the dense hash-group prefix saves
+                            # (block size == scheduler block) are unaffected.
+                            if layer_name not in self._subblock_skip_warned:
+                                self._subblock_skip_warned.add(layer_name)
+                                logger.warning(
+                                    "[PegaKVConnector] skipping save for %s: blocks=%d "
+                                    "hashes=%d (T6 sub-block granularity; further "
+                                    "skips for this layer are silent)",
+                                    layer_name,
+                                    len(block_ids),
+                                    len(block_hashes),
+                                )
+                            continue
+                        raise RuntimeError(
+                            f"save block/hash count mismatch for {layer_name}: "
+                            f"blocks={len(block_ids)} hashes={len(block_hashes)}"
+                        )
+                    # vLLM's null-block sentinel (0) only exists in hybrid
+                    # (HMA) cache layouts; single-group deployments use block 0
+                    # as a real block id, so filter only for multi-group.
+                    if self._cache_groups.group_count > 1:
+                        non_null = tuple(
+                            (block_id, block_hash)
+                            for block_id, block_hash in zip(block_ids, block_hashes, strict=True)
+                            if block_id != 0
+                        )
+                        block_ids = tuple(block_id for block_id, _ in non_null)
+                        block_hashes = tuple(block_hash for _, block_hash in non_null)
+                    if self._page_first and not self._use_mla_layer_split_registration:
+                        # Full-replica (one shard): every rank holds all layers,
+                        # so spread the whole-page writes across ranks by block
+                        # stripe. Layer-split ranks are each the sole writer of
+                        # their shard and keep the full block set (no striping).
+                        block_ids, block_hashes = self._block_shard(block_ids, block_hashes)
+                    if not block_ids:
+                        continue
                     if layer_name not in saves_by_layer:
                         saves_by_layer[layer_name] = ([], [])
 
@@ -963,18 +1204,6 @@ class WorkerConnector:
                         "[PegaKVConnector] Save batch failed: %s (continuing without save)",
                         message,
                     )
-                    # Ascend-specific: error 507899 means device tensors were not
-                    # allocated via aclrtMallocPhysical (camem_allocator).  Provide
-                    # a clear diagnostic so users can fix their configuration.
-                    if "507899" in message:
-                        logger.error(
-                            "[PegaKVConnector] D2H memcpy failed with CANN error 507899: "
-                            "device memory is not DMA-capable.  Enable camem_allocator "
-                            "(COMPILE_CUSTOM_KERNELS=1) so KV cache tensors are allocated "
-                            "via aclrtMallocPhysical, or set PEGAFLOW_ASCEND_FORCE_SYNC_D2H=1 "
-                            "to attempt synchronous aclrtMemcpy fallback "
-                            "(WARNING: may segfault on non-DMA memory)."
-                        )
                 else:
                     success = True
                     logger.debug(
@@ -988,18 +1217,9 @@ class WorkerConnector:
                     "[PegaKVConnector] Save RPC exception: %s (continuing without save)",
                     e,
                 )
-                # If the exception message suggests a DMA issue, provide the same hint.
-                exc_msg = str(e)
-                if "507899" in exc_msg or "aclrtMemcpy" in exc_msg:
-                    logger.error(
-                        "[PegaKVConnector] Save failure may be caused by non-DMA-capable "
-                        "device memory.  See the CANN error 507899 diagnostic above for "
-                        "resolution steps (camem_allocator)."
-                    )
 
             save_duration = time.perf_counter() - save_start
 
-            # Record stats
             with self._stats_lock:
                 self._stats.record_save(save_duration, total_blocks, success)
 
@@ -1146,16 +1366,22 @@ class WorkerConnector:
 
         with self._save_completion_lock:
             for req_id in request_ids:
-                if req_id in self._req_pending_saves:
-                    self._req_pending_saves.discard(req_id)
-                    if failure is not None and self._sync_save_on_finish:
-                        self._failed_saves[req_id] = failure
-                    else:
-                        self._completed_saves.add(req_id)
-                    completed_reqs.append(req_id)
-                    event = self._save_completion_events.pop(req_id, None)
-                    if event:
-                        event.set()
+                pending_tasks = self._req_pending_save_tasks.get(req_id)
+                if pending_tasks is None:
+                    continue
+                if pending_tasks > 1:
+                    self._req_pending_save_tasks[req_id] = pending_tasks - 1
+                    continue
+
+                del self._req_pending_save_tasks[req_id]
+                if failure is not None and self._sync_save_on_finish:
+                    self._failed_saves[req_id] = failure
+                else:
+                    self._completed_saves.add(req_id)
+                completed_reqs.append(req_id)
+                event = self._save_completion_events.pop(req_id, None)
+                if event:
+                    event.set()
 
         self._handle_save_completion(completed_reqs)
 
@@ -1177,28 +1403,27 @@ class WorkerConnector:
     def _use_page_first(self) -> bool:
         """Whether this instance stores blocks page-first.
 
-        Page-first packs each block's layers into contiguous host pages — one
-        slot per *shard* (the set of layers one worker holds) instead of one
-        slot per layer — cutting per-block metadata by ~num_layers / num_shards.
-        Two MLA shapes qualify:
-
-        * full-replica (every rank holds all layers): one shard, so a block's
-          whole page is a single slot and ranks block-stripe the writes.
-        * layer-split (each rank holds a disjoint subset): one shard per rank,
-          and each rank writes its own sub-page as a slot.
-
-        Pipeline parallelism is excluded: with pp_size > 1 each stage holds only
-        some layers, but the engine seals one topology spanning the union of all
-        stages, so the layers a single worker holds are not one of the sealed
-        shards. The first save would seal a partial page and the other stages'
-        same-hash saves dedup instead of repairing it. Page-first requires that
-        one worker can write each shard's entire page. DCP is excluded because a
-        DCP rank stores a different token slice of every layer, not a layer
-        partition.
+        Page-first requires one worker to write every layer in its page shard.
+        PP workers hold only part of a sealed shard, DCP workers hold different
+        token slices, and HMA groups can save different block sets, so none can
+        safely use one common block set across every layer in a page.
         """
-        return self._ctx.is_mla and self._ctx.dcp_world_size == 1 and self._ctx.pp_size == 1
+        return (
+            self._ctx.is_mla
+            and self._cache_groups.group_count == 1
+            and self._ctx.dcp_world_size == 1
+            and self._ctx.pp_size == 1
+        )
 
-    def _block_shard(self, save_intent) -> tuple[list[int], list[bytes]]:
+    def _block_shard(
+        self,
+        block_ids: Iterable[int],
+        block_hashes: Iterable[bytes] | None = None,
+    ) -> tuple[list[int], list[bytes]]:
+        if block_hashes is None:
+            # Legacy call shape: a SaveIntent (pre-cache-group).
+            intent = block_ids
+            block_ids, block_hashes = intent.block_ids, intent.block_hashes
         """`(block_ids, hashes)` this rank saves under page-first: a block stripe.
 
         A page needs all layers, so page-first distributes save work by block
@@ -1207,15 +1432,13 @@ class WorkerConnector:
         disjoint and complete, so every block's page is written exactly once.
         With tp_size == 1 this is the whole set.
         """
-        tp_size = self._ctx.tp_size
+        tp_size = self._ctx.local_physical_tp_size
         if tp_size <= 1:
-            return list(save_intent.block_ids), list(save_intent.block_hashes)
-        tp_rank = self._ctx.tp_rank or 0
+            return list(block_ids), list(block_hashes)
+        tp_rank = self._ctx.local_physical_tp_rank
         ids: list[int] = []
         hashes: list[bytes] = []
-        for block_id, block_hash in zip(
-            save_intent.block_ids, save_intent.block_hashes, strict=True
-        ):
+        for block_id, block_hash in zip(block_ids, block_hashes, strict=True):
             if block_id % tp_size == tp_rank:
                 ids.append(block_id)
                 hashes.append(block_hash)
@@ -1256,18 +1479,15 @@ class WorkerConnector:
     def get_stats(self) -> PegaKVConnectorStats | None:
         """Get and reset worker stats for the current interval."""
         with self._stats_lock:
-            # Add current queue depth as gauge
             with self._save_completion_lock:
-                self._stats.data["pending_save_requests"] = len(self._req_pending_saves)
+                self._stats.data["pending_save_requests"] = len(self._req_pending_save_tasks)
 
             if self._stats.is_empty():
                 return None
             return self._stats.clone_and_reset()
 
 
-# ---------------------------------------------------------------------------
-# Device-aware helpers
-# ---------------------------------------------------------------------------
+__all__ = ["WorkerConnector"]
 
 
 def _resolve_ipc_wrapper_factory(device: torch.device):
@@ -1303,21 +1523,16 @@ def _safe_data_ptr(tensor) -> int:
 def _ensure_npu_device_set(device):
     """Set the NPU device for the calling OS thread if on Ascend.
 
-    On CUDA the driver manages per-thread context automatically via the
-    primary context; on Ascend each thread must explicitly call
-    ``aclrtSetDevice`` before any CANN API.  This matches vllm-ascend's
-    ``NPUDmaCopyBackend._copy_loop`` pattern where
-    ``torch.npu.set_device(self._device)`` is called once at worker
-    thread start.
-
-    Idempotent — safe to call before every batch.
+    On CUDA the driver manages per-thread context automatically; on Ascend
+    each thread must explicitly call aclrtSetDevice before any CANN API
+    (matches vllm-ascend's NPUDmaCopyBackend pattern). Idempotent.
     """
     if device is not None and device.type == "npu":
         torch.npu.set_device(device)
 
 
 def _device_synchronize(device):  # type: ignore[type-arg]
-    """Synchronize the current stream on the given device."""
+    """Synchronize the current stream on the given accelerator."""
     if device is None:
         return
     if device.type == "cuda":
@@ -1326,6 +1541,3 @@ def _device_synchronize(device):  # type: ignore[type-arg]
         torch.npu.synchronize(device)
     else:
         raise RuntimeError(f"Unsupported device type '{device.type}'")
-
-
-__all__ = ["WorkerConnector"]

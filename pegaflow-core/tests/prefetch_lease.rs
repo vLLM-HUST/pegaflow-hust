@@ -61,8 +61,8 @@ async fn query_then_load_consumes_reservation_budget() {
             0,
             0,
             load_state.shm_name(),
-            &layer_names,
-            &[(lease, block_ids)],
+            &[layer_names],
+            &[(lease, vec![block_ids.iter().map(|&id| Some(id)).collect()])],
         )
         .expect_err("third load should fail");
     assert!(

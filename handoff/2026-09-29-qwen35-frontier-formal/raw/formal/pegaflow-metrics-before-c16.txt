@@ -1,0 +1,212 @@
+# HELP pegaflow_cache_block_evictions_total Blocks evicted from cache due to memory pressure
+# TYPE pegaflow_cache_block_evictions_total counter
+pegaflow_cache_block_evictions_total{otel_scope_name="pegaflow-core"} 1536
+# HELP pegaflow_cache_block_hits_total Complete blocks found in cache (cache hit)
+# TYPE pegaflow_cache_block_hits_total counter
+pegaflow_cache_block_hits_total{otel_scope_name="pegaflow-core"} 15484
+# HELP pegaflow_cache_block_insertions_total New blocks inserted into cache
+# TYPE pegaflow_cache_block_insertions_total counter
+pegaflow_cache_block_insertions_total{otel_scope_name="pegaflow-core"} 3118
+# HELP pegaflow_cache_block_misses_total Complete blocks not found in cache (cache miss)
+# TYPE pegaflow_cache_block_misses_total counter
+pegaflow_cache_block_misses_total{otel_scope_name="pegaflow-core"} 719
+# HELP pegaflow_cache_eviction_reclaimed_bytes_total Estimated bytes actually reclaimed in pinned allocator after cache eviction
+# TYPE pegaflow_cache_eviction_reclaimed_bytes_total counter
+pegaflow_cache_eviction_reclaimed_bytes_total{otel_scope_name="pegaflow-core"} 25693945856
+# HELP pegaflow_cache_resident_bytes Current sealed block bytes resident in cache (sum of footprints)
+# TYPE pegaflow_cache_resident_bytes gauge
+pegaflow_cache_resident_bytes{otel_scope_name="pegaflow-core"} 26985693184
+# HELP pegaflow_cache_tier_block_requests_total Per-decision query_prefetch block attribution by storage tier (tier=ram|rdma|ssd|miss). The sum across tiers equals the request's block count for that decision. This is decision attribution, not service attribution; backing failures must be inspected via pegaflow_rdma_fetch_total{status="error"} and pegaflow_ssd_prefetch_failures_total.
+# TYPE pegaflow_cache_tier_block_requests_total counter
+pegaflow_cache_tier_block_requests_total{tier="miss",otel_scope_name="pegaflow-core"} 719
+pegaflow_cache_tier_block_requests_total{tier="ram",otel_scope_name="pegaflow-core"} 15484
+# HELP pegaflow_hll_cardinality Estimated distinct blocks seen in the sliding window
+# TYPE pegaflow_hll_cardinality gauge
+pegaflow_hll_cardinality{window="15m",otel_scope_name="pegaflow-core"} 336.43062765185465
+pegaflow_hll_cardinality{window="1d",otel_scope_name="pegaflow-core"} 776.0946017492131
+pegaflow_hll_cardinality{window="1h",otel_scope_name="pegaflow-core"} 760.3745122712405
+# HELP pegaflow_hll_total_requests Total block requests in the sliding window
+# TYPE pegaflow_hll_total_requests gauge
+pegaflow_hll_total_requests{window="15m",otel_scope_name="pegaflow-core"} 6766
+pegaflow_hll_total_requests{window="1d",otel_scope_name="pegaflow-core"} 16203
+pegaflow_hll_total_requests{window="1h",otel_scope_name="pegaflow-core"} 16049
+# HELP pegaflow_inflight_bytes Current bytes in inflight blocks (memory allocated but not yet sealed)
+# TYPE pegaflow_inflight_bytes gauge
+pegaflow_inflight_bytes{otel_scope_name="pegaflow-core"} 0
+# HELP pegaflow_load_bytes_total Total bytes loaded from CPU storage to GPU
+# TYPE pegaflow_load_bytes_total counter
+pegaflow_load_bytes_total{otel_scope_name="pegaflow-core"} 117670117376
+# HELP pegaflow_load_duration_seconds Load operation latency in seconds
+# TYPE pegaflow_load_duration_seconds histogram
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.01"} 242
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.025"} 1139
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.05"} 1955
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.1"} 2137
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.25"} 2140
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.5"} 2144
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="1"} 2189
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="1.5"} 2200
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="2"} 2204
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="3"} 2207
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="5"} 2207
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="7.5"} 2208
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="10"} 2208
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="15"} 2208
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="30"} 2208
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="60"} 2208
+pegaflow_load_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="+Inf"} 2208
+pegaflow_load_duration_seconds_sum{otel_scope_name="pegaflow-core"} 127.65567359400004
+pegaflow_load_duration_seconds_count{otel_scope_name="pegaflow-core"} 2208
+# HELP pegaflow_object_age_seconds Object age observed at lookup or eviction
+# TYPE pegaflow_object_age_seconds histogram
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="0.01"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="0.025"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="0.05"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="0.1"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="0.25"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="0.5"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="1"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="1.5"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="2"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="3"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="5"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="7.5"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="10"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="15"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="30"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="60"} 0
+pegaflow_object_age_seconds_bucket{event="evict",location="memory",otel_scope_name="pegaflow-core",le="+Inf"} 1536
+pegaflow_object_age_seconds_sum{event="evict",location="memory",otel_scope_name="pegaflow-core"} 2501486.7380742365
+pegaflow_object_age_seconds_count{event="evict",location="memory",otel_scope_name="pegaflow-core"} 1536
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="0.01"} 65
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="0.025"} 106
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="0.05"} 151
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="0.1"} 205
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="0.25"} 220
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="0.5"} 221
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="1"} 246
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="1.5"} 277
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="2"} 318
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="3"} 402
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="5"} 632
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="7.5"} 884
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="10"} 1100
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="15"} 1510
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="30"} 2504
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="60"} 4294
+pegaflow_object_age_seconds_bucket{event="lookup",location="memory",otel_scope_name="pegaflow-core",le="+Inf"} 15484
+pegaflow_object_age_seconds_sum{event="lookup",location="memory",otel_scope_name="pegaflow-core"} 3223921.6536288797
+pegaflow_object_age_seconds_count{event="lookup",location="memory",otel_scope_name="pegaflow-core"} 15484
+# HELP pegaflow_object_lifecycle_total Object lifecycle events by event, resident location, and outcome
+# TYPE pegaflow_object_lifecycle_total counter
+pegaflow_object_lifecycle_total{event="create",location="cpu_pool",outcome="already_resident",otel_scope_name="pegaflow-core"} 4
+pegaflow_object_lifecycle_total{event="create",location="cpu_pool",outcome="new",otel_scope_name="pegaflow-core"} 3118
+pegaflow_object_lifecycle_total{event="evict",location="memory",outcome="memory_pressure",otel_scope_name="pegaflow-core"} 1536
+pegaflow_object_lifecycle_total{event="insert",location="memory",outcome="new",otel_scope_name="pegaflow-core"} 3118
+pegaflow_object_lifecycle_total{event="lookup",location="memory",outcome="hit",otel_scope_name="pegaflow-core"} 15484
+pegaflow_object_lifecycle_total{event="lookup",location="memory",outcome="miss",otel_scope_name="pegaflow-core"} 578
+pegaflow_object_lifecycle_total{event="seal",location="cpu_pool",outcome="ok",otel_scope_name="pegaflow-core"} 3118
+# HELP pegaflow_object_resident_bytes Current object bytes by resident location
+# TYPE pegaflow_object_resident_bytes gauge
+pegaflow_object_resident_bytes{location="memory",otel_scope_name="pegaflow-core"} 26985693184
+# HELP pegaflow_pool_capacity_bytes Total pinned pool capacity in bytes
+# TYPE pegaflow_pool_capacity_bytes gauge
+pegaflow_pool_capacity_bytes{otel_scope_name="pegaflow-core"} 32212254720
+# HELP pegaflow_pool_used_bytes Current pinned pool usage in bytes
+# TYPE pegaflow_pool_used_bytes gauge
+pegaflow_pool_used_bytes{otel_scope_name="pegaflow-core"} 27029274624
+# HELP pegaflow_rpc_duration_seconds RPC latency in seconds
+# TYPE pegaflow_rpc_duration_seconds histogram
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.0005"} 2174
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.001"} 2198
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.002"} 2200
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.005"} 2202
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.01"} 2204
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.02"} 2207
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.05"} 2208
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.1"} 2208
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.2"} 2208
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.5"} 2208
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="1"} 2208
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="2"} 2208
+pegaflow_rpc_duration_seconds_bucket{method="load",status="ok",otel_scope_name="pegaflow_server_rpc",le="+Inf"} 2208
+pegaflow_rpc_duration_seconds_sum{method="load",status="ok",otel_scope_name="pegaflow_server_rpc"} 0.6354790929999989
+pegaflow_rpc_duration_seconds_count{method="load",status="ok",otel_scope_name="pegaflow_server_rpc"} 2208
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.0005"} 4550
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.001"} 4551
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.002"} 4551
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.005"} 4551
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.01"} 4551
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.02"} 4551
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.05"} 4552
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.1"} 4552
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.2"} 4552
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.5"} 4552
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="1"} 4552
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="2"} 4552
+pegaflow_rpc_duration_seconds_bucket{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc",le="+Inf"} 4552
+pegaflow_rpc_duration_seconds_sum{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc"} 0.2628845319999998
+pegaflow_rpc_duration_seconds_count{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc"} 4552
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.0005"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.001"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.002"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.005"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.01"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.02"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.05"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.1"} 0
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.2"} 1
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.5"} 2
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="1"} 2
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="2"} 2
+pegaflow_rpc_duration_seconds_bucket{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc",le="+Inf"} 2
+pegaflow_rpc_duration_seconds_sum{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc"} 0.437552002
+pegaflow_rpc_duration_seconds_count{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc"} 2
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.0005"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.001"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.002"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.005"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.01"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.02"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.05"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.1"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.2"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="0.5"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="1"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="2"} 1944
+pegaflow_rpc_duration_seconds_bucket{method="save",status="ok",otel_scope_name="pegaflow_server_rpc",le="+Inf"} 1944
+pegaflow_rpc_duration_seconds_sum{method="save",status="ok",otel_scope_name="pegaflow_server_rpc"} 0.02434753499999995
+pegaflow_rpc_duration_seconds_count{method="save",status="ok",otel_scope_name="pegaflow_server_rpc"} 1944
+# HELP pegaflow_rpc_requests_total Total RPC requests handled by pegaflow server
+# TYPE pegaflow_rpc_requests_total counter
+pegaflow_rpc_requests_total{method="load",status="ok",otel_scope_name="pegaflow_server_rpc"} 2208
+pegaflow_rpc_requests_total{method="query_prefetch",status="ok",otel_scope_name="pegaflow_server_rpc"} 4552
+pegaflow_rpc_requests_total{method="register_context_batch",status="ok",otel_scope_name="pegaflow_server_rpc"} 2
+pegaflow_rpc_requests_total{method="save",status="ok",otel_scope_name="pegaflow_server_rpc"} 1944
+# HELP pegaflow_save_bytes_total Total bytes saved from GPU to CPU storage
+# TYPE pegaflow_save_bytes_total counter
+pegaflow_save_bytes_total{otel_scope_name="pegaflow-core"} 52791476224
+# HELP pegaflow_save_duration_seconds Save operation latency in seconds
+# TYPE pegaflow_save_duration_seconds histogram
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.01"} 499
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.025"} 1252
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.05"} 1471
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.1"} 1475
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.25"} 1478
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="0.5"} 1483
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="1"} 1524
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="1.5"} 1532
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="2"} 1534
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="3"} 1536
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="5"} 1536
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="7.5"} 1536
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="10"} 1536
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="15"} 1536
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="30"} 1536
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="60"} 1536
+pegaflow_save_duration_seconds_bucket{otel_scope_name="pegaflow-core",le="+Inf"} 1536
+pegaflow_save_duration_seconds_sum{otel_scope_name="pegaflow-core"} 73.96900272899988
+pegaflow_save_duration_seconds_count{otel_scope_name="pegaflow-core"} 1536
+# HELP target_info Target metadata
+# TYPE target_info gauge
+target_info{service_name="unknown_service",telemetry_sdk_language="rust",telemetry_sdk_name="opentelemetry",telemetry_sdk_version="0.31.0"} 1

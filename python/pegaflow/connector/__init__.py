@@ -1,8 +1,5 @@
 """
 Facade for the PegaFlow vLLM connector, split into scheduler/worker implementations.
-
-Supports both CUDA (via CudaIPCWrapper) and Ascend CANN (via NpuIPCWrapper).
-Device auto-detection picks the appropriate IPC backend at runtime.
 """
 
 from __future__ import annotations
@@ -15,6 +12,7 @@ import torch
 from vllm.distributed.kv_transfer.kv_connector.v1.base import (
     KVConnectorBase_V1,
     KVConnectorRole,
+    SupportsHMA,
 )
 from vllm.distributed.parallel_state import get_pp_group, get_tensor_model_parallel_rank
 
@@ -24,6 +22,7 @@ from pegaflow.connector.common import (
     PegaConnectorMode,
     PegaKVConnectorStats,
     PegaPromMetrics,
+    TpShardTopology,
     derive_namespace,
     detect_mla,
     logger,
@@ -36,7 +35,7 @@ from pegaflow.connector.worker import WorkerConnector
 from pegaflow.pegaflow import EngineRpcClient
 
 
-class PegaKVConnector(KVConnectorBase_V1):
+class PegaKVConnector(KVConnectorBase_V1, SupportsHMA):
     """v1 KV connector for PegaFlow with separated scheduler/worker logic."""
 
     def __init__(self, vllm_config, role: KVConnectorRole, kv_cache_config=None):
@@ -46,13 +45,15 @@ class PegaKVConnector(KVConnectorBase_V1):
         tp_size = vllm_config.parallel_config.tensor_parallel_size
         world_size = vllm_config.parallel_config.world_size
         is_mla = detect_mla(vllm_config)
+        cache_groups = tuple(getattr(kv_cache_config, "kv_cache_groups", ()) or ())
+        collapse_mla_tp = is_mla and len(cache_groups) <= 1
         dcp_world_size = (
             getattr(vllm_config.parallel_config, "decode_context_parallel_size", 1) or 1
         )
         pcp_world_size = (
             getattr(vllm_config.parallel_config, "prefill_context_parallel_size", 1) or 1
         )
-        effective_tp_size = max(1, dcp_world_size) if is_mla else tp_size
+        effective_tp_size = max(1, dcp_world_size) if collapse_mla_tp else tp_size
 
         if dcp_world_size > 1 and not is_mla:
             logger.warning(
@@ -63,29 +64,13 @@ class PegaKVConnector(KVConnectorBase_V1):
                 dcp_world_size,
             )
 
-        # vLLM uses a per-process random NONE_HASH (os.urandom(32)) as the
-        # first block's parent hash when PYTHONHASHSEED is not set.  This
-        # makes every vLLM instance produce different block_hashes for the
-        # same tokens, breaking cross-instance KV cache sharing.  Warn users
-        # early so they can fix their deployment before wasting cache budget.
-        if not os.environ.get("PYTHONHASHSEED"):
-            logger.warning(
-                "[PegaKVConnector] PYTHONHASHSEED is not set — vLLM's block "
-                "hashes will be per-process random (the NONE_HASH is seeded "
-                "from os.urandom(32)).  Cross-instance KV cache sharing will "
-                "NOT work.  Set PYTHONHASHSEED=0 (or any fixed value) in all "
-                "vLLM instances that should share KV cache through PegaFlow."
-            )
-
         cross_layer_blocks = os.environ.get("PEGAFLOW_CROSS_LAYER_BLOCKS", "1") == "1"
-        namespace_override = os.environ.get("PEGAFLOW_NAMESPACE")
-        namespace = derive_namespace(
+        base_namespace = derive_namespace(
             vllm_config,
             effective_tp_size,
             dcp_world_size,
             pcp_world_size,
             cross_layer_blocks=cross_layer_blocks,
-            override=namespace_override,
         )
         block_size = vllm_config.cache_config.block_size
 
@@ -104,7 +89,10 @@ class PegaKVConnector(KVConnectorBase_V1):
                 )
 
                 dcp_rank = get_decode_context_model_parallel_rank()
-            device_id = _resolve_device_id()
+            if torch.cuda.is_available():
+                device_id = _resolve_device_id()
+            elif hasattr(torch, "npu") and torch.npu.is_available():
+                device_id = _resolve_npu_device_id()
 
         assert vllm_config.kv_transfer_config is not None
         server_host = os.environ.get(
@@ -124,7 +112,31 @@ class PegaKVConnector(KVConnectorBase_V1):
             is_mla,
             vllm_config.kv_transfer_config.get_from_extra_config("pegaflow.transfer_backend", None),
         )
-        self._engine_endpoint = f"{server_host}:{server_port}"
+        wait_for_full_prefix = bool(
+            vllm_config.kv_transfer_config.get_from_extra_config(
+                "pegaflow.wait_for_full_prefix", False
+            )
+        )
+        default_endpoint = f"{server_host}:{server_port}"
+        tp_shards = TpShardTopology.from_config(
+            default_endpoint=default_endpoint,
+            configured_endpoints=vllm_config.kv_transfer_config.get_from_extra_config(
+                "pegaflow.tp_shard_endpoints", None
+            ),
+            global_tp_size=tp_size,
+            global_world_size=world_size,
+        )
+        if tp_shards.shard_count > 1 and (
+            world_size != tp_size or dcp_world_size != 1 or pcp_world_size != 1
+        ):
+            raise ValueError(
+                "pegaflow.tp_shard_endpoints currently supports TP-only parallelism; "
+                f"got tp_size={tp_size}, world_size={world_size}, "
+                f"dcp_world_size={dcp_world_size}, pcp_world_size={pcp_world_size}"
+            )
+        shard_index = tp_shards.shard_index(tp_rank) if tp_rank is not None else 0
+        namespace = tp_shards.namespace(base_namespace, shard_index)
+        self._engine_endpoint = tp_shards.endpoints[shard_index]
         engine_client = EngineRpcClient(self._engine_endpoint)
         logger.debug("[PegaKVConnector] Connected to engine server at %s", self._engine_endpoint)
 
@@ -141,6 +153,7 @@ class PegaKVConnector(KVConnectorBase_V1):
             engine_client=engine_client,
             state_manager=self._state_manager,
             is_mla=is_mla,
+            collapse_mla_tp=collapse_mla_tp,
             transfer_backend=transfer_backend,
             dcp_world_size=dcp_world_size,
             pcp_world_size=pcp_world_size,
@@ -148,6 +161,8 @@ class PegaKVConnector(KVConnectorBase_V1):
             pp_rank=pp_rank,
             pp_size=pp_size,
             mode=mode,
+            wait_for_full_prefix=wait_for_full_prefix,
+            tp_shards=tp_shards,
         )
 
         # MLA attention backends expose no num-layers stride dimension, so vLLM
@@ -155,7 +170,7 @@ class PegaKVConnector(KVConnectorBase_V1):
         # is silently ignored upstream and falls back to per-layer — surface
         # that instead of pretending the request was honored.
         env_cross_layer = os.environ.get("PEGAFLOW_CROSS_LAYER_BLOCKS", "1") == "1"
-        self._prefer_cross_layer = env_cross_layer and not is_mla
+        self._prefer_cross_layer = env_cross_layer and not is_mla and len(cache_groups) <= 1
         if is_mla and env_cross_layer:
             logger.warning(
                 "[PegaKVConnector] PEGAFLOW_CROSS_LAYER_BLOCKS=1 is ignored for MLA "
@@ -166,12 +181,35 @@ class PegaKVConnector(KVConnectorBase_V1):
         self._scheduler: SchedulerConnector | None = None
         self._worker: WorkerConnector | None = None
         if role == KVConnectorRole.SCHEDULER:
-            self._scheduler = SchedulerConnector(self._ctx)
+            pd_tail_save = bool(
+                vllm_config.kv_transfer_config.get_from_extra_config("pegaflow.pd_tail_save", False)
+            )
+            pd_tail_load = bool(
+                vllm_config.kv_transfer_config.get_from_extra_config("pegaflow.pd_tail_load", False)
+            )
+            query_clients = tuple(
+                engine_client if index == shard_index else EngineRpcClient(endpoint)
+                for index, endpoint in enumerate(tp_shards.endpoints)
+            )
+            self._scheduler = SchedulerConnector(
+                self._ctx,
+                engine_clients=query_clients,
+                pd_tail_save=pd_tail_save,
+                pd_tail_load=pd_tail_load,
+                vllm_config=vllm_config,
+                kv_cache_config=kv_cache_config,
+            )
             # Open the liveness stream from the scheduler process only. One
             # stream per vllm replica is enough — if any tp worker crashes,
             # the scheduler dies too, closing this stream and triggering
-            # server-side cleanup of the instance IPC mappings.
-            engine_client.start_session_watcher(instance_id, namespace, tp_size, world_size)
+            # server-side cleanup of the instance's CUDA IPC mappings.
+            for index, client in enumerate(query_clients):
+                client.start_session_watcher(
+                    instance_id,
+                    tp_shards.namespace(base_namespace, index),
+                    self._ctx.effective_tp_size,
+                    self._ctx.effective_world_size,
+                )
         else:
             self._worker = WorkerConnector(
                 self._ctx,
@@ -182,7 +220,9 @@ class PegaKVConnector(KVConnectorBase_V1):
         logger.debug(
             "[PegaKVConnector] Initialized role=%s instance_id=%s device=%s "
             "tp_rank=%s tp_size=%d pp_rank=%d pp_size=%d world_size=%d namespace=%s "
-            "is_mla=%s transfer_backend=%s dcp_world_size=%d pcp_world_size=%d dcp_rank=%d mode=%s",
+            "is_mla=%s collapse_mla_tp=%s transfer_backend=%s dcp_world_size=%d "
+            "pcp_world_size=%d dcp_rank=%d tp_shard=%d/%d "
+            "mode=%s wait_for_full_prefix=%s",
             role.name,
             instance_id,
             device_id if device_id is not None else "cpu",
@@ -193,11 +233,15 @@ class PegaKVConnector(KVConnectorBase_V1):
             world_size,
             namespace,
             is_mla,
+            collapse_mla_tp,
             transfer_backend,
             dcp_world_size,
             pcp_world_size,
             dcp_rank,
+            shard_index,
+            tp_shards.shard_count,
             mode.value,
+            wait_for_full_prefix,
         )
 
     # ==============================
@@ -223,13 +267,10 @@ class PegaKVConnector(KVConnectorBase_V1):
         attn_metadata,
         **kwargs: Any,
     ) -> None:
-        # Primary save path: vLLM calls wait_for_save() after the forward pass.
-        # Ascend attention backends may not call wait_for_save(), so delegate
-        # to the worker's per-layer callback which includes a fallback that
-        # triggers on the first registered layer.
-        if not self._worker:
-            return
-        self._worker.save_kv_layer(layer_name, kv_layer, attn_metadata)
+        # Save is submitted from wait_for_save() using scheduler metadata.
+        # Layer callbacks are intentionally ignored so CUDA graph replay
+        # cannot suppress save submission.
+        pass
 
     def wait_for_save(self) -> None:
         if not self._worker:
@@ -267,10 +308,23 @@ class PegaKVConnector(KVConnectorBase_V1):
         if self._scheduler:
             self._scheduler.update_connector_output(connector_output)
 
+    def bind_gpu_block_pool(self, gpu_block_pool) -> None:
+        if self._scheduler:
+            self._scheduler.bind_gpu_block_pool(gpu_block_pool)
+
     def request_finished(
         self,
         request,
         block_ids: list[int],
+    ) -> tuple[bool, dict[str, Any] | None]:
+        if self._scheduler:
+            return self._scheduler.request_finished(request, (block_ids,))
+        return (False, None)
+
+    def request_finished_all_groups(
+        self,
+        request,
+        block_ids: tuple[list[int], ...],
     ) -> tuple[bool, dict[str, Any] | None]:
         if self._scheduler:
             return self._scheduler.request_finished(request, block_ids)
@@ -373,17 +427,22 @@ class PegaKVConnector(KVConnectorBase_V1):
             self._state_manager.shutdown()
 
 
-class NoopKVConnector(KVConnectorBase_V1):
+class NoopKVConnector(KVConnectorBase_V1, SupportsHMA):
     """Connector-path baseline for tests."""
 
     def __init__(self, vllm_config, role: KVConnectorRole, kv_cache_config=None):
         super().__init__(vllm_config, role, kv_cache_config)
         self._is_mla = detect_mla(vllm_config)
+        self._cache_group_count = len(tuple(getattr(kv_cache_config, "kv_cache_groups", ()) or ()))
 
     @property
     def prefer_cross_layer_blocks(self) -> bool:
         # MLA cannot use cross-layer KV (no num-layers stride); be honest.
-        return not self._is_mla and os.environ.get("PEGAFLOW_CROSS_LAYER_BLOCKS", "1") == "1"
+        return (
+            not self._is_mla
+            and self._cache_group_count <= 1
+            and os.environ.get("PEGAFLOW_CROSS_LAYER_BLOCKS", "1") == "1"
+        )
 
     def start_load_kv(self, forward_context, **kwargs: Any) -> None:
         return
@@ -411,6 +470,13 @@ class NoopKVConnector(KVConnectorBase_V1):
 
     def build_connector_meta(self, scheduler_output) -> PegaConnectorMetadata:
         return PegaConnectorMetadata()
+
+    def request_finished_all_groups(
+        self,
+        request,
+        block_ids: tuple[list[int], ...],
+    ) -> tuple[bool, dict[str, Any] | None]:
+        return (False, None)
 
 
 def _resolve_device_id() -> int:
@@ -456,10 +522,25 @@ def _map_device(local_id: int, visible: str | None) -> int:
         return local_id
 
 
-__all__ = [
-    "PegaKVConnector",
-    "NoopKVConnector",
-    "KVConnectorRole",
-    "_map_device",
-    "_resolve_device_id",
-]
+
+
+
+def _resolve_npu_device_id() -> int:
+    """
+    Return the global Ascend device id even when ASCEND_RT_VISIBLE_DEVICES
+    masks NPUs (mirror of _resolve_device_id for CUDA). Ascend NPU UUIDs may
+    be non-unique, so the visible-set index mapping is the reliable route.
+    """
+    local_id = torch.npu.current_device()
+    visible = os.environ.get("ASCEND_RT_VISIBLE_DEVICES")
+    if not visible:
+        return local_id
+    slots = [slot.strip() for slot in visible.split(",") if slot.strip()]
+    try:
+        mapped = slots[local_id]
+    except IndexError:
+        return local_id
+    try:
+        return int(mapped)
+    except ValueError:
+        return local_id

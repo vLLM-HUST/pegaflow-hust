@@ -9,7 +9,7 @@ use crate::proto::engine::{
     ReleaseRequest, ReleaseResponse, ReleaseTransferLockRequest, ReleaseTransferLockResponse,
     ResponseStatus, SaveRequest, SaveResponse, SessionEvent, SessionRequest, ShutdownRequest,
     ShutdownResponse, TransferBlockInfo, TransferMode as ProtoTransferMode, TransferSlotInfo,
-    UnregisterRequest, UnregisterResponse, query_response,
+    UnregisterRequest, UnregisterResponse, load_block_target, query_response,
 };
 use crate::registry::RegistryHandle;
 use crate::session::SessionRegistry;
@@ -302,7 +302,12 @@ impl Engine for GrpcEngineService {
             }
 
             // Call engine batch registration
-            if let Err(err) = self.engine.register_context_layer_batch(
+            let layer_group_ids: Option<&[u32]> = if req.layer_group_ids.is_empty() {
+                None
+            } else {
+                Some(&req.layer_group_ids)
+            };
+            if let Err(err) = self.engine.register_context_layer_batch_strided(
                 &req.instance_id,
                 &req.namespace,
                 req.device_id,
@@ -317,6 +322,8 @@ impl Engine for GrpcEngineService {
                 &bytes_per_block_list,
                 &kv_stride_bytes_list,
                 &segments_list,
+                None,
+                layer_group_ids,
                 transfer_mode,
                 req.page_first,
             ) {
@@ -449,9 +456,14 @@ impl Engine for GrpcEngineService {
         let start = Instant::now();
 
         let req = request.into_inner();
-        let layer_count = req.layer_names.len();
+        let layer_count: usize = req.groups.iter().map(|group| group.layer_names.len()).sum();
         let load_count = req.loads.len();
-        let block_count: usize = req.loads.iter().map(|load| load.block_ids.len()).sum();
+        let block_count: usize = req
+            .loads
+            .iter()
+            .flat_map(|load| &load.block_ids_by_group)
+            .map(|block_ids| block_ids.targets.len())
+            .sum();
 
         trace_root!("rpc.load", root, || {
             [
@@ -466,7 +478,7 @@ impl Engine for GrpcEngineService {
                 instance_id,
                 tp_rank,
                 device_id,
-                layer_names,
+                groups,
                 loads,
                 load_state_shm,
                 ..
@@ -483,28 +495,41 @@ impl Engine for GrpcEngineService {
                 block_count,
                 load_state_shm.len()
             );
-            let layer_refs: Vec<&str> = layer_names.iter().map(|s| s.as_str()).collect();
-            let loads: Vec<(QueryLeaseId, Vec<usize>)> = loads
+            let layer_groups: Vec<Vec<&str>> = groups
+                .iter()
+                .map(|group| group.layer_names.iter().map(String::as_str).collect())
+                .collect();
+            let loads: Vec<(QueryLeaseId, Vec<Vec<Option<usize>>>)> = loads
                 .into_iter()
                 .map(|load| {
                     let lease =
                         QueryLeaseId::from_bytes(&load.lease).map_err(Status::invalid_argument)?;
-                    let block_ids = load.block_ids.into_iter().map(|id| id as usize).collect();
-                    Ok::<_, Status>((lease, block_ids))
+                    let block_ids_by_group = load
+                        .block_ids_by_group
+                        .into_iter()
+                        .map(|block_ids| {
+                            block_ids
+                                .targets
+                                .into_iter()
+                                .map(|target| {
+                                    target
+                                        .target
+                                        .map(|load_block_target::Target::BlockId(id)| id as usize)
+                                })
+                                .collect()
+                        })
+                        .collect();
+                    Ok::<_, Status>((lease, block_ids_by_group))
                 })
                 .collect::<Result<_, _>>()?;
 
-            // TODO(ascend): batch_load_kv_blocks_multi_layer requires device
-            // memory allocated via aclrtMallocPhysical (see §7.2 方案 A/B).
-            // When camem_allocator is ready, this will perform native H2D DMA.
-            // Until then, returns Err on Ascend (aclrtMemcpyAsync H2D → 507899).
             self.engine
                 .batch_load_kv_blocks_multi_layer(
                     &instance_id,
                     tp_rank,
                     device_id,
                     &load_state_shm,
-                    &layer_refs,
+                    &layer_groups,
                     &loads,
                 )
                 .map_err(Self::map_engine_error)?;
@@ -554,45 +579,74 @@ impl Engine for GrpcEngineService {
                 req.block_hashes.len()
             );
 
-            // SSD prefetch-aware query
-            let status = self
-                .engine
-                .count_prefix_hit_blocks_with_prefetch(
-                    &req.instance_id,
-                    &req.req_id,
-                    &req.block_hashes,
-                )
-                .await
-                .map_err(Self::map_engine_error)?;
-
-            let outcome = match status {
-                PrefetchStatus::Ready { blocks, missing } => {
-                    let hit = blocks.len();
-                    if let Ok(mut t) = self.hll_tracker.lock() {
-                        t.record_hashes(&req.block_hashes);
+            let outcome = if req.group_id > 0 {
+                let hits = self
+                    .engine
+                    .query_group_membership(&req.instance_id, req.group_id, &req.block_hashes)
+                    .map_err(Self::map_engine_error)?;
+                let mut positions = Vec::new();
+                let mut blocks = Vec::new();
+                for (position, block) in hits.into_iter().enumerate() {
+                    if let Some(block) = block {
+                        positions.push(position as u32);
+                        blocks.push(block);
                     }
-                    let lease = if hit == 0 {
-                        Vec::new()
-                    } else {
-                        self.engine
-                            .create_query_lease(&req.instance_id, blocks)
-                            .map_err(Self::map_engine_error)?
-                            .to_bytes()
-                            .to_vec()
-                    };
-                    debug!(
-                        "RPC [query_prefetch] ready: instance_id={} hit={} missing={} lease={}",
-                        req.instance_id,
-                        hit,
-                        missing,
-                        !lease.is_empty()
-                    );
-                    query_response::Outcome::Ready(QueryReady {
-                        num_hit_blocks: hit as u64,
-                        lease,
-                    })
                 }
-                PrefetchStatus::Loading => query_response::Outcome::Loading(QueryLoading {}),
+                let lease = if blocks.is_empty() {
+                    Vec::new()
+                } else {
+                    self.engine
+                        .create_query_lease(&req.instance_id, blocks)
+                        .map_err(Self::map_engine_error)?
+                        .to_bytes()
+                        .to_vec()
+                };
+                query_response::Outcome::Ready(QueryReady {
+                    num_hit_blocks: positions.len() as u64,
+                    lease,
+                    hit_positions: positions,
+                })
+            } else {
+                let status = self
+                    .engine
+                    .count_prefix_hit_blocks_with_prefetch(
+                        &req.instance_id,
+                        &req.req_id,
+                        &req.block_hashes,
+                    )
+                    .await
+                    .map_err(Self::map_engine_error)?;
+
+                match status {
+                    PrefetchStatus::Ready { blocks, missing } => {
+                        let hit = blocks.len();
+                        if let Ok(mut t) = self.hll_tracker.lock() {
+                            t.record_hashes(&req.block_hashes);
+                        }
+                        let lease = if hit == 0 {
+                            Vec::new()
+                        } else {
+                            self.engine
+                                .create_query_lease(&req.instance_id, blocks)
+                                .map_err(Self::map_engine_error)?
+                                .to_bytes()
+                                .to_vec()
+                        };
+                        debug!(
+                            "RPC [query_prefetch] ready: instance_id={} hit={} missing={} lease={}",
+                            req.instance_id,
+                            hit,
+                            missing,
+                            !lease.is_empty()
+                        );
+                        query_response::Outcome::Ready(QueryReady {
+                            num_hit_blocks: hit as u64,
+                            lease,
+                            hit_positions: Vec::new(),
+                        })
+                    }
+                    PrefetchStatus::Loading => query_response::Outcome::Loading(QueryLoading {}),
+                }
             };
 
             Ok(Response::new(QueryResponse {
@@ -993,6 +1047,8 @@ mod tests {
             instance_id: "instance".to_string(),
             block_hashes: Vec::new(),
             req_id: String::new(),
+            wait_for_full_prefix: false,
+            group_id: 0,
         })
         .expect_err("empty req_id must be rejected before engine lookup");
 
@@ -1006,6 +1062,8 @@ mod tests {
             instance_id: "instance".to_string(),
             block_hashes: Vec::new(),
             req_id: "request".to_string(),
+            wait_for_full_prefix: false,
+            group_id: 0,
         })
         .expect("empty block_hashes are a valid zero-hit query");
     }
@@ -1029,6 +1087,7 @@ mod tests {
             pp_rank: 0,
             transfer_mode: ProtoTransferMode::Direct as i32,
             page_first: false,
+            layer_group_ids: Vec::new(),
         })
         .expect_err("tp_rank outside tp_size must be rejected at RPC boundary");
 
@@ -1055,6 +1114,7 @@ mod tests {
             pp_rank: 0,
             transfer_mode: ProtoTransferMode::Direct as i32,
             page_first: false,
+            layer_group_ids: Vec::new(),
         })
         .expect_err("client/server version mismatch must be rejected before registration");
 

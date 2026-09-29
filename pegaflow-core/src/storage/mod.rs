@@ -530,6 +530,19 @@ impl StorageEngine {
             .await
     }
 
+    /// Position-aligned membership lookup in the resident read cache.
+    pub(crate) fn get_membership(
+        &self,
+        namespace: &str,
+        hashes: &[Vec<u8>],
+    ) -> Vec<Option<Arc<crate::block::SealedBlock>>> {
+        let keys: Vec<BlockKey> = hashes
+            .iter()
+            .map(|hash| BlockKey::new(namespace.to_string(), hash.clone()))
+            .collect();
+        self.read_cache.get_blocks_aligned(&keys)
+    }
+
     /// Atomically remove the restored cache from normal lookup visibility and
     /// retain it as the Issue #23 hidden source/shadow reservation.
     pub(crate) fn activate_issue23_experiment(&self) -> Result<Issue23ActivationStats, String> {

@@ -1,0 +1,8 @@
+INFO 09-29 01:03:40 [__init__.py:44] Available plugins for group vllm.platform_plugins:
+INFO 09-29 01:03:40 [__init__.py:46] - ascend -> vllm_ascend:register
+INFO 09-29 01:03:40 [__init__.py:49] All plugins in this group will be loaded. Set `VLLM_PLUGINS` to control which plugins to load.
+INFO 09-29 01:03:40 [__init__.py:237] Platform plugin ascend is activated
+INFO 09-29 01:03:40 [platform.py:61] Breakable cudagraph is force disabled on Ascend because DeepSeek V4 PIECEWISE cudagraph is not supported yet.
+vllm=/root/vllm-hust/vllm/__init__.py
+vllm_ascend=/vllm-workspace/vllm-ascend/vllm_ascend/__init__.py
+pegaflow=/usr/local/python3.12.13/lib/python3.12/site-packages/pegaflow/__init__.py

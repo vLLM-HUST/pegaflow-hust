@@ -4,7 +4,7 @@ pub mod logging;
 #[cfg(target_os = "linux")]
 pub mod numa;
 
-pub use block::BlockKey;
+pub use block::{BlockKey, group_hash};
 #[cfg(target_os = "linux")]
 pub use numa::{
     NumaNode, NumaTopology, format_cpu_list, get_npu_device_count, get_npu_numa_affinity,

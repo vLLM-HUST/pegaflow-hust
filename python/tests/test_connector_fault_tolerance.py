@@ -54,17 +54,23 @@ class FakeEngineClient:
         tp_rank: int,
         device_id: int,
         load_state_shm: str,
-        layer_names,
+        layer_groups,
         loads,
     ) -> tuple[bool, str]:
-        block_ids = [block_id for _, ids in loads for block_id in ids]
+        block_ids = [
+            block_id
+            for _, ids_by_group in loads
+            for ids in ids_by_group
+            for block_id in ids
+            if block_id is not None
+        ]
         self.load_calls.append(
             (
                 instance_id,
                 tp_rank,
                 device_id,
                 load_state_shm,
-                list(layer_names),
+                [list(group) for group in layer_groups],
                 list(block_ids),
             )
         )
@@ -74,7 +80,12 @@ class FakeEngineClient:
             return (False, "simulated load failure")
         return (True, "ok")
 
-    def register_context_batch(self, *args) -> tuple[bool, str]:
+    def register_context_batch(
+        self,
+        *args,
+        layer_group_ids=None,
+        **kwargs,
+    ) -> tuple[bool, str]:
         self.register_calls.append(args)
         if self.register_exception is not None:
             raise self.register_exception
@@ -253,7 +264,7 @@ def test_sync_save_on_finish_waits_before_reporting_completion():
     save_done.wait.return_value = True
     with worker._save_completion_lock:
         worker._save_completion_events["req-visible"] = save_done
-        worker._req_pending_saves.add("req-visible")
+        worker._req_pending_save_tasks["req-visible"] = 1
         worker._completed_saves.add("req-visible")
 
     finished_sending, _ = worker.get_finished({"req-visible"})
@@ -281,7 +292,7 @@ def test_sync_save_on_finish_fails_closed_on_rpc_error():
     worker, _client, _ = _make_worker()
     worker._sync_save_on_finish = True
     with worker._save_completion_lock:
-        worker._req_pending_saves.add("req-failed")
+        worker._req_pending_save_tasks["req-failed"] = 1
         worker._save_completion_events["req-failed"] = MagicMock()
 
     worker._complete_save_requests(["req-failed"], failure="publication barrier failed")
@@ -356,7 +367,8 @@ def test_load_uses_registered_layer_names_before_forward_context_names():
     worker.start_load_kv(_load_metadata("req_registered_layers", (1, 2)), forward_context)
 
     assert len(client.load_calls) == 1
-    assert client.load_calls[0][4] == ["registered.layer.0", "registered.layer.1"]
+    # load 契约改为 per-group layer lists (layer_groups)
+    assert client.load_calls[0][4] == [["registered.layer.0", "registered.layer.1"]]
 
     worker.shutdown()
 

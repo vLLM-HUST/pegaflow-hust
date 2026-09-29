@@ -1,8 +1,9 @@
 use pegaflow_core::LoadState;
 use pegaflow_proto::proto::engine::{
-    HealthRequest, LeaseLoad, LoadRequest, QueryRequest, RegisterContextRequest, ReleaseRequest,
-    ResponseStatus, SaveLayer, SaveRequest, SessionEvent, SessionRequest, ShutdownRequest,
-    TransferMode, UnregisterRequest, engine_client::EngineClient, query_response,
+    HealthRequest, LeaseLoad, LoadBlockIds, LoadBlockTarget, LoadGroup, LoadRequest, QueryRequest,
+    RegisterContextRequest, ReleaseRequest, ResponseStatus, SaveLayer, SaveRequest, SessionEvent,
+    SessionRequest, ShutdownRequest, TransferMode, UnregisterRequest, engine_client::EngineClient,
+    load_block_target, query_response,
 };
 use pyo3::{
     create_exception,
@@ -99,6 +100,11 @@ impl QueryLoading {
 #[derive(Clone)]
 struct PyQueryLease(Vec<u8>);
 
+/// (lease, block_ids_by_group): per cache-group destination block ids for one
+/// query lease. `None` marks a group with no physical destination for that
+/// logical block (e.g. historical recurrent-state blocks in HMA).
+type PyLeaseLoad = (Vec<u8>, Vec<Vec<Option<u32>>>);
+
 impl PyQueryLease {
     fn into_proto(self) -> Vec<u8> {
         self.0
@@ -129,15 +135,22 @@ struct QueryReady {
     #[pyo3(get)]
     num_hit_blocks: usize,
     lease: PyQueryLease,
+    /// Membership queries (group_id > 0) only: indices into the queried
+    /// block_hashes whose block is cached; lease block i corresponds to
+    /// query position hit_positions[i]. Empty for prefix queries.
+    #[pyo3(get)]
+    hit_positions: Vec<u32>,
 }
 
 #[pymethods]
 impl QueryReady {
     #[new]
-    fn new(num_hit_blocks: usize, lease: PyQueryLease) -> Self {
+    #[pyo3(signature = (num_hit_blocks, lease, hit_positions=Vec::new()))]
+    fn new(num_hit_blocks: usize, lease: PyQueryLease, hit_positions: Vec<u32>) -> Self {
         Self {
             num_hit_blocks,
             lease,
+            hit_positions,
         }
     }
 
@@ -148,8 +161,9 @@ impl QueryReady {
 
     fn __repr__(&self) -> String {
         format!(
-            "QueryReady(num_hit_blocks={}, has_lease={})",
+            "QueryReady(num_hit_blocks={}, hits={:?}, has_lease={})",
             self.num_hit_blocks,
+            self.hit_positions,
             !self.lease.0.is_empty()
         )
     }
@@ -268,11 +282,11 @@ impl EngineRpcClient {
     ///     segments_list: List of segment counts per layer
     ///
     /// Returns: (ok: bool, message: str)
+    #[pyo3(signature = (instance_id, namespace, tp_rank, pp_rank, tp_size, world_size, device_id, layer_names, wrapper_bytes_list, num_blocks_list, bytes_per_block_list, kv_stride_bytes_list, segments_list, transfer_backend, page_first, layer_group_ids=None))]
     #[allow(
         clippy::too_many_arguments,
         reason = "PyO3 binding mirrors the public batch registration call shape"
     )]
-    #[pyo3(signature = (instance_id, namespace, tp_rank, pp_rank, tp_size, world_size, device_id, layer_names, wrapper_bytes_list, num_blocks_list, bytes_per_block_list, kv_stride_bytes_list, segments_list, transfer_backend, page_first))]
     fn register_context_batch(
         &self,
         py: Python<'_>,
@@ -291,6 +305,7 @@ impl EngineRpcClient {
         segments_list: Vec<u32>,
         transfer_backend: &str,
         page_first: bool,
+        layer_group_ids: Option<Vec<u32>>,
     ) -> PyResult<(bool, String)> {
         let transfer_mode = match transfer_backend {
             "direct" => TransferMode::Direct,
@@ -321,6 +336,7 @@ impl EngineRpcClient {
                     pp_rank,
                     transfer_mode: transfer_mode as i32,
                     page_first,
+                    layer_group_ids: layer_group_ids.unwrap_or_default(),
                 })
                 .await?;
             Ok(resp.into_inner())
@@ -402,12 +418,29 @@ impl EngineRpcClient {
         tp_rank: u32,
         device_id: i32,
         load_state_shm: String,
-        layer_names: Vec<String>,
-        loads: Vec<(Vec<u8>, Vec<u32>)>,
+        layer_groups: Vec<Vec<String>>,
+        loads: Vec<PyLeaseLoad>,
     ) -> PyResult<(bool, String)> {
         let loads = loads
             .into_iter()
-            .map(|(lease, block_ids)| LeaseLoad { lease, block_ids })
+            .map(|(lease, block_ids_by_group)| LeaseLoad {
+                lease,
+                block_ids_by_group: block_ids_by_group
+                    .into_iter()
+                    .map(|targets| LoadBlockIds {
+                        targets: targets
+                            .into_iter()
+                            .map(|block_id| LoadBlockTarget {
+                                target: block_id.map(load_block_target::Target::BlockId),
+                            })
+                            .collect(),
+                    })
+                    .collect(),
+            })
+            .collect();
+        let groups = layer_groups
+            .into_iter()
+            .map(|layer_names| LoadGroup { layer_names })
             .collect();
         self.call(py, "load", |mut c| async move {
             let resp = c
@@ -416,7 +449,7 @@ impl EngineRpcClient {
                     tp_rank,
                     device_id,
                     load_state_shm,
-                    layer_names,
+                    groups,
                     loads,
                 })
                 .await?;
@@ -442,12 +475,15 @@ impl EngineRpcClient {
     ///
     /// Returns:
     ///     QueryLoading while backing fetch is in progress, otherwise QueryReady.
+    #[pyo3(signature = (instance_id, block_hashes, req_id, wait_for_full_prefix=false, group_id=0))]
     fn query_prefetch(
         &self,
         py: Python<'_>,
         instance_id: String,
         block_hashes: Vec<Vec<u8>>,
         req_id: String,
+        wait_for_full_prefix: bool,
+        group_id: u32,
     ) -> PyResult<Py<PyAny>> {
         let result = py.detach(|| {
             self.rt_handle.block_on(async {
@@ -457,6 +493,8 @@ impl EngineRpcClient {
                         instance_id,
                         block_hashes,
                         req_id,
+                        wait_for_full_prefix,
+                        group_id,
                     })
                     .await
                     .map(|resp| resp.into_inner())
@@ -472,6 +510,7 @@ impl EngineRpcClient {
                         QueryReady {
                             num_hit_blocks: 0,
                             lease: PyQueryLease(Vec::new()),
+                            hit_positions: Vec::new(),
                         },
                     )
                     .map(|obj| obj.into_any())
@@ -489,6 +528,7 @@ impl EngineRpcClient {
                 QueryReady {
                     num_hit_blocks: u64_to_usize(ready.num_hit_blocks, "num_hit_blocks")?,
                     lease: PyQueryLease(ready.lease),
+                    hit_positions: ready.hit_positions,
                 },
             )
             .map(|obj| obj.into_any()),
