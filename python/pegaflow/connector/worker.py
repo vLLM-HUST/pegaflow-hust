@@ -192,6 +192,52 @@ def _registration_tensor(kv_cache) -> torch.Tensor:
     return first
 
 
+def _expand_hybrid_registration_caches(
+    kv_caches: dict[str, Any],
+    layer_to_group: dict[str, int],
+    recurrent_layer_names: frozenset[str],
+) -> tuple[dict[str, torch.Tensor], dict[str, int], frozenset[str]]:
+    """Expose each HMA cache segment as an independently strided layer.
+
+    Ascend stores recurrent states state-major: every state tensor spans all
+    blocks, and different state shapes therefore have different page strides.
+    Attention K/V tuples can likewise use separate allocations. PegaFlow's
+    per-layer registration already supports different block sizes, so retain
+    the scheduler group while registering every physical segment separately.
+    """
+    expanded: dict[str, torch.Tensor] = {}
+    expanded_groups: dict[str, int] = {}
+    expanded_recurrent: set[str] = set()
+
+    for layer_name, cache in kv_caches.items():
+        group_index = layer_to_group.get(layer_name)
+        if group_index is None:
+            raise RuntimeError(f"HMA registration contains an unmapped layer: {layer_name}")
+
+        if not isinstance(cache, (tuple, list)):
+            if not isinstance(cache, torch.Tensor):
+                raise TypeError(f"KV cache for {layer_name} must be a tensor")
+            expanded[layer_name] = cache
+            expanded_groups[layer_name] = group_index
+            if layer_name in recurrent_layer_names:
+                expanded_recurrent.add(layer_name)
+            continue
+
+        if not cache or not all(isinstance(segment, torch.Tensor) for segment in cache):
+            raise TypeError(
+                f"KV cache for {layer_name} must be a non-empty sequence of tensors"
+            )
+        kind = "state" if layer_name in recurrent_layer_names else "segment"
+        for index, segment in enumerate(cache):
+            registration_name = f"{layer_name}::{kind}{index}"
+            expanded[registration_name] = segment
+            expanded_groups[registration_name] = group_index
+            if layer_name in recurrent_layer_names:
+                expanded_recurrent.add(registration_name)
+
+    return expanded, expanded_groups, frozenset(expanded_recurrent)
+
+
 class WorkerConnector:
     """Holds worker-only state and behaviors."""
 
@@ -254,6 +300,7 @@ class WorkerConnector:
         self._failed_load_reqs: set[str] = set()
 
         self._registered_layers: list[str] = []
+        self._save_trigger_layer: str | None = None
         self._subblock_skip_warned: set[str] = set()  # 每层只警告一次的子块跳保存
         # Page-first storage: all layers of a block in one host page, one slot
         # per tp_rank. Saves distribute by block stripe instead of by layer.
@@ -331,6 +378,9 @@ class WorkerConnector:
         if not kv_caches:
             raise RuntimeError("No KV cache layers were selected for registration")
 
+        self._save_trigger_layer = next(iter(kv_caches))
+        recurrent_registration_names = self._cache_groups.recurrent_layer_names
+
         # Ascend prefill-disaggregation returns KV caches as (k, v) tuples.
         # Following vllm-ascend's _flatten_kv_value pattern: each tensor has
         # its own backing storage and may be independently allocated (K and V
@@ -356,6 +406,15 @@ class WorkerConnector:
                         seen_ptrs.add(ptr)
                         flat_kv_caches[layer_name] = kv_cache
             kv_caches = flat_kv_caches
+        else:
+            kv_caches, expanded_groups, recurrent_registration_names = (
+                _expand_hybrid_registration_caches(
+                    kv_caches,
+                    self._layer_to_group,
+                    self._cache_groups.recurrent_layer_names,
+                )
+            )
+            self._layer_to_group.update(expanded_groups)
 
         if self._diag_kv_checksum:
             self._diag_kv_caches = {
@@ -388,8 +447,7 @@ class WorkerConnector:
 
         for layer_name, kv_cache in kv_caches.items():
             is_recurrent_state = (
-                layer_name in self._cache_groups.recurrent_layer_names
-                or isinstance(kv_cache, (tuple, list))
+                layer_name in recurrent_registration_names
             )
             registration_tensor = _registration_tensor(kv_cache)
             # DeepSeek-V4 hybrid layers expose views with non-zero storage
@@ -908,7 +966,7 @@ class WorkerConnector:
         # provide a fallback path through the layer callback on first layer.
         if not self._registered_layers:
             return
-        first_layer = self._registered_layers[0]
+        first_layer = self._save_trigger_layer or self._registered_layers[0]
         if layer_name != first_layer:
             return
         if self._diag_kv_checksum:

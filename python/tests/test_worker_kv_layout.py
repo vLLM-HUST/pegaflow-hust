@@ -3,12 +3,16 @@
 from __future__ import annotations
 
 import pytest
+import torch
 
 from .unit_stubs import install_connector_unit_stubs
 
 install_connector_unit_stubs()
 
-from pegaflow.connector.worker import _infer_kv_cache_registration  # noqa: E402
+from pegaflow.connector.worker import (  # noqa: E402
+    _expand_hybrid_registration_caches,
+    _infer_kv_cache_registration,
+)
 
 
 class FakeTensor:
@@ -22,6 +26,53 @@ class FakeTensor:
 
     def element_size(self) -> int:
         return self._element_size
+
+
+def test_hybrid_recurrent_states_keep_independent_page_strides():
+    caches, groups, recurrent = _expand_hybrid_registration_caches(
+        {
+            "linear_attn": [
+                torch.empty((4, 8), dtype=torch.bfloat16),
+                torch.empty((4, 3, 5), dtype=torch.bfloat16),
+            ],
+            "full_attn": torch.empty((4, 2, 8), dtype=torch.bfloat16),
+        },
+        {"linear_attn": 1, "full_attn": 0},
+        frozenset({"linear_attn"}),
+    )
+
+    assert list(caches) == [
+        "linear_attn::state0",
+        "linear_attn::state1",
+        "full_attn",
+    ]
+    assert caches["linear_attn::state0"].stride(0) == 8
+    assert caches["linear_attn::state1"].stride(0) == 15
+    assert groups == {
+        "linear_attn::state0": 1,
+        "linear_attn::state1": 1,
+        "full_attn": 0,
+    }
+    assert recurrent == frozenset(
+        {"linear_attn::state0", "linear_attn::state1"}
+    )
+
+
+def test_hybrid_attention_tuple_keeps_both_allocations():
+    caches, groups, recurrent = _expand_hybrid_registration_caches(
+        {
+            "full_attn": (
+                torch.empty((4, 8), dtype=torch.bfloat16),
+                torch.empty((4, 12), dtype=torch.bfloat16),
+            )
+        },
+        {"full_attn": 0},
+        frozenset(),
+    )
+
+    assert list(caches) == ["full_attn::segment0", "full_attn::segment1"]
+    assert groups == {"full_attn::segment0": 0, "full_attn::segment1": 0}
+    assert recurrent == frozenset()
 
 
 def test_mla_blocks_first_physical_rows_are_grouped_into_logical_blocks():
