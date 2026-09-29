@@ -12,7 +12,9 @@ Standalone build:
 from setuptools import Extension, setup
 
 _npu_ipc = Extension(
-    "npu_ipc_bindings._npu_ipc",
+    # build-wheel.sh executes setup.py from this package directory. Keeping
+    # the extension name local makes --inplace install it beside __init__.py.
+    "_npu_ipc",
     sources=["_npu_ipc.c"],
     extra_compile_args=["-std=c11", "-O2"],
     extra_link_args=["-ldl"],
