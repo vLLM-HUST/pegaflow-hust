@@ -12,17 +12,27 @@ from vllm_hust_pegaflow_provider import provider as provider_module
 from vllm_hust_pegaflow_provider.provider import PegaFlowProvider
 
 ROOT = Path(__file__).resolve().parents[1]
-MANIFEST = ROOT / "src/vllm_hust_pegaflow_provider/manifests/vllm-hust-extension-v0.2.json"
+RUNTIME_ROOT = ROOT.parent / "python"
+MANIFEST = RUNTIME_ROOT / "pegaflow/ecpa_bundle/vllm-hust-extension-v0.3.json"
 
 
-def test_provider_publishes_declared_activation_entry_point() -> None:
+def test_runtime_distribution_owns_bundle_and_activation_entry_point() -> None:
     manifest = load_manifest(MANIFEST)
-    project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
+    project = tomllib.loads((RUNTIME_ROOT / "pyproject.toml").read_text())["project"]
     published = project["entry-points"]["vllm.general_plugins"]
+    bundles = project["entry-points"]["vllm_hust.extension_bundles"]
 
+    assert bundles[manifest.bundle_id] == "pegaflow.ecpa_bundle"
     for entry_point in manifest.activation.entry_points:
         assert entry_point.group == "vllm.general_plugins"
         assert entry_point.name in published
+
+
+def test_provider_distribution_does_not_claim_runtime_entry_points() -> None:
+    project = tomllib.loads((ROOT / "pyproject.toml").read_text())["project"]
+    entry_points = project["entry-points"]
+
+    assert set(entry_points) == {"vllm_hust_ext.providers"}
 
 
 def test_manifest_preserves_external_service_boundary() -> None:
@@ -33,6 +43,7 @@ def test_manifest_preserves_external_service_boundary() -> None:
     assert manifest.lifecycle_owner == "external_operator"
     assert manifest.runtime.type == "composite"
     assert manifest.requires_services[0].endpoint_config == "health_url"
+    assert manifest.resource_claims[0].resource == "vllm.kv-connector.primary"
 
 
 def test_plan_renders_primary_connector_without_mutating_service() -> None:

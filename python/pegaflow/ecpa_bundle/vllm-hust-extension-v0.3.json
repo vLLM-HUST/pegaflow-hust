@@ -1,7 +1,7 @@
 {
-  "schema_version": "0.2-experimental",
+  "schema_version": "0.3-experimental",
   "extension_id": "org.vllm-hust.pegaflow",
-  "extension_version": "0.2.0.dev0",
+  "extension_version": "0.23.3",
   "kind": "kv_service_adapter",
   "host": {
     "provider": "pegaflow",
@@ -38,6 +38,13 @@
       "version_range": null,
       "endpoint_config": "health_url",
       "optional": false
+    }
+  ],
+  "resource_claims": [
+    {
+      "resource": "vllm.kv-connector.primary",
+      "scope": "vllm-process",
+      "mode": "exclusive"
     }
   ],
   "activation": {

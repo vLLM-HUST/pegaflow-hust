@@ -166,6 +166,37 @@ jobs:
         run: |
           uv run --isolated --no-project --with pytest --with numpy --with 'requests>=2.26.0' pytest
 
+  ecpa-package:
+    name: ECPA package contract (Python ${{ matrix.python-version }})
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ['3.10', '3.12']
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: ${{ matrix.python-version }}
+      - name: Install package tools and pinned ECPA
+        run: |
+          python -m pip install build pytest
+          python -m pip install 'vllm-hust-ext @ git+https://github.com/vLLM-HUST/extension-manager.git@031cbb13ae1dc9deebb09d55dc85a1918cd33dc0'
+      - name: Validate runtime-owned Bundle and provider contract
+        run: |
+          python -m pytest -q python/tests/test_ecpa_bundle.py extension-provider/tests
+      - name: Build and inspect provider wheel
+        run: |
+          python -m build extension-provider --outdir dist
+          python -m venv /tmp/pegaflow-ecpa-provider
+          /tmp/pegaflow-ecpa-provider/bin/pip install 'vllm-hust-ext @ git+https://github.com/vLLM-HUST/extension-manager.git@031cbb13ae1dc9deebb09d55dc85a1918cd33dc0'
+          /tmp/pegaflow-ecpa-provider/bin/pip install --no-deps dist/vllm_hust_pegaflow_provider-*.whl
+          test "$(VLLM_HUST_EXT_CONFIG=/tmp/pegaflow-ecpa-provider/config.json /tmp/pegaflow-ecpa-provider/bin/vllm-hust-ext extension list --json)" = '[]'
+
   # --------------------------------------------------------------------
   # P2: Ascend compile check (this project targets Ascend NPU only)
   # --------------------------------------------------------------------

@@ -6,13 +6,20 @@ into an in-process vLLM plugin and does not grant the Extension Manager
 authority to start, stop, upgrade, clear, or delete PegaFlow services or data.
 
 ```bash
-pip install vllm-hust-ext vllm-hust-pegaflow-provider
+pip install vllm-hust-ext
 pip install /path/to/pegaflow-llm-npu-0.23.3.whl
+pip install /path/to/vllm_hust_pegaflow_provider-0.2.0.dev0-py3-none-any.whl
 
 vllm-hust-ext extension check org.vllm-hust.pegaflow
 vllm-hust-ext extension enable org.vllm-hust.pegaflow
 vllm-hust-ext run -- vllm serve MODEL
 ```
+
+The runtime wheel owns `org.vllm-hust.pegaflow` and
+`vllm.general_plugins:pegaflow`, including their target modules. This provider
+wheel owns only `vllm_hust_ext.providers:pegaflow`. Installing only the runtime
+wheel leaves the Bundle discoverable but makes provider operations fail closed;
+installing only this provider wheel does not advertise a phantom Bundle.
 
 The Manager configuration must provide:
 
