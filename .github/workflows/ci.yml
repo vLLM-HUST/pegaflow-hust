@@ -186,6 +186,7 @@ jobs:
         run: |
           python -m pip install build pytest
           python -m pip install 'vllm-hust-ext @ git+https://github.com/vLLM-HUST/extension-manager.git@031cbb13ae1dc9deebb09d55dc85a1918cd33dc0'
+          python -m pip install --no-deps --editable extension-provider
       - name: Validate runtime-owned Bundle and provider contract
         run: |
           python -m pytest -q python/tests/test_ecpa_bundle.py extension-provider/tests
