@@ -51,6 +51,7 @@ test = [
     "numpy>=1.24",
     "httpx>=0.24.0",
     "requests>=2.26.0",
+    "tomli>=2; python_version < '3.11'",
 ]
 dev = [
     "pegaflow-llm-npu[test]",

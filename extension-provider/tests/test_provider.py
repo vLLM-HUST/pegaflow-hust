@@ -5,8 +5,12 @@ from pathlib import Path
 from types import SimpleNamespace
 
 import pytest
-import tomllib
 from vllm_hust_ext.manifest import load_manifest
+
+try:
+    import tomllib
+except ModuleNotFoundError:  # pragma: no cover - Python 3.10
+    import tomli as tomllib
 
 from vllm_hust_pegaflow_provider import provider as provider_module
 from vllm_hust_pegaflow_provider.provider import PegaFlowProvider
