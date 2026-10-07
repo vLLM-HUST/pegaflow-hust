@@ -199,7 +199,7 @@ jobs:
           test "$(VLLM_HUST_EXT_CONFIG=/tmp/pegaflow-ecpa-provider/config.json /tmp/pegaflow-ecpa-provider/bin/vllm-hust-ext extension list --json)" = '[]'
 
   ecpa-runtime-wheel:
-    name: ECPA runtime clean-wheel lifecycle
+    name: ECPA runtime metadata clean-wheel lifecycle
     runs-on: ubuntu-latest
     steps:
       - name: Checkout
@@ -219,9 +219,19 @@ jobs:
           sudo apt-get update
           sudo apt-get install -y protobuf-compiler
           python -m pip install build 'maturin>=1.0,<2.0'
-      - name: Build runtime and provider wheels
+      - name: Build metadata-validation runtime and provider wheels
         run: |
-          python -m maturin build --release --no-default-features --features ascend --manifest-path python/Cargo.toml --out dist-runtime
+          # GitHub-hosted x86 runners do not carry CANN. This link-only stub is
+          # used solely to build an unpublished wheel whose Python package and
+          # entry-point metadata are inspected below; the native module is
+          # never imported or described as Ascend runtime evidence.
+          mkdir -p /tmp/pegaflow-ascend-link-stub
+          printf 'void pegaflow_ci_link_placeholder(void) {}\n' | \
+            cc -shared -x c - -o /tmp/pegaflow-ascend-link-stub/libascendcl.so
+          RUSTFLAGS='-L native=/tmp/pegaflow-ascend-link-stub' \
+            LIBRARY_PATH=/tmp/pegaflow-ascend-link-stub \
+            python -m maturin build --release --no-default-features --features ascend \
+              --auditwheel skip --manifest-path python/Cargo.toml --out dist-runtime
           python -m build extension-provider --outdir dist-provider
       - name: Exercise clean-wheel ECPA lifecycle
         run: |
