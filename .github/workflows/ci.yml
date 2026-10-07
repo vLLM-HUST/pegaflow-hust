@@ -185,7 +185,7 @@ jobs:
       - name: Install package tools and pinned ECPA
         run: |
           python -m pip install build pytest tomli
-          python -m pip install 'vllm-hust-ext @ git+https://github.com/vLLM-HUST/extension-manager.git@031cbb13ae1dc9deebb09d55dc85a1918cd33dc0'
+          python -m pip install 'vllm-hust-ext @ git+https://github.com/vLLM-HUST/extension-manager.git@4be9d2c502f8a41797bb068993eb91add29f3401'
           python -m pip install --no-deps --editable extension-provider
       - name: Validate runtime-owned Bundle and provider contract
         run: |
@@ -194,9 +194,105 @@ jobs:
         run: |
           python -m build extension-provider --outdir dist
           python -m venv /tmp/pegaflow-ecpa-provider
-          /tmp/pegaflow-ecpa-provider/bin/pip install 'vllm-hust-ext @ git+https://github.com/vLLM-HUST/extension-manager.git@031cbb13ae1dc9deebb09d55dc85a1918cd33dc0'
+          /tmp/pegaflow-ecpa-provider/bin/pip install 'vllm-hust-ext @ git+https://github.com/vLLM-HUST/extension-manager.git@4be9d2c502f8a41797bb068993eb91add29f3401'
           /tmp/pegaflow-ecpa-provider/bin/pip install --no-deps dist/vllm_hust_pegaflow_provider-*.whl
           test "$(VLLM_HUST_EXT_CONFIG=/tmp/pegaflow-ecpa-provider/config.json /tmp/pegaflow-ecpa-provider/bin/vllm-hust-ext extension list --json)" = '[]'
+
+  ecpa-runtime-wheel:
+    name: ECPA runtime metadata clean-wheel lifecycle
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Set up Python 3.11
+        uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Install Rust toolchain
+        uses: dtolnay/rust-toolchain@1.97.0
+      - name: Set up sccache
+        uses: mozilla-actions/sccache-action@v0.0.9
+      - name: Install build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y protobuf-compiler
+          python -m pip install build 'maturin>=1.0,<2.0'
+      - name: Build metadata-validation runtime and provider wheels
+        run: |
+          # GitHub-hosted x86 runners do not carry CANN. This link-only stub is
+          # used solely to build an unpublished wheel whose Python package and
+          # entry-point metadata are inspected below; the native module is
+          # never imported or described as Ascend runtime evidence.
+          mkdir -p /tmp/pegaflow-ascend-link-stub
+          printf 'void pegaflow_ci_link_placeholder(void) {}\n' | \
+            cc -shared -x c - -o /tmp/pegaflow-ascend-link-stub/libascendcl.so
+          RUSTFLAGS='-L native=/tmp/pegaflow-ascend-link-stub' \
+            LIBRARY_PATH=/tmp/pegaflow-ascend-link-stub \
+            python -m maturin build --release --no-default-features --features ascend \
+              --auditwheel skip --manifest-path python/Cargo.toml --out dist-runtime
+          python -m build extension-provider --outdir dist-provider
+      - name: Exercise clean-wheel ECPA lifecycle
+        run: |
+          python -m venv /tmp/pegaflow-ecpa-runtime
+          /tmp/pegaflow-ecpa-runtime/bin/pip install 'vllm-hust-ext @ git+https://github.com/vLLM-HUST/extension-manager.git@4be9d2c502f8a41797bb068993eb91add29f3401'
+          /tmp/pegaflow-ecpa-runtime/bin/pip install dist-runtime/pegaflow_llm_npu-*.whl dist-provider/vllm_hust_pegaflow_provider-*.whl
+          /tmp/pegaflow-ecpa-runtime/bin/python - <<'PY'
+          import json
+          import os
+          import pathlib
+          import subprocess
+
+          root = pathlib.Path('/tmp/pegaflow-ecpa-runtime')
+          cli = root / 'bin/vllm-hust-ext'
+          config = root / 'config.json'
+          profile = root / 'profile.json'
+          profile.write_text(json.dumps({
+              'grpc_endpoint': 'http://127.0.0.1:50055',
+              'health_url': 'http://127.0.0.1:19091/health',
+              'kv_role': 'kv_both',
+          }))
+          env = os.environ | {'VLLM_HUST_EXT_CONFIG': str(config)}
+
+          def run(*args, check=True, extra_env=None):
+              command_env = env | (extra_env or {})
+              return subprocess.run(
+                  [str(cli), *args],
+                  check=check,
+                  capture_output=True,
+                  text=True,
+                  env=command_env,
+              )
+
+          listed = json.loads(run('extension', 'list', '--json').stdout)
+          assert len(listed) == 1
+          assert listed[0]['bundle_id'] == 'org.vllm-hust.pegaflow'
+          assert listed[0]['distribution'] == 'pegaflow-llm-npu'
+          assert listed[0]['activation_ready'] is True
+          run('extension', 'inspect', 'org.vllm-hust.pegaflow')
+          run('extension', 'validate', 'org.vllm-hust.pegaflow')
+          run('extension', 'configure', 'org.vllm-hust.pegaflow', '--file', str(profile))
+          check = json.loads(run('extension', 'check', 'org.vllm-hust.pegaflow').stdout)
+          assert check['states'] == [
+              'installed', 'discovered', 'compatible', 'configured', 'degraded'
+          ]
+          run('extension', 'plan', 'org.vllm-hust.pegaflow')
+          run('extension', 'render', 'org.vllm-hust.pegaflow')
+          run('extension', 'enable', 'org.vllm-hust.pegaflow')
+          rendered_env = json.loads(run(
+              'extension', 'env',
+              extra_env={'VLLM_PLUGINS': 'ascend,user_plugin,ascend'},
+          ).stdout)
+          assert rendered_env['VLLM_PLUGINS'] == 'ascend,user_plugin,pegaflow'
+          refused = run('run', '--', '/bin/true', check=False)
+          assert refused.returncode == 2
+          assert "required service health is not verified" in refused.stderr
+          run('extension', 'disable', 'org.vllm-hust.pegaflow')
+          run('extension', 'forget', 'org.vllm-hust.pegaflow')
+          PY
+          /tmp/pegaflow-ecpa-runtime/bin/pip uninstall -y pegaflow-llm-npu
+          test "$(VLLM_HUST_EXT_CONFIG=/tmp/pegaflow-ecpa-runtime/config.json /tmp/pegaflow-ecpa-runtime/bin/vllm-hust-ext extension list --json)" = '[]'
 
   # --------------------------------------------------------------------
   # P2: Ascend compile check (this project targets Ascend NPU only)
