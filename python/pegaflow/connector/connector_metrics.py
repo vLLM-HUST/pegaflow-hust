@@ -73,6 +73,10 @@ class PrefetchTracker:
         """Called when a request enters prefetch loading state."""
         self._pending_prefetches += 1
 
+    def on_prefetch_cancel(self) -> None:
+        """Remove a cancelled prefetch from the pending gauge."""
+        self._pending_prefetches = max(0, self._pending_prefetches - 1)
+
     def on_prefetch_complete(self, duration_ms: float, hit_blocks: int) -> None:
         """Called when a request's prefetch completes.
 

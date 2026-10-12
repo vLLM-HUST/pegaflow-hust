@@ -17,6 +17,7 @@ from pegaflow.connector.common import (  # noqa: E402
     PegaConnectorMetadata,
     PegaConnectorMode,
     SaveIntent,
+    TpShardTopology,
 )
 from pegaflow.connector.scheduler import SchedulerConnector  # noqa: E402
 from pegaflow.pegaflow import QueryLoading, QueryReady  # noqa: E402
@@ -605,6 +606,47 @@ class TestSchedulerQueryProbeReuse:
         assert engine_client.query_prefetch.call_count == 2
         sc._cleanup_request("r1")
         assert "r1" not in sc._pending_query_probes
+
+    def test_completed_miss_is_invalidated_by_local_progress_and_cleanup(self):
+        sc, engine_client = self._make_connector()
+        engine_client.query_prefetch.return_value = QueryReady(0, b"")
+        req = _make_fake_request("r1", [_hash(i) for i in range(4)])
+        assert sc.get_num_new_matched_tokens(req, num_computed_tokens=0) == (0, False)
+        assert sc.get_num_new_matched_tokens(req, num_computed_tokens=16) == (0, False)
+        assert engine_client.query_prefetch.call_count == 2
+        sc._cleanup_request("r1")
+        assert "r1" not in sc._external_matched_blocks
+        assert sc.get_num_new_matched_tokens(req, num_computed_tokens=16) == (0, False)
+        assert engine_client.query_prefetch.call_count == 3
+
+    @pytest.mark.parametrize("cleanup", ["request", "shutdown"])
+    def test_cleanup_releases_partially_ready_tp_query(self, cleanup):
+        first, second = MagicMock(), MagicMock()
+        first.query_prefetch.return_value = QueryReady(2, b"first")
+        second.query_prefetch.return_value = QueryLoading()
+        topology = TpShardTopology.from_config(
+            "http://p0:50055", ["http://p0:50055", "http://p1:50055"], 2, 2
+        )
+        sc = SchedulerConnector(
+            _make_ctx(engine_client=first, tp_size=2, world_size=2, tp_shards=topology),
+            engine_clients=(first, second),
+        )
+        req = _make_fake_request("r1", [_hash(i) for i in range(4)])
+        assert sc.get_num_new_matched_tokens(req, num_computed_tokens=0) == (None, False)
+        assert sc._prefetch_tracker.pending_prefetches == 1
+        if cleanup == "shutdown":
+            sc.shutdown()
+        else:
+            sc._cleanup_request("r1")
+        first.release.assert_called_once_with(b"first")
+        assert not sc._pending_query_probes
+        assert not sc._tp_shard_client._pending
+        assert not sc._prefetch_start_times
+        assert sc._prefetch_tracker.get_stats() == {
+            "pending_prefetches": 0,
+            "prefetch_duration": [],
+            "prefetch_blocks": [],
+        }
 
     def test_save_only_mode_skips_query(self):
         engine_client = MagicMock()
