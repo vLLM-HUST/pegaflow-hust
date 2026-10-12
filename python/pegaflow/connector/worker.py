@@ -1256,7 +1256,9 @@ class WorkerConnector:
     def _write_save_ack(self, raw_request_id: str) -> None:
         assert self._save_ack_dir is not None
         stable_request_id = self._stable_request_id_for_ack(raw_request_id)
-        rank = self._ctx.effective_tp_rank
+        rank = self._ctx.tp_rank
+        if rank is None:
+            raise RuntimeError("visibility acknowledgement requires a physical TP rank")
         marker = self._save_ack_dir / f"{stable_request_id}.tp{rank}.visible"
         temporary = self._save_ack_dir / (
             f".{stable_request_id}.tp{rank}.{os.getpid()}.{time.monotonic_ns()}.tmp"

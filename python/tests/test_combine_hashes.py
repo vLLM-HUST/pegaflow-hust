@@ -593,6 +593,19 @@ class TestSchedulerQueryProbeReuse:
 
         assert sc._count_available_block_prefix([_hash(i) for i in range(4)], "r1") is None
 
+    def test_completed_miss_is_reused_until_query_identity_changes(self):
+        sc, engine_client = self._make_connector()
+        engine_client.query_prefetch.return_value = QueryReady(0, b"")
+        req = _make_fake_request("r1", [_hash(i) for i in range(4)])
+        assert sc.get_num_new_matched_tokens(req, num_computed_tokens=0) == (0, False)
+        assert sc.get_num_new_matched_tokens(req, num_computed_tokens=0) == (0, False)
+        assert engine_client.query_prefetch.call_count == 1
+        req.block_hashes = [_hash(i) for i in range(10, 14)]
+        assert sc.get_num_new_matched_tokens(req, num_computed_tokens=0) == (0, False)
+        assert engine_client.query_prefetch.call_count == 2
+        sc._cleanup_request("r1")
+        assert "r1" not in sc._pending_query_probes
+
     def test_save_only_mode_skips_query(self):
         engine_client = MagicMock()
         sc = SchedulerConnector(

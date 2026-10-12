@@ -336,6 +336,12 @@ class SchedulerConnector:
     ) -> tuple[int, bool]:
         hit_blocks = probe.require_hit_blocks()
         computed_blocks = probe.computed_blocks
+        if hit_blocks == 0:
+            # A completed miss remains valid while this request's query
+            # identity is unchanged. Retrying it while waiting for token
+            # budget would duplicate a remote fetch and re-enter a cohort gate.
+            self._external_matched_blocks[req_id] = computed_blocks
+            return (0, False)
         vbs = self._ctx.virtual_block_size
         tail_hit = probe.tail_tokens > 0 and hit_blocks == len(probe.query_hashes)
         # _build_query appends the tail key last and the backend reports prefix
@@ -1234,11 +1240,12 @@ class SchedulerConnector:
             self._release_pending_query_probe(req_id)
 
     def _release_pending_query_probe(self, req_id: str) -> bool:
+        pending_released = self._tp_shard_client.cancel_pending(self._ctx.instance_id, req_id)
         probe = self._pending_query_probes.pop(req_id, None)
         if probe is None:
-            return True
+            return pending_released
 
-        return self._release_query_probe(req_id, probe)
+        return self._release_query_probe(req_id, probe) and pending_released
 
     def _release_query_probe(self, req_id: str, probe: _QueryProbe) -> bool:
         released = True

@@ -22,6 +22,17 @@ class ShardedQueryReady:
 class TpShardQueryClient:
     def __init__(self, clients: tuple[EngineRpcClient, ...]):
         self._clients = clients
+        self._pending: dict[tuple[str, str], tuple[tuple[bytes, ...], list[QueryReady | None]]] = {}
+
+    def cancel_pending(self, instance_id: str, req_id: str) -> bool:
+        pending = self._pending.pop((instance_id, req_id), None)
+        if pending is None:
+            return True
+        released = True
+        for client, result in zip(self._clients, pending[1], strict=True):
+            if result is not None and not self._release_one(client, result.lease, req_id):
+                released = False
+        return released
 
     def query(
         self,
@@ -30,25 +41,40 @@ class TpShardQueryClient:
         req_id: str,
         wait_for_full_prefix: bool,
     ) -> ShardedQueryReady | None:
+        key = (instance_id, req_id)
+        identity = tuple(block_hashes)
+        previous = self._pending.get(key)
+        if previous is not None and previous[0] != identity:
+            self.cancel_pending(instance_id, req_id)
+            previous = None
+        cached = previous[1] if previous is not None else [None] * len(self._clients)
+        self._pending[key] = (identity, cached)
         results: list[QueryReady] = []
         try:
-            for client in self._clients:
-                result = client.query_prefetch(
-                    instance_id,
-                    block_hashes,
-                    req_id=req_id,
-                    wait_for_full_prefix=wait_for_full_prefix,
-                )
+            for index, client in enumerate(self._clients):
+                result = cached[index]
+                if result is None:
+                    result = client.query_prefetch(
+                        instance_id,
+                        block_hashes,
+                        req_id=req_id,
+                        wait_for_full_prefix=wait_for_full_prefix,
+                    )
                 if isinstance(result, QueryLoading):
-                    self.release(tuple(ready.lease for ready in results), req_id)
+                    # Retain completed shard leases while another shard is
+                    # loading. An experiment deliberately bypasses host cache;
+                    # releasing Ready here would fetch that shard again.
                     return None
                 if not isinstance(result, QueryReady):
                     raise TypeError(f"query_prefetch returned unexpected outcome {type(result)!r}")
                 results.append(result)
+                cached[index] = result
                 self._validate_ready(result, len(block_hashes), len(results) - 1)
         except Exception:
-            self.release(tuple(ready.lease for ready in results), req_id)
+            self.cancel_pending(instance_id, req_id)
             raise
+
+        self._pending.pop(key, None)
 
         common_blocks = min(result.num_hit_blocks for result in results)
         leases = [result.lease for result in results]
