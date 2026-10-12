@@ -1,0 +1,15 @@
+1791796470131008916   INFO pegaflow_metaserver: lib.rs:105 Starting pegaflow-metaserver v0.23.3
+1791796470131061237   INFO pegaflow_metaserver: lib.rs:110 Starting PegaFlow MetaServer
+1791796470131066797   INFO pegaflow_metaserver: lib.rs:111 Binding to address: 192.168.0.2:29056
+1791796470131072867   INFO pegaflow_metaserver: lib.rs:112 Node lifecycle: stale_after=30s ttl=120m sweep_interval=600s
+1791796470131150709   INFO opentelemetry: metrics.rs:29  name="MeterProvider.GlobalSet" message=Global meter provider is set. Meters can now be created using global::meter() or global::meter_with_scope().
+1791796470131163849   INFO pegaflow_metaserver: lib.rs:65 Prometheus metrics exporter enabled
+1791796470131482215   INFO pegaflow_metaserver::http_server: http_server.rs:47 Starting HTTP server on 0.0.0.0:29092 (/health, /metrics)
+1791796470131499835   INFO pegaflow_metaserver: lib.rs:179 MetaServer initialized successfully
+1791796470131503705   INFO pegaflow_metaserver: lib.rs:180 Listening on 192.168.0.2:29056
+1791796483872524455   INFO pegaflow_metaserver::store: store.rs:148 MetaServer node registered: node=192.168.0.4:29055 node_id=e33db8ff-319d-40c9-ae68-c5ecb2ef239a
+1791796483950116386   INFO pegaflow_metaserver::store: store.rs:148 MetaServer node registered: node=192.168.0.4:29057 node_id=ff18179b-de58-47dc-82f1-3f9141dc2021
+1791796484243525186   INFO pegaflow_metaserver::store: store.rs:148 MetaServer node registered: node=192.168.0.2:29057 node_id=14b75a72-1db2-4633-9886-197cdb0e92f2
+1791796484250021659   INFO pegaflow_metaserver::store: store.rs:148 MetaServer node registered: node=192.168.0.2:29055 node_id=aaa25fa3-a501-492e-95b0-30af0a7e24a1
+1791796778120192571   INFO pegaflow_metaserver: lib.rs:94 Received SIGTERM, initiating shutdown
+1791796787697432888   INFO pegaflow_metaserver: lib.rs:197 MetaServer shut down gracefully

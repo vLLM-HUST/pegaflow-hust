@@ -1,0 +1,220 @@
+2026-10-12T09:41:42.224721+00:00   INFO pegaflow_server: lib.rs:554 Starting pega-engine-server v0.23.3
+2026-10-12T09:41:42.864059+00:00   INFO pegaflow_server: lib.rs:368 Ascend ACL runtime initialized, device 1 set as current
+2026-10-12T09:41:42.864111+00:00   INFO pegaflow_server::check_ascend_version: check_ascend_version.rs:40 Ascend preflight: minimum required version 1.16.0
+2026-10-12T09:41:42.864166+00:00   INFO pegaflow_server::check_ascend_version: check_ascend_version.rs:52 Ascend preflight: runtime version 1.17.0 detected
+2026-10-12T09:41:42.864174+00:00   INFO pegaflow_server: lib.rs:575 Using specified device(s): [1]
+[W1012 09:41:46.064805044 FunctionLoader.cpp:48] Warning: LD_PRELOAD detected, FunctionLoader prefers RTLD_DEFAULT for symbol resolution. (function operator())
+[W1012 09:41:53.947355931 NPUCachingAllocator.cpp:202] Warning: The current CANN and HDK(driver) versions require processing for 32 padding size, with memory allocation. (function operator())
+2026-10-12T09:41:53.479368+00:00   INFO pegaflow_server: lib.rs:447 Initialized context for device 1 in 0.01s
+2026-10-12T09:41:53.479435+00:00   INFO pegaflow_server: lib.rs:585 Device runtime initialized for 1 device(s): [1]
+2026-10-12T09:41:53.479618+00:00   INFO pegaflow_server: lib.rs:606 Creating PegaEngine with pinned memory pool: 15.00 GiB (16106127360 bytes), hugepages=false
+2026-10-12T09:41:53.487885+00:00   INFO pegaflow_server: lib.rs:740 NUMA-aware memory allocation disabled
+2026-10-12T09:41:53.488547+00:00   INFO pegaflow_server: lib.rs:496 Prometheus metrics exporter enabled
+2026-10-12T09:41:53.488645+00:00   INFO opentelemetry: metrics.rs:29  name="MeterProvider.GlobalSet" message=Global meter provider is set. Meters can now be created using global::meter() or global::meter_with_scope().
+2026-10-12T09:41:54.837919+00:00   INFO pegaflow_common::numa: numa.rs:703 === Device-NUMA Topology ===
+2026-10-12T09:41:54.837975+00:00   INFO pegaflow_common::numa: numa.rs:704 NUMA nodes: 8
+2026-10-12T09:41:54.837983+00:00   INFO pegaflow_common::numa: numa.rs:712   Device 0 -> NUMA6
+2026-10-12T09:41:54.837989+00:00   INFO pegaflow_common::numa: numa.rs:712   Device 1 -> UNKNOWN
+2026-10-12T09:41:54.840174+00:00   INFO pegaflow_core::storage: mod.rs:186 MetaServer client enabled: metaserver=http://192.168.0.2:29056, advertise=192.168.0.2:29057, queue_depth=4096
+2026-10-12T09:41:54.840319+00:00   INFO pegaflow_core::internode::metaserver_client: metaserver_client.rs:165 MetaServer client started (queue_depth=4096, addr=http://192.168.0.2:29056)
+2026-10-12T09:41:54.840330+00:00   INFO pegaflow_core::storage: mod.rs:217 Creating global pinned pool (NUMA affinity disabled)
+2026-10-12T09:41:54.840335+00:00   INFO pegaflow_core::pinned_pool: pinned_pool.rs:204 Allocating RDMA-compatible pinned memory pool with mmap + aclrtHostRegister
+2026-10-12T09:41:54.840349+00:00   INFO pegaflow_core::pinned_pool: pinned_pool.rs:265 Ascend pinned pool on NUMA node UNKNOWN → using device 1
+2026-10-12T09:41:54.843240+00:00   INFO pegaflow_core::internode::metaserver_client: metaserver_client.rs:685 Connected to MetaServer at http://192.168.0.2:29056
+2026-10-12T09:41:54.844785+00:00   INFO pegaflow_core::internode::metaserver_client: metaserver_client.rs:709 MetaServer heartbeat established: node=192.168.0.2:29057 node_id=3cb64a90-bc14-4f85-afa9-644fabb47e52 next_in=15s
+2026-10-12T09:42:11.517262+00:00   INFO pegaflow_core::pinned_pool: pinned_pool.rs:216 Pinned pool: backing_size=15.0 GiB, unit_size=512 B, max_units=31457280, allocatable_size=15.0 GiB
+2026-10-12T09:42:11.588271+00:00   INFO pegaflow_transfer::rc_backend::runtime: runtime.rs:45 RDMA NIC ready: nic=mlx5_2, port=1, link_layer=Ethernet, local_lid=0, gid_index=5, mtu=Mtu1024, numa=NUMA6
+2026-10-12T09:42:11.588325+00:00   INFO pegaflow_transfer::rc_backend: mod.rs:140 RC backend init: nics=1, qps_per_peer=2
+2026-10-12T09:42:12.718065+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:131 === PegaFlow System Topology ===
+2026-10-12T09:42:12.718108+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:132 
+2026-10-12T09:42:12.718123+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA0:
+2026-10-12T09:42:12.718128+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:42:12.718131+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:42:12.718138+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 0-23
+2026-10-12T09:42:12.718142+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:42:12.718144+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA1:
+2026-10-12T09:42:12.718147+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:42:12.718150+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:42:12.718152+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 24-47
+2026-10-12T09:42:12.718158+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:42:12.718161+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA2:
+2026-10-12T09:42:12.718164+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:42:12.718166+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:42:12.718168+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 48-71
+2026-10-12T09:42:12.718171+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:42:12.718173+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA3:
+2026-10-12T09:42:12.718176+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:42:12.718178+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:42:12.718181+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 72-95
+2026-10-12T09:42:12.718183+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:42:12.718186+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA4:
+2026-10-12T09:42:12.718188+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:42:12.718191+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:42:12.718193+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 96-119
+2026-10-12T09:42:12.718196+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:42:12.718198+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA5:
+2026-10-12T09:42:12.718200+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:42:12.718203+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:42:12.718206+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 120-143
+2026-10-12T09:42:12.718208+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:42:12.718210+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA6:
+2026-10-12T09:42:12.718213+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:42:12.718217+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:155   NICs: mlx5_2 (0000:c3:00.0), mlx5_3 (0000:c3:00.1)
+2026-10-12T09:42:12.718220+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 144-167
+2026-10-12T09:42:12.718395+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:198   PCIe:
+2026-10-12T09:42:12.718401+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:200     [0000:c0:10.0] mlx5_2 (0000:c3:00.0, PCIe 4.0 x16), mlx5_3 (0000:c3:00.1, PCIe 4.0 x16)
+2026-10-12T09:42:12.718405+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:42:12.718408+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA7:
+2026-10-12T09:42:12.718411+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:42:12.718413+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:42:12.718416+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 168-191
+2026-10-12T09:42:12.718423+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:42:12.718427+00:00   INFO pegaflow_core::backing::rdma: rdma.rs:54 RDMA transport initialised: nics=1, registered 1 memory region(s), elapsed=1.146658154s
+2026-10-12T09:42:12.718507+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:95 RDMA remote fetch enabled (advertise=192.168.0.2:29057)
+2026-10-12T09:42:12.718890+00:00   INFO pegaflow_server: lib.rs:820 Background GC task started (interval=60s, inflight_max_age=5m, failed_remote_max_age=5m)
+2026-10-12T09:42:12.718994+00:00   INFO pegaflow_server::http_server: http_server.rs:216 Starting HTTP server on 0.0.0.0:29093 (/health, /metrics, /instances, /instances/cleanup, /cache/memory/cleanup)
+2026-10-12T09:42:12.719031+00:00   INFO pegaflow_server: lib.rs:848 PegaEngine gRPC server listening on 192.168.0.2:29057
+2026-10-12T09:45:27.978622+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=14.86 (perf-t1)
+2026-10-12T09:45:27.981080+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.50 (perf-t1)
+2026-10-12T09:45:27.988721+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=7.14 (perf-t1)
+2026-10-12T09:45:27.989679+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:45:27.997025+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=6.86 (perf-t1)
+2026-10-12T09:45:27.997912+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.005268+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=6.93 (perf-t1)
+2026-10-12T09:45:28.006165+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.013554+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=6.92 (perf-t1)
+2026-10-12T09:45:28.014468+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.021819+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=6.91 (perf-t1)
+2026-10-12T09:45:28.022691+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:45:28.029951+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=6.86 (perf-t1)
+2026-10-12T09:45:28.030893+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.48 (perf-t1)
+2026-10-12T09:45:28.038751+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=7.39 (perf-t1)
+2026-10-12T09:45:28.039677+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.046991+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=6.88 (perf-t1)
+2026-10-12T09:45:28.047913+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:45:28.055080+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=6.72 (perf-t1)
+2026-10-12T09:45:28.055993+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:45:28.056887+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.057788+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.48 (perf-t1)
+2026-10-12T09:45:28.058722+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.49 (perf-t1)
+2026-10-12T09:45:28.059596+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.060509+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.49 (perf-t1)
+2026-10-12T09:45:28.061427+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.48 (perf-t1)
+2026-10-12T09:45:28.062309+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.063208+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.064093+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.064994+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.065858+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.066739+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.067633+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.068518+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.069361+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.42 (perf-t1)
+2026-10-12T09:45:28.070220+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.071140+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.072006+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.072842+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:45:28.073684+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:45:28.074583+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:45:28.075438+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.42 (perf-t1)
+2026-10-12T09:45:28.076313+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.077218+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.078112+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.079003+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.079905+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:45:28.080817+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.081687+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.082566+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.083429+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:45:28.084334+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:45:28.085190+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.086054+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.086957+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.48 (perf-t1)
+2026-10-12T09:45:28.087848+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.088702+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.089588+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:45:28.090456+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.091338+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.092187+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.093064+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.093937+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:45:28.094835+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.48 (perf-t1)
+2026-10-12T09:45:28.095726+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.096632+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.48 (perf-t1)
+2026-10-12T09:45:28.100168+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=3.12 (perf-t1)
+2026-10-12T09:45:28.101071+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.101963+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.102860+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:45:28.103726+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.104624+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.105501+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:45:28.106376+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.107296+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.48 (perf-t1)
+2026-10-12T09:45:28.108184+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:45:28.109082+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:45:28.109973+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:45:28.111036+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.63 (perf-t1)
+2026-10-12T09:45:28.112017+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=1 size_bytes=1718575104 import_ms=0.54 (perf-t1)
+2026-10-12T09:45:28.115782+00:00   INFO pegaflow_core::gpu_worker: gpu_worker.rs:338 GPU worker initialized: device=1 backend=ascend_batch device_id=1
+2026-10-12T09:45:28.118680+00:00   INFO pegaflow_core::gpu_worker: gpu_worker.rs:338 GPU worker initialized: device=1 backend=ascend_batch device_id=1
+2026-10-12T09:45:28.118764+00:00   INFO pegaflow_core::gpu_worker: gpu_worker.rs:200 GPU worker pool started: device=1, numa_node=UNKNOWN, transfer_mode=Direct
+2026-10-12T09:45:28.118908+00:00   INFO pegaflow_core::instance: instance.rs:838 Sealed instance topology: instance=0e8fe926-91e3-4613-835d-4c9a5a03337b-cc93fe82a29744febaedbb9fa63f749b, num_layers=80, tp_size=1, world_size=1, total_slots=80
+2026-10-12T09:45:28.118919+00:00   INFO pegaflow_core::instance: instance.rs:851 Initialized GPU context: device_id=1, numa_node=UNKNOWN
+2026-10-12T09:45:28.118923+00:00   INFO pegaflow_core: lib.rs:480 Registered context batch: instance=0e8fe926-91e3-4613-835d-4c9a5a03337b-cc93fe82a29744febaedbb9fa63f749b, namespace=a8762b23:tp-shard-1-of-2, device=1, layers=80, tp_rank=0/1, pp_rank=0
+2026-10-12T09:45:40.849202+00:00   INFO pegaflow_server::service: service.rs:996 Session opened: instance_id=0e8fe926-91e3-4613-835d-4c9a5a03337b-cc93fe82a29744febaedbb9fa63f749b namespace=a8762b23:tp-shard-1-of-2 tp_size=1 world_size=1 token=1
+2026-10-12T09:45:47.495382+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0000-0-0-bfb28987 total_keys=2 hit=0 remaining=2 key_build=590ns cache_scan=31.4µs task_schedule=23.45µs total=55.91µs
+2026-10-12T09:45:47.505295+00:00   INFO pegaflow_transfer::rc_backend: mod.rs:368 RDMA connection established: remote=192.168.0.4:29057, qps_per_peer=2, local_qpns=[[276, 277]], remote_qpns=[[2240, 2241]]
+2026-10-12T09:45:47.509805+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0000-0-0-bfb28987 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=13.41 tp_mib_s=186
+2026-10-12T09:45:47.509839+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0000-0-0-bfb28987 remote=192.168.0.4:29057 connect_ms=8.94 query_ms=0.45 build_transfer_tasks_ms=0.07 submit_transfer_ms=0.24 rdma_wait_ms=0.37 rebuild_ms=0.02
+2026-10-12T09:45:48.906055+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0000-1-0-a3b74c8f total_keys=2 hit=0 remaining=2 key_build=1.06µs cache_scan=7.41µs task_schedule=33.61µs total=42.49µs
+2026-10-12T09:45:48.910908+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0000-1-0-a3b74c8f remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=4.26 tp_mib_s=587
+2026-10-12T09:45:48.910974+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0000-1-0-a3b74c8f remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.49 build_transfer_tasks_ms=0.07 submit_transfer_ms=0.03 rdma_wait_ms=0.34 rebuild_ms=0.04
+2026-10-12T09:45:50.176820+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0000-2-0-afe98921 total_keys=2 hit=0 remaining=2 key_build=940ns cache_scan=11.76µs task_schedule=26.64µs total=39.76µs
+2026-10-12T09:45:50.181828+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0000-2-0-afe98921 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=4.40 tp_mib_s=568
+2026-10-12T09:45:50.181874+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0000-2-0-afe98921 remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.58 build_transfer_tasks_ms=0.08 submit_transfer_ms=0.04 rdma_wait_ms=0.28 rebuild_ms=0.02
+2026-10-12T09:45:51.514482+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0000-3-0-b2a32cb6 total_keys=2 hit=0 remaining=2 key_build=400ns cache_scan=5.61µs task_schedule=6.4µs total=12.86µs
+2026-10-12T09:45:51.519177+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0000-3-0-b2a32cb6 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=4.14 tp_mib_s=604
+2026-10-12T09:45:51.519203+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0000-3-0-b2a32cb6 remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.53 build_transfer_tasks_ms=0.05 submit_transfer_ms=0.03 rdma_wait_ms=0.32 rebuild_ms=0.01
+2026-10-12T09:45:52.864768+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0001-0-0-af758c4e total_keys=2 hit=0 remaining=2 key_build=530ns cache_scan=6.38µs task_schedule=5.401µs total=12.751µs
+2026-10-12T09:45:52.869542+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0001-0-0-af758c4e remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=4.22 tp_mib_s=593
+2026-10-12T09:45:52.869569+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0001-0-0-af758c4e remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.56 build_transfer_tasks_ms=0.06 submit_transfer_ms=0.03 rdma_wait_ms=0.31 rebuild_ms=0.02
+2026-10-12T09:45:54.112641+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0001-1-0-adb419e0 total_keys=2 hit=0 remaining=2 key_build=410ns cache_scan=5.8µs task_schedule=21.91µs total=28.72µs
+2026-10-12T09:45:54.117210+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0001-1-0-adb419e0 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=4.05 tp_mib_s=617
+2026-10-12T09:45:54.117244+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0001-1-0-adb419e0 remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.46 build_transfer_tasks_ms=0.05 submit_transfer_ms=0.03 rdma_wait_ms=0.31 rebuild_ms=0.02
+2026-10-12T09:45:55.363805+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0001-2-0-8f526a81 total_keys=2 hit=0 remaining=2 key_build=730ns cache_scan=6.4µs task_schedule=5.55µs total=13.26µs
+2026-10-12T09:45:55.368403+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0001-2-0-8f526a81 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=4.10 tp_mib_s=610
+2026-10-12T09:45:55.368425+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0001-2-0-8f526a81 remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.48 build_transfer_tasks_ms=0.05 submit_transfer_ms=0.03 rdma_wait_ms=0.32 rebuild_ms=0.01
+2026-10-12T09:45:56.638038+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0001-3-0-9d76a429 total_keys=2 hit=0 remaining=2 key_build=600ns cache_scan=5.34µs task_schedule=5.38µs total=11.75µs
+2026-10-12T09:45:56.642626+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0001-3-0-9d76a429 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=4.10 tp_mib_s=609
+2026-10-12T09:45:56.642656+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0001-3-0-9d76a429 remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.57 build_transfer_tasks_ms=0.06 submit_transfer_ms=0.04 rdma_wait_ms=0.32 rebuild_ms=0.01
+2026-10-12T09:46:00.202404+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0000-0-0-b31c9188 total_keys=2 hit=0 remaining=2 key_build=980ns cache_scan=10.15µs task_schedule=9.66µs total=21.28µs
+2026-10-12T09:46:00.203498+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0000-1-0-a3c79ebc total_keys=2 hit=0 remaining=2 key_build=360ns cache_scan=3.44µs task_schedule=5.55µs total=9.55µs
+2026-10-12T09:46:00.207503+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0000-3-0-b18c0393 total_keys=2 hit=0 remaining=2 key_build=390ns cache_scan=3.61µs task_schedule=100.441µs total=104.931µs
+2026-10-12T09:46:00.211569+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0000-2-0-afd80803 total_keys=2 hit=0 remaining=2 key_build=400ns cache_scan=7.26µs task_schedule=7.23µs total=15.49µs
+2026-10-12T09:46:00.236835+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0000-0-0-b31c9188 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=33.51 tp_mib_s=75
+2026-10-12T09:46:00.236881+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0000-0-0-b31c9188 remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.53 build_transfer_tasks_ms=0.09 submit_transfer_ms=0.66 rdma_wait_ms=29.33 rebuild_ms=0.03
+2026-10-12T09:46:00.237114+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0000-2-0-afd80803 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=21.58 tp_mib_s=116
+2026-10-12T09:46:00.237129+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0000-2-0-afd80803 remote=192.168.0.4:29057 connect_ms=0.00 query_ms=0.36 build_transfer_tasks_ms=0.06 submit_transfer_ms=0.51 rdma_wait_ms=17.72 rebuild_ms=0.01
+2026-10-12T09:46:00.237135+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0000-1-0-a3c79ebc remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=29.69 tp_mib_s=84
+2026-10-12T09:46:00.237146+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0000-3-0-b18c0393 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=25.64 tp_mib_s=98
+2026-10-12T09:46:00.237183+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0000-3-0-b18c0393 remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.43 build_transfer_tasks_ms=0.07 submit_transfer_ms=0.34 rdma_wait_ms=21.66 rebuild_ms=0.01
+2026-10-12T09:46:00.237174+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0000-1-0-a3c79ebc remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.42 build_transfer_tasks_ms=0.10 submit_transfer_ms=0.85 rdma_wait_ms=25.43 rebuild_ms=0.02
+2026-10-12T09:46:08.255176+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0001-1-0-b566ec7f total_keys=2 hit=0 remaining=2 key_build=390ns cache_scan=7.39µs task_schedule=6.48µs total=14.68µs
+2026-10-12T09:46:08.256132+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0001-0-0-a2acfddf total_keys=2 hit=0 remaining=2 key_build=340ns cache_scan=4.911µs task_schedule=17.96µs total=23.481µs
+2026-10-12T09:46:08.260002+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0001-3-0-840fddf6 total_keys=2 hit=0 remaining=2 key_build=380ns cache_scan=4.06µs task_schedule=3.81µs total=8.54µs
+2026-10-12T09:46:08.260751+00:00   INFO pegaflow_core::storage::prefetch: prefetch.rs:314 Prefetch scheduling timing: req_id=cmpl-issue23-mmlu-pro-smoke-0001-2-0-b6cb40e1 total_keys=2 hit=0 remaining=2 key_build=340ns cache_scan=3.13µs task_schedule=4.39µs total=8.08µs
+2026-10-12T09:46:08.286508+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0001-0-0-a2acfddf remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=26.52 tp_mib_s=94
+2026-10-12T09:46:08.286538+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0001-0-0-a2acfddf remote=192.168.0.4:29057 connect_ms=0.00 query_ms=0.49 build_transfer_tasks_ms=0.07 submit_transfer_ms=0.01 rdma_wait_ms=22.50 rebuild_ms=0.01
+2026-10-12T09:46:08.287133+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0001-1-0-b566ec7f remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=31.28 tp_mib_s=80
+2026-10-12T09:46:08.287148+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0001-1-0-b566ec7f remote=192.168.0.4:29057 connect_ms=0.01 query_ms=0.58 build_transfer_tasks_ms=0.06 submit_transfer_ms=0.31 rdma_wait_ms=26.93 rebuild_ms=0.01
+2026-10-12T09:46:08.287143+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0001-2-0-b6cb40e1 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=26.06 tp_mib_s=96
+2026-10-12T09:46:08.287162+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0001-2-0-b6cb40e1 remote=192.168.0.4:29057 connect_ms=0.00 query_ms=6.31 build_transfer_tasks_ms=0.07 submit_transfer_ms=0.25 rdma_wait_ms=16.22 rebuild_ms=0.02
+2026-10-12T09:46:08.287175+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:318 RDMA fetch summary: req_id=cmpl-issue23-mmlu-pro-smoke-0001-3-0-840fddf6 remote=192.168.0.4:29057 blocks=2/2 slots=40 descs=40 slabs=2 bytes_mib=2.5 total_ms=26.83 tp_mib_s=93
+2026-10-12T09:46:08.287204+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:326 RDMA fetch stages: req_id=cmpl-issue23-mmlu-pro-smoke-0001-3-0-840fddf6 remote=192.168.0.4:29057 connect_ms=0.00 query_ms=0.38 build_transfer_tasks_ms=0.07 submit_transfer_ms=0.19 rdma_wait_ms=20.15 rebuild_ms=0.01
+2026-10-12T09:47:03.634704+00:00   INFO pegaflow_server::service: service.rs:1020 Session closed: instance_id=0e8fe926-91e3-4613-835d-4c9a5a03337b-cc93fe82a29744febaedbb9fa63f749b token=1 — running cleanup
+2026-10-12T09:47:03.634593+00:00   WARN pegaflow_core::internode::metaserver_client: metaserver_client.rs:724 MetaServer heartbeat failed: code: 'Internal error', message: "h2 protocol error: http2 error", source: tonic::transport::Error(Transport, hyper::Error(Http2, Error { kind: GoAway(b"", NO_ERROR, Remote) }))
+2026-10-12T09:47:03.735436+00:00  ERROR pegaflow_core::internode::metaserver_client: metaserver_client.rs:690 Failed to connect to MetaServer: transport error
+2026-10-12T09:47:03.937282+00:00  ERROR pegaflow_core::internode::metaserver_client: metaserver_client.rs:690 Failed to connect to MetaServer: transport error
+2026-10-12T09:47:04.201616+00:00   INFO pegaflow_server::service: service.rs:59 Session cleanup (stream closed): dropped 80 device tensors for instance 0e8fe926-91e3-4613-835d-4c9a5a03337b-cc93fe82a29744febaedbb9fa63f749b
+2026-10-12T09:47:04.201813+00:00   INFO pegaflow_core: lib.rs:499 Unregistered instance: 0e8fe926-91e3-4613-835d-4c9a5a03337b-cc93fe82a29744febaedbb9fa63f749b
+2026-10-12T09:47:04.339127+00:00  ERROR pegaflow_core::internode::metaserver_client: metaserver_client.rs:690 Failed to connect to MetaServer: transport error
+2026-10-12T09:47:05.140995+00:00  ERROR pegaflow_core::internode::metaserver_client: metaserver_client.rs:690 Failed to connect to MetaServer: transport error

@@ -1,0 +1,158 @@
+{
+  "schema_version": 1,
+  "protocol_id": "issue23-qwen35-20261012",
+  "model_path": "/data/shared_upload/models/vspec/Qwen3.5-35B-A3B",
+  "model_revision": "59d61f3ce65a6d9863b86d2e96597125219dc754",
+  "model_check_sha256": "52a995f611cb79ac824467dcec4a594a258711cf55e6627e17c1804ce2dcfbed",
+  "tokenizer_class": "TokenizersBackend",
+  "libraries": {
+    "transformers": "5.5.4",
+    "tokenizers": "0.22.2",
+    "jinja2": "3.1.6",
+    "pyarrow": "18.1.0"
+  },
+  "tokenizer_sha256": "5f9e4d4901a92b997e463c1f46055088b6cca5ca61a6522d1b9f64c4bb81cb42",
+  "template_sha256": "a4aee8afcf2e0711942cf848899be66016f8d14a889ff9ede07bca099c28f715",
+  "sources_sha256": "15eca4f8c6a8bcb437645a8edbcf4d0ea0b00051f408b3d68c0ec91589adc9e5",
+  "sampling_seed": 17,
+  "cohort_size": 4,
+  "cohort_period_seconds": 8,
+  "timeout_seconds": 300,
+  "qps_per_peer": 2,
+  "enable_thinking": false,
+  "tensor_parallel_size": 2,
+  "max_model_len": 32768,
+  "max_input_tokens": 16384,
+  "max_num_seqs": 16,
+  "max_num_batched_tokens": 4096,
+  "device_cache_bytes_per_card": 17179869184,
+  "host_pool_bytes_per_node": 32212254720,
+  "tailguard_admission": false,
+  "speculative_decoding": false,
+  "prompt_protocol": "rendered completions; 5-shot MMLU validation examples; controlled cohort prefix",
+  "validation_example_ids": {
+    "chemistry": [
+      25,
+      26,
+      27,
+      28,
+      29
+    ],
+    "computer science": [
+      30,
+      31,
+      32,
+      33,
+      34
+    ],
+    "math": [
+      0,
+      1,
+      2,
+      3,
+      4
+    ],
+    "physics": [
+      10,
+      11,
+      12,
+      13,
+      14
+    ]
+  },
+  "split_summary": {
+    "main": {
+      "requests": 128,
+      "cohorts": 32,
+      "categories": {
+        "math": 32,
+        "computer science": 32,
+        "physics": 32,
+        "chemistry": 32
+      },
+      "input_tokens": {
+        "n": 128,
+        "min": 4097,
+        "p50": 4105.0,
+        "p95": 4112.0,
+        "p99": 4113.0,
+        "max": 4113
+      },
+      "sha256": "7460b8f197142ff85c76c94473c0eb08ba5ae6cef6b8a3934ef80a86fe54aad3"
+    },
+    "calibration": {
+      "requests": 16,
+      "cohorts": 4,
+      "categories": {
+        "chemistry": 4,
+        "math": 4,
+        "computer science": 4,
+        "physics": 4
+      },
+      "input_tokens": {
+        "n": 16,
+        "min": 4097,
+        "p50": 4101.5,
+        "p95": 4112.25,
+        "p99": 4112.85,
+        "max": 4113
+      },
+      "sha256": "e333a44295cd47c77ba858644b1a02a4a9e98506def8e6141c615d99944bdd7f"
+    },
+    "smoke": {
+      "requests": 8,
+      "cohorts": 2,
+      "categories": {
+        "math": 4,
+        "physics": 4
+      },
+      "input_tokens": {
+        "n": 8,
+        "min": 4099,
+        "p50": 4105.5,
+        "p95": 4109.25,
+        "p99": 4110.65,
+        "max": 4111
+      },
+      "sha256": "1ebbde7492d876bf8e870b34922cb91419fde08ccb16417d5433b0e400b797be"
+    },
+    "frontier-smoke": {
+      "requests": 16,
+      "cohorts": 4,
+      "categories": {
+        "biology": 4,
+        "physics": 8,
+        "chemistry": 4
+      },
+      "input_tokens": {
+        "n": 16,
+        "min": 4097,
+        "p50": 4105.5,
+        "p95": 4112.25,
+        "p99": 4112.85,
+        "max": 4113
+      },
+      "sha256": "f16c59fa9d86afeefaf701a75b769e24db924dbed11a01f711d937ec8cdb4deb"
+    }
+  },
+  "round_arm_order": [
+    [
+      "rdma-smooth",
+      "local_copy-smooth",
+      "rdma-burst",
+      "local_copy-burst"
+    ],
+    [
+      "local_copy-burst",
+      "rdma-burst",
+      "rdma-smooth",
+      "local_copy-smooth"
+    ]
+  ],
+  "hardware_qualification": "pending",
+  "min_input_tokens": 4097,
+  "runtime_attention_block_tokens": 2048,
+  "context_protocol": "original benchmark question and examples followed by a fixed ignorable reference appendix",
+  "python_hash_seed": 17,
+  "prefix_caching_hash_algo": "sha256"
+}

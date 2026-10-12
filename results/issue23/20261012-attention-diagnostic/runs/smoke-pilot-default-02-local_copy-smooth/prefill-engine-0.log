@@ -1,0 +1,168 @@
+2026-10-12T09:20:01.482413+00:00   INFO pegaflow_server: lib.rs:554 Starting pega-engine-server v0.23.3
+2026-10-12T09:20:02.052632+00:00   INFO pegaflow_server: lib.rs:368 Ascend ACL runtime initialized, device 0 set as current
+2026-10-12T09:20:02.052691+00:00   INFO pegaflow_server::check_ascend_version: check_ascend_version.rs:40 Ascend preflight: minimum required version 1.16.0
+2026-10-12T09:20:02.052732+00:00   INFO pegaflow_server::check_ascend_version: check_ascend_version.rs:52 Ascend preflight: runtime version 1.17.0 detected
+2026-10-12T09:20:02.052739+00:00   INFO pegaflow_server: lib.rs:575 Using specified device(s): [0]
+[W1012 09:20:05.723228506 FunctionLoader.cpp:48] Warning: LD_PRELOAD detected, FunctionLoader prefers RTLD_DEFAULT for symbol resolution. (function operator())
+[W1012 09:20:10.127451543 NPUCachingAllocator.cpp:202] Warning: The current CANN and HDK(driver) versions require processing for 32 padding size, with memory allocation. (function operator())
+2026-10-12T09:20:10.964715+00:00   INFO pegaflow_server: lib.rs:447 Initialized context for device 0 in 0.02s
+2026-10-12T09:20:10.964781+00:00   INFO pegaflow_server: lib.rs:585 Device runtime initialized for 1 device(s): [0]
+2026-10-12T09:20:10.964948+00:00   INFO pegaflow_server: lib.rs:606 Creating PegaEngine with pinned memory pool: 15.00 GiB (16106127360 bytes), hugepages=false
+2026-10-12T09:20:10.964976+00:00   INFO pegaflow_server: lib.rs:740 NUMA-aware memory allocation disabled
+2026-10-12T09:20:10.965626+00:00   INFO pegaflow_server: lib.rs:496 Prometheus metrics exporter enabled
+2026-10-12T09:20:10.965734+00:00   INFO opentelemetry: metrics.rs:29  name="MeterProvider.GlobalSet" message=Global meter provider is set. Meters can now be created using global::meter() or global::meter_with_scope().
+2026-10-12T09:20:12.207043+00:00   INFO pegaflow_common::numa: numa.rs:703 === Device-NUMA Topology ===
+2026-10-12T09:20:12.207098+00:00   INFO pegaflow_common::numa: numa.rs:704 NUMA nodes: 8
+2026-10-12T09:20:12.207107+00:00   INFO pegaflow_common::numa: numa.rs:712   Device 0 -> NUMA6
+2026-10-12T09:20:12.207112+00:00   INFO pegaflow_common::numa: numa.rs:712   Device 1 -> UNKNOWN
+2026-10-12T09:20:12.207144+00:00   INFO pegaflow_core::storage: mod.rs:186 MetaServer client enabled: metaserver=http://192.168.0.2:29056, advertise=192.168.0.4:29055, queue_depth=4096
+2026-10-12T09:20:12.207313+00:00   INFO pegaflow_core::internode::metaserver_client: metaserver_client.rs:165 MetaServer client started (queue_depth=4096, addr=http://192.168.0.2:29056)
+2026-10-12T09:20:12.207321+00:00   INFO pegaflow_core::storage: mod.rs:217 Creating global pinned pool (NUMA affinity disabled)
+2026-10-12T09:20:12.207326+00:00   INFO pegaflow_core::pinned_pool: pinned_pool.rs:204 Allocating RDMA-compatible pinned memory pool with mmap + aclrtHostRegister
+2026-10-12T09:20:12.207340+00:00   INFO pegaflow_core::pinned_pool: pinned_pool.rs:265 Ascend pinned pool on NUMA node UNKNOWN → using device 0
+2026-10-12T09:20:12.210136+00:00   INFO pegaflow_core::internode::metaserver_client: metaserver_client.rs:685 Connected to MetaServer at http://192.168.0.2:29056
+2026-10-12T09:20:12.212681+00:00   INFO pegaflow_core::internode::metaserver_client: metaserver_client.rs:709 MetaServer heartbeat established: node=192.168.0.4:29055 node_id=c2d705bf-adea-4d0a-8a90-59f212b644db next_in=15s
+2026-10-12T09:20:22.317683+00:00   INFO pegaflow_core::pinned_pool: pinned_pool.rs:216 Pinned pool: backing_size=15.0 GiB, unit_size=512 B, max_units=31457280, allocatable_size=15.0 GiB
+2026-10-12T09:20:22.399190+00:00   INFO pegaflow_transfer::rc_backend::runtime: runtime.rs:45 RDMA NIC ready: nic=mlx5_2, port=1, link_layer=Ethernet, local_lid=0, gid_index=5, mtu=Mtu1024, numa=NUMA6
+2026-10-12T09:20:22.399246+00:00   INFO pegaflow_transfer::rc_backend: mod.rs:140 RC backend init: nics=1, qps_per_peer=2
+2026-10-12T09:20:22.920901+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:131 === PegaFlow System Topology ===
+2026-10-12T09:20:22.920948+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:132 
+2026-10-12T09:20:22.920965+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA0:
+2026-10-12T09:20:22.920971+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:20:22.920974+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:20:22.920980+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 0-23
+2026-10-12T09:20:22.920985+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:20:22.920987+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA1:
+2026-10-12T09:20:22.920990+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:20:22.920992+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:20:22.920995+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 24-47
+2026-10-12T09:20:22.920997+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:20:22.921000+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA2:
+2026-10-12T09:20:22.921002+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:20:22.921005+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:20:22.921007+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 48-71
+2026-10-12T09:20:22.921010+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:20:22.921013+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA3:
+2026-10-12T09:20:22.921015+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:20:22.921018+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:20:22.921021+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 72-95
+2026-10-12T09:20:22.921023+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:20:22.921025+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA4:
+2026-10-12T09:20:22.921028+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:20:22.921030+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:20:22.921033+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 96-119
+2026-10-12T09:20:22.921035+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:20:22.921038+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA5:
+2026-10-12T09:20:22.921040+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:20:22.921043+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:20:22.921045+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 120-143
+2026-10-12T09:20:22.921048+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:20:22.921050+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA6:
+2026-10-12T09:20:22.921053+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:20:22.921057+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:155   NICs: mlx5_2 (0000:c3:00.0), mlx5_3 (0000:c3:00.1)
+2026-10-12T09:20:22.921060+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 144-167
+2026-10-12T09:20:22.921300+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:198   PCIe:
+2026-10-12T09:20:22.921307+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:200     [0000:c0:10.0] mlx5_2 (0000:c3:00.0, PCIe 4.0 x16), mlx5_3 (0000:c3:00.1, PCIe 4.0 x16)
+2026-10-12T09:20:22.921311+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:20:22.921313+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:135 NUMA7:
+2026-10-12T09:20:22.921316+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:139   GPUs: (none)
+2026-10-12T09:20:22.921318+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:148   NICs: (none)
+2026-10-12T09:20:22.921321+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:162   CPUs: 168-191
+2026-10-12T09:20:22.921329+00:00   INFO pegaflow_transfer::rdma_topo: rdma_topo.rs:168 
+2026-10-12T09:20:22.921334+00:00   INFO pegaflow_core::backing::rdma: rdma.rs:54 RDMA transport initialised: nics=1, registered 1 memory region(s), elapsed=533.546543ms
+2026-10-12T09:20:22.921426+00:00   INFO pegaflow_core::backing::rdma_fetch: rdma_fetch.rs:95 RDMA remote fetch enabled (advertise=192.168.0.4:29055)
+2026-10-12T09:20:22.921643+00:00   INFO pegaflow_server: lib.rs:820 Background GC task started (interval=60s, inflight_max_age=5m, failed_remote_max_age=5m)
+2026-10-12T09:20:22.921769+00:00   INFO pegaflow_server::http_server: http_server.rs:216 Starting HTTP server on 0.0.0.0:29091 (/health, /metrics, /instances, /instances/cleanup, /cache/memory/cleanup)
+2026-10-12T09:20:22.921814+00:00   INFO pegaflow_server: lib.rs:848 PegaEngine gRPC server listening on 192.168.0.4:29055
+2026-10-12T09:23:10.711094+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=14.35 (perf-t1)
+2026-10-12T09:23:10.713944+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.52 (perf-t1)
+2026-10-12T09:23:10.721140+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=6.70 (perf-t1)
+2026-10-12T09:23:10.722059+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:23:10.729200+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=6.69 (perf-t1)
+2026-10-12T09:23:10.730087+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.737050+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=6.55 (perf-t1)
+2026-10-12T09:23:10.737964+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:23:10.745083+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=6.67 (perf-t1)
+2026-10-12T09:23:10.745996+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.48 (perf-t1)
+2026-10-12T09:23:10.756115+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=9.72 (perf-t1)
+2026-10-12T09:23:10.757076+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:23:10.764247+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=6.74 (perf-t1)
+2026-10-12T09:23:10.765155+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.772187+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=6.61 (perf-t1)
+2026-10-12T09:23:10.773128+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.780025+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=6.49 (perf-t1)
+2026-10-12T09:23:10.781061+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.59 (perf-t1)
+2026-10-12T09:23:10.788113+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=6.63 (perf-t1)
+2026-10-12T09:23:10.789004+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:23:10.789906+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.790798+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.791700+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.792614+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.49 (perf-t1)
+2026-10-12T09:23:10.793584+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.53 (perf-t1)
+2026-10-12T09:23:10.794558+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.56 (perf-t1)
+2026-10-12T09:23:10.795471+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.796308+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.42 (perf-t1)
+2026-10-12T09:23:10.797169+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.798058+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.42 (perf-t1)
+2026-10-12T09:23:10.798967+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.799842+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.800745+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.801594+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.802403+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.42 (perf-t1)
+2026-10-12T09:23:10.803200+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.40 (perf-t1)
+2026-10-12T09:23:10.804080+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.805000+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.805885+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.806744+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.42 (perf-t1)
+2026-10-12T09:23:10.807613+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.808588+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.54 (perf-t1)
+2026-10-12T09:23:10.809407+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.42 (perf-t1)
+2026-10-12T09:23:10.810273+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:23:10.811146+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.812023+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.812915+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.813803+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.814670+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.815542+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.816434+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.817308+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:23:10.818199+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.819075+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.819950+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.820817+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.821666+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.822521+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.41 (perf-t1)
+2026-10-12T09:23:10.823364+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:23:10.824170+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.40 (perf-t1)
+2026-10-12T09:23:10.825013+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.42 (perf-t1)
+2026-10-12T09:23:10.825954+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.55 (perf-t1)
+2026-10-12T09:23:10.826764+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.40 (perf-t1)
+2026-10-12T09:23:10.827613+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.828515+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.829396+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.830293+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.831169+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.832078+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.47 (perf-t1)
+2026-10-12T09:23:10.832987+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.833879+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.834753+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.44 (perf-t1)
+2026-10-12T09:23:10.835628+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.43 (perf-t1)
+2026-10-12T09:23:10.836523+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.837417+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.838318+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.839210+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.45 (perf-t1)
+2026-10-12T09:23:10.840105+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.46 (perf-t1)
+2026-10-12T09:23:10.841135+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.55 (perf-t1)
+2026-10-12T09:23:10.842170+00:00   INFO pegaflow_server::registry: registry.rs:219 IPC import timing: device_id=0 size_bytes=1718575104 import_ms=0.56 (perf-t1)
+2026-10-12T09:23:10.846543+00:00   INFO pegaflow_core::gpu_worker: gpu_worker.rs:338 GPU worker initialized: device=0 backend=ascend_batch device_id=0
+2026-10-12T09:23:10.849356+00:00   INFO pegaflow_core::gpu_worker: gpu_worker.rs:338 GPU worker initialized: device=0 backend=ascend_batch device_id=0
+2026-10-12T09:23:10.849427+00:00   INFO pegaflow_core::gpu_worker: gpu_worker.rs:200 GPU worker pool started: device=0, numa_node=NUMA6, transfer_mode=Direct
+2026-10-12T09:23:10.849600+00:00   INFO pegaflow_core::instance: instance.rs:838 Sealed instance topology: instance=ba2b4d62-1196-4ead-b5e4-9b1ddf738a85-964d117990c64644846972cd1b9c7f1e, num_layers=80, tp_size=1, world_size=1, total_slots=80
+2026-10-12T09:23:10.849612+00:00   INFO pegaflow_core::instance: instance.rs:851 Initialized GPU context: device_id=0, numa_node=NUMA6
+2026-10-12T09:23:10.849617+00:00   INFO pegaflow_core: lib.rs:480 Registered context batch: instance=ba2b4d62-1196-4ead-b5e4-9b1ddf738a85-964d117990c64644846972cd1b9c7f1e, namespace=a8762b23:tp-shard-0-of-2, device=0, layers=80, tp_rank=0/1, pp_rank=0
+2026-10-12T09:23:23.970795+00:00   INFO pegaflow_server::service: service.rs:996 Session opened: instance_id=ba2b4d62-1196-4ead-b5e4-9b1ddf738a85-964d117990c64644846972cd1b9c7f1e namespace=a8762b23:tp-shard-0-of-2 tp_size=1 world_size=1 token=1
+2026-10-12T09:23:51.824877+00:00   INFO pegaflow_transfer::rc_backend: mod.rs:368 RDMA connection established: remote=192.168.0.2:29055, qps_per_peer=2, local_qpns=[[2230, 2231]], remote_qpns=[[266, 267]]
+2026-10-12T09:23:51.825181+00:00   INFO pegaflow_core: lib.rs:1040 RDMA handshake accepted: client=192.168.0.2:29055
+2026-10-12T09:25:07.488148+00:00   INFO pegaflow_server::service: service.rs:1020 Session closed: instance_id=ba2b4d62-1196-4ead-b5e4-9b1ddf738a85-964d117990c64644846972cd1b9c7f1e token=1 — running cleanup
+2026-10-12T09:25:08.116175+00:00   INFO pegaflow_server::service: service.rs:59 Session cleanup (stream closed): dropped 80 device tensors for instance ba2b4d62-1196-4ead-b5e4-9b1ddf738a85-964d117990c64644846972cd1b9c7f1e
+2026-10-12T09:25:08.116260+00:00   INFO pegaflow_core: lib.rs:499 Unregistered instance: ba2b4d62-1196-4ead-b5e4-9b1ddf738a85-964d117990c64644846972cd1b9c7f1e

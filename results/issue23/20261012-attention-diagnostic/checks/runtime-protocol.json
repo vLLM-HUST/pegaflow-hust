@@ -1,0 +1,23 @@
+{
+  "changed_at": "2026-10-12",
+  "contract_sha256": "ad3e8d7cc7967453636d3389e02a1200faef05e05e62d8a94ff6b0e09def2976",
+  "previous_contract_sha256": "a2914ffd5dbf7fb1b11b8331a9fffa2b025cf55f68f3503b6a90fd7d6eaf4b9a",
+  "scheduler_policy": "sched_other",
+  "scheduler_priority": 0,
+  "request_timeout_seconds": 300,
+  "measured_output_tokens_max": 512,
+  "prepare_output_tokens_max": 1,
+  "cases_changed": true,
+  "cpu_tests": {
+    "tests": 19,
+    "failures": 0
+  },
+  "reason": "Measured single-node eager responses reached 141.45 seconds; default scheduling authorized by user.",
+  "min_input_tokens": 4097,
+  "runtime_attention_block_tokens": 2048,
+  "dataset_selection_changed": false,
+  "python_hash_seed": 17,
+  "prefix_caching_hash_algo": "sha256",
+  "router_placement": "prefill node",
+  "marker_cleanup_placement": "prefill node"
+}

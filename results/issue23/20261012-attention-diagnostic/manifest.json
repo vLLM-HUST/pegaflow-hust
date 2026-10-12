@@ -1,0 +1,2287 @@
+[
+  {
+    "path": ".gitattributes",
+    "bytes": 55,
+    "sha256": "be44806039e51069e5e3f4af1799f532e7737f927fbf88bfcaf361406d8f09a4"
+  },
+  {
+    "path": "checks/cpu-tests.xml",
+    "bytes": 2515,
+    "sha256": "0058f41bfaf3e957c06b1d2064eb505f567fc9c53a706f40aa33dd19a9c1f71f"
+  },
+  {
+    "path": "checks/reproducibility.json",
+    "bytes": 852,
+    "sha256": "75f2293660b824422f2c8c9b6dc738b2e35d53c5cf38f8f05de12785984342f4"
+  },
+  {
+    "path": "checks/runtime-protocol.json",
+    "bytes": 844,
+    "sha256": "cad8e110ee439bc806c22c7cbcd60398f95f4871d360b7605a46b7682ad075cf"
+  },
+  {
+    "path": "config/deployment.actual.json",
+    "bytes": 1605,
+    "sha256": "12e331fb5e62366164ad1d9c3184f04fd7e5738f0211c08244749a46638b7e42"
+  },
+  {
+    "path": "prepared/contract.json",
+    "bytes": 3832,
+    "sha256": "ad3e8d7cc7967453636d3389e02a1200faef05e05e62d8a94ff6b0e09def2976"
+  },
+  {
+    "path": "prepared/plans-smoke/decode-engine-0.json",
+    "bytes": 157610,
+    "sha256": "b9b1e1a59f43a2d95749dfad51039d6060e2a8ed1f199a7454e7df763464a577"
+  },
+  {
+    "path": "prepared/plans-smoke/decode-engine-1.json",
+    "bytes": 157610,
+    "sha256": "212372ad85dd1e7fca9a213c2e4e1a7560a997bd4f7751963bd0bdd8e35418d6"
+  },
+  {
+    "path": "prepared/plans-smoke/summary.json",
+    "bytes": 743,
+    "sha256": "ae6e6a13e0b8f7450ad7c0a00b92a0db99a46e7cb0b3187e692bfea732bc028e"
+  },
+  {
+    "path": "prepared/smoke.json.gz",
+    "bytes": 51809,
+    "sha256": "7ed9c1cd634b03848c494ebd42d63f560f301f5974ee9cb53b43cc4019d91344"
+  },
+  {
+    "path": "README.md",
+    "bytes": 1431,
+    "sha256": "1f824b497eae59585d06222aa9d045f9441ca1bb1d2e093f0f0d8a73aac90319"
+  },
+  {
+    "path": "report.md",
+    "bytes": 5127,
+    "sha256": "e992b3b3b3f9e42d737c7c569c3d27d2b7fc80f6a3634312280f56a428d19615"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/after-capture-decode-engine-0.prom",
+    "bytes": 25862,
+    "sha256": "2d2c3486f757b3fbc4311b673f0e5be548209fcd7cd1dc8dffb54183a8a079f9"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/after-capture-decode-engine-1.prom",
+    "bytes": 25855,
+    "sha256": "fa70615429ce30903cee1190ae857ec20f9b7d232fb5b7366f2d3078335198f4"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/before-capture-decode-engine-0.prom",
+    "bytes": 3717,
+    "sha256": "b8cce9b403e368e03b7e9d34237410879855d5f6353f02a7cdde5a0c4ad5d114"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/before-capture-decode-engine-1.prom",
+    "bytes": 3717,
+    "sha256": "13cfd6a6335cae49538aaff2440b5a6ea49f14eaacccc5942971ec8454b0be48"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/correctness-reference/client.jsonl",
+    "bytes": 536,
+    "sha256": "9be65b7f2fed57610409c26e73d656f517865f70cc6e3937f321e722359b87c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/correctness-reference/prefill-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/correctness-reference/prefill-engine-0-host-cache.json",
+    "bytes": 118,
+    "sha256": "46b5604e10aa238b6dbe527aa200cea5864d80b94c3c9176bd8721e5db65f878"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/correctness-reference/prefill-engine-1-host-cache.json",
+    "bytes": 118,
+    "sha256": "46b5604e10aa238b6dbe527aa200cea5864d80b94c3c9176bd8721e5db65f878"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/correctness-reference/sse/issue23-mmlu-pro-smoke-0000-0-reference.jsonl",
+    "bytes": 11421,
+    "sha256": "5472b66e0d0970b18d173ded523c30b6c5620bed613b7f51d121abb6df0578a8"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/decode-engine-0.log",
+    "bytes": 31891,
+    "sha256": "598e45855ddf575e86ff3443b222d3cd5613e86baa7ad7274ab9d3c2496e49c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/decode-engine-1.log",
+    "bytes": 32185,
+    "sha256": "87c038b3fae2c98b143d260a2b931299da5f19963feb0715d8e0dca928e34b76"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/decode-metaserver.log",
+    "bytes": 1865,
+    "sha256": "e0b869dd32156c536d023f7f7a0c1ab45591c3a2ae1abda85cbe073e0cee1446"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/decode-vllm.log",
+    "bytes": 89036,
+    "sha256": "f64b5bc46c7e4e91426eb2a510962cc0838474bd6d7eca9a89b27f5ede5253bf"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/pd-correctness.json",
+    "bytes": 1365,
+    "sha256": "c31419437cac721a52d3563b0238b2cf2d8671328fbd86ccf3183313761bdd28"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prefill-engine-0.log",
+    "bytes": 24437,
+    "sha256": "d8013fa273f9e627ebe29b54eabbf7409832e7ae63a404e92a9d4ebc56903cb4"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prefill-engine-1.log",
+    "bytes": 24441,
+    "sha256": "e63d1ff4ba784606e162ddcd5914a6af797dd274178c57d875302a358919bf43"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prefill-router.log",
+    "bytes": 5400,
+    "sha256": "071a7b84032044340a65ca2cc96f8d4383d6b1b3c781275c4672eacc13308d96"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prefill-vllm.log",
+    "bytes": 87433,
+    "sha256": "6e48ce78a1dd579e90c4479fcfb017d3654de2558d3fadfcdee918a8ff81b96b"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/client.jsonl",
+    "bytes": 3670,
+    "sha256": "b7fa637437d1d315f7bf6fb6030bc4c12336a232b281003182d722cadda180f6"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0000-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0000-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0000-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0001-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0001-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0001-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0002-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0002-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0002-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0003-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0003-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0003-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0004-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0004-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0004-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0005-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0005-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0005-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0006-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0006-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0006-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0007-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0007-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/request-0007-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/sse/issue23-mmlu-pro-smoke-0000-0.jsonl",
+    "bytes": 11083,
+    "sha256": "3899dcc631f384ff820f5782d53618180e4dbcb75d2b161172564ad267e0d313"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/sse/issue23-mmlu-pro-smoke-0000-1.jsonl",
+    "bytes": 728,
+    "sha256": "e19618ff0fdeaa3ac4eb2efaa577ae3f21486ceece435ed8140f77a6852dd577"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/sse/issue23-mmlu-pro-smoke-0000-2.jsonl",
+    "bytes": 729,
+    "sha256": "a53e1b6dfddc4d9ae3b11d2215421be37cd06a41026b5775ec01eeb774e89134"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/sse/issue23-mmlu-pro-smoke-0000-3.jsonl",
+    "bytes": 728,
+    "sha256": "f8acc335b8a43435f9d8acb7b12fbfed20304c095424545bdbb67f8f883a26f4"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/sse/issue23-mmlu-pro-smoke-0001-0.jsonl",
+    "bytes": 727,
+    "sha256": "d8c54d670ce9d0b812cea5966ef32fa32ec04c56f13c26e651e1428f1c5b8f95"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/sse/issue23-mmlu-pro-smoke-0001-1.jsonl",
+    "bytes": 729,
+    "sha256": "f76b8fbe82acf32376fb10b7ca898303044d406b2e66c9d3131d614a59b99236"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/sse/issue23-mmlu-pro-smoke-0001-2.jsonl",
+    "bytes": 727,
+    "sha256": "9c5313e8e72e84eae12de46e1ade80096d9c43d2a501c2934a0ceb45c2ff6852"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/prepare/sse/issue23-mmlu-pro-smoke-0001-3.jsonl",
+    "bytes": 727,
+    "sha256": "6dc73ca2d6f929fffbdf793826f0cfdf79ab758c17c619da48518e3c1617e177"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/processes-decode.json",
+    "bytes": 3216,
+    "sha256": "2560d4db35db13a2a03b18fca318a82adee75aa96dcbece3e4f0785ba4e0f482"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/processes-prefill.json",
+    "bytes": 3201,
+    "sha256": "b9341a649e44937f05e18589b2c80d15e2231ee9fd9082d6426944b19471f52f"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/qualification.json",
+    "bytes": 1366,
+    "sha256": "a3e3e0ac697a89b48885fa80b11834f1987d6ee05e79c8e962eed79558b41fb8"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/run-contract.json",
+    "bytes": 1620,
+    "sha256": "b632476603ddd1af40a594c3fc0e1a5f66f046bc8b46cf53d4994a999eb60c49"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/status.json",
+    "bytes": 28,
+    "sha256": "0cb87b61f0afab118ac222a0af92bc06c579959aeea208461294d16becf11b39"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/trace-decode-engine-0.jsonl",
+    "bytes": 117695,
+    "sha256": "6dc307cf69ccfe362170fc97c6ef3bf2c50e34965d7b5824154985691fe098f8"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/trace-decode-engine-1.jsonl",
+    "bytes": 117695,
+    "sha256": "9ff2275939e9c03430278c25c07626b53f32557990a876e08116a6f98c292b45"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-0-reference.tp0.visible",
+    "bytes": 81,
+    "sha256": "ed4a01e0f0a52706a056da927bc13f26828c0bf25b952837632864253da61348"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-0-reference.tp1.visible",
+    "bytes": 81,
+    "sha256": "5f4a6897f1801cfe9d64464891eb5b4d9013d221e265a8420e65a4b858f175ef"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "f739f026bbdfd34a377d56c69e2f68f24a8bd2bf0410ca40c70903e20bb8f375"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "4f4034b8c9c0b29c562efc477ca3e48732bce929b41327d6ce8a3ed0b4b49a50"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "4648d146dff28a7c19f390ac63a8a17365140b90b17bccd02468adeea3a44508"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "49be067765cce22534f212eed9eab94c97d0ab235b4471d1e42333d118e9fa37"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "ac513cfe66a61fde12e64541a6e3152566c510778836b411a04df9f830d772d5"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "9014ef23fc95ebc9ad7e7413726738f3f5a2d4928fc468184f1e231bb6e3a2e9"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "06351dcae9dba1305142cfec9dab748becf90485fdb965bff8e0b68440aa6f62"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0000-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "f9a035b1eaa213614da1ed2b8c01f36d957d3a801e737ac246d8c380fb5a88bb"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0001-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "ea4bcaace9300289475d7c7cac7614311951c3079185df5ad79a6a96ebf72746"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0001-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "c59b3ddef4883e2d25729b4e5a7c8d40d0698249ce75a66c7dfcdf304da9df6a"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0001-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "c839f8b367f8c4e4f064809e93063cfd5e66c00743928b8ec7078a0f850e52d1"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0001-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "b523512af8cdf90d6cfb2bcf842c717423cff2999ae16f760ebf68f431a6d33e"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0001-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "4d08801472ebdc40887f5d2a736f721d4ef852975ebad6a4bbf2389af33eb91e"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0001-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "b5cb509290aedd3ab1476acdeaeb8ec0fbf1416d8ce5d836d8f279438f2bd162"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0001-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "420ccc654cfb8f953bfe4c94e2870e11cefd0005b82252fbfa541097017bbf6e"
+  },
+  {
+    "path": "runs/qualification-capture-default-05/visibility/issue23-mmlu-pro-smoke-0001-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "7564cd99e47b40ecfc4bb03ae05200c825fb75d3e94badde464c289053fd88d4"
+  },
+  {
+    "path": "runs/setup-20261012/connector-tests-final.xml",
+    "bytes": 9974,
+    "sha256": "b6636dd8d87b97f77608c65a60f84cf4d925f9565a4296d488d01fc30e4d0431"
+  },
+  {
+    "path": "runs/setup-20261012/pilot-resume.log",
+    "bytes": 129,
+    "sha256": "a7b8f00be72d79de82e1b01ed12c1a4d7ca4399422861d8c3696e18ed8c4d1bc"
+  },
+  {
+    "path": "runs/setup-20261012/python-overlay-identity.json",
+    "bytes": 346,
+    "sha256": "f262a762af97a9c4a26674c61d808707b3be2f4ac9d71ca863292f935fb328c3"
+  },
+  {
+    "path": "runs/setup-20261012/qualification-orchestrator-08.log",
+    "bytes": 721,
+    "sha256": "2b4c55cfc3ac98f68ff0e23ed8435aa418631579fd941709d09fc84b63f92c27"
+  },
+  {
+    "path": "runs/setup-20261012/runtime-identity-host-192-168-0-2.json",
+    "bytes": 1467,
+    "sha256": "a263a4262f7ffae05b95575709ea62cbac63ba1e27f5fcbe987c0e3fc4d0eeeb"
+  },
+  {
+    "path": "runs/setup-20261012/runtime-identity-host-192-168-0-4.json",
+    "bytes": 1467,
+    "sha256": "aa2beeac08df821cc7c30d40ee993a8e307f161f7ffb48ccfa7f4d77d3cff219"
+  },
+  {
+    "path": "runs/setup-20261012/smoke-pilot-orchestrator-06.log",
+    "bytes": 76,
+    "sha256": "5f7a726dccdf0ba098df68e801fc7d9e9090609ff2efd75ffe12632f2c476fc3"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/activate-decode-engine-0.json",
+    "bytes": 74,
+    "sha256": "44db608f32108116b1fd57a86eedae2ff1479a299c8e0fe18a098704d4a2a716"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/activate-decode-engine-1.json",
+    "bytes": 74,
+    "sha256": "44db608f32108116b1fd57a86eedae2ff1479a299c8e0fe18a098704d4a2a716"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/after-measurement-decode-engine-0.prom",
+    "bytes": 25926,
+    "sha256": "5f65408467c2f489c68e628e7b1c0ac261e4b42be28764ef585f1ade80092880"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/after-measurement-decode-engine-1.prom",
+    "bytes": 25928,
+    "sha256": "c9423f89858628034c2b8833a31841ef58d0db10324067ebd1c10a3cf2ae8fa8"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/after-prepare-decode-engine-0.prom",
+    "bytes": 25864,
+    "sha256": "8a112fb82f356f10b91203ae849229d3b4ac85f8c497567affc953de3370cbca"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/after-prepare-decode-engine-1.prom",
+    "bytes": 25846,
+    "sha256": "be753ea9828022848c1a4f98e7197b6e7933b3ed00e02f57bfa84755621bdcb8"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/analysis.json",
+    "bytes": 8187,
+    "sha256": "275ca87ca7c7734403a88a2a91db5d7cd21c65846c1f9de3cc3de06ca5583026"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/before-prepare-decode-engine-0.prom",
+    "bytes": 3717,
+    "sha256": "ac51980facf6671b02fb5f1f3a194ae7751e9cbde3a1333f634dcdc6b8bcdaa1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/before-prepare-decode-engine-1.prom",
+    "bytes": 3717,
+    "sha256": "9de772d562fad24bdd0e86c9bb09ca887833e0bec5ae8640c78c1e689f5c024b"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/client.jsonl",
+    "bytes": 14668,
+    "sha256": "9a7397163baea3b2a8d8e64771914438e00fadffce3384eaecf68ea6a4d43f79"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/decode-engine-0.log",
+    "bytes": 37219,
+    "sha256": "1e70fe42137eb67e7ac3f0209399211b679171de2202f886bbe68aa47fdf2976"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/decode-engine-1.log",
+    "bytes": 37207,
+    "sha256": "e03fa09d88e76977624755ad68de50c8edde55cc082b32d0342a3bee9731f66e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/decode-metaserver.log",
+    "bytes": 1774,
+    "sha256": "26126d0682449c92287afa6e64b938783a32c4d2246a3d739ea58cf446b49180"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/decode-vllm.log",
+    "bytes": 92430,
+    "sha256": "a02dacbb67366563a864e8a43d6a80047c0236f263d6c6ebc34fd76070de5f44"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/marker_clear_argv.log",
+    "bytes": 42,
+    "sha256": "9fde034d46aba157a23da076e94825a02add0cfa3ab9b4d5c99fe29abd8ea196"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/pre-activation-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/pre-activation-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/pre-activation-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prefill-engine-0.log",
+    "bytes": 24240,
+    "sha256": "447244d96c0b841c8c741cba6920dbb8a12449e19186698d27f5cdf88dff8fe9"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prefill-engine-1.log",
+    "bytes": 24244,
+    "sha256": "4f81360fb9f5d0faf0e59555cd9516c2cd9f4ff91a759ecb712fb997f8b9d737"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prefill-router.log",
+    "bytes": 10188,
+    "sha256": "4b36adb6292a5a6f809917f4ca248388edb2f6fa9d16c1c170b5d101bb5087c9"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prefill-vllm.log",
+    "bytes": 94663,
+    "sha256": "35c23a13bc97040cd3c832ba82cd20013ae9928d5ad1ed933e966786ad1589a2"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/client.jsonl",
+    "bytes": 3593,
+    "sha256": "ffe9d2d9432b400fca850adc69ba3dcbd865ed0e57b913b0920e0f970679c7b7"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0000-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0000-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0000-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0001-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0001-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0001-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0002-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0002-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0002-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0003-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0003-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0003-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0004-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0004-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0004-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0005-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0005-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0005-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0006-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0006-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0006-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0007-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0007-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/request-0007-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/sse/issue23-mmlu-pro-smoke-0000-0.jsonl",
+    "bytes": 728,
+    "sha256": "ea9267e20297cf4d564e2ba4f601a72c5361c1f85859be5863c4956439efce22"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/sse/issue23-mmlu-pro-smoke-0000-1.jsonl",
+    "bytes": 729,
+    "sha256": "12ae3522a1ef450605699c74be0bcf23c8fe6d46fdec3ef078c26894d4e649ff"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/sse/issue23-mmlu-pro-smoke-0000-2.jsonl",
+    "bytes": 729,
+    "sha256": "49f5bb63ebf6684493511056f8c53a3adb75ddd14e935539152ea9199511ee14"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/sse/issue23-mmlu-pro-smoke-0000-3.jsonl",
+    "bytes": 728,
+    "sha256": "d725ba06e69e69942310bcc448b0fcbe23acd50a3ab94cd54c372476cae54c7a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/sse/issue23-mmlu-pro-smoke-0001-0.jsonl",
+    "bytes": 728,
+    "sha256": "94676b6fce506f18d19b6cbace7a619187be031fe46c76c007ad0bcea6d8d6df"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/sse/issue23-mmlu-pro-smoke-0001-1.jsonl",
+    "bytes": 728,
+    "sha256": "b5ceece7622660ac9678159a26adfa8282def946c203177df82a1a5007353f94"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/sse/issue23-mmlu-pro-smoke-0001-2.jsonl",
+    "bytes": 729,
+    "sha256": "620f13344ed7330281c8265494d617e0f6ac8daf28a997a35bb717f76355f2bb"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/prepare/sse/issue23-mmlu-pro-smoke-0001-3.jsonl",
+    "bytes": 728,
+    "sha256": "2286be16dc852132d22595760189976e2c0cd2d160d91c9ed068b106417b183f"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/processes-decode.json",
+    "bytes": 3676,
+    "sha256": "dd383bd7362d7b0d1650736a1e7f8fb719cc5f0fc4ffcdde2eb22178998d9f7a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/processes-prefill.json",
+    "bytes": 3209,
+    "sha256": "ffcb1f0554ed9ed232d6761b66b89acff11744d0f9926e5f03ee9e127b677cd4"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/run-contract.json",
+    "bytes": 2688,
+    "sha256": "51872ba510953cff48ee9d5733dcd5c4235c278a8dec571334b676c956ae6bd9"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/sse/issue23-mmlu-pro-smoke-0000-0.jsonl",
+    "bytes": 96897,
+    "sha256": "9732770e77bfc09ad503b5dc5f830e2a0d0f33cdac816198bdb5f08cee9098d0"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/sse/issue23-mmlu-pro-smoke-0000-1.jsonl",
+    "bytes": 171438,
+    "sha256": "86c80df355e7dcff8273c4e5bc811708e995d4e74275415ef975771df6d9b7c8"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/sse/issue23-mmlu-pro-smoke-0000-2.jsonl",
+    "bytes": 171528,
+    "sha256": "4eba67d9988b924910f1bdc2dfcfc45dd662714dc52a1b7811aabf5dca1c9996"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/sse/issue23-mmlu-pro-smoke-0000-3.jsonl",
+    "bytes": 171677,
+    "sha256": "36a919a2e623b4cdaf78708e5942bdce52a54808863a6979bb21e3b14a9e0b94"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/sse/issue23-mmlu-pro-smoke-0001-0.jsonl",
+    "bytes": 171695,
+    "sha256": "80a75e8801a43c7c43fe1dcc6749ce0f827a0ce59e8043bc27e3ce1b7e813ae1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/sse/issue23-mmlu-pro-smoke-0001-1.jsonl",
+    "bytes": 171380,
+    "sha256": "9198f04972a67370c66f78097b89527f5d3c3203c6917546d30135995a69e466"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/sse/issue23-mmlu-pro-smoke-0001-2.jsonl",
+    "bytes": 171318,
+    "sha256": "09387b6d773da543601987ebe5c63568ea885dfdac51b36163cde3157df1532d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/sse/issue23-mmlu-pro-smoke-0001-3.jsonl",
+    "bytes": 162801,
+    "sha256": "e0fba6e2ded4de316b33a79e2f1361abdad5ca0814df1b3c047012dcc034708a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/start_argv.log",
+    "bytes": 245,
+    "sha256": "3c0e0ccd53d7308bdb62332c365df06fa2f462f6f5a023f29cd8094dd7a5563c"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/status-before-recovery.json",
+    "bytes": 66,
+    "sha256": "113670bedb17fe402bd26629be479ff79ac18335dcbcddbd8babcedd07a89b0d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/status.json",
+    "bytes": 268,
+    "sha256": "4620544b0f7727bc9fdbb70326f9f8248eec67273cc085462988d67151e873fe"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/stop_argv.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/trace-decode-engine-0.jsonl",
+    "bytes": 242762,
+    "sha256": "6e481dd6b68bd5f7200d1aecd38e9f4a61e277c879f85357959ac25a0c970fac"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/trace-decode-engine-1.jsonl",
+    "bytes": 242762,
+    "sha256": "c333814caff95ea202334feee373a73be446b3304238d7e4d063adaab64dd073"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0000-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "a6565e93d67d62d6d6d181dd147ddb2785254cab2e402259ab0fa3e481aad3f5"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0000-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "5aa92047c8f23f4d0d4d37a2cd87f991da83908c475b87ef9cdfbc7f88750946"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0000-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "fb23db6203f92229d53de675a2f1b9f3d187098078ac6aa6e3542856f54bb751"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0000-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "29d4888e226e6dc86bb8ebca17683847602d29013f312394e891461f746d2763"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0000-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "7092bf90a894cea0158ea39c0723846e07417ba19b4da23242dc1b0e1bbfccff"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0000-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "06c85edb935e51bb6be8253de590921ede62cad0a1c4ea7e521e919999329c9f"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0000-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "e50ec8951b0d8b71b86a8bd4b9502734d321f824951c0157ceffdec4ed5fb3b2"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0000-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "a75e61ef8b9b895c90392b3d7d47730012b14eb3d3aaaf3c8bedd2f53c05b2fc"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0001-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "1151342404777d5500b1efb45d4f259ad09f28da4cd3ecf8a7aac0a6c1451cb8"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0001-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "652cd573c69d4fc80dc5944cbf17c95461704f36fccdd7b20878bef6f024f87d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0001-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "c108f8f7d2fbd2d10c97f5605806298c6380cce1ba9852f1ebe943743ce7c6ac"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0001-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "4e2d6bf6159c70967dcc199100861f441773f43962c25897946c41a70f584267"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0001-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "77c2c56fc351c20615726e63925bdfb33baa7207f5531b116bfd778352b0e78e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0001-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "3ae22a757da72957609190000a86ff2b05324ccc260e95a5b5f3df7bfa0fe980"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0001-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "cc9ba7dd1ee70c5f0ae2ec6cf4dbe943f294f0581e3d0a8f07e3c0a1abf61625"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-local_copy-smooth/visibility/issue23-mmlu-pro-smoke-0001-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "a853322d24446c0a2a049eda27921496846676722dc02308d1c5f764154ca1e0"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/activate-decode-engine-0.json",
+    "bytes": 74,
+    "sha256": "44db608f32108116b1fd57a86eedae2ff1479a299c8e0fe18a098704d4a2a716"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/activate-decode-engine-1.json",
+    "bytes": 74,
+    "sha256": "44db608f32108116b1fd57a86eedae2ff1479a299c8e0fe18a098704d4a2a716"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/after-measurement-decode-engine-0.prom",
+    "bytes": 25947,
+    "sha256": "5da1680038945c472b5c929f0c9af1b5a8aa09d7ebc92c3bc79da5eaf0c04ded"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/after-measurement-decode-engine-1.prom",
+    "bytes": 25933,
+    "sha256": "d6daa8e6c2f8b5358a1f2b0c37c531a833cae5e423321bf120d95d5d5d184d09"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/after-prepare-decode-engine-0.prom",
+    "bytes": 25874,
+    "sha256": "ae76f43ea9e3361609c3edde5ba5c7b093189e0e98b150f11e12cb173f695d72"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/after-prepare-decode-engine-1.prom",
+    "bytes": 25840,
+    "sha256": "f36457de7492f1eaea3c658ad5645cf6b5a95bd130ab29dbfbf0a6120c721f50"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/analysis.json",
+    "bytes": 8172,
+    "sha256": "12ec239960da613946547c8211eb30086676d7d345b1b972f1a238ae27f5b206"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/before-prepare-decode-engine-0.prom",
+    "bytes": 3717,
+    "sha256": "0f8c6a7f6eee224193b1b1520c820b6aed677ba865810c306867e3cb69898453"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/before-prepare-decode-engine-1.prom",
+    "bytes": 3717,
+    "sha256": "2aada7abad8b1c3bc957bb9469bd99849f2ff0c3641f7e9f423a38fabf4dd009"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/client.jsonl",
+    "bytes": 13474,
+    "sha256": "eeaccc1eaeabc9d3fed7345b400fd16c6dfbfb184a13b2ef192088a8288851b7"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/decode-engine-0.log",
+    "bytes": 39181,
+    "sha256": "73f70cf877d556feae4be022ad76569e91b62bd2a87bcf0d0a77182dcda9bf4a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/decode-engine-1.log",
+    "bytes": 38717,
+    "sha256": "42fa8ac73caade549901e65656689584943d10af0dc40aaf3f1174c0dbec80ad"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/decode-metaserver.log",
+    "bytes": 1865,
+    "sha256": "cdb12956dd6789f6cb87856c0497d301dab3cd38f50ee41b3219a0b659fe0dbc"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/decode-vllm.log",
+    "bytes": 92591,
+    "sha256": "8b2195024550df967bfadd389ce40eb64923e518999656a51c545ee4ce4b9e94"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/marker_clear_argv.log",
+    "bytes": 42,
+    "sha256": "9fde034d46aba157a23da076e94825a02add0cfa3ab9b4d5c99fe29abd8ea196"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/pre-activation-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/pre-activation-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/pre-activation-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prefill-engine-0.log",
+    "bytes": 24241,
+    "sha256": "88b6078784ffb91e303aa4925e48d30a5e32d728c5f32695ec33285d837bcfba"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prefill-engine-1.log",
+    "bytes": 24244,
+    "sha256": "60926dc4e0f6ed3387f944b89e4b0a03e53f2efe96f70a0be67a0f6662f313df"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prefill-router.log",
+    "bytes": 10182,
+    "sha256": "de9c413fa845114cd9b10cfc2ee63f7360ac1817a1fb391133cff28f6bbf0965"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prefill-vllm.log",
+    "bytes": 94471,
+    "sha256": "d3bbf4c98c23f8e0df96d612928bc38a72e95ff6b583be4c01beee01a0d95258"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/client.jsonl",
+    "bytes": 3600,
+    "sha256": "10e0963c8c957fca81f73302edbf51c570a6fdc740db980693748cd3b11fc9ec"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0000-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0000-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0000-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0001-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0001-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0001-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0002-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0002-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0002-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0003-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0003-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0003-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0004-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0004-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0004-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0005-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0005-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0005-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0006-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0006-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0006-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0007-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0007-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/request-0007-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/sse/issue23-mmlu-pro-smoke-0000-0.jsonl",
+    "bytes": 729,
+    "sha256": "40a5c7418e9e1afda07350a585b7f55cb19f3959677ef12a495591cbdd77445f"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/sse/issue23-mmlu-pro-smoke-0000-1.jsonl",
+    "bytes": 728,
+    "sha256": "ccf022c370e1bfc8e3d6858a4ad624d88821cc2f0a89fc63304258368312e5ce"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/sse/issue23-mmlu-pro-smoke-0000-2.jsonl",
+    "bytes": 729,
+    "sha256": "a9b84c1ab38b8f0e61c085d3c5088ff6f2ca3bfbb4e0d4eedd097148399b95f3"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/sse/issue23-mmlu-pro-smoke-0000-3.jsonl",
+    "bytes": 729,
+    "sha256": "947047a74fbeab3758cca261851f179b8adc8d9db473df41566e003b1b4afb2d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/sse/issue23-mmlu-pro-smoke-0001-0.jsonl",
+    "bytes": 728,
+    "sha256": "a4c76c17b71dca621f8ef0d718785b681864f27fbfa8e82d125ce9a5f1d18b12"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/sse/issue23-mmlu-pro-smoke-0001-1.jsonl",
+    "bytes": 729,
+    "sha256": "e92ca62faf84a08de346cd5d4a7ea8bd2a2f72a0d901e9dd526abdcbc466fc27"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/sse/issue23-mmlu-pro-smoke-0001-2.jsonl",
+    "bytes": 725,
+    "sha256": "b87f416d730c336d77f4f32ce8db2c01dacb4e5ef494991f8b99201f47fff4da"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/prepare/sse/issue23-mmlu-pro-smoke-0001-3.jsonl",
+    "bytes": 728,
+    "sha256": "2798446ef7a1b3e99bf79b35f0d75d406425b36be37fd4119ee345a8a3daa179"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/processes-decode.json",
+    "bytes": 3652,
+    "sha256": "17c7bf4f7ab84db16cd0ab7a985b96976e512bb8e3c2ff987547e75afbcc50b4"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/processes-prefill.json",
+    "bytes": 3203,
+    "sha256": "fdf8b8c5e23c3fda5fcbade2c74af1a8fec60e0b61d01a1b54125380fcb27051"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/run-contract.json",
+    "bytes": 2664,
+    "sha256": "b2413d771b5ce9fed04f24c6e0f815f81e6dae660a180022a1516e2f6f2587f0"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/sse/issue23-mmlu-pro-smoke-0000-0.jsonl",
+    "bytes": 96905,
+    "sha256": "2151c42a23563268c7fb81ac7cb2c185118fb8465db7483addf52ffb8620f737"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/sse/issue23-mmlu-pro-smoke-0000-1.jsonl",
+    "bytes": 171467,
+    "sha256": "6ed9ace506d564c4e75828ae8444b5b5afb2857fc619ed045b359057adaf7442"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/sse/issue23-mmlu-pro-smoke-0000-2.jsonl",
+    "bytes": 171551,
+    "sha256": "f1f0b27b7eeee64c0e666422e2c5998502ebbd74f0b0288854fdfcc955660ab6"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/sse/issue23-mmlu-pro-smoke-0000-3.jsonl",
+    "bytes": 171751,
+    "sha256": "0a25ae9f7f26f66ba643177c35d6731cced3d493ef4022b21d25cd4803098398"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/sse/issue23-mmlu-pro-smoke-0001-0.jsonl",
+    "bytes": 153516,
+    "sha256": "adfc36bead6d08b420aaf6d79058523df4ca87943b86a2741b7f5d5ceda3e346"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/sse/issue23-mmlu-pro-smoke-0001-1.jsonl",
+    "bytes": 171448,
+    "sha256": "b08531d309ac3205296c49491a119eb7cf9fba57c61db96e4a7c47f6ca690348"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/sse/issue23-mmlu-pro-smoke-0001-2.jsonl",
+    "bytes": 171386,
+    "sha256": "a5c784313a5aac52ca4d79d50081f237537dce2489fac347a1d6875eedf90105"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/sse/issue23-mmlu-pro-smoke-0001-3.jsonl",
+    "bytes": 70707,
+    "sha256": "c6a0c303c18f9536c5c9be4a73dcadf19c99f810cbc09e9b9ba0535b38cccce7"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/start_argv.log",
+    "bytes": 245,
+    "sha256": "3c0e0ccd53d7308bdb62332c365df06fa2f462f6f5a023f29cd8094dd7a5563c"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/status.json",
+    "bytes": 104,
+    "sha256": "5c057558255a7db06afe3434ad1547b72db93a07a01740608cb862a60aeb6717"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/stop_argv.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/trace-decode-engine-0.jsonl",
+    "bytes": 242756,
+    "sha256": "997d40662f424d1b8e830dcd05b25b4837cb4a155e838fcee856419b8d64f760"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/trace-decode-engine-1.jsonl",
+    "bytes": 242756,
+    "sha256": "0b13103b4e99a87913e589a89a827a5befadbaf13cbcccb94b95c9d60eb444cb"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0000-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "64fae3e2115a67073040c1c4df23356a2b0294692450a3190462d8df5a5de322"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0000-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "d50eaa53c3b271d2dfd4bb491536caf1201d03ddac0c365f4c949c72fa394b9d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0000-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "0a4fc545ab0520137e14065c6fdd7f72d45a10afea3f8ccbe897476691795798"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0000-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "5c9fea21f8108591aa8d0e0a5f327e6d8b6ecaec99028663f5eb09f470b0434c"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0000-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "44f127afe19dbe30588d28b7939fe11cb5f699b754163f0ace032651b931cd22"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0000-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "99fd07312c6428c57af2a0281f6944dbd6736316df37d7bb48057ee41323b931"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0000-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "9900c6a18ff194c2be5359c9eced3e82333b18ef05b63668430fddd84473cef5"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0000-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "255202796cb40efeceb47b94816010b724ef5fb2185d6f038ce23e154254e1d9"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0001-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "c99590b30984ad659589f2a42c2b676ee32d8a6d7169f6d0b891434013ddea11"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0001-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "e3a6da8f77a1921fa64523f2c626d56c8dac6364125729144dcce36fabe949b9"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0001-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "62c5d3779ed4f60e5b12708cb935ee64385210901228fe5e958341b3a67f2dec"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0001-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "0566341222bb7026939fb9c551c850303e9e74ed12f0ba682fbbbe2cbaa03c7c"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0001-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "7d953e8c46518b45ef5205c24f04a904ad808316dd1cb8dce3fad515a88ab622"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0001-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "1f139122b4f99f1e1d5e532d305dd20d9cc9ea6f7ba7a192a97c784c3f25f0ca"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0001-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "08c21c86e7e1c5fdf8657a5792bfe91f2a53493d8c91fddd55a94e76982f5a31"
+  },
+  {
+    "path": "runs/smoke-pilot-default-02-rdma-smooth/visibility/issue23-mmlu-pro-smoke-0001-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "d05c5bd2a143a145881be9a874c863931cdd1d590d9093864a24ed8c05d73a50"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/activate-decode-engine-0.json",
+    "bytes": 74,
+    "sha256": "44db608f32108116b1fd57a86eedae2ff1479a299c8e0fe18a098704d4a2a716"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/activate-decode-engine-1.json",
+    "bytes": 74,
+    "sha256": "44db608f32108116b1fd57a86eedae2ff1479a299c8e0fe18a098704d4a2a716"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/after-measurement-decode-engine-0.prom",
+    "bytes": 25923,
+    "sha256": "6e573f0045eb95263650660b226eae7345be93f6b62fdb209c7c699291bf55fb"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/after-measurement-decode-engine-1.prom",
+    "bytes": 25931,
+    "sha256": "e0f9339059c2d8e7e2cdeff7d84fb06eb04dd00de6a941fad1152f6d2b08c97a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/after-prepare-decode-engine-0.prom",
+    "bytes": 25842,
+    "sha256": "87b76298ad3a43cb8e4312984db65f45af43d32ac5699dca4a714acb37f389e3"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/after-prepare-decode-engine-1.prom",
+    "bytes": 25854,
+    "sha256": "4737236b7d6adc69a150fbf12a3abf1c36d82db781932b47d452c4a61df57878"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/analysis.json",
+    "bytes": 8158,
+    "sha256": "b572e9727c59985a712239e32d1e6afca048e57f58c5d108ff842f7fff94f385"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/before-prepare-decode-engine-0.prom",
+    "bytes": 3717,
+    "sha256": "94061844a75c7aef5af20b504f3b74002a1bf4677c7ac76c2c6770d1ba8f748b"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/before-prepare-decode-engine-1.prom",
+    "bytes": 3717,
+    "sha256": "1543c42c5c2166a19258073f0bb7b847f3b224f5166052401f563baed44d7741"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/client.jsonl",
+    "bytes": 13719,
+    "sha256": "8341a3ff296f6c617e3d93f7a0402f5a3eb8e05a48fe1b3203370f09842bbb9e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/decode-engine-0.log",
+    "bytes": 37805,
+    "sha256": "b8e1588e2ae9a05236eea5730a4acedf8dda505bb520065f3e6d36b117bcc66e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/decode-engine-1.log",
+    "bytes": 38734,
+    "sha256": "99c3ace8f6b521b4a7fe6e9bb40dfe6e1f96a409f3165744665bc51c64314186"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/decode-metaserver.log",
+    "bytes": 1865,
+    "sha256": "d4bd98854ccea6e699b102a4465b528968f5bcd50b7e9b0b7ab77c553c97abf1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/decode-vllm.log",
+    "bytes": 92106,
+    "sha256": "3bee7c33d5b34f68d7d9518cc66ecffb4f5a5734122f9869fb9a090a8030e003"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/marker_clear_argv.log",
+    "bytes": 42,
+    "sha256": "9fde034d46aba157a23da076e94825a02add0cfa3ab9b4d5c99fe29abd8ea196"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/pre-activation-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/pre-activation-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/pre-activation-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prefill-engine-0.log",
+    "bytes": 24240,
+    "sha256": "565d6c858f986dd82cc851cac21347c0ec21d733dce7b6279c467eb102c8a92d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prefill-engine-1.log",
+    "bytes": 24244,
+    "sha256": "3ea4d210dfa3b017dbbc4436120c071b7ab1020eb245af1b920bbb373c0c3ea4"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prefill-router.log",
+    "bytes": 10187,
+    "sha256": "ab55b0ff72e7c22eaf582988928f6358557e227ea18e9a8d547b8e8fd159cbef"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prefill-vllm.log",
+    "bytes": 93596,
+    "sha256": "789c5867b1e7e9ef37992b8a75b22d4a07121edc9fe3bf042a303f475530bde8"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/client.jsonl",
+    "bytes": 3601,
+    "sha256": "e4f19def29557386e3d2e381f261953f1147db6c6851eaa8bb09a61b3160c76f"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0000-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0000-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0000-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0001-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0001-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0001-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0002-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0002-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0002-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0003-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0003-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0003-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0004-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0004-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0004-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0005-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0005-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0005-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0006-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0006-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0006-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0007-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0007-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/request-0007-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/sse/issue23-mmlu-pro-smoke-0000-0.jsonl",
+    "bytes": 729,
+    "sha256": "7889fae7508a83dbb5146c79c9e4c7391eb8e4c4f8f9a62bb5ef09bfcce0e58e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/sse/issue23-mmlu-pro-smoke-0000-1.jsonl",
+    "bytes": 728,
+    "sha256": "c84f1b7a3f0478e3bc27300560037c43e302562e3337af5c7fe68324bc81fde2"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/sse/issue23-mmlu-pro-smoke-0000-2.jsonl",
+    "bytes": 728,
+    "sha256": "ed936bf6bee7d4a23c3d9ea40225e1e80618cbd9d3d9bb9e513dc04263cf4d8a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/sse/issue23-mmlu-pro-smoke-0000-3.jsonl",
+    "bytes": 728,
+    "sha256": "1a8ca1c1b2684a914c21e0563f09ce1ac422d8f2cffe3c1de2caed2aefb11c48"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/sse/issue23-mmlu-pro-smoke-0001-0.jsonl",
+    "bytes": 729,
+    "sha256": "3ac5341d80513c46c644fae3c5751a35542043d9f3b22361cc8db4a4e27b29bc"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/sse/issue23-mmlu-pro-smoke-0001-1.jsonl",
+    "bytes": 729,
+    "sha256": "3f152a10ba3fc5dd739563cd3239fcf2dce4e3d0d93803daaecc6665d6e91335"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/sse/issue23-mmlu-pro-smoke-0001-2.jsonl",
+    "bytes": 729,
+    "sha256": "183ecb5f3904edfd001d98f54d558479c0453fb3a3302f6650da6c8543019939"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/prepare/sse/issue23-mmlu-pro-smoke-0001-3.jsonl",
+    "bytes": 728,
+    "sha256": "1443a398181e59970c8911e049e72482e612e28beb0446527b49c79ecc2ce4ca"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/processes-decode.json",
+    "bytes": 3668,
+    "sha256": "880a09334978c2b3675cfd97cba246de817203e8be3919b28f52cd6c02efd859"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/processes-prefill.json",
+    "bytes": 3208,
+    "sha256": "0a58f2b57d7eddbdd7cd000f7e31e6a896a7b5cc9ad94c1a917b3d6000e9e78e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/run-contract.json",
+    "bytes": 2684,
+    "sha256": "81aca23ae9dee863fd008ec24974b7f32838213b6435666e359dfb0d24192ab6"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/sse/issue23-mmlu-pro-smoke-0000-0.jsonl",
+    "bytes": 96926,
+    "sha256": "e8d4fb3c2a1163f98de569bf0a7114683a313112638c9fe68fbf37cb92506236"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/sse/issue23-mmlu-pro-smoke-0000-1.jsonl",
+    "bytes": 171497,
+    "sha256": "f5651ed5dbe1d920ea94567f0d7b55d2c0409e42d9dbcf3075f0d2fb5eb356cf"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/sse/issue23-mmlu-pro-smoke-0000-2.jsonl",
+    "bytes": 171575,
+    "sha256": "ffbfff35ba2dc5b371f3a61a48ae7d218e71a3ea07672ebe000ab4143b06708a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/sse/issue23-mmlu-pro-smoke-0000-3.jsonl",
+    "bytes": 171748,
+    "sha256": "6e0a9e8a1b6ac22fcfb36d75403f6af35ebe6810824c39efc45c78ea3604325c"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/sse/issue23-mmlu-pro-smoke-0001-0.jsonl",
+    "bytes": 171755,
+    "sha256": "6d778a41440f2eacb9f28130f6e86f9891bb682d63f89331b944cbb46f6ab187"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/sse/issue23-mmlu-pro-smoke-0001-1.jsonl",
+    "bytes": 171455,
+    "sha256": "567b00f42159331e57a4ff713b74602347c888d6e67ac64d2c8dfd4ac08e7f41"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/sse/issue23-mmlu-pro-smoke-0001-2.jsonl",
+    "bytes": 171435,
+    "sha256": "78c02a0ad344d7f6ed3f9b6560a44484f4caa81fdac35f3533cd64036116aa4b"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/sse/issue23-mmlu-pro-smoke-0001-3.jsonl",
+    "bytes": 92067,
+    "sha256": "e3233db1bef37d43d2e0b73a00a58ba351b4f5d92bf6cc3d477875d4ee1dbc27"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/start_argv.log",
+    "bytes": 245,
+    "sha256": "e1f56e9ceaf8f177b51787e5f49dcda5b7e2efd39f5bd4016d6e3c7dc1fbaca7"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/status.json",
+    "bytes": 105,
+    "sha256": "af0a04ac31a41a6887530df223f4003462a4f991c3b02af7aeab9b9061fa9511"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/stop_argv.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/trace-decode-engine-0.jsonl",
+    "bytes": 243145,
+    "sha256": "352d68de2081a2264be29c8daa1d95f93c09a9a4ffd637c5840077377d71e126"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/trace-decode-engine-1.jsonl",
+    "bytes": 243145,
+    "sha256": "9fd37060f3c86806d17ad1b04bb3eb325a50a1544e73ec28f37d8d80be9a5534"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0000-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "b0afaeb29dace3afd830591044b1610c43e35ed0097bbe3d4a41ed3aa9b7b178"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0000-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "71d7d8082841e459bb556dec54490e9b37c8fb1358f521a6d7ceae9d1cfae1f9"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0000-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "85b9c312f5c28529aaf533a008a338b2503901a2e87fb5ddd0a64bdd4ab1e420"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0000-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "f3a558b989da275c754a4f9c36283e0bb54521a2ed710d695aed5e76ebb2ad52"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0000-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "24363f60fbd077dba04de17ab20234517d57af140b3dfc8df570281ca68a7ba5"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0000-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "d90a26d7a45fa8e83063c9851522045fb4f185259d508adb576e47477ded4aca"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0000-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "fca334127e88d0959e44c5923431e33daf54dbf887e67bb2005dc16790c597d4"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0000-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "539a521191c065f1f99f51351f7ef7e8e0cb13802497e98b9e8db2d7c6711a9a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0001-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "ed1b3d0e41b542b268074b636fb7fe63fde092052aa86807b52591115e21bc46"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0001-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "92074cc72e877fce6bb25ed064d0b0630b4d2ca695f114405b48942ec4feb659"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0001-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "8f3fe780aead45723b7454569d16a2cbb9d18346ef04e0b7f18a3eef11cf82c9"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0001-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "951cf25dba23366e315d9d54ef06ad53b9e6bfeea91e766fec5314060553d8f7"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0001-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "e85039181768ae308bb25ec110f2465cd7324112083786a842ca658771cb4042"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0001-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "25f13637f3ae597cec7b5c34ffda6166d66c3c96cf0bbcb6c8cc45942e5f6054"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0001-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "3efbd3f375940494206ca74906c6700b133bb8a54a319c05d29c5a878aa3381b"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-local_copy-burst/visibility/issue23-mmlu-pro-smoke-0001-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "ff8ecfaefd3691c3662fa488db61f43c1badcb1ebbf1d2b8363e2dab83c30cc9"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/activate-decode-engine-0.json",
+    "bytes": 74,
+    "sha256": "44db608f32108116b1fd57a86eedae2ff1479a299c8e0fe18a098704d4a2a716"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/activate-decode-engine-1.json",
+    "bytes": 74,
+    "sha256": "44db608f32108116b1fd57a86eedae2ff1479a299c8e0fe18a098704d4a2a716"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/after-measurement-decode-engine-0.prom",
+    "bytes": 25945,
+    "sha256": "75c5a7d7b9d6a955a144a6d1ebddfac99de25e517ef6475b500d0295fac748bd"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/after-measurement-decode-engine-1.prom",
+    "bytes": 25909,
+    "sha256": "a71323bb48acc3a13f9ba0969c87cbec07e37dd4cbfa5685752d903e564d8c37"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/after-prepare-decode-engine-0.prom",
+    "bytes": 25861,
+    "sha256": "a0d8eae1f1913b6862bad7c9dce1a824d9856b5bbd52daa9536446c4c60fb292"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/after-prepare-decode-engine-1.prom",
+    "bytes": 25872,
+    "sha256": "7b63c165be0415f4f7963baa63c3d811104e8a04ede6bb8a67f49834943be2dc"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/analysis.json",
+    "bytes": 8204,
+    "sha256": "eace6d67003d8d4eb073676db9caf88bd5b4df5d3c884ce61a23d0a5b818aa8d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/before-prepare-decode-engine-0.prom",
+    "bytes": 3717,
+    "sha256": "7696c72a1cd9aeccdcf416cf70db1bf841ff0de464a6300ea8439fbc024b469c"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/before-prepare-decode-engine-1.prom",
+    "bytes": 3717,
+    "sha256": "0bd3ebf2e59d55837be4f4817666c7d08a6a6d0b8adb3bc30dccfb907d279607"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/client.jsonl",
+    "bytes": 13432,
+    "sha256": "e40ba65a9078ba2046bbf48369727c4a84984d0a1e406bf6bfed2e4ac03281ce"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/decode-engine-0.log",
+    "bytes": 38681,
+    "sha256": "1f9203091f82e1ae12b52e51d574c2a0aa55bc035e0e7925229a3a0b58d90478"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/decode-engine-1.log",
+    "bytes": 38835,
+    "sha256": "8f98c3983523bd72acd1d3d6edb4ef4393b2d58ddbc8d2fb9e6e4e4c6655a2f3"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/decode-metaserver.log",
+    "bytes": 1865,
+    "sha256": "0b8c9b57c8009148ba672042aed14a93b28f3bde443f01bdfae41055523f67ea"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/decode-vllm.log",
+    "bytes": 90681,
+    "sha256": "ede2899515f6fa1bfd4ed53e56bd1ab26880b5e4fb4cd2d9b6d318a60eefdd33"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/marker_clear_argv.log",
+    "bytes": 42,
+    "sha256": "9fde034d46aba157a23da076e94825a02add0cfa3ab9b4d5c99fe29abd8ea196"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/pre-activation-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/pre-activation-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/pre-activation-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prefill-engine-0.log",
+    "bytes": 24240,
+    "sha256": "05beedd5da3a4a118f3c671605b004ecba33f4632cc11961ac8f793eb622882e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prefill-engine-1.log",
+    "bytes": 24244,
+    "sha256": "dd4057667dbcbf574d2cbaf16fc6d6207311187e7b842f4ff2097e1f87ae8256"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prefill-router.log",
+    "bytes": 10181,
+    "sha256": "a7b6d096f32a150fc1ec2471ffec28269e84b68d8910628e0810829b910ede06"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prefill-vllm.log",
+    "bytes": 93445,
+    "sha256": "6817d95a1e1711e2b280c8d7dd0ef817c4a50ebce9815eb93784338237aa3cd3"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/client.jsonl",
+    "bytes": 3602,
+    "sha256": "ebfc3c324dd16f743803ddf83e138936c3c9e2444c7ee194a849b82d43a57f42"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0000-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0000-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0000-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0001-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0001-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0001-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0002-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0002-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0002-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0003-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0003-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0003-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0004-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0004-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0004-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0005-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0005-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0005-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0006-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0006-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0006-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0007-decode-engine-0-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0007-decode-engine-1-host-cache.json",
+    "bytes": 104,
+    "sha256": "0fe3f76b4dc0a0e0e7ff5b5f8660dc72524670a6a5664a30beb1d33d6a4502c1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/request-0007-device-cache.json",
+    "bytes": 26,
+    "sha256": "07c872c555795ea5ab0ef965e45c1becfb2d0d549c499c78aabf125a3f5cb958"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/sse/issue23-mmlu-pro-smoke-0000-0.jsonl",
+    "bytes": 729,
+    "sha256": "76cd5fd140343cde51fab01156c426dd853d80fb10180756c4110627c32fba9e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/sse/issue23-mmlu-pro-smoke-0000-1.jsonl",
+    "bytes": 729,
+    "sha256": "378bbeecb4ed6f0ed5c2be72fdc2ca2d2f5119b4167f29ae7d99023d680cd26e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/sse/issue23-mmlu-pro-smoke-0000-2.jsonl",
+    "bytes": 727,
+    "sha256": "a82cb267048ab4f5f24d2e4c6067f347ebef743696e905e459487baa590da472"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/sse/issue23-mmlu-pro-smoke-0000-3.jsonl",
+    "bytes": 729,
+    "sha256": "8ceedc6ca58bb8d5618db5fa07d0f75992d1da5bf02b975e08fa94c201b73767"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/sse/issue23-mmlu-pro-smoke-0001-0.jsonl",
+    "bytes": 728,
+    "sha256": "4512bede58450884696596ee1ac849148cf261189f3e402f0e85f03a6b6dec24"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/sse/issue23-mmlu-pro-smoke-0001-1.jsonl",
+    "bytes": 729,
+    "sha256": "d140e452ccb658301bd92be554c2c44d2f6c962a8e42f567eb18bc4cd455bec9"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/sse/issue23-mmlu-pro-smoke-0001-2.jsonl",
+    "bytes": 728,
+    "sha256": "0628c1e2b0a75091e769ad625b909010f5e8371242e5adc1328398df9e15c03b"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/prepare/sse/issue23-mmlu-pro-smoke-0001-3.jsonl",
+    "bytes": 727,
+    "sha256": "f04a45f1d0156b1fc686f9d3b0d337252f0f0db45947354eaa6884d0d58b9e0a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/processes-decode.json",
+    "bytes": 3644,
+    "sha256": "b784e8593dd8ff08b95b1fa5198edc38c359385874b3f2dd2fcbbd0207ac6d4f"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/processes-prefill.json",
+    "bytes": 3202,
+    "sha256": "8a6eba77021b5df11db16952da4f0f92b038c1cd87eb9c807c4d85b286a9ecc1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/run-contract.json",
+    "bytes": 2660,
+    "sha256": "176e083acf01e8047f7282c2db36f74c2019b6671caf85b90747034bf45bc37d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/sse/issue23-mmlu-pro-smoke-0000-0.jsonl",
+    "bytes": 96914,
+    "sha256": "ee67f49d96f5ddc59c2e80184f8b4877a1f75215e8702fcdfb8afa746d161d20"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/sse/issue23-mmlu-pro-smoke-0000-1.jsonl",
+    "bytes": 171532,
+    "sha256": "040d628119a8c66aad4baa97918462b501bf586bac9c19b6aceb860566345b8e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/sse/issue23-mmlu-pro-smoke-0000-2.jsonl",
+    "bytes": 171618,
+    "sha256": "0542200a46250a97f089cf2f5632c07db937427a1843f4f1158cd73eb61d93a1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/sse/issue23-mmlu-pro-smoke-0000-3.jsonl",
+    "bytes": 171856,
+    "sha256": "f0549eb894808fa22aab1ba2fc6a97de26c3629ce72782bcabaeaa177ede3380"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/sse/issue23-mmlu-pro-smoke-0001-0.jsonl",
+    "bytes": 153536,
+    "sha256": "e7cf95b2054415085726fed009dda05df96bcd77b828ad34ae7548483ed15df1"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/sse/issue23-mmlu-pro-smoke-0001-1.jsonl",
+    "bytes": 171497,
+    "sha256": "34c45ebb2defb8a9cac843e0d5f3c2c699d0ce46587c8d42ca3db978875658fe"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/sse/issue23-mmlu-pro-smoke-0001-2.jsonl",
+    "bytes": 171429,
+    "sha256": "6f59736527159d9a6c1217b90e5e94555e924fa3d1bbf48152df6ad2f5a15bcd"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/sse/issue23-mmlu-pro-smoke-0001-3.jsonl",
+    "bytes": 65303,
+    "sha256": "b8096e9499de831d75e44014ad760890fcdf9542ca7463fe8a8f8ca261812946"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/start_argv.log",
+    "bytes": 245,
+    "sha256": "668d56ab4fcd3cc02343bebb9d5641015104279ea0b0dcd106f1fd65e9e129a3"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/status.json",
+    "bytes": 105,
+    "sha256": "617509a679116661a710aa89dd7b59e82ce1d79b970395f9298eea941efff6dc"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/stop_argv.log",
+    "bytes": 0,
+    "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/trace-decode-engine-0.jsonl",
+    "bytes": 243137,
+    "sha256": "e6e1791cea42868516effb8d773c83dd82f54c54c62324ef409243cc86832688"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/trace-decode-engine-1.jsonl",
+    "bytes": 243137,
+    "sha256": "68c6b6f5e5ae2b4e1960220753d49248f6e7c60efdf16225c4a9b780e0a7b31a"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0000-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "e7b6d482ee4502dc355835c69c2f29d53f5b003bdc810c8d72fc39571e993cbb"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0000-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "874c64b7f34008287163a6f4dce6e3c3cb106f354d84983c93c2bf2f30fcc368"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0000-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "17cfb5b1633ae46db76f4c0add8565cb9d136766ddf4e987d0dd0ee6d1020b3d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0000-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "d600742524146379a6ea1038b7216b0ccf376f537afcb02bc2a77dd48d8e474e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0000-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "d08744acb3abb6c71883a73ead2eeb15b328ef3502c446aa3371b5d15b98ed98"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0000-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "2df8358798760ffd27a363ddc2177fee850b8d55156907169da92524f2c13b40"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0000-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "c106ff27df2ca3b040d69dddc60229eee69dc08212d728942720dd24e493bbaf"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0000-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "6e26559691e71127e71577a883b2735b6de49de29d4663cd6876b88ae8d42376"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0001-0.tp0.visible",
+    "bytes": 71,
+    "sha256": "671a974a129bf9c2a9587dd32fd1fc0949c1acc0cc93af246ba7bd121dfa773d"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0001-0.tp1.visible",
+    "bytes": 71,
+    "sha256": "830876672eabd16bc5d7c8aeedb64d2e663061ef912016002e428d6c7f922091"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0001-1.tp0.visible",
+    "bytes": 71,
+    "sha256": "f5e8d8a7a3d08bf9a8fbbfee336767186cc019e5f090bbd9e88062e67eadf295"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0001-1.tp1.visible",
+    "bytes": 71,
+    "sha256": "19a29149b16cca6dcfcc4e39c0db44d6cd2b1ba995a46cb6a2a4218f82b60852"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0001-2.tp0.visible",
+    "bytes": 71,
+    "sha256": "ee085a23d7487313fca81b20b0a3c28f20234c84c64d652627dc85718adba436"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0001-2.tp1.visible",
+    "bytes": 71,
+    "sha256": "e5a2fe33c0bef8b7a482e18e94e376a56ec8c3fe19b6aff3e517de6410cf4e75"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0001-3.tp0.visible",
+    "bytes": 71,
+    "sha256": "af3830fd0a1ee7d047bbf972b0b6fe08e75ce0e257fc84f1071070cd74cee96e"
+  },
+  {
+    "path": "runs/smoke-pilot-default-03-rdma-burst/visibility/issue23-mmlu-pro-smoke-0001-3.tp1.visible",
+    "bytes": 71,
+    "sha256": "31901e5ac7344b689c662451aac8a7c4a681e5372a8a405f169aa017eb281400"
+  },
+  {
+    "path": "runs/smoke-pilot-default-summary.json",
+    "bytes": 40110,
+    "sha256": "862dc35f373476c1951936e081e1efe5784453a25a4d3d94dffd8c5f0c237e70"
+  },
+  {
+    "path": "runs/smoke-pilot-result-evidence.json",
+    "bytes": 8245,
+    "sha256": "3788f8384dcbabbea6488fc47b45c09d56f248a123e70c5f50a602bf4c5315c3"
+  },
+  {
+    "path": "runtime/Cargo.lock",
+    "bytes": 104155,
+    "sha256": "d3039a6c275023788c1bde170012e9b1753484f5ed7c424ac478a09d9d771a22"
+  },
+  {
+    "path": "runtime/issue23-pilot.patch",
+    "bytes": 16602,
+    "sha256": "d59fa675695091fe4649af378ec9366e0c9432199dc9381ebf36984a81f66dae"
+  },
+  {
+    "path": "runtime-snapshot/collect_pilot.py",
+    "bytes": 2258,
+    "sha256": "1fbfe5a857dc24ee1b18c854293452dcf4255dabaa49cb517870219c6db8da41"
+  },
+  {
+    "path": "runtime-snapshot/lifecycle.py",
+    "bytes": 6834,
+    "sha256": "7c7a55fd5c88c252f17ed77c8616a160b9ffe2c25e477d29d8c8d619643ea871"
+  },
+  {
+    "path": "runtime-snapshot/node_agent.py",
+    "bytes": 5803,
+    "sha256": "dff2b66975f78d275d9cbc91bb06317c61d03a7e9af08fddf019e4debfefcfd4"
+  },
+  {
+    "path": "runtime-snapshot/prepare_transfer_context.py",
+    "bytes": 2342,
+    "sha256": "a06f4e895f79f3bc975267b31cd0f8ec5385ebc07a556afa3edb7915e5cf53b1"
+  },
+  {
+    "path": "runtime-snapshot/qualify_and_capture.py",
+    "bytes": 7527,
+    "sha256": "e7fbc32b9890b3efece061354cd936217cfd1d5855467e6f48b1173936882487"
+  },
+  {
+    "path": "runtime-snapshot/resume_pilot.py",
+    "bytes": 2495,
+    "sha256": "38a49b280150ff9393b55d6d3ebd0ef43d7c29217ca7b95f58cf936fa4aba8f0"
+  },
+  {
+    "path": "runtime-snapshot/run_smoke_pilot.py",
+    "bytes": 3390,
+    "sha256": "e95f1c5864169553acaa0ed56673040691356c6544e5cc9c5fc9169b6a1d881e"
+  },
+  {
+    "path": "runtime-snapshot/summarize_pilot.py",
+    "bytes": 4288,
+    "sha256": "f4bf2c419429839d0533f2356a53bc3ef532223d747a8b9eab8f8566b9a599c9"
+  },
+  {
+    "path": "verification.json",
+    "bytes": 1036,
+    "sha256": "88839f34c629f937d55b4c218b959201dbf07f0e6a28bb5c8d743d248fd3b2ae"
+  }
+]
