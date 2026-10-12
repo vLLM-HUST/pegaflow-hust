@@ -1,13 +1,16 @@
 import asyncio
 import copy
 import json
+import subprocess
+import sys
 import time
+from pathlib import Path
 
 import httpx
 import pytest
 from aiohttp import web
 
-from analyze import trace_analysis
+from analyze import analyze_run, trace_analysis
 from client import ArmFailure, make_client, open_loop, stream_request
 from common import read_json, read_jsonl, sha256, write_json
 from freeze_plan import freeze, validate_plan
@@ -29,6 +32,8 @@ def fixture_plan():
 def fixture_trace(plan, schedule="burst", backend="rdma"):
     events = [{"event": "experiment_opened", "schedule": schedule, "backend": backend, "monotonic_ns": 0},
               {"event": "experiment_activated", "monotonic_ns": 1}]
+    if schedule == "smooth":
+        events[0].update(smooth_scheduler_policy="sched_other", smooth_scheduler_priority=0)
     for request in plan["requests"]:
         common = {k: request[k] for k in ["request_id", "cohort_id", "smooth_slot"]}
         posted = 15_000_100 if schedule == "burst" else request["smooth_slot"] * 10_000_000 + 100
@@ -102,6 +107,75 @@ def test_engine_clocks_are_not_subtracted_across_engines():
     left = trace_analysis(a, plan, "smooth", "rdma")
     right = trace_analysis(b, plan, "smooth", "rdma")
     assert left["valid"] and right["valid"] and left["requests"] == right["requests"]
+
+
+@pytest.mark.parametrize("policy,priority,expected", [
+    (None, None, None), ("sched_other", 10, None), ("sched_fifo", 0, None),
+    ("unavailable", 0, None), ("sched_fifo", 10, "sched_other"),
+])
+def test_analysis_rejects_unqualified_scheduler(policy, priority, expected):
+    plan = fixture_plan()
+    events = fixture_trace(plan, "smooth")
+    events[0].update(smooth_scheduler_policy=policy, smooth_scheduler_priority=priority)
+    assert not trace_analysis(events, plan, "smooth", "rdma", expected)["valid"]
+
+
+@pytest.mark.parametrize("fault", ["missing_engine", "extra_engine", "missing_request", "cohort", "slot"])
+def test_analysis_requires_every_planned_engine_and_request(fault):
+    plan = fixture_plan()
+    cases = [{"request_id": r["request_id"], "cohort_id": r["cohort_id"], "smooth_slot": r["smooth_slot"],
+              "dataset": "mmlu-pro", "category": "math", "reference_answer": "A"} for r in plan["requests"]]
+    results = [{"request_id": c["request_id"], "status": "ok", "text": "A", "ttft_seconds": 1,
+                "e2e_seconds": 2, "dispatch_lateness_ms": 0} for c in cases]
+    plans = {"e0": plan, "e1": copy.deepcopy(plan)}
+    traces = {engine: fixture_trace(value) for engine, value in plans.items()}
+    assert analyze_run(cases, results, traces, plans, "burst", "rdma")["valid_timing_arm"]
+    if fault == "missing_engine":
+        traces.pop("e1")
+    elif fault == "extra_engine":
+        traces["e2"] = fixture_trace(plan)
+    elif fault == "missing_request":
+        cases.pop()
+        results.pop()
+    else:
+        cases[0]["cohort_id" if fault == "cohort" else "smooth_slot"] = "wrong" if fault == "cohort" else 3
+    assert not analyze_run(cases, results, traces, plans, "burst", "rdma")["valid_timing_arm"]
+
+
+def test_analysis_rejects_posting_before_the_cohort_gate():
+    plan = fixture_plan()
+    events = fixture_trace(plan)
+    eligible = [e for e in events if e["event"] == "bundle_eligible"]
+    eligible[-1]["monotonic_ns"] = 16_000_000
+    completed = [e for e in events if e["event"] == "bundle_completed"]
+    completed[-1]["monotonic_ns"] = 17_000_000
+    assert not trace_analysis(events, plan, "burst", "rdma")["valid"]
+
+
+@pytest.mark.parametrize("complete", [True, False])
+def test_analysis_cli_uses_the_complete_plan_directory(complete, tmp_path):
+    plan = fixture_plan()
+    cases = [{"request_id": r["request_id"], "cohort_id": r["cohort_id"], "smooth_slot": r["smooth_slot"],
+              "dataset": "mmlu-pro", "category": "math", "reference_answer": "A"} for r in plan["requests"]]
+    results = [{"request_id": c["request_id"], "status": "ok", "text": "A", "ttft_seconds": 1,
+                "e2e_seconds": 2, "dispatch_lateness_ms": 0} for c in cases]
+    write_json(tmp_path / "cases.json", cases)
+    (tmp_path / "client.jsonl").write_text("\n".join(json.dumps(r) for r in results), encoding="utf-8")
+    arguments = [sys.executable, str(Path(__file__).with_name("analyze.py")),
+                 "--cases", str(tmp_path / "cases.json"), "--results", str(tmp_path / "client.jsonl"),
+                 "--schedule", "burst", "--backend", "rdma", "--plans", str(tmp_path / "plans"),
+                 "--output", str(tmp_path / "analysis.json")]
+    for engine in ["e0", "e1"]:
+        write_json(tmp_path / f"plans/{engine}.json", plan)
+        write_json(tmp_path / f"plans/{engine}.summary.json", {"requests": 4})
+        trace = tmp_path / f"{engine}.jsonl"
+        trace.write_text("\n".join(json.dumps(e) for e in fixture_trace(plan)), encoding="utf-8")
+        if complete or engine == "e0":
+            arguments.extend(["--trace", f"{engine}={trace}"])
+    write_json(tmp_path / "plans/summary.json", {"e0": {}, "e1": {}})
+    process = subprocess.run(arguments, capture_output=True, text=True)
+    assert process.returncode == (0 if complete else 1), process.stderr
+    assert read_json(tmp_path / "analysis.json")["valid_timing_arm"] is complete
 
 
 def test_pending_hardware_cannot_be_started():

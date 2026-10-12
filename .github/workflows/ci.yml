@@ -165,6 +165,15 @@ jobs:
         working-directory: python
         run: |
           uv run --isolated --no-project --with pytest --with numpy --with 'requests>=2.26.0' pytest
+      - name: Run Issue23 preparation and analysis tests
+        run: |
+          uv run --isolated --no-project --with pytest --with httpx --with aiohttp \
+            pytest scripts/issue23/test_preparation.py -q
+      - name: Audit frozen Issue23 pilot evidence
+        run: |
+          python scripts/issue23/audit_archive.py \
+            --archive results/issue23/20261012-attention-diagnostic \
+            --output "$RUNNER_TEMP/issue23-archive-review.json"
 
   ecpa-package:
     name: ECPA package contract (Python ${{ matrix.python-version }})

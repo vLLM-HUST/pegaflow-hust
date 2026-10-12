@@ -211,7 +211,8 @@ async def run_one(root, deployment, split, mode, arm, label):
             write_json(plans_dir / "summary.json", summaries)
         else:
             traces = {engine: read_jsonl(path) for engine, path in paths.items()}
-            summary = analyze_run(cases, read_jsonl(output / "client.jsonl"), traces, plans, schedule, backend)
+            summary = analyze_run(cases, read_jsonl(output / "client.jsonl"), traces, plans, schedule, backend,
+                                  deployment.get("scheduler_policy", "sched_fifo"))
             write_json(output / "analysis.json", summary)
             if not summary["valid_timing_arm"]:
                 raise ValueError("Arm validity checks failed; see analysis.json")
