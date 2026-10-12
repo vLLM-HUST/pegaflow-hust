@@ -28,6 +28,7 @@ from pegaflow.connector.common import (  # noqa: E402
     LoadIntent,
     PegaConnectorMetadata,
     SaveIntent,
+    TpShardTopology,
 )
 from pegaflow.connector.worker import WorkerConnector  # noqa: E402
 
@@ -337,6 +338,22 @@ def test_visible_save_ack_uses_stable_request_id(tmp_path):
     assert marker.read_text(encoding="utf-8") == (
         f"raw_request_id={raw_request_id}\ntp_rank=0\n"
     )
+    worker.shutdown()
+
+
+@pytest.mark.parametrize("physical_rank", [0, 1])
+def test_visible_save_ack_distinguishes_physical_tp_shards(tmp_path, physical_rank):
+    topology = TpShardTopology.from_config(
+        "http://p0:50055", ["http://p0:50055", "http://p1:50055"], 2, 2
+    )
+    worker, _client, _ = _make_worker(
+        tp_rank=physical_rank, tp_size=2, world_size=2, tp_shards=topology
+    )
+    assert worker._ctx.effective_tp_rank == 0
+    worker._save_ack_dir = tmp_path
+    worker._write_save_ack("cmpl-issue23-measure-0001-0-deadbeef")
+    assert (tmp_path / f"issue23-measure-0001.tp{physical_rank}.visible").exists()
+    assert not (tmp_path / f"issue23-measure-0001.tp{1 - physical_rank}.visible").exists()
     worker.shutdown()
 
 

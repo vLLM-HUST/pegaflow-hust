@@ -1,0 +1,41 @@
+{
+  "runtime_commit": "812f3a3af64d87805fd9b26d1a15b03f7500db3e",
+  "correctness": {
+    "pytest_passed": 4,
+    "cache_plan_completions": 11,
+    "matching_outputs": 11,
+    "baseline_prompts": 9,
+    "physical_rank_ack_pairs": 8
+  },
+  "engines": [
+    {
+      "pegaflow_cache_block_insertions_total": 8.0,
+      "pegaflow_cache_block_hits_total": 3.0,
+      "pegaflow_save_bytes_total": 58720256.0,
+      "pegaflow_load_bytes_total": 22020096.0,
+      "pegaflow_load_failures_total": 0,
+      "rpc_failures": {}
+    },
+    {
+      "pegaflow_cache_block_insertions_total": 8.0,
+      "pegaflow_cache_block_hits_total": 3.0,
+      "pegaflow_save_bytes_total": 58720256.0,
+      "pegaflow_load_bytes_total": 22020096.0,
+      "pegaflow_load_failures_total": 0,
+      "rpc_failures": {}
+    }
+  ],
+  "stress": {
+    "pytest_passed": 1,
+    "submitted_concurrent_requests": 12,
+    "completed_concurrent_requests": 12,
+    "warm_hit_lookups": 16,
+    "peak_logged_kv_usage_percent": 94.3,
+    "kv_cache_bytes_per_rank": 268435456,
+    "output_equal_before_after_pressure": true,
+    "cache_hits": 114.0,
+    "load_bytes": 1673527296.0,
+    "load_failures": 0,
+    "rpc_failures": {}
+  }
+}
