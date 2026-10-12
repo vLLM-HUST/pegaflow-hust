@@ -1,0 +1,168 @@
+{
+  "format_version": 1,
+  "source_commit": "812f3a3af64d87805fd9b26d1a15b03f7500db3e",
+  "files": {
+    ".gitattributes": {
+      "bytes": 8,
+      "sha256": "705fd4d6451a31d36b3df7de96f83f30ac976c9b4a6d1e51671d8e2f33e2d0da"
+    },
+    "baseline-repeat-check.json": {
+      "bytes": 149,
+      "sha256": "a06562aba3b935858d0de59b2c92952adcf50a6d317b7cc7866bcd7cf580a50b"
+    },
+    "Cargo.lock": {
+      "bytes": 104155,
+      "sha256": "d3039a6c275023788c1bde170012e9b1753484f5ed7c424ac478a09d9d771a22"
+    },
+    "raw-evidence.tar.gz": {
+      "bytes": 113283,
+      "sha256": "163f37c95df8fc9dc4ad5a3692e383ffe1e70abdd53eb0c58d3ef6a656763e29"
+    },
+    "README.md": {
+      "bytes": 3723,
+      "sha256": "e379c1e4608b922455f2e4b6d1e391dbf56123f12e978bca552b76a6c24cb53f"
+    },
+    "run_sharded_gate.py": {
+      "bytes": 5281,
+      "sha256": "279b545c909c63ee0e804b49df6140862311e7a86783219d11cd79f2c938b1e8"
+    },
+    "run_stress_gate.py": {
+      "bytes": 3444,
+      "sha256": "794ee35294e142c86cf6ba2bf6547f0171a656f5699a264c5c751f00c7c4029e"
+    },
+    "runtime-identity.json": {
+      "bytes": 3287,
+      "sha256": "b6390eee7ed48131055a7e2075dc6590ddb3ba2798705e74b2b983146203c45f"
+    },
+    "summary.json": {
+      "bytes": 1187,
+      "sha256": "7858b05d8e839d1fd53f329f978e363ed920b9a22948cc707f4fecfdbaca1ce4"
+    }
+  },
+  "raw_evidence_files": {
+    "sharded-evidence/acks/86f18b9f47abbe50.tp0.visible": {
+      "bytes": 58,
+      "sha256": "3c6d69daa72e6c2735985cc459e383595e42a5ac5d35b33144222ee8146388f4"
+    },
+    "sharded-evidence/acks/86f18b9f47abbe50.tp1.visible": {
+      "bytes": 58,
+      "sha256": "60cdb503e5b3b0e69d192b1ce57d0c7941b2ad105dbdd13021f740d2f646915d"
+    },
+    "sharded-evidence/acks/943e9d5c92391c8b.tp0.visible": {
+      "bytes": 58,
+      "sha256": "26d0980fc876d3554a2b3da49481d6596308656bdf5765e7e99b96d67fd33abe"
+    },
+    "sharded-evidence/acks/943e9d5c92391c8b.tp1.visible": {
+      "bytes": 58,
+      "sha256": "20bd2cf45a251151c6d82048638d8ae2ed2998b9174ed8c5670693c7d1ff8902"
+    },
+    "sharded-evidence/acks/9b31b1acc68bcf56.tp0.visible": {
+      "bytes": 58,
+      "sha256": "148fc60560619358bb277e0df19662f47bb381feb3dde0a61961dece6ba8b35a"
+    },
+    "sharded-evidence/acks/9b31b1acc68bcf56.tp1.visible": {
+      "bytes": 58,
+      "sha256": "3dfd082e82b81fffe61bf1dc2a183101f8b16210fe6cde753258014b642ed896"
+    },
+    "sharded-evidence/acks/a19df89e987158ba.tp0.visible": {
+      "bytes": 58,
+      "sha256": "a33447aa030fe3b85198cce737ed7324c5f037da24f2f3cd116b9a463099ddc1"
+    },
+    "sharded-evidence/acks/a19df89e987158ba.tp1.visible": {
+      "bytes": 58,
+      "sha256": "0f04581a91645fb86d3f5f6a53f439ccedc1bfb40bee6cd745015a0f49224bdf"
+    },
+    "sharded-evidence/acks/af80fc09c0ed8066.tp0.visible": {
+      "bytes": 58,
+      "sha256": "da3e019dcb07d5fc1b4cd30f8594a2019aa02a4001e6b6311bc0da7e2f451dca"
+    },
+    "sharded-evidence/acks/af80fc09c0ed8066.tp1.visible": {
+      "bytes": 58,
+      "sha256": "f77a7738d23e2be61753f5fcaff707e07de697bc2f33fcfaec40afc2f757bb2b"
+    },
+    "sharded-evidence/acks/b186cff5f28fc0d6.tp0.visible": {
+      "bytes": 58,
+      "sha256": "bc997b6cde998a68b5c05e57b841502b547d1b166fc51f96833304737be82dba"
+    },
+    "sharded-evidence/acks/b186cff5f28fc0d6.tp1.visible": {
+      "bytes": 58,
+      "sha256": "4559191e86dc86197cb42c73a8cdba9c5bbba9159dcca86dd202d14cfc0fb6b3"
+    },
+    "sharded-evidence/acks/b56b623adf622832.tp0.visible": {
+      "bytes": 58,
+      "sha256": "e3d8908e34d1eef401bf8d2663e61ed17583934660eb5ab91e3e7132bd5769cf"
+    },
+    "sharded-evidence/acks/b56b623adf622832.tp1.visible": {
+      "bytes": 58,
+      "sha256": "3123c8d728b02ed27bee805a193912810c4423be9b91c7bc90759605e2838e2f"
+    },
+    "sharded-evidence/acks/b7f8779329ea1874.tp0.visible": {
+      "bytes": 58,
+      "sha256": "eddb5a4d38637e885d630a38df5148ff05e1d763dd9feb0cadc3de1f0411f70f"
+    },
+    "sharded-evidence/acks/b7f8779329ea1874.tp1.visible": {
+      "bytes": 58,
+      "sha256": "fe36fea9346794cbc2ed0e164d050eb32d7a1b5c8f9b4059adf09e42d7fbdb8a"
+    },
+    "sharded-evidence/completions.jsonl": {
+      "bytes": 213165,
+      "sha256": "d2b2c4a13d1f4da41c95c742106b272eababb1e1bc0dd69fdb4dc2dcfcc85b06"
+    },
+    "sharded-evidence/correctness.xml": {
+      "bytes": 734,
+      "sha256": "a44e5e766f631b39885304329ca6e72438586fa3bec2f4d0482464731374fc80"
+    },
+    "sharded-evidence/engine-rank0-metrics.json": {
+      "bytes": 1309,
+      "sha256": "a4983265efda465afa9626ef7f01bbb7654129da7aaed4f546931b7d55d34685"
+    },
+    "sharded-evidence/engine-rank1-metrics.json": {
+      "bytes": 1303,
+      "sha256": "459db94c7335cd3d0fea47105c30fe8e2b3ef50741ae8353f1e3584c8701ed26"
+    },
+    "sharded-evidence/engine-rank1.log": {
+      "bytes": 22977,
+      "sha256": "4a2b8db5c3d530aa767e21ffb9daf41c8793845b79c0aad3cb2cd8f5a67d1a2b"
+    },
+    "sharded-evidence/gate.log": {
+      "bytes": 3254,
+      "sha256": "63a9d7245cd01d417bc65d23adf6fc7114a8d0e576d6148ae10f4611edfe2e39"
+    },
+    "sharded-evidence/pytest/e2e_logs0/baseline.log": {
+      "bytes": 31603,
+      "sha256": "bdd1c379f8ad80e0103ad6a4ae91d9a3d6082efbfd4e22198fec497d883ae8f4"
+    },
+    "sharded-evidence/pytest/e2e_logs0/pegaflow-server.log": {
+      "bytes": 23594,
+      "sha256": "1a53eb0898496313db1bcdb69fffd47f8a252b70663ce83cbfc4654f15a91065"
+    },
+    "sharded-evidence/pytest/e2e_logs0/pegaflow.log": {
+      "bytes": 61478,
+      "sha256": "7b162a4ef862247704e4d08bd66874ea3920fde09da115c8d624a55d2c9659c0"
+    },
+    "stress-evidence/gate.log": {
+      "bytes": 6624,
+      "sha256": "819841543ef3da1ad1e41dcc56aaaf4038cf71eeddbb4c03bf9c3aa0e45563ef"
+    },
+    "stress-evidence/metrics.json": {
+      "bytes": 1335,
+      "sha256": "fd80f4b9a757a4890621a1a6eddaad084a3afb5fc8bcddf05d9513e4c06a6c9b"
+    },
+    "stress-evidence/pytest/test_warm_hit_pressure_on_sing0/warm_hit_stress_logs/pegaflow-server.log": {
+      "bytes": 39852,
+      "sha256": "4ebd85000e224fd7531906204a2892056800bfe66223fc4e0bb405fa10c9a000"
+    },
+    "stress-evidence/pytest/test_warm_hit_pressure_on_sing0/warm_hit_stress_logs/pegaflow-vllm.log": {
+      "bytes": 61291,
+      "sha256": "514cb40446ed1432357e06db6258e96e90476308760341ad79e33799acc532e8"
+    },
+    "stress-evidence/stress.xml": {
+      "bytes": 357,
+      "sha256": "fe45a9d37bf4556d607cc23604786931417b0a8a9b77330854b7d690c21f6778"
+    },
+    "stress-evidence/vllm-metrics.prom": {
+      "bytes": 77881,
+      "sha256": "924f69703808f5a5e4aabdd4b1c29e778cd4a93d0a5e22ac3831ff9e21a094e5"
+    }
+  }
+}

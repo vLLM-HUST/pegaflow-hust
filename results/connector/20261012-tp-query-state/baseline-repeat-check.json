@@ -1,0 +1,6 @@
+{
+  "unique_prompts": 9,
+  "matching_outputs": 9,
+  "mismatches": 0,
+  "comparison": "Two independent baseline service starts, same Ascend profile"
+}
