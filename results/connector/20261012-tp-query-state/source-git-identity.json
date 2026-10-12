@@ -1,0 +1,55 @@
+{
+  "source_commit": "812f3a3af64d87805fd9b26d1a15b03f7500db3e",
+  "normalization": "CRLF to LF only",
+  "files": {
+    "python/pegaflow/connector/__init__.py": {
+      "runtime_bytes": 20246,
+      "runtime_sha256": "9948c2b7e9b3ccfaeb53608197c187bff9f85b17b2f666d6c0f862feb8039eb3",
+      "git_blob_bytes": 19700,
+      "git_blob_sha256": "afcfe17a42cc5ec3fad559fffb732bbf716ecda18255c745ee839c1e0e9aade9",
+      "lf_normalized_runtime_sha256": "afcfe17a42cc5ec3fad559fffb732bbf716ecda18255c745ee839c1e0e9aade9"
+    },
+    "python/pegaflow/connector/common.py": {
+      "runtime_bytes": 30507,
+      "runtime_sha256": "01f682039822779d533e67909e522cee5b22ac61c13f0bbe96df05e842533f7c",
+      "git_blob_bytes": 29729,
+      "git_blob_sha256": "7d9f64d56a5a1debc363db67d2cecb0d6d52452252e3c42d6386861bc3c108e4",
+      "lf_normalized_runtime_sha256": "7d9f64d56a5a1debc363db67d2cecb0d6d52452252e3c42d6386861bc3c108e4"
+    },
+    "python/pegaflow/connector/connector_metrics.py": {
+      "runtime_bytes": 18242,
+      "runtime_sha256": "6af73d91392569afc18a55b7c11f9504b00ca0dea3776f0e773a00a8b6d45654",
+      "git_blob_bytes": 17800,
+      "git_blob_sha256": "ec04bee789085dd444e15dfb845805d7b27b631d4e3f979dd7decd796315b630",
+      "lf_normalized_runtime_sha256": "ec04bee789085dd444e15dfb845805d7b27b631d4e3f979dd7decd796315b630"
+    },
+    "python/pegaflow/connector/scheduler.py": {
+      "runtime_bytes": 55771,
+      "runtime_sha256": "75b8df5b72192ce29b0814b6d207595e7f609b5fd1c1e4a81936c61521da7a59",
+      "git_blob_bytes": 54504,
+      "git_blob_sha256": "f73a68fbf3f2b4d2528d73c4dda774da412577d5435430bcd7f70acf23a4d426",
+      "lf_normalized_runtime_sha256": "f73a68fbf3f2b4d2528d73c4dda774da412577d5435430bcd7f70acf23a4d426"
+    },
+    "python/pegaflow/connector/state_manager.py": {
+      "runtime_bytes": 3281,
+      "runtime_sha256": "9bc48e7b2cd968b0d30803391475b7cdf22652cabf9d2f20bc2ad65b58aaf2e3",
+      "git_blob_bytes": 3179,
+      "git_blob_sha256": "f4654f8aa6370cb7ded298cb2cca5ddb19333d752894aafca73e7978f89c38f3",
+      "lf_normalized_runtime_sha256": "f4654f8aa6370cb7ded298cb2cca5ddb19333d752894aafca73e7978f89c38f3"
+    },
+    "python/pegaflow/connector/tp_shards.py": {
+      "runtime_bytes": 8805,
+      "runtime_sha256": "1511b53cbc32db49f49dd3aa7e63a55cce3f5ca00f6cf9c11eba124d2922e66b",
+      "git_blob_bytes": 8603,
+      "git_blob_sha256": "aa97a47f7424a956b92a069ee22e9bba2f02407c603dba09cfb310083ef25f9d",
+      "lf_normalized_runtime_sha256": "aa97a47f7424a956b92a069ee22e9bba2f02407c603dba09cfb310083ef25f9d"
+    },
+    "python/pegaflow/connector/worker.py": {
+      "runtime_bytes": 67290,
+      "runtime_sha256": "08c30592d61ff32c61165564c4617a1832b1580cc8548c5719aabb675a33cc2f",
+      "git_blob_bytes": 65745,
+      "git_blob_sha256": "59994b320cc00ecbc01e59c462be6f27bae549cc04fcf5e30058e421fcd3bb5e",
+      "lf_normalized_runtime_sha256": "59994b320cc00ecbc01e59c462be6f27bae549cc04fcf5e30058e421fcd3bb5e"
+    }
+  }
+}

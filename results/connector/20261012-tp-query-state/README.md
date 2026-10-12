@@ -1,6 +1,6 @@
 # TP 查询状态与 ACK 验收
 
-2026-10-12，在一台双 Ascend 910B2 机器上验收 PR #34 的独立连接器修复。运行代码提交为 `812f3a3af64d87805fd9b26d1a15b03f7500db3e`，模型为共享目录中的 Qwen3-0.6B BF16。模型文件及连接器源码的逐文件 SHA256 见 `runtime-identity.json`。
+2026-10-12，在一台双 Ascend 910B2 机器上验收 PR #34 的独立连接器修复。运行代码提交为 `812f3a3af64d87805fd9b26d1a15b03f7500db3e`，模型为共享目录中的 Qwen3-0.6B BF16。模型文件及连接器源码的原始字节 SHA256 见 `runtime-identity.json`；`source-git-identity.json` 同时记录 LF 规范化后的运行文件及 Git blob SHA256，七个连接器文件均核对一致。
 
 ## 结果
 

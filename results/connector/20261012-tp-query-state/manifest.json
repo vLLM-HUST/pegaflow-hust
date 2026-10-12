@@ -19,8 +19,8 @@
       "sha256": "163f37c95df8fc9dc4ad5a3692e383ffe1e70abdd53eb0c58d3ef6a656763e29"
     },
     "README.md": {
-      "bytes": 3723,
-      "sha256": "e379c1e4608b922455f2e4b6d1e391dbf56123f12e978bca552b76a6c24cb53f"
+      "bytes": 3857,
+      "sha256": "c0b02ac820e3eaaa6d3bf4d7cdf5aedb07f7c05b8a47cbb9af4040207f840114"
     },
     "run_sharded_gate.py": {
       "bytes": 5281,
@@ -33,6 +33,10 @@
     "runtime-identity.json": {
       "bytes": 3287,
       "sha256": "b6390eee7ed48131055a7e2075dc6590ddb3ba2798705e74b2b983146203c45f"
+    },
+    "source-git-identity.json": {
+      "bytes": 2964,
+      "sha256": "dfd46518c65fc53bb0abfee64222daabd6e699624df6c776694b3fa5b25d2e12"
     },
     "summary.json": {
       "bytes": 1187,
