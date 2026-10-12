@@ -1,0 +1,75 @@
+{
+  "mode": "arm",
+  "arm": "local_copy-smooth",
+  "split": "smoke",
+  "cases_sha256": "1ebbde7492d876bf8e870b34922cb91419fde08ccb16417d5433b0e400b797be",
+  "contract_sha256": "ad3e8d7cc7967453636d3389e02a1200faef05e05e62d8a94ff6b0e09def2976",
+  "deployment": {
+    "schema_version": 1,
+    "router_url": "http://192.168.0.4:28190",
+    "prefill_url": "http://192.168.0.4:28180",
+    "decode_url": "http://192.168.0.2:28180",
+    "prefill_ack_ranks": 2,
+    "scheduler_policy": "sched_other",
+    "prepare_max_tokens": 1,
+    "engines": [
+      {
+        "engine_id": "decode-engine-0",
+        "url": "http://192.168.0.2:29091",
+        "trace_path": "{run_dir}/trace-decode-engine-0.jsonl",
+        "covered_tp_ranks": [
+          0
+        ]
+      },
+      {
+        "engine_id": "decode-engine-1",
+        "url": "http://192.168.0.2:29093",
+        "trace_path": "{run_dir}/trace-decode-engine-1.jsonl",
+        "covered_tp_ranks": [
+          1
+        ]
+      }
+    ],
+    "qualification": {
+      "single_replica": true,
+      "pd_hybrid_correctness": false,
+      "rdma_link": true,
+      "runtime_identity": true,
+      "cache_reset": true,
+      "marker_visibility": true,
+      "rank_bundle_topology": true,
+      "memlock": true,
+      "normal_scheduler": true,
+      "pd_output_match": true
+    },
+    "start_argv": [
+      "python3",
+      "/data/shared_upload/hust-zsx/tailguard-issue23-20261012/runtime/lifecycle.py",
+      "start"
+    ],
+    "stop_argv": [
+      "python3",
+      "/data/shared_upload/hust-zsx/tailguard-issue23-20261012/runtime/lifecycle.py",
+      "stop"
+    ],
+    "marker_clear_argv": [
+      "python3",
+      "/data/shared_upload/hust-zsx/tailguard-issue23-20261012/runtime/lifecycle.py",
+      "clear-markers"
+    ],
+    "qualification_evidence": "/data/shared_upload/hust-zsx/tailguard-issue23-20261012/runs/qualification-capture-default-05",
+    "experiment_scope": "attention_transfer_diagnostic",
+    "hybrid_prefix_reuse": false
+  },
+  "hook_environment": {
+    "TG_RUN_DIR": "/data/shared_upload/hust-zsx/tailguard-issue23-20261012/runs/smoke-pilot-default-02-local_copy-smooth",
+    "TG_MARKER_DIR": "/data/shared_upload/hust-zsx/tailguard-issue23-20261012/runs/smoke-pilot-default-02-local_copy-smooth/visibility",
+    "TG_MODE": "arm",
+    "TG_BACKEND": "local_copy",
+    "TG_SCHEDULE": "smooth",
+    "TG_PLANS_DIR": "/data/shared_upload/hust-zsx/tailguard-issue23-20261012/prepared/plans-smoke",
+    "TG_CASES": "/data/shared_upload/hust-zsx/tailguard-issue23-20261012/prepared/smoke.json",
+    "TG_CONTRACT": "/data/shared_upload/hust-zsx/tailguard-issue23-20261012/prepared/contract.json",
+    "TG_SCHEDULER_POLICY": "sched_other"
+  }
+}

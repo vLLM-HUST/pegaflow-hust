@@ -1,0 +1,295 @@
+{
+  "contract_sha256": "ad3e8d7cc7967453636d3389e02a1200faef05e05e62d8a94ff6b0e09def2976",
+  "cases_sha256": "1ebbde7492d876bf8e870b34922cb91419fde08ccb16417d5433b0e400b797be",
+  "requests_per_arm": 8,
+  "experiment_scope": "attention_transfer_diagnostic",
+  "hybrid_prefix_reuse": false,
+  "arms": {
+    "rdma-smooth": {
+      "status": "completed",
+      "valid_timing_arm": true,
+      "validity_issues": [],
+      "ttft_seconds": {
+        "n": 8,
+        "min": 3.3152737480122596,
+        "p50": 5.347988646593876,
+        "p95": 7.150626771559473,
+        "p99": 7.382964575185905,
+        "max": 7.441049026092514
+      },
+      "e2e_seconds": {
+        "n": 8,
+        "min": 21.421755864052102,
+        "p50": 38.3728982975008,
+        "p95": 41.48316846220987,
+        "p99": 41.516648401303684,
+        "max": 41.525018386077136
+      },
+      "accuracy": 0.375,
+      "transport": {
+        "decode-engine-0": {
+          "prepare_fetch_bytes": 20971520,
+          "measurement_fetch_bytes": 20971520,
+          "measurement_fetch_errors": 0
+        },
+        "decode-engine-1": {
+          "prepare_fetch_bytes": 20971520,
+          "measurement_fetch_bytes": 20971520,
+          "measurement_fetch_errors": 0
+        }
+      },
+      "engine_timing": {
+        "decode-engine-0": {
+          "policy": "sched_other",
+          "priority": 0,
+          "burst_spread_ms": [],
+          "posting_lateness_ms": {
+            "n": 8,
+            "min": 0.012913999999998538,
+            "p50": 0.015812500000000895,
+            "p95": 0.2533925999999999,
+            "p99": 0.30433131999999996,
+            "max": 0.317066
+          }
+        },
+        "decode-engine-1": {
+          "policy": "sched_other",
+          "priority": 0,
+          "burst_spread_ms": [],
+          "posting_lateness_ms": {
+            "n": 8,
+            "min": 0.011307999999999652,
+            "p50": 0.013861000000000345,
+            "p95": 0.2818775,
+            "p99": 0.2976275,
+            "max": 0.301565
+          }
+        }
+      },
+      "successful_requests": 8
+    },
+    "local_copy-smooth": {
+      "status": "completed",
+      "valid_timing_arm": true,
+      "validity_issues": [],
+      "ttft_seconds": {
+        "n": 8,
+        "min": 3.277055551065132,
+        "p50": 5.409288871451281,
+        "p95": 7.6650485219433895,
+        "p99": 7.995534416474402,
+        "max": 8.078155890107155
+      },
+      "e2e_seconds": {
+        "n": 8,
+        "min": 36.70949418400414,
+        "p50": 50.563685890403576,
+        "p95": 55.20439423657954,
+        "p99": 55.21499374330044,
+        "max": 55.21764361998066
+      },
+      "accuracy": 0.25,
+      "transport": {
+        "decode-engine-0": {
+          "prepare_fetch_bytes": 20971520,
+          "measurement_fetch_bytes": 20971520,
+          "measurement_fetch_errors": 0
+        },
+        "decode-engine-1": {
+          "prepare_fetch_bytes": 20971520,
+          "measurement_fetch_bytes": 20971520,
+          "measurement_fetch_errors": 0
+        }
+      },
+      "engine_timing": {
+        "decode-engine-0": {
+          "policy": "sched_other",
+          "priority": 0,
+          "burst_spread_ms": [],
+          "posting_lateness_ms": {
+            "n": 8,
+            "min": 0.006948999999998762,
+            "p50": 0.01054500000000047,
+            "p95": 0.2777567499999999,
+            "p99": 0.3450449499999999,
+            "max": 0.361867
+          }
+        },
+        "decode-engine-1": {
+          "policy": "sched_other",
+          "priority": 0,
+          "burst_spread_ms": [],
+          "posting_lateness_ms": {
+            "n": 8,
+            "min": 0.0055499999999995,
+            "p50": 0.007264499999999785,
+            "p95": 0.33059174999999985,
+            "p99": 0.40783674999999997,
+            "max": 0.427148
+          }
+        }
+      },
+      "successful_requests": 8
+    },
+    "rdma-burst": {
+      "status": "completed",
+      "valid_timing_arm": true,
+      "validity_issues": [],
+      "ttft_seconds": {
+        "n": 8,
+        "min": 3.265521453693509,
+        "p50": 5.2879198347218335,
+        "p95": 7.0388569327536965,
+        "p99": 7.2795592743624,
+        "max": 7.339734859764576
+      },
+      "e2e_seconds": {
+        "n": 8,
+        "min": 13.895888307131827,
+        "p50": 28.758445876650512,
+        "p95": 32.00467783231288,
+        "p99": 32.013178811259564,
+        "max": 32.01530405599624
+      },
+      "accuracy": 0.375,
+      "transport": {
+        "decode-engine-0": {
+          "prepare_fetch_bytes": 20971520,
+          "measurement_fetch_bytes": 20971520,
+          "measurement_fetch_errors": 0
+        },
+        "decode-engine-1": {
+          "prepare_fetch_bytes": 20971520,
+          "measurement_fetch_bytes": 20971520,
+          "measurement_fetch_errors": 0
+        }
+      },
+      "engine_timing": {
+        "decode-engine-0": {
+          "policy": null,
+          "priority": null,
+          "burst_spread_ms": [
+            0.192384,
+            0.00923
+          ],
+          "posting_lateness_ms": {
+            "n": 8,
+            "min": 0.08263799999999932,
+            "p50": 0.6712599999999993,
+            "p95": 1.4235371499999998,
+            "p99": 1.4391362299999995,
+            "max": 1.4430359999999993
+          }
+        },
+        "decode-engine-1": {
+          "policy": null,
+          "priority": null,
+          "burst_spread_ms": [
+            0.176854,
+            0.00696
+          ],
+          "posting_lateness_ms": {
+            "n": 8,
+            "min": 0.13189900000000065,
+            "p50": 0.5281520000000004,
+            "p95": 1.0721191499999994,
+            "p99": 1.0898630299999994,
+            "max": 1.0942989999999995
+          }
+        }
+      },
+      "successful_requests": 8
+    },
+    "local_copy-burst": {
+      "status": "completed",
+      "valid_timing_arm": true,
+      "validity_issues": [],
+      "ttft_seconds": {
+        "n": 8,
+        "min": 3.389808801934123,
+        "p50": 5.554721416439861,
+        "p95": 7.774588259262964,
+        "p99": 8.083174385568126,
+        "max": 8.160320917144418
+      },
+      "e2e_seconds": {
+        "n": 8,
+        "min": 22.18294781073928,
+        "p50": 32.357464578934014,
+        "p95": 37.09353582873009,
+        "p99": 37.12084579306654,
+        "max": 37.12767328415066
+      },
+      "accuracy": 0.25,
+      "transport": {
+        "decode-engine-0": {
+          "prepare_fetch_bytes": 20971520,
+          "measurement_fetch_bytes": 20971520,
+          "measurement_fetch_errors": 0
+        },
+        "decode-engine-1": {
+          "prepare_fetch_bytes": 20971520,
+          "measurement_fetch_bytes": 20971520,
+          "measurement_fetch_errors": 0
+        }
+      },
+      "engine_timing": {
+        "decode-engine-0": {
+          "policy": null,
+          "priority": null,
+          "burst_spread_ms": [
+            0.622396,
+            0.270783
+          ],
+          "posting_lateness_ms": {
+            "n": 8,
+            "min": 0.07328500000000027,
+            "p50": 12.499158000000001,
+            "p95": 25.208421299999998,
+            "p99": 25.262999459999996,
+            "max": 25.276643999999997
+          }
+        },
+        "decode-engine-1": {
+          "policy": null,
+          "priority": null,
+          "burst_spread_ms": [
+            0.513055,
+            0.305664
+          ],
+          "posting_lateness_ms": {
+            "n": 8,
+            "min": 0.08410399999999996,
+            "p50": 0.7991215,
+            "p95": 1.653135800000001,
+            "p99": 1.7078511600000013,
+            "max": 1.7215300000000013
+          }
+        }
+      },
+      "successful_requests": 8
+    }
+  },
+  "output_comparisons": {
+    "rdma-smooth": {
+      "reference_arm": "rdma-smooth",
+      "requests_compared": 8,
+      "exact_text_and_usage_matches": 8
+    },
+    "local_copy-smooth": {
+      "reference_arm": "rdma-smooth",
+      "requests_compared": 8,
+      "exact_text_and_usage_matches": 1
+    },
+    "rdma-burst": {
+      "reference_arm": "rdma-smooth",
+      "requests_compared": 8,
+      "exact_text_and_usage_matches": 3
+    },
+    "local_copy-burst": {
+      "reference_arm": "rdma-smooth",
+      "requests_compared": 8,
+      "exact_text_and_usage_matches": 1
+    }
+  }
+}

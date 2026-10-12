@@ -1,0 +1,7 @@
+{
+  "status": "completed",
+  "started_unix": 1791796798.2897372,
+  "finished_unix": 1791797772.4759367,
+  "recovered_after_measurement": true,
+  "teardown_note": "Workspace connection interrupted after all responses and metrics; services absent after reconnection."
+}

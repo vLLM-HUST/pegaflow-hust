@@ -1,0 +1,6 @@
+{
+  "evicted_blocks": 0,
+  "evicted_bytes": 0,
+  "reclaimed_bytes": 0,
+  "still_referenced_blocks": 0
+}

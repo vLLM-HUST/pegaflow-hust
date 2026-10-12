@@ -1,0 +1,40 @@
+{
+  "all_arms_passed": true,
+  "arms": {
+    "rdma-smooth": {
+      "client_rows": 8,
+      "valid_timing_arm": true,
+      "recomputed_summary_matches": true,
+      "output_truncated": 5
+    },
+    "local_copy-smooth": {
+      "client_rows": 8,
+      "valid_timing_arm": true,
+      "recomputed_summary_matches": true,
+      "output_truncated": 6
+    },
+    "rdma-burst": {
+      "client_rows": 8,
+      "valid_timing_arm": true,
+      "recomputed_summary_matches": true,
+      "output_truncated": 5
+    },
+    "local_copy-burst": {
+      "client_rows": 8,
+      "valid_timing_arm": true,
+      "recomputed_summary_matches": true,
+      "output_truncated": 6
+    }
+  },
+  "services_stopped": {
+    "prefill": {
+      "control_agent_pid_stopped": 231668,
+      "remaining_owned_listeners": []
+    },
+    "decode": {
+      "control_agent_pid_stopped": 12587,
+      "remaining_owned_listeners": []
+    }
+  },
+  "archive_sha256": "89ef821292fbcb7a14d04898f359bb6d7aaecb6c46c3a81c9ed09ed75afe4f16"
+}

@@ -43,25 +43,34 @@ type SmoothSchedulerJob = Box<dyn FnOnce() + Send + 'static>;
 
 /// A pre-started scheduler for all four smooth slots.
 ///
-/// Keeping one SCHED_FIFO thread blocked on a channel between cohorts avoids
-/// both Tokio blocking-pool cold starts and millisecond-scale preemption while
-/// the final deadline guard is spinning.  The Issue23 path is opt-in and the
-/// thread is runnable for only about 30 ms per cohort at the frozen 0.5 QPS.
+/// The worker stays blocked on a channel between cohorts. Set
+/// PEGAFLOW_ISSUE23_DEFAULT_SCHEDULER=1 to retain SCHED_OTHER at priority zero.
 #[cfg(feature = "rdma")]
 struct SmoothScheduler {
     sender: mpsc::Sender<SmoothSchedulerJob>,
     realtime_error: Option<String>,
+    default_policy: bool,
 }
 
 #[cfg(feature = "rdma")]
 impl SmoothScheduler {
     fn new() -> Result<Self, String> {
+        Self::with_default_policy(
+            std::env::var("PEGAFLOW_ISSUE23_DEFAULT_SCHEDULER").as_deref() == Ok("1"),
+        )
+    }
+
+    fn with_default_policy(default_policy: bool) -> Result<Self, String> {
         let (sender, receiver) = mpsc::channel::<SmoothSchedulerJob>();
         let (startup_sender, startup_receiver) = mpsc::sync_channel(1);
         std::thread::Builder::new()
             .name("issue23-smooth-scheduler".into())
             .spawn(move || {
-                let realtime = configure_realtime_scheduler();
+                let realtime = if default_policy {
+                    verify_default_scheduler()
+                } else {
+                    configure_realtime_scheduler()
+                };
                 let _ = startup_sender.send(realtime.clone());
                 for job in receiver {
                     job();
@@ -75,6 +84,7 @@ impl SmoothScheduler {
         Ok(Self {
             sender,
             realtime_error,
+            default_policy,
         })
     }
 
@@ -84,13 +94,32 @@ impl SmoothScheduler {
             .map_err(|_| "Issue23 smooth scheduler is unavailable".to_string())
     }
 
-    fn require_realtime(&self) -> Result<(), String> {
+    fn require_scheduler(&self) -> Result<(), String> {
         self.realtime_error.as_ref().map_or(Ok(()), |error| {
             Err(format!(
-                "Issue23 smooth scheduler could not enable SCHED_FIFO: {error}"
+                "Issue23 smooth scheduler configuration failed: {error}"
             ))
         })
     }
+}
+
+#[cfg(feature = "rdma")]
+fn verify_default_scheduler() -> Result<(), String> {
+    let mut policy = 0;
+    let mut parameter = libc::sched_param { sched_priority: 0 };
+    // SAFETY: both output pointers are valid and pthread_self identifies this worker.
+    let result =
+        unsafe { libc::pthread_getschedparam(libc::pthread_self(), &mut policy, &mut parameter) };
+    if result != 0 {
+        return Err(std::io::Error::from_raw_os_error(result).to_string());
+    }
+    if policy != libc::SCHED_OTHER || parameter.sched_priority != 0 {
+        return Err(format!(
+            "expected SCHED_OTHER/0, got policy={policy} priority={}",
+            parameter.sched_priority
+        ));
+    }
+    Ok(())
 }
 
 #[cfg(feature = "rdma")]
@@ -439,11 +468,19 @@ impl Issue23CausalExperiment {
             .map_or((None, None, None), |scheduler| {
                 (
                     Some(if scheduler.realtime_error.is_none() {
-                        "sched_fifo"
+                        if scheduler.default_policy {
+                            "sched_other"
+                        } else {
+                            "sched_fifo"
+                        }
                     } else {
                         "unavailable"
                     }),
-                    Some(SMOOTH_SCHEDULER_PRIORITY),
+                    Some(if scheduler.default_policy {
+                        0
+                    } else {
+                        SMOOTH_SCHEDULER_PRIORITY
+                    }),
                     scheduler.realtime_error.as_deref(),
                 )
             });
@@ -566,9 +603,7 @@ impl Issue23CausalExperiment {
         }
         #[cfg(feature = "rdma")]
         if let Some(scheduler) = &self.smooth_scheduler {
-            // A normal-timeshare fallback would make a failed timing treatment
-            // look like valid experiment data. Refuse activation instead.
-            scheduler.require_realtime()?;
+            scheduler.require_scheduler()?;
         }
         let hidden = self.hidden.read();
         if hidden.len() != self.expected_hidden.len() {
@@ -1378,9 +1413,24 @@ mod tests {
 
     #[cfg(feature = "rdma")]
     #[test]
+    fn default_scheduler_runs_without_realtime_privileges() {
+        let scheduler = SmoothScheduler::with_default_policy(true).unwrap();
+        scheduler.require_scheduler().unwrap();
+        let (sender, receiver) = mpsc::sync_channel(1);
+        scheduler
+            .submit(Box::new(move || {
+                sender.send(verify_default_scheduler()).unwrap();
+            }))
+            .unwrap();
+        receiver.recv().unwrap().unwrap();
+    }
+
+    #[cfg(feature = "rdma")]
+    #[test]
     fn smooth_scheduler_releases_all_four_slots_on_its_prestarted_worker() {
         let scheduler = SmoothScheduler::new().unwrap();
         let realtime_available = scheduler.realtime_error.is_none();
+        let default_policy = scheduler.default_policy;
         let caller_thread = std::thread::current().id();
         let release_at = Instant::now() + Duration::from_millis(5);
         let (sender, receiver) = mpsc::sync_channel(EXPECTED_COHORT_SIZE);
@@ -1418,8 +1468,22 @@ mod tests {
             assert_ne!(worker_thread, caller_thread);
             assert_eq!(result, 0);
             if realtime_available {
-                assert_eq!(policy, libc::SCHED_FIFO);
-                assert_eq!(priority, SMOOTH_SCHEDULER_PRIORITY);
+                assert_eq!(
+                    policy,
+                    if default_policy {
+                        libc::SCHED_OTHER
+                    } else {
+                        libc::SCHED_FIFO
+                    }
+                );
+                assert_eq!(
+                    priority,
+                    if default_policy {
+                        0
+                    } else {
+                        SMOOTH_SCHEDULER_PRIORITY
+                    }
+                );
             }
         }
     }

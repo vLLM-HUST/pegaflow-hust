@@ -1,0 +1,262 @@
+{
+  "valid_timing_arm": true,
+  "validity_issues": [],
+  "client_requests": 8,
+  "client_failures": 0,
+  "ttft_seconds": {
+    "n": 8,
+    "min": 3.3152737480122596,
+    "p50": 5.347988646593876,
+    "p95": 7.150626771559473,
+    "p99": 7.382964575185905,
+    "max": 7.441049026092514
+  },
+  "e2e_seconds": {
+    "n": 8,
+    "min": 21.421755864052102,
+    "p50": 38.3728982975008,
+    "p95": 41.48316846220987,
+    "p99": 41.516648401303684,
+    "max": 41.525018386077136
+  },
+  "dispatch_lateness_ms": {
+    "n": 8,
+    "min": 0.7389939855784178,
+    "p50": 3.1796119874343276,
+    "p95": 4.602949763648212,
+    "p99": 4.672000310383737,
+    "max": 4.689262947067618
+  },
+  "quality": [
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-0",
+      "category": "math",
+      "extracted_answer": "A",
+      "correct": true,
+      "parse_failed": false,
+      "finish_reason": "stop",
+      "output_tokens": 289,
+      "output_truncated": false
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-1",
+      "category": "math",
+      "extracted_answer": null,
+      "correct": false,
+      "parse_failed": true,
+      "finish_reason": "length",
+      "output_tokens": 512,
+      "output_truncated": true
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-2",
+      "category": "math",
+      "extracted_answer": null,
+      "correct": false,
+      "parse_failed": true,
+      "finish_reason": "length",
+      "output_tokens": 512,
+      "output_truncated": true
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-3",
+      "category": "math",
+      "extracted_answer": null,
+      "correct": false,
+      "parse_failed": true,
+      "finish_reason": "length",
+      "output_tokens": 512,
+      "output_truncated": true
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0001-0",
+      "category": "physics",
+      "extracted_answer": "F",
+      "correct": true,
+      "parse_failed": false,
+      "finish_reason": "stop",
+      "output_tokens": 458,
+      "output_truncated": false
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0001-1",
+      "category": "physics",
+      "extracted_answer": null,
+      "correct": false,
+      "parse_failed": true,
+      "finish_reason": "length",
+      "output_tokens": 512,
+      "output_truncated": true
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0001-2",
+      "category": "physics",
+      "extracted_answer": null,
+      "correct": false,
+      "parse_failed": true,
+      "finish_reason": "length",
+      "output_tokens": 512,
+      "output_truncated": true
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0001-3",
+      "category": "physics",
+      "extracted_answer": "G",
+      "correct": true,
+      "parse_failed": false,
+      "finish_reason": "stop",
+      "output_tokens": 209,
+      "output_truncated": false
+    }
+  ],
+  "engine_reports": {
+    "decode-engine-0": {
+      "valid": true,
+      "issues": [],
+      "requests": [
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-0",
+          "cohort_id": "mmlu-pro-smoke-0000",
+          "gate_wait_ms": 1012.899664,
+          "posting_lateness_ms": 0.317066,
+          "completion_observation_ms": 29.845561
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-1",
+          "cohort_id": "mmlu-pro-smoke-0000",
+          "gate_wait_ms": 198.324281,
+          "posting_lateness_ms": 0.016298000000000812,
+          "completion_observation_ms": 20.300492
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-2",
+          "cohort_id": "mmlu-pro-smoke-0000",
+          "gate_wait_ms": 13.651867,
+          "posting_lateness_ms": 0.013415999999999428,
+          "completion_observation_ms": 10.454847
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-3",
+          "cohort_id": "mmlu-pro-smoke-0000",
+          "gate_wait_ms": 0.0,
+          "posting_lateness_ms": 0.012913999999998538,
+          "completion_observation_ms": 0.608592
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0001-0",
+          "cohort_id": "mmlu-pro-smoke-0001",
+          "gate_wait_ms": 3.467196,
+          "posting_lateness_ms": 0.135142,
+          "completion_observation_ms": 30.21634
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0001-1",
+          "cohort_id": "mmlu-pro-smoke-0001",
+          "gate_wait_ms": 280.985807,
+          "posting_lateness_ms": 0.015978000000000492,
+          "completion_observation_ms": 20.488117
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0001-2",
+          "cohort_id": "mmlu-pro-smoke-0001",
+          "gate_wait_ms": 1094.826357,
+          "posting_lateness_ms": 0.0156470000000013,
+          "completion_observation_ms": 10.651941
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0001-3",
+          "cohort_id": "mmlu-pro-smoke-0001",
+          "gate_wait_ms": 0.0,
+          "posting_lateness_ms": 0.015446000000000737,
+          "completion_observation_ms": 0.818165
+        }
+      ],
+      "scheduler_policy": "sched_other",
+      "scheduler_priority": 0,
+      "posting_lateness_ms": {
+        "n": 8,
+        "min": 0.012913999999998538,
+        "p50": 0.015812500000000895,
+        "p95": 0.2533925999999999,
+        "p99": 0.30433131999999996,
+        "max": 0.317066
+      },
+      "clock_note": "Each engine's monotonic clock is analyzed independently; completion is an observation timestamp."
+    },
+    "decode-engine-1": {
+      "valid": true,
+      "issues": [],
+      "requests": [
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-0",
+          "cohort_id": "mmlu-pro-smoke-0000",
+          "gate_wait_ms": 9.807325,
+          "posting_lateness_ms": 0.301565,
+          "completion_observation_ms": 29.878593
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-1",
+          "cohort_id": "mmlu-pro-smoke-0000",
+          "gate_wait_ms": 2.918405,
+          "posting_lateness_ms": 0.011307999999999652,
+          "completion_observation_ms": 20.326393
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-2",
+          "cohort_id": "mmlu-pro-smoke-0000",
+          "gate_wait_ms": 5.85668,
+          "posting_lateness_ms": 0.013466000000001088,
+          "completion_observation_ms": 10.484698
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-3",
+          "cohort_id": "mmlu-pro-smoke-0000",
+          "gate_wait_ms": 0.0,
+          "posting_lateness_ms": 0.012503999999999849,
+          "completion_observation_ms": 0.637302
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0001-0",
+          "cohort_id": "mmlu-pro-smoke-0001",
+          "gate_wait_ms": 2.928765,
+          "posting_lateness_ms": 0.245315,
+          "completion_observation_ms": 30.045526
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0001-1",
+          "cohort_id": "mmlu-pro-smoke-0001",
+          "gate_wait_ms": 5.989053,
+          "posting_lateness_ms": 0.01689900000000044,
+          "completion_observation_ms": 20.424275
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0001-2",
+          "cohort_id": "mmlu-pro-smoke-0001",
+          "gate_wait_ms": 9.970128,
+          "posting_lateness_ms": 0.013078000000000145,
+          "completion_observation_ms": 10.592619
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0001-3",
+          "cohort_id": "mmlu-pro-smoke-0001",
+          "gate_wait_ms": 0.0,
+          "posting_lateness_ms": 0.014255999999999602,
+          "completion_observation_ms": 0.733014
+        }
+      ],
+      "scheduler_policy": "sched_other",
+      "scheduler_priority": 0,
+      "posting_lateness_ms": {
+        "n": 8,
+        "min": 0.011307999999999652,
+        "p50": 0.013861000000000345,
+        "p95": 0.2818775,
+        "p99": 0.2976275,
+        "max": 0.301565
+      },
+      "clock_note": "Each engine's monotonic clock is analyzed independently; completion is an observation timestamp."
+    }
+  },
+  "accuracy": 0.375,
+  "grading_note": "FrontierScience outputs require a separately frozen grader or documented manual review."
+}

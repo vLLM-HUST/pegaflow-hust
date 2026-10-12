@@ -1,0 +1,40 @@
+{
+  "exact_text_and_usage_match": true,
+  "baseline_sha256": "9be65b7f2fed57610409c26e73d656f517865f70cc6e3937f321e722359b87c1",
+  "baseline": {
+    "request_id": "issue23-mmlu-pro-smoke-0000-0-reference",
+    "cohort_id": "mmlu-pro-smoke-0000",
+    "planned_offset_seconds": 0,
+    "started_monotonic_ns": 1752423698340096,
+    "dispatch_lateness_ms": 0.05755200982093811,
+    "status": "ok",
+    "ttft_seconds": 0.8741219360381365,
+    "first_sse_seconds": 0.8741219360381365,
+    "usage": {
+      "prompt_tokens": 4106,
+      "total_tokens": 4138,
+      "completion_tokens": 32
+    },
+    "finish_reason": "length",
+    "e2e_seconds": 1.2773000309243798,
+    "text": "Let's think step by step. We are given the equation:\n$$3x - 4(x - 2) + 6x - 8"
+  },
+  "pd": {
+    "request_id": "issue23-mmlu-pro-smoke-0000-0",
+    "cohort_id": "mmlu-pro-smoke-0000",
+    "planned_offset_seconds": 0,
+    "started_monotonic_ns": 1752425018013880,
+    "dispatch_lateness_ms": 0.0324309803545475,
+    "status": "ok",
+    "ttft_seconds": 1.713480511913076,
+    "first_sse_seconds": 1.713480511913076,
+    "usage": {
+      "prompt_tokens": 4106,
+      "total_tokens": 4138,
+      "completion_tokens": 32
+    },
+    "finish_reason": "length",
+    "e2e_seconds": 3.5976129309274256,
+    "text": "Let's think step by step. We are given the equation:\n$$3x - 4(x - 2) + 6x - 8"
+  }
+}

@@ -1,0 +1,37 @@
+1791795890095415449   INFO pegaflow_router: pegaflow-router.rs:492 Starting pegaflow-router v0.23.3
+1791795890106280117   INFO pegaflow_router: pegaflow-router.rs:525 Starting on 0.0.0.0:28190
+1791795890106296317   INFO pegaflow_router: pegaflow-router.rs:526 Prefill nodes: ["http://192.168.0.4:28180"]
+1791795890106301227   INFO pegaflow_router: pegaflow-router.rs:527 Decode nodes: ["http://192.168.0.2:28180"]
+1791795890106304337   INFO pegaflow_router: pegaflow-router.rs:529 Prefill visibility acknowledgements: dir=/data/shared_upload/hust-zsx/tailguard-issue23-20261012/runs/qualification-capture-default-05/visibility ranks=2 timeout=120s
+1791795892548871338   INFO pegaflow_router: pegaflow-router.rs:209 request arrived: req=issue23-mmlu-pro-smoke-0000-0 inflight=[P=[0] D=[0]]
+1791795893131583495   INFO pegaflow_router: pegaflow-router.rs:289 prefill visible: req=issue23-mmlu-pro-smoke-0000-0 ranks=2 ack_wait=4ms
+1791795893131839031   INFO pegaflow_router: pegaflow-router.rs:311 prefill done: req=issue23-mmlu-pro-smoke-0000-0 P[0] latency=582ms inflight=[P=[0] D=[0]]
+1791795896140439549   INFO pegaflow_router: pegaflow-router.rs:377 done (stream): req=issue23-mmlu-pro-smoke-0000-0 D[0] total=3591ms inflight=[P=[0] D=[0]]
+1791795896170946181   INFO pegaflow_router: pegaflow-router.rs:209 request arrived: req=issue23-mmlu-pro-smoke-0000-1 inflight=[P=[0] D=[0]]
+1791795896740927078   INFO pegaflow_router: pegaflow-router.rs:289 prefill visible: req=issue23-mmlu-pro-smoke-0000-1 ranks=2 ack_wait=4ms
+1791795896740991330   INFO pegaflow_router: pegaflow-router.rs:311 prefill done: req=issue23-mmlu-pro-smoke-0000-1 P[0] latency=570ms inflight=[P=[0] D=[0]]
+1791795897419041903   INFO pegaflow_router: pegaflow-router.rs:377 done (stream): req=issue23-mmlu-pro-smoke-0000-1 D[0] total=1248ms inflight=[P=[0] D=[0]]
+1791795897445894288   INFO pegaflow_router: pegaflow-router.rs:209 request arrived: req=issue23-mmlu-pro-smoke-0000-2 inflight=[P=[0] D=[0]]
+1791795898042275975   INFO pegaflow_router: pegaflow-router.rs:289 prefill visible: req=issue23-mmlu-pro-smoke-0000-2 ranks=2 ack_wait=4ms
+1791795898042315786   INFO pegaflow_router: pegaflow-router.rs:311 prefill done: req=issue23-mmlu-pro-smoke-0000-2 P[0] latency=596ms inflight=[P=[0] D=[0]]
+1791795898722597034   INFO pegaflow_router: pegaflow-router.rs:377 done (stream): req=issue23-mmlu-pro-smoke-0000-2 D[0] total=1276ms inflight=[P=[0] D=[0]]
+1791795898748785664   INFO pegaflow_router: pegaflow-router.rs:209 request arrived: req=issue23-mmlu-pro-smoke-0000-3 inflight=[P=[0] D=[0]]
+1791795899366848167   INFO pegaflow_router: pegaflow-router.rs:289 prefill visible: req=issue23-mmlu-pro-smoke-0000-3 ranks=2 ack_wait=4ms
+1791795899366878247   INFO pegaflow_router: pegaflow-router.rs:311 prefill done: req=issue23-mmlu-pro-smoke-0000-3 P[0] latency=618ms inflight=[P=[0] D=[0]]
+1791795900146929089   INFO pegaflow_router: pegaflow-router.rs:377 done (stream): req=issue23-mmlu-pro-smoke-0000-3 D[0] total=1398ms inflight=[P=[0] D=[0]]
+1791795900172856302   INFO pegaflow_router: pegaflow-router.rs:209 request arrived: req=issue23-mmlu-pro-smoke-0001-0 inflight=[P=[0] D=[0]]
+1791795900741504869   INFO pegaflow_router: pegaflow-router.rs:289 prefill visible: req=issue23-mmlu-pro-smoke-0001-0 ranks=2 ack_wait=4ms
+1791795900741530660   INFO pegaflow_router: pegaflow-router.rs:311 prefill done: req=issue23-mmlu-pro-smoke-0001-0 P[0] latency=568ms inflight=[P=[0] D=[0]]
+1791795901429402323   INFO pegaflow_router: pegaflow-router.rs:377 done (stream): req=issue23-mmlu-pro-smoke-0001-0 D[0] total=1256ms inflight=[P=[0] D=[0]]
+1791795901455242704   INFO pegaflow_router: pegaflow-router.rs:209 request arrived: req=issue23-mmlu-pro-smoke-0001-1 inflight=[P=[0] D=[0]]
+1791795902108568637   INFO pegaflow_router: pegaflow-router.rs:289 prefill visible: req=issue23-mmlu-pro-smoke-0001-1 ranks=2 ack_wait=7ms
+1791795902108602988   INFO pegaflow_router: pegaflow-router.rs:311 prefill done: req=issue23-mmlu-pro-smoke-0001-1 P[0] latency=653ms inflight=[P=[0] D=[0]]
+1791795902777572337   INFO pegaflow_router: pegaflow-router.rs:377 done (stream): req=issue23-mmlu-pro-smoke-0001-1 D[0] total=1322ms inflight=[P=[0] D=[0]]
+1791795902802858814   INFO pegaflow_router: pegaflow-router.rs:209 request arrived: req=issue23-mmlu-pro-smoke-0001-2 inflight=[P=[0] D=[0]]
+1791795903415059618   INFO pegaflow_router: pegaflow-router.rs:289 prefill visible: req=issue23-mmlu-pro-smoke-0001-2 ranks=2 ack_wait=4ms
+1791795903415097219   INFO pegaflow_router: pegaflow-router.rs:311 prefill done: req=issue23-mmlu-pro-smoke-0001-2 P[0] latency=612ms inflight=[P=[0] D=[0]]
+1791795904063268711   INFO pegaflow_router: pegaflow-router.rs:377 done (stream): req=issue23-mmlu-pro-smoke-0001-2 D[0] total=1260ms inflight=[P=[0] D=[0]]
+1791795904089894850   INFO pegaflow_router: pegaflow-router.rs:209 request arrived: req=issue23-mmlu-pro-smoke-0001-3 inflight=[P=[0] D=[0]]
+1791795904687647296   INFO pegaflow_router: pegaflow-router.rs:289 prefill visible: req=issue23-mmlu-pro-smoke-0001-3 ranks=2 ack_wait=4ms
+1791795904687675987   INFO pegaflow_router: pegaflow-router.rs:311 prefill done: req=issue23-mmlu-pro-smoke-0001-3 P[0] latency=597ms inflight=[P=[0] D=[0]]
+1791795905385203176   INFO pegaflow_router: pegaflow-router.rs:377 done (stream): req=issue23-mmlu-pro-smoke-0001-3 D[0] total=1295ms inflight=[P=[0] D=[0]]
