@@ -336,12 +336,6 @@ class SchedulerConnector:
     ) -> tuple[int, bool]:
         hit_blocks = probe.require_hit_blocks()
         computed_blocks = probe.computed_blocks
-        if hit_blocks == 0:
-            # A completed miss remains valid while this request's query
-            # identity is unchanged. Retrying it while waiting for token
-            # budget would duplicate a remote fetch and re-enter a cohort gate.
-            self._external_matched_blocks[req_id] = computed_blocks
-            return (0, False)
         vbs = self._ctx.virtual_block_size
         tail_hit = probe.tail_tokens > 0 and hit_blocks == len(probe.query_hashes)
         # _build_query appends the tail key last and the backend reports prefix
@@ -406,6 +400,12 @@ class SchedulerConnector:
                 tail_hit,
                 probe.tail_tokens,
             )
+
+        if hit_blocks == 0:
+            # A completed miss remains valid while this request's query
+            # identity is unchanged. Retrying it while waiting for token
+            # budget would duplicate a remote fetch and re-enter a cohort gate.
+            return (0, False)
 
         if hit_tokens <= 0:
             # No external load will consume this lease.
