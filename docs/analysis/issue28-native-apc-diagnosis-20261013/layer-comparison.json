@@ -1,0 +1,8282 @@
+[
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.0.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.1.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.001953125,
+        "rms": 3.1494739232584834e-05,
+        "relative_rms": 0.004189362283796072,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.06137704849243164,
+        "rms": 0.00020614400273188949,
+        "relative_rms": 0.004588752519339323,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.2.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.001953125,
+        "rms": 2.1873902369407006e-05,
+        "relative_rms": 0.0023257513530552387,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.0031427997164428234,
+        "relative_rms": 0.0030621574260294437,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.01442292332649231,
+        "rms": 0.0001309778162976727,
+        "relative_rms": 0.005737895146012306,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.125,
+        "rms": 0.003301761345937848,
+        "relative_rms": 0.0032044516410678625,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.03125,
+        "rms": 0.0060649714432656765,
+        "relative_rms": 0.003406468080356717,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.015625,
+        "rms": 0.005724878050386906,
+        "relative_rms": 0.0021397664677351713,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.4.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0009765625,
+        "rms": 1.3843477972841356e-05,
+        "relative_rms": 0.009090205654501915,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.005724504590034485,
+        "relative_rms": 0.004944403190165758,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.031546592712402344,
+        "rms": 0.0002302854845765978,
+        "relative_rms": 0.010867966338992119,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.00578707130625844,
+        "relative_rms": 0.0049406238831579685,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.03125,
+        "rms": 0.011161521077156067,
+        "relative_rms": 0.0036083462182432413,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.03125,
+        "rms": 0.009291988797485828,
+        "relative_rms": 0.003438492538407445,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.5.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.000244140625,
+        "rms": 5.7313404795422684e-06,
+        "relative_rms": 0.00601237965747714,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.006203011143952608,
+        "relative_rms": 0.00580743420869112,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.010870933532714844,
+        "rms": 9.327803854830563e-05,
+        "relative_rms": 0.008432801812887192,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.006482546683400869,
+        "relative_rms": 0.006040443200618029,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.03515625,
+        "rms": 0.012439086101949215,
+        "relative_rms": 0.006109293550252914,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.03125,
+        "rms": 0.009762573055922985,
+        "relative_rms": 0.0046857139095664024,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.6.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0003662109375,
+        "rms": 8.897257430362515e-06,
+        "relative_rms": 0.012590385973453522,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.25,
+        "rms": 0.02058815397322178,
+        "relative_rms": 0.018392479047179222,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.011158019304275513,
+        "rms": 0.0001364724594168365,
+        "relative_rms": 0.010992328636348248,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.25,
+        "rms": 0.01995035819709301,
+        "relative_rms": 0.017859771847724915,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.074462890625,
+        "rms": 0.021977445110678673,
+        "relative_rms": 0.01544327475130558,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.0439453125,
+        "rms": 0.013812367804348469,
+        "relative_rms": 0.007645009085536003,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.8.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0029296875,
+        "rms": 5.439796586870216e-05,
+        "relative_rms": 0.00998875591903925,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.1328125,
+        "rms": 0.02104000747203827,
+        "relative_rms": 0.015305416658520699,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.04092592000961304,
+        "rms": 0.0003947386867366731,
+        "relative_rms": 0.008761503733694553,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.1328125,
+        "rms": 0.021488869562745094,
+        "relative_rms": 0.015556867234408855,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.02627185918390751,
+        "relative_rms": 0.007153286598622799,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.022681906819343567,
+        "relative_rms": 0.005737155210226774,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.9.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.001220703125,
+        "rms": 3.091639155172743e-05,
+        "relative_rms": 0.01153884269297123,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.40625,
+        "rms": 0.03289005905389786,
+        "relative_rms": 0.026880977675318718,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.0383305549621582,
+        "rms": 0.0004438360338099301,
+        "relative_rms": 0.016221335157752037,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.40625,
+        "rms": 0.029765544459223747,
+        "relative_rms": 0.024375123903155327,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.02243812009692192,
+        "relative_rms": 0.006859800778329372,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.09375,
+        "rms": 0.025904804468154907,
+        "relative_rms": 0.007770334370434284,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.10.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.00079345703125,
+        "rms": 1.5509571312577464e-05,
+        "relative_rms": 0.02218908816576004,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.171875,
+        "rms": 0.028287913650274277,
+        "relative_rms": 0.022151807323098183,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.013867855072021484,
+        "rms": 0.0002066034503513947,
+        "relative_rms": 0.019061604514718056,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.212890625,
+        "rms": 0.032582078129053116,
+        "relative_rms": 0.025753062218427658,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.0859375,
+        "rms": 0.02996496669948101,
+        "relative_rms": 0.011549818329513073,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.025947336107492447,
+        "relative_rms": 0.008359251543879509,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.12.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.001220703125,
+        "rms": 2.733697692747228e-05,
+        "relative_rms": 0.015045171603560448,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.71435546875,
+        "rms": 0.04070969298481941,
+        "relative_rms": 0.030553175136446953,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.02892017364501953,
+        "rms": 0.000227604599785991,
+        "relative_rms": 0.019003355875611305,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.71435546875,
+        "rms": 0.04096956551074982,
+        "relative_rms": 0.030739881098270416,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.1875,
+        "rms": 0.05477313697338104,
+        "relative_rms": 0.014520276337862015,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.078125,
+        "rms": 0.03261750936508179,
+        "relative_rms": 0.008782112039625645,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.13.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.001220703125,
+        "rms": 3.803665822488256e-05,
+        "relative_rms": 0.02190280333161354,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.796875,
+        "rms": 0.07086887210607529,
+        "relative_rms": 0.05800807476043701,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.021661043167114258,
+        "rms": 0.00035528565058484674,
+        "relative_rms": 0.02255968376994133,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.796875,
+        "rms": 0.06667777895927429,
+        "relative_rms": 0.05458192899823189,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.28125,
+        "rms": 0.06982933729887009,
+        "relative_rms": 0.014051957987248898,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.25,
+        "rms": 0.07143360376358032,
+        "relative_rms": 0.014897134155035019,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.14.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.004150390625,
+        "rms": 6.858683627797291e-05,
+        "relative_rms": 0.037266168743371964,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 1.078125,
+        "rms": 0.10859636962413788,
+        "relative_rms": 0.07558320462703705,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.07156745344400406,
+        "rms": 0.0005268388777039945,
+        "relative_rms": 0.032729655504226685,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 1.078125,
+        "rms": 0.0971192792057991,
+        "relative_rms": 0.06764348596334457,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.6875,
+        "rms": 0.11296933144330978,
+        "relative_rms": 0.023346323519945145,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.15625,
+        "rms": 0.06152888759970665,
+        "relative_rms": 0.012456605210900307,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.16.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0185546875,
+        "rms": 0.0002924942527897656,
+        "relative_rms": 0.10496283322572708,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.1484375,
+        "rms": 0.34354180097579956,
+        "relative_rms": 0.30860015749931335,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.06146528944373131,
+        "rms": 0.0006016696570441127,
+        "relative_rms": 0.031425200402736664,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 4.1484375,
+        "rms": 0.3030160963535309,
+        "relative_rms": 0.27978622913360596,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.9609375,
+        "rms": 0.2574043273925781,
+        "relative_rms": 0.045518986880779266,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.171875,
+        "rms": 0.23131650686264038,
+        "relative_rms": 0.04355045408010483,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.17.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0025634765625,
+        "rms": 6.717855285387486e-05,
+        "relative_rms": 0.12140847742557526,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 5.5546875,
+        "rms": 0.361676961183548,
+        "relative_rms": 0.24241387844085693,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.1250428855419159,
+        "rms": 0.0009594382136128843,
+        "relative_rms": 0.0971483588218689,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 5.5546875,
+        "rms": 0.3214627504348755,
+        "relative_rms": 0.2166343778371811,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.625,
+        "rms": 0.22524724900722504,
+        "relative_rms": 0.043618787080049515,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.59375,
+        "rms": 0.23506224155426025,
+        "relative_rms": 0.05273686349391937,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.18.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.006591796875,
+        "rms": 0.00013073068112134933,
+        "relative_rms": 0.1661606729030609,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 5.79296875,
+        "rms": 0.35931846499443054,
+        "relative_rms": 0.3004356622695923,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.05399608612060547,
+        "rms": 0.0007719681598246098,
+        "relative_rms": 0.02853734791278839,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 5.79296875,
+        "rms": 0.33836254477500916,
+        "relative_rms": 0.28382816910743713,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 1.9375,
+        "rms": 0.4681463837623596,
+        "relative_rms": 0.0933033749461174,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.90625,
+        "rms": 0.22449147701263428,
+        "relative_rms": 0.0499265193939209,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.20.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.052734375,
+        "rms": 0.001044485135935247,
+        "relative_rms": 0.1928146332502365,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.5078125,
+        "rms": 0.43698233366012573,
+        "relative_rms": 0.30508551001548767,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.28737306594848633,
+        "rms": 0.0018718125065788627,
+        "relative_rms": 0.041012249886989594,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 4.984375,
+        "rms": 0.487393319606781,
+        "relative_rms": 0.3340717852115631,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 1.890625,
+        "rms": 0.6347054243087769,
+        "relative_rms": 0.10076499730348587,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.796875,
+        "rms": 0.28832584619522095,
+        "relative_rms": 0.062095556408166885,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.21.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.057861328125,
+        "rms": 0.0010584108531475067,
+        "relative_rms": 0.3825370967388153,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.578125,
+        "rms": 0.5106666684150696,
+        "relative_rms": 0.40048009157180786,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.47991254925727844,
+        "rms": 0.0029734382405877113,
+        "relative_rms": 0.11649283766746521,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 4.6875,
+        "rms": 0.5909822583198547,
+        "relative_rms": 0.45199599862098694,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.5625,
+        "rms": 0.6634101271629333,
+        "relative_rms": 0.12193487584590912,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.671875,
+        "rms": 0.5844787955284119,
+        "relative_rms": 0.13794367015361786,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.22.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0128173828125,
+        "rms": 0.0002679432509467006,
+        "relative_rms": 0.2680482566356659,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 6.6875,
+        "rms": 0.4632990062236786,
+        "relative_rms": 0.34799593687057495,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.10171617567539215,
+        "rms": 0.0016807490028440952,
+        "relative_rms": 0.11135083436965942,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 6.6875,
+        "rms": 0.5565027594566345,
+        "relative_rms": 0.40762606263160706,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.65625,
+        "rms": 0.7265363931655884,
+        "relative_rms": 0.15530523657798767,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.28125,
+        "rms": 0.6199235916137695,
+        "relative_rms": 0.16585670411586761,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.24.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.010009765625,
+        "rms": 0.00024262057559099048,
+        "relative_rms": 0.13467806577682495,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.7431640625,
+        "rms": 0.5025449991226196,
+        "relative_rms": 0.35614675283432007,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.743811309337616,
+        "rms": 0.0039646076038479805,
+        "relative_rms": 0.3003363609313965,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 7.3125,
+        "rms": 0.601667582988739,
+        "relative_rms": 0.4207141399383545,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.53125,
+        "rms": 0.9955496191978455,
+        "relative_rms": 0.20854923129081726,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.875,
+        "rms": 0.6193715333938599,
+        "relative_rms": 0.15444034337997437,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.25.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.004608154296875,
+        "rms": 0.0001702757435850799,
+        "relative_rms": 0.21982689201831818,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 5.390625,
+        "rms": 0.6010496616363525,
+        "relative_rms": 0.46701857447624207,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.12374615669250488,
+        "rms": 0.001204012893140316,
+        "relative_rms": 0.08291640877723694,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 5.390625,
+        "rms": 0.7122917175292969,
+        "relative_rms": 0.5416354537010193,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.96875,
+        "rms": 1.1930603981018066,
+        "relative_rms": 0.20100808143615723,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.65625,
+        "rms": 1.0400372743606567,
+        "relative_rms": 0.22001953423023224,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.26.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0303955078125,
+        "rms": 0.0004866743111051619,
+        "relative_rms": 0.28807002305984497,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 5.890625,
+        "rms": 0.5476040244102478,
+        "relative_rms": 0.3575250208377838,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 1.0583715438842773,
+        "rms": 0.003583207493647933,
+        "relative_rms": 0.2180536389350891,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 5.890625,
+        "rms": 0.6843891143798828,
+        "relative_rms": 0.4446282386779785,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.890625,
+        "rms": 1.0387616157531738,
+        "relative_rms": 0.18834584951400757,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.375,
+        "rms": 0.7976608872413635,
+        "relative_rms": 0.1743997484445572,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.28.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.02392578125,
+        "rms": 0.0005241617327556014,
+        "relative_rms": 0.1377355307340622,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 7.1962890625,
+        "rms": 0.5837648510932922,
+        "relative_rms": 0.5034027099609375,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.10538579523563385,
+        "rms": 0.0013327181804925203,
+        "relative_rms": 0.06551907956600189,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 7.1962890625,
+        "rms": 0.7014092803001404,
+        "relative_rms": 0.5804867744445801,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.53125,
+        "rms": 0.8902110457420349,
+        "relative_rms": 0.15479950606822968,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.15625,
+        "rms": 0.8433933258056641,
+        "relative_rms": 0.20907838642597198,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.29.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0079345703125,
+        "rms": 0.00017183771706186235,
+        "relative_rms": 0.2328406423330307,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 6.859375,
+        "rms": 0.6305930018424988,
+        "relative_rms": 0.41349679231643677,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.2078658640384674,
+        "rms": 0.0019305736059322953,
+        "relative_rms": 0.19105464220046997,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 6.859375,
+        "rms": 0.7225198149681091,
+        "relative_rms": 0.4629967212677002,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.9375,
+        "rms": 0.9628547430038452,
+        "relative_rms": 0.18766483664512634,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.4375,
+        "rms": 0.685802161693573,
+        "relative_rms": 0.178399920463562,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.30.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.010009765625,
+        "rms": 0.00021805212600156665,
+        "relative_rms": 0.2409760057926178,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 7.771484375,
+        "rms": 0.5154497027397156,
+        "relative_rms": 0.39951464533805847,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.11630535125732422,
+        "rms": 0.001391120720654726,
+        "relative_rms": 0.07722458243370056,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 7.771484375,
+        "rms": 0.6228025555610657,
+        "relative_rms": 0.4785158336162567,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.21875,
+        "rms": 0.7646430730819702,
+        "relative_rms": 0.1419062614440918,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.328125,
+        "rms": 0.6604532599449158,
+        "relative_rms": 0.1709897816181183,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.32.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.00604248046875,
+        "rms": 0.00024383178970310837,
+        "relative_rms": 0.19690634310245514,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 9.1875,
+        "rms": 0.5776374936103821,
+        "relative_rms": 0.3937177360057831,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.31190329790115356,
+        "rms": 0.001970346551388502,
+        "relative_rms": 0.18495230376720428,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 10.484375,
+        "rms": 0.6994039416313171,
+        "relative_rms": 0.4701930284500122,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.53125,
+        "rms": 1.117795705795288,
+        "relative_rms": 0.21279709041118622,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 3.0625,
+        "rms": 1.0839898586273193,
+        "relative_rms": 0.2560693919658661,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.33.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.02783203125,
+        "rms": 0.0005198937724344432,
+        "relative_rms": 0.3724001944065094,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 6.484375,
+        "rms": 0.634547770023346,
+        "relative_rms": 0.3866025507450104,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.20168828964233398,
+        "rms": 0.002763190306723118,
+        "relative_rms": 0.17510446906089783,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 8.375,
+        "rms": 0.7894631028175354,
+        "relative_rms": 0.47734612226486206,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 4.03125,
+        "rms": 1.2801380157470703,
+        "relative_rms": 0.28785744309425354,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.59375,
+        "rms": 0.9833030104637146,
+        "relative_rms": 0.3262181282043457,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.34.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0147705078125,
+        "rms": 0.00042576028499752283,
+        "relative_rms": 0.18962450325489044,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.67578125,
+        "rms": 0.5788804292678833,
+        "relative_rms": 0.3790224492549896,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.20547127723693848,
+        "rms": 0.00283029954880476,
+        "relative_rms": 0.17066539824008942,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 7.296875,
+        "rms": 0.7161458134651184,
+        "relative_rms": 0.4574264585971832,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.3125,
+        "rms": 0.8108129501342773,
+        "relative_rms": 0.19908854365348816,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.34375,
+        "rms": 0.567096471786499,
+        "relative_rms": 0.17903193831443787,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.36.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.072265625,
+        "rms": 0.001966240582987666,
+        "relative_rms": 0.1960136443376541,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 8.1875,
+        "rms": 0.768205463886261,
+        "relative_rms": 0.31142836809158325,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.760496973991394,
+        "rms": 0.004561719950288534,
+        "relative_rms": 0.08715546876192093,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 14.71875,
+        "rms": 0.9380365610122681,
+        "relative_rms": 0.3724326491355896,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.40625,
+        "rms": 1.2837296724319458,
+        "relative_rms": 0.21511325240135193,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.453125,
+        "rms": 0.7110381722450256,
+        "relative_rms": 0.1969211846590042,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.37.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.080078125,
+        "rms": 0.0016907274257391691,
+        "relative_rms": 0.1965990513563156,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 13.765625,
+        "rms": 0.7470530271530151,
+        "relative_rms": 0.278348833322525,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.5406572818756104,
+        "rms": 0.004674524534493685,
+        "relative_rms": 0.10811400413513184,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 13.765625,
+        "rms": 0.9052576422691345,
+        "relative_rms": 0.33707118034362793,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.84375,
+        "rms": 1.2242285013198853,
+        "relative_rms": 0.20052070915699005,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.5625,
+        "rms": 0.6860589981079102,
+        "relative_rms": 0.18463897705078125,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 0,
+    "layer": "01-language_model.model.layers.38.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.024169921875,
+        "rms": 0.0005072182975709438,
+        "relative_rms": 0.20620396733283997,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 5.4765625,
+        "rms": 0.6067524552345276,
+        "relative_rms": 0.2547649145126343,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.21133975684642792,
+        "rms": 0.0028622576501220465,
+        "relative_rms": 0.10501506924629211,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 5.85546875,
+        "rms": 0.7575325965881348,
+        "relative_rms": 0.31848418712615967,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.390625,
+        "rms": 1.124636173248291,
+        "relative_rms": 0.21224701404571533,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.75,
+        "rms": 0.7373995780944824,
+        "relative_rms": 0.1687573492527008,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.0.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.1.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.001953125,
+        "rms": 5.0068050768459216e-05,
+        "relative_rms": 0.003500129794701934,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.08978033065795898,
+        "rms": 0.00035197471152059734,
+        "relative_rms": 0.004555812105536461,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.2.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.00048828125,
+        "rms": 1.137529488914879e-05,
+        "relative_rms": 0.003799392841756344,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.0032209346536546946,
+        "relative_rms": 0.003139743348583579,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.01398622989654541,
+        "rms": 0.00012109327508369461,
+        "relative_rms": 0.004638009238988161,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.0033411814365535975,
+        "relative_rms": 0.0032716223504394293,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.0234375,
+        "rms": 0.0050504980608820915,
+        "relative_rms": 0.003661239519715309,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.015625,
+        "rms": 0.004173662513494492,
+        "relative_rms": 0.002021803753450513,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.4.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.000244140625,
+        "rms": 5.102659088151995e-06,
+        "relative_rms": 0.008336115628480911,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.005366177763789892,
+        "relative_rms": 0.005011732690036297,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.015552163124084473,
+        "rms": 0.00010182159894611686,
+        "relative_rms": 0.008650708012282848,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.005394820589572191,
+        "relative_rms": 0.0049438937567174435,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.03125,
+        "rms": 0.008744923397898674,
+        "relative_rms": 0.003908887505531311,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.03125,
+        "rms": 0.006763418670743704,
+        "relative_rms": 0.0025993147864937782,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.5.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.00048828125,
+        "rms": 1.1602402992139105e-05,
+        "relative_rms": 0.00533305574208498,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.0064888461492955685,
+        "relative_rms": 0.005297377239912748,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.019953250885009766,
+        "rms": 0.0001675714156590402,
+        "relative_rms": 0.007228521630167961,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.006726422812789679,
+        "relative_rms": 0.005491283256560564,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.03125,
+        "rms": 0.018216565251350403,
+        "relative_rms": 0.005758944898843765,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.03125,
+        "rms": 0.013795160688459873,
+        "relative_rms": 0.003839154029265046,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.6.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0009765625,
+        "rms": 1.2213276022521313e-05,
+        "relative_rms": 0.014907457865774632,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.166015625,
+        "rms": 0.02115640789270401,
+        "relative_rms": 0.01972295716404915,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.026662677526474,
+        "rms": 0.0001739465369610116,
+        "relative_rms": 0.012978004291653633,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.166015625,
+        "rms": 0.020428556948900223,
+        "relative_rms": 0.01911543495953083,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.1015625,
+        "rms": 0.025497304275631905,
+        "relative_rms": 0.01080573070794344,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.0546875,
+        "rms": 0.01818356104195118,
+        "relative_rms": 0.006375922821462154,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.8.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.00146484375,
+        "rms": 3.328292950754985e-05,
+        "relative_rms": 0.00912250205874443,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.16796875,
+        "rms": 0.02176472544670105,
+        "relative_rms": 0.014625977724790573,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.047145724296569824,
+        "rms": 0.00038612671778537333,
+        "relative_rms": 0.010314613580703735,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.16796875,
+        "rms": 0.022457681596279144,
+        "relative_rms": 0.015098531730473042,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.02552408166229725,
+        "relative_rms": 0.007414824329316616,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.01584232784807682,
+        "relative_rms": 0.005406809505075216,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.9.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0009765625,
+        "rms": 2.116508585459087e-05,
+        "relative_rms": 0.008624802343547344,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.203125,
+        "rms": 0.029412753880023956,
+        "relative_rms": 0.021366409957408905,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.04395744204521179,
+        "rms": 0.00035486643901094794,
+        "relative_rms": 0.012572549283504486,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.203125,
+        "rms": 0.02700340747833252,
+        "relative_rms": 0.019566550850868225,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.0625,
+        "rms": 0.021466368809342384,
+        "relative_rms": 0.005501682870090008,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.09375,
+        "rms": 0.020807944238185883,
+        "relative_rms": 0.006079662591218948,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.10.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0006103515625,
+        "rms": 1.2627130672626663e-05,
+        "relative_rms": 0.01814909279346466,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.234375,
+        "rms": 0.027387138456106186,
+        "relative_rms": 0.021976670250296593,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.013755977153778076,
+        "rms": 0.00017724130884744227,
+        "relative_rms": 0.0169515460729599,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.28125,
+        "rms": 0.03166263923048973,
+        "relative_rms": 0.025575341656804085,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.09375,
+        "rms": 0.03427807241678238,
+        "relative_rms": 0.013342373073101044,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.078125,
+        "rms": 0.029936160892248154,
+        "relative_rms": 0.011830509640276432,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.12.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.00042724609375,
+        "rms": 1.1342584912199527e-05,
+        "relative_rms": 0.025139138102531433,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 0.359375,
+        "rms": 0.03564263507723808,
+        "relative_rms": 0.03276107832789421,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.01038554310798645,
+        "rms": 0.00020405498798936605,
+        "relative_rms": 0.02506384812295437,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 0.359375,
+        "rms": 0.036625053733587265,
+        "relative_rms": 0.03378982096910477,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.140625,
+        "rms": 0.0434240996837616,
+        "relative_rms": 0.012661132961511612,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.109375,
+        "rms": 0.033435385674238205,
+        "relative_rms": 0.010443137027323246,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.13.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0013427734375,
+        "rms": 3.222583109163679e-05,
+        "relative_rms": 0.026115557178854942,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 1.265625,
+        "rms": 0.07498127222061157,
+        "relative_rms": 0.051244597882032394,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.01954585313796997,
+        "rms": 0.0002733654109761119,
+        "relative_rms": 0.020386477932333946,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 1.265625,
+        "rms": 0.06955860555171967,
+        "relative_rms": 0.04723827913403511,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.40625,
+        "rms": 0.09485232830047607,
+        "relative_rms": 0.017895612865686417,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.15625,
+        "rms": 0.06506290286779404,
+        "relative_rms": 0.010777069255709648,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.14.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0078125,
+        "rms": 9.962439071387053e-05,
+        "relative_rms": 0.0450180321931839,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 2.09375,
+        "rms": 0.12495075166225433,
+        "relative_rms": 0.09378000348806381,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.12495231628417969,
+        "rms": 0.0008777729235589504,
+        "relative_rms": 0.01736649125814438,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 2.09375,
+        "rms": 0.11081213504076004,
+        "relative_rms": 0.08327681571245193,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 0.4375,
+        "rms": 0.08705368638038635,
+        "relative_rms": 0.01663868874311447,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.28125,
+        "rms": 0.07680542767047882,
+        "relative_rms": 0.019380774348974228,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.16.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0025634765625,
+        "rms": 7.555422780569643e-05,
+        "relative_rms": 0.15644027292728424,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 3.953125,
+        "rms": 0.32642436027526855,
+        "relative_rms": 0.2662782371044159,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.03546048700809479,
+        "rms": 0.0007019569166004658,
+        "relative_rms": 0.05819425359368324,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 3.953125,
+        "rms": 0.28859183192253113,
+        "relative_rms": 0.24010901153087616,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 1.587890625,
+        "rms": 0.2820652723312378,
+        "relative_rms": 0.05242893099784851,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.484375,
+        "rms": 0.17128105461597443,
+        "relative_rms": 0.036013826727867126,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.17.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.01220703125,
+        "rms": 0.0001986669230973348,
+        "relative_rms": 0.11789068579673767,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 3.50244140625,
+        "rms": 0.3368515372276306,
+        "relative_rms": 0.2751568555831909,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.5852127075195312,
+        "rms": 0.002810550155118108,
+        "relative_rms": 0.18085014820098877,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 3.50244140625,
+        "rms": 0.29910749197006226,
+        "relative_rms": 0.24669376015663147,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 1.0625,
+        "rms": 0.30611929297447205,
+        "relative_rms": 0.052477821707725525,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.71875,
+        "rms": 0.28809091448783875,
+        "relative_rms": 0.05132919177412987,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.18.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.009765625,
+        "rms": 0.0001871996937552467,
+        "relative_rms": 0.2250964492559433,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.05078125,
+        "rms": 0.36165720224380493,
+        "relative_rms": 0.27729901671409607,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.0728912502527237,
+        "rms": 0.0005949438200332224,
+        "relative_rms": 0.05517912656068802,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 4.05078125,
+        "rms": 0.34219878911972046,
+        "relative_rms": 0.26536843180656433,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 1.21875,
+        "rms": 0.4000702202320099,
+        "relative_rms": 0.07966447621583939,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.70458984375,
+        "rms": 0.22662357985973358,
+        "relative_rms": 0.04935939610004425,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.20.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.078125,
+        "rms": 0.001391659490764141,
+        "relative_rms": 0.37553727626800537,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.875,
+        "rms": 0.5181083083152771,
+        "relative_rms": 0.34100577235221863,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.3728644847869873,
+        "rms": 0.0017396857729181647,
+        "relative_rms": 0.05461151525378227,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 5.484375,
+        "rms": 0.570703387260437,
+        "relative_rms": 0.3683757483959198,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 1.6875,
+        "rms": 0.6041185855865479,
+        "relative_rms": 0.09845057874917984,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 0.87890625,
+        "rms": 0.2872825562953949,
+        "relative_rms": 0.0705675557255745,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.21.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.01220703125,
+        "rms": 0.0003845600876957178,
+        "relative_rms": 0.3161300718784332,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 5.41015625,
+        "rms": 0.484424352645874,
+        "relative_rms": 0.3381933271884918,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.15005123615264893,
+        "rms": 0.0010440904879942536,
+        "relative_rms": 0.05029120296239853,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 5.41015625,
+        "rms": 0.5470821857452393,
+        "relative_rms": 0.3761061728000641,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 1.9375,
+        "rms": 0.5685030221939087,
+        "relative_rms": 0.09778919816017151,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.3125,
+        "rms": 0.5605220794677734,
+        "relative_rms": 0.14268048107624054,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.22.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0076904296875,
+        "rms": 0.00014009494043421,
+        "relative_rms": 0.24375809729099274,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.734375,
+        "rms": 0.4393298029899597,
+        "relative_rms": 0.32566866278648376,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.08642672747373581,
+        "rms": 0.000939039106015116,
+        "relative_rms": 0.08184635639190674,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 4.734375,
+        "rms": 0.5075007677078247,
+        "relative_rms": 0.3698664903640747,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 1.84375,
+        "rms": 0.5276813507080078,
+        "relative_rms": 0.11679642647504807,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.1640625,
+        "rms": 0.5396663546562195,
+        "relative_rms": 0.16787934303283691,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.24.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.00347900390625,
+        "rms": 0.00011265005741734058,
+        "relative_rms": 0.3926919400691986,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 5.19140625,
+        "rms": 0.4947538673877716,
+        "relative_rms": 0.404755175113678,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.04713711142539978,
+        "rms": 0.0013229460455477238,
+        "relative_rms": 0.1697847694158554,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 6.21875,
+        "rms": 0.6044356822967529,
+        "relative_rms": 0.4911797344684601,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.7265625,
+        "rms": 0.8168377876281738,
+        "relative_rms": 0.19388045370578766,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.6796875,
+        "rms": 0.5244849324226379,
+        "relative_rms": 0.16940774023532867,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.25.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.008544921875,
+        "rms": 0.00024698537890799344,
+        "relative_rms": 0.21847257018089294,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 7.357421875,
+        "rms": 0.6034262776374817,
+        "relative_rms": 0.3911072015762329,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.10694588720798492,
+        "rms": 0.001223926548846066,
+        "relative_rms": 0.0890459343791008,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 7.5,
+        "rms": 0.7287017703056335,
+        "relative_rms": 0.46958595514297485,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 5.015625,
+        "rms": 1.3885687589645386,
+        "relative_rms": 0.22916178405284882,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.375,
+        "rms": 0.9274824857711792,
+        "relative_rms": 0.18226678669452667,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.26.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.080078125,
+        "rms": 0.0009977583540603518,
+        "relative_rms": 0.5103123188018799,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 5.09375,
+        "rms": 0.5590373873710632,
+        "relative_rms": 0.3775971531867981,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.2568126916885376,
+        "rms": 0.0027673838194459677,
+        "relative_rms": 0.0628451257944107,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 5.29296875,
+        "rms": 0.6832109689712524,
+        "relative_rms": 0.45999300479888916,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.375,
+        "rms": 1.3296948671340942,
+        "relative_rms": 0.22869907319545746,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.6875,
+        "rms": 1.0256520509719849,
+        "relative_rms": 0.24905821681022644,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.28.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.00506591796875,
+        "rms": 0.0001959961373358965,
+        "relative_rms": 0.34598109126091003,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.8359375,
+        "rms": 0.5444543957710266,
+        "relative_rms": 0.4349522888660431,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.0784035176038742,
+        "rms": 0.0016603381372988224,
+        "relative_rms": 0.17012058198451996,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 4.8359375,
+        "rms": 0.6625475883483887,
+        "relative_rms": 0.5185112953186035,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.625,
+        "rms": 0.8271645903587341,
+        "relative_rms": 0.15195663273334503,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.09375,
+        "rms": 0.7600321769714355,
+        "relative_rms": 0.20153744518756866,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.29.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.03955078125,
+        "rms": 0.0007554342155344784,
+        "relative_rms": 0.2774389982223511,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 7.375,
+        "rms": 0.6273221373558044,
+        "relative_rms": 0.4738523066043854,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.9852119088172913,
+        "rms": 0.004886058159172535,
+        "relative_rms": 0.3363008201122284,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 7.375,
+        "rms": 0.7178385257720947,
+        "relative_rms": 0.5293756127357483,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 1.78125,
+        "rms": 0.7707780003547668,
+        "relative_rms": 0.1385841965675354,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.703125,
+        "rms": 0.923554539680481,
+        "relative_rms": 0.20710942149162292,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.30.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0118560791015625,
+        "rms": 0.0003545723157003522,
+        "relative_rms": 0.4302762746810913,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 8.21875,
+        "rms": 0.6337218284606934,
+        "relative_rms": 0.45250046253204346,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.09670910239219666,
+        "rms": 0.002084689447656274,
+        "relative_rms": 0.12600289285182953,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 10.421875,
+        "rms": 0.7777864933013916,
+        "relative_rms": 0.5481576323509216,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.625,
+        "rms": 1.2487726211547852,
+        "relative_rms": 0.22916372120380402,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 3.46875,
+        "rms": 1.366217017173767,
+        "relative_rms": 0.31399524211883545,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.32.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0048828125,
+        "rms": 0.000189136277185753,
+        "relative_rms": 0.19135935604572296,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 4.71875,
+        "rms": 0.5480690598487854,
+        "relative_rms": 0.3242093026638031,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.11820592731237411,
+        "rms": 0.0013718446716666222,
+        "relative_rms": 0.1636795997619629,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 6.9375,
+        "rms": 0.6743353009223938,
+        "relative_rms": 0.39480870962142944,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.53125,
+        "rms": 0.7291257381439209,
+        "relative_rms": 0.1707480549812317,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.875,
+        "rms": 0.5467561483383179,
+        "relative_rms": 0.1599886268377304,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.33.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.010498046875,
+        "rms": 0.0002289048716193065,
+        "relative_rms": 0.2618200480937958,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 6.0625,
+        "rms": 0.6064817905426025,
+        "relative_rms": 0.4291646480560303,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.045310139656066895,
+        "rms": 0.0014609454665333033,
+        "relative_rms": 0.1548364758491516,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 6.0625,
+        "rms": 0.7339679598808289,
+        "relative_rms": 0.5140219330787659,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.40625,
+        "rms": 1.2594194412231445,
+        "relative_rms": 0.3078940808773041,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.1484375,
+        "rms": 0.8333681225776672,
+        "relative_rms": 0.2705595791339874,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.34.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0279541015625,
+        "rms": 0.0006419810233637691,
+        "relative_rms": 0.44070959091186523,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 6.9296875,
+        "rms": 0.5884647369384766,
+        "relative_rms": 0.3935007154941559,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.1483447253704071,
+        "rms": 0.002438070485368371,
+        "relative_rms": 0.15366244316101074,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 6.9296875,
+        "rms": 0.7356165051460266,
+        "relative_rms": 0.47649049758911133,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 3.6875,
+        "rms": 1.0795005559921265,
+        "relative_rms": 0.2296956330537796,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.07861328125,
+        "rms": 0.6959902048110962,
+        "relative_rms": 0.18629802763462067,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.36.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.0224609375,
+        "rms": 0.0006255093030631542,
+        "relative_rms": 0.1822858303785324,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 11.4765625,
+        "rms": 0.7151131629943848,
+        "relative_rms": 0.28957194089889526,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.47104185819625854,
+        "rms": 0.0030960675794631243,
+        "relative_rms": 0.09315521270036697,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 11.4765625,
+        "rms": 0.8775279521942139,
+        "relative_rms": 0.3483631908893585,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 2.90625,
+        "rms": 0.9632198214530945,
+        "relative_rms": 0.17005473375320435,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 1.96875,
+        "rms": 0.6851014494895935,
+        "relative_rms": 0.20994770526885986,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.37.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.11474609375,
+        "rms": 0.0016128983115777373,
+        "relative_rms": 0.2582952380180359,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 10.8125,
+        "rms": 0.8157699108123779,
+        "relative_rms": 0.30363863706588745,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 1.3749885559082031,
+        "rms": 0.008708374574780464,
+        "relative_rms": 0.18437260389328003,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 11.8125,
+        "rms": 0.998633861541748,
+        "relative_rms": 0.37205344438552856,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 4.6875,
+        "rms": 1.7546000480651855,
+        "relative_rms": 0.27377721667289734,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 3.234375,
+        "rms": 1.0959429740905762,
+        "relative_rms": 0.2802170217037201,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  },
+  {
+    "rank": 1,
+    "layer": "01-language_model.model.layers.38.linear_attn-after.pt",
+    "cold_repeat": {
+      "output_tail": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "output_comparison": {
+      "output_tail": {
+        "equal": false,
+        "max": 0.028076171875,
+        "rms": 0.0005439858068712056,
+        "relative_rms": 0.258833110332489,
+        "shape": [
+          4,
+          16,
+          128
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "conv": {
+        "equal": false,
+        "max": 7.5,
+        "rms": 0.6963785290718079,
+        "relative_rms": 0.2572525143623352,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": false,
+        "max": 0.5510008335113525,
+        "rms": 0.008592831902205944,
+        "relative_rms": 0.18708063662052155,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    },
+    "input_comparison": {
+      "qkv_tail": {
+        "equal": false,
+        "max": 17.6875,
+        "rms": 0.9176709651947021,
+        "relative_rms": 0.34074297547340393,
+        "shape": [
+          4,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "a_tail": {
+        "equal": false,
+        "max": 4.3125,
+        "rms": 1.790191650390625,
+        "relative_rms": 0.3049389719963074,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "b_tail": {
+        "equal": false,
+        "max": 2.703125,
+        "rms": 1.2150450944900513,
+        "relative_rms": 0.40366190671920776,
+        "shape": [
+          4,
+          16
+        ],
+        "dtype": "torch.bfloat16"
+      }
+    },
+    "checkpoint_copy": {
+      "conv": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          3,
+          4096
+        ],
+        "dtype": "torch.bfloat16"
+      },
+      "ssm": {
+        "equal": true,
+        "max": 0.0,
+        "rms": 0.0,
+        "relative_rms": 0.0,
+        "shape": [
+          16,
+          128,
+          128
+        ],
+        "dtype": "torch.float32"
+      }
+    }
+  }
+]

@@ -8,7 +8,9 @@
 关键定位：解码产生的 checkpoint、以及较短 prefill 后继续计算的 checkpoint，
 在本地 APC 真实命中时，也能产生与跨节点恢复完全相同的 32-token 差异。
 相同输入 hash 不足以保证当前后端不同计算轨迹的状态和输出等价。
-具体属于数值差异还是内核实现问题，尚需进一步测量状态与 logits 并定位内核。
+后续 [原生 APC 与算子诊断](issue28-native-apc-diagnosis-20261013.md) 已定位到
+BF16 输出投影的批次形状数值差异，并验证局部修正能消除一类输出分叉；
+decode 生成边界状态的完整正确性仍待解决。
 
 实现基线为 `77be394a0a52089cc6877b0867077a040b772441`，工作分支为
 `feature/pegaflow-hybrid-cache-adaptation`，服务与 binding 均为 **0.23.4**。
