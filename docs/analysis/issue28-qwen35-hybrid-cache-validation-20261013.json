@@ -50,12 +50,21 @@
     }
   },
   "pending": [
-    "GDN state and logits error measurement; numerical versus kernel implementation diagnosis",
-    "checkpoint computation-history compatibility and coherent group provenance",
-    "sparse checkpoint availability and allocator lifecycle, including boundary 6144",
+    "sparse checkpoint hit availability, including boundary 6144",
     "graph/async/MTP/long-context/concurrency acceptance",
     "Issue23 formal performance experiment"
   ],
+  "semantic_followup": {
+    "report": "issue28-cache-semantics-20261013.md",
+    "scope": "Pinned Qwen3.5 Ascend TP=2 eager synchronous APC/align cases",
+    "restored_state_tensors": 120,
+    "restored_state_tensors_exact": 120,
+    "loaded_plane_prefix_checks": 3160,
+    "prefix_identity_violations": 0,
+    "classification": "observed divergence families attributed to floating-point execution paths",
+    "strict_token_equality": "failed",
+    "semantic_acceptance": "passed within recorded scope"
+  },
   "source_sha256": {
     "Cargo.toml": "0ef15d91225d9bb259b87eed9605fe09b5a432a033ae9804e6ab61020dab121f",
     "pegaflow-core/src/lib.rs": "8fe0f09f184b32b5e152ada69b887b900fb935073d7665a26536976c63dcce5f",
@@ -78,7 +87,7 @@
     "docs/analysis/issue28-qwen35-hybrid-cache-implementation-20261013.md": "8a74b029cfe2796dd13304fa27f01bade4e8237ce8ff23345b319a5568946c67",
     "python/pegaflow/logging_utils.py": "709b6f9a843898faaecbb8ef6ad7ef0a743dd46b72a3b2346ea9ecc760d9fc53",
     "python/tests/test_npu_connector_layer6.py": "ab9215c74a704ff7392c7b001ab0805caed0e72551ddbce489f7799f76982dcf",
-    "docs/analysis/issue28-qwen35-hybrid-cache-acceptance-20261013.md": "0b1f6c3f3ee0b81389a51a6c9690c8c031560cb6b5e3da96a5f3fc4110320bec"
+    "docs/analysis/issue28-qwen35-hybrid-cache-acceptance-20261013.md": "80ddea53cd9f46e482fea65378228f10385b1a976fdfa50bcc70e220e91b8ff7"
   },
   "acceptance": {
     "status": "failed",
