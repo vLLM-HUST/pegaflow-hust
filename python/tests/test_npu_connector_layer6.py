@@ -42,6 +42,7 @@ def _import_resolve_device_id():
 # Test A1: _map_device logic (pure, no imports needed)
 # ---------------------------------------------------------------------------
 
+
 def _map_device(local_id: int, visible: str | None) -> int:
     """Inline copy of _map_device for zero-dependency testing."""
     if not visible:
@@ -96,6 +97,7 @@ class TestMapDevice:
 # Test A2: _resolve_device_id (imports torch; skip if unavailable)
 # ---------------------------------------------------------------------------
 
+
 @pytest.mark.skipif(
     os.environ.get("SKIP_TORCH_TESTS", "") == "1",
     reason="SKIP_TORCH_TESTS=1",
@@ -114,6 +116,7 @@ def test_resolve_device_id_imports():
 # ---------------------------------------------------------------------------
 # Test B: NpuIPCWrapper pickle roundtrip (object structure only)
 # ---------------------------------------------------------------------------
+
 
 class FakeNpuIPCWrapper:
     """A stand-in for NpuIPCWrapper for pure-structure testing.
@@ -353,7 +356,7 @@ class TestDeriveNamespace:
         ns2 = derive_namespace(fake_cfg2, tp_size=2)
 
         assert ns1 == ns2
-        assert len(ns1) == 8
+        assert len(ns1) == 32
         assert all(c in "0123456789abcdef" for c in ns1)
 
     def test_derive_namespace_changes_with_tp_size(self):
@@ -371,10 +374,7 @@ class TestResolveTransferBackend:
         """CUDA MLA defaults to 'kernel'. Pass is_npu=False explicitly to
         prevent NPU auto-detection from overriding the default."""
         _, _, resolve_transfer_backend = _import_common()
-        assert (
-            resolve_transfer_backend(is_mla=True, override=None, is_npu=False)
-            == "kernel"
-        )
+        assert resolve_transfer_backend(is_mla=True, override=None, is_npu=False) == "kernel"
 
     def test_mla_defaults_to_direct_on_npu(self):
         """On NPU systems, MLA must default to 'direct' — kernel is CUDA-only."""
@@ -383,10 +383,7 @@ class TestResolveTransferBackend:
         backend = resolve_transfer_backend(is_mla=True, override=None)
         assert backend in ("direct", "kernel"), f"unexpected backend: {backend}"
         # When explicitly on NPU, must be 'direct'
-        assert (
-            resolve_transfer_backend(is_mla=True, override=None, is_npu=True)
-            == "direct"
-        )
+        assert resolve_transfer_backend(is_mla=True, override=None, is_npu=True) == "direct"
 
     def test_non_mla_defaults_to_direct(self):
         _, _, resolve_transfer_backend = _import_common()
@@ -394,10 +391,7 @@ class TestResolveTransferBackend:
 
     def test_override_wins(self):
         _, _, resolve_transfer_backend = _import_common()
-        assert (
-            resolve_transfer_backend(is_mla=True, override="ascend_direct")
-            == "ascend_direct"
-        )
+        assert resolve_transfer_backend(is_mla=True, override="ascend_direct") == "ascend_direct"
         assert resolve_transfer_backend(is_mla=False, override="kernel") == "kernel"
 
     def test_unknown_override_is_rejected(self):

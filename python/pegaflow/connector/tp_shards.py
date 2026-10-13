@@ -17,12 +17,26 @@ class ShardedQueryReady:
     # recurrent group holds a checkpoint there on every shard, below the
     # attention prefix). Drives boundary re-derivation under token clamps.
     usable_positions: tuple[int, ...] = ()
+    attention_lease_blocks: int = 0
 
 
 class TpShardQueryClient:
     def __init__(self, clients: tuple[EngineRpcClient, ...]):
         self._clients = clients
         self._pending: dict[tuple[str, str], tuple[tuple[bytes, ...], list[QueryReady | None]]] = {}
+        self._membership_pending: dict[
+            tuple[str, str, int], tuple[tuple[bytes, ...], bool, list[QueryReady | None]]
+        ] = {}
+
+    def cancel_membership(self, instance_id: str, req_id: str, group_id: int) -> bool:
+        pending = self._membership_pending.pop((instance_id, req_id, group_id), None)
+        if pending is None:
+            return True
+        released = True
+        for client, result in zip(self._clients, pending[2], strict=True):
+            if result is not None:
+                released = self._release_one(client, result.lease, req_id) and released
+        return released
 
     def cancel_pending(self, instance_id: str, req_id: str) -> bool:
         pending = self._pending.pop((instance_id, req_id), None)
@@ -122,36 +136,50 @@ class TpShardQueryClient:
         block_hashes: list[bytes],
         req_id: str,
         group_id: int,
-    ) -> list[tuple[tuple[int, ...], bytes]]:
+        *,
+        prefetch: bool = False,
+    ) -> list[tuple[tuple[int, ...], bytes]] | None:
         """Per-shard membership query over one hybrid storage group.
 
         Returns ``(hit_positions, lease)`` per shard; the lease pins exactly
-        the hit blocks in positions order. Membership queries are local-only,
-        so every shard answers Ready immediately (never Loading).
+        the hit blocks in positions order. A single-checkpoint remote probe
+        retains completed shard leases while its siblings are Loading.
         """
-        results: list[tuple[tuple[int, ...], bytes]] = []
+        if prefetch and len(block_hashes) != 1:
+            raise ValueError("remote membership prefetch requires one checkpoint hash")
+        key = (instance_id, req_id, group_id)
+        identity = tuple(block_hashes)
+        pending = self._membership_pending.get(key)
+        if pending is not None and (pending[0] != identity or pending[1] != prefetch):
+            self.cancel_membership(instance_id, req_id, group_id)
+            pending = None
+        cached = pending[2] if pending is not None else [None] * len(self._clients)
+        self._membership_pending[key] = (identity, prefetch, cached)
         try:
             for shard_index, client in enumerate(self._clients):
-                result = client.query_prefetch(
-                    instance_id,
-                    block_hashes,
-                    req_id=req_id,
-                    group_id=group_id,
-                )
-                if isinstance(result, QueryLoading):
-                    raise RuntimeError(
-                        f"TP shard {shard_index} membership query for group {group_id} "
-                        "returned Loading; membership queries are local-only"
+                result = cached[shard_index]
+                if result is None:
+                    result = client.query_prefetch(
+                        instance_id,
+                        block_hashes,
+                        req_id=req_id,
+                        group_id=group_id,
+                        wait_for_full_prefix=prefetch,
                     )
+                if isinstance(result, QueryLoading):
+                    if prefetch:
+                        return None
+                    raise RuntimeError("local membership query returned Loading")
                 if not isinstance(result, QueryReady):
                     raise TypeError(f"query_prefetch returned unexpected outcome {type(result)!r}")
+                cached[shard_index] = result
                 positions = tuple(result.hit_positions)
                 if len(positions) != result.num_hit_blocks:
                     raise RuntimeError(
                         f"TP shard {shard_index} reported {result.num_hit_blocks} hits "
                         f"but returned {len(positions)} positions"
                     )
-                if any(position >= len(block_hashes) for position in positions):
+                if any(position < 0 or position >= len(block_hashes) for position in positions):
                     raise RuntimeError(
                         f"TP shard {shard_index} returned hit positions outside "
                         f"a {len(block_hashes)}-hash query"
@@ -160,11 +188,17 @@ class TpShardQueryClient:
                     raise RuntimeError(
                         f"TP shard {shard_index} returned {len(positions)} hits without a lease"
                     )
-                results.append((positions, result.lease))
+                if positions != tuple(sorted(set(positions))):
+                    raise RuntimeError("membership hit positions must be unique and sorted")
+                if not positions and result.lease:
+                    raise RuntimeError("membership miss must not return a lease")
         except Exception:
-            self.release(tuple(lease for _, lease in results), req_id)
+            self.cancel_membership(instance_id, req_id, group_id)
             raise
-        return results
+        self._membership_pending.pop(key, None)
+        return [
+            (tuple(result.hit_positions), result.lease) for result in cached if result is not None
+        ]
 
     def release(self, leases: tuple[bytes, ...], req_id: str) -> bool:
         released = True

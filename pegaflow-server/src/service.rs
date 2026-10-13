@@ -579,7 +579,38 @@ impl Engine for GrpcEngineService {
                 req.block_hashes.len()
             );
 
-            let outcome = if req.group_id > 0 {
+            let outcome = if req.group_id > 0 && req.wait_for_full_prefix {
+                let status = self
+                    .engine
+                    .query_group_checkpoint_with_prefetch(
+                        &req.instance_id,
+                        &req.req_id,
+                        req.group_id,
+                        &req.block_hashes,
+                    )
+                    .await
+                    .map_err(Self::map_engine_error)?;
+                match status {
+                    PrefetchStatus::Loading => query_response::Outcome::Loading(QueryLoading {}),
+                    PrefetchStatus::Ready { blocks, .. } => {
+                        let hit = blocks.len();
+                        let lease = if blocks.is_empty() {
+                            Vec::new()
+                        } else {
+                            self.engine
+                                .create_query_lease(&req.instance_id, blocks)
+                                .map_err(Self::map_engine_error)?
+                                .to_bytes()
+                                .to_vec()
+                        };
+                        query_response::Outcome::Ready(QueryReady {
+                            num_hit_blocks: hit as u64,
+                            lease,
+                            hit_positions: (0..hit as u32).collect(),
+                        })
+                    }
+                }
+            } else if req.group_id > 0 {
                 let hits = self
                     .engine
                     .query_group_membership(&req.instance_id, req.group_id, &req.block_hashes)

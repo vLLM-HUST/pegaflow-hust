@@ -15,6 +15,7 @@ mod allocator;
 mod backing;
 mod block;
 mod cache;
+mod checkpoint;
 pub mod device;
 mod gpu_worker;
 mod instance;
@@ -591,6 +592,33 @@ impl PegaEngine {
             .map(|hash| group_hash(hash, group_id))
             .collect();
         Ok(self.storage.get_membership(instance.namespace(), &encoded))
+    }
+
+    /// Fetch one sparse checkpoint without imposing a dense-prefix requirement.
+    pub async fn query_group_checkpoint_with_prefetch(
+        &self,
+        instance_id: &str,
+        req_id: &str,
+        group_id: u32,
+        block_hashes: &[Vec<u8>],
+    ) -> Result<PrefetchStatus, EngineError> {
+        if group_id == 0 || block_hashes.len() != 1 {
+            return Err(EngineError::InvalidArgument(
+                "checkpoint prefetch requires a nonzero group and exactly one hash".into(),
+            ));
+        }
+        let instance = self.get_instance(instance_id)?;
+        instance.sealed_topology()?.group_total_slots(group_id)?;
+        let encoded = group_hash(&block_hashes[0], group_id);
+        let scoped_req_id = checkpoint::checkpoint_request_id(
+            instance_id,
+            instance.namespace(),
+            req_id,
+            group_id,
+            &encoded,
+        );
+        self.count_prefix_hit_blocks_with_prefetch(instance_id, &scoped_req_id, &[encoded])
+            .await
     }
 
     /// Create an opaque lease that owns query-ready blocks.

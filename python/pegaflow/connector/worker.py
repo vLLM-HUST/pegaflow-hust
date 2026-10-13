@@ -20,6 +20,7 @@ from pegaflow.connector.common import (
     ConnectorContext,
     PegaConnectorMetadata,
     PegaKVConnectorStats,
+    PegaWorkerMetadata,
     SaveIntent,
     logger,
     parse_env_int,
@@ -73,6 +74,7 @@ def _infer_kv_cache_registration(
     *,
     is_mla: bool = False,
     is_recurrent_state: bool = False,
+    is_attention_plane: bool = False,
 ) -> _KVCacheRegistrationInfo:
     """Infer the PegaFlow registration from a vLLM KV cache tensor.
 
@@ -90,13 +92,27 @@ def _infer_kv_cache_registration(
     if logical_block_size <= 0:
         raise ValueError(f"logical block size must be > 0, got {logical_block_size}")
 
+    if not shape or len(shape) != len(stride) or any(value < 0 for value in stride):
+        raise ValueError(f"Invalid cache tensor layout: shape={shape} stride={stride}")
+
     if is_recurrent_state or not is_mla:
-        if not is_recurrent_state and len(shape) >= 2 and shape[0] == 2:
+        token_axis = None
+        if is_recurrent_state or is_attention_plane:
+            layout = "blocks-first"
+            num_blocks = shape[0]
+            bytes_per_block = stride[0] * element_size
+            kv_stride_bytes = 0
+            segments = 1
+            if is_attention_plane and len(shape) >= 3:
+                token_axis = 1
+        elif len(shape) >= 2 and shape[0] == 2:
             layout = "KV-first"
             num_blocks = shape[1]
             bytes_per_block = stride[1] * element_size
             kv_stride_bytes = stride[0] * element_size
             segments = 2
+            if len(shape) >= 4:
+                token_axis = 2
         elif len(shape) >= 2 and shape[1] == 2 and stride[1] > stride[0]:
             # vLLM's standardized LHBNC layout exposes one layer as logical
             # [B, 2, N, C], but stores it physically as [2, B, N, C].  All K
@@ -108,25 +124,45 @@ def _infer_kv_cache_registration(
             bytes_per_block = stride[0] * element_size
             kv_stride_bytes = stride[1] * element_size
             segments = 2
+            if len(shape) >= 4:
+                token_axis = 2
         else:
             layout = "blocks-first"
             num_blocks = shape[0]
             bytes_per_block = stride[0] * element_size
             kv_stride_bytes = 0
             segments = 1
+            if len(shape) == 6 and shape[2] == 2:
+                token_axis = 3  # cross-layer [B, L, 2, N, H, D]
+            elif len(shape) >= 4:
+                token_axis = 2 if shape[1] == 2 else 1
+            elif len(shape) == 3 and shape[1] != 2:
+                token_axis = 1
 
         if num_blocks <= 0:
             raise ValueError(f"physical block count must be > 0, got {num_blocks}")
         if bytes_per_block == 0:
             raise ValueError(f"Invalid bytes_per_block: shape={shape} stride={stride}")
 
+        physical_tokens = shape[token_axis] if token_axis is not None else logical_block_size
+        if physical_tokens <= 0 or logical_block_size % physical_tokens:
+            raise ValueError(
+                "logical block size must be a multiple of physical block size "
+                f"(logical={logical_block_size}, physical={physical_tokens})"
+            )
+        ratio = logical_block_size // physical_tokens
+        if num_blocks % ratio:
+            raise ValueError(
+                "physical block count must be divisible by physical/logical split ratio "
+                f"(physical_blocks={num_blocks}, ratio={ratio})"
+            )
         return _KVCacheRegistrationInfo(
             layout=layout,
-            num_blocks=num_blocks,
-            bytes_per_block=bytes_per_block,
+            num_blocks=num_blocks // ratio,
+            bytes_per_block=bytes_per_block * ratio,
             kv_stride_bytes=kv_stride_bytes,
             segments=segments,
-            physical_blocks_per_logical_block=1,
+            physical_blocks_per_logical_block=ratio,
         )
 
     layout = "blocks-first"
@@ -224,9 +260,7 @@ def _expand_hybrid_registration_caches(
             continue
 
         if not cache or not all(isinstance(segment, torch.Tensor) for segment in cache):
-            raise TypeError(
-                f"KV cache for {layer_name} must be a non-empty sequence of tensors"
-            )
+            raise TypeError(f"KV cache for {layer_name} must be a non-empty sequence of tensors")
         kind = "state" if layer_name in recurrent_layer_names else "segment"
         for index, segment in enumerate(cache):
             registration_name = f"{layer_name}::{kind}{index}"
@@ -271,17 +305,19 @@ class WorkerConnector:
 
         self._req_pending_save_tasks: dict[str, int] = {}
         self._completed_saves: set[str] = set()
+        self._completed_save_tickets: dict[tuple[str, int], set[tuple[int, int]]] = {}
         self._failed_saves: dict[str, str] = {}
         self._save_completion_lock = threading.Lock()
         self._save_completion_events: dict[str, threading.Event] = {}
-        self._sync_save_on_finish = os.environ.get("PEGAFLOW_SYNC_SAVE_ON_FINISH", "0") == "1"
+        self._sync_save_on_finish = (
+            self._cache_groups.has_recurrent_state
+            or os.environ.get("PEGAFLOW_SYNC_SAVE_ON_FINISH", "0") == "1"
+        )
         ack_dir = os.environ.get("PEGAFLOW_SAVE_ACK_DIR", "").strip()
         self._save_ack_dir = Path(ack_dir) if ack_dir else None
         if self._save_ack_dir is not None:
             if not self._sync_save_on_finish:
-                raise RuntimeError(
-                    "PEGAFLOW_SAVE_ACK_DIR requires PEGAFLOW_SYNC_SAVE_ON_FINISH=1"
-                )
+                raise RuntimeError("PEGAFLOW_SAVE_ACK_DIR requires PEGAFLOW_SYNC_SAVE_ON_FINISH=1")
             self._save_ack_dir.mkdir(parents=True, exist_ok=True)
         self._current_metadata: PegaConnectorMetadata | None = None
 
@@ -316,6 +352,8 @@ class WorkerConnector:
         self._diag_kv_checksum = os.environ.get("PEGA_DIAG_KV_CHECKSUM", "0") == "1"
         self._diag_kv_all_layers = os.environ.get("PEGA_DIAG_KV_CHECKSUM_LAYERS", "first") == "all"
         self._diag_kv_caches: dict[str, torch.Tensor] = {}
+        self._cache_registrations: dict[str, _KVCacheRegistrationInfo] = {}
+        self._pending_load_diag: dict[str, tuple[list[int], ...]] = {}
 
         self._finished_requests: set[str] = set()
 
@@ -446,9 +484,7 @@ class WorkerConnector:
         split_logical_blocks = 0
 
         for layer_name, kv_cache in kv_caches.items():
-            is_recurrent_state = (
-                layer_name in recurrent_registration_names
-            )
+            is_recurrent_state = layer_name in recurrent_registration_names
             registration_tensor = _registration_tensor(kv_cache)
             # DeepSeek-V4 hybrid layers expose views with non-zero storage
             # offsets (shared storage). NpuIPCWrapper preserves storage_offset,
@@ -457,20 +493,45 @@ class WorkerConnector:
                 logger.warning(
                     "[PegaKVConnector] layer %s storage_offset=%d (DeepSeek-V4 "
                     "shared storage) — preserved via wrapper.",
-                    layer_name, registration_tensor.storage_offset(),
+                    layer_name,
+                    registration_tensor.storage_offset(),
                 )
 
             _factory = _resolve_ipc_wrapper_factory(registration_tensor.device)
             wrapper = _factory(registration_tensor)
             wrapper_bytes = pickle.dumps(wrapper)
 
+            logical_block_size = (
+                self._cache_groups.group_block_sizes[self._layer_to_group[layer_name]]
+                if self._cache_groups.group_block_sizes
+                else self._ctx.block_size
+            )
             registration = _infer_kv_cache_registration(
                 registration_tensor,
-                self._ctx.block_size,
+                logical_block_size,
                 is_mla=self._ctx.is_mla,
                 is_recurrent_state=is_recurrent_state,
+                is_attention_plane="::segment" in layer_name,
             )
             layout = registration.layout
+            self._cache_registrations[layer_name] = registration
+            logger.info(
+                "[PegaKVConnector] cache_registration: layer=%s group=%d storage_group=%d "
+                "shape=%s stride=%s dtype=%s storage_offset=%s logical_tokens=%d "
+                "logical_blocks=%d bytes_per_block=%d segments=%d physical_rows_per_block=%d",
+                layer_name,
+                self._layer_to_group.get(layer_name, 0),
+                self._cache_groups.storage_group_ids[self._layer_to_group.get(layer_name, 0)],
+                tuple(registration_tensor.shape),
+                tuple(registration_tensor.stride()),
+                getattr(registration_tensor, "dtype", None),
+                registration_tensor.storage_offset(),
+                logical_block_size,
+                registration.num_blocks,
+                registration.bytes_per_block,
+                registration.segments,
+                registration.physical_blocks_per_logical_block,
+            )
 
             layer_names.append(layer_name)
             ipc_wrappers.append(wrapper_bytes)
@@ -487,7 +548,7 @@ class WorkerConnector:
                     "[PegaKVConnector] Registered %s with virtual block split: "
                     "logical_block_size=%d physical_blocks_per_logical=%d logical_blocks=%d",
                     layer_name,
-                    self._ctx.block_size,
+                    logical_block_size,
                     registration.physical_blocks_per_logical_block,
                     registration.num_blocks,
                 )
@@ -513,9 +574,6 @@ class WorkerConnector:
             layer_segments,
             self._ctx.transfer_backend,
             self._page_first,
-            # layer_group_ids (PR #433) requires the rust server's
-            # RegisterContextRequest support — not yet in this fork's rust
-            # side. Degraded to single-group registration for now (T6).
             layer_group_ids=layer_group_ids,
         )
 
@@ -588,8 +646,7 @@ class WorkerConnector:
                 }
             if failed_saves:
                 details = "; ".join(
-                    f"request={req_id}: {error}"
-                    for req_id, error in sorted(failed_saves.items())
+                    f"request={req_id}: {error}" for req_id, error in sorted(failed_saves.items())
                 )
                 raise RuntimeError(f"visible save failed: {details}")
 
@@ -616,7 +673,7 @@ class WorkerConnector:
 
         timeout_triggered = False
         load_stats_to_record: list[tuple[float, int, bool]] = []
-        completed_load_checksums: list[tuple[list[str], list[int]]] = []
+        completed_load_checksums: list[tuple[list[str], tuple[list[int], ...]]] = []
         hma_load_failure: str | None = None
         with self._load_completion_lock:
             completed_reqs: set[str] = set()
@@ -657,7 +714,10 @@ class WorkerConnector:
                         )
                         if self._diag_kv_checksum and meta is not None:
                             completed_load_checksums.append(
-                                (sorted(req_ids), list(meta[2]))
+                                (
+                                    sorted(req_ids),
+                                    self._pending_load_diag.get(shm_name, (list(meta[2]),)),
+                                )
                             )
 
                     if meta is not None:
@@ -693,6 +753,7 @@ class WorkerConnector:
             for shm_name in completed_shms:
                 shm_req_ids = self._pending_load_reqs.pop(shm_name, set())
                 self._pending_load_meta.pop(shm_name, None)
+                self._pending_load_diag.pop(shm_name, None)
                 for req_id in shm_req_ids:
                     self._pending_loads.pop(req_id, None)
 
@@ -711,8 +772,15 @@ class WorkerConnector:
                 for duration, num_blocks, success in load_stats_to_record:
                     self._stats.record_load(duration, num_blocks, success)
 
-        for req_ids, block_ids in completed_load_checksums:
-            self._log_diag_kv_checksums("load", req_ids, block_ids)
+        for req_ids, ids_by_group in completed_load_checksums:
+            selected_layers = (
+                self._registered_layers if self._diag_kv_all_layers else self._registered_layers[:1]
+            )
+            for layer_name in selected_layers:
+                group = self._layer_to_group.get(layer_name, 0)
+                self._log_diag_kv_checksums(
+                    "load", req_ids, ids_by_group[group], layer_name=layer_name
+                )
 
         if hma_load_failure is not None:
             self._ctx.state_manager.mark_unavailable(hma_load_failure)
@@ -744,7 +812,7 @@ class WorkerConnector:
         if metadata.ready_save_intents:
             if not self._cache_groups.has_recurrent_state:
                 raise RuntimeError("ready save intents are only valid for HMA")
-            self._process_save_batch([self._make_save_task(metadata.ready_save_intents)])
+            self._process_hma_save_task(self._make_save_task(metadata.ready_save_intents))
 
         if not metadata.load_intents:
             return
@@ -770,6 +838,15 @@ class WorkerConnector:
                 # recurrent destinations travel with the membership leases.
                 for group_index in recurrent_groups:
                     block_ids_by_group[group_index] = [None] * len(block_ids_by_group[group_index])
+                lease_count = load_intent.attention_lease_blocks or len(
+                    block_ids_by_group[self._cache_groups.hash_group_index]
+                )
+                for group_index, destinations in enumerate(block_ids_by_group):
+                    if len(destinations) > lease_count:
+                        raise RuntimeError(f"req {req_id}: destinations exceed attention lease")
+                    block_ids_by_group[group_index] = destinations + [None] * (
+                        lease_count - len(destinations)
+                    )
             elif self._cache_groups.group_count > 1:
                 # Non-recurrent heterogeneous groups save and seal under their
                 # own storage ids but do not have checkpoint semantics, so
@@ -898,6 +975,16 @@ class WorkerConnector:
                 num_blocks,
                 all_block_ids,
             )
+            if self._diag_kv_checksum:
+                self._pending_load_diag[shm_name] = tuple(
+                    [
+                        block_id
+                        for _, vectors in loads
+                        for block_id in vectors[group]
+                        if block_id is not None
+                    ]
+                    for group in range(self._cache_groups.group_count)
+                )
 
         logger.debug(
             "[PegaKVConnector] started async load: %d blocks across %d layers for %d reqs, "
@@ -971,6 +1058,10 @@ class WorkerConnector:
             return
         if self._diag_kv_checksum:
             self._log_diag_attention_metadata(layer_name, attn_metadata)
+        if self._cache_groups.has_recurrent_state:
+            # A hybrid checkpoint spans every attention and recurrent layer.
+            # The runner's finalization hook must observe the completed forward.
+            return
         # Delegate to wait_for_save so all save logic stays in one place.
         # Guard with a flag to avoid double-submission when an Ascend backend
         # is patched to call both save_kv_layer and wait_for_save.
@@ -998,9 +1089,37 @@ class WorkerConnector:
             # Align-mode recurrent states can reuse their only live block on
             # the next scheduler step. Finish D2H before returning so the
             # saved boundary state cannot be overwritten underneath the copy.
-            self._process_save_batch([task])
+            self._process_hma_save_task(task)
         else:
             self._save_queue.put(task)
+
+    def _process_hma_save_task(self, task: SaveTask) -> None:
+        try:
+            self._process_save_batch([task])
+        except Exception as exc:
+            self._complete_save_requests(task.request_ids, failure=str(exc))
+            self._ctx.state_manager.mark_unavailable(f"HMA save failed: {exc}")
+            raise
+        with self._save_completion_lock:
+            failures = {req_id: self._failed_saves.get(req_id) for req_id in task.request_ids}
+        if any(failures.values()):
+            details = "; ".join(f"{req_id}: {error}" for req_id, error in failures.items() if error)
+            self._ctx.state_manager.mark_unavailable(f"HMA save failed: {details}")
+            raise RuntimeError(f"PegaFlow HMA save failed: {details}")
+        with self._save_completion_lock:
+            for req_id, intent in task.metadata.save_intents.items():
+                if intent.save_ticket:
+                    if self._ctx.tp_rank is None:
+                        raise RuntimeError("HMA save acknowledgement requires a physical TP rank")
+                    self._completed_save_tickets[(req_id, intent.save_ticket)] = {
+                        (self._ctx.pp_rank, self._ctx.tp_rank)
+                    }
+
+    def build_connector_worker_meta(self) -> PegaWorkerMetadata | None:
+        with self._save_completion_lock:
+            tickets = self._completed_save_tickets
+            self._completed_save_tickets = {}
+        return PegaWorkerMetadata(tickets) if tickets else None
 
     def _make_save_task(self, save_intents: dict[str, SaveIntent]) -> SaveTask:
         request_ids = list(save_intents)
@@ -1025,8 +1144,7 @@ class WorkerConnector:
                 }
             if prior_failures:
                 details = "; ".join(
-                    f"request={req_id}: {error}"
-                    for req_id, error in sorted(prior_failures.items())
+                    f"request={req_id}: {error}" for req_id, error in sorted(prior_failures.items())
                 )
                 raise RuntimeError(f"prior visible save failed: {details}")
 
@@ -1106,6 +1224,11 @@ class WorkerConnector:
                         ) from exc
                     block_hashes = save_intent.block_hashes
                     if len(block_ids) != len(block_hashes):
+                        if self._cache_groups.has_recurrent_state:
+                            raise RuntimeError(
+                                f"HMA save block/hash count mismatch for {layer_name}: "
+                                f"blocks={len(block_ids)} hashes={len(block_hashes)}"
+                            )
                         if len(block_ids) < len(block_hashes) or (
                             group_index != self._cache_groups.hash_group_index
                         ):
@@ -1170,7 +1293,9 @@ class WorkerConnector:
                     selected_layers = selected_layers[:1]
                 for selected_layer in selected_layers:
                     self._log_diag_kv_checksums(
-                        "save", all_request_ids, saves_by_layer[selected_layer][0],
+                        "save",
+                        all_request_ids,
+                        saves_by_layer[selected_layer][0],
                         layer_name=selected_layer,
                     )
 
@@ -1184,7 +1309,9 @@ class WorkerConnector:
                 logger.info(
                     "[PegaKVConnector.DEBUG] _process_save_batch: layers=%d total_blocks=%d "
                     "reqs=%s",
-                    len(saves_list), total_blocks, all_request_ids,
+                    len(saves_list),
+                    total_blocks,
+                    all_request_ids,
                 )
 
             save_start = time.perf_counter()
@@ -1223,8 +1350,7 @@ class WorkerConnector:
             with self._stats_lock:
                 self._stats.record_save(save_duration, total_blocks, success)
 
-        # Normal serving preserves the historical best-effort behavior. The
-        # experiment's synchronous mode surfaces failures to get_finished.
+        # Publication barriers surface failures before a hybrid state is reused.
         self._complete_save_requests(all_request_ids, failure=save_failure)
 
     @staticmethod
@@ -1236,21 +1362,15 @@ class WorkerConnector:
             or len(suffix) != 8
             or any(character not in "0123456789abcdefABCDEF" for character in suffix)
         ):
-            raise RuntimeError(
-                f"request id {raw_request_id!r} lacks the frozen vLLM suffix"
-            )
+            raise RuntimeError(f"request id {raw_request_id!r} lacks the frozen vLLM suffix")
         stable_request_id = prefix.removesuffix("-0")
         if stable_request_id == prefix or not stable_request_id:
-            raise RuntimeError(
-                f"request id {raw_request_id!r} lacks the frozen completion index"
-            )
+            raise RuntimeError(f"request id {raw_request_id!r} lacks the frozen completion index")
         if any(
             not (character.isascii() and (character.isalnum() or character in "._-"))
             for character in stable_request_id
         ):
-            raise RuntimeError(
-                f"request id {raw_request_id!r} is unsafe for a visibility marker"
-            )
+            raise RuntimeError(f"request id {raw_request_id!r} is unsafe for a visibility marker")
         return stable_request_id
 
     def _write_save_ack(self, raw_request_id: str) -> None:
@@ -1293,9 +1413,13 @@ class WorkerConnector:
         if layer_name is None:
             if not self._registered_layers:
                 return
-            selected_layers = self._registered_layers if self._diag_kv_all_layers else self._registered_layers[:1]
+            selected_layers = (
+                self._registered_layers if self._diag_kv_all_layers else self._registered_layers[:1]
+            )
             for selected_layer in selected_layers:
-                self._log_diag_kv_checksums(event, request_ids, block_ids, layer_name=selected_layer)
+                self._log_diag_kv_checksums(
+                    event, request_ids, block_ids, layer_name=selected_layer
+                )
             return
         kv_cache = self._diag_kv_caches.get(layer_name)
         if kv_cache is None:
@@ -1312,14 +1436,16 @@ class WorkerConnector:
             _device_synchronize(self._torch_device)
             checksums = []
             for block_id in block_ids:
+                registration = self._cache_registrations.get(layer_name)
+                ratio = registration.physical_blocks_per_logical_block if registration else 1
+                rows = slice(block_id * ratio, (block_id + 1) * ratio)
+                block = (
+                    kv_cache[:, rows]
+                    if registration and registration.layout == "KV-first"
+                    else kv_cache[rows]
+                )
                 host_bytes = (
-                    kv_cache[block_id]
-                    .detach()
-                    .to("cpu")
-                    .contiguous()
-                    .view(torch.uint8)
-                    .numpy()
-                    .tobytes()
+                    block.detach().to("cpu").contiguous().view(torch.uint8).numpy().tobytes()
                 )
                 checksums.append((block_id, hashlib.sha256(host_bytes).hexdigest()))
             logger.info(
@@ -1350,7 +1476,8 @@ class WorkerConnector:
             logger.info(
                 "[PegaKVConnector.ATTN_DIAG] layer=%s tokens=%s state=%s "
                 "seq_lens=%s query_start=%s block_tables=%s slot_head=%s slot_tail=%s",
-                layer_name, metadata.num_actual_tokens,
+                layer_name,
+                metadata.num_actual_tokens,
                 str(getattr(metadata, "attn_state", None)),
                 getattr(metadata, "seq_lens_list", None),
                 metadata.query_start_loc.detach().cpu().tolist(),
@@ -1361,9 +1488,7 @@ class WorkerConnector:
         except Exception:
             logger.exception("[PegaKVConnector.ATTN_DIAG] failed layer=%s", layer_name)
 
-    def _complete_save_requests(
-        self, request_ids: list[str], failure: str | None = None
-    ) -> None:
+    def _complete_save_requests(self, request_ids: list[str], failure: str | None = None) -> None:
         completed_reqs: list[str] = []
 
         with self._save_completion_lock:
@@ -1499,8 +1624,7 @@ def _resolve_ipc_wrapper_factory(device: torch.device):
     if device.type == "npu":
         return lambda tensor: NpuIPCWrapper(tensor)
     raise RuntimeError(
-        f"Unsupported device type '{device.type}'. "
-        "PegaFlow requires CUDA or Ascend NPU."
+        f"Unsupported device type '{device.type}'. PegaFlow requires CUDA or Ascend NPU."
     )
 
 

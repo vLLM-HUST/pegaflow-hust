@@ -5,11 +5,14 @@ Shared types and helpers for the PegaFlow vLLM connector.
 import hashlib
 import os
 import uuid
-from dataclasses import dataclass
+from dataclasses import dataclass, field
 from enum import Enum
 from typing import TYPE_CHECKING
 
-from vllm.distributed.kv_transfer.kv_connector.v1.base import KVConnectorMetadata
+from vllm.distributed.kv_transfer.kv_connector.v1.base import (
+    KVConnectorMetadata,
+    KVConnectorWorkerMetadata,
+)
 
 from pegaflow.connector.connector_metrics import PegaKVConnectorStats, PegaPromMetrics
 from pegaflow.logging_utils import get_connector_logger
@@ -224,6 +227,7 @@ class LoadIntent:
     block_ids_by_group: tuple[tuple[int | None, ...], ...]
     leases: tuple[bytes, ...]
     num_tokens: int
+    attention_lease_blocks: int = 0
 
     def __init__(
         self,
@@ -234,6 +238,7 @@ class LoadIntent:
         block_ids=None,
         lease=None,
         recurrent_hold=None,
+        attention_lease_blocks=0,
     ):
         # Legacy call shape: flat block_ids + singular lease (pre-cache-group).
         if block_ids_by_group is None:
@@ -244,6 +249,8 @@ class LoadIntent:
         object.__setattr__(self, "leases", leases)
         object.__setattr__(self, "num_tokens", num_tokens)
         object.__setattr__(self, "recurrent_hold", recurrent_hold)
+        object.__setattr__(self, "attention_lease_blocks", attention_lease_blocks)
+
     # Hybrid-cache loads carry one membership lease per recurrent storage
     # group (pinned checkpoints in hit-positions order) on top of the
     # attention prefix leases. See RecurrentLoadHold.
@@ -311,6 +318,7 @@ class SaveIntent:
 
     block_ids_by_group: tuple[tuple[int, ...], ...]
     block_hashes: tuple[bytes, ...]
+    save_ticket: int = 0
 
     def __init__(
         self,
@@ -318,6 +326,7 @@ class SaveIntent:
         block_ids_by_group=None,
         block_hashes=(),
         block_ids=None,
+        save_ticket=0,
     ):
         # Legacy call shape: flat block_ids (pre-cache-group). Wrapped as a
         # single group for the hash group's compatibility view.
@@ -325,6 +334,7 @@ class SaveIntent:
             block_ids_by_group = (tuple(block_ids),) if block_ids is not None else ()
         object.__setattr__(self, "block_ids_by_group", block_ids_by_group)
         object.__setattr__(self, "block_hashes", block_hashes)
+        object.__setattr__(self, "save_ticket", save_ticket)
 
     @property
     def block_ids(self) -> tuple[int, ...]:
@@ -339,9 +349,8 @@ class CacheGroupLayout:
     """Stable vLLM cache-group order shared by scheduler and worker.
 
     `storage_group_ids` maps each connector cache group onto the engine's
-    hybrid storage groups: every attention-like group shares storage group 0
-    (prefix cadence, raw hash keys), while each recurrent group gets its own
-    id starting at 1 (membership semantics, group-encoded keys).
+    storage groups: the attention hash group has id 0 (prefix cadence, raw
+    hash keys). Other groups have independent dense ids and seal domains.
     """
 
     layer_names: tuple[tuple[str, ...], ...]
@@ -385,11 +394,10 @@ class CacheGroupLayout:
             class _NeverMatch:  # noqa: N801
                 pass
 
-            FullAttentionSpec = MLAAttentionSpec = SlidingWindowSpec = (
-                UniformTypeKVCacheSpecs
-            ) = _MissingVLLM
+            FullAttentionSpec = MLAAttentionSpec = SlidingWindowSpec = UniformTypeKVCacheSpecs = (
+                _MissingVLLM
+            )
             MambaSpec = _NeverMatch
-
 
         specs = tuple(group.kv_cache_spec for group in groups)
         if len(specs) == 1:
@@ -404,7 +412,9 @@ class CacheGroupLayout:
             )
             if (
                 type(spec) not in (FullAttentionSpec, MLAAttentionSpec)
-                and not isinstance(spec, SlidingWindowSpec)  # DeepSeek-V4 HCA (SlidingWindowMLASpec)
+                and not isinstance(
+                    spec, SlidingWindowSpec
+                )  # DeepSeek-V4 HCA (SlidingWindowMLASpec)
                 and not is_uniform_mla
                 and not isinstance(spec, UniformTypeKVCacheSpecs)  # DeepSeek-V4 packed groups
             ):
@@ -422,7 +432,8 @@ class CacheGroupLayout:
                     logger.warning(
                         "[PegaKVConnector] HMA group spec %s not in (FullAttention, "
                         "SlidingWindow, Mamba) — accepting optimistically for "
-                        "DeepSeek-V4 (T6).", type(_spec).__name__
+                        "DeepSeek-V4 (T6).",
+                        type(_spec).__name__,
                     )
 
             has_full_attention = any(_hmma_is_full_attention_group(spec) for spec in specs)
@@ -435,8 +446,7 @@ class CacheGroupLayout:
             # Mamba pair is required only when a Mamba group exists; dense +
             # sliding-window hybrids (DeepSeek-V4) have no Mamba group.
             if not has_mamba and not any(
-                isinstance(spec, (SlidingWindowSpec, UniformTypeKVCacheSpecs))
-                for spec in specs
+                isinstance(spec, (SlidingWindowSpec, UniformTypeKVCacheSpecs)) for spec in specs
             ):
                 logger.warning(
                     "[PegaKVConnector] HMA group layout lacks both Mamba and "
@@ -457,8 +467,12 @@ class CacheGroupLayout:
 
         try:
             with open("/tmp/pegaflow-hash-debug.log", "a") as _f:
-                _f.write(f"groups={len(groups)} types={[type(g.kv_cache_spec).__name__ for g in groups]}\n")
-                _f.write(f"inner={[list(g.kv_cache_spec.kv_cache_specs.values())[0] if hasattr(g.kv_cache_spec,'kv_cache_specs') and g.kv_cache_spec.kv_cache_specs else None for g in groups]}\n")
+                _f.write(
+                    f"groups={len(groups)} types={[type(g.kv_cache_spec).__name__ for g in groups]}\n"
+                )
+                _f.write(
+                    f"inner={[list(g.kv_cache_spec.kv_cache_specs.values())[0] if hasattr(g.kv_cache_spec, 'kv_cache_specs') and g.kv_cache_spec.kv_cache_specs else None for g in groups]}\n"
+                )
         except Exception:  # debug log must never break registration
             pass
         hash_group_index = (
@@ -496,7 +510,17 @@ class CacheGroupLayout:
         # give each group an independent seal domain (rust `group_total_slots`).
         # Engine keys are raw only for group 0, so single-group deployments
         # stay bit-identical.
-        storage_group_ids = tuple(range(len(groups)))
+        storage_order = (hash_group_index,) + tuple(
+            index for index in range(len(groups)) if index != hash_group_index
+        )
+        storage_group_ids = tuple(storage_order.index(index) for index in range(len(groups)))
+        if recurrent_group_indices:
+            if hash_group_index in recurrent_group_indices:
+                raise RuntimeError("HMA requires an attention prefix group")
+            if set(range(len(groups))) - recurrent_group_indices != {hash_group_index}:
+                raise RuntimeError("HMA supports one attention group and recurrent groups")
+            if len(block_sizes) != 1:
+                raise RuntimeError("HMA recurrent groups require a common logical block size")
 
         return cls(
             layer_names=tuple(tuple(group.layer_names) for group in groups),
@@ -510,9 +534,7 @@ class CacheGroupLayout:
                 for layer_name in group.layer_names
             ),
             storage_group_ids=storage_group_ids,
-            group_block_sizes=tuple(
-                group.kv_cache_spec.block_size for group in groups
-            ),
+            group_block_sizes=tuple(group.kv_cache_spec.block_size for group in groups),
         )
 
     @property
@@ -531,6 +553,19 @@ class CacheGroupLayout:
     def storage_group_of(self, group_index: int) -> int:
         """Engine storage group id for a connector cache group index."""
         return self.storage_group_ids[group_index]
+
+
+@dataclass
+class PegaWorkerMetadata(KVConnectorWorkerMetadata):
+    saved_tickets: dict[tuple[str, int], set[tuple[int, int]]] = field(default_factory=dict)
+
+    def aggregate(self, other: "PegaWorkerMetadata") -> "PegaWorkerMetadata":
+        if not isinstance(other, PegaWorkerMetadata):
+            raise TypeError("cannot aggregate incompatible PegaFlow worker metadata")
+        combined = {ticket: set(ranks) for ticket, ranks in self.saved_tickets.items()}
+        for ticket, ranks in other.saved_tickets.items():
+            combined.setdefault(ticket, set()).update(ranks)
+        return PegaWorkerMetadata(combined)
 
 
 class PegaConnectorMetadata(KVConnectorMetadata):
@@ -618,6 +653,7 @@ def derive_namespace(
     dcp_world_size: int = 1,
     pcp_world_size: int = 1,
     cross_layer_blocks: bool = False,
+    kv_cache_config=None,
 ) -> str:
     """
     Derive namespace for storage isolation.
@@ -642,6 +678,8 @@ def derive_namespace(
 
     factors = {
         "model": model_config.model,
+        "model_revision": resolve_model_revision(vllm_config),
+        "block_size": getattr(cache_config, "block_size", None),
         "dtype": str(model_config.dtype),
         "tp_size": tp_size,
         "pp_size": vllm_config.parallel_config.pipeline_parallel_size,
@@ -649,6 +687,7 @@ def derive_namespace(
         "head_size": model_config.get_head_size(),
         "num_hidden_layers": model_config.get_total_num_hidden_layers(),
         "cache_dtype": str(cache_config.cache_dtype),
+        "prefix_caching_hash_algo": getattr(cache_config, "prefix_caching_hash_algo", None),
         "is_hma_enabled": not getattr(
             getattr(vllm_config, "scheduler_config", None),
             "disable_hybrid_kv_cache_manager",
@@ -658,11 +697,47 @@ def derive_namespace(
         "pcp_world_size": pcp_world_size,
         "cross_layer_blocks": cross_layer_blocks,
         "mla_layer_split_kv_cache": bool(additional_config.get("mla_layer_split_kv_cache", False)),
+        "cache_groups": tuple(
+            (
+                type(group.kv_cache_spec).__name__,
+                tuple(group.layer_names)
+                if vllm_config.parallel_config.pipeline_parallel_size == 1
+                else (),
+                group.kv_cache_spec.block_size,
+                getattr(group.kv_cache_spec, "page_size_bytes", None),
+                repr(getattr(group.kv_cache_spec, "shapes", ())),
+                repr(getattr(group.kv_cache_spec, "dtypes", ())),
+                str(getattr(group.kv_cache_spec, "dtype", None)),
+                getattr(group.kv_cache_spec, "num_speculative_blocks", 0),
+                getattr(group.kv_cache_spec, "mamba_cache_mode", None),
+            )
+            for group in (getattr(kv_cache_config, "kv_cache_groups", ()) or ())
+        ),
     }
 
     factor_str = str(sorted(factors.items()))
-    hash_suffix = hashlib.sha256(factor_str.encode()).hexdigest()[:8]
+    hash_suffix = hashlib.sha256(factor_str.encode()).hexdigest()[:32]
     return f"{hash_suffix}"
+
+
+def resolve_model_revision(vllm_config) -> str | None:
+    model_config = vllm_config.model_config
+    extra = getattr(vllm_config, "kv_transfer_config", None)
+    explicit = (
+        extra.get_from_extra_config("pegaflow.model_revision", None) if extra is not None else None
+    )
+    for value in (
+        explicit,
+        getattr(getattr(model_config, "hf_config", None), "_commit_hash", None),
+        getattr(model_config, "revision", None),
+    ):
+        if (
+            isinstance(value, str)
+            and value.strip()
+            and value.strip() not in {"main", "master", "latest"}
+        ):
+            return value.strip()
+    return None
 
 
 def detect_mla(vllm_config) -> bool:
@@ -715,6 +790,7 @@ __all__ = [
     "PegaConnectorMetadata",
     "PegaKVConnectorStats",
     "PegaPromMetrics",
+    "PegaWorkerMetadata",
     "RecurrentLoadHold",
     "SaveIntent",
     "TpShardTopology",
@@ -724,6 +800,7 @@ __all__ = [
     "parse_env_int",
     "reconcile_hybrid_hit",
     "resolve_instance_id",
+    "resolve_model_revision",
     "resolve_transfer_backend",
 ]
 
@@ -732,6 +809,7 @@ def _is_npu_available() -> bool:
     """True when torch.npu is importable and reports at least one device."""
     try:
         import torch
+
         return hasattr(torch, "npu") and torch.npu.is_available()
     except Exception:
         return False
@@ -752,10 +830,7 @@ def _hmma_accept_spec(spec) -> bool:
 
     if isinstance(spec, UniformTypeKVCacheSpecs):
         inner = list(spec.kv_cache_specs.values())
-        return all(
-            isinstance(x, (FullAttentionSpec, SlidingWindowSpec, MambaSpec))
-            for x in inner
-        )
+        return all(isinstance(x, (FullAttentionSpec, SlidingWindowSpec, MambaSpec)) for x in inner)
     return isinstance(spec, (FullAttentionSpec, SlidingWindowSpec, MambaSpec))
 
 
@@ -775,4 +850,3 @@ def _hmma_is_full_attention_group(spec) -> bool:
         inner = list(spec.kv_cache_specs.values())
         return bool(inner) and all(isinstance(x, FullAttentionSpec) for x in inner)
     return isinstance(spec, FullAttentionSpec)
-

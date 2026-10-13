@@ -17,6 +17,7 @@ from vllm.distributed.kv_transfer.kv_connector.v1.base import (
 from vllm.distributed.parallel_state import get_pp_group, get_tensor_model_parallel_rank
 
 from pegaflow.connector.common import (
+    CacheGroupLayout,
     ConnectorContext,
     PegaConnectorMetadata,
     PegaConnectorMode,
@@ -27,6 +28,7 @@ from pegaflow.connector.common import (
     detect_mla,
     logger,
     resolve_instance_id,
+    resolve_model_revision,
     resolve_transfer_backend,
 )
 from pegaflow.connector.scheduler import SchedulerConnector
@@ -46,6 +48,12 @@ class PegaKVConnector(KVConnectorBase_V1, SupportsHMA):
         world_size = vllm_config.parallel_config.world_size
         is_mla = detect_mla(vllm_config)
         cache_groups = tuple(getattr(kv_cache_config, "kv_cache_groups", ()) or ())
+        cache_layout = CacheGroupLayout.from_config(kv_cache_config)
+        if cache_layout.has_recurrent_state and resolve_model_revision(vllm_config) is None:
+            raise ValueError(
+                "HMA requires an immutable model identity; set pegaflow.model_revision "
+                "to the local model's pinned revision or weight-manifest digest"
+            )
         collapse_mla_tp = is_mla and len(cache_groups) <= 1
         dcp_world_size = (
             getattr(vllm_config.parallel_config, "decode_context_parallel_size", 1) or 1
@@ -53,6 +61,13 @@ class PegaKVConnector(KVConnectorBase_V1, SupportsHMA):
         pcp_world_size = (
             getattr(vllm_config.parallel_config, "prefill_context_parallel_size", 1) or 1
         )
+        block_size = vllm_config.cache_config.block_size
+        if cache_layout.has_recurrent_state and (
+            dcp_world_size != 1
+            or pcp_world_size != 1
+            or any(size != block_size for size in cache_layout.group_block_sizes)
+        ):
+            raise ValueError("HMA requires equal scheduler/cache-group block sizes and DCP=PCP=1")
         effective_tp_size = max(1, dcp_world_size) if collapse_mla_tp else tp_size
 
         if dcp_world_size > 1 and not is_mla:
@@ -71,9 +86,8 @@ class PegaKVConnector(KVConnectorBase_V1, SupportsHMA):
             dcp_world_size,
             pcp_world_size,
             cross_layer_blocks=cross_layer_blocks,
+            kv_cache_config=kv_cache_config,
         )
-        block_size = vllm_config.cache_config.block_size
-
         tp_rank: int | None = None
         device_id: int | None = None
         dcp_rank: int = 0
@@ -281,6 +295,9 @@ class PegaKVConnector(KVConnectorBase_V1, SupportsHMA):
         if not self._worker:
             return (None, None)
         return self._worker.get_finished(finished_req_ids)
+
+    def build_connector_worker_meta(self):
+        return self._worker.build_connector_worker_meta() if self._worker else None
 
     def register_kv_caches(self, kv_caches: dict[str, torch.Tensor]):
         if not self._worker:
@@ -520,9 +537,6 @@ def _map_device(local_id: int, visible: str | None) -> int:
         return int(mapped)
     except ValueError:
         return local_id
-
-
-
 
 
 def _resolve_npu_device_id() -> int:

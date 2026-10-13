@@ -458,7 +458,7 @@ impl EngineRpcClient {
         .and_then(|r| status_tuple("load", r.status))
     }
 
-    /// Query prefix cache hits with SSD prefetch support.
+    /// Query prefix or sparse-checkpoint hits with backing prefetch.
     ///
     /// Checks memory cache and triggers backing-store prefetch for missing blocks.
     /// Ready blocks are owned by an opaque lease.
@@ -466,7 +466,10 @@ impl EngineRpcClient {
     /// Argument contract:
     /// - `instance_id` must identify a registered model instance.
     /// - `req_id` must be non-empty and stable across retries for the same request.
-    /// - `block_hashes` may be empty; an empty list returns `QueryReady(0, empty lease)`.
+    /// - `block_hashes` may be empty for group 0 or local membership queries.
+    /// - For `group_id > 0`, `wait_for_full_prefix=false` queries local membership.
+    ///   With the flag true, exactly one hash is required and backing prefetch
+    ///   returns Loading or a terminal Ready hit/miss for that checkpoint.
     ///
     /// Args:
     ///     instance_id: Model instance ID
