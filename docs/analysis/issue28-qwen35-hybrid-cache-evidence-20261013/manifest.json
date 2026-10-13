@@ -1,0 +1,41 @@
+{
+  "schema_version": 1,
+  "input_source": {
+    "dataset": "FrontierScience",
+    "problem_id": "f7b49518-6e84-44e3-9480-4cf91d149702",
+    "construction": "Repeated single problem, token-sliced at boundaries, with one pre-boundary fork",
+    "purpose": "Cache correctness, not benchmark task accuracy"
+  },
+  "files_sha256": {
+    "cases.json": "d7a4e6ed56199c4511783a16c5d8d1987c0f3acbbf45f518f442e5c5adba527c",
+    "outputs.json": "9d2ec687df336b8388c1f06825b5ffa90f25771f91d49cb4f2b5ba6ff448a835",
+    "publications.json": "ac97f037386a20d8ac3a4dc63f6817676ecec1e98fb89d9d4a3946e01bdc586f",
+    "README.md": "84c23cd8b1caaeaa92f3cd43adf5617a98bfe6e6f7fd892340b299e0543fe57b",
+    "verify.py": "a899317df5a1d83d46f26722b61295b5d6426d4b170ba4f7e7ebed56ff6b39e0",
+    "unit-tests.txt": "aab9015cde9e5e69bc45228e4385c269901a62dcb0805a1c02b89aed1ca76ff0"
+  },
+  "extracted_from": {
+    "baseline-results.jsonl": "8a653bf29af007ddd67d5eda407cac283e5e5ea67c0461f19bd8800824f0f009",
+    "final-stage5/evidence/isolated-matrix-results.jsonl": "d6af77269d72e9a80ed336d6b54c6e4d99edb67305cb9d007b2c51803628c66d",
+    "final-stage5/evidence/source-results.jsonl": "4021282b19c1ed121660692715308171a0b0966a623556569ee86a85015ab27f",
+    "final-stage5/evidence/target-results.jsonl": "a1535d89ff22d45e6a313b9f3ea830a812471ff7d020eec8a64c031bda8931ba",
+    "final-stage5/evidence/fixed-reverse-results.json": "8e538d1d510cc552274414e302295f9b7e876da525831c3ec74cbcdd578326d2",
+    "final-stage5/evidence/fixed-extra-results.json": "fe1a0a27f2ff852bd31778eb2deda03740201e75665bb7c88732b23f5f0220b4",
+    "final-stage5/evidence/native-history-diagnosis.json": "c8cc049fe536b84bfcb4c54b36720efc488c50bbc83e995b4dcec654419d6a8c",
+    "native-prefill-split-diagnosis.json": "36945fb2ffccab4b016819abd662358a8079ea9fff87c1251daa04a563fabbdf",
+    "final-stage5/evidence/cases.json": "d1a58ca953bd46cac167d9882797abf25ca55f2c9c6805b2f4dcf3b41875d4b1",
+    "fixed-publication-validation.json": "180d3eee67cddf3093842997da34e6a68ac50cd15a8c3e2eca5465f659d85857",
+    "final-stage5/evidence/native-first-forward-proof.json": "067c824bffb86ed2edc5cf798b91b1f9901751721c4f621ac2ed8aa859f4e29f",
+    "final-unit-tests.txt": "37f0148429c16027916abdee499f4e911706fb90fbbd90434ef2518fa47f8a42"
+  },
+  "archives_sha256": {
+    "final-evidence.tar.gz": "974f10de0830e1073e51e96ecf56e3b649fba5a92cd8a2473edaa6d3d5ff6962",
+    "history-diagnosis-stage3.tar.gz": "4e289aee48efdb15072b1d00a772395392069b9be309fe385814c7bc9d9fa46c",
+    "fixed-gate-stage4.tar.gz": "73bf22ba4106684d0d5b0ff3f07e1b014c4823011cdb8c4042d6eef0fc7b9f33",
+    "diagnosis-final-stage5.tar.gz": "1f1fb527c01398ee33f1013719869751d988176bd401e1a405e9573d1ef51ff4"
+  },
+  "hash_encoding": "UTF-8 with LF line endings",
+  "sanitization": {
+    "unit-tests.txt": "Repository absolute path replaced with <repository>; test counts and result preserved"
+  }
+}

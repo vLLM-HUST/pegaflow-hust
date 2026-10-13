@@ -1,0 +1,205 @@
+{
+  "schema_version": 3,
+  "date": "2026-10-13",
+  "baseline": "77be394a0a52089cc6877b0867077a040b772441",
+  "branch": "feature/pegaflow-hybrid-cache-adaptation",
+  "package_version": "0.23.4",
+  "checks": {
+    "python": {
+      "gate": "targeted source-only unit",
+      "runtime": "CPython 3.13.13 / Windows",
+      "files": 13,
+      "duration_seconds": 1.25,
+      "passed": 332,
+      "status": "passed"
+    },
+    "rust_checkpoint_identity": {
+      "command": "cargo test -p pegaflow-core --lib --no-default-features --features ascend,rdma checkpoint::tests",
+      "passed": 2,
+      "status": "passed"
+    },
+    "ruff": {
+      "format_files": 12,
+      "status": "passed"
+    },
+    "rustfmt": {
+      "files": 4,
+      "status": "passed"
+    },
+    "diff_whitespace": {
+      "status": "passed"
+    },
+    "native_server_check": {
+      "command": "cargo check -p pegaflow-core -p pegaflow-server --no-default-features --features ascend,rdma",
+      "runtime": "Linux aarch64 / Ascend",
+      "status": "passed"
+    },
+    "native_build": {
+      "status": "passed",
+      "compiler": "Linux release Ascend/RDMA",
+      "binding_version": "0.23.4",
+      "runtime_version_verified_on_nodes": 2,
+      "initial_auxiliary_version_query_exit": 1,
+      "initial_query_note": "Compiler succeeded; trailing package-name query failed. Native version verified separately."
+    },
+    "public_evidence": {
+      "command": "python docs/analysis/issue28-qwen35-hybrid-cache-evidence-20261013/verify.py",
+      "status": "passed",
+      "model_output_gate": "failed",
+      "require_model_correctness_exit_code": 1
+    }
+  },
+  "pending": [
+    "GDN state and logits error measurement; numerical versus kernel implementation diagnosis",
+    "checkpoint computation-history compatibility and coherent group provenance",
+    "sparse checkpoint availability and allocator lifecycle, including boundary 6144",
+    "graph/async/MTP/long-context/concurrency acceptance",
+    "Issue23 formal performance experiment"
+  ],
+  "source_sha256": {
+    "Cargo.toml": "0ef15d91225d9bb259b87eed9605fe09b5a432a033ae9804e6ab61020dab121f",
+    "pegaflow-core/src/lib.rs": "8fe0f09f184b32b5e152ada69b887b900fb935073d7665a26536976c63dcce5f",
+    "pegaflow-core/src/checkpoint.rs": "5828ab40d50e787715cd37c148048ae5d8a5336abde82df3702b522ca9f76c03",
+    "pegaflow-proto/proto/engine.proto": "0c84c516627e6570333ffbac13ed36799b3fd2aaca1bedb03d21a24bcc44496e",
+    "pegaflow-server/src/service.rs": "4f1b488f9e01ed7d5a6c0c4292f1f765b54e8778aa0b73893e4fd3b4925de838",
+    "python/pegaflow/connector/__init__.py": "e51e5e362786facbe5cf937b2e11433cfbac49b11f55b601953647b98e167df4",
+    "python/pegaflow/connector/common.py": "57ecca1752ee65fa3c01334379244ae07efcd2b94ea12af4d24b2e08844d7753",
+    "python/pegaflow/connector/scheduler.py": "47ab52700c14cbbc2cbb08912ad4bc3a4e2762b0147cb7a7ee9420d6db9d2157",
+    "python/pegaflow/connector/tp_shards.py": "8751858f707ec0e515adc150747da5e5ef8024252e8803828c4abd144c2a308e",
+    "python/pegaflow/connector/worker.py": "1434309913502adb2c82383c8e3b0b922392bc416cd118f6faa32ad3a47a25bb",
+    "python/pegaflow/pegaflow.pyi": "76984c728854777afb83e944a38eac5547dec74e6abd04b1b784b41e4eaad6d5",
+    "python/pyproject.toml": "e416cd42b5fdc3c4adacbf95622836878ffc0d4b029eb23c0d933b99dc736507",
+    "python/src/lib.rs": "20f676f2d8a5d5bafc140b022c60c746c5f13abc2ae4934044099d4010842929",
+    "python/tests/test_hybrid_connector.py": "be7c68328d8b693656ba43bb18d8105c9cd5ba9667c0d826e6f3bd3d000cb538",
+    "python/tests/test_connector_fault_tolerance.py": "17ca8217304f892da2ce1025b3b07b8eb57779a6b133215b7b5072d65cc01906",
+    "python/tests/test_worker_kv_checksums.py": "ef05f2919081a839144f080d79c91a058f3a0407d8b5bddd415ca3ad09a7b10a",
+    "python/tests/test_worker_kv_layout.py": "61918ad7b695fea624838f794d83f8bd0a9db349228efec00e17a9bb0ed15018",
+    "python/tests/unit_stubs.py": "31bb1aeafe3f8bcce7264f386dd2318a3bd89423d4738718e6baf97dbf496e22",
+    "docs/analysis/issue28-qwen35-hybrid-cache-implementation-20261013.md": "8a74b029cfe2796dd13304fa27f01bade4e8237ce8ff23345b319a5568946c67",
+    "python/pegaflow/logging_utils.py": "709b6f9a843898faaecbb8ef6ad7ef0a743dd46b72a3b2346ea9ecc760d9fc53",
+    "python/tests/test_npu_connector_layer6.py": "ab9215c74a704ff7392c7b001ab0805caed0e72551ddbce489f7799f76982dcf",
+    "docs/analysis/issue28-qwen35-hybrid-cache-acceptance-20261013.md": "0b1f6c3f3ee0b81389a51a6c9690c8c031560cb6b5e3da96a5f3fc4110320bec"
+  },
+  "acceptance": {
+    "status": "failed",
+    "baseline": {
+      "passed": 18,
+      "total": 18
+    },
+    "initial_isolated": {
+      "passed": 9,
+      "total": 9,
+      "positive_reuse_cases": 6,
+      "byte_checks": 1120
+    },
+    "initial_shared": {
+      "passed": 5,
+      "total": 9
+    },
+    "updated_original": {
+      "passed": 7,
+      "total": 9
+    },
+    "updated_reverse": {
+      "passed": 7,
+      "total": 9
+    },
+    "updated_extra": {
+      "passed": 2,
+      "total": 4
+    },
+    "publication_validation": {
+      "records": 3160,
+      "matching_source": 2738,
+      "matching_prior_local_only": 422,
+      "unresolved": 0,
+      "scope": "same boundary hash, physical TP rank and layer; destination producers precede each load"
+    },
+    "native_apc": {
+      "decode_2047_to_2049": {
+        "real_hit_tokens": 2048,
+        "next_forward_tokens": 1,
+        "equals_baseline": false,
+        "all_32_equal_to_cross_node": true
+      },
+      "prefill_2048_to_4096": {
+        "real_hit_tokens": 2048,
+        "next_forward_tokens": 2048,
+        "equals_baseline": false,
+        "all_32_equal_to_cross_node": true
+      },
+      "prefill_4096_to_4097": {
+        "real_hit_tokens": 4096,
+        "next_forward_tokens": 1,
+        "equals_baseline": true
+      }
+    },
+    "blocking_gate": "model output identity across computation histories",
+    "metrics": {
+      "host-192-168-0-4/rank0": {
+        "pegaflow_inflight_bytes": 0.0,
+        "pegaflow_transfer_lock_active": 0.0,
+        "pegaflow_load_failures_total": null,
+        "pegaflow_transfer_lock_timeouts_total": null
+      },
+      "host-192-168-0-4/rank1": {
+        "pegaflow_inflight_bytes": 0.0,
+        "pegaflow_transfer_lock_active": 0.0,
+        "pegaflow_load_failures_total": null,
+        "pegaflow_transfer_lock_timeouts_total": null
+      },
+      "host-192-168-0-2/rank0": {
+        "pegaflow_inflight_bytes": 0.0,
+        "pegaflow_transfer_lock_active": null,
+        "pegaflow_load_failures_total": null,
+        "pegaflow_transfer_lock_timeouts_total": null
+      },
+      "host-192-168-0-2/rank1": {
+        "pegaflow_inflight_bytes": 0.0,
+        "pegaflow_transfer_lock_active": null,
+        "pegaflow_load_failures_total": null,
+        "pegaflow_transfer_lock_timeouts_total": null
+      }
+    },
+    "rank_ack_pairs": {
+      "host-192-168-0-4": {
+        "expected": 8,
+        "complete": 8
+      },
+      "host-192-168-0-2": {
+        "expected": 8,
+        "complete": 8
+      }
+    }
+  },
+  "evidence_archives_sha256": {
+    "final-evidence.tar.gz": "974f10de0830e1073e51e96ecf56e3b649fba5a92cd8a2473edaa6d3d5ff6962",
+    "history-diagnosis-stage3.tar.gz": "4e289aee48efdb15072b1d00a772395392069b9be309fe385814c7bc9d9fa46c",
+    "fixed-gate-stage4.tar.gz": "73bf22ba4106684d0d5b0ff3f07e1b014c4823011cdb8c4042d6eef0fc7b9f33",
+    "diagnosis-final-stage5.tar.gz": "1f1fb527c01398ee33f1013719869751d988176bd401e1a405e9573d1ef51ff4"
+  },
+  "cleanup": {
+    "managed_model_and_engine_processes": "stopped",
+    "allocated_npu_running_processes": 0,
+    "platform_workspaces": "retained"
+  },
+  "deployed_worktree_sha256": {
+    "Cargo.toml": "179ad30bf4ef68d601374cf90905f045855ea1f5de5e49d7f6d23fa4da7ee3a4",
+    "pegaflow-core/src/lib.rs": "8fe0f09f184b32b5e152ada69b887b900fb935073d7665a26536976c63dcce5f",
+    "pegaflow-core/src/checkpoint.rs": "5828ab40d50e787715cd37c148048ae5d8a5336abde82df3702b522ca9f76c03",
+    "pegaflow-proto/proto/engine.proto": "16d260c9b6572c1a142760d141551e8f80e28ee3094802e691f4e5c4506fc694",
+    "pegaflow-server/src/service.rs": "4f1b488f9e01ed7d5a6c0c4292f1f765b54e8778aa0b73893e4fd3b4925de838",
+    "python/pegaflow/connector/__init__.py": "426a4bbec17abf0496a9ddcd9ff35f3991cd7a3c51283fc719437015d148fc00",
+    "python/pegaflow/connector/common.py": "61b46fa2d34b02a6886ff0fc043018e77dbe917882e91d4a9f60f0420c5ac473",
+    "python/pegaflow/connector/scheduler.py": "f3c06dc58fdaf079a3156b6f813c01a3644ef79cb34abbab2ff7c2affdb6d8c4",
+    "python/pegaflow/connector/tp_shards.py": "46f06415c8778664b0376a0941348d936883d8b22d4de0f11dd257ffd826dc7a",
+    "python/pegaflow/connector/worker.py": "b5de632997f5b9a6ce2a961f58f73fa9c4c06538df34e867a5c06253cf3d4f23",
+    "python/pegaflow/pegaflow.pyi": "efe080ee6142310261e956fb90bd8a51c6a8fe663b44326f4755581219e92396",
+    "python/pyproject.toml": "52d5fd5f81ca75fad27ca9231962b029aa867fb86909ed0a9e4acc82dd61dbf8",
+    "python/src/lib.rs": "7ece8bdb48b8e9689a50361687f494baa150692090d771c2006ecc6e4a037523",
+    "python/pegaflow/logging_utils.py": "f28912bad5075bae5719df1e8410d3478c08933d295efa0a4265c33d3c0dbcb2"
+  },
+  "source_hash_encoding": "UTF-8 with LF line endings; deployment worktree byte hashes are recorded separately",
+  "public_evidence": "docs/analysis/issue28-qwen35-hybrid-cache-evidence-20261013",
+  "implementation_commit": "37d2119fb15fd8952c9e18d532b524abd4eb20ae"
+}
