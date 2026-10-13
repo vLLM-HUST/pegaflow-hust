@@ -21,6 +21,7 @@ from pegaflow.connector.common import (
     reconcile_hybrid_hit,
 )
 from pegaflow.connector.connector_metrics import PrefetchTracker
+from pegaflow.connector.telemetry import telemetry_event
 from pegaflow.connector.tp_shards import ShardedQueryReady, TpShardQueryClient
 from pegaflow.pegaflow import EngineRpcClient
 
@@ -920,6 +921,15 @@ class SchedulerConnector:
         self._next_hma_save_ticket += 1
         ticket = self._next_hma_save_ticket
         self._hma_save_pins.setdefault(req_id, {})[ticket] = pins
+        telemetry_event(
+            "checkpoint_publish",
+            request_id=req_id,
+            ticket=ticket,
+            boundaries=[(position + 1) * self._ctx.virtual_block_size for position in positions],
+            blocks_by_group=rows,
+            prompt_tokens=prompt_tokens,
+            written_tokens=written,
+        )
         logger.debug(
             "[PegaKVConnector] HMA checkpoint save: req=%s ticket=%d boundary_tokens=%s "
             "block_ids_by_group=%s hashes=%s",
@@ -1125,6 +1135,7 @@ class SchedulerConnector:
             None: Blocks are being prefetched from DFS, retry later
         """
         block_hash_list = list(block_hashes)
+        query_started = time.perf_counter()
         span = self._hash_group_span
         if span > 1:
             # DeepSeek-V4: query the completed end-boundary hash of each
@@ -1149,6 +1160,12 @@ class SchedulerConnector:
         if ready is None:
             if req_id not in self._prefetch_start_times:
                 self._prefetch_start_times[req_id] = time.perf_counter()
+                telemetry_event(
+                    "cache_query_wait",
+                    request_id=req_id,
+                    query_blocks=len(block_hash_list),
+                    call_ms=(time.perf_counter() - query_started) * 1000,
+                )
                 self._prefetch_tracker.on_prefetch_start()
                 logger.debug(
                     "[PegaKVConnector] Prefetch started: req=%s pending_prefetches=%d",
@@ -1157,6 +1174,7 @@ class SchedulerConnector:
                 )
             return None
 
+        prefetch_duration_ms = 0.0
         if req_id in self._prefetch_start_times:
             prefetch_duration_ms = (
                 time.perf_counter() - self._prefetch_start_times.pop(req_id)
@@ -1172,6 +1190,18 @@ class SchedulerConnector:
                 self._prefetch_tracker.pending_prefetches,
             )
 
+        telemetry_event(
+            "cache_query_ready",
+            request_id=req_id,
+            query_blocks=len(block_hash_list),
+            hit_blocks=ready.num_hit_blocks,
+            hit_tokens=ready.num_hit_blocks * self._ctx.virtual_block_size,
+            recurrent_checkpoint=(
+                ready.recurrent_hold.checkpoint if ready.recurrent_hold is not None else None
+            ),
+            wait_ms=prefetch_duration_ms,
+            call_ms=(time.perf_counter() - query_started) * 1000,
+        )
         return ready
 
     def _reconcile_hybrid(
