@@ -24,6 +24,8 @@ def test_runtime_distribution_owns_ecpa_bundle_and_plugin_target() -> None:
     assert (ROOT / "pegaflow/vllm_plugin.py").is_file()
     assert manifest["schema_version"] == "0.3-experimental"
     assert manifest["extension_version"] == project["version"]
+    assert manifest["host"]["version_range"] == f"=={project['version']}"
+    assert manifest["protocols"][0]["version_range"] == f"=={project['version']}"
 
 
 def test_external_operator_boundary_and_exclusive_connector_claim() -> None:

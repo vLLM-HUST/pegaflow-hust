@@ -1,0 +1,54 @@
+[
+  {
+    "tag": "split4k",
+    "native_hit_tokens": 2048.0,
+    "first_difference": 2,
+    "baseline_top5_at_difference": {
+      " DNA": -0.07454251497983932,
+      "\n\n": -3.32454252243042,
+      "\n": -4.07454252243042,
+      "DNA": -5.26204252243042,
+      " both": -5.76204252243042
+    },
+    "reuse_top5_at_difference": {
+      " a": -0.006704573519527912,
+      " DNA": -5.756704807281494,
+      " the": -5.881704807281494,
+      "\n\n": -8.319204330444336,
+      " an": -8.944204330444336
+    }
+  },
+  {
+    "tag": "decode2k",
+    "native_hit_tokens": 2048.0,
+    "first_difference": 4,
+    "baseline_top5_at_difference": {
+      " drug": -0.8541122078895569,
+      "osis": -1.791612148284912,
+      "\n\n": -2.104112148284912,
+      "\n": -3.229112148284912,
+      ".": -3.416612148284912
+    },
+    "reuse_top5_at_difference": {
+      "osis": -0.49947264790534973,
+      " cell": -2.6244726181030273,
+      "cell": -2.6869726181030273,
+      "\n\n": -2.9369726181030273,
+      " drug": -3.0619726181030273
+    }
+  },
+  {
+    "tag": "prefill2k",
+    "native_hit_tokens": 2048.0,
+    "first_difference": null,
+    "baseline_top5_at_difference": null,
+    "reuse_top5_at_difference": null
+  },
+  {
+    "tag": "coherent4k",
+    "native_hit_tokens": 4096.0,
+    "first_difference": null,
+    "baseline_top5_at_difference": null,
+    "reuse_top5_at_difference": null
+  }
+]

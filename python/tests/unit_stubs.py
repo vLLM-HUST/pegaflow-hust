@@ -186,9 +186,10 @@ def _install_native_extension_stub() -> None:
         pass
 
     class _QueryReady:
-        def __init__(self, num_hit_blocks: int = 0, lease: bytes = b"") -> None:
+        def __init__(self, num_hit_blocks: int = 0, lease: bytes = b"", hit_positions=()) -> None:
             self.num_hit_blocks = num_hit_blocks
             self.lease = lease
+            self.hit_positions = list(hit_positions)
 
     module.EngineRpcClient = getattr(module, "EngineRpcClient", MagicMock)
     module.PegaFlowError = getattr(module, "PegaFlowError", type("PegaFlowError", (Exception,), {}))

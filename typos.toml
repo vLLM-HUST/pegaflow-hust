@@ -1,5 +1,11 @@
 [files]
-extend-exclude = ["results/", "handoff/**/raw/"]
+# Frozen machine records contain request IDs and tensor-format labels.
+extend-exclude = [
+    "results/",
+    "handoff/**/raw/",
+    "docs/analysis/issue28-native-apc-diagnosis-20261013/projection-replay.json",
+    "docs/analysis/issue28-qwen35-hybrid-cache-evidence-20261013/publications.json",
+]
 
 [default.extend-words]
 # Rust std library path (std::f64::consts)

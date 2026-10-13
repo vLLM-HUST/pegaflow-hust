@@ -335,9 +335,7 @@ def test_visible_save_ack_uses_stable_request_id(tmp_path):
 
     assert finished_sending == {raw_request_id}
     marker = tmp_path / "issue23-measure-0001.tp0.visible"
-    assert marker.read_text(encoding="utf-8") == (
-        f"raw_request_id={raw_request_id}\ntp_rank=0\n"
-    )
+    assert marker.read_text(encoding="utf-8") == (f"raw_request_id={raw_request_id}\ntp_rank=0\n")
     worker.shutdown()
 
 
@@ -522,12 +520,11 @@ def test_register_non_version_failure_reports_batch_layers(monkeypatch):
 
 def test_register_kv_caches_ignores_shared_by_without_layer_split_opt_in(monkeypatch):
     kv_cache_config = MagicMock()
-    kv_cache_config.kv_cache_groups = [
-        MagicMock(layer_names=("layer.0", "layer.1", "layer.2"))
-    ]
+    kv_cache_config.kv_cache_groups = [MagicMock(layer_names=("layer.0", "layer.1", "layer.2"))]
     kv_cache_config.kv_cache_tensors = [
         MagicMock(shared_by=("layer.1",)),
     ]
+    kv_cache_config.kv_cache_groups[0].kv_cache_spec.block_size = 16
     worker, client, _ = _make_worker(
         kv_cache_config=kv_cache_config,
     )
@@ -551,14 +548,13 @@ def test_register_kv_caches_ignores_shared_by_without_layer_split_opt_in(monkeyp
 
 def test_register_kv_caches_uses_layer_split_shared_by_plan(monkeypatch):
     kv_cache_config = MagicMock()
-    kv_cache_config.kv_cache_groups = [
-        MagicMock(layer_names=("layer.0", "layer.1", "layer.2"))
-    ]
+    kv_cache_config.kv_cache_groups = [MagicMock(layer_names=("layer.0", "layer.1", "layer.2"))]
     kv_cache_config.kv_cache_tensors = [
         MagicMock(shared_by=("layer.1",)),
         MagicMock(shared_by=()),
         MagicMock(shared_by=("layer.0",)),
     ]
+    kv_cache_config.kv_cache_groups[0].kv_cache_spec.block_size = 16
     worker, client, _ = _make_worker(
         kv_cache_config=kv_cache_config,
         vllm_config=MagicMock(additional_config={"mla_layer_split_kv_cache": True}),

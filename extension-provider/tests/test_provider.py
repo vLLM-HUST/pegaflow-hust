@@ -92,7 +92,10 @@ def test_plan_rejects_connector_profile_conflation() -> None:
 
 def test_check_reports_reachable_healthy_service(monkeypatch: pytest.MonkeyPatch) -> None:
     manifest = load_manifest(MANIFEST)
-    monkeypatch.setattr(provider_module, "_installed_version", lambda: "0.23.3")
+    runtime_version = tomllib.loads((RUNTIME_ROOT / "pyproject.toml").read_text())["project"][
+        "version"
+    ]
+    monkeypatch.setattr(provider_module, "_installed_version", lambda: runtime_version)
 
     class Response:
         status = 200

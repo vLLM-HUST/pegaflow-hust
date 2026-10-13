@@ -223,21 +223,24 @@ class EngineRpcClient:
         wait_for_full_prefix: bool = False,
         group_id: int = 0,
     ) -> QueryLoading | QueryReady:
-        """Query prefix cache hits with SSD prefetch support.
+        """Query prefix or sparse-checkpoint hits with backing prefetch.
 
         Checks memory cache and triggers SSD prefetch for missing blocks.
         Ready hits are owned by an opaque lease consumed by load or release.
         Contract: instance_id must be registered, req_id must be non-empty
         and stable across retries for the same request, and block_hashes may
-        be empty. group_id > 0 selects position-aligned resident-cache
-        membership semantics; remote set fetch is not supported for groups.
+        be empty for group 0 or local membership. group_id > 0 selects
+        position-aligned membership. With wait_for_full_prefix=True, provide
+        exactly one hash to prefetch a sparse checkpoint from backing storage;
+        a missing checkpoint terminates with QueryReady(0, empty lease).
 
         Args:
             instance_id: Model instance ID.
             block_hashes: List of block hashes to check.
             req_id: Request ID for tracking and prefetch correlation.
             wait_for_full_prefix: Keep the query Loading until the full
-                remaining prefix is fetchable.
+                remaining prefix is fetchable for group 0; for other groups,
+                enable single-checkpoint backing prefetch.
             group_id: Storage group to query (0 = dense attention prefix).
 
         Returns:

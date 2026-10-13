@@ -5,7 +5,7 @@ Scheduler-side connector logic.
 import os
 import time
 from collections.abc import Iterable
-from dataclasses import dataclass, replace
+from dataclasses import dataclass, field, replace
 from typing import TYPE_CHECKING
 
 from pegaflow.connector.common import (
@@ -14,6 +14,7 @@ from pegaflow.connector.common import (
     LoadIntent,
     PegaConnectorMetadata,
     PegaKVConnectorStats,
+    PegaWorkerMetadata,
     RecurrentLoadHold,
     SaveIntent,
     logger,
@@ -61,6 +62,7 @@ class _QueryProbe:
     # ``None`` means the backend is still loading.
     hit_blocks: int | None = None
     leases: tuple[bytes, ...] = ()
+    attention_lease_blocks: int = 0
     # Hybrid (HMA): pinned recurrent checkpoints from the membership queries,
     # set together with `leases` when the hybrid reconcile found a boundary.
     recurrent_hold: RecurrentLoadHold | None = None
@@ -100,6 +102,7 @@ class _QueryProbe:
             len(self.query_hashes),
         )
         self.leases = ready.leases
+        self.attention_lease_blocks = ready.attention_lease_blocks or ready.num_hit_blocks
         self.recurrent_hold = ready.recurrent_hold
         self.usable_positions = frozenset(ready.usable_positions)
 
@@ -107,6 +110,14 @@ class _QueryProbe:
         if self.hit_blocks is None:
             raise RuntimeError("query probe is still loading")
         return self.hit_blocks
+
+
+@dataclass
+class _HybridQuery:
+    block_hashes: tuple[bytes, ...]
+    attention: ShardedQueryReady
+    groups: dict[int, list[tuple[tuple[int, ...], bytes]]] = field(default_factory=dict)
+    remote_checkpoint: int | None = None
 
 
 class SchedulerConnector:
@@ -134,6 +145,7 @@ class SchedulerConnector:
         if self._cache_groups.has_recurrent_state and (pd_tail_save or pd_tail_load):
             raise ValueError("P/D tail-block caching is not supported with HMA")
         self._get_local_cached_blocks = None
+        self._get_hma_cached_block = None
 
         # P/D tail-block extension (`pegaflow.pd_tail_save`): vLLM only hashes
         # full blocks, so a prompt's partial tail block never enters the tier
@@ -185,6 +197,13 @@ class SchedulerConnector:
         self._pending_load_intents: dict[str, LoadIntent] = {}
         self._prefetch_start_times: dict[str, float] = {}
         self._pending_query_probes: dict[str, _QueryProbe] = {}
+        self._hybrid_queries: dict[str, _HybridQuery] = {}
+        self._hma_saved_hashes: dict[str, list[set[bytes]]] = {}
+        self._hma_save_pins: dict[str, dict[int, dict[int, object]]] = {}
+        self._hma_save_acks: dict[tuple[str, int], set[tuple[int, int]]] = {}
+        self._next_hma_save_ticket = 0
+        self._touch_save_blocks = None
+        self._free_save_blocks = None
 
         # Prefetch tracking (for metrics)
         self._prefetch_tracker = PrefetchTracker()
@@ -208,6 +227,17 @@ class SchedulerConnector:
 
     def bind_gpu_block_pool(self, gpu_block_pool) -> None:
         self._get_local_cached_blocks = gpu_block_pool.get_cached_block
+        if self._cache_groups.has_recurrent_state:
+            from vllm.v1.core.kv_cache_utils import make_block_hash_with_group_id
+
+            def get_hma_cached_block(block_id, block_hash, group_index):
+                block = gpu_block_pool.blocks[block_id]
+                expected = make_block_hash_with_group_id(block_hash, group_index)
+                return block if block.block_hash == expected else None
+
+            self._get_hma_cached_block = get_hma_cached_block
+            self._touch_save_blocks = gpu_block_pool.touch
+            self._free_save_blocks = gpu_block_pool.free_blocks
         if self._cache_groups.group_count <= 1:
             return
 
@@ -473,6 +503,9 @@ class SchedulerConnector:
                 recurrent_hold=(
                     pending_probe.recurrent_hold if pending_probe is not None else None
                 ),
+                attention_lease_blocks=(
+                    pending_probe.attention_lease_blocks if pending_probe is not None else 0
+                ),
             )
             if pending_probe is not None:
                 query_hashes, tail_tokens = self._build_query(request, num_computed_blocks)
@@ -727,6 +760,12 @@ class SchedulerConnector:
         self, request: "Request", computed_blocks: int
     ) -> tuple[tuple[bytes, ...], int]:
         query_hashes = tuple(request.block_hashes[computed_blocks:])
+        if self._cache_groups.has_recurrent_state:
+            # A checkpoint must leave at least one prompt token for logits.
+            limit = max(
+                0, (request.num_tokens - 1) // self._ctx.virtual_block_size - computed_blocks
+            )
+            query_hashes = query_hashes[:limit]
         if not self._tail_load_enabled:
             return query_hashes, 0
 
@@ -742,6 +781,10 @@ class SchedulerConnector:
         computed_before_step: int | None = None,
     ) -> SaveIntent | None:
         # block_hashes are at virtual_block_size granularity, 1-to-1 with block_ids.
+        if self._cache_groups.has_recurrent_state:
+            return self._consume_hma_saves(
+                req_id, written if computed_before_step is None else computed_before_step
+            )
         block_hashes = self._block_hashes.get(req_id)
         if block_hashes is None:
             return None
@@ -759,27 +802,15 @@ class SchedulerConnector:
         # In external-hit cases, the prefix-loaded block IDs are still present at
         # the front, so save intents must slice by global block index rather than
         # rebasing to a local-only view.
-        if self._cache_groups.has_recurrent_state:
-            if computed_before_step is None:
-                computed_before_step = written
-            saveable_block_idx = min(
-                len(block_hashes),
-                computed_before_step // self._ctx.virtual_block_size,
-            )
-        else:
-            # Cap by the hash group's allocated blocks (in chain units). The
-            # other groups may hold fewer/more blocks because their block
-            # sizes differ (DeepSeek-V4: a 16384-token group has zero blocks
-            # for short prompts) — capping on their minimum would starve the
-            # whole save intent.
-            hash_group = self._cache_groups.hash_group_index
-            hash_group_blocks = len(allocated[hash_group]) if allocated else 0
-            span = self._hash_group_span
-            local_saveable = min(
-                hash_group_blocks * span,
-                scheduled // self._ctx.virtual_block_size,
-            )
-            saveable_block_idx = min(len(block_hashes), base_block_idx + local_saveable)
+        # Other groups may hold fewer blocks at different hash granularities.
+        hash_group = self._cache_groups.hash_group_index
+        hash_group_blocks = len(allocated[hash_group]) if allocated else 0
+        span = self._hash_group_span
+        local_saveable = min(
+            hash_group_blocks * span,
+            scheduled // self._ctx.virtual_block_size,
+        )
+        saveable_block_idx = min(len(block_hashes), base_block_idx + local_saveable)
         new_blocks = saveable_block_idx - start_block_idx
         if new_blocks <= 0:
             return None
@@ -787,11 +818,7 @@ class SchedulerConnector:
         hash_start = start_block_idx
         save_hashes = block_hashes[hash_start : hash_start + new_blocks]
         span = self._hash_group_span
-        if self._cache_groups.has_recurrent_state:
-            save_block_ids_by_group = self._local_cached_block_ids(save_hashes)
-            if save_block_ids_by_group is None:
-                return None
-        elif span > 1:
+        if span > 1:
             # DeepSeek-V4: hash-group physical blocks span `span` chain
             # positions. Pair each completed block with the cumulative hash at
             # its completed END boundary — the only chain hash that uniquely
@@ -804,7 +831,7 @@ class SchedulerConnector:
             g_start = hash_start // span
             g_saveable = saveable_block_idx // span
             sampled_hashes = self._block_end_hashes(
-                block_hashes[g_start * span:g_saveable * span], span
+                block_hashes[g_start * span : g_saveable * span], span
             )
             save_block_ids_by_group = tuple(
                 tuple(
@@ -838,22 +865,75 @@ class SchedulerConnector:
             block_hashes=save_hashes,
         )
 
-    def _local_cached_block_ids(
-        self,
-        block_hashes: tuple[bytes, ...],
-    ) -> tuple[tuple[int, ...], ...] | None:
-        if self._get_local_cached_blocks is None:
-            raise RuntimeError("HMA block pool was not bound before building save metadata")
-
-        group_ids = list(range(self._cache_groups.group_count))
-        block_ids_by_group = [[] for _ in group_ids]
-        for block_hash in block_hashes:
-            cached_blocks = self._get_local_cached_blocks(block_hash, group_ids)
-            if cached_blocks is None:
-                return None
-            for block_ids, block in zip(block_ids_by_group, cached_blocks, strict=True):
-                block_ids.append(block.block_id)
-        return tuple(tuple(block_ids) for block_ids in block_ids_by_group)
+    def _consume_hma_saves(self, req_id: str, written: int) -> SaveIntent | None:
+        if (
+            self._get_hma_cached_block is None
+            or self._touch_save_blocks is None
+            or self._free_save_blocks is None
+        ):
+            raise RuntimeError("HMA block pool must support owned cached-block lookup and pinning")
+        hashes = self._block_hashes.get(req_id, ())
+        # Decode kernels can produce a different recurrent trajectory than
+        # prefill for the same tokens. Publish only checkpoints within the
+        # prompt, so a generated continuation cannot poison the prompt index.
+        prompt_tokens = self._requests[req_id].num_prompt_tokens
+        count = min(len(hashes), min(written, prompt_tokens) // self._ctx.virtual_block_size)
+        allocated = self._allocated_blocks.get(req_id, ())
+        saved = self._hma_saved_hashes.setdefault(
+            req_id, [set() for _ in range(self._cache_groups.group_count)]
+        )
+        pins = {}
+        rows = [[] for _ in saved]
+        selected_hashes = []
+        positions = []
+        for position, block_hash in enumerate(hashes[:count]):
+            selected = []
+            for group_index, group_saved in enumerate(saved):
+                if block_hash in group_saved:
+                    selected.append(None)
+                    continue
+                group = allocated[group_index] if group_index < len(allocated) else ()
+                block_id = group[position] if position < len(group) else 0
+                # Hash lookup can return another request's older decode state.
+                # Preserve the identity of this request's cached physical slot.
+                block = (
+                    self._get_hma_cached_block(block_id, block_hash, group_index)
+                    if block_id
+                    else None
+                )
+                if block is not None and (block.block_id == 0 or getattr(block, "is_null", False)):
+                    block = None
+                selected.append(block)
+            if not any(block is not None for block in selected):
+                continue
+            for group_index, block in enumerate(selected):
+                rows[group_index].append(block.block_id if block is not None else 0)
+                if block is not None:
+                    if block.block_id not in pins:
+                        self._touch_save_blocks([block])
+                        pins[block.block_id] = block
+                    saved[group_index].add(block_hash)
+            selected_hashes.append(block_hash)
+            positions.append(position)
+        if not selected_hashes:
+            return None
+        self._next_hma_save_ticket += 1
+        ticket = self._next_hma_save_ticket
+        self._hma_save_pins.setdefault(req_id, {})[ticket] = pins
+        logger.debug(
+            "[PegaKVConnector] HMA checkpoint save: req=%s ticket=%d boundary_tokens=%s "
+            "block_ids_by_group=%s hashes=%s",
+            req_id,
+            ticket,
+            [(position + 1) * self._ctx.virtual_block_size for position in positions],
+            rows,
+            [block_hash.hex() for block_hash in selected_hashes],
+        )
+        return SaveIntent(
+            block_ids_by_group=tuple(tuple(row) for row in rows),
+            block_hashes=tuple(selected_hashes),
+            save_ticket=ticket,
+        )
 
     def _consume_finished_hma_save(
         self,
@@ -861,47 +941,10 @@ class SchedulerConnector:
         block_ids: tuple[list[int], ...],
         written: int,
     ) -> SaveIntent | None:
-        block_hashes = self._block_hashes.get(req_id)
-        if block_hashes is None:
-            return None
-
-        start_block_idx = self._next_stored_block_idx.get(
-            req_id, self._block_index_offsets.get(req_id, 0)
-        )
-        saveable_block_idx = min(len(block_hashes), written // self._ctx.virtual_block_size)
-        if saveable_block_idx <= start_block_idx:
-            return None
-
-        groups = self._copy_block_ids_by_group(block_ids)
-        available = tuple(len(group) for group in groups)
-        required = tuple(
-            saveable_block_idx + 1
-            if group_index in self._cache_groups.recurrent_group_indices
-            else saveable_block_idx
-            for group_index in range(self._cache_groups.group_count)
-        )
-        if any(length < minimum for length, minimum in zip(available, required, strict=True)):
-            raise RuntimeError(
-                f"req {req_id} final HMA block table is shorter than its hash prefix: "
-                f"saveable={saveable_block_idx} available_by_group={available} "
-                f"required_by_group={required}"
-            )
-
-        num_new_blocks = saveable_block_idx - start_block_idx
-        save_block_ids_by_group = []
-        for group_index, group in enumerate(groups):
-            if group_index in self._cache_groups.recurrent_group_indices:
-                save_block_ids_by_group.append(
-                    (0,) * (num_new_blocks - 1) + (group[saveable_block_idx],)
-                )
-            else:
-                save_block_ids_by_group.append(group[start_block_idx:saveable_block_idx])
-
-        self._next_stored_block_idx[req_id] = saveable_block_idx
-        return SaveIntent(
-            block_ids_by_group=tuple(save_block_ids_by_group),
-            block_hashes=block_hashes[start_block_idx:saveable_block_idx],
-        )
+        self._allocated_blocks[req_id] = [
+            list(group) for group in self._copy_block_ids_by_group(block_ids)
+        ]
+        return self._consume_hma_saves(req_id, written)
 
     def _copy_block_ids_by_group(self, block_ids) -> tuple[tuple[int, ...], ...]:
         groups = tuple(tuple(group) for group in block_ids)
@@ -954,6 +997,26 @@ class SchedulerConnector:
         return tuple(result)
 
     def update_connector_output(self, connector_output: "KVConnectorOutput") -> None:
+        metadata = getattr(connector_output, "kv_connector_worker_meta", None)
+        if isinstance(metadata, PegaWorkerMetadata):
+            expected = {
+                (pp, tp) for pp in range(self._ctx.pp_size) for tp in range(self._ctx.tp_size)
+            }
+            for (req_id, ticket), ranks in metadata.saved_tickets.items():
+                pending = self._hma_save_pins.get(req_id, {})
+                if ticket not in pending:
+                    continue  # repeated acknowledgement or an already completed request
+                if not ranks <= expected:
+                    raise RuntimeError("HMA save acknowledgement has unexpected worker ranks")
+                key = (req_id, ticket)
+                acknowledged = self._hma_save_acks.setdefault(key, set())
+                acknowledged.update(ranks)
+                if acknowledged == expected:
+                    pins = pending.pop(ticket)
+                    self._free_save_blocks(list(pins.values()))
+                    self._hma_save_acks.pop(key, None)
+                    if not pending:
+                        self._hma_save_pins.pop(req_id, None)
         for req_id in connector_output.finished_sending or []:
             self._pending_saves.discard(req_id)
             logger.debug("[PegaKVConnector] Request %s save completed", req_id)
@@ -1011,6 +1074,12 @@ class SchedulerConnector:
         self._deferred_save_intents.pop(req_id, None)
         self._pending_saves.discard(req_id)
         self._tail_saved.discard(req_id)
+        tickets = self._hma_save_pins.pop(req_id, {})
+        if tickets and self._free_save_blocks is not None:
+            for ticket, pins in tickets.items():
+                self._free_save_blocks(list(pins.values()))
+                self._hma_save_acks.pop((req_id, ticket), None)
+        self._hma_saved_hashes.pop(req_id, None)
 
     @staticmethod
     def _block_end_hashes(chain: Iterable[bytes], span: int) -> tuple[bytes, ...]:
@@ -1027,7 +1096,7 @@ class SchedulerConnector:
         if span <= 1:
             return tuple(chain)
         # positions span-1, 2*span-1, 3*span-1, ... (last position per block)
-        return tuple(chain[span - 1::span])
+        return tuple(chain[span - 1 :: span])
 
     @property
     def _hash_group_span(self) -> int:
@@ -1064,12 +1133,19 @@ class SchedulerConnector:
             # stores blocks under exactly those keys; hit counts are expanded
             # back to chain units in _QueryProbe.mark_ready.
             block_hash_list = self._block_end_hashes(block_hash_list, span)
-        ready = self._tp_shard_client.query(
-            self._ctx.instance_id,
-            block_hash_list,
-            req_id,
-            self._ctx.wait_for_full_prefix,
+        hybrid = self._hybrid_queries.get(req_id)
+        if hybrid is not None and hybrid.block_hashes != tuple(block_hash_list):
+            self._release_hybrid_query(req_id)
+            hybrid = None
+        ready = (
+            hybrid.attention
+            if hybrid is not None
+            else self._tp_shard_client.query(
+                self._ctx.instance_id, block_hash_list, req_id, self._ctx.wait_for_full_prefix
+            )
         )
+        if ready is not None and self._cache_groups.has_recurrent_state:
+            ready = self._reconcile_hybrid(block_hash_list, ready, req_id)
         if ready is None:
             if req_id not in self._prefetch_start_times:
                 self._prefetch_start_times[req_id] = time.perf_counter()
@@ -1096,8 +1172,6 @@ class SchedulerConnector:
                 self._prefetch_tracker.pending_prefetches,
             )
 
-        if self._cache_groups.has_recurrent_state:
-            return self._reconcile_hybrid(block_hash_list, ready, req_id)
         return ready
 
     def _reconcile_hybrid(
@@ -1105,7 +1179,7 @@ class SchedulerConnector:
         block_hashes: list[bytes],
         ready: ShardedQueryReady,
         req_id: str,
-    ) -> ShardedQueryReady:
+    ) -> ShardedQueryReady | None:
         """Gate an attention-prefix hit on a usable recurrent boundary.
 
         HMA can resume only where every recurrent group cached its state on
@@ -1121,87 +1195,117 @@ class SchedulerConnector:
             self._cache_groups.storage_group_ids[index]
             for index in sorted(self._cache_groups.recurrent_group_indices)
         )
-        per_group: list[list[tuple[tuple[int, ...], bytes]]] = []
+        state = self._hybrid_queries.setdefault(req_id, _HybridQuery(tuple(block_hashes), ready))
+        block_hashes = block_hashes[: ready.num_hit_blocks]
         try:
-            for group_id in group_ids:
-                per_group.append(
-                    self._tp_shard_client.query_group_membership(
-                        self._ctx.instance_id,
-                        block_hashes,
-                        f"{req_id}:g{group_id}",
-                        group_id,
+            if state.remote_checkpoint is None:
+                for group_id in group_ids:
+                    result = self._tp_shard_client.query_group_membership(
+                        self._ctx.instance_id, block_hashes, f"{req_id}:g{group_id}", group_id
                     )
+                    if result is None:
+                        raise RuntimeError("local membership query must finish immediately")
+                    state.groups[group_id] = result
+                hit, checkpoint, usable = reconcile_hybrid_hit(
+                    ready.num_hit_blocks,
+                    tuple(tuple(positions for positions, _ in state.groups[g]) for g in group_ids),
                 )
-            hybrid_hit, checkpoint, usable = reconcile_hybrid_hit(
-                ready.num_hit_blocks,
-                tuple(
-                    tuple(positions for positions, _ in group_results)
-                    for group_results in per_group
-                ),
-            )
+                if hit and checkpoint is not None:
+                    return self._finish_hybrid_query(req_id, checkpoint, usable)
+                self._release_hybrid_groups(req_id, state)
+                state.remote_checkpoint = ready.num_hit_blocks - 1
+
+            while state.remote_checkpoint >= 0:
+                checkpoint = state.remote_checkpoint
+                for group_id in group_ids:
+                    if group_id not in state.groups:
+                        result = self._tp_shard_client.query_group_membership(
+                            self._ctx.instance_id,
+                            [block_hashes[checkpoint]],
+                            f"{req_id}:g{group_id}:checkpoint-{checkpoint}",
+                            group_id,
+                            prefetch=True,
+                        )
+                        if result is None:
+                            return None
+                        state.groups[group_id] = [
+                            ((checkpoint,) if positions else (), lease)
+                            for positions, lease in result
+                        ]
+                    if any(not positions for positions, _ in state.groups[group_id]):
+                        break
+                else:
+                    return self._finish_hybrid_query(req_id, checkpoint, frozenset({checkpoint}))
+                self._release_hybrid_groups(req_id, state)
+                state.remote_checkpoint -= 1
         except Exception:
-            self._release_leases(ready.leases, req_id)
-            for group_id, group_results in zip(group_ids, per_group, strict=False):
-                self._tp_shard_client.release(
-                    tuple(lease for _, lease in group_results), f"{req_id}:g{group_id}"
-                )
+            self._release_hybrid_query(req_id)
             raise
+        self._release_hybrid_query(req_id)
+        return ShardedQueryReady(0, tuple(b"" for _ in ready.leases))
 
-        if hybrid_hit == 0 or checkpoint is None:
-            self._release_leases(ready.leases, req_id)
-            for group_id, group_results in zip(group_ids, per_group, strict=True):
-                self._tp_shard_client.release(
-                    tuple(lease for _, lease in group_results), f"{req_id}:g{group_id}"
-                )
-            logger.info(
-                "[PegaKVConnector] req=%s HMA attention prefix of %d blocks has no "
-                "common recurrent checkpoint; recomputing instead",
-                req_id,
-                ready.num_hit_blocks,
-            )
-            return ShardedQueryReady(0, tuple(b"" for _ in ready.leases))
-
-        if hybrid_hit < ready.num_hit_blocks:
-            # The hit shrank behind the prefix lease: re-lease the exact
-            # shortened attention prefix so lease count and load agree.
-            exact = self._tp_shard_client.query(
-                self._ctx.instance_id,
-                block_hashes[:hybrid_hit],
-                f"{req_id}:hma-exact-{hybrid_hit}",
-                False,
-            )
-            self._release_leases(ready.leases, req_id)
-            if exact is None or exact.num_hit_blocks != hybrid_hit:
-                if exact is not None:
-                    self._release_leases(exact.leases, req_id)
-                for group_id, group_results in zip(group_ids, per_group, strict=True):
-                    self._tp_shard_client.release(
-                        tuple(lease for _, lease in group_results), f"{req_id}:g{group_id}"
-                    )
-                logger.warning(
-                    "[PegaKVConnector] req=%s could not re-lease the reconciled "
-                    "%d-block HMA prefix; recomputing instead",
-                    req_id,
-                    hybrid_hit,
-                )
-                return ShardedQueryReady(0, tuple(b"" for _ in ready.leases))
-            ready = exact
-
+    def _finish_hybrid_query(
+        self, req_id: str, checkpoint: int, usable: frozenset[int]
+    ) -> ShardedQueryReady:
+        state = self._hybrid_queries.pop(req_id)
+        group_ids = tuple(
+            self._cache_groups.storage_group_ids[index]
+            for index in sorted(self._cache_groups.recurrent_group_indices)
+        )
+        logger.info(
+            "[PegaKVConnector] HMA checkpoint ready: req=%s query_position=%d "
+            "hit_blocks=%d attention_lease_blocks=%d storage_groups=%s",
+            req_id,
+            checkpoint,
+            checkpoint + 1,
+            state.attention.num_hit_blocks,
+            group_ids,
+        )
         return ShardedQueryReady(
-            hybrid_hit,
-            ready.leases,
+            checkpoint + 1,
+            state.attention.leases,
             RecurrentLoadHold(
                 leases=tuple(
-                    tuple(lease for _, lease in group_results) for group_results in per_group
+                    tuple(lease for _, lease in state.groups[group]) for group in group_ids
                 ),
                 hit_positions=tuple(
-                    tuple(positions for positions, _ in group_results)
-                    for group_results in per_group
+                    tuple(positions for positions, _ in state.groups[group]) for group in group_ids
                 ),
                 checkpoint=checkpoint,
             ),
             usable_positions=tuple(sorted(usable)),
+            attention_lease_blocks=state.attention.num_hit_blocks,
         )
+
+    def _release_hybrid_groups(self, req_id: str, state: _HybridQuery) -> bool:
+        released = True
+        for index in sorted(self._cache_groups.recurrent_group_indices):
+            group_id = self._cache_groups.storage_group_ids[index]
+            suffix = (
+                f":checkpoint-{state.remote_checkpoint}"
+                if state.remote_checkpoint is not None
+                else ""
+            )
+            group_req_id = f"{req_id}:g{group_id}{suffix}"
+            released = (
+                self._tp_shard_client.cancel_membership(
+                    self._ctx.instance_id, group_req_id, group_id
+                )
+                and released
+            )
+            result = state.groups.pop(group_id, [])
+            released = (
+                self._tp_shard_client.release(tuple(lease for _, lease in result), group_req_id)
+                and released
+            )
+        return released
+
+    def _release_hybrid_query(self, req_id: str) -> bool:
+        state = self._hybrid_queries.pop(req_id, None)
+        if state is None:
+            return True
+        groups_released = self._release_hybrid_groups(req_id, state)
+        return self._release_leases(state.attention.leases, req_id) and groups_released
 
     def _cancel_prefetch_tracking(self, req_id: str) -> None:
         """Drop in-flight prefetch metrics when polling stops before QueryReady."""
@@ -1236,13 +1340,16 @@ class SchedulerConnector:
         return stats
 
     def shutdown(self) -> None:
-        for req_id in list(self._pending_query_probes):
+        for req_id in set(self._pending_query_probes) | set(self._hybrid_queries):
             self._release_pending_query_probe(req_id)
 
     def _release_pending_query_probe(self, req_id: str) -> bool:
+        hybrid_released = self._release_hybrid_query(req_id)
         pending_released = self._tp_shard_client.cancel_pending(self._ctx.instance_id, req_id)
+        pending_released = pending_released and hybrid_released
         probe = self._pending_query_probes.pop(req_id, None)
         if probe is None:
+            self._cancel_prefetch_tracking(req_id)
             return pending_released
 
         return self._release_query_probe(req_id, probe) and pending_released

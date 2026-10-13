@@ -114,14 +114,15 @@ message QueryRequest {
   string instance_id = 1;
   repeated bytes block_hashes = 2;
   string req_id = 3;
-  // Keep the query in Loading until the full remaining prefix is fetchable
+  // For group 0, keep the query in Loading until the full remaining prefix is fetchable
   // from a remote node via MetaServer + RDMA. Does not observe saves landing
-  // in the local engine; no effect when RDMA is not configured. Membership
-  // queries are resident-cache lookups and currently ignore this flag.
+  // in the local engine; no effect when RDMA is not configured. For groups
+  // > 0, true enables backing prefetch of exactly one checkpoint hash, with
+  // Loading/Ready and a terminal Ready miss when no owner can supply it.
   bool wait_for_full_prefix = 4;
   // Hybrid-cache storage group to query. 0 (default) is the attention group
-  // and uses prefix semantics. Groups > 0 use position-aligned resident-cache
-  // membership semantics; remote all-or-nothing set fetch is not implemented.
+  // and uses prefix semantics. Groups > 0 use position-aligned membership;
+  // with wait_for_full_prefix=false they are resident-cache lookups.
   uint32 group_id = 5;
 }
 
