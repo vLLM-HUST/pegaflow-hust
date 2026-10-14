@@ -116,7 +116,7 @@ class _QueryProbe:
 @dataclass
 class _HybridQuery:
     block_hashes: tuple[bytes, ...]
-    attention: ShardedQueryReady
+    attention: ShardedQueryReady | None
     groups: dict[int, list[tuple[tuple[int, ...], bytes]]] = field(default_factory=dict)
     remote_checkpoint: int | None = None
 
@@ -199,6 +199,13 @@ class SchedulerConnector:
         self._prefetch_start_times: dict[str, float] = {}
         self._pending_query_probes: dict[str, _QueryProbe] = {}
         self._hybrid_queries: dict[str, _HybridQuery] = {}
+        self._issue23_parallel_groups = os.environ.get("PEGAFLOW_ISSUE23_HYBRID_PREFETCH") == "1"
+        if self._issue23_parallel_groups and (
+            not self._cache_groups.has_recurrent_state or not context.wait_for_full_prefix
+        ):
+            raise ValueError(
+                "Issue23 hybrid prefetch requires recurrent groups and full-prefix waiting"
+            )
         self._hma_saved_hashes: dict[str, list[set[bytes]]] = {}
         self._hma_save_pins: dict[str, dict[int, dict[int, object]]] = {}
         self._hma_save_acks: dict[tuple[str, int], set[tuple[int, int]]] = {}
@@ -1150,12 +1157,14 @@ class SchedulerConnector:
             hybrid = None
         ready = (
             hybrid.attention
-            if hybrid is not None
+            if hybrid is not None and hybrid.attention is not None
             else self._tp_shard_client.query(
                 self._ctx.instance_id, block_hash_list, req_id, self._ctx.wait_for_full_prefix
             )
         )
-        if ready is not None and self._cache_groups.has_recurrent_state:
+        if self._issue23_parallel_groups:
+            ready = self._reconcile_issue23_bundle(block_hash_list, ready, req_id)
+        elif ready is not None and self._cache_groups.has_recurrent_state:
             ready = self._reconcile_hybrid(block_hash_list, ready, req_id)
         if ready is None:
             if req_id not in self._prefetch_start_times:
@@ -1274,10 +1283,60 @@ class SchedulerConnector:
         self._release_hybrid_query(req_id)
         return ShardedQueryReady(0, tuple(b"" for _ in ready.leases))
 
+    def _reconcile_issue23_bundle(self, hashes, attention, req_id):
+        """Start every frozen group before waiting for the complete transport gate."""
+        if not hashes:
+            raise RuntimeError("Issue23 hybrid experiment requires a complete checkpoint")
+        checkpoint = len(hashes) - 1
+        state = self._hybrid_queries.setdefault(
+            req_id, _HybridQuery(tuple(hashes), None, remote_checkpoint=checkpoint)
+        )
+        if attention is not None:
+            state.attention = attention
+        pending = state.attention is None
+        try:
+            for index in sorted(self._cache_groups.recurrent_group_indices):
+                group_id = self._cache_groups.storage_group_ids[index]
+                if group_id in state.groups:
+                    continue
+                result = self._tp_shard_client.query_group_membership(
+                    self._ctx.instance_id,
+                    [hashes[checkpoint]],
+                    f"{req_id}:g{group_id}:checkpoint-{checkpoint}",
+                    group_id,
+                    prefetch=True,
+                )
+                if result is None:
+                    pending = True
+                    continue
+                state.groups[group_id] = [
+                    ((checkpoint,) if positions else (), lease) for positions, lease in result
+                ]
+                telemetry_event(
+                    "issue23_group_ready",
+                    request_id=req_id,
+                    storage_group_id=group_id,
+                    checkpoint=checkpoint,
+                    ranks=len(result),
+                    hit_ranks=sum(bool(positions) for positions, _ in result),
+                )
+            if state.attention is not None and state.attention.num_hit_blocks != len(hashes):
+                raise RuntimeError("Issue23 frozen attention prefix is unavailable")
+            if any(not positions for group in state.groups.values() for positions, _ in group):
+                raise RuntimeError("Issue23 frozen recurrent checkpoint is unavailable")
+            if pending:
+                return None
+            return self._finish_hybrid_query(req_id, checkpoint, frozenset({checkpoint}))
+        except Exception:
+            self._release_hybrid_query(req_id)
+            raise
+
     def _finish_hybrid_query(
         self, req_id: str, checkpoint: int, usable: frozenset[int]
     ) -> ShardedQueryReady:
         state = self._hybrid_queries.pop(req_id)
+        if state.attention is None:
+            raise RuntimeError("hybrid query completed without attention state")
         group_ids = tuple(
             self._cache_groups.storage_group_ids[index]
             for index in sorted(self._cache_groups.recurrent_group_indices)
@@ -1335,7 +1394,9 @@ class SchedulerConnector:
         if state is None:
             return True
         groups_released = self._release_hybrid_groups(req_id, state)
-        return self._release_leases(state.attention.leases, req_id) and groups_released
+        return (
+            state.attention is None or self._release_leases(state.attention.leases, req_id)
+        ) and groups_released
 
     def _cancel_prefetch_tracking(self, req_id: str) -> None:
         """Drop in-flight prefetch metrics when polling stops before QueryReady."""

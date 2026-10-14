@@ -938,6 +938,17 @@ impl PegaEngine {
         Ok((stats.hidden_blocks, stats.hidden_bytes))
     }
 
+    /// Pin one immutable serving snapshot for the four experimental arms.
+    pub async fn freeze_issue23_source_snapshot(
+        &self,
+        plan: &Issue23TransferPlan,
+    ) -> Result<(usize, u64), String> {
+        plan.validate()?;
+        self.storage.flush_write_pipeline().await;
+        let expected = issue23_causal::expected_hidden_layout(Some(plan))?;
+        self.storage.freeze_issue23_source_snapshot(&expected)
+    }
+
     /// Remove stale inflight blocks and failed_remote entries (background GC).
     ///
     /// Should be called periodically (e.g., every 30 seconds).

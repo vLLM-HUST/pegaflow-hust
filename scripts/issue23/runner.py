@@ -53,6 +53,11 @@ def validate_deployment(deployment):
         if deployment.get("output_policy") != "observe_numerical_differences":
             raise ValueError("Hybrid performance deployment must record its output policy")
         required.append("pd_hybrid_semantics")
+        if sorted(deployment.get("expected_storage_groups", [])) != [0, 1, 2, 3]:
+            raise ValueError("Qwen3.5 four-arm deployment must freeze storage groups 0,1,2,3")
+        sources = deployment.get("source_engines", [])
+        if not sources or any(not e.get("url") or not e.get("plan_engine_id") for e in sources):
+            raise ValueError("Hybrid four-arm deployment requires frozen source engines")
     else:
         required.append("pd_hybrid_correctness")
     policy = deployment.get("scheduler_policy", "sched_fifo")
@@ -141,7 +146,13 @@ async def clear_decode(client, deployment, output, label):
 
 
 async def save_metrics(client, deployment, output, label):
-    for engine in deployment["engines"]:
+    endpoints = [
+        *deployment["engines"],
+        *deployment.get("source_engines", []),
+        {"engine_id": "prefill-model", "url": deployment["prefill_url"]},
+        {"engine_id": "decode-model", "url": deployment["decode_url"]},
+    ]
+    for engine in endpoints:
         response = await client.get(engine["url"].rstrip("/") + "/metrics", timeout=30)
         response.raise_for_status()
         (output / f"{label}-{engine['engine_id']}.prom").write_text(response.text, encoding="utf-8")
@@ -180,6 +191,11 @@ async def run_one(root, deployment, split, mode, arm, label):
             plan_path = plans_dir / f"{engine['engine_id']}.json"
             plan = read_json(plan_path)
             validate_plan(plan)
+            if (
+                deployment.get("experiment_scope") == "hybrid_performance"
+                and plan["schema_version"] != 2
+            ):
+                raise ValueError("Hybrid four-arm run requires a new schema-2 capture")
             if plan["freeze_provenance"]["cases_sha256"] != sha256(cases_path) or plan[
                 "freeze_provenance"
             ]["contract_sha256"] != sha256(contract_path):
@@ -196,6 +212,9 @@ async def run_one(root, deployment, split, mode, arm, label):
         "TG_CASES": str(cases_path),
         "TG_CONTRACT": str(contract_path),
         "TG_SCHEDULER_POLICY": deployment.get("scheduler_policy", "sched_fifo"),
+        "TG_HYBRID_PREFETCH": "1"
+        if deployment.get("experiment_scope") == "hybrid_performance"
+        else "0",
     }
     write_json(
         output / "run-contract.json",
@@ -210,6 +229,7 @@ async def run_one(root, deployment, split, mode, arm, label):
         },
     )
     state = {"status": "starting", "started_unix": time.time()}
+    write_json(output / "phase.json", {"phase": "starting", "arm": arm})
     try:
         await hook(deployment, "start_argv", env, output, 1200)
         async with make_client(len(cases)) as client:
@@ -224,6 +244,7 @@ async def run_one(root, deployment, split, mode, arm, label):
             preparation.mkdir()
             await save_metrics(client, deployment, output, "before-prepare")
             state["status"] = "preparing"
+            write_json(output / "phase.json", {"phase": "preparing", "arm": arm})
             for index, case in enumerate(cases):
                 clear_markers(marker_dir, [case], deployment["prefill_ack_ranks"])
                 await clear_decode(client, deployment, preparation, f"request-{index:04d}")
@@ -244,6 +265,34 @@ async def run_one(root, deployment, split, mode, arm, label):
                 )
             await save_metrics(client, deployment, output, "after-prepare")
             if mode == "arm":
+                write_json(output / "phase.json", {"phase": "freezing", "arm": arm})
+                for source in deployment.get("source_engines", []):
+                    plan = plans[source["plan_engine_id"]]
+                    response = await client.post(
+                        source["url"].rstrip("/") + "/issue23/freeze-source", json=plan, timeout=30
+                    )
+                    response.raise_for_status()
+                    frozen = response.json()
+                    unique = {
+                        (
+                            op["namespace"],
+                            op["block_hash_hex"],
+                            op["slot_index"],
+                            op["segment"],
+                        ): op["logical_payload_bytes"]
+                        for request in plan["requests"]
+                        for op in request["operations"]
+                    }
+                    blocks = {(namespace, hash_value) for namespace, hash_value, _, _ in unique}
+                    if (
+                        frozen.get("status") != "PASS"
+                        or frozen.get("source_blocks") != len(blocks)
+                        or frozen.get("source_bytes") != sum(unique.values())
+                    ):
+                        raise ValueError(
+                            "Frozen source snapshot differs from the full transfer plan"
+                        )
+                    write_json(output / f"source-snapshot-{source['plan_engine_id']}.json", frozen)
                 await clear_decode(client, deployment, output, "pre-activation")
                 for engine in deployment["engines"]:
                     activation = await post_control(
@@ -261,6 +310,7 @@ async def run_one(root, deployment, split, mode, arm, label):
                 clear_markers(marker_dir, cases, deployment["prefill_ack_ranks"])
                 await hook(deployment, "marker_clear_argv", env, output, 120)
                 state["status"] = "measuring"
+                write_json(output / "phase.json", {"phase": "measuring", "arm": arm})
                 await open_loop(
                     client,
                     deployment["router_url"],
@@ -274,6 +324,7 @@ async def run_one(root, deployment, split, mode, arm, label):
         state.update(status="failed", error=f"{type(error).__name__}: {error}")
         raise
     finally:
+        write_json(output / "phase.json", {"phase": "stopping", "arm": arm})
         write_json(output / "status.json", state)
         try:
             await hook(deployment, "stop_argv", env, output, 120)
@@ -298,6 +349,12 @@ async def run_one(root, deployment, split, mode, arm, label):
                     path,
                     plans_dir / f"{engine}.json",
                     engine,
+                    deployment.get("expected_storage_groups"),
+                    next(
+                        e["covered_tp_ranks"]
+                        for e in deployment["engines"]
+                        if e["engine_id"] == engine
+                    ),
                 )
             write_json(plans_dir / "summary.json", summaries)
         else:

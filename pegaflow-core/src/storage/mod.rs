@@ -8,8 +8,8 @@ use bytesize::ByteSize;
 #[cfg(not(feature = "rdma"))]
 use log::warn;
 use log::{debug, info};
-use parking_lot::Mutex;
-use std::collections::HashSet;
+use parking_lot::{Mutex, RwLock};
+use std::collections::{HashMap, HashSet};
 use std::num::NonZeroU64;
 use std::sync::{Arc, Weak};
 use std::time::Duration;
@@ -137,6 +137,7 @@ pub(crate) struct StorageEngine {
     metaserver_client: Option<Arc<MetaServerClient>>,
     transfer_lock: Arc<transfer_lock::TransferLockManager>,
     issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
+    frozen_transfer_source: RwLock<Option<HashMap<BlockKey, Arc<SealedBlock>>>>,
 }
 
 impl StorageEngine {
@@ -313,6 +314,7 @@ impl StorageEngine {
                 metaserver_client,
                 transfer_lock,
                 issue23_experiment,
+                frozen_transfer_source: RwLock::new(None),
             }
         });
 
@@ -683,7 +685,55 @@ impl StorageEngine {
         keys: &[BlockKey],
         request_id: &str,
     ) -> Vec<(BlockKey, Arc<SealedBlock>)> {
+        if let Some(snapshot) = self.frozen_transfer_source.read().as_ref() {
+            let found: Vec<_> = keys
+                .iter()
+                .filter_map(|key| {
+                    snapshot
+                        .get(key)
+                        .map(|block| (key.clone(), Arc::clone(block)))
+                })
+                .collect();
+            info!(
+                "issue23_source_snapshot_lookup: request_id={request_id} requested={} found={}",
+                keys.len(),
+                found.len()
+            );
+            return found;
+        }
         self.read_cache.get_blocks_for_request(keys, request_id)
+    }
+
+    pub(crate) fn freeze_issue23_source_snapshot(
+        &self,
+        expected: &HashMap<BlockKey, u64>,
+    ) -> Result<(usize, u64), String> {
+        let mut slot = self.frozen_transfer_source.write();
+        if slot.is_some() {
+            return Err("Issue23 source snapshot is already frozen; restart the arm".into());
+        }
+        let keys: Vec<_> = expected.keys().cloned().collect();
+        let found = self
+            .read_cache
+            .get_blocks_for_request(&keys, "issue23-source-freeze");
+        if found.len() != expected.len() {
+            return Err(format!(
+                "source snapshot incomplete: found={} expected={}",
+                found.len(),
+                expected.len()
+            ));
+        }
+        let mut bytes = 0u64;
+        for (key, block) in &found {
+            if expected.get(key).copied() != Some(block.memory_footprint()) {
+                return Err(format!("source snapshot byte mismatch: {}", object_id(key)));
+            }
+            bytes += block.memory_footprint();
+        }
+        let count = found.len();
+        *slot = Some(found.into_iter().collect());
+        info!("issue23_source_snapshot_frozen: blocks={count} bytes={bytes}");
+        Ok((count, bytes))
     }
 
     /// Lock blocks for a transfer session, returning the session ID.
@@ -775,6 +825,25 @@ mod tests {
 
         let stats = storage.cleanup_memory_cache();
         assert_eq!(stats, MemoryCacheCleanupStats::default());
+    }
+
+    #[tokio::test]
+    async fn frozen_issue23_source_serves_original_blocks_after_republication_and_eviction() {
+        let storage = make_engine();
+        let key = BlockKey::new("ns".into(), vec![1]);
+        let original = Arc::new(SealedBlock::from_slots(Vec::new()));
+        storage.test_insert_cache(key.clone(), Arc::clone(&original));
+        let expected = HashMap::from([(key.clone(), 0)]);
+        assert_eq!(
+            storage.freeze_issue23_source_snapshot(&expected).unwrap(),
+            (1, 0)
+        );
+        storage.test_insert_cache(key.clone(), Arc::new(SealedBlock::from_slots(Vec::new())));
+        storage.cleanup_memory_cache();
+        let served = storage.get_blocks_for_transfer_with_request(&[key], "request");
+        assert_eq!(served.len(), 1);
+        assert!(Arc::ptr_eq(&served[0].1, &original));
+        assert!(storage.freeze_issue23_source_snapshot(&expected).is_err());
     }
 
     #[tokio::test]

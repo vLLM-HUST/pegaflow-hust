@@ -3,7 +3,7 @@ use axum::http::StatusCode;
 use axum::response::IntoResponse;
 use axum::{Json, Router, routing::get, routing::post};
 use log::{info, warn};
-use pegaflow_core::PegaEngine;
+use pegaflow_core::{Issue23TransferPlan, PegaEngine};
 use prometheus::{Registry, TextEncoder};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
@@ -183,6 +183,22 @@ async fn activate_issue23_handler(State(state): State<AppState>) -> impl IntoRes
     }
 }
 
+async fn freeze_issue23_source_handler(
+    State(state): State<AppState>,
+    Json(plan): Json<Issue23TransferPlan>,
+) -> impl IntoResponse {
+    match state.engine.freeze_issue23_source_snapshot(&plan).await {
+        Ok((blocks, bytes)) => (
+            StatusCode::OK,
+            Json(serde_json::json!({
+                "status": "PASS", "source_blocks": blocks, "source_bytes": bytes,
+            })),
+        )
+            .into_response(),
+        Err(error) => (StatusCode::PRECONDITION_FAILED, error.into_response()).into_response(),
+    }
+}
+
 /// Start HTTP server for health check, optional Prometheus metrics, and instance management.
 pub async fn start_http_server(
     addr: std::net::SocketAddr,
@@ -209,7 +225,11 @@ pub async fn start_http_server(
         .route("/instances", get(list_instances_handler))
         .route("/instances/cleanup", post(cleanup_handler))
         .route("/cache/memory/cleanup", post(cleanup_memory_cache_handler))
-        .route("/issue23/activate", post(activate_issue23_handler));
+        .route("/issue23/activate", post(activate_issue23_handler))
+        .route(
+            "/issue23/freeze-source",
+            post(freeze_issue23_source_handler),
+        );
 
     if enable_prometheus {
         app = app.route("/metrics", get(metrics_handler));

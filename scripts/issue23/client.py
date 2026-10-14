@@ -81,11 +81,11 @@ async def stream_request(client, url, case, output, origin, planned_offset, time
                         usage = event.get("usage") or usage
                         for choice in event.get("choices", []):
                             piece = choice.get("text", "")
+                            emitted_ids = choice.get("token_ids") or []
+                            token_ids.extend(emitted_ids)
                             if piece:
                                 first_text = first_text if first_text is not None else event_time
                                 text.append(piece)
-                                emitted_ids = choice.get("token_ids") or []
-                                token_ids.extend(emitted_ids)
                                 token_events.append(
                                     {
                                         "offset_seconds": event_time - started,

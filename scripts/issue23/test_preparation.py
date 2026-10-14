@@ -340,6 +340,8 @@ def test_hybrid_performance_uses_semantic_gate_and_records_output_policy():
     checks.update(pd_hybrid_correctness=False, pd_output_match=False)
     deployment = {
         "experiment_scope": "hybrid_performance",
+        "expected_storage_groups": [0, 1, 2, 3],
+        "source_engines": [{"url": "http://fixture/source", "plan_engine_id": "e0"}],
         "hybrid_prefix_reuse": True,
         "output_policy": "observe_numerical_differences",
         "scheduler_policy": "sched_other",

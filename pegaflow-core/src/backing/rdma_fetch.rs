@@ -25,7 +25,7 @@ use crate::block::{BlockKey, RawBlock, SealedBlock, Segment, object_id};
 use crate::internode::MetaServerClient;
 use crate::issue23_causal::{
     Issue23Backend, Issue23CausalExperiment, ObservedOperation, encode_hex, operation_id,
-    stable_request_id,
+    stable_request_id, storage_group_id,
 };
 use crate::metrics::{core_metrics, record_object_lifecycle};
 use crate::tailguard::TailGuardRemoteReadController;
@@ -120,6 +120,10 @@ impl RdmaFetchStore {
         let nodes = match self.metaserver_client.query_prefix(namespace, hashes).await {
             Ok(n) => n,
             Err(e) => {
+                if let Some(experiment) = &self.issue23_experiment {
+                    let _ = experiment.record_fetch_stage("fetch_unavailable", req_id, namespace,
+                        serde_json::json!({"reason": "metaserver_query_failed", "detail": e.to_string()}));
+                }
                 warn!("MetaServer query failed for remote fetch: {e}");
                 return None;
             }
@@ -128,13 +132,27 @@ impl RdmaFetchStore {
         let best = nodes
             .iter()
             .filter(|n| n.node != self.advertise_addr)
-            .max_by_key(|n| n.prefix_len)?;
+            .max_by_key(|n| n.prefix_len);
+        let Some(best) = best else {
+            if let Some(experiment) = &self.issue23_experiment {
+                let _ = experiment.record_fetch_stage("fetch_unavailable", req_id, namespace,
+                    serde_json::json!({"reason": "no_remote_owner", "requested_blocks": hashes.len()}));
+            }
+            return None;
+        };
 
         let remote_prefix_len = best.prefix_len as usize;
         let prefix_len = if let Some(experiment) = &self.issue23_experiment {
-            match experiment.frozen_remote_prefix_len(req_id, hashes, remote_prefix_len) {
+            match experiment.frozen_remote_prefix_len(req_id, namespace, hashes, remote_prefix_len)
+            {
                 Ok(prefix_len) => prefix_len,
                 Err(error) => {
+                    let _ = experiment.record_fetch_stage(
+                        "fetch_unavailable",
+                        req_id,
+                        namespace,
+                        serde_json::json!({"reason": "frozen_prefix_mismatch", "detail": error}),
+                    );
                     warn!("Frozen remote prefix validation failed: {error}");
                     return None;
                 }
@@ -255,6 +273,13 @@ async fn rdma_fetch_task(
     let total_bytes: u64 = blocks.iter().flat_map(|b| &b.slots).fold(0, |total, slot| {
         total.saturating_add(slot.k_size.saturating_add(slot.v_size))
     });
+    if let Some(experiment) = &issue23_experiment {
+        let _ = experiment.record_fetch_stage("fetch_control_ready", req_id, namespace,
+            serde_json::json!({"source": remote_addr, "destination": advertise_addr,
+                "requested_blocks": block_hashes.len(), "available_blocks": blocks.len(),
+                "logical_payload_bytes": total_bytes, "connect_ns": connect_elapsed.as_nanos(),
+                "remote_query_ns": query_elapsed.as_nanos(), "source_lock_timeout_seconds": response.lock_timeout_secs}));
+    }
     // The source lock is already held, but no destination allocation or RDMA
     // operation exists yet. A denial releases the lock and makes the remaining
     // prefix a miss, preserving any local CPU prefix found by PrefetchScheduler.
@@ -286,12 +311,16 @@ async fn rdma_fetch_task(
         &blocks,
         transfer_timeout,
         req_id,
-        issue23_experiment,
+        issue23_experiment.clone(),
     )
     .await
     {
         Ok(r) => r,
         Err(e) => {
+            if let Some(experiment) = &issue23_experiment {
+                let _ = experiment.record_fetch_stage("fetch_failed", req_id, namespace,
+                    serde_json::json!({"reason": "transfer_failed", "detail": e, "source": remote_addr}));
+            }
             record_remote_read_objects(req_id, namespace, &blocks, "error");
             warn!("RDMA transfer from {remote_addr} failed: {e}");
             rdma.engine().invalidate_connection(remote_addr);
@@ -303,6 +332,16 @@ async fn rdma_fetch_task(
         }
     };
     record_remote_read_objects(req_id, namespace, &blocks, "ok");
+    if let Some(experiment) = &issue23_experiment {
+        let _ = experiment.record_fetch_stage("fetch_completed", req_id, namespace,
+            serde_json::json!({"source": remote_addr, "completed_blocks": result.len(),
+                "completed_payload_bytes": total_bytes, "total_ns": t0.elapsed().as_nanos(),
+                "connect_ns": connect_elapsed.as_nanos(), "remote_query_ns": query_elapsed.as_nanos(),
+                "allocation_and_descriptor_ns": transfer_timing.build_transfer_tasks.as_nanos(),
+                "submit_ns": transfer_timing.submit_transfer.as_nanos(),
+                "gate_and_transport_wait_ns": transfer_timing.rdma_wait.as_nanos(),
+                "descriptor_count": transfer_timing.transfer_desc_count, "slot_count": transfer_timing.slot_count}));
+    }
 
     // 4. Release transfer lock (fire-and-forget: spawns a detached task)
     spawn_release_lock(client, transfer_session_id);
@@ -452,13 +491,18 @@ async fn fetch_blocks_via_rdma(
     // Build the exact logical operation manifest before the transport
     // boundary. NonNull pointers are converted to integer addresses before
     // any await so the frozen cohort can move between async tasks safely.
-    let (mut operations, rdma_batch, mut timing) = {
+    let (mut operations, mut timing) = {
         let mut all_descs: Vec<TransferDesc> = Vec::new();
         let stable_id = issue23_experiment
             .as_ref()
             .map(|_| stable_request_id(req_id))
             .transpose()?;
         let mut operations = Vec::new();
+        let group_id = if issue23_experiment.is_some() {
+            storage_group_id(req_id, namespace)?
+        } else {
+            0
+        };
 
         for (block_index, block_info) in blocks.iter().enumerate() {
             slot_count += block_info.slots.len();
@@ -489,10 +533,14 @@ async fn fetch_blocks_via_rdma(
                         operations.push(ObservedOperation {
                             operation_id: operation_id(
                                 stable_id,
+                                namespace,
+                                group_id,
                                 &block_info.block_hash,
                                 slot_index,
                                 "k",
                             ),
+                            namespace: namespace.to_string(),
+                            storage_group_id: group_id,
                             block_hash_hex: encode_hex(&block_info.block_hash),
                             slot_index,
                             segment: "k".into(),
@@ -528,10 +576,14 @@ async fn fetch_blocks_via_rdma(
                         operations.push(ObservedOperation {
                             operation_id: operation_id(
                                 stable_id,
+                                namespace,
+                                group_id,
                                 &block_info.block_hash,
                                 slot_index,
                                 "v",
                             ),
+                            namespace: namespace.to_string(),
+                            storage_group_id: group_id,
                             block_hash_hex: encode_hex(&block_info.block_hash),
                             slot_index,
                             segment: "v".into(),
@@ -568,19 +620,6 @@ async fn fetch_blocks_via_rdma(
         }
 
         let transfer_desc_count = all_descs.len();
-        let rdma_batch = if issue23_experiment
-            .as_ref()
-            .is_some_and(|experiment| experiment.is_active())
-        {
-            Some(
-                rdma.engine()
-                    .prepare_batch_transfer(TransferOp::Read, remote_addr, &all_descs, Some(0))
-                    .map_err(|e| format!("RDMA prepare_batch_transfer failed: {e}"))?,
-            )
-        } else {
-            None
-        };
-
         let timing = TransferTiming {
             build_transfer_tasks: build_start.elapsed(),
             transfer_desc_count,
@@ -588,7 +627,7 @@ async fn fetch_blocks_via_rdma(
             numa_slab_count,
             ..TransferTiming::default()
         };
-        (operations, rdma_batch, timing)
+        (operations, timing)
     };
 
     if let Some(experiment) = &issue23_experiment {
@@ -596,6 +635,7 @@ async fn fetch_blocks_via_rdma(
         if experiment.is_active() && experiment.backend() == Issue23Backend::LocalCopy {
             for operation in &mut operations {
                 operation.remote_addr = experiment.local_source(
+                    &operation.namespace,
                     &operation.block_hash_hex,
                     operation.slot_index,
                     &operation.segment,
@@ -611,12 +651,11 @@ async fn fetch_blocks_via_rdma(
             // cohort, which is the only memory-safe cancellation boundary.
             let completion = experiment
                 .gate_bundle(
-                    Arc::clone(rdma),
+                    Some(Arc::clone(rdma)),
                     remote_addr.to_string(),
                     req_id.to_string(),
                     stable_id,
                     operations,
-                    rdma_batch,
                 )
                 .await?;
             timing.submit_transfer = completion.submit;
