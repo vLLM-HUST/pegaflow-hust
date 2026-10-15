@@ -1,0 +1,986 @@
+{
+  "complete_cohorts": 8,
+  "foreground_requests": 512,
+  "arms": {
+    "rdma-burst": {
+      "ttft_seconds": {
+        "n": 128,
+        "min": 9.286605538800359,
+        "p50": 11.11236015940085,
+        "p95": 16.461463008960706,
+        "p99": 18.37857571013272,
+        "max": 18.48815804067999,
+        "mean": 11.677092136109422
+      },
+      "cohort_wait_seconds": {
+        "n": 128,
+        "min": 0.0,
+        "p50": 2.9387877849999997,
+        "p95": 6.686107824,
+        "p99": 6.8702437574,
+        "max": 7.056695395,
+        "mean": 2.9031403213515623
+      },
+      "ttft_without_cohort_wait_seconds": {
+        "n": 128,
+        "min": 3.0489503981447603,
+        "p50": 8.780421853346565,
+        "p95": 14.555061605427664,
+        "p99": 15.901491437293425,
+        "max": 18.464974362403154,
+        "mean": 8.77395181475786
+      },
+      "transfer_completion_ms": {
+        "n": 128,
+        "min": 117.725548,
+        "p50": 1081.061377,
+        "p95": 1890.16187345,
+        "p99": 1953.8832422900002,
+        "max": 1983.348851,
+        "mean": 1072.7318834140624
+      },
+      "cache_access_ms": {
+        "n": 128,
+        "min": 1325.459419,
+        "p50": 4842.5327265,
+        "p95": 8650.49984945,
+        "p99": 9388.46581854,
+        "max": 9838.333456,
+        "mean": 5056.23961371875
+      },
+      "observer_itl_ms": {
+        "n": 18860,
+        "min": 0.08840952068567276,
+        "p50": 18.090583384037018,
+        "p95": 55.68210007622837,
+        "p99": 70.23052860051389,
+        "max": 218.11190992593765,
+        "mean": 25.010816636223698
+      },
+      "posting_spread_ms": {
+        "n": 8,
+        "min": 0.02722,
+        "p50": 0.136548,
+        "p95": 1.1608458499999994,
+        "p99": 1.5340771699999998,
+        "max": 1.627385,
+        "mean": 0.328129375
+      }
+    },
+    "rdma-smooth": {
+      "ttft_seconds": {
+        "n": 128,
+        "min": 8.301393932662904,
+        "p50": 9.913130490109324,
+        "p95": 11.59133352576755,
+        "p99": 12.290190547155218,
+        "max": 12.90064718388021,
+        "mean": 9.930417933392164
+      },
+      "cohort_wait_seconds": {
+        "n": 128,
+        "min": 0.0,
+        "p50": 2.794862249,
+        "p95": 6.70303270255,
+        "p99": 6.82422033461,
+        "max": 6.881749434,
+        "mean": 2.879543275421875
+      },
+      "ttft_without_cohort_wait_seconds": {
+        "n": 128,
+        "min": 1.5262544412219157,
+        "p50": 7.158272782828886,
+        "p95": 11.518042362991702,
+        "p99": 12.180782772008858,
+        "max": 12.90064718388021,
+        "mean": 7.050874657970289
+      },
+      "transfer_completion_ms": {
+        "n": 128,
+        "min": 117.618904,
+        "p50": 117.666731,
+        "p95": 127.59894255,
+        "p99": 131.28616803,
+        "max": 131.81676,
+        "mean": 118.8590588359375
+      },
+      "cache_access_ms": {
+        "n": 128,
+        "min": 1740.660813,
+        "p50": 4099.3374395,
+        "p95": 6823.0175184,
+        "p99": 6943.54354519,
+        "max": 7143.538757,
+        "mean": 4079.3169394140623
+      },
+      "observer_itl_ms": {
+        "n": 18031,
+        "min": 0.08425116539001465,
+        "p50": 16.878735274076462,
+        "p95": 53.315430879592896,
+        "p99": 65.3061328455806,
+        "max": 158.94335508346558,
+        "mean": 23.34416488874655
+      },
+      "posting_spread_ms": {
+        "n": 0,
+        "min": null,
+        "p50": null,
+        "p95": null,
+        "p99": null,
+        "max": null,
+        "mean": null
+      }
+    },
+    "local_copy-burst": {
+      "ttft_seconds": {
+        "n": 128,
+        "min": 9.269060828723013,
+        "p50": 11.080347808077931,
+        "p95": 11.982921535009519,
+        "p99": 12.00100147439167,
+        "max": 12.00201428681612,
+        "mean": 11.11231580945605
+      },
+      "cohort_wait_seconds": {
+        "n": 128,
+        "min": 0.0,
+        "p50": 2.773558516,
+        "p95": 6.657979805349999,
+        "p99": 6.78206326996,
+        "max": 7.011885792,
+        "mean": 2.88049369609375
+      },
+      "ttft_without_cohort_wait_seconds": {
+        "n": 128,
+        "min": 4.05761782801091,
+        "p50": 8.400966021615744,
+        "p95": 11.526553448372603,
+        "p99": 11.94734589470603,
+        "max": 11.984504472464323,
+        "mean": 8.2318221133623
+      },
+      "transfer_completion_ms": {
+        "n": 128,
+        "min": 105.251959,
+        "p50": 184.409409,
+        "p95": 249.4744526999998,
+        "p99": 261.36712996,
+        "max": 262.451757,
+        "mean": 187.521335125
+      },
+      "cache_access_ms": {
+        "n": 128,
+        "min": 1228.699275,
+        "p50": 4042.4792125,
+        "p95": 7881.8851317,
+        "p99": 8110.400904300001,
+        "max": 8282.894833,
+        "mean": 4150.439454015625
+      },
+      "observer_itl_ms": {
+        "n": 18448,
+        "min": 0.08587073534727097,
+        "p50": 16.180857550352812,
+        "p95": 51.96108929812908,
+        "p99": 67.63541301712388,
+        "max": 216.42848383635283,
+        "mean": 22.625763769370987
+      },
+      "posting_spread_ms": {
+        "n": 8,
+        "min": 2.80659,
+        "p50": 3.3054259999999998,
+        "p95": 5.795725349999998,
+        "p99": 6.680312269999999,
+        "max": 6.901459,
+        "mean": 3.6752055
+      }
+    },
+    "local_copy-smooth": {
+      "ttft_seconds": {
+        "n": 128,
+        "min": 8.092024443671107,
+        "p50": 9.685166337527335,
+        "p95": 11.431586166098713,
+        "p99": 11.773162981597707,
+        "max": 11.942358620464802,
+        "mean": 9.74427712259785
+      },
+      "cohort_wait_seconds": {
+        "n": 128,
+        "min": 0.0,
+        "p50": 2.774803775,
+        "p95": 6.6658239803,
+        "p99": 6.86795270068,
+        "max": 6.937694512,
+        "mean": 2.8787493777265625
+      },
+      "ttft_without_cohort_wait_seconds": {
+        "n": 128,
+        "min": 1.3832492691747191,
+        "p50": 6.895332829468667,
+        "p95": 11.249797122204672,
+        "p99": 11.735735649702434,
+        "max": 11.942358620464802,
+        "mean": 6.8655277448712875
+      },
+      "transfer_completion_ms": {
+        "n": 128,
+        "min": 24.62281,
+        "p50": 28.709694,
+        "p95": 36.59125519999997,
+        "p99": 53.99323373000006,
+        "max": 64.171842,
+        "mean": 29.5088767109375
+      },
+      "cache_access_ms": {
+        "n": 128,
+        "min": 1190.420784,
+        "p50": 4106.964096,
+        "p95": 6697.23615465,
+        "p99": 6958.4585026800005,
+        "max": 7199.383916,
+        "mean": 3988.570888640625
+      },
+      "observer_itl_ms": {
+        "n": 18582,
+        "min": 0.08172169327735901,
+        "p50": 16.873301472514868,
+        "p95": 51.0945178102702,
+        "p99": 60.03528407774864,
+        "max": 174.43210631608963,
+        "mean": 22.43802665833341
+      },
+      "posting_spread_ms": {
+        "n": 0,
+        "min": null,
+        "p50": null,
+        "p95": null,
+        "p99": null,
+        "max": null,
+        "mean": null
+      }
+    }
+  },
+  "paired_effects": {
+    "rdma": {
+      "paired_cohort_ttft_difference_seconds": {
+        "n": 8,
+        "min": -5.206864495470654,
+        "p50": -1.3807402276142966,
+        "p95": -0.8354871302406537,
+        "p99": -0.814133144338266,
+        "max": -0.8087946478626691,
+        "mean": -1.7466742027172586
+      },
+      "blocks": 0,
+      "block_bootstrap_mean_ci95": null,
+      "bootstrap_scope": "16 paired cohorts per time block; model processes reused"
+    },
+    "local_copy": {
+      "paired_cohort_ttft_difference_seconds": {
+        "n": 8,
+        "min": -2.0349407039466314,
+        "p50": -1.261117089248728,
+        "p95": -1.0266263492318104,
+        "p99": -0.9848231773433509,
+        "max": -0.974372384371236,
+        "mean": -1.368038686858199
+      },
+      "blocks": 0,
+      "block_bootstrap_mean_ci95": null,
+      "bootstrap_scope": "16 paired cohorts per time block; model processes reused"
+    }
+  },
+  "output_scope": "one-token foreground TTFT and existing decoder ITL",
+  "transport_scope": "Native foreground RDMA, independent saturated perftest READ competitor. Completion includes host session FIFO queueing and service. Queue/service means describe native QP batches, not logical requests. Metric deltas bracket foreground start to one second before observation end, allowing collection to catch completion. Port counters cover the shared physical port and 1 Hz sample brackets.",
+  "measurement_contract": {
+    "protocol_id": "issue23-contention-sixteen-v1",
+    "cohort_size": 16,
+    "smooth_interval_ms": 144,
+    "rdma_rate_bps": 0,
+    "requests_per_arm": 128,
+    "input_tokens": 4097,
+    "reused_tokens": 4096,
+    "output_tokens": 1,
+    "background_decode_requests": 4,
+    "datasets": {
+      "mmlu-pro": 924,
+      "frontierscience": 100
+    },
+    "cases_sha256": "afd4fa2a39d8d3c5b6a36278f4c615395ae6f881e5e8d993283402ebf66e8719",
+    "source_model": "/data/shared_upload/models/vspec/Qwen3.5-35B-A3B",
+    "min_trial_window_seconds": 8.0,
+    "background_rdma_rate_bps": 0,
+    "observer_max_tokens": 4096,
+    "inference": {
+      "profile": "performance",
+      "enforce_eager": false,
+      "async_scheduling": true,
+      "compilation_config": {
+        "mode": 3,
+        "cudagraph_mode": "FULL_DECODE_ONLY",
+        "cudagraph_capture_sizes": [
+          1,
+          2,
+          4,
+          8,
+          12,
+          16,
+          24
+        ]
+      }
+    },
+    "network_background": {
+      "port": 29945,
+      "capacity_gbps": 90.43,
+      "target_gbps": 90.43,
+      "qps": 16,
+      "mode": "saturated_host_rdma"
+    },
+    "campaign_budget_seconds": 600,
+    "foreground_timeout_seconds": 60,
+    "baseline_seconds": 1.0,
+    "recovery_seconds": 1.0,
+    "event_window_seconds": 4,
+    "source_discovery_grace_seconds": 5,
+    "limit": 8,
+    "runtime_config_sha256": "1cd08caa1ae4db4ed86a71b716862b2e97954e19a27c1f6837e8de2ddafbecbd",
+    "transport_model": "aggregate software RDMA injection budget",
+    "observer_policy": "four fresh decoder requests per arm; warm at eight SSE events"
+  },
+  "phases": {
+    "rdma-burst": {
+      "cache_complete_to_model_work_ms": {
+        "n": 128,
+        "mean": 1499.341363296875,
+        "p50": 905.0342935,
+        "p95": 6029.042039549999,
+        "p99": 7301.631123220001
+      },
+      "queue_seconds_per_batch_ms": {
+        "n": 8,
+        "mean": 894.874225468749,
+        "p50": 888.7169859999995,
+        "p95": 914.2326211015625,
+        "p99": 914.7126183203126
+      },
+      "service_seconds_per_batch_ms": {
+        "n": 8,
+        "mean": 119.28748662890642,
+        "p50": 118.57073371874972,
+        "p95": 121.4530722515625,
+        "p99": 121.86943117531251
+      },
+      "physical_port_receive_gbps": {
+        "n": 8,
+        "mean": 98.05736359146992,
+        "p50": 98.04089992836673,
+        "p95": 98.17034246846833,
+        "p99": 98.18705388756763
+      },
+      "decode_step_interval_in_event_window_ms": {
+        "n": 1124,
+        "mean": 28.670313294483986,
+        "p50": 22.397918,
+        "p95": 55.40529124999998,
+        "p99": 93.05219481999993
+      },
+      "sse_baseline_ms": {
+        "n": 1390,
+        "mean": 22.32725566618705,
+        "p50": 15.265792000000001,
+        "p95": 51.5932416,
+        "p99": 60.61269247999998
+      },
+      "sse_event_window_ms": {
+        "n": 4496,
+        "mean": 28.695318946619217,
+        "p50": 21.508224,
+        "p95": 60.880511999999996,
+        "p99": 91.0697856
+      },
+      "competitor_reported_gbps": {
+        "n": 53,
+        "mean": 89.10698113207548,
+        "p50": 90.26,
+        "p95": 90.63,
+        "p99": 90.63
+      }
+    },
+    "rdma-smooth": {
+      "cache_complete_to_model_work_ms": {
+        "n": 128,
+        "mean": 788.9593280859375,
+        "p50": 684.5367915,
+        "p95": 1667.5612170499994,
+        "p99": 2303.2053681600014
+      },
+      "queue_seconds_per_batch_ms": {
+        "n": 8,
+        "mean": 0.1113297382812628,
+        "p50": 0.022763171874551347,
+        "p95": 0.48335043750015144,
+        "p99": 0.6794858875000218
+      },
+      "service_seconds_per_batch_ms": {
+        "n": 8,
+        "mean": 118.55378691796874,
+        "p50": 118.51355521874973,
+        "p95": 119.24453071250005,
+        "p99": 119.54119291750004
+      },
+      "physical_port_receive_gbps": {
+        "n": 8,
+        "mean": 98.02695118930139,
+        "p50": 98.03053275784154,
+        "p95": 98.20688368610783,
+        "p99": 98.2079583853793
+      },
+      "decode_step_interval_in_event_window_ms": {
+        "n": 1154,
+        "mean": 27.934035032928943,
+        "p50": 20.6409995,
+        "p95": 56.49231819999999,
+        "p99": 70.91749321
+      },
+      "sse_baseline_ms": {
+        "n": 1416,
+        "mean": 21.973761265536723,
+        "p50": 15.208960000000001,
+        "p95": 49.885952,
+        "p99": 56.599999999999966
+      },
+      "sse_event_window_ms": {
+        "n": 4612,
+        "mean": 28.050683059843884,
+        "p50": 20.576768,
+        "p95": 59.75647999999998,
+        "p99": 78.44713984000015
+      },
+      "competitor_reported_gbps": {
+        "n": 48,
+        "mean": 89.00979166666667,
+        "p50": 90.245,
+        "p95": 90.62,
+        "p99": 90.63
+      }
+    },
+    "local_copy-smooth": {
+      "cache_complete_to_model_work_ms": {
+        "n": 128,
+        "mean": 688.47650409375,
+        "p50": 589.8920989999999,
+        "p95": 1565.0926318499987,
+        "p99": 1885.9075120500006
+      },
+      "physical_port_receive_gbps": {
+        "n": 8,
+        "mean": 98.06006155325812,
+        "p50": 98.06403641862346,
+        "p95": 98.15206582188522,
+        "p99": 98.15999466799748
+      },
+      "decode_step_interval_in_event_window_ms": {
+        "n": 1353,
+        "mean": 23.83087072727273,
+        "p50": 18.292975,
+        "p95": 51.79656639999999,
+        "p99": 58.77547832000001
+      },
+      "sse_baseline_ms": {
+        "n": 1472,
+        "mean": 21.168441217391305,
+        "p50": 15.332352,
+        "p95": 48.97473280000001,
+        "p99": 54.50123264
+      },
+      "sse_event_window_ms": {
+        "n": 5404,
+        "mean": 23.937035937823833,
+        "p50": 18.576256,
+        "p95": 51.800499199999976,
+        "p99": 63.95712768000002
+      },
+      "competitor_reported_gbps": {
+        "n": 46,
+        "mean": 90.3445652173913,
+        "p50": 90.335,
+        "p95": 90.6275,
+        "p99": 90.6355
+      }
+    },
+    "local_copy-burst": {
+      "cache_complete_to_model_work_ms": {
+        "n": 128,
+        "mean": 1854.0318921015626,
+        "p50": 1874.445819,
+        "p95": 2716.58367645,
+        "p99": 2784.24664831
+      },
+      "physical_port_receive_gbps": {
+        "n": 8,
+        "mean": 97.62315137894447,
+        "p50": 97.63458367413162,
+        "p95": 97.82049809394456,
+        "p99": 97.82059406609973
+      },
+      "decode_step_interval_in_event_window_ms": {
+        "n": 1398,
+        "mean": 23.167818946351932,
+        "p50": 16.487170499999998,
+        "p95": 51.32161529999998,
+        "p99": 88.55380481999984
+      },
+      "sse_baseline_ms": {
+        "n": 1424,
+        "mean": 21.885754786516856,
+        "p50": 15.280512,
+        "p95": 50.9290368,
+        "p99": 54.55538432
+      },
+      "sse_event_window_ms": {
+        "n": 5588,
+        "mean": 23.240956380816034,
+        "p50": 16.610048,
+        "p95": 53.78990079999998,
+        "p99": 107.03004672000016
+      },
+      "competitor_reported_gbps": {
+        "n": 48,
+        "mean": 90.13770833333334,
+        "p50": 90.315,
+        "p95": 90.62,
+        "p99": 90.63
+      }
+    }
+  },
+  "transport_batch_metrics": {
+    "rdma-burst": {
+      "queue_batches": 256,
+      "service_batches": 256,
+      "queue_seconds": 229.08780171999976,
+      "service_seconds": 30.537596577000045
+    },
+    "rdma-smooth": {
+      "queue_batches": 256,
+      "service_batches": 256,
+      "queue_seconds": 0.028500413000003277,
+      "service_seconds": 30.349769450999997
+    },
+    "local_copy-smooth": {
+      "queue_batches": 0,
+      "service_batches": 0,
+      "queue_seconds": 0.0,
+      "service_seconds": 0.0
+    },
+    "local_copy-burst": {
+      "queue_batches": 0,
+      "service_batches": 0,
+      "queue_seconds": 0.0,
+      "service_seconds": 0.0
+    }
+  },
+  "network_counter_deltas_in_sample_brackets": {
+    "rdma-burst": {
+      "port_xmit_constraint_errors": 0,
+      "port_rcv_errors": 0,
+      "link_error_recovery": 0,
+      "port_rcv_remote_physical_errors": 0,
+      "excessive_buffer_overrun_errors": 0,
+      "port_rcv_constraint_errors": 0,
+      "local_link_integrity_errors": 0,
+      "port_rcv_switch_relay_errors": 0,
+      "symbol_error": 0,
+      "hw/roce_slow_restart_cnps": 551,
+      "hw/rp_cnp_ignored": 0,
+      "hw/roce_adp_retrans_to": 0,
+      "hw/resp_local_length_error": 0,
+      "hw/np_ecn_marked_roce_packets": 0,
+      "hw/local_ack_timeout_err": 0,
+      "hw/req_cqe_error": 0,
+      "hw/rnr_nak_retry_err": 0,
+      "hw/np_cnp_sent": 0,
+      "hw/rp_cnp_handled": 0,
+      "hw/implied_nak_seq_err": 2290,
+      "hw/req_cqe_flush_error": 0,
+      "hw/packet_seq_err": 0,
+      "hw/roce_adp_retrans": 551,
+      "hw/out_of_buffer": 0,
+      "hw/resp_cqe_error": 0,
+      "hw/resp_cqe_flush_error": 0,
+      "hw/out_of_sequence": 0,
+      "hw/req_remote_access_errors": 0,
+      "hw/resp_remote_access_errors": 0
+    },
+    "rdma-smooth": {
+      "port_xmit_constraint_errors": 0,
+      "port_rcv_errors": 0,
+      "link_error_recovery": 0,
+      "port_rcv_remote_physical_errors": 0,
+      "excessive_buffer_overrun_errors": 0,
+      "port_rcv_constraint_errors": 0,
+      "local_link_integrity_errors": 0,
+      "port_rcv_switch_relay_errors": 0,
+      "symbol_error": 0,
+      "hw/roce_slow_restart_cnps": 455,
+      "hw/rp_cnp_ignored": 0,
+      "hw/roce_adp_retrans_to": 0,
+      "hw/resp_local_length_error": 0,
+      "hw/np_ecn_marked_roce_packets": 0,
+      "hw/local_ack_timeout_err": 0,
+      "hw/req_cqe_error": 0,
+      "hw/rnr_nak_retry_err": 0,
+      "hw/np_cnp_sent": 0,
+      "hw/rp_cnp_handled": 0,
+      "hw/implied_nak_seq_err": 2198,
+      "hw/req_cqe_flush_error": 0,
+      "hw/packet_seq_err": 0,
+      "hw/roce_adp_retrans": 455,
+      "hw/out_of_buffer": 0,
+      "hw/resp_cqe_error": 0,
+      "hw/resp_cqe_flush_error": 0,
+      "hw/out_of_sequence": 0,
+      "hw/req_remote_access_errors": 0,
+      "hw/resp_remote_access_errors": 0
+    },
+    "local_copy-smooth": {
+      "port_xmit_constraint_errors": 0,
+      "port_rcv_errors": 0,
+      "link_error_recovery": 0,
+      "port_rcv_remote_physical_errors": 0,
+      "excessive_buffer_overrun_errors": 0,
+      "port_rcv_constraint_errors": 0,
+      "local_link_integrity_errors": 0,
+      "port_rcv_switch_relay_errors": 0,
+      "symbol_error": 0,
+      "hw/roce_slow_restart_cnps": 644,
+      "hw/rp_cnp_ignored": 0,
+      "hw/roce_adp_retrans_to": 0,
+      "hw/resp_local_length_error": 0,
+      "hw/np_ecn_marked_roce_packets": 0,
+      "hw/local_ack_timeout_err": 0,
+      "hw/req_cqe_error": 0,
+      "hw/rnr_nak_retry_err": 0,
+      "hw/np_cnp_sent": 0,
+      "hw/rp_cnp_handled": 0,
+      "hw/implied_nak_seq_err": 2645,
+      "hw/req_cqe_flush_error": 0,
+      "hw/packet_seq_err": 0,
+      "hw/roce_adp_retrans": 644,
+      "hw/out_of_buffer": 0,
+      "hw/resp_cqe_error": 0,
+      "hw/resp_cqe_flush_error": 0,
+      "hw/out_of_sequence": 0,
+      "hw/req_remote_access_errors": 0,
+      "hw/resp_remote_access_errors": 0
+    },
+    "local_copy-burst": {
+      "port_xmit_constraint_errors": 0,
+      "port_rcv_errors": 0,
+      "link_error_recovery": 0,
+      "port_rcv_remote_physical_errors": 0,
+      "excessive_buffer_overrun_errors": 0,
+      "port_rcv_constraint_errors": 0,
+      "local_link_integrity_errors": 0,
+      "port_rcv_switch_relay_errors": 0,
+      "symbol_error": 0,
+      "hw/roce_slow_restart_cnps": 504,
+      "hw/rp_cnp_ignored": 0,
+      "hw/roce_adp_retrans_to": 0,
+      "hw/resp_local_length_error": 0,
+      "hw/np_ecn_marked_roce_packets": 0,
+      "hw/local_ack_timeout_err": 0,
+      "hw/req_cqe_error": 0,
+      "hw/rnr_nak_retry_err": 0,
+      "hw/np_cnp_sent": 0,
+      "hw/rp_cnp_handled": 0,
+      "hw/implied_nak_seq_err": 3973,
+      "hw/req_cqe_flush_error": 0,
+      "hw/packet_seq_err": 0,
+      "hw/roce_adp_retrans": 504,
+      "hw/out_of_buffer": 0,
+      "hw/resp_cqe_error": 0,
+      "hw/resp_cqe_flush_error": 0,
+      "hw/out_of_sequence": 0,
+      "hw/req_remote_access_errors": 0,
+      "hw/resp_remote_access_errors": 0
+    }
+  },
+  "posting_qualifications": {
+    "rdma-burst": {
+      "count": 1,
+      "events": [
+        {
+          "block_id": "cases-decode-engine",
+          "cohort_id": "contention-0000",
+          "covered_tp_ranks": [
+            0,
+            1
+          ],
+          "event": "cohort_posting_spread",
+          "limit_ns": 1000000,
+          "monotonic_ns": 13440479029,
+          "pass": false,
+          "pid": 76078,
+          "posting_spread_ns": 1627385,
+          "wall_time_unix_ns": 1792031882943576759
+        }
+      ]
+    },
+    "rdma-smooth": {
+      "count": 0,
+      "events": []
+    },
+    "local_copy-smooth": {
+      "count": 0,
+      "events": []
+    },
+    "local_copy-burst": {
+      "count": 8,
+      "events": [
+        {
+          "block_id": "cases-decode-engine",
+          "cohort_id": "contention-0000",
+          "covered_tp_ranks": [
+            0,
+            1
+          ],
+          "event": "cohort_posting_spread",
+          "limit_ns": 1000000,
+          "monotonic_ns": 11171597603,
+          "pass": false,
+          "pid": 76078,
+          "posting_spread_ns": 3544567,
+          "wall_time_unix_ns": 1792031934270694274
+        },
+        {
+          "block_id": "cases-decode-engine",
+          "cohort_id": "contention-0001",
+          "covered_tp_ranks": [
+            0,
+            1
+          ],
+          "event": "cohort_posting_spread",
+          "limit_ns": 1000000,
+          "monotonic_ns": 11311693484,
+          "pass": false,
+          "pid": 76078,
+          "posting_spread_ns": 3742220,
+          "wall_time_unix_ns": 1792031973235242267
+        },
+        {
+          "block_id": "cases-decode-engine",
+          "cohort_id": "contention-0002",
+          "covered_tp_ranks": [
+            0,
+            1
+          ],
+          "event": "cohort_posting_spread",
+          "limit_ns": 1000000,
+          "monotonic_ns": 11182476126,
+          "pass": false,
+          "pid": 76078,
+          "posting_spread_ns": 2901353,
+          "wall_time_unix_ns": 1792032028463672188
+        },
+        {
+          "block_id": "cases-decode-engine",
+          "cohort_id": "contention-0003",
+          "covered_tp_ranks": [
+            0,
+            1
+          ],
+          "event": "cohort_posting_spread",
+          "limit_ns": 1000000,
+          "monotonic_ns": 11170443886,
+          "pass": false,
+          "pid": 76078,
+          "posting_spread_ns": 2806590,
+          "wall_time_unix_ns": 1792032130363804936
+        },
+        {
+          "block_id": "cases-decode-engine",
+          "cohort_id": "contention-0004",
+          "covered_tp_ranks": [
+            0,
+            1
+          ],
+          "event": "cohort_posting_spread",
+          "limit_ns": 1000000,
+          "monotonic_ns": 11472041603,
+          "pass": false,
+          "pid": 76078,
+          "posting_spread_ns": 3358082,
+          "wall_time_unix_ns": 1792032215563318633
+        },
+        {
+          "block_id": "cases-decode-engine",
+          "cohort_id": "contention-0005",
+          "covered_tp_ranks": [
+            0,
+            1
+          ],
+          "event": "cohort_posting_spread",
+          "limit_ns": 1000000,
+          "monotonic_ns": 11225366901,
+          "pass": false,
+          "pid": 76078,
+          "posting_spread_ns": 2894603,
+          "wall_time_unix_ns": 1792032254363389065
+        },
+        {
+          "block_id": "cases-decode-engine",
+          "cohort_id": "contention-0006",
+          "covered_tp_ranks": [
+            0,
+            1
+          ],
+          "event": "cohort_posting_spread",
+          "limit_ns": 1000000,
+          "monotonic_ns": 11144442429,
+          "pass": false,
+          "pid": 76078,
+          "posting_spread_ns": 6901459,
+          "wall_time_unix_ns": 1792032309545309162
+        },
+        {
+          "block_id": "cases-decode-engine",
+          "cohort_id": "contention-0007",
+          "covered_tp_ranks": [
+            0,
+            1
+          ],
+          "event": "cohort_posting_spread",
+          "limit_ns": 1000000,
+          "monotonic_ns": 11656714007,
+          "pass": false,
+          "pid": 76078,
+          "posting_spread_ns": 3252770,
+          "wall_time_unix_ns": 1792032411893195098
+        }
+      ]
+    }
+  },
+  "checkpoint_validation": {
+    "first_work_valid_per_arm": {
+      "rdma-burst": 256,
+      "rdma-smooth": 256,
+      "local_copy-smooth": 256,
+      "local_copy-burst": 256
+    },
+    "payload_distribution_per_arm": {
+      "rdma-burst": {
+        "n": 128,
+        "mean": 148275200,
+        "p50": 148275200.0,
+        "p95": 148275200.0,
+        "p99": 148275200.0
+      },
+      "rdma-smooth": {
+        "n": 128,
+        "mean": 148275200,
+        "p50": 148275200.0,
+        "p95": 148275200.0,
+        "p99": 148275200.0
+      },
+      "local_copy-smooth": {
+        "n": 128,
+        "mean": 148275200,
+        "p50": 148275200.0,
+        "p95": 148275200.0,
+        "p99": 148275200.0
+      },
+      "local_copy-burst": {
+        "n": 128,
+        "mean": 148275200,
+        "p50": 148275200.0,
+        "p95": 148275200.0,
+        "p99": 148275200.0
+      }
+    }
+  },
+  "paired_cohort_effects": {
+    "rdma": {
+      "n": 8,
+      "mean": -1.7466742027172586,
+      "p50": -1.3807402276142966,
+      "p95": -0.8354871302406537,
+      "p99": -0.814133144338266,
+      "negative_cohorts": 8
+    },
+    "local_copy": {
+      "n": 8,
+      "mean": -1.368038686858199,
+      "p50": -1.261117089248728,
+      "p95": -1.0266263492318104,
+      "p99": -0.9848231773433509,
+      "negative_cohorts": 8
+    }
+  },
+  "network_interaction_seconds_by_cohort": [
+    3.9428826583898626,
+    0.2939668601611629,
+    -1.2261460560839623,
+    0.09494971367530525,
+    -0.8255544971907511,
+    0.03966377425240353,
+    0.3685883317957632,
+    0.3407333418726921
+  ],
+  "cohort_means": [
+    {
+      "rdma-burst": 15.6153157260851,
+      "rdma-smooth": 10.408451230614446,
+      "local_copy-smooth": 9.390659811499063,
+      "local_copy-burst": 10.654641648579855
+    },
+    {
+      "rdma-smooth": 10.014521393051837,
+      "local_copy-burst": 10.962445334764197,
+      "rdma-burst": 11.460896122036502,
+      "local_copy-smooth": 9.810037465940695
+    },
+    {
+      "local_copy-burst": 11.81348795699887,
+      "local_copy-smooth": 9.778547253052238,
+      "rdma-smooth": 9.86106172169093,
+      "rdma-burst": 10.6698563695536
+    },
+    {
+      "local_copy-smooth": 9.582833629858214,
+      "rdma-burst": 11.42025501729222,
+      "local_copy-burst": 11.008905181835871,
+      "rdma-smooth": 9.899233751639258
+    },
+    {
+      "rdma-burst": 10.791560782527085,
+      "rdma-smooth": 9.906501899298746,
+      "local_copy-smooth": 9.897716156032402,
+      "local_copy-burst": 11.608329536451492
+    },
+    {
+      "rdma-smooth": 9.792771939304657,
+      "local_copy-burst": 11.027353901823517,
+      "rdma-burst": 10.95610514038708,
+      "local_copy-smooth": 9.903684474993497
+    },
+    {
+      "local_copy-burst": 10.86441386322258,
+      "local_copy-smooth": 9.606161521805916,
+      "rdma-smooth": 9.922057746211067,
+      "rdma-burst": 11.548898419423494
+    },
+    {
+      "local_copy-smooth": 9.984576667600777,
+      "rdma-burst": 10.953849511570297,
+      "local_copy-burst": 10.958949051972013,
+      "rdma-smooth": 9.638743785326369
+    }
+  ],
+  "clock_scope": "Native cache stages and model steps use D timestamps; SSE event windows align P client wall timestamps to D ready timestamps. Token and step samples are correlated within trials.",
+  "event_interval_scope": "Include full intervals overlapping the common event window, including stalls that extend beyond its boundary.",
+  "contract_annotation": "The recorded transport_model string is inherited metadata. rdma_rate_bps=0 is the executed condition and disables the software pacer."
+}
+
