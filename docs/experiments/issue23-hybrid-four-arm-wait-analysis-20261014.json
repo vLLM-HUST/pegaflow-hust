@@ -1,0 +1,1948 @@
+{
+  "formula": "adjusted_ttft_i = raw_ttft_i - (Tg_cohort - bundle_eligible_i)",
+  "clock_note": "Cohort wait uses one engine monotonic clock. P-visible-to-gate uses cross-node wall clocks and includes required transfer preparation.",
+  "arms": {
+    "local_copy-burst": {
+      "valid_timing_arm": false,
+      "ttft_seconds": {
+        "mean": 3.2892035199329257,
+        "p50": 3.2888492504134774,
+        "min": 3.0365770999342203,
+        "max": 3.5398001056164503
+      },
+      "cohort_wait_seconds": {
+        "mean": 0.5576807975,
+        "p50": 0.48763780900000003,
+        "min": 0.0,
+        "max": 1.3012978880000001
+      },
+      "ttft_without_cohort_wait_seconds": {
+        "mean": 2.731522722432926,
+        "p50": 2.762487480756663,
+        "min": 1.797303454178881,
+        "max": 3.4790971586480737
+      },
+      "prefill_visible_to_gate_seconds_wall_clock": {
+        "mean": 0.68610064875,
+        "p50": 0.6072306585,
+        "min": 0.073521445,
+        "max": 1.458212681
+      },
+      "cohorts": {
+        "mmlu-pro-smoke-0000": {
+          "ttft_seconds": {
+            "mean": 3.0688186155166477,
+            "p50": 3.0700480099767447,
+            "min": 3.0365770999342203,
+            "max": 3.098601342178881
+          },
+          "cohort_wait_seconds": {
+            "mean": 0.5691433765,
+            "p50": 0.48763780900000003,
+            "min": 0.0,
+            "max": 1.3012978880000001
+          },
+          "ttft_without_cohort_wait_seconds": {
+            "mean": 2.4996752390166477,
+            "p50": 2.582410200976745,
+            "min": 1.797303454178881,
+            "max": 3.0365770999342203
+          },
+          "completed_to_first_model_work_ms": {
+            "mean": 325.900963,
+            "p50": 326.0787345,
+            "min": 324.343288,
+            "max": 327.103095
+          },
+          "first_model_step_cpu_ms": [
+            [
+              352.356215,
+              354.179239
+            ],
+            [
+              352.356215,
+              354.179239
+            ],
+            [
+              352.356215,
+              354.179239
+            ],
+            [
+              352.356215,
+              354.179239
+            ]
+          ]
+        },
+        "frontierscience-smoke-0000": {
+          "ttft_seconds": {
+            "mean": 3.5095884243492037,
+            "p50": 3.5097282165661454,
+            "min": 3.4790971586480737,
+            "max": 3.5398001056164503
+          },
+          "cohort_wait_seconds": {
+            "mean": 0.5462182185,
+            "p50": 0.49109786050000004,
+            "min": 0.0,
+            "max": 1.202677153
+          },
+          "ttft_without_cohort_wait_seconds": {
+            "mean": 2.9633702058492037,
+            "p50": 3.0186303560661454,
+            "min": 2.3371229526164505,
+            "max": 3.4790971586480737
+          },
+          "completed_to_first_model_work_ms": {
+            "mean": 611.0904585,
+            "p50": 610.1329479999999,
+            "min": 608.77767,
+            "max": 615.318268
+          },
+          "first_model_step_cpu_ms": [
+            [
+              382.061428,
+              382.94343
+            ],
+            [
+              382.061428,
+              382.94343
+            ],
+            [
+              382.061428,
+              382.94343
+            ],
+            [
+              382.061428,
+              382.94343
+            ]
+          ]
+        }
+      },
+      "first_steps": [
+        {
+          "rank": 0,
+          "step": 957,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-b9ebf5e1",
+              4096,
+              10
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-889f5c05",
+              4096,
+              15
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-bb34ec9b",
+              4096,
+              9
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-84e27698",
+              4096,
+              3
+            ]
+          ],
+          "cpu_span_ms": 352.356215,
+          "return_after_work_ms": 343.847039
+        },
+        {
+          "rank": 0,
+          "step": 993,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-b9ebf5e1",
+              4141,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-889f5c05",
+              4146,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-bb34ec9b",
+              4140,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-84e27698",
+              4134,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-0-0-b8015692",
+              4096,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-1-0-86ac4bde",
+              4096,
+              2
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-2-0-83cb106e",
+              4096,
+              6
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-3-0-b5d74f36",
+              4096,
+              8
+            ]
+          ],
+          "cpu_span_ms": 382.061428,
+          "return_after_work_ms": 375.711844
+        },
+        {
+          "rank": 1,
+          "step": 957,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-b9ebf5e1",
+              4096,
+              10
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-889f5c05",
+              4096,
+              15
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-bb34ec9b",
+              4096,
+              9
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-84e27698",
+              4096,
+              3
+            ]
+          ],
+          "cpu_span_ms": 354.179239,
+          "return_after_work_ms": 346.603816
+        },
+        {
+          "rank": 1,
+          "step": 993,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-b9ebf5e1",
+              4141,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-889f5c05",
+              4146,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-bb34ec9b",
+              4140,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-84e27698",
+              4134,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-0-0-b8015692",
+              4096,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-1-0-86ac4bde",
+              4096,
+              2
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-2-0-83cb106e",
+              4096,
+              6
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-3-0-b5d74f36",
+              4096,
+              8
+            ]
+          ],
+          "cpu_span_ms": 382.94343,
+          "return_after_work_ms": 374.089755
+        }
+      ]
+    },
+    "local_copy-smooth": {
+      "valid_timing_arm": true,
+      "ttft_seconds": {
+        "mean": 4.597495044115931,
+        "p50": 4.6377137042582035,
+        "min": 2.859244955703616,
+        "max": 6.108032714575529
+      },
+      "cohort_wait_seconds": {
+        "mean": 0.549948507875,
+        "p50": 0.39914815299999995,
+        "min": 0.0,
+        "max": 1.388904174
+      },
+      "ttft_without_cohort_wait_seconds": {
+        "mean": 4.04754653624093,
+        "p50": 3.949426225781453,
+        "min": 1.5353357817036162,
+        "max": 6.051455685868859
+      },
+      "prefill_visible_to_gate_seconds_wall_clock": {
+        "mean": 0.712245393375,
+        "p50": 0.6278393755,
+        "min": 0.069804173,
+        "max": 1.528536496
+      },
+      "cohorts": {
+        "mmlu-pro-smoke-0000": {
+          "ttft_seconds": {
+            "mean": 3.116428406443447,
+            "p50": 3.191248473711312,
+            "min": 2.859244955703616,
+            "max": 3.2239717226475477
+          },
+          "cohort_wait_seconds": {
+            "mean": 0.57721976925,
+            "p50": 0.4924849515,
+            "min": 0.0,
+            "max": 1.323909174
+          },
+          "ttft_without_cohort_wait_seconds": {
+            "mean": 2.539208637193447,
+            "p50": 2.7208874280413973,
+            "min": 1.5353357817036162,
+            "max": 3.179723910987377
+          },
+          "completed_to_first_model_work_ms": {
+            "mean": 334.52972925,
+            "p50": 405.1562265,
+            "min": 109.089249,
+            "max": 418.717215
+          },
+          "first_model_step_cpu_ms": [
+            [
+              309.909446,
+              310.91556
+            ],
+            [
+              367.372981,
+              369.091577
+            ],
+            [
+              367.372981,
+              369.091577
+            ],
+            [
+              367.372981,
+              369.091577
+            ]
+          ]
+        },
+        "frontierscience-smoke-0000": {
+          "ttft_seconds": {
+            "mean": 6.078561681788415,
+            "p50": 6.077379163354635,
+            "min": 6.051455685868859,
+            "max": 6.108032714575529
+          },
+          "cohort_wait_seconds": {
+            "mean": 0.5226772465,
+            "p50": 0.350902406,
+            "min": 0.0,
+            "max": 1.388904174
+          },
+          "ttft_without_cohort_wait_seconds": {
+            "mean": 5.555884435288415,
+            "p50": 5.726476757354636,
+            "min": 4.719128540575529,
+            "max": 6.051455685868859
+          },
+          "completed_to_first_model_work_ms": {
+            "mean": 3138.698671,
+            "p50": 3138.5417180000004,
+            "min": 3126.982554,
+            "max": 3150.728694
+          },
+          "first_model_step_cpu_ms": [
+            [
+              359.656479,
+              362.268289
+            ],
+            [
+              359.656479,
+              362.268289
+            ],
+            [
+              359.656479,
+              362.268289
+            ],
+            [
+              359.656479,
+              362.268289
+            ]
+          ]
+        }
+      },
+      "first_steps": [
+        {
+          "rank": 0,
+          "step": 736,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bd8aa1b9",
+              4096,
+              10
+            ]
+          ],
+          "cpu_span_ms": 309.909446,
+          "return_after_work_ms": 305.646171
+        },
+        {
+          "rank": 0,
+          "step": 737,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bd8aa1b9",
+              4106,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-8b410bd7",
+              4096,
+              15
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-a097b2bb",
+              4096,
+              9
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-9ecd1409",
+              4096,
+              3
+            ]
+          ],
+          "cpu_span_ms": 367.372981,
+          "return_after_work_ms": 361.753151
+        },
+        {
+          "rank": 0,
+          "step": 784,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bd8aa1b9",
+              4153,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-8b410bd7",
+              4157,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-a097b2bb",
+              4151,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-9ecd1409",
+              4145,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-0-0-97d843e6",
+              4096,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-1-0-b87481c7",
+              4096,
+              2
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-2-0-8ed021fa",
+              4096,
+              6
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-3-0-a13c0a0e",
+              4096,
+              8
+            ]
+          ],
+          "cpu_span_ms": 359.656479,
+          "return_after_work_ms": 351.372087
+        },
+        {
+          "rank": 1,
+          "step": 736,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bd8aa1b9",
+              4096,
+              10
+            ]
+          ],
+          "cpu_span_ms": 310.91556,
+          "return_after_work_ms": 306.451024
+        },
+        {
+          "rank": 1,
+          "step": 737,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bd8aa1b9",
+              4106,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-8b410bd7",
+              4096,
+              15
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-a097b2bb",
+              4096,
+              9
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-9ecd1409",
+              4096,
+              3
+            ]
+          ],
+          "cpu_span_ms": 369.091577,
+          "return_after_work_ms": 361.200499
+        },
+        {
+          "rank": 1,
+          "step": 784,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bd8aa1b9",
+              4153,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-8b410bd7",
+              4157,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-a097b2bb",
+              4151,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-9ecd1409",
+              4145,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-0-0-97d843e6",
+              4096,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-1-0-b87481c7",
+              4096,
+              2
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-2-0-8ed021fa",
+              4096,
+              6
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-3-0-a13c0a0e",
+              4096,
+              8
+            ]
+          ],
+          "cpu_span_ms": 362.268289,
+          "return_after_work_ms": 355.614113
+        }
+      ]
+    },
+    "rdma-burst": {
+      "valid_timing_arm": true,
+      "ttft_seconds": {
+        "mean": 3.2171672644326463,
+        "p50": 3.2507345657795668,
+        "min": 2.921446168795228,
+        "max": 3.3159864051267505
+      },
+      "cohort_wait_seconds": {
+        "mean": 0.525609349125,
+        "p50": 0.400375408,
+        "min": 0.0,
+        "max": 1.3538872389999999
+      },
+      "ttft_without_cohort_wait_seconds": {
+        "mean": 2.6915579153076465,
+        "p50": 2.8683428830740376,
+        "min": 1.5675589297952282,
+        "max": 3.276293962262571
+      },
+      "prefill_visible_to_gate_seconds_wall_clock": {
+        "mean": 0.675499301375,
+        "p50": 0.601059308,
+        "min": 0.07253761,
+        "max": 1.421053148
+      },
+      "cohorts": {
+        "mmlu-pro-smoke-0000": {
+          "ttft_seconds": {
+            "mean": 3.2030640828888863,
+            "p50": 3.2874118788167834,
+            "min": 2.921446168795228,
+            "max": 3.3159864051267505
+          },
+          "cohort_wait_seconds": {
+            "mean": 0.59664296175,
+            "p50": 0.5163423039999999,
+            "min": 0.0,
+            "max": 1.3538872389999999
+          },
+          "ttft_without_cohort_wait_seconds": {
+            "mean": 2.6064211211388866,
+            "p50": 2.790915796248873,
+            "min": 1.5675589297952282,
+            "max": 3.276293962262571
+          },
+          "completed_to_first_model_work_ms": {
+            "mean": 358.48679100000004,
+            "p50": 442.45328500000005,
+            "min": 105.959479,
+            "max": 443.081115
+          },
+          "first_model_step_cpu_ms": [
+            [
+              358.238685,
+              359.66409
+            ],
+            [
+              397.009854,
+              398.886121
+            ],
+            [
+              397.009854,
+              398.886121
+            ],
+            [
+              397.009854,
+              398.886121
+            ]
+          ]
+        },
+        "frontierscience-smoke-0000": {
+          "ttft_seconds": {
+            "mean": 3.2312704459764063,
+            "p50": 3.230621869675815,
+            "min": 3.2012756997719407,
+            "max": 3.2625623447820544
+          },
+          "cohort_wait_seconds": {
+            "mean": 0.4545757365,
+            "p50": 0.342882282,
+            "min": 0.0,
+            "max": 1.132538382
+          },
+          "ttft_without_cohort_wait_seconds": {
+            "mean": 2.7766947094764065,
+            "p50": 2.8877395876758154,
+            "min": 2.1300239627820545,
+            "max": 3.2012756997719407
+          },
+          "completed_to_first_model_work_ms": {
+            "mean": 378.75590175,
+            "p50": 381.648349,
+            "min": 369.426994,
+            "max": 382.299915
+          },
+          "first_model_step_cpu_ms": [
+            [
+              350.999824,
+              349.032295
+            ],
+            [
+              350.999824,
+              349.032295
+            ],
+            [
+              350.999824,
+              349.032295
+            ],
+            [
+              350.999824,
+              349.032295
+            ]
+          ]
+        }
+      },
+      "first_steps": [
+        {
+          "rank": 0,
+          "step": 739,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bec61850",
+              4096,
+              10
+            ]
+          ],
+          "cpu_span_ms": 358.238685,
+          "return_after_work_ms": 352.493371
+        },
+        {
+          "rank": 0,
+          "step": 740,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bec61850",
+              4106,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-9de40a06",
+              4096,
+              15
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-802b0633",
+              4096,
+              9
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-8ae304b7",
+              4096,
+              3
+            ]
+          ],
+          "cpu_span_ms": 397.009854,
+          "return_after_work_ms": 391.423044
+        },
+        {
+          "rank": 0,
+          "step": 774,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bec61850",
+              4140,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-9de40a06",
+              4144,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-802b0633",
+              4138,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-8ae304b7",
+              4132,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-0-0-b659de97",
+              4096,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-1-0-8bca0935",
+              4096,
+              2
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-2-0-9c2a31b2",
+              4096,
+              6
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-3-0-98afb96b",
+              4096,
+              8
+            ]
+          ],
+          "cpu_span_ms": 350.999824,
+          "return_after_work_ms": 344.385139
+        },
+        {
+          "rank": 1,
+          "step": 739,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bec61850",
+              4096,
+              10
+            ]
+          ],
+          "cpu_span_ms": 359.66409,
+          "return_after_work_ms": 350.162503
+        },
+        {
+          "rank": 1,
+          "step": 740,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bec61850",
+              4106,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-9de40a06",
+              4096,
+              15
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-802b0633",
+              4096,
+              9
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-8ae304b7",
+              4096,
+              3
+            ]
+          ],
+          "cpu_span_ms": 398.886121,
+          "return_after_work_ms": 392.150432
+        },
+        {
+          "rank": 1,
+          "step": 774,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-bec61850",
+              4140,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-9de40a06",
+              4144,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-802b0633",
+              4138,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-8ae304b7",
+              4132,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-0-0-b659de97",
+              4096,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-1-0-8bca0935",
+              4096,
+              2
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-2-0-9c2a31b2",
+              4096,
+              6
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-3-0-98afb96b",
+              4096,
+              8
+            ]
+          ],
+          "cpu_span_ms": 349.032295,
+          "return_after_work_ms": 341.442796
+        }
+      ]
+    },
+    "rdma-smooth": {
+      "valid_timing_arm": true,
+      "ttft_seconds": {
+        "mean": 3.4536178646376356,
+        "p50": 3.524357200600207,
+        "min": 3.0411975430324674,
+        "max": 3.7219506269320846
+      },
+      "cohort_wait_seconds": {
+        "mean": 0.585653457375,
+        "p50": 0.493876014,
+        "min": 0.0,
+        "max": 1.4088902909999999
+      },
+      "ttft_without_cohort_wait_seconds": {
+        "mean": 2.867964407262636,
+        "p50": 3.0346461795359705,
+        "min": 1.6554251752102462,
+        "max": 3.6639900049194694
+      },
+      "prefill_visible_to_gate_seconds_wall_clock": {
+        "mean": 0.690016690125,
+        "p50": 0.602813162,
+        "min": 0.074514073,
+        "max": 1.477796004
+      },
+      "cohorts": {
+        "mmlu-pro-smoke-0000": {
+          "ttft_seconds": {
+            "mean": 3.2137839121278375,
+            "p50": 3.214606854598969,
+            "min": 3.0411975430324674,
+            "max": 3.3847243962809443
+          },
+          "cohort_wait_seconds": {
+            "mean": 0.5991605797499999,
+            "p50": 0.493876014,
+            "min": 0.0,
+            "max": 1.4088902909999999
+          },
+          "ttft_without_cohort_wait_seconds": {
+            "mean": 2.6146233323778376,
+            "p50": 2.719084955656706,
+            "min": 1.6554251752102462,
+            "max": 3.3648982429876924
+          },
+          "completed_to_first_model_work_ms": {
+            "mean": 323.7482455,
+            "p50": 320.5793835,
+            "min": 162.745665,
+            "max": 491.08855
+          },
+          "first_model_step_cpu_ms": [
+            [
+              332.576759,
+              333.802773
+            ],
+            [
+              332.576759,
+              333.802773
+            ],
+            [
+              355.07785,
+              354.114805
+            ],
+            [
+              355.07785,
+              354.114805
+            ]
+          ]
+        },
+        "frontierscience-smoke-0000": {
+          "ttft_seconds": {
+            "mean": 3.6934518171474338,
+            "p50": 3.6939333183690906,
+            "min": 3.6639900049194694,
+            "max": 3.7219506269320846
+          },
+          "cohort_wait_seconds": {
+            "mean": 0.572146335,
+            "p50": 0.4600527725,
+            "min": 0.0,
+            "max": 1.368479795
+          },
+          "ttft_without_cohort_wait_seconds": {
+            "mean": 3.1213054821474335,
+            "p50": 3.2338805458690905,
+            "min": 2.3534708319320847,
+            "max": 3.6639900049194694
+          },
+          "completed_to_first_model_work_ms": {
+            "mean": 840.64017775,
+            "p50": 843.8055509999999,
+            "min": 826.600967,
+            "max": 848.348642
+          },
+          "first_model_step_cpu_ms": [
+            [
+              363.120051,
+              361.609619
+            ],
+            [
+              363.120051,
+              361.609619
+            ],
+            [
+              363.120051,
+              361.609619
+            ],
+            [
+              363.120051,
+              361.609619
+            ]
+          ]
+        }
+      },
+      "first_steps": [
+        {
+          "rank": 0,
+          "step": 876,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-8dd24855",
+              4096,
+              10
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-83acb64a",
+              4096,
+              15
+            ]
+          ],
+          "cpu_span_ms": 332.576759,
+          "return_after_work_ms": 327.012041
+        },
+        {
+          "rank": 0,
+          "step": 877,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-8dd24855",
+              4106,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-83acb64a",
+              4111,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-8e3b6d98",
+              4096,
+              9
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-a79a2c0b",
+              4096,
+              3
+            ]
+          ],
+          "cpu_span_ms": 355.07785,
+          "return_after_work_ms": 350.358406
+        },
+        {
+          "rank": 0,
+          "step": 913,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-8dd24855",
+              4142,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-83acb64a",
+              4147,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-8e3b6d98",
+              4140,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-a79a2c0b",
+              4134,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-0-0-b87b58e5",
+              4096,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-1-0-962bccdb",
+              4096,
+              2
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-2-0-9a57d0cf",
+              4096,
+              6
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-3-0-90cbc127",
+              4096,
+              8
+            ]
+          ],
+          "cpu_span_ms": 363.120051,
+          "return_after_work_ms": 356.878933
+        },
+        {
+          "rank": 1,
+          "step": 876,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-8dd24855",
+              4096,
+              10
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-83acb64a",
+              4096,
+              15
+            ]
+          ],
+          "cpu_span_ms": 333.802773,
+          "return_after_work_ms": 327.679548
+        },
+        {
+          "rank": 1,
+          "step": 877,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-8dd24855",
+              4106,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-83acb64a",
+              4111,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-8e3b6d98",
+              4096,
+              9
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-a79a2c0b",
+              4096,
+              3
+            ]
+          ],
+          "cpu_span_ms": 354.114805,
+          "return_after_work_ms": 349.469351
+        },
+        {
+          "rank": 1,
+          "step": 913,
+          "requests": [
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-0-0-8dd24855",
+              4142,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-1-0-83acb64a",
+              4147,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-2-0-8e3b6d98",
+              4140,
+              1
+            ],
+            [
+              "cmpl-issue23-mmlu-pro-smoke-0000-3-0-a79a2c0b",
+              4134,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-0-0-b87b58e5",
+              4096,
+              1
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-1-0-962bccdb",
+              4096,
+              2
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-2-0-9a57d0cf",
+              4096,
+              6
+            ],
+            [
+              "cmpl-issue23-frontierscience-smoke-0000-3-0-90cbc127",
+              4096,
+              8
+            ]
+          ],
+          "cpu_span_ms": 361.609619,
+          "return_after_work_ms": 354.952844
+        }
+      ]
+    }
+  },
+  "requests": [
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-3",
+      "arm": "local_copy-burst",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.0365770999342203,
+      "cohort_wait_seconds": 0.0,
+      "ttft_without_cohort_wait_seconds": 3.0365770999342203,
+      "e2e_without_cohort_wait_seconds": 19.363143105059862,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.073521445,
+      "p_ack_wait_ms": 0,
+      "completed_to_first_model_work_ms": 324.343288,
+      "first_model_step_cpu_ms": [
+        352.356215,
+        354.179239
+      ],
+      "first_model_step_return_after_work_ms": [
+        343.847039,
+        346.603816
+      ],
+      "first_step": [
+        957,
+        957
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-0",
+      "arm": "local_copy-burst",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.098601342178881,
+      "cohort_wait_seconds": 1.3012978880000001,
+      "ttft_without_cohort_wait_seconds": 1.797303454178881,
+      "e2e_without_cohort_wait_seconds": 18.12395016119958,
+      "prefill_visible_to_gate_seconds_wall_clock": 1.3687108,
+      "p_ack_wait_ms": 311,
+      "completed_to_first_model_work_ms": 327.103095,
+      "first_model_step_cpu_ms": [
+        352.356215,
+        354.179239
+      ],
+      "first_model_step_return_after_work_ms": [
+        343.847039,
+        346.603816
+      ],
+      "first_step": [
+        957,
+        957
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-2",
+      "arm": "local_copy-burst",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.059913414530456,
+      "cohort_wait_seconds": 0.323854556,
+      "ttft_without_cohort_wait_seconds": 2.736058858530456,
+      "e2e_without_cohort_wait_seconds": 19.061041475580865,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.393693214,
+      "p_ack_wait_ms": 322,
+      "completed_to_first_model_work_ms": 325.405743,
+      "first_model_step_cpu_ms": [
+        352.356215,
+        354.179239
+      ],
+      "first_model_step_return_after_work_ms": [
+        343.847039,
+        346.603816
+      ],
+      "first_step": [
+        957,
+        957
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-1",
+      "arm": "local_copy-burst",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.0801826054230332,
+      "cohort_wait_seconds": 0.651421062,
+      "ttft_without_cohort_wait_seconds": 2.4287615434230334,
+      "e2e_without_cohort_wait_seconds": 18.75650440873215,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.722441606,
+      "p_ack_wait_ms": 316,
+      "completed_to_first_model_work_ms": 326.751726,
+      "first_model_step_cpu_ms": [
+        352.356215,
+        354.179239
+      ],
+      "first_model_step_return_after_work_ms": [
+        343.847039,
+        346.603816
+      ],
+      "first_step": [
+        957,
+        957
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-0",
+      "arm": "local_copy-burst",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.5398001056164503,
+      "cohort_wait_seconds": 1.202677153,
+      "ttft_without_cohort_wait_seconds": 2.3371229526164505,
+      "e2e_without_cohort_wait_seconds": 18.351687483540413,
+      "prefill_visible_to_gate_seconds_wall_clock": 1.458212681,
+      "p_ack_wait_ms": 307,
+      "completed_to_first_model_work_ms": 615.318268,
+      "first_model_step_cpu_ms": [
+        382.061428,
+        382.94343
+      ],
+      "first_model_step_return_after_work_ms": [
+        375.711844,
+        374.089755
+      ],
+      "first_step": [
+        993,
+        993
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-1",
+      "arm": "local_copy-burst",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.5172395249828696,
+      "cohort_wait_seconds": 0.728323422,
+      "ttft_without_cohort_wait_seconds": 2.7889161029828697,
+      "e2e_without_cohort_wait_seconds": 18.80813694689404,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.809261748,
+      "p_ack_wait_ms": 314,
+      "completed_to_first_model_work_ms": 610.291867,
+      "first_model_step_cpu_ms": [
+        382.061428,
+        382.94343
+      ],
+      "first_model_step_return_after_work_ms": [
+        375.711844,
+        374.089755
+      ],
+      "first_step": [
+        993,
+        993
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-2",
+      "arm": "local_copy-burst",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.502216908149421,
+      "cohort_wait_seconds": 0.253872299,
+      "ttft_without_cohort_wait_seconds": 3.248344609149421,
+      "e2e_without_cohort_wait_seconds": 19.264390895710015,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.492019711,
+      "p_ack_wait_ms": 309,
+      "completed_to_first_model_work_ms": 609.974029,
+      "first_model_step_cpu_ms": [
+        382.061428,
+        382.94343
+      ],
+      "first_model_step_return_after_work_ms": [
+        375.711844,
+        374.089755
+      ],
+      "first_step": [
+        993,
+        993
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-3",
+      "arm": "local_copy-burst",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.4790971586480737,
+      "cohort_wait_seconds": 0.0,
+      "ttft_without_cohort_wait_seconds": 3.4790971586480737,
+      "e2e_without_cohort_wait_seconds": 19.499835978262126,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.170943985,
+      "p_ack_wait_ms": 0,
+      "completed_to_first_model_work_ms": 608.77767,
+      "first_model_step_cpu_ms": [
+        382.061428,
+        382.94343
+      ],
+      "first_model_step_return_after_work_ms": [
+        375.711844,
+        374.089755
+      ],
+      "first_step": [
+        993,
+        993
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-0",
+      "arm": "local_copy-smooth",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 2.859244955703616,
+      "cohort_wait_seconds": 1.323909174,
+      "ttft_without_cohort_wait_seconds": 1.5353357817036162,
+      "e2e_without_cohort_wait_seconds": 16.263029261211777,
+      "prefill_visible_to_gate_seconds_wall_clock": 1.387537623,
+      "p_ack_wait_ms": 328,
+      "completed_to_first_model_work_ms": 109.089249,
+      "first_model_step_cpu_ms": [
+        309.909446,
+        310.91556
+      ],
+      "first_model_step_return_after_work_ms": [
+        305.646171,
+        306.451024
+      ],
+      "first_step": [
+        736,
+        736
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-3",
+      "arm": "local_copy-smooth",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.179723910987377,
+      "cohort_wait_seconds": 0.0,
+      "ttft_without_cohort_wait_seconds": 3.179723910987377,
+      "e2e_without_cohort_wait_seconds": 17.78071057330817,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.069804173,
+      "p_ack_wait_ms": 0,
+      "completed_to_first_model_work_ms": 400.58881,
+      "first_model_step_cpu_ms": [
+        367.372981,
+        369.091577
+      ],
+      "first_model_step_return_after_work_ms": [
+        361.753151,
+        361.200499
+      ],
+      "first_step": [
+        737,
+        737
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-1",
+      "arm": "local_copy-smooth",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.2239717226475477,
+      "cohort_wait_seconds": 0.65725261,
+      "ttft_without_cohort_wait_seconds": 2.5667191126475477,
+      "e2e_without_cohort_wait_seconds": 17.16620720709659,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.72177797,
+      "p_ack_wait_ms": 314,
+      "completed_to_first_model_work_ms": 418.717215,
+      "first_model_step_cpu_ms": [
+        367.372981,
+        369.091577
+      ],
+      "first_model_step_return_after_work_ms": [
+        361.753151,
+        361.200499
+      ],
+      "first_step": [
+        737,
+        737
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-2",
+      "arm": "local_copy-smooth",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.2027730364352465,
+      "cohort_wait_seconds": 0.32771729299999997,
+      "ttft_without_cohort_wait_seconds": 2.8750557434352464,
+      "e2e_without_cohort_wait_seconds": 17.477636274935527,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.393734913,
+      "p_ack_wait_ms": 320,
+      "completed_to_first_model_work_ms": 409.723643,
+      "first_model_step_cpu_ms": [
+        367.372981,
+        369.091577
+      ],
+      "first_model_step_return_after_work_ms": [
+        361.753151,
+        361.200499
+      ],
+      "first_step": [
+        737,
+        737
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-2",
+      "arm": "local_copy-smooth",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 6.068006819114089,
+      "cohort_wait_seconds": 0.23122579899999998,
+      "ttft_without_cohort_wait_seconds": 5.836781020114089,
+      "e2e_without_cohort_wait_seconds": 20.225201388658846,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.533900781,
+      "p_ack_wait_ms": 317,
+      "completed_to_first_model_work_ms": 3133.530959,
+      "first_model_step_cpu_ms": [
+        359.656479,
+        362.268289
+      ],
+      "first_model_step_return_after_work_ms": [
+        351.372087,
+        355.614113
+      ],
+      "first_step": [
+        784,
+        784
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-1",
+      "arm": "local_copy-smooth",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 6.0867515075951815,
+      "cohort_wait_seconds": 0.470579013,
+      "ttft_without_cohort_wait_seconds": 5.616172494595181,
+      "e2e_without_cohort_wait_seconds": 20.00891601410253,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.857900289,
+      "p_ack_wait_ms": 323,
+      "completed_to_first_model_work_ms": 3143.552477,
+      "first_model_step_cpu_ms": [
+        359.656479,
+        362.268289
+      ],
+      "first_model_step_return_after_work_ms": [
+        351.372087,
+        355.614113
+      ],
+      "first_step": [
+        784,
+        784
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-3",
+      "arm": "local_copy-smooth",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 6.051455685868859,
+      "cohort_wait_seconds": 0.0,
+      "ttft_without_cohort_wait_seconds": 6.051455685868859,
+      "e2e_without_cohort_wait_seconds": 20.441081929951906,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.204770902,
+      "p_ack_wait_ms": 0,
+      "completed_to_first_model_work_ms": 3126.982554,
+      "first_model_step_cpu_ms": [
+        359.656479,
+        362.268289
+      ],
+      "first_model_step_return_after_work_ms": [
+        351.372087,
+        355.614113
+      ],
+      "first_step": [
+        784,
+        784
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-0",
+      "arm": "local_copy-smooth",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 6.108032714575529,
+      "cohort_wait_seconds": 1.388904174,
+      "ttft_without_cohort_wait_seconds": 4.719128540575529,
+      "e2e_without_cohort_wait_seconds": 19.113574811115885,
+      "prefill_visible_to_gate_seconds_wall_clock": 1.528536496,
+      "p_ack_wait_ms": 317,
+      "completed_to_first_model_work_ms": 3150.728694,
+      "first_model_step_cpu_ms": [
+        359.656479,
+        362.268289
+      ],
+      "first_model_step_return_after_work_ms": [
+        351.372087,
+        355.614113
+      ],
+      "first_step": [
+        784,
+        784
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-0",
+      "arm": "rdma-burst",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 2.921446168795228,
+      "cohort_wait_seconds": 1.3538872389999999,
+      "ttft_without_cohort_wait_seconds": 1.5675589297952282,
+      "e2e_without_cohort_wait_seconds": 16.233562237122857,
+      "prefill_visible_to_gate_seconds_wall_clock": 1.421053148,
+      "p_ack_wait_ms": 314,
+      "completed_to_first_model_work_ms": 105.959479,
+      "first_model_step_cpu_ms": [
+        358.238685,
+        359.66409
+      ],
+      "first_model_step_return_after_work_ms": [
+        352.493371,
+        350.162503
+      ],
+      "first_step": [
+        739,
+        739
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-3",
+      "arm": "rdma-burst",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.276293962262571,
+      "cohort_wait_seconds": 0.0,
+      "ttft_without_cohort_wait_seconds": 3.276293962262571,
+      "e2e_without_cohort_wait_seconds": 17.78190407063812,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.07253761,
+      "p_ack_wait_ms": 0,
+      "completed_to_first_model_work_ms": 442.06312,
+      "first_model_step_cpu_ms": [
+        397.009854,
+        398.886121
+      ],
+      "first_model_step_return_after_work_ms": [
+        391.423044,
+        392.150432
+      ],
+      "first_step": [
+        740,
+        740
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-1",
+      "arm": "rdma-burst",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.3159864051267505,
+      "cohort_wait_seconds": 0.690582105,
+      "ttft_without_cohort_wait_seconds": 2.6254043001267506,
+      "e2e_without_cohort_wait_seconds": 17.131722770589906,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.7615365,
+      "p_ack_wait_ms": 329,
+      "completed_to_first_model_work_ms": 443.081115,
+      "first_model_step_cpu_ms": [
+        397.009854,
+        398.886121
+      ],
+      "first_model_step_return_after_work_ms": [
+        391.423044,
+        392.150432
+      ],
+      "first_step": [
+        740,
+        740
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-2",
+      "arm": "rdma-burst",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.298529795370996,
+      "cohort_wait_seconds": 0.342102503,
+      "ttft_without_cohort_wait_seconds": 2.956427292370996,
+      "e2e_without_cohort_wait_seconds": 17.463002358035943,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.414511295,
+      "p_ack_wait_ms": 338,
+      "completed_to_first_model_work_ms": 442.84345,
+      "first_model_step_cpu_ms": [
+        397.009854,
+        398.886121
+      ],
+      "first_model_step_return_after_work_ms": [
+        391.423044,
+        392.150432
+      ],
+      "first_step": [
+        740,
+        740
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-0",
+      "arm": "rdma-burst",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.2625623447820544,
+      "cohort_wait_seconds": 1.132538382,
+      "ttft_without_cohort_wait_seconds": 2.1300239627820545,
+      "e2e_without_cohort_wait_seconds": 16.398518823051184,
+      "prefill_visible_to_gate_seconds_wall_clock": 1.412147371,
+      "p_ack_wait_ms": 311,
+      "completed_to_first_model_work_ms": 382.299915,
+      "first_model_step_cpu_ms": [
+        350.999824,
+        349.032295
+      ],
+      "first_model_step_return_after_work_ms": [
+        344.385139,
+        341.442796
+      ],
+      "first_step": [
+        774,
+        774
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-2",
+      "arm": "rdma-burst",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.222336952574551,
+      "cohort_wait_seconds": 0.22711625100000002,
+      "ttft_without_cohort_wait_seconds": 2.995220701574551,
+      "e2e_without_cohort_wait_seconds": 17.26407108771728,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.440582116,
+      "p_ack_wait_ms": 310,
+      "completed_to_first_model_work_ms": 381.251089,
+      "first_model_step_cpu_ms": [
+        350.999824,
+        349.032295
+      ],
+      "first_model_step_return_after_work_ms": [
+        344.385139,
+        341.442796
+      ],
+      "first_step": [
+        774,
+        774
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-1",
+      "arm": "rdma-burst",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.238906786777079,
+      "cohort_wait_seconds": 0.458648313,
+      "ttft_without_cohort_wait_seconds": 2.7802584737770792,
+      "e2e_without_cohort_wait_seconds": 17.05556046387633,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.763338342,
+      "p_ack_wait_ms": 316,
+      "completed_to_first_model_work_ms": 382.045609,
+      "first_model_step_cpu_ms": [
+        350.999824,
+        349.032295
+      ],
+      "first_model_step_return_after_work_ms": [
+        344.385139,
+        341.442796
+      ],
+      "first_step": [
+        774,
+        774
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-3",
+      "arm": "rdma-burst",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.2012756997719407,
+      "cohort_wait_seconds": 0.0,
+      "ttft_without_cohort_wait_seconds": 3.2012756997719407,
+      "e2e_without_cohort_wait_seconds": 17.476054770871997,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.118288029,
+      "p_ack_wait_ms": 0,
+      "completed_to_first_model_work_ms": 369.426994,
+      "first_model_step_cpu_ms": [
+        350.999824,
+        349.032295
+      ],
+      "first_model_step_return_after_work_ms": [
+        344.385139,
+        341.442796
+      ],
+      "first_step": [
+        774,
+        774
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-0",
+      "arm": "rdma-smooth",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.064315466210246,
+      "cohort_wait_seconds": 1.4088902909999999,
+      "ttft_without_cohort_wait_seconds": 1.6554251752102462,
+      "e2e_without_cohort_wait_seconds": 16.233532696148167,
+      "prefill_visible_to_gate_seconds_wall_clock": 1.477796004,
+      "p_ack_wait_ms": 342,
+      "completed_to_first_model_work_ms": 162.959084,
+      "first_model_step_cpu_ms": [
+        332.576759,
+        333.802773
+      ],
+      "first_model_step_return_after_work_ms": [
+        327.012041,
+        327.679548
+      ],
+      "first_step": [
+        876,
+        876
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-1",
+      "arm": "rdma-smooth",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.0411975430324674,
+      "cohort_wait_seconds": 0.65651814,
+      "ttft_without_cohort_wait_seconds": 2.384679403032467,
+      "e2e_without_cohort_wait_seconds": 16.96583319908689,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.750553902,
+      "p_ack_wait_ms": 328,
+      "completed_to_first_model_work_ms": 162.745665,
+      "first_model_step_cpu_ms": [
+        332.576759,
+        333.802773
+      ],
+      "first_model_step_return_after_work_ms": [
+        327.012041,
+        327.679548
+      ],
+      "first_step": [
+        876,
+        876
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-3",
+      "arm": "rdma-smooth",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.3648982429876924,
+      "cohort_wait_seconds": 0.0,
+      "ttft_without_cohort_wait_seconds": 3.3648982429876924,
+      "e2e_without_cohort_wait_seconds": 17.817323424853384,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.074514073,
+      "p_ack_wait_ms": 0,
+      "completed_to_first_model_work_ms": 478.199683,
+      "first_model_step_cpu_ms": [
+        355.07785,
+        354.114805
+      ],
+      "first_model_step_return_after_work_ms": [
+        350.358406,
+        349.469351
+      ],
+      "first_step": [
+        877,
+        877
+      ]
+    },
+    {
+      "request_id": "issue23-mmlu-pro-smoke-0000-2",
+      "arm": "rdma-smooth",
+      "cohort_id": "mmlu-pro-smoke-0000",
+      "ttft_seconds": 3.3847243962809443,
+      "cohort_wait_seconds": 0.331233888,
+      "ttft_without_cohort_wait_seconds": 3.0534905082809445,
+      "e2e_without_cohort_wait_seconds": 17.509010825239372,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.406151114,
+      "p_ack_wait_ms": 332,
+      "completed_to_first_model_work_ms": 491.08855,
+      "first_model_step_cpu_ms": [
+        355.07785,
+        354.114805
+      ],
+      "first_model_step_return_after_work_ms": [
+        350.358406,
+        349.469351
+      ],
+      "first_step": [
+        877,
+        877
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-0",
+      "arm": "rdma-smooth",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.7219506269320846,
+      "cohort_wait_seconds": 1.368479795,
+      "ttft_without_cohort_wait_seconds": 2.3534708319320847,
+      "e2e_without_cohort_wait_seconds": 16.69851042498793,
+      "prefill_visible_to_gate_seconds_wall_clock": 1.449528267,
+      "p_ack_wait_ms": 317,
+      "completed_to_first_model_work_ms": 848.348642,
+      "first_model_step_cpu_ms": [
+        363.120051,
+        361.609619
+      ],
+      "first_model_step_return_after_work_ms": [
+        356.878933,
+        354.952844
+      ],
+      "first_step": [
+        913,
+        913
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-1",
+      "arm": "rdma-smooth",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.7030408307909966,
+      "cohort_wait_seconds": 0.6872389799999999,
+      "ttft_without_cohort_wait_seconds": 3.0158018507909965,
+      "e2e_without_cohort_wait_seconds": 17.362459932538588,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.78262737,
+      "p_ack_wait_ms": 323,
+      "completed_to_first_model_work_ms": 848.129783,
+      "first_model_step_cpu_ms": [
+        363.120051,
+        361.609619
+      ],
+      "first_model_step_return_after_work_ms": [
+        356.878933,
+        354.952844
+      ],
+      "first_step": [
+        913,
+        913
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-3",
+      "arm": "rdma-smooth",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.6639900049194694,
+      "cohort_wait_seconds": 0.0,
+      "ttft_without_cohort_wait_seconds": 3.6639900049194694,
+      "e2e_without_cohort_wait_seconds": 18.010687397792935,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.123890369,
+      "p_ack_wait_ms": 0,
+      "completed_to_first_model_work_ms": 826.600967,
+      "first_model_step_cpu_ms": [
+        363.120051,
+        361.609619
+      ],
+      "first_model_step_return_after_work_ms": [
+        356.878933,
+        354.952844
+      ],
+      "first_step": [
+        913,
+        913
+      ]
+    },
+    {
+      "request_id": "issue23-frontierscience-smoke-0000-2",
+      "arm": "rdma-smooth",
+      "cohort_id": "frontierscience-smoke-0000",
+      "ttft_seconds": 3.6848258059471846,
+      "cohort_wait_seconds": 0.232866565,
+      "ttft_without_cohort_wait_seconds": 3.4519592409471844,
+      "e2e_without_cohort_wait_seconds": 17.798587732713937,
+      "prefill_visible_to_gate_seconds_wall_clock": 0.455072422,
+      "p_ack_wait_ms": 316,
+      "completed_to_first_model_work_ms": 839.481319,
+      "first_model_step_cpu_ms": [
+        363.120051,
+        361.609619
+      ],
+      "first_model_step_return_after_work_ms": [
+        356.878933,
+        354.952844
+      ],
+      "first_step": [
+        913,
+        913
+      ]
+    }
+  ]
+}

@@ -8,8 +8,8 @@ use bytesize::ByteSize;
 #[cfg(not(feature = "rdma"))]
 use log::warn;
 use log::{debug, info};
-use parking_lot::Mutex;
-use std::collections::HashSet;
+use parking_lot::{Mutex, RwLock};
+use std::collections::{HashMap, HashSet};
 use std::num::NonZeroU64;
 use std::sync::{Arc, Weak};
 use std::time::Duration;
@@ -136,7 +136,12 @@ pub(crate) struct StorageEngine {
     blockwise_alloc: bool,
     metaserver_client: Option<Arc<MetaServerClient>>,
     transfer_lock: Arc<transfer_lock::TransferLockManager>,
-    issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
+    issue23_experiment: Option<Arc<RwLock<Arc<Issue23CausalExperiment>>>>,
+    issue23_trace_root: Option<std::path::PathBuf>,
+    #[cfg(feature = "rdma")]
+    issue23_background:
+        tokio::sync::Mutex<Option<crate::backing::issue23_background::BackgroundReader>>,
+    frozen_transfer_source: RwLock<Option<HashMap<BlockKey, Arc<SealedBlock>>>>,
 }
 
 impl StorageEngine {
@@ -155,11 +160,18 @@ impl StorageEngine {
         let rdma_qps_per_peer = config.rdma_qps_per_peer;
         let blockwise_alloc = config.blockwise_alloc;
         let transfer_lock_timeout = config.transfer_lock_timeout;
+        let issue23_trace_root = config
+            .issue23_experiment
+            .as_ref()
+            .and_then(|c| c.trace_path.parent())
+            .and_then(|parent| parent.parent())
+            .map(|p| p.to_path_buf());
         let issue23_experiment = config
             .issue23_experiment
             .clone()
             .map(Issue23CausalExperiment::new)
-            .transpose()?;
+            .transpose()?
+            .map(|experiment| Arc::new(RwLock::new(experiment)));
         #[cfg(feature = "rdma")]
         let tailguard_remote_read = config
             .tailguard_remote_read
@@ -313,6 +325,10 @@ impl StorageEngine {
                 metaserver_client,
                 transfer_lock,
                 issue23_experiment,
+                issue23_trace_root,
+                #[cfg(feature = "rdma")]
+                issue23_background: tokio::sync::Mutex::new(None),
+                frozen_transfer_source: RwLock::new(None),
             }
         });
 
@@ -557,7 +573,114 @@ impl StorageEngine {
                 visible.len()
             ));
         }
-        experiment.activate_staged_hidden()
+        experiment.read().activate_staged_hidden()
+    }
+
+    pub(crate) fn configure_issue23(
+        &self,
+        config: Issue23ExperimentConfig,
+        inherit: bool,
+    ) -> Result<(), String> {
+        let root = self
+            .issue23_trace_root
+            .as_ref()
+            .ok_or("Issue23 trace root is unavailable")?
+            .canonicalize()
+            .map_err(|e| e.to_string())?;
+        let parent = config
+            .trace_path
+            .parent()
+            .ok_or("Trace parent is missing")?
+            .canonicalize()
+            .map_err(|e| e.to_string())?;
+        if !parent.starts_with(root) {
+            return Err("Trace must stay within the experiment run".into());
+        }
+        let slot = self
+            .issue23_experiment
+            .as_ref()
+            .ok_or("Issue23 is not enabled")?;
+        let mut previous = slot.write();
+        if !previous.is_idle() || Arc::strong_count(&previous) != 1 {
+            return Err("Issue23 fetches must finish before changing epochs".into());
+        }
+        let next = Issue23CausalExperiment::new(config.clone())?;
+        if inherit {
+            next.inherit_hidden(&previous)?;
+        }
+        #[cfg(feature = "rdma")]
+        if let Some(rdma) = &self.rdma_transport {
+            let rate = config.plan.as_ref().map_or(0, |p| p.rdma_rate_bps);
+            rdma.engine()
+                .set_pacing_rate(rate)
+                .map_err(|e| e.to_string())?;
+        }
+        *previous = next;
+        Ok(())
+    }
+
+    pub(crate) fn release_issue23_source(&self) -> Result<(), String> {
+        if self.issue23_experiment.is_none() {
+            return Err("Issue23 is not enabled".into());
+        }
+        if self.transfer_lock.active_session_count() != 0 {
+            return Err("Source transfer leases are still active".into());
+        }
+        *self.frozen_transfer_source.write() = None;
+        Ok(())
+    }
+
+    #[cfg(feature = "rdma")]
+    pub(crate) async fn start_issue23_background(
+        &self,
+        config: crate::backing::issue23_background::Issue23BackgroundConfig,
+    ) -> Result<(), String> {
+        if self.issue23_experiment.is_none() {
+            return Err("Issue23 is not enabled".into());
+        }
+        let mut slot = self.issue23_background.lock().await;
+        if slot.is_some() {
+            return Err("Background is already running".into());
+        }
+        let rdma = self
+            .rdma_transport
+            .as_ref()
+            .ok_or("RDMA transport is unavailable")?
+            .clone();
+        let allocation = self
+            .allocate(NonZeroU64::new(1024 * 1024).expect("positive buffer"), None)
+            .ok_or("Background allocation failed")?;
+        *slot = Some(
+            crate::backing::issue23_background::BackgroundReader::start(
+                rdma,
+                allocation,
+                config,
+                "issue23-background-decode".into(),
+            )
+            .await?,
+        );
+        Ok(())
+    }
+
+    #[cfg(feature = "rdma")]
+    pub(crate) async fn stop_issue23_background(
+        &self,
+    ) -> Result<crate::backing::issue23_background::Issue23BackgroundStats, String> {
+        let reader = self
+            .issue23_background
+            .lock()
+            .await
+            .take()
+            .ok_or("Background is not running")?;
+        reader.stop().await
+    }
+
+    pub(crate) fn issue23_pacing_totals(&self) -> (u64, u64, usize) {
+        #[cfg(feature = "rdma")]
+        if let Some(rdma) = &self.rdma_transport {
+            return rdma.engine().pacing_totals();
+        }
+        (0, 0, 0)
     }
 
     fn reclaim_until_allocator_can_allocate(
@@ -683,7 +806,58 @@ impl StorageEngine {
         keys: &[BlockKey],
         request_id: &str,
     ) -> Vec<(BlockKey, Arc<SealedBlock>)> {
+        if let Some(snapshot) = self.frozen_transfer_source.read().as_ref() {
+            let found: Vec<_> = keys
+                .iter()
+                .filter_map(|key| {
+                    snapshot
+                        .get(key)
+                        .map(|block| (key.clone(), Arc::clone(block)))
+                })
+                .collect();
+            info!(
+                "issue23_source_snapshot_lookup: request_id={request_id} requested={} found={}",
+                keys.len(),
+                found.len()
+            );
+            return found;
+        }
         self.read_cache.get_blocks_for_request(keys, request_id)
+    }
+
+    pub(crate) fn freeze_issue23_source_snapshot(
+        &self,
+        expected: &HashMap<BlockKey, u64>,
+    ) -> Result<(usize, u64), String> {
+        if self.issue23_experiment.is_none() {
+            return Err("Issue23 is not enabled".into());
+        }
+        let mut slot = self.frozen_transfer_source.write();
+        if slot.is_some() {
+            return Err("Issue23 source snapshot is already frozen; restart the arm".into());
+        }
+        let keys: Vec<_> = expected.keys().cloned().collect();
+        let found = self
+            .read_cache
+            .get_blocks_for_request(&keys, "issue23-source-freeze");
+        if found.len() != expected.len() {
+            return Err(format!(
+                "source snapshot incomplete: found={} expected={}",
+                found.len(),
+                expected.len()
+            ));
+        }
+        let mut bytes = 0u64;
+        for (key, block) in &found {
+            if expected.get(key).copied() != Some(block.memory_footprint()) {
+                return Err(format!("source snapshot byte mismatch: {}", object_id(key)));
+            }
+            bytes += block.memory_footprint();
+        }
+        let count = found.len();
+        *slot = Some(found.into_iter().collect());
+        info!("issue23_source_snapshot_frozen: blocks={count} bytes={bytes}");
+        Ok((count, bytes))
     }
 
     /// Lock blocks for a transfer session, returning the session ID.
@@ -775,6 +949,47 @@ mod tests {
 
         let stats = storage.cleanup_memory_cache();
         assert_eq!(stats, MemoryCacheCleanupStats::default());
+    }
+
+    #[tokio::test]
+    async fn frozen_issue23_source_serves_original_blocks_after_republication_and_eviction() {
+        let directory = tempfile::tempdir().unwrap();
+        let config = StorageConfig {
+            issue23_experiment: Some(Issue23ExperimentConfig {
+                plan: None,
+                backend: crate::issue23_causal::Issue23Backend::Rdma,
+                schedule: crate::issue23_causal::Issue23Schedule::Burst,
+                trace_path: directory.path().join("source.jsonl"),
+            }),
+            ..StorageConfig::default()
+        };
+        let storage = StorageEngine::new_with_config(1 << 20, false, config, &[]).unwrap();
+        let key = BlockKey::new("ns".into(), vec![1]);
+        let original = Arc::new(SealedBlock::from_slots(Vec::new()));
+        storage.test_insert_cache(key.clone(), Arc::clone(&original));
+        let expected = HashMap::from([(key.clone(), 0)]);
+        assert_eq!(
+            storage.freeze_issue23_source_snapshot(&expected).unwrap(),
+            (1, 0)
+        );
+        storage.test_insert_cache(key.clone(), Arc::new(SealedBlock::from_slots(Vec::new())));
+        storage.cleanup_memory_cache();
+        let served = storage.get_blocks_for_transfer_with_request(&[key], "request");
+        assert_eq!(served.len(), 1);
+        assert!(Arc::ptr_eq(&served[0].1, &original));
+        assert!(storage.freeze_issue23_source_snapshot(&expected).is_err());
+    }
+
+    #[tokio::test]
+    async fn source_snapshot_controls_require_experiment_opt_in() {
+        let storage = make_engine();
+        assert!(
+            storage
+                .freeze_issue23_source_snapshot(&HashMap::new())
+                .is_err()
+        );
+        assert!(storage.release_issue23_source().is_err());
+        assert!(storage.frozen_transfer_source.read().is_none());
     }
 
     #[tokio::test]

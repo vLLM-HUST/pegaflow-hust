@@ -25,6 +25,7 @@ from pegaflow.connector.common import (
     logger,
     parse_env_int,
 )
+from pegaflow.connector.telemetry import telemetry_event
 from pegaflow.debug_save import debug_save_enabled
 from pegaflow.ipc_wrapper import CudaIPCWrapper
 from pegaflow.npu_ipc_wrapper import NpuIPCWrapper
@@ -502,7 +503,7 @@ class WorkerConnector:
             wrapper_bytes = pickle.dumps(wrapper)
 
             logical_block_size = (
-                self._cache_groups.group_block_sizes[self._layer_to_group[layer_name]]
+                self._cache_groups.group_block_sizes[self._layer_to_group.get(layer_name, 0)]
                 if self._cache_groups.group_block_sizes
                 else self._ctx.block_size
             )
@@ -724,6 +725,16 @@ class WorkerConnector:
                         start_time, num_blocks, _ = meta
                         duration = now - start_time
                         load_stats_to_record.append((duration, num_blocks, success))
+                        telemetry_event(
+                            "load_completed",
+                            request_ids=sorted(req_ids),
+                            tp_rank=self._ctx.tp_rank,
+                            load_state=shm_name,
+                            blocks=num_blocks,
+                            duration_ms=duration * 1000,
+                            success=success,
+                            native_state=state,
+                        )
 
                     completed_reqs.update(req_ids)
                     completed_shms.append(shm_name)
@@ -819,6 +830,13 @@ class WorkerConnector:
 
         total_requests = len(metadata.load_intents)
         load_start = time.perf_counter()
+        telemetry_event(
+            "load_start",
+            request_ids=list(metadata.load_intents),
+            tp_rank=self._ctx.tp_rank,
+            shard=self._ctx.tp_shard_index,
+            groups=self._cache_groups.group_count,
+        )
 
         all_block_ids: list[int] = []
         loads: list[tuple[bytes, list[list[int | None]]]] = []
@@ -965,6 +983,17 @@ class WorkerConnector:
 
         schedule_end = time.perf_counter()
         schedule_time_us = (schedule_end - load_start) * 1e6
+        telemetry_event(
+            "load_submitted",
+            request_ids=request_ids,
+            tp_rank=self._ctx.tp_rank,
+            shard=self._ctx.tp_shard_index,
+            blocks=num_blocks,
+            planes=num_layers,
+            lease_bundles=len(loads),
+            rpc_and_schedule_us=schedule_time_us,
+            load_state=shm_name,
+        )
 
         with self._load_completion_lock:
             for req_id in request_ids:

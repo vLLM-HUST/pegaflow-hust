@@ -6,7 +6,7 @@ use std::sync::Arc;
 use std::time::Instant;
 
 use log::{info, warn};
-use parking_lot::Mutex;
+use parking_lot::{Mutex, RwLock};
 use tokio::task::JoinHandle;
 
 #[cfg(feature = "rdma")]
@@ -164,7 +164,7 @@ pub(super) struct PrefetchScheduler {
     ssd_store: Option<Arc<SsdBackingStore>>,
     rdma_fetch: Option<RdmaFetch>,
     max_prefetch_blocks: usize,
-    issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
+    issue23_experiment: Option<Arc<RwLock<Arc<Issue23CausalExperiment>>>>,
 }
 
 impl PrefetchScheduler {
@@ -172,7 +172,7 @@ impl PrefetchScheduler {
         ssd_store: Option<Arc<SsdBackingStore>>,
         rdma_fetch: Option<RdmaFetch>,
         max_prefetch_blocks: usize,
-        issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
+        issue23_experiment: Option<Arc<RwLock<Arc<Issue23CausalExperiment>>>>,
     ) -> Self {
         Self {
             state: Arc::new(Mutex::new(PrefetchState {
@@ -262,6 +262,7 @@ impl PrefetchScheduler {
         }
 
         if let Some(experiment) = &self.issue23_experiment {
+            let experiment = experiment.read();
             if !experiment.is_active()
                 && let Err(error) = experiment.stage_hidden_blocks(&result.cache_inserts)
             {

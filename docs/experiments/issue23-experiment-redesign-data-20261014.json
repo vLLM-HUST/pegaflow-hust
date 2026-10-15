@@ -1,0 +1,2035 @@
+{
+  "arms": {
+    "local_copy-burst": {
+      "valid_timing_arm": false,
+      "ttft_mean_seconds": 3.2892035199329257,
+      "observer_intervals_ms": {
+        "before_second_arrival": {
+          "n": 84,
+          "mean": 227.595601885003,
+          "p50": 225.73991725221276,
+          "p95": 238.04706688970327,
+          "p99": 245.66174244508147,
+          "max": 246.07253354042768
+        },
+        "after_second_arrival": {
+          "n": 168,
+          "mean": 274.7567409893409,
+          "p50": 228.92917832359672,
+          "p95": 431.57993336208165,
+          "p99": 964.9224354978651,
+          "max": 967.1433875337243
+        }
+      },
+      "observer_intervals_over_500ms": {
+        "before_second_arrival": 0,
+        "after_second_arrival": 8
+      },
+      "observer_intervals_over_1000ms": {
+        "before_second_arrival": 0,
+        "after_second_arrival": 0
+      },
+      "observers": {
+        "issue23-mmlu-pro-smoke-0000-3": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 227.72023627268416,
+              "p50": 225.6468003615737,
+              "p95": 236.9564799591899,
+              "p99": 243.85337959975004,
+              "max": 245.57760450989008
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 274.6760857380217,
+              "p50": 228.75018557533622,
+              "p95": 430.5177515838294,
+              "p99": 888.0014643911265,
+              "max": 964.9040177464485
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 259.0241359162425,
+            "p50": 227.63979621231556,
+            "p95": 395.70127874612797,
+            "p99": 848.6123516969387,
+            "max": 964.9040177464485
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 11.422320815
+        },
+        "issue23-mmlu-pro-smoke-0000-0": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 227.60941669167508,
+              "p50": 225.83303414285183,
+              "p95": 238.06133959442377,
+              "p99": 243.91958806663752,
+              "max": 245.38415018469095
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 274.7455631560158,
+              "p50": 229.19936338439584,
+              "p95": 429.8269120045005,
+              "p99": 888.9100738242262,
+              "max": 967.1433875337243
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 259.0335143345689,
+            "p50": 227.86363866180182,
+            "p95": 395.56624721735704,
+            "p99": 848.8393521681433,
+            "max": 967.1433875337243
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 11.424159067
+        },
+        "issue23-mmlu-pro-smoke-0000-2": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 227.48179578532776,
+              "p50": 225.87029356509447,
+              "p95": 237.04508319497108,
+              "p99": 243.7051847577095,
+              "max": 245.3702101483941
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 274.76806929778485,
+              "p50": 228.7859357893467,
+              "p95": 426.723476499319,
+              "p99": 887.8236944507801,
+              "max": 964.9598291143775
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 259.00597812696583,
+            "p50": 227.83788852393627,
+            "p95": 400.1224262639879,
+            "p99": 848.3149425499146,
+            "max": 964.9598291143775
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 11.425501711
+        },
+        "issue23-mmlu-pro-smoke-0000-1": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 227.570958790325,
+              "p50": 225.1672614365816,
+              "p95": 237.96618822962046,
+              "p99": 244.45126447826624,
+              "max": 246.07253354042768
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 274.8372457655413,
+              "p50": 229.2522587813437,
+              "p95": 427.51377322711045,
+              "p99": 887.9520786460482,
+              "max": 964.0911743044853
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 259.08181677380253,
+            "p50": 227.60056518018246,
+            "p95": 399.466608185321,
+            "p99": 848.954005260021,
+            "max": 964.0911743044853
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 11.426854415
+        }
+      },
+      "cohorts": {
+        "mmlu-pro-smoke-0000": {
+          "ttft_mean_seconds": 3.0688186155166477,
+          "post_spread_ms": 0.551963,
+          "eligibility_spread_ms": 1301.297888,
+          "gate_to_all_complete_ms": 60.125835,
+          "first_post_to_all_complete_ms": 43.899082,
+          "completion_spread_ms": 2.760937,
+          "logical_payload_bytes": 593100800,
+          "requests": [
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-0",
+              "actual_post_offset_ms": 16.423858,
+              "actual_complete_offset_ms": 57.364898
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-1",
+              "actual_post_offset_ms": 16.601332,
+              "actual_complete_offset_ms": 57.717377
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-2",
+              "actual_post_offset_ms": 16.226753,
+              "actual_complete_offset_ms": 59.06365
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-3",
+              "actual_post_offset_ms": 16.778716,
+              "actual_complete_offset_ms": 60.125835
+            }
+          ]
+        },
+        "frontierscience-smoke-0000": {
+          "ttft_mean_seconds": 3.5095884243492037,
+          "post_spread_ms": 1.982898,
+          "eligibility_spread_ms": 1202.677153,
+          "gate_to_all_complete_ms": 58.30926,
+          "first_post_to_all_complete_ms": 43.135323,
+          "completion_spread_ms": 6.560889,
+          "logical_payload_bytes": 593100800,
+          "requests": [
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-0",
+              "actual_post_offset_ms": 15.183137,
+              "actual_complete_offset_ms": 51.748371
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-1",
+              "actual_post_offset_ms": 17.156835,
+              "actual_complete_offset_ms": 56.794003
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-2",
+              "actual_post_offset_ms": 15.173937,
+              "actual_complete_offset_ms": 57.112931
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-3",
+              "actual_post_offset_ms": 17.102413,
+              "actual_complete_offset_ms": 58.30926
+            }
+          ]
+        }
+      },
+      "local_copy_notification_hold_ms": [
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-3",
+          "slot": 3,
+          "copy_ms": 39.381773,
+          "copy_done_to_notification_ms": 3.938155
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-0",
+          "slot": 0,
+          "copy_ms": 40.411857,
+          "copy_done_to_notification_ms": 0.166314
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-2",
+          "slot": 2,
+          "copy_ms": 39.27108,
+          "copy_done_to_notification_ms": 3.360582
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-1",
+          "slot": 1,
+          "copy_ms": 34.958146,
+          "copy_done_to_notification_ms": 5.962594
+        },
+        {
+          "request_id": "issue23-frontierscience-smoke-0000-0",
+          "slot": 0,
+          "copy_ms": 36.341579,
+          "copy_done_to_notification_ms": 0.207795
+        },
+        {
+          "request_id": "issue23-frontierscience-smoke-0000-1",
+          "slot": 1,
+          "copy_ms": 39.446954,
+          "copy_done_to_notification_ms": 0.169994
+        },
+        {
+          "request_id": "issue23-frontierscience-smoke-0000-2",
+          "slot": 2,
+          "copy_ms": 39.241359,
+          "copy_done_to_notification_ms": 2.677165
+        },
+        {
+          "request_id": "issue23-frontierscience-smoke-0000-3",
+          "slot": 3,
+          "copy_ms": 39.236659,
+          "copy_done_to_notification_ms": 1.944017
+        }
+      ],
+      "frontier_h2d": [
+        {
+          "timestamp": "2026-10-14T02:49:48.140926+00:00",
+          "blocks": 8,
+          "copies": 400,
+          "bytes": 296550400,
+          "duration_ms": 156.19,
+          "logical_device": 1
+        },
+        {
+          "timestamp": "2026-10-14T02:49:48.187675+00:00",
+          "blocks": 8,
+          "copies": 400,
+          "bytes": 296550400,
+          "duration_ms": 207.04,
+          "logical_device": 0
+        }
+      ],
+      "prefill_first_work": [
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-0-0-a6d69470",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4106,
+          "tp_rank": 0,
+          "unix_ns": 1791946177310624989
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-1-0-9261e412",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4111,
+          "tp_rank": 0,
+          "unix_ns": 1791946177618056942
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-2-0-b603e2a8",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4105,
+          "tp_rank": 0,
+          "unix_ns": 1791946177956050608
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-3-0-baea2ddc",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4099,
+          "tp_rank": 0,
+          "unix_ns": 1791946178597895123
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-0-0-ac37071f",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4097,
+          "tp_rank": 0,
+          "unix_ns": 1791946185314479289
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-1-0-a2f5c5ec",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4098,
+          "tp_rank": 0,
+          "unix_ns": 1791946185627035154
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-2-0-93a32552",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4102,
+          "tp_rank": 0,
+          "unix_ns": 1791946185994419633
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-3-0-a0aa62b4",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4104,
+          "tp_rank": 0,
+          "unix_ns": 1791946186637428800
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-0-0-a6d69470",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4106,
+          "tp_rank": 1,
+          "unix_ns": 1791946177308291597
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-1-0-9261e412",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4111,
+          "tp_rank": 1,
+          "unix_ns": 1791946177617707245
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-2-0-b603e2a8",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4105,
+          "tp_rank": 1,
+          "unix_ns": 1791946177955264114
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-3-0-baea2ddc",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4099,
+          "tp_rank": 1,
+          "unix_ns": 1791946178597269522
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-0-0-ac37071f",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4097,
+          "tp_rank": 1,
+          "unix_ns": 1791946185316390213
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-1-0-a2f5c5ec",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4098,
+          "tp_rank": 1,
+          "unix_ns": 1791946185626329541
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-2-0-93a32552",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4102,
+          "tp_rank": 1,
+          "unix_ns": 1791946185994422873
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-3-0-a0aa62b4",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4104,
+          "tp_rank": 1,
+          "unix_ns": 1791946186637240276
+        }
+      ],
+      "batch_api_fallback_warning_count": 0,
+      "resources": {
+        "prefill": {
+          "samples": 28,
+          "sample_duration_seconds": 27.00182524,
+          "cpu_quota": "800000 100000",
+          "cpu_effective_cores": 1.0175219547491599,
+          "cpu_delta": {
+            "usage_usec": 27474950,
+            "user_usec": 17181263,
+            "system_usec": 10293687,
+            "nr_periods": 270,
+            "nr_throttled": 1,
+            "throttled_usec": 220021
+          },
+          "throttled_period_fraction": 0.003703703703703704,
+          "collector_ms": {
+            "n": 28,
+            "mean": 122.519142460078,
+            "p50": 26.98937989771366,
+            "p95": 563.8790781609714,
+            "p99": 568.7240736186504,
+            "max": 570.317555218935
+          },
+          "sample_interval_ms": {
+            "n": 27,
+            "mean": 1000.0676014814815,
+            "p50": 1000.067265,
+            "p95": 1000.0767161,
+            "p99": 1000.0781231999999,
+            "max": 1000.078534
+          },
+          "memory_gib_range": [
+            21.724254608154297,
+            21.748600006103516
+          ],
+          "memory_event_delta": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0
+          },
+          "network_counter_delta": {
+            "rx_bytes": 3356658,
+            "tx_bytes": 6906812,
+            "rx_packets": 7368,
+            "tx_packets": 9758,
+            "rx_dropped": 0,
+            "tx_dropped": 0
+          }
+        },
+        "decode": {
+          "samples": 28,
+          "sample_duration_seconds": 27.001982206,
+          "cpu_quota": "800000 100000",
+          "cpu_effective_cores": 3.8405547122002277,
+          "cpu_delta": {
+            "usage_usec": 103702590,
+            "user_usec": 86009868,
+            "system_usec": 17692723,
+            "nr_periods": 270,
+            "nr_throttled": 0,
+            "throttled_usec": 0
+          },
+          "throttled_period_fraction": 0.0,
+          "collector_ms": {
+            "n": 28,
+            "mean": 134.3863557392199,
+            "p50": 36.71187849249691,
+            "p95": 596.9255790347233,
+            "p99": 600.1298310188577,
+            "max": 600.2193840686232
+          },
+          "sample_interval_ms": {
+            "n": 27,
+            "mean": 1000.0734150370371,
+            "p50": 1000.07726,
+            "p95": 1000.0849512000001,
+            "p99": 1000.0859432999999,
+            "max": 1000.08615
+          },
+          "memory_gib_range": [
+            21.380115509033203,
+            21.581867218017578
+          ],
+          "memory_event_delta": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0
+          },
+          "network_counter_delta": {
+            "rx_bytes": 10811943,
+            "tx_bytes": 12397461,
+            "rx_packets": 20921,
+            "tx_packets": 22555,
+            "rx_dropped": 0,
+            "tx_dropped": 0
+          }
+        }
+      },
+      "source_snapshot": {
+        "source_blocks": 40,
+        "source_bytes": 1186201600,
+        "status": "PASS"
+      },
+      "planned_arrival_relative_seconds": [
+        0.06,
+        0.0,
+        0.042,
+        0.02,
+        8.001,
+        8.02,
+        8.04,
+        8.06
+      ]
+    },
+    "local_copy-smooth": {
+      "valid_timing_arm": true,
+      "ttft_mean_seconds": 4.597495044115931,
+      "observer_intervals_ms": {
+        "before_second_arrival": {
+          "n": 85,
+          "mean": 228.27529505114344,
+          "p50": 223.9780444651842,
+          "p95": 260.2428313344716,
+          "p99": 289.04910285025795,
+          "max": 384.6053062006831
+        },
+        "after_second_arrival": {
+          "n": 167,
+          "mean": 234.19495603950796,
+          "p50": 228.75538654625416,
+          "p95": 253.79983466118574,
+          "p99": 381.5551344677806,
+          "max": 384.80211421847343
+        }
+      },
+      "observer_intervals_over_500ms": {
+        "before_second_arrival": 0,
+        "after_second_arrival": 0
+      },
+      "observer_intervals_over_1000ms": {
+        "before_second_arrival": 0,
+        "after_second_arrival": 0
+      },
+      "observers": {
+        "issue23-mmlu-pro-smoke-0000-0": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 22,
+              "mean": 233.5729773410342,
+              "p50": 224.28383119404316,
+              "p95": 267.11927335709333,
+              "p99": 360.36985198035825,
+              "max": 384.6053062006831
+            },
+            "after_second_arrival": {
+              "n": 41,
+              "mean": 233.80435464858283,
+              "p50": 228.704446926713,
+              "p95": 244.43436600267887,
+              "p99": 330.46360258013027,
+              "max": 380.1711993291974
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 233.72355622372456,
+            "p50": 226.35025717318058,
+            "p95": 254.75542331114409,
+            "p99": 381.856159940362,
+            "max": 384.6053062006831
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.586066053
+        },
+        "issue23-mmlu-pro-smoke-0000-3": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 226.4814166618245,
+              "p50": 223.99495542049408,
+              "p95": 227.40240767598152,
+              "p99": 262.1588185429573,
+              "max": 270.84792125970125
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 234.29128230505046,
+              "p50": 228.87056600302458,
+              "p95": 253.36573664098972,
+              "p99": 328.58211085200264,
+              "max": 379.929605871439
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 231.68799375730848,
+            "p50": 226.24557092785835,
+            "p95": 252.8685726225376,
+            "p99": 312.2989614121619,
+            "max": 379.929605871439
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.84121731
+        },
+        "issue23-mmlu-pro-smoke-0000-1": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 226.36869580795369,
+              "p50": 223.96095748990774,
+              "p95": 227.62359213083982,
+              "p99": 260.23683976382017,
+              "max": 268.39015167206526
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 234.3145137918847,
+              "p50": 228.79769979044795,
+              "p95": 252.50714491121468,
+              "p99": 331.17246679030313,
+              "max": 384.80211421847343
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 231.66590779724103,
+            "p50": 226.34790651500225,
+            "p95": 252.0691386424005,
+            "p99": 312.62669743970065,
+            "max": 384.80211421847343
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.84293514
+        },
+        "issue23-mmlu-pro-smoke-0000-2": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 226.42581980852853,
+              "p50": 223.8796465098858,
+              "p95": 227.65354998409748,
+              "p99": 261.32284440100193,
+              "max": 269.74016800522804
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 234.36037337939655,
+              "p50": 228.9956510066986,
+              "p95": 253.1661828048527,
+              "p99": 330.9071722347285,
+              "max": 384.24159679561853
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 231.71552218910722,
+            "p50": 226.38413682579994,
+            "p95": 252.67968494445086,
+            "p99": 313.2507109455767,
+            "max": 384.24159679561853
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.844338227
+        }
+      },
+      "cohorts": {
+        "mmlu-pro-smoke-0000": {
+          "ttft_mean_seconds": 3.116428406443447,
+          "post_spread_ms": 29.522655,
+          "eligibility_spread_ms": 1323.909174,
+          "gate_to_all_complete_ms": 61.988492,
+          "first_post_to_all_complete_ms": 61.263009,
+          "completion_spread_ms": 28.905403,
+          "logical_payload_bytes": 593100800,
+          "requests": [
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-0",
+              "actual_post_offset_ms": 0.725483,
+              "actual_complete_offset_ms": 33.083089
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-1",
+              "actual_post_offset_ms": 10.240577,
+              "actual_complete_offset_ms": 43.860577
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-2",
+              "actual_post_offset_ms": 20.235063,
+              "actual_complete_offset_ms": 52.854029
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-3",
+              "actual_post_offset_ms": 30.248138,
+              "actual_complete_offset_ms": 61.988492
+            }
+          ]
+        },
+        "frontierscience-smoke-0000": {
+          "ttft_mean_seconds": 6.078561681788415,
+          "post_spread_ms": 29.653142,
+          "eligibility_spread_ms": 1388.904174,
+          "gate_to_all_complete_ms": 59.462996,
+          "first_post_to_all_complete_ms": 59.075334,
+          "completion_spread_ms": 23.74648,
+          "logical_payload_bytes": 593100800,
+          "requests": [
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-0",
+              "actual_post_offset_ms": 0.387662,
+              "actual_complete_offset_ms": 35.716516
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-1",
+              "actual_post_offset_ms": 10.037338,
+              "actual_complete_offset_ms": 42.892393
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-2",
+              "actual_post_offset_ms": 20.034936,
+              "actual_complete_offset_ms": 52.913931
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-3",
+              "actual_post_offset_ms": 30.040804,
+              "actual_complete_offset_ms": 59.462996
+            }
+          ]
+        }
+      },
+      "local_copy_notification_hold_ms": [
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-0",
+          "slot": 0,
+          "copy_ms": 31.983994,
+          "copy_done_to_notification_ms": 0.157401
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-3",
+          "slot": 3,
+          "copy_ms": 31.289221,
+          "copy_done_to_notification_ms": 0.162351
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-1",
+          "slot": 1,
+          "copy_ms": 33.146758,
+          "copy_done_to_notification_ms": 0.187231
+        },
+        {
+          "request_id": "issue23-mmlu-pro-smoke-0000-2",
+          "slot": 2,
+          "copy_ms": 32.148365,
+          "copy_done_to_notification_ms": 0.17602
+        },
+        {
+          "request_id": "issue23-frontierscience-smoke-0000-2",
+          "slot": 2,
+          "copy_ms": 32.666115,
+          "copy_done_to_notification_ms": 0.19936
+        },
+        {
+          "request_id": "issue23-frontierscience-smoke-0000-1",
+          "slot": 1,
+          "copy_ms": 32.643325,
+          "copy_done_to_notification_ms": 0.20157
+        },
+        {
+          "request_id": "issue23-frontierscience-smoke-0000-3",
+          "slot": 3,
+          "copy_ms": 29.246472,
+          "copy_done_to_notification_ms": 0.15398
+        },
+        {
+          "request_id": "issue23-frontierscience-smoke-0000-0",
+          "slot": 0,
+          "copy_ms": 35.110423,
+          "copy_done_to_notification_ms": 0.209761
+        }
+      ],
+      "frontier_h2d": [
+        {
+          "timestamp": "2026-10-14T03:03:42.955583+00:00",
+          "blocks": 8,
+          "copies": 400,
+          "bytes": 296550400,
+          "duration_ms": 498.53,
+          "logical_device": 1
+        },
+        {
+          "timestamp": "2026-10-14T03:03:45.363017+00:00",
+          "blocks": 8,
+          "copies": 400,
+          "bytes": 296550400,
+          "duration_ms": 2905.56,
+          "logical_device": 0
+        }
+      ],
+      "prefill_first_work": [
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-0-0-be8bf88b",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4106,
+          "tp_rank": 0,
+          "unix_ns": 1791947011731149982
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-1-0-ada71a65",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4111,
+          "tp_rank": 0,
+          "unix_ns": 1791947012054555529
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-2-0-b98094dd",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4105,
+          "tp_rank": 0,
+          "unix_ns": 1791947012390912199
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-3-0-bf50a5b2",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4099,
+          "tp_rank": 0,
+          "unix_ns": 1791947013069408516
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-0-0-a5045f2a",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4097,
+          "tp_rank": 0,
+          "unix_ns": 1791947019736541909
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-1-0-b4ed68d1",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4098,
+          "tp_rank": 0,
+          "unix_ns": 1791947020052510417
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-2-0-b4f95ece",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4102,
+          "tp_rank": 0,
+          "unix_ns": 1791947020407117098
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-3-0-b632e5dd",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4104,
+          "tp_rank": 0,
+          "unix_ns": 1791947021072626682
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-0-0-be8bf88b",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4106,
+          "tp_rank": 1,
+          "unix_ns": 1791947011731311884
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-1-0-ada71a65",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4111,
+          "tp_rank": 1,
+          "unix_ns": 1791947012054324786
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-2-0-b98094dd",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4105,
+          "tp_rank": 1,
+          "unix_ns": 1791947012388913066
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-3-0-bf50a5b2",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4099,
+          "tp_rank": 1,
+          "unix_ns": 1791947013068586017
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-0-0-a5045f2a",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4097,
+          "tp_rank": 1,
+          "unix_ns": 1791947019735256024
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-1-0-b4ed68d1",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4098,
+          "tp_rank": 1,
+          "unix_ns": 1791947020052630789
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-2-0-b4f95ece",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4102,
+          "tp_rank": 1,
+          "unix_ns": 1791947020406782225
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-3-0-b632e5dd",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4104,
+          "tp_rank": 1,
+          "unix_ns": 1791947021071727352
+        }
+      ],
+      "batch_api_fallback_warning_count": 0,
+      "resources": {
+        "prefill": {
+          "samples": 28,
+          "sample_duration_seconds": 27.002203696,
+          "cpu_quota": "800000 100000",
+          "cpu_effective_cores": 1.000828721398147,
+          "cpu_delta": {
+            "usage_usec": 27024581,
+            "user_usec": 16737812,
+            "system_usec": 10286769,
+            "nr_periods": 270,
+            "nr_throttled": 0,
+            "throttled_usec": 0
+          },
+          "throttled_period_fraction": 0.0,
+          "collector_ms": {
+            "n": 28,
+            "mean": 123.99702276369291,
+            "p50": 28.620317578315735,
+            "p95": 563.3634007535875,
+            "p99": 573.0983897577971,
+            "max": 576.5360835939646
+          },
+          "sample_interval_ms": {
+            "n": 27,
+            "mean": 1000.0816183703704,
+            "p50": 1000.086085,
+            "p95": 1000.1049205,
+            "p99": 1000.1072951799999,
+            "max": 1000.10731
+          },
+          "memory_gib_range": [
+            21.717395782470703,
+            21.7431640625
+          ],
+          "memory_event_delta": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0
+          },
+          "network_counter_delta": {
+            "rx_bytes": 20289410,
+            "tx_bytes": 92029712,
+            "rx_packets": 20085,
+            "tx_packets": 68698,
+            "rx_dropped": 0,
+            "tx_dropped": 0
+          }
+        },
+        "decode": {
+          "samples": 28,
+          "sample_duration_seconds": 27.002190785,
+          "cpu_quota": "800000 100000",
+          "cpu_effective_cores": 3.9027095556461533,
+          "cpu_delta": {
+            "usage_usec": 105381708,
+            "user_usec": 88143313,
+            "system_usec": 17238394,
+            "nr_periods": 270,
+            "nr_throttled": 0,
+            "throttled_usec": 0
+          },
+          "throttled_period_fraction": 0.0,
+          "collector_ms": {
+            "n": 28,
+            "mean": 132.75828939263843,
+            "p50": 34.424601471982896,
+            "p95": 590.1889287983067,
+            "p99": 606.5183905302547,
+            "max": 611.848235828802
+          },
+          "sample_interval_ms": {
+            "n": 27,
+            "mean": 1000.0811401851852,
+            "p50": 1000.081951,
+            "p95": 1000.0873431,
+            "p99": 1000.08974254,
+            "max": 1000.090502
+          },
+          "memory_gib_range": [
+            21.376747131347656,
+            21.593921661376953
+          ],
+          "memory_event_delta": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0
+          },
+          "network_counter_delta": {
+            "rx_bytes": 94613981,
+            "tx_bytes": 17453705,
+            "rx_packets": 77606,
+            "tx_packets": 26370,
+            "rx_dropped": 0,
+            "tx_dropped": 0
+          }
+        }
+      },
+      "source_snapshot": {
+        "source_blocks": 40,
+        "source_bytes": 1186201600,
+        "status": "PASS"
+      },
+      "planned_arrival_relative_seconds": [
+        0.0,
+        0.061,
+        0.02,
+        0.04,
+        8.042,
+        8.02,
+        8.06,
+        8.0
+      ]
+    },
+    "rdma-burst": {
+      "valid_timing_arm": true,
+      "ttft_mean_seconds": 3.2171672644326463,
+      "observer_intervals_ms": {
+        "before_second_arrival": {
+          "n": 81,
+          "mean": 231.39482605512495,
+          "p50": 227.73385141044855,
+          "p95": 239.32091798633337,
+          "p99": 277.589176408947,
+          "max": 418.7972052022815
+        },
+        "after_second_arrival": {
+          "n": 171,
+          "mean": 230.55653422199495,
+          "p50": 226.82600747793913,
+          "p95": 249.223823659122,
+          "p99": 395.1824118383229,
+          "max": 395.95838263630867
+        }
+      },
+      "observer_intervals_over_500ms": {
+        "before_second_arrival": 0,
+        "after_second_arrival": 0
+      },
+      "observer_intervals_over_1000ms": {
+        "before_second_arrival": 0,
+        "after_second_arrival": 0
+      },
+      "observers": {
+        "issue23-mmlu-pro-smoke-0000-0": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 237.97974256532532,
+              "p50": 228.14517002552748,
+              "p95": 239.32091798633337,
+              "p99": 382.90194775909197,
+              "max": 418.7972052022815
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 230.14324382391004,
+              "p50": 226.33319348096848,
+              "p95": 239.35432657599446,
+              "p99": 335.28497179038766,
+              "max": 395.12429758906364
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 232.75541007104846,
+            "p50": 227.2890955209732,
+            "p95": 239.5421608351171,
+            "p99": 404.1200024820865,
+            "max": 418.7972052022815
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.587016782
+        },
+        "issue23-mmlu-pro-smoke-0000-3": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 20,
+              "mean": 229.15325774811208,
+              "p50": 227.72834729403257,
+              "p95": 238.62469336017966,
+              "p99": 241.55467404052615,
+              "max": 242.28716921061277
+            },
+            "after_second_arrival": {
+              "n": 43,
+              "mean": 230.65744110837926,
+              "p50": 226.9496787339449,
+              "p95": 248.29759057611227,
+              "p99": 333.79917910322524,
+              "max": 393.84293369948864
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 230.1799225813103,
+            "p50": 227.26472467184067,
+            "p95": 242.010410502553,
+            "p99": 305.20691500976716,
+            "max": 393.84293369948864
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.841347776
+        },
+        "issue23-mmlu-pro-smoke-0000-1": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 20,
+              "mean": 229.09604967571795,
+              "p50": 227.57673915475607,
+              "p95": 238.34284213371575,
+              "p99": 240.84224441088736,
+              "max": 241.46709498018026
+            },
+            "after_second_arrival": {
+              "n": 43,
+              "mean": 230.69289499937102,
+              "p50": 226.9215974956751,
+              "p95": 248.53700390085575,
+              "p99": 334.36978286132194,
+              "max": 395.3180117532611
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 230.18595997598908,
+            "p50": 226.98133066296577,
+            "p95": 241.20717458426952,
+            "p99": 305.34681672230397,
+            "max": 395.3180117532611
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.843666007
+        },
+        "issue23-mmlu-pro-smoke-0000-2": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 20,
+              "mean": 229.02100840583444,
+              "p50": 227.7727979235351,
+              "p95": 237.86762743256986,
+              "p99": 239.43547460250556,
+              "max": 239.8274363949895
+            },
+            "after_second_arrival": {
+              "n": 43,
+              "mean": 230.72294555171285,
+              "p50": 226.82600747793913,
+              "p95": 247.80428484082222,
+              "p99": 336.2327544018624,
+              "max": 395.95838263630867
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 230.1826480450848,
+            "p50": 227.18482371419668,
+            "p95": 239.77172346785665,
+            "p99": 307.79197905212675,
+            "max": 395.95838263630867
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.845213344
+        }
+      },
+      "cohorts": {
+        "mmlu-pro-smoke-0000": {
+          "ttft_mean_seconds": 3.2030640828888863,
+          "post_spread_ms": 0.440541,
+          "eligibility_spread_ms": 1353.887239,
+          "gate_to_all_complete_ms": 68.903602,
+          "first_post_to_all_complete_ms": 52.81656,
+          "completion_spread_ms": 26.714988,
+          "logical_payload_bytes": 593100800,
+          "requests": [
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-0",
+              "actual_post_offset_ms": 16.333838,
+              "actual_complete_offset_ms": 42.188614
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-1",
+              "actual_post_offset_ms": 16.527583,
+              "actual_complete_offset_ms": 67.883516
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-2",
+              "actual_post_offset_ms": 16.087042,
+              "actual_complete_offset_ms": 68.123102
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-3",
+              "actual_post_offset_ms": 16.43565,
+              "actual_complete_offset_ms": 68.903602
+            }
+          ]
+        },
+        "frontierscience-smoke-0000": {
+          "ttft_mean_seconds": 3.2312704459764063,
+          "post_spread_ms": 0.057071,
+          "eligibility_spread_ms": 1132.538382,
+          "gate_to_all_complete_ms": 66.854279,
+          "first_post_to_all_complete_ms": 51.656319,
+          "completion_spread_ms": 12.876171,
+          "logical_payload_bytes": 593100800,
+          "requests": [
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-0",
+              "actual_post_offset_ms": 15.20437,
+              "actual_complete_offset_ms": 53.978108
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-1",
+              "actual_post_offset_ms": 15.19805,
+              "actual_complete_offset_ms": 54.236714
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-2",
+              "actual_post_offset_ms": 15.19796,
+              "actual_complete_offset_ms": 55.030734
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-3",
+              "actual_post_offset_ms": 15.255031,
+              "actual_complete_offset_ms": 66.854279
+            }
+          ]
+        }
+      },
+      "local_copy_notification_hold_ms": [],
+      "frontier_h2d": [
+        {
+          "timestamp": "2026-10-14T02:44:42.236023+00:00",
+          "blocks": 8,
+          "copies": 400,
+          "bytes": 296550400,
+          "duration_ms": 29.33,
+          "logical_device": 0
+        },
+        {
+          "timestamp": "2026-10-14T02:44:42.305609+00:00",
+          "blocks": 8,
+          "copies": 400,
+          "bytes": 296550400,
+          "duration_ms": 98.3,
+          "logical_device": 1
+        }
+      ],
+      "prefill_first_work": [
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-0-0-837b3330",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4106,
+          "tp_rank": 0,
+          "unix_ns": 1791945871597698223
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-1-0-afcb7641",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4111,
+          "tp_rank": 0,
+          "unix_ns": 1791945871910775656
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-2-0-a4e23928",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4105,
+          "tp_rank": 0,
+          "unix_ns": 1791945872251727783
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-3-0-bfce59e1",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4099,
+          "tp_rank": 0,
+          "unix_ns": 1791945872896171074
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-0-0-a9e37c28",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4097,
+          "tp_rank": 0,
+          "unix_ns": 1791945879602235460
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-1-0-98ca7a8a",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4098,
+          "tp_rank": 0,
+          "unix_ns": 1791945879915937815
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-2-0-a9a4d109",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4102,
+          "tp_rank": 0,
+          "unix_ns": 1791945880289004341
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-3-0-8357e49f",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4104,
+          "tp_rank": 0,
+          "unix_ns": 1791945880929828890
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-0-0-837b3330",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4106,
+          "tp_rank": 1,
+          "unix_ns": 1791945871598740191
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-1-0-afcb7641",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4111,
+          "tp_rank": 1,
+          "unix_ns": 1791945871910803236
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-2-0-a4e23928",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4105,
+          "tp_rank": 1,
+          "unix_ns": 1791945872251930467
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-3-0-bfce59e1",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4099,
+          "tp_rank": 1,
+          "unix_ns": 1791945872896551940
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-0-0-a9e37c28",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4097,
+          "tp_rank": 1,
+          "unix_ns": 1791945879603180037
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-1-0-98ca7a8a",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4098,
+          "tp_rank": 1,
+          "unix_ns": 1791945879913869198
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-2-0-a9a4d109",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4102,
+          "tp_rank": 1,
+          "unix_ns": 1791945880285729043
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-3-0-8357e49f",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4104,
+          "tp_rank": 1,
+          "unix_ns": 1791945880929751978
+        }
+      ],
+      "batch_api_fallback_warning_count": 0,
+      "resources": {
+        "prefill": {
+          "samples": 25,
+          "sample_duration_seconds": 24.002036364,
+          "cpu_quota": "800000 100000",
+          "cpu_effective_cores": 1.05240949629952,
+          "cpu_delta": {
+            "usage_usec": 25259971,
+            "user_usec": 16272687,
+            "system_usec": 8987283,
+            "nr_periods": 240,
+            "nr_throttled": 0,
+            "throttled_usec": 0
+          },
+          "throttled_period_fraction": 0.0,
+          "collector_ms": {
+            "n": 25,
+            "mean": 142.99214363098145,
+            "p50": 28.68872880935669,
+            "p95": 603.183701261878,
+            "p99": 615.9970194101334,
+            "max": 619.9743095785379
+          },
+          "sample_interval_ms": {
+            "n": 24,
+            "mean": 1000.0848485,
+            "p50": 1000.0891750000001,
+            "p95": 1000.1041333000001,
+            "p99": 1000.10990241,
+            "max": 1000.111313
+          },
+          "memory_gib_range": [
+            21.69080352783203,
+            21.729228973388672
+          ],
+          "memory_event_delta": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0
+          },
+          "network_counter_delta": {
+            "rx_bytes": 2815672,
+            "tx_bytes": 5414323,
+            "rx_packets": 6097,
+            "tx_packets": 7846,
+            "rx_dropped": 0,
+            "tx_dropped": 0
+          }
+        },
+        "decode": {
+          "samples": 25,
+          "sample_duration_seconds": 24.002008595,
+          "cpu_quota": "800000 100000",
+          "cpu_effective_cores": 3.8392339805759494,
+          "cpu_delta": {
+            "usage_usec": 92149327,
+            "user_usec": 78843908,
+            "system_usec": 13305419,
+            "nr_periods": 240,
+            "nr_throttled": 0,
+            "throttled_usec": 0
+          },
+          "throttled_period_fraction": 0.0,
+          "collector_ms": {
+            "n": 25,
+            "mean": 144.5608950778842,
+            "p50": 34.79930991306901,
+            "p95": 583.9637646917254,
+            "p99": 591.394375981763,
+            "max": 593.6227741185576
+          },
+          "sample_interval_ms": {
+            "n": 24,
+            "mean": 1000.0836914583333,
+            "p50": 1000.0851574999999,
+            "p95": 1000.0954052,
+            "p99": 1000.10390832,
+            "max": 1000.10635
+          },
+          "memory_gib_range": [
+            21.36376953125,
+            21.551239013671875
+          ],
+          "memory_event_delta": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0
+          },
+          "network_counter_delta": {
+            "rx_bytes": 6448649,
+            "tx_bytes": 14637781,
+            "rx_packets": 16358,
+            "tx_packets": 21746,
+            "rx_dropped": 0,
+            "tx_dropped": 0
+          }
+        }
+      },
+      "source_snapshot": {
+        "source_blocks": 40,
+        "source_bytes": 1186201600,
+        "status": "PASS"
+      },
+      "planned_arrival_relative_seconds": [
+        0.0,
+        0.06,
+        0.022,
+        0.04,
+        8.0,
+        8.041,
+        8.02,
+        8.06
+      ]
+    },
+    "rdma-smooth": {
+      "valid_timing_arm": true,
+      "ttft_mean_seconds": 3.4536178646376356,
+      "observer_intervals_ms": {
+        "before_second_arrival": {
+          "n": 82,
+          "mean": 228.5291613874639,
+          "p50": 225.1730738207698,
+          "p95": 236.62662017159164,
+          "p99": 360.4696966148913,
+          "max": 362.948308698833
+        },
+        "after_second_arrival": {
+          "n": 170,
+          "mean": 231.24939891893197,
+          "p50": 226.7717570066452,
+          "p95": 237.69893869757652,
+          "p99": 381.4524155948311,
+          "max": 385.9682586044073
+        }
+      },
+      "observer_intervals_over_500ms": {
+        "before_second_arrival": 0,
+        "after_second_arrival": 0
+      },
+      "observer_intervals_over_1000ms": {
+        "before_second_arrival": 0,
+        "after_second_arrival": 0
+      },
+      "observers": {
+        "issue23-mmlu-pro-smoke-0000-0": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 231.69315326958895,
+              "p50": 225.02605989575386,
+              "p95": 237.9039404913783,
+              "p99": 335.49142312258493,
+              "max": 359.88829378038645
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 231.1619853689557,
+              "p50": 226.70581052079797,
+              "p95": 236.35933566838503,
+              "p99": 323.1092731747771,
+              "max": 381.1698341742158
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 231.33904133583346,
+            "p50": 226.0872796177864,
+            "p95": 237.76430496945977,
+            "p99": 367.97527913004166,
+            "max": 381.1698341742158
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.641819311
+        },
+        "issue23-mmlu-pro-smoke-0000-1": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 21,
+              "mean": 231.7424975335598,
+              "p50": 225.53555015474558,
+              "p95": 236.69578786939383,
+              "p99": 337.69780453294527,
+              "max": 362.948308698833
+            },
+            "after_second_arrival": {
+              "n": 42,
+              "mean": 231.21257339205061,
+              "p50": 226.83524806052446,
+              "p95": 237.28034547530112,
+              "p99": 325.1425594184542,
+              "max": 385.9682586044073
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 231.38921477255366,
+            "p50": 226.35499387979507,
+            "p95": 237.43462162092328,
+            "p99": 371.6958896629513,
+            "max": 385.9682586044073
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.643572692
+        },
+        "issue23-mmlu-pro-smoke-0000-3": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 20,
+              "mean": 225.13504908420146,
+              "p50": 225.21422384306788,
+              "p95": 228.8865770213306,
+              "p99": 234.0272625349462,
+              "max": 235.3124339133501
+            },
+            "after_second_arrival": {
+              "n": 43,
+              "mean": 231.27770497528618,
+              "p50": 226.96057613939047,
+              "p95": 237.56731366738677,
+              "p99": 321.421079598367,
+              "max": 381.6849635913968
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 229.32765548605295,
+            "p50": 226.20448097586632,
+            "p95": 235.70542614907026,
+            "p99": 292.7239919826392,
+            "max": 381.6849635913968
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.878251155
+        },
+        "issue23-mmlu-pro-smoke-0000-2": {
+          "intervals": {
+            "before_second_arrival": {
+              "n": 20,
+              "mean": 225.22707926109433,
+              "p50": 224.86626310274005,
+              "p95": 229.2260856833309,
+              "p99": 235.85157158784568,
+              "max": 237.50794306397438
+            },
+            "after_second_arrival": {
+              "n": 43,
+              "mean": 231.34244265857825,
+              "p50": 226.75415128469467,
+              "p95": 237.8743260167539,
+              "p99": 321.33024090900994,
+              "max": 381.34793750941753
+            }
+          },
+          "all_intervals": {
+            "n": 63,
+            "mean": 229.4010574530278,
+            "p50": 226.34496353566647,
+            "p95": 237.3037975281477,
+            "p99": 292.750385385007,
+            "max": 381.34793750941753
+          },
+          "all_events_one_token": true,
+          "finish_relative_second_arrival_seconds": 9.879780222
+        }
+      },
+      "cohorts": {
+        "mmlu-pro-smoke-0000": {
+          "ttft_mean_seconds": 3.2137839121278375,
+          "post_spread_ms": 29.558672,
+          "eligibility_spread_ms": 1408.890291,
+          "gate_to_all_complete_ms": 52.158294,
+          "first_post_to_all_complete_ms": 51.712346,
+          "completion_spread_ms": 21.849836,
+          "logical_payload_bytes": 593100800,
+          "requests": [
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-0",
+              "actual_post_offset_ms": 0.445948,
+              "actual_complete_offset_ms": 30.308458
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-1",
+              "actual_post_offset_ms": 10.006013,
+              "actual_complete_offset_ms": 30.528597
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-2",
+              "actual_post_offset_ms": 20.005547,
+              "actual_complete_offset_ms": 39.270467
+            },
+            {
+              "request_id": "issue23-mmlu-pro-smoke-0000-3",
+              "actual_post_offset_ms": 30.00462,
+              "actual_complete_offset_ms": 52.158294
+            }
+          ]
+        },
+        "frontierscience-smoke-0000": {
+          "ttft_mean_seconds": 3.6934518171474338,
+          "post_spread_ms": 29.632733,
+          "eligibility_spread_ms": 1368.479795,
+          "gate_to_all_complete_ms": 51.953545,
+          "first_post_to_all_complete_ms": 51.581597,
+          "completion_spread_ms": 21.748215,
+          "logical_payload_bytes": 593100800,
+          "requests": [
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-0",
+              "actual_post_offset_ms": 0.371948,
+              "actual_complete_offset_ms": 30.20533
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-1",
+              "actual_post_offset_ms": 10.006467,
+              "actual_complete_offset_ms": 30.425789
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-2",
+              "actual_post_offset_ms": 20.005334,
+              "actual_complete_offset_ms": 39.072463
+            },
+            {
+              "request_id": "issue23-frontierscience-smoke-0000-3",
+              "actual_post_offset_ms": 30.004681,
+              "actual_complete_offset_ms": 51.953545
+            }
+          ]
+        }
+      },
+      "local_copy_notification_hold_ms": [],
+      "frontier_h2d": [
+        {
+          "timestamp": "2026-10-14T02:59:36.863812+00:00",
+          "blocks": 8,
+          "copies": 400,
+          "bytes": 296550400,
+          "duration_ms": 59.65,
+          "logical_device": 0
+        },
+        {
+          "timestamp": "2026-10-14T02:59:37.313204+00:00",
+          "blocks": 8,
+          "copies": 400,
+          "bytes": 296550400,
+          "duration_ms": 509.04,
+          "logical_device": 1
+        }
+      ],
+      "prefill_first_work": [
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-0-0-85ae814c",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4106,
+          "tp_rank": 0,
+          "unix_ns": 1791946766152130353
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-1-0-92d585fe",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4111,
+          "tp_rank": 0,
+          "unix_ns": 1791946766487489050
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-2-0-83b8e16b",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4105,
+          "tp_rank": 0,
+          "unix_ns": 1791946766841043142
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-3-0-86296fd3",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4099,
+          "tp_rank": 0,
+          "unix_ns": 1791946767581774104
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-0-0-a90537f9",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4097,
+          "tp_rank": 0,
+          "unix_ns": 1791946774155138402
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-1-0-a13b45db",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4098,
+          "tp_rank": 0,
+          "unix_ns": 1791946774470593484
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-2-0-ab2ab8bb",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4102,
+          "tp_rank": 0,
+          "unix_ns": 1791946774831112830
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-3-0-99a8cdf2",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4104,
+          "tp_rank": 0,
+          "unix_ns": 1791946775492822664
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-0-0-85ae814c",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4106,
+          "tp_rank": 1,
+          "unix_ns": 1791946766155606865
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-1-0-92d585fe",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4111,
+          "tp_rank": 1,
+          "unix_ns": 1791946766491449341
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-2-0-83b8e16b",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4105,
+          "tp_rank": 1,
+          "unix_ns": 1791946766843462065
+        },
+        {
+          "request_id": "cmpl-issue23-mmlu-pro-smoke-0000-3-0-86296fd3",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4099,
+          "tp_rank": 1,
+          "unix_ns": 1791946767582641189
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-0-0-a90537f9",
+          "computed_tokens": 0,
+          "scheduled_tokens": 4096,
+          "prompt_tokens": 4097,
+          "tp_rank": 1,
+          "unix_ns": 1791946774155576610
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-1-0-a13b45db",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4098,
+          "tp_rank": 1,
+          "unix_ns": 1791946774471727184
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-2-0-ab2ab8bb",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4102,
+          "tp_rank": 1,
+          "unix_ns": 1791946774830830725
+        },
+        {
+          "request_id": "cmpl-issue23-frontierscience-smoke-0000-3-0-99a8cdf2",
+          "computed_tokens": 0,
+          "scheduled_tokens": 2048,
+          "prompt_tokens": 4104,
+          "tp_rank": 1,
+          "unix_ns": 1791946775492714512
+        }
+      ],
+      "batch_api_fallback_warning_count": 0,
+      "resources": {
+        "prefill": {
+          "samples": 26,
+          "sample_duration_seconds": 25.001999974,
+          "cpu_quota": "800000 100000",
+          "cpu_effective_cores": 1.0534266469638065,
+          "cpu_delta": {
+            "usage_usec": 26337773,
+            "user_usec": 17383077,
+            "system_usec": 8954695,
+            "nr_periods": 250,
+            "nr_throttled": 0,
+            "throttled_usec": 0
+          },
+          "throttled_period_fraction": 0.0,
+          "collector_ms": {
+            "n": 26,
+            "mean": 132.39029461804492,
+            "p50": 29.33894796296954,
+            "p95": 573.2784606516361,
+            "p99": 580.1288029178977,
+            "max": 581.5120851621032
+          },
+          "sample_interval_ms": {
+            "n": 25,
+            "mean": 1000.07999896,
+            "p50": 1000.080915,
+            "p95": 1000.0975138,
+            "p99": 1000.09781764,
+            "max": 1000.097875
+          },
+          "memory_gib_range": [
+            21.71133041381836,
+            21.73509979248047
+          ],
+          "memory_event_delta": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0
+          },
+          "network_counter_delta": {
+            "rx_bytes": 12320000,
+            "tx_bytes": 6497537,
+            "rx_packets": 12935,
+            "tx_packets": 9207,
+            "rx_dropped": 0,
+            "tx_dropped": 0
+          }
+        },
+        "decode": {
+          "samples": 26,
+          "sample_duration_seconds": 25.00177859,
+          "cpu_quota": "800000 100000",
+          "cpu_effective_cores": 3.8451955589452327,
+          "cpu_delta": {
+            "usage_usec": 96136728,
+            "user_usec": 81905954,
+            "system_usec": 14230773,
+            "nr_periods": 250,
+            "nr_throttled": 0,
+            "throttled_usec": 0
+          },
+          "throttled_period_fraction": 0.0,
+          "collector_ms": {
+            "n": 26,
+            "mean": 139.91806072254593,
+            "p50": 36.54145693872124,
+            "p95": 581.3132213661447,
+            "p99": 583.3451589569449,
+            "max": 583.7485049851239
+          },
+          "sample_interval_ms": {
+            "n": 25,
+            "mean": 1000.0711436,
+            "p50": 1000.071916,
+            "p95": 1000.0798188,
+            "p99": 1000.08152008,
+            "max": 1000.082014
+          },
+          "memory_gib_range": [
+            21.37713623046875,
+            21.577011108398438
+          ],
+          "memory_event_delta": {
+            "low": 0,
+            "high": 0,
+            "max": 0,
+            "oom": 0,
+            "oom_kill": 0
+          },
+          "network_counter_delta": {
+            "rx_bytes": 7224101,
+            "tx_bytes": 13474615,
+            "rx_packets": 19636,
+            "tx_packets": 23176,
+            "rx_dropped": 0,
+            "tx_dropped": 0
+          }
+        }
+      },
+      "source_snapshot": {
+        "source_blocks": 40,
+        "source_bytes": 1186201600,
+        "status": "PASS"
+      },
+      "planned_arrival_relative_seconds": [
+        0.0,
+        0.022,
+        0.061,
+        0.04,
+        8.0,
+        8.02,
+        8.061,
+        8.041
+      ]
+    }
+  },
+  "note": "One execution per arm; descriptive intervals and cohort summaries, not independent repetitions."
+}

@@ -84,6 +84,107 @@ def scheduler_for(config, clients):
     return SchedulerConnector(ctx, engine_clients=clients, kv_cache_config=config)
 
 
+def test_issue23_starts_every_group_before_attention_finishes(hybrid_config):
+    import copy
+
+    config = copy.deepcopy(hybrid_config)
+    config.kv_cache_groups.extend([copy.deepcopy(config.kv_cache_groups[1]) for _ in range(2)])
+    client = MagicMock()
+    polls = {}
+    calls = []
+
+    def query(instance, hashes, req_id, group_id=0, **kwargs):
+        calls.append(group_id)
+        polls[group_id] = polls.get(group_id, 0) + 1
+        if polls[group_id] == 1:
+            return QueryLoading()
+        return QueryReady(
+            2 if group_id == 0 else 1,
+            f"lease-g{group_id}".encode(),
+            list(range(2)) if group_id == 0 else [0],
+        )
+
+    client.query_prefetch.side_effect = query
+    scheduler = scheduler_for(config, (client,))
+    scheduler._issue23_parallel_groups = True
+    assert scheduler._count_available_block_prefix([b"a", b"b"], "request") is None
+    assert calls == [0, 1, 2, 3]
+    ready = scheduler._count_available_block_prefix([b"a", b"b"], "request")
+    assert ready.num_hit_blocks == 2
+    assert ready.recurrent_hold.checkpoint == 1
+    assert len(ready.recurrent_hold.leases) == 3
+    assert not scheduler._hybrid_queries
+
+
+def test_issue23_missing_checkpoint_fails_and_releases_all_ready_leases(hybrid_config):
+    client = MagicMock()
+
+    def query(instance, hashes, req_id, group_id=0, **kwargs):
+        return QueryReady(2, b"attention", [0, 1]) if group_id == 0 else QueryReady(0, b"", [])
+
+    client.query_prefetch.side_effect = query
+    scheduler = scheduler_for(hybrid_config, (client,))
+    scheduler._issue23_parallel_groups = True
+    with pytest.raises(RuntimeError, match="checkpoint is unavailable"):
+        scheduler._count_available_block_prefix([b"a", b"b"], "request")
+    assert not scheduler._hybrid_queries
+    assert any(call.args[0] == b"attention" for call in client.release.call_args_list)
+
+
+def test_issue23_retries_discovery_without_refetching_ready_groups(hybrid_config, monkeypatch):
+    import copy
+
+    monkeypatch.setenv("PEGAFLOW_ISSUE23_DISCOVERY_GRACE_SECONDS", "5")
+    clock = [10.0]
+    monkeypatch.setattr("pegaflow.connector.scheduler.time.monotonic", lambda: clock[0])
+    config = copy.deepcopy(hybrid_config)
+    config.kv_cache_groups.append(copy.deepcopy(config.kv_cache_groups[1]))
+    client = MagicMock()
+    calls = []
+
+    def query(instance, hashes, req_id, group_id=0, **kwargs):
+        calls.append(group_id)
+        if group_id == 1 and calls.count(1) == 1:
+            return QueryReady(0, b"", [])
+        return QueryReady(
+            2 if group_id == 0 else 1,
+            f"lease-{group_id}".encode(),
+            [0, 1] if group_id == 0 else [0],
+        )
+
+    client.query_prefetch.side_effect = query
+    scheduler = scheduler_for(config, (client,))
+    scheduler._issue23_parallel_groups = True
+    assert scheduler._count_available_block_prefix([b"a", b"b"], "request") is None
+    assert calls == [0, 1, 2]
+    clock[0] += 0.005
+    assert scheduler._count_available_block_prefix([b"a", b"b"], "request") is None
+    assert calls == [0, 1, 2]
+    clock[0] += 0.02
+    ready = scheduler._count_available_block_prefix([b"a", b"b"], "request")
+    assert ready.num_hit_blocks == 2
+    assert calls == [0, 1, 2, 1]
+    assert not scheduler._hybrid_queries
+
+
+def test_issue23_discovery_grace_expires_with_ready_leases_released(hybrid_config, monkeypatch):
+    monkeypatch.setenv("PEGAFLOW_ISSUE23_DISCOVERY_GRACE_SECONDS", "5")
+    clock = [10.0]
+    monkeypatch.setattr("pegaflow.connector.scheduler.time.monotonic", lambda: clock[0])
+    client = MagicMock()
+    client.query_prefetch.side_effect = lambda instance, hashes, group_id=0, **kw: (
+        QueryReady(2, b"attention", [0, 1]) if group_id == 0 else QueryReady(0, b"", [])
+    )
+    scheduler = scheduler_for(hybrid_config, (client,))
+    scheduler._issue23_parallel_groups = True
+    assert scheduler._count_available_block_prefix([b"a", b"b"], "request") is None
+    clock[0] += 6
+    with pytest.raises(RuntimeError, match="checkpoint is unavailable"):
+        scheduler._count_available_block_prefix([b"a", b"b"], "request")
+    assert not scheduler._hybrid_queries
+    assert any(call.args[0] == b"attention" for call in client.release.call_args_list)
+
+
 def test_qwen_attention_planes_and_state_slots_have_independent_addressing():
     plane = _infer_kv_cache_registration(
         make_tensor((160, 128, 1, 256)), 2048, is_attention_plane=True

@@ -3,7 +3,7 @@ use axum::http::StatusCode;
 use axum::response::IntoResponse;
 use axum::{Json, Router, routing::get, routing::post};
 use log::{info, warn};
-use pegaflow_core::PegaEngine;
+use pegaflow_core::{Issue23ExperimentConfig, Issue23TransferPlan, PegaEngine};
 use prometheus::{Registry, TextEncoder};
 use serde::{Deserialize, Serialize};
 use std::sync::Arc;
@@ -183,6 +183,77 @@ async fn activate_issue23_handler(State(state): State<AppState>) -> impl IntoRes
     }
 }
 
+async fn freeze_issue23_source_handler(
+    State(state): State<AppState>,
+    Json(plan): Json<Issue23TransferPlan>,
+) -> impl IntoResponse {
+    match state.engine.freeze_issue23_source_snapshot(&plan).await {
+        Ok((blocks, bytes)) => (
+            StatusCode::OK,
+            Json(serde_json::json!({
+                "status": "PASS", "source_blocks": blocks, "source_bytes": bytes,
+            })),
+        )
+            .into_response(),
+        Err(error) => (StatusCode::PRECONDITION_FAILED, error.into_response()).into_response(),
+    }
+}
+
+#[derive(Deserialize)]
+struct Issue23EpochRequest {
+    #[serde(flatten)]
+    config: Issue23ExperimentConfig,
+    #[serde(default)]
+    inherit_hidden: bool,
+}
+
+async fn configure_issue23_handler(
+    State(state): State<AppState>,
+    Json(epoch): Json<Issue23EpochRequest>,
+) -> impl IntoResponse {
+    match state
+        .engine
+        .configure_issue23(epoch.config, epoch.inherit_hidden)
+        .await
+    {
+        Ok(()) => (StatusCode::OK, Json(serde_json::json!({"status":"PASS"}))).into_response(),
+        Err(error) => (StatusCode::PRECONDITION_FAILED, error).into_response(),
+    }
+}
+
+async fn release_issue23_source_handler(State(state): State<AppState>) -> impl IntoResponse {
+    match state.engine.release_issue23_source().await {
+        Ok(()) => (StatusCode::OK, Json(serde_json::json!({"status":"PASS"}))).into_response(),
+        Err(error) => (StatusCode::PRECONDITION_FAILED, error).into_response(),
+    }
+}
+
+#[cfg(feature = "rdma")]
+async fn start_issue23_background_handler(
+    State(state): State<AppState>,
+    Json(config): Json<pegaflow_core::Issue23BackgroundConfig>,
+) -> impl IntoResponse {
+    match state.engine.start_issue23_background(config).await {
+        Ok(()) => (StatusCode::OK, Json(serde_json::json!({"status":"PASS"}))).into_response(),
+        Err(error) => (StatusCode::PRECONDITION_FAILED, error).into_response(),
+    }
+}
+
+#[cfg(feature = "rdma")]
+async fn stop_issue23_background_handler(State(state): State<AppState>) -> impl IntoResponse {
+    match state.engine.stop_issue23_background().await {
+        Ok(stats) => (StatusCode::OK, Json(stats)).into_response(),
+        Err(error) => (StatusCode::PRECONDITION_FAILED, error).into_response(),
+    }
+}
+
+async fn issue23_pacing_handler(State(state): State<AppState>) -> impl IntoResponse {
+    let (posted, completed, active) = state.engine.issue23_pacing_totals();
+    Json(
+        serde_json::json!({"posted_bytes": posted, "completed_bytes": completed, "active_batches": active}),
+    )
+}
+
 /// Start HTTP server for health check, optional Prometheus metrics, and instance management.
 pub async fn start_http_server(
     addr: std::net::SocketAddr,
@@ -209,7 +280,17 @@ pub async fn start_http_server(
         .route("/instances", get(list_instances_handler))
         .route("/instances/cleanup", post(cleanup_handler))
         .route("/cache/memory/cleanup", post(cleanup_memory_cache_handler))
-        .route("/issue23/activate", post(activate_issue23_handler));
+        .route("/issue23/activate", post(activate_issue23_handler))
+        .route("/issue23/configure", post(configure_issue23_handler))
+        .route("/issue23/pacing", get(issue23_pacing_handler))
+        .route(
+            "/issue23/release-source",
+            post(release_issue23_source_handler),
+        )
+        .route(
+            "/issue23/freeze-source",
+            post(freeze_issue23_source_handler),
+        );
 
     if enable_prometheus {
         app = app.route("/metrics", get(metrics_handler));
@@ -224,6 +305,16 @@ pub async fn start_http_server(
         );
     }
 
+    #[cfg(feature = "rdma")]
+    let app = app
+        .route(
+            "/issue23/background/start",
+            post(start_issue23_background_handler),
+        )
+        .route(
+            "/issue23/background/stop",
+            post(stop_issue23_background_handler),
+        );
     let app = app.with_state(state);
 
     let handle = tokio::spawn(async move {

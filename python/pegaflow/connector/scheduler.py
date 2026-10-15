@@ -21,6 +21,7 @@ from pegaflow.connector.common import (
     reconcile_hybrid_hit,
 )
 from pegaflow.connector.connector_metrics import PrefetchTracker
+from pegaflow.connector.telemetry import telemetry_event
 from pegaflow.connector.tp_shards import ShardedQueryReady, TpShardQueryClient
 from pegaflow.pegaflow import EngineRpcClient
 
@@ -115,9 +116,11 @@ class _QueryProbe:
 @dataclass
 class _HybridQuery:
     block_hashes: tuple[bytes, ...]
-    attention: ShardedQueryReady
+    attention: ShardedQueryReady | None
     groups: dict[int, list[tuple[tuple[int, ...], bytes]]] = field(default_factory=dict)
     remote_checkpoint: int | None = None
+    discovery_deadline: float | None = None
+    retry_after: dict[int, float] = field(default_factory=dict)
 
 
 class SchedulerConnector:
@@ -198,6 +201,19 @@ class SchedulerConnector:
         self._prefetch_start_times: dict[str, float] = {}
         self._pending_query_probes: dict[str, _QueryProbe] = {}
         self._hybrid_queries: dict[str, _HybridQuery] = {}
+        self._issue23_local_observers = os.environ.get("PEGAFLOW_ISSUE23_LOCAL_OBSERVERS") == "1"
+        self._issue23_parallel_groups = os.environ.get("PEGAFLOW_ISSUE23_HYBRID_PREFETCH") == "1"
+        self._issue23_discovery_grace = float(
+            os.environ.get("PEGAFLOW_ISSUE23_DISCOVERY_GRACE_SECONDS", "0")
+        )
+        if self._issue23_discovery_grace < 0:
+            raise ValueError("Issue23 discovery grace must be nonnegative")
+        if self._issue23_parallel_groups and (
+            not self._cache_groups.has_recurrent_state or not context.wait_for_full_prefix
+        ):
+            raise ValueError(
+                "Issue23 hybrid prefetch requires recurrent groups and full-prefix waiting"
+            )
         self._hma_saved_hashes: dict[str, list[set[bytes]]] = {}
         self._hma_save_pins: dict[str, dict[int, dict[int, object]]] = {}
         self._hma_save_acks: dict[tuple[str, int], set[tuple[int, int]]] = {}
@@ -254,6 +270,10 @@ class SchedulerConnector:
         request: "Request",
         num_computed_tokens: int,
     ) -> tuple[int | None, bool]:
+        if getattr(self, "_issue23_local_observers", False) and request.request_id.removeprefix(
+            "cmpl-"
+        ).startswith("issue23-observer-"):
+            return (0, False)
         req_id = request.request_id
 
         if not self._ctx.read_enabled:
@@ -450,6 +470,10 @@ class SchedulerConnector:
         blocks: "KVCacheBlocks",
         num_external_tokens: int,
     ) -> None:
+        if getattr(self, "_issue23_local_observers", False) and request.request_id.removeprefix(
+            "cmpl-"
+        ).startswith("issue23-observer-"):
+            return
         req_id = request.request_id
 
         # Keep a live reference so we can refresh block_hashes during decode
@@ -547,6 +571,10 @@ class SchedulerConnector:
         # Process new requests
         for req in scheduler_output.scheduled_new_reqs:
             req_id = req.req_id
+            if getattr(self, "_issue23_local_observers", False) and req_id.removeprefix(
+                "cmpl-"
+            ).startswith("issue23-observer-"):
+                continue
             num_tokens = scheduler_output.num_scheduled_tokens.get(req_id, 0)
 
             # Verify update_state_after_alloc was called for this request
@@ -920,6 +948,15 @@ class SchedulerConnector:
         self._next_hma_save_ticket += 1
         ticket = self._next_hma_save_ticket
         self._hma_save_pins.setdefault(req_id, {})[ticket] = pins
+        telemetry_event(
+            "checkpoint_publish",
+            request_id=req_id,
+            ticket=ticket,
+            boundaries=[(position + 1) * self._ctx.virtual_block_size for position in positions],
+            blocks_by_group=rows,
+            prompt_tokens=prompt_tokens,
+            written_tokens=written,
+        )
         logger.debug(
             "[PegaKVConnector] HMA checkpoint save: req=%s ticket=%d boundary_tokens=%s "
             "block_ids_by_group=%s hashes=%s",
@@ -1125,6 +1162,7 @@ class SchedulerConnector:
             None: Blocks are being prefetched from DFS, retry later
         """
         block_hash_list = list(block_hashes)
+        query_started = time.perf_counter()
         span = self._hash_group_span
         if span > 1:
             # DeepSeek-V4: query the completed end-boundary hash of each
@@ -1139,16 +1177,24 @@ class SchedulerConnector:
             hybrid = None
         ready = (
             hybrid.attention
-            if hybrid is not None
+            if hybrid is not None and hybrid.attention is not None
             else self._tp_shard_client.query(
                 self._ctx.instance_id, block_hash_list, req_id, self._ctx.wait_for_full_prefix
             )
         )
-        if ready is not None and self._cache_groups.has_recurrent_state:
+        if self._issue23_parallel_groups:
+            ready = self._reconcile_issue23_bundle(block_hash_list, ready, req_id)
+        elif ready is not None and self._cache_groups.has_recurrent_state:
             ready = self._reconcile_hybrid(block_hash_list, ready, req_id)
         if ready is None:
             if req_id not in self._prefetch_start_times:
                 self._prefetch_start_times[req_id] = time.perf_counter()
+                telemetry_event(
+                    "cache_query_wait",
+                    request_id=req_id,
+                    query_blocks=len(block_hash_list),
+                    call_ms=(time.perf_counter() - query_started) * 1000,
+                )
                 self._prefetch_tracker.on_prefetch_start()
                 logger.debug(
                     "[PegaKVConnector] Prefetch started: req=%s pending_prefetches=%d",
@@ -1157,6 +1203,7 @@ class SchedulerConnector:
                 )
             return None
 
+        prefetch_duration_ms = 0.0
         if req_id in self._prefetch_start_times:
             prefetch_duration_ms = (
                 time.perf_counter() - self._prefetch_start_times.pop(req_id)
@@ -1172,6 +1219,18 @@ class SchedulerConnector:
                 self._prefetch_tracker.pending_prefetches,
             )
 
+        telemetry_event(
+            "cache_query_ready",
+            request_id=req_id,
+            query_blocks=len(block_hash_list),
+            hit_blocks=ready.num_hit_blocks,
+            hit_tokens=ready.num_hit_blocks * self._ctx.virtual_block_size,
+            recurrent_checkpoint=(
+                ready.recurrent_hold.checkpoint if ready.recurrent_hold is not None else None
+            ),
+            wait_ms=prefetch_duration_ms,
+            call_ms=(time.perf_counter() - query_started) * 1000,
+        )
         return ready
 
     def _reconcile_hybrid(
@@ -1244,10 +1303,79 @@ class SchedulerConnector:
         self._release_hybrid_query(req_id)
         return ShardedQueryReady(0, tuple(b"" for _ in ready.leases))
 
+    def _reconcile_issue23_bundle(self, hashes, attention, req_id):
+        """Start every frozen group before waiting for the complete transport gate."""
+        if not hashes:
+            raise RuntimeError("Issue23 hybrid experiment requires a complete checkpoint")
+        checkpoint = len(hashes) - 1
+        state = self._hybrid_queries.setdefault(
+            req_id, _HybridQuery(tuple(hashes), None, remote_checkpoint=checkpoint)
+        )
+        if attention is not None:
+            state.attention = attention
+        now = time.monotonic()
+        if state.discovery_deadline is None:
+            state.discovery_deadline = now + self._issue23_discovery_grace
+        pending = state.attention is None
+        try:
+            for index in sorted(self._cache_groups.recurrent_group_indices):
+                group_id = self._cache_groups.storage_group_ids[index]
+                if group_id in state.groups:
+                    continue
+                if now < state.retry_after.get(group_id, 0):
+                    pending = True
+                    continue
+                result = self._tp_shard_client.query_group_membership(
+                    self._ctx.instance_id,
+                    [hashes[checkpoint]],
+                    f"{req_id}:g{group_id}:checkpoint-{checkpoint}",
+                    group_id,
+                    prefetch=True,
+                )
+                if result is None:
+                    pending = True
+                    continue
+                if any(not positions for positions, _ in result):
+                    self._tp_shard_client.release(tuple(lease for _, lease in result), req_id)
+                    if now >= state.discovery_deadline:
+                        raise RuntimeError("Issue23 frozen recurrent checkpoint is unavailable")
+                    state.retry_after[group_id] = now + 0.01
+                    telemetry_event(
+                        "issue23_group_discovery_retry",
+                        request_id=req_id,
+                        storage_group_id=group_id,
+                        checkpoint=checkpoint,
+                    )
+                    pending = True
+                    continue
+                state.groups[group_id] = [
+                    ((checkpoint,) if positions else (), lease) for positions, lease in result
+                ]
+                telemetry_event(
+                    "issue23_group_ready",
+                    request_id=req_id,
+                    storage_group_id=group_id,
+                    checkpoint=checkpoint,
+                    ranks=len(result),
+                    hit_ranks=sum(bool(positions) for positions, _ in result),
+                )
+            if state.attention is not None and state.attention.num_hit_blocks != len(hashes):
+                raise RuntimeError("Issue23 frozen attention prefix is unavailable")
+            if any(not positions for group in state.groups.values() for positions, _ in group):
+                raise RuntimeError("Issue23 frozen recurrent checkpoint is unavailable")
+            if pending:
+                return None
+            return self._finish_hybrid_query(req_id, checkpoint, frozenset({checkpoint}))
+        except Exception:
+            self._release_hybrid_query(req_id)
+            raise
+
     def _finish_hybrid_query(
         self, req_id: str, checkpoint: int, usable: frozenset[int]
     ) -> ShardedQueryReady:
         state = self._hybrid_queries.pop(req_id)
+        if state.attention is None:
+            raise RuntimeError("hybrid query completed without attention state")
         group_ids = tuple(
             self._cache_groups.storage_group_ids[index]
             for index in sorted(self._cache_groups.recurrent_group_indices)
@@ -1305,7 +1433,9 @@ class SchedulerConnector:
         if state is None:
             return True
         groups_released = self._release_hybrid_groups(req_id, state)
-        return self._release_leases(state.attention.leases, req_id) and groups_released
+        return (
+            state.attention is None or self._release_leases(state.attention.leases, req_id)
+        ) and groups_released
 
     def _cancel_prefetch_tracking(self, req_id: str) -> None:
         """Drop in-flight prefetch metrics when polling stops before QueryReady."""

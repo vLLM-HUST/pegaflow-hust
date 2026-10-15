@@ -139,8 +139,7 @@ impl TransferLockManager {
     }
 
     /// Number of active transfer sessions.
-    #[cfg(test)]
-    fn active_session_count(&self) -> usize {
+    pub(crate) fn active_session_count(&self) -> usize {
         self.inner.lock().len()
     }
 

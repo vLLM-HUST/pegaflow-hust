@@ -1,0 +1,30 @@
+{
+  "platform": "Linux-5.15.0-25-generic-aarch64-with-glibc2.38",
+  "python": "3.12.13 (main, Aug  3 2026, 03:58:42) [GCC 12.3.1 (openEuler 12.3.1-105.oe2403sp3)]",
+  "packages": {
+    "vllm": "0.23.0+empty",
+    "vllm-ascend": "0.23.0",
+    "torch": "2.10.0+cpu",
+    "torch-npu": "2.10.0.post4",
+    "transformers": "5.5.4",
+    "httpx": "0.28.1"
+  },
+  "native_artifacts": {
+    "/data/shared_upload/hust-zsx/issue23-scaled-20261014/runtime/bin/pegaflow-server": {
+      "bytes": 11459208,
+      "sha256": "f2d3856a3e14a65e4267e58e26224298da733f8f18d08d51e7f8ff8dcae771a8"
+    },
+    "/data/shared_upload/hust-zsx/issue23-scaled-20261014/runtime/bin/pegaflow-router": {
+      "bytes": 9266976,
+      "sha256": "cf5bce1e77e691002cdc55f242e5479708f7cfbe665543cdc5456438fa07f9c5"
+    },
+    "/data/shared_upload/hust-zsx/issue23-scaled-20261014/runtime/bin/pegaflow-metaserver": {
+      "bytes": 6059600,
+      "sha256": "00941dbe3651a08eb8f0a3b71c71db23b13c0d027187427df3f061edaf42e89b"
+    },
+    "/data/shared_upload/hust-zsx/issue23-contention-20261015/source/python/pegaflow/pegaflow.cpython-312-aarch64-linux-gnu.so": {
+      "bytes": 5248432,
+      "sha256": "2a48f2422ab846dad925edfb605e2e143f8199410ed82b50590333e1c4bb4bd5"
+    }
+  }
+}

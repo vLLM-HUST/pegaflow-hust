@@ -480,7 +480,10 @@ fn process_load_task(
 
     let (copies, total_bytes) = build_copy_descs(layers)?;
 
+    let descriptors_ready = std::time::Instant::now();
+
     backend.h2d(&copies, stream).map_err(EngineError::Storage)?;
+    let api_returned = std::time::Instant::now();
 
     // Synchronize the stream.  On Ascend, async copies may fall back to
     // synchronous aclrtMemcpy inside the backend, which can leave the stream
@@ -492,6 +495,18 @@ fn process_load_task(
     }
 
     let elapsed = start.elapsed();
+    info!(
+        "Load stage timing: worker={} build_us={} api_us={} sync_us={} copies={} bytes={}",
+        std::thread::current().name().unwrap_or("unknown"),
+        descriptors_ready.duration_since(start).as_micros(),
+        api_returned.duration_since(descriptors_ready).as_micros(),
+        start
+            .elapsed()
+            .saturating_sub(api_returned.duration_since(start))
+            .as_micros(),
+        copies.len(),
+        total_bytes,
+    );
     let bandwidth_gbps = if elapsed.as_secs_f64() > 0.0 {
         (total_bytes as f64 / 1e9) / elapsed.as_secs_f64()
     } else {

@@ -34,6 +34,8 @@ pub mod sync_state;
 mod tailguard;
 pub mod transfer;
 
+#[cfg(feature = "rdma")]
+pub use backing::issue23_background::{Issue23BackgroundConfig, Issue23BackgroundStats};
 pub use backing::{
     DEFAULT_SSD_PREFETCH_INFLIGHT, DEFAULT_SSD_PREFETCH_QUEUE_DEPTH, DEFAULT_SSD_WRITE_INFLIGHT,
     DEFAULT_SSD_WRITE_QUEUE_DEPTH, SsdCacheConfig,
@@ -936,6 +938,48 @@ impl PegaEngine {
         self.storage.flush_write_pipeline().await;
         let stats = self.storage.activate_issue23_experiment()?;
         Ok((stats.hidden_blocks, stats.hidden_bytes))
+    }
+
+    pub async fn configure_issue23(
+        &self,
+        config: Issue23ExperimentConfig,
+        inherit: bool,
+    ) -> Result<(), String> {
+        self.storage.flush_write_pipeline().await;
+        self.storage.configure_issue23(config, inherit)
+    }
+
+    pub async fn release_issue23_source(&self) -> Result<(), String> {
+        self.storage.flush_write_pipeline().await;
+        self.storage.release_issue23_source()
+    }
+
+    #[cfg(feature = "rdma")]
+    pub async fn start_issue23_background(
+        &self,
+        config: Issue23BackgroundConfig,
+    ) -> Result<(), String> {
+        self.storage.start_issue23_background(config).await
+    }
+
+    #[cfg(feature = "rdma")]
+    pub async fn stop_issue23_background(&self) -> Result<Issue23BackgroundStats, String> {
+        self.storage.stop_issue23_background().await
+    }
+
+    pub fn issue23_pacing_totals(&self) -> (u64, u64, usize) {
+        self.storage.issue23_pacing_totals()
+    }
+
+    /// Pin one immutable serving snapshot for the four experimental arms.
+    pub async fn freeze_issue23_source_snapshot(
+        &self,
+        plan: &Issue23TransferPlan,
+    ) -> Result<(usize, u64), String> {
+        plan.validate()?;
+        self.storage.flush_write_pipeline().await;
+        let expected = issue23_causal::expected_hidden_layout(Some(plan))?;
+        self.storage.freeze_issue23_source_snapshot(&expected)
     }
 
     /// Remove stale inflight blocks and failed_remote entries (background GC).

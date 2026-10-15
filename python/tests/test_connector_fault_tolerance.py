@@ -475,6 +475,36 @@ def test_register_deduplicates_exact_view_aliases(monkeypatch):
     worker.shutdown()
 
 
+def test_register_single_group_kv_tuple_uses_group_block_size(monkeypatch):
+    class AttentionPlane(FakeSharedStorageTensor):
+        shape = (4, 16, 1, 2)
+
+        def stride(self):
+            return (32, 2, 2, 1)
+
+    kv_cache_config = MagicMock()
+    kv_cache_config.kv_cache_groups = [MagicMock(layer_names=("layer.0",))]
+    kv_cache_config.kv_cache_groups[0].kv_cache_spec.block_size = 16
+    worker, client, _ = _make_worker(kv_cache_config=kv_cache_config, block_size=32)
+    shared = FakeSharedStorage()
+    monkeypatch.setattr("pegaflow.connector.worker.CudaIPCWrapper", FakeCudaIPCWrapper)
+
+    try:
+        worker.register_kv_caches(
+            {
+                "layer.0": (
+                    AttentionPlane(shared, storage_offset=0),
+                    AttentionPlane(shared, storage_offset=128),
+                )
+            }
+        )
+        assert client.register_calls[0][7] == ["layer.0_k", "layer.0_v"]
+        assert client.register_calls[0][9] == [4, 4]
+        assert client.register_calls[0][10] == [64, 64]
+    finally:
+        worker.shutdown()
+
+
 def test_register_version_mismatch_raises_startup_error(monkeypatch):
     worker, client, _ = _make_worker()
     client.register_response = (

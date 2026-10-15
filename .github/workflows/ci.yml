@@ -168,12 +168,16 @@ jobs:
       - name: Run Issue23 preparation and analysis tests
         run: |
           uv run --isolated --no-project --with pytest --with httpx --with aiohttp \
-            pytest scripts/issue23/test_preparation.py -q
+            pytest scripts/issue23 -q
       - name: Audit frozen Issue23 pilot evidence
         run: |
           python scripts/issue23/audit_archive.py \
             --archive results/issue23/20261012-attention-diagnostic \
             --output "$RUNNER_TEMP/issue23-archive-review.json"
+      - name: Audit frozen contention experiment evidence
+        run: |
+          python scripts/issue23/verify_contention.py \
+            --root results/issue23/20261015-contention
 
   ecpa-package:
     name: ECPA package contract (Python ${{ matrix.python-version }})
@@ -326,8 +330,26 @@ jobs:
       - name: Run cargo check
         run: |
           cargo check --no-default-features --features ascend -p pegaflow-core -p pegaflow-server --lib
+          cargo check --no-default-features --features ascend,rdma -p pegaflow-core -p pegaflow-server --lib --tests
         env:
           CUDA_PATH: /usr/local/cuda
+
+  rdma-cpu-tests:
+    name: RDMA CPU unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - name: Install native build dependencies
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y protobuf-compiler libibverbs-dev
+      - uses: dtolnay/rust-toolchain@1.97.0
+      - uses: mozilla-actions/sccache-action@v0.0.9
+      - name: Test CPU pacing without device initialization
+        run: |
+          cargo test -p pegaflow-transfer --no-default-features --features ascend --lib rc_backend::pacing::tests
 
   cargo-check:
     name: cargo check
