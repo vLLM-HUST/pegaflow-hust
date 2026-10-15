@@ -169,7 +169,7 @@ impl BackgroundReader {
                         len: bytes,
                     };
                     rdma.engine()
-                        .batch_transfer_async(&remote_key, &[desc], TransferOp::Read)
+                        .batch_transfer_async(TransferOp::Read, &remote_key, &[desc])
                 };
                 let receivers = match receivers {
                     Ok(receivers) => receivers,

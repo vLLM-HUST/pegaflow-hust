@@ -238,7 +238,7 @@ def trace_analysis(events, plan, schedule, backend, scheduler_policy=None):
         "scheduler_policy": opened[0].get("smooth_scheduler_policy") if opened else None,
         "scheduler_priority": opened[0].get("smooth_scheduler_priority") if opened else None,
         "posting_lateness_ms": distribution([r["posting_lateness_ms"] for r in rows]),
-        "storage_groups": group_report,
+        **({"storage_groups": group_report} if plan["schema_version"] == 2 else {}),
         "clock_note": "Each engine's monotonic clock is analyzed independently; completion is an observation timestamp.",
     }
 
