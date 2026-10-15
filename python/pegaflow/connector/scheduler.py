@@ -119,6 +119,8 @@ class _HybridQuery:
     attention: ShardedQueryReady | None
     groups: dict[int, list[tuple[tuple[int, ...], bytes]]] = field(default_factory=dict)
     remote_checkpoint: int | None = None
+    discovery_deadline: float | None = None
+    retry_after: dict[int, float] = field(default_factory=dict)
 
 
 class SchedulerConnector:
@@ -199,7 +201,13 @@ class SchedulerConnector:
         self._prefetch_start_times: dict[str, float] = {}
         self._pending_query_probes: dict[str, _QueryProbe] = {}
         self._hybrid_queries: dict[str, _HybridQuery] = {}
+        self._issue23_local_observers = os.environ.get("PEGAFLOW_ISSUE23_LOCAL_OBSERVERS") == "1"
         self._issue23_parallel_groups = os.environ.get("PEGAFLOW_ISSUE23_HYBRID_PREFETCH") == "1"
+        self._issue23_discovery_grace = float(
+            os.environ.get("PEGAFLOW_ISSUE23_DISCOVERY_GRACE_SECONDS", "0")
+        )
+        if self._issue23_discovery_grace < 0:
+            raise ValueError("Issue23 discovery grace must be nonnegative")
         if self._issue23_parallel_groups and (
             not self._cache_groups.has_recurrent_state or not context.wait_for_full_prefix
         ):
@@ -262,6 +270,10 @@ class SchedulerConnector:
         request: "Request",
         num_computed_tokens: int,
     ) -> tuple[int | None, bool]:
+        if getattr(self, "_issue23_local_observers", False) and request.request_id.removeprefix(
+            "cmpl-"
+        ).startswith("issue23-observer-"):
+            return (0, False)
         req_id = request.request_id
 
         if not self._ctx.read_enabled:
@@ -458,6 +470,10 @@ class SchedulerConnector:
         blocks: "KVCacheBlocks",
         num_external_tokens: int,
     ) -> None:
+        if getattr(self, "_issue23_local_observers", False) and request.request_id.removeprefix(
+            "cmpl-"
+        ).startswith("issue23-observer-"):
+            return
         req_id = request.request_id
 
         # Keep a live reference so we can refresh block_hashes during decode
@@ -555,6 +571,10 @@ class SchedulerConnector:
         # Process new requests
         for req in scheduler_output.scheduled_new_reqs:
             req_id = req.req_id
+            if getattr(self, "_issue23_local_observers", False) and req_id.removeprefix(
+                "cmpl-"
+            ).startswith("issue23-observer-"):
+                continue
             num_tokens = scheduler_output.num_scheduled_tokens.get(req_id, 0)
 
             # Verify update_state_after_alloc was called for this request
@@ -1293,11 +1313,17 @@ class SchedulerConnector:
         )
         if attention is not None:
             state.attention = attention
+        now = time.monotonic()
+        if state.discovery_deadline is None:
+            state.discovery_deadline = now + self._issue23_discovery_grace
         pending = state.attention is None
         try:
             for index in sorted(self._cache_groups.recurrent_group_indices):
                 group_id = self._cache_groups.storage_group_ids[index]
                 if group_id in state.groups:
+                    continue
+                if now < state.retry_after.get(group_id, 0):
+                    pending = True
                     continue
                 result = self._tp_shard_client.query_group_membership(
                     self._ctx.instance_id,
@@ -1307,6 +1333,19 @@ class SchedulerConnector:
                     prefetch=True,
                 )
                 if result is None:
+                    pending = True
+                    continue
+                if any(not positions for positions, _ in result):
+                    self._tp_shard_client.release(tuple(lease for _, lease in result), req_id)
+                    if now >= state.discovery_deadline:
+                        raise RuntimeError("Issue23 frozen recurrent checkpoint is unavailable")
+                    state.retry_after[group_id] = now + 0.01
+                    telemetry_event(
+                        "issue23_group_discovery_retry",
+                        request_id=req_id,
+                        storage_group_id=group_id,
+                        checkpoint=checkpoint,
+                    )
                     pending = True
                     continue
                 state.groups[group_id] = [

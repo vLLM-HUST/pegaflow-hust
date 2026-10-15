@@ -79,7 +79,7 @@ pub(crate) struct RdmaFetchStore {
     /// peer would each create QPs and race on the server, causing all but
     /// the last handshake's QPs to be invalidated.
     connect_group: Arc<Group<String, ()>>,
-    issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
+    issue23_experiment: Option<Arc<parking_lot::RwLock<Arc<Issue23CausalExperiment>>>>,
     tailguard_remote_read: Option<Arc<TailGuardRemoteReadController>>,
 }
 
@@ -89,7 +89,7 @@ impl RdmaFetchStore {
         rdma_transport: Arc<RdmaTransport>,
         allocate_fn: AllocateFn,
         advertise_addr: String,
-        issue23_experiment: Option<Arc<Issue23CausalExperiment>>,
+        issue23_experiment: Option<Arc<parking_lot::RwLock<Arc<Issue23CausalExperiment>>>>,
         tailguard_remote_read: Option<Arc<TailGuardRemoteReadController>>,
     ) -> Self {
         info!("RDMA remote fetch enabled (advertise={})", advertise_addr);
@@ -113,6 +113,10 @@ impl RdmaFetchStore {
         namespace: &str,
         hashes: &[Vec<u8>],
     ) -> Option<(String, usize)> {
+        let issue23_experiment = self
+            .issue23_experiment
+            .as_ref()
+            .map(|slot| slot.read().clone());
         if hashes.is_empty() {
             return None;
         }
@@ -120,7 +124,7 @@ impl RdmaFetchStore {
         let nodes = match self.metaserver_client.query_prefix(namespace, hashes).await {
             Ok(n) => n,
             Err(e) => {
-                if let Some(experiment) = &self.issue23_experiment {
+                if let Some(experiment) = &issue23_experiment {
                     let _ = experiment.record_fetch_stage("fetch_unavailable", req_id, namespace,
                         serde_json::json!({"reason": "metaserver_query_failed", "detail": e.to_string()}));
                 }
@@ -134,7 +138,7 @@ impl RdmaFetchStore {
             .filter(|n| n.node != self.advertise_addr)
             .max_by_key(|n| n.prefix_len);
         let Some(best) = best else {
-            if let Some(experiment) = &self.issue23_experiment {
+            if let Some(experiment) = &issue23_experiment {
                 let _ = experiment.record_fetch_stage("fetch_unavailable", req_id, namespace,
                     serde_json::json!({"reason": "no_remote_owner", "requested_blocks": hashes.len()}));
             }
@@ -142,7 +146,7 @@ impl RdmaFetchStore {
         };
 
         let remote_prefix_len = best.prefix_len as usize;
-        let prefix_len = if let Some(experiment) = &self.issue23_experiment {
+        let prefix_len = if let Some(experiment) = &issue23_experiment {
             match experiment.frozen_remote_prefix_len(req_id, namespace, hashes, remote_prefix_len)
             {
                 Ok(prefix_len) => prefix_len,
@@ -191,7 +195,9 @@ impl RdmaFetchStore {
             &self.advertise_addr,
             namespace,
             hashes,
-            self.issue23_experiment.clone(),
+            self.issue23_experiment
+                .as_ref()
+                .map(|slot| slot.read().clone()),
             self.tailguard_remote_read.clone(),
         )
         .await

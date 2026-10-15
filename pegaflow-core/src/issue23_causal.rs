@@ -152,7 +152,7 @@ pub enum Issue23Schedule {
     Burst,
 }
 
-#[derive(Clone, Debug)]
+#[derive(Clone, Debug, Deserialize)]
 pub struct Issue23ExperimentConfig {
     pub plan: Option<Issue23TransferPlan>,
     pub backend: Issue23Backend,
@@ -167,9 +167,22 @@ pub struct Issue23TransferPlan {
     pub protocol_id: String,
     pub block_id: String,
     pub qps_per_peer: usize,
+    #[serde(default = "default_cohort_size")]
+    pub cohort_size: usize,
+    #[serde(default = "default_smooth_interval_ms")]
+    pub smooth_interval_ms: u64,
+    #[serde(default)]
+    pub rdma_rate_bps: u64,
     pub requests: Vec<Issue23RequestPlan>,
     #[serde(default, skip_serializing_if = "Option::is_none")]
     pub freeze_provenance: Option<serde_json::Value>,
+}
+
+fn default_cohort_size() -> usize {
+    4
+}
+fn default_smooth_interval_ms() -> u64 {
+    10
 }
 
 #[derive(Clone, Debug, Deserialize, Serialize)]
@@ -339,6 +352,12 @@ impl Issue23TransferPlan {
         if self.requests.is_empty() {
             return Err("Issue23 transfer plan must contain requests".into());
         }
+        if !(2..=16).contains(&self.cohort_size) || self.smooth_interval_ms == 0 {
+            return Err("cohort_size must be 2..16 and smooth_interval_ms positive".into());
+        }
+        self.smooth_interval_ms
+            .checked_mul((self.cohort_size - 1) as u64)
+            .ok_or("release schedule overflows")?;
 
         let mut request_ids = HashSet::new();
         let mut operation_ids = HashSet::new();
@@ -350,7 +369,7 @@ impl Issue23TransferPlan {
             if !request_ids.insert(request.request_id.as_str()) {
                 return Err(format!("duplicate request_id {}", request.request_id));
             }
-            if request.smooth_slot >= EXPECTED_COHORT_SIZE {
+            if request.smooth_slot >= self.cohort_size {
                 return Err(format!(
                     "request {} has invalid smooth_slot {}",
                     request.request_id, request.smooth_slot
@@ -434,9 +453,10 @@ impl Issue23TransferPlan {
         for (cohort, slots) in cohorts {
             let mut sorted = slots;
             sorted.sort_unstable();
-            if sorted != [0, 1, 2, 3] {
+            if sorted != (0..self.cohort_size).collect::<Vec<_>>() {
                 return Err(format!(
-                    "cohort {cohort} must contain smooth slots [0,1,2,3], got {sorted:?}"
+                    "cohort {cohort} must contain all {} smooth slots, got {sorted:?}",
+                    self.cohort_size
                 ));
             }
         }
@@ -445,6 +465,43 @@ impl Issue23TransferPlan {
 }
 
 impl Issue23CausalExperiment {
+    pub(crate) fn is_idle(&self) -> bool {
+        #[cfg(feature = "rdma")]
+        {
+            let gate = self.gate.lock();
+            gate.cohorts.is_empty() && gate.parts.is_empty()
+        }
+        #[cfg(not(feature = "rdma"))]
+        {
+            true
+        }
+    }
+
+    pub(crate) fn inherit_hidden(&self, previous: &Self) -> Result<(), String> {
+        let blocks = previous
+            .hidden
+            .read()
+            .iter()
+            .map(|(key, block)| (key.clone(), Arc::clone(block)))
+            .collect::<Vec<_>>();
+        self.stage_hidden_blocks(&blocks)
+    }
+
+    fn cohort_size(&self) -> usize {
+        self.config.plan.as_ref().map_or(4, |plan| plan.cohort_size)
+    }
+
+    fn offset_ms(&self, slot: usize) -> u64 {
+        let interval = self
+            .config
+            .plan
+            .as_ref()
+            .map_or(10, |plan| plan.smooth_interval_ms);
+        match self.config.schedule {
+            Issue23Schedule::Smooth => interval * slot as u64,
+            Issue23Schedule::Burst => interval * (self.cohort_size() - 1) as u64 / 2,
+        }
+    }
     pub(crate) fn new(config: Issue23ExperimentConfig) -> Result<Arc<Self>, String> {
         if let Some(plan) = &config.plan {
             plan.validate()?;
@@ -644,21 +701,22 @@ impl Issue23CausalExperiment {
         &self,
         blocks: &[(BlockKey, Arc<SealedBlock>)],
     ) -> Result<(), String> {
-        if !self.has_frozen_plan() {
-            return Ok(());
-        }
         if self.is_active() {
             return Err("cannot add hidden objects after Issue23 activation".into());
         }
         let mut hidden = self.hidden.write();
         for (key, block) in blocks {
-            let expected_bytes = self.expected_hidden.get(key).ok_or_else(|| {
-                format!(
-                    "restored object {} is absent from the frozen hidden snapshot",
-                    encode_hex(&key.hash)
-                )
-            })?;
-            if block.memory_footprint() != *expected_bytes {
+            let expected_bytes = if self.has_frozen_plan() {
+                *self.expected_hidden.get(key).ok_or_else(|| {
+                    format!(
+                        "restored object {} is absent from the frozen hidden snapshot",
+                        encode_hex(&key.hash)
+                    )
+                })?
+            } else {
+                block.memory_footprint()
+            };
+            if block.memory_footprint() != expected_bytes {
                 return Err(format!(
                     "restored object {} size mismatch: observed={} expected={}",
                     encode_hex(&key.hash),
@@ -1008,8 +1066,8 @@ impl Issue23CausalExperiment {
             &raw_request_id,
             &plan,
             Some(match self.config.schedule {
-                Issue23Schedule::Burst => BURST_OFFSET_MS,
-                Issue23Schedule::Smooth => SMOOTH_OFFSETS_MS[plan.smooth_slot],
+                Issue23Schedule::Burst => self.offset_ms(plan.smooth_slot),
+                Issue23Schedule::Smooth => self.offset_ms(plan.smooth_slot),
             }),
         );
         let bundle = PreparedIssue23Bundle {
@@ -1039,7 +1097,7 @@ impl Issue23CausalExperiment {
                 ));
             }
             cohort.push(bundle);
-            if cohort.len() == EXPECTED_COHORT_SIZE {
+            if cohort.len() == self.cohort_size() {
                 gate.cohorts.remove(&plan.cohort_id)
             } else {
                 None
@@ -1072,130 +1130,105 @@ impl Issue23CausalExperiment {
             .max()
             .expect("complete cohort is non-empty");
 
-        match self.config.schedule {
-            Issue23Schedule::Burst => {
-                wait_until_precise(tg + Duration::from_millis(BURST_OFFSET_MS)).await;
-                let posted = self.post_burst_cohort(&rdma, &remote_addr, cohort).await;
-                let successful_posts: Vec<_> = posted
-                    .iter()
-                    .filter_map(|post| post.as_ref().ok().map(|pending| pending.posted_at))
-                    .collect();
-                if let (Some(first), Some(last)) =
-                    (successful_posts.iter().min(), successful_posts.iter().max())
-                {
-                    let spread = last.duration_since(*first);
-                    let _ = self.write_event(&serde_json::json!({
-                        "event": "cohort_posting_spread",
-                        "cohort_id": posted.iter().find_map(|post| post.as_ref().ok().map(|pending| pending.cohort_id.as_str())),
-                        "posting_spread_ns": spread.as_nanos(),
-                        "limit_ns": MAX_BURST_POSTING_SPREAD.as_nanos(),
-                        "pass": spread <= MAX_BURST_POSTING_SPREAD,
-                    }));
-                }
-                for post in posted {
-                    self.finish_post(post).await;
-                }
-            }
-            Issue23Schedule::Smooth => {
-                // T_g is the fourth bundle's eligibility timestamp, so slot 0
-                // is due immediately. Hand the complete sorted cohort to the
-                // pre-started realtime scheduler: publishing slot 0 on this
-                // normal-timeshare coordinator would leave it vulnerable to
-                // the same millisecond-scale preemption that the scheduler is
-                // intended to exclude. One worker dispatches all four slots
-                // serially at 0/10/20/30 ms.
-                let scheduler = self
-                    .smooth_scheduler
-                    .as_ref()
-                    .expect("smooth experiment has a scheduler");
-                let experiment = Arc::clone(&self);
-                let delayed_rdma = rdma.clone();
-                let delayed_remote_addr = remote_addr.clone();
-                let runtime = tokio::runtime::Handle::current();
-                let (scheduled_sender, scheduled_receiver) = oneshot::channel();
-                let submit_result = scheduler.submit(Box::new(move || {
-                    // Local-copy arms enqueue their memcpy worker from
-                    // post_bundle, so make the originating runtime available
-                    // on this dedicated OS thread too.
-                    let _runtime_guard = runtime.enter();
-                    let mut posts = Vec::with_capacity(cohort.len());
-                    release_smooth_slots(
-                        tg,
-                        cohort,
-                        |bundle| bundle.plan.smooth_slot,
-                        |bundle| {
-                            posts.push(experiment.post_bundle(
-                                &delayed_rdma,
-                                &delayed_remote_addr,
-                                bundle,
-                            ));
-                        },
-                    );
-                    let _ = scheduled_sender.send(posts);
-                }));
+        if self
+            .smooth_scheduler
+            .as_ref()
+            .is_some_and(|scheduler| !scheduler.default_policy)
+        {
+            self.run_realtime_smooth_cohort(rdma, remote_addr, cohort, tg)
+                .await;
+            return;
+        }
 
-                if let Err(error) = submit_result {
-                    let _ = self.write_event(&serde_json::json!({
-                        "event": "cohort_post_task_failed",
-                        "schedule": "smooth",
-                        "error": error,
-                    }));
-                }
-                match scheduled_receiver.await {
-                    Ok(posts) => {
-                        for post in posts {
-                            self.finish_post(post).await;
+        let cohort_id = cohort[0].plan.cohort_id.clone();
+        let posted_times = Arc::new(Mutex::new(Vec::new()));
+        let mut tasks = tokio::task::JoinSet::new();
+        for bundle in cohort {
+            let deadline = tg + Duration::from_millis(self.offset_ms(bundle.plan.smooth_slot));
+            let experiment = Arc::clone(&self);
+            let rdma = rdma.clone();
+            let remote_addr = remote_addr.clone();
+            let posted_times = Arc::clone(&posted_times);
+            tasks.spawn(async move {
+                let submitter = Arc::clone(&experiment);
+                let result = tokio::task::spawn_blocking(move || {
+                    wait_until_precise_blocking(deadline);
+                    submitter.post_bundle(&rdma, &remote_addr, bundle)
+                })
+                .await;
+                match result {
+                    Ok(post) => {
+                        if let Ok(pending) = &post {
+                            posted_times.lock().push(pending.posted_at);
                         }
+                        experiment.finish_post(post).await;
                     }
                     Err(error) => {
-                        let _ = self.write_event(&serde_json::json!({
-                            "event": "cohort_post_task_failed",
-                            "schedule": "smooth",
-                            "error": error.to_string(),
+                        let _ = experiment.write_event(&serde_json::json!({
+                            "event": "cohort_post_task_failed", "error": error.to_string(),
                         }));
                     }
                 }
-            }
+            });
+        }
+        while tasks.join_next().await.is_some() {}
+        let times = posted_times.lock();
+        if self.config.schedule == Issue23Schedule::Burst
+            && let (Some(first), Some(last)) = (times.iter().min(), times.iter().max())
+        {
+            let spread = last.duration_since(*first);
+            let _ = self.write_event(&serde_json::json!({
+                "event": "cohort_posting_spread", "cohort_id": cohort_id, "posting_spread_ns": spread.as_nanos(),
+                "limit_ns": MAX_BURST_POSTING_SPREAD.as_nanos(),
+                "pass": spread <= MAX_BURST_POSTING_SPREAD,
+            }));
         }
     }
 
     #[cfg(feature = "rdma")]
-    async fn post_burst_cohort(
+    async fn run_realtime_smooth_cohort(
         self: &Arc<Self>,
-        rdma: &Option<Arc<RdmaTransport>>,
-        remote_addr: &str,
+        rdma: Option<Arc<RdmaTransport>>,
+        remote_addr: String,
         cohort: Vec<PreparedIssue23Bundle>,
-    ) -> Vec<Result<PendingBundle, FailedBundle>> {
-        // Prepare all blocking workers before releasing the barrier. This
-        // makes the frozen burst deadline the common release point instead of
-        // serializing four submit_prepared_batch calls on one runtime worker.
-        let barrier = Arc::new(std::sync::Barrier::new(cohort.len() + 1));
-        let mut tasks = Vec::with_capacity(cohort.len());
-        for bundle in cohort {
-            let experiment = Arc::clone(self);
-            let rdma = rdma.clone();
-            let remote_addr = remote_addr.to_owned();
-            let barrier = Arc::clone(&barrier);
-            tasks.push(tokio::task::spawn_blocking(move || {
-                barrier.wait();
-                experiment.post_bundle(&rdma, &remote_addr, bundle)
-            }));
+        tg: Instant,
+    ) {
+        let scheduler = self
+            .smooth_scheduler
+            .as_ref()
+            .expect("smooth scheduler exists");
+        let experiment = Arc::clone(self);
+        let runtime = tokio::runtime::Handle::current();
+        let (sender, receiver) = oneshot::channel();
+        let submitted = scheduler.submit(Box::new(move || {
+            let _runtime_guard = runtime.enter();
+            let posts = cohort
+                .into_iter()
+                .map(|bundle| {
+                    wait_until_precise_blocking(
+                        tg + Duration::from_millis(experiment.offset_ms(bundle.plan.smooth_slot)),
+                    );
+                    experiment.post_bundle(&rdma, &remote_addr, bundle)
+                })
+                .collect::<Vec<_>>();
+            let _ = sender.send(posts);
+        }));
+        if let Err(error) = submitted {
+            let _ = self.write_event(
+                &serde_json::json!({"event": "cohort_post_task_failed", "error": error}),
+            );
+            return;
         }
-        barrier.wait();
-
-        let mut posted = Vec::with_capacity(tasks.len());
-        for task in tasks {
-            match task.await {
-                Ok(post) => posted.push(post),
-                Err(error) => {
-                    let _ = self.write_event(&serde_json::json!({
-                        "event": "cohort_post_task_failed",
-                        "error": error.to_string(),
-                    }));
+        match receiver.await {
+            Ok(posts) => {
+                for post in posts {
+                    self.finish_post(post).await;
                 }
             }
+            Err(error) => {
+                let _ = self.write_event(&serde_json::json!({"event": "cohort_post_task_failed", "error": error.to_string()}));
+            }
         }
-        posted
     }
 
     #[cfg(feature = "rdma")]
@@ -1583,7 +1616,7 @@ pub(crate) fn encode_hex(bytes: &[u8]) -> String {
     encoded
 }
 
-fn decode_hex(value: &str) -> Result<Vec<u8>, String> {
+pub(crate) fn decode_hex(value: &str) -> Result<Vec<u8>, String> {
     if !value.len().is_multiple_of(2) {
         return Err("hex string has odd length".into());
     }
@@ -1640,6 +1673,9 @@ mod tests {
             protocol_id: "p".into(),
             block_id: "b".into(),
             qps_per_peer: 2,
+            cohort_size: 4,
+            smooth_interval_ms: 10,
+            rdma_rate_bps: 0,
             requests: (0..4)
                 .map(|slot| {
                     let request = format!("req-{slot}");
@@ -1653,6 +1689,33 @@ mod tests {
                 .collect(),
             freeze_provenance: None,
         }
+    }
+
+    #[test]
+    fn eight_slot_plan_accepts_complete_cohort_and_rejects_missing_slot() {
+        let mut plan = valid_plan();
+        plan.cohort_size = 8;
+        plan.smooth_interval_ms = 1200;
+        plan.rdma_rate_bps = 1_000_000_000;
+        for slot in 4..8 {
+            let mut request = plan.requests[slot - 4].clone();
+            request.request_id = format!("extra-{slot}");
+            request.smooth_slot = slot;
+            for op in &mut request.operations {
+                op.operation_id = operation_id(
+                    &request.request_id,
+                    &op.namespace,
+                    op.storage_group_id,
+                    &decode_hex(&op.block_hash_hex).unwrap(),
+                    op.slot_index,
+                    &op.segment,
+                );
+            }
+            plan.requests.push(request);
+        }
+        assert!(plan.validate().is_ok());
+        plan.requests.pop();
+        assert!(plan.validate().is_err());
     }
 
     #[test]

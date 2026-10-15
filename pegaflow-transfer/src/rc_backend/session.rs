@@ -1,7 +1,9 @@
+use super::pacing::{PACING_CHUNK_BYTES, SharedPacer};
 use std::collections::HashMap;
 use std::sync::Arc;
+use std::sync::atomic::Ordering;
 use std::sync::mpsc as std_mpsc;
-use std::time::Instant;
+use std::time::{Duration, Instant};
 
 use mea::oneshot;
 use std::thread;
@@ -79,11 +81,16 @@ pub(crate) struct RcSession {
     _recv_cq: GenericCompletionQueue,
     pub(crate) local_endpoint: RcEndpoint,
     cmd_tx: std_mpsc::Sender<SessionCommand>,
+    pacer: Arc<SharedPacer>,
 }
 
 impl RcSession {
     /// Create an RC QP in INIT state and return the session (not yet connected).
-    pub(crate) fn create(runtime: &RcRuntime, psn_seed: u64) -> Result<Arc<Self>> {
+    pub(crate) fn create(
+        runtime: &RcRuntime,
+        psn_seed: u64,
+        pacer: Arc<SharedPacer>,
+    ) -> Result<Arc<Self>> {
         let mut cq_builder = runtime.device_ctx.create_cq_builder();
         cq_builder.setup_cqe(SEND_CQ_SIZE);
         let send_cq: GenericCompletionQueue = cq_builder
@@ -136,6 +143,7 @@ impl RcSession {
             _recv_cq: recv_cq,
             local_endpoint,
             cmd_tx,
+            pacer,
         });
 
         Self::spawn_worker(Arc::clone(&session), cmd_rx, runtime.numa_node)?;
@@ -222,6 +230,7 @@ impl RcSession {
         let shape = batch_shape(ops.iter().map(|rdma_op| rdma_op.len));
         let enqueued_at = Instant::now();
         metrics::record_enqueue(op);
+        self.pacer.begin_batch();
         if self
             .cmd_tx
             .send(SessionCommand::Transfer {
@@ -233,6 +242,7 @@ impl RcSession {
             })
             .is_err()
         {
+            self.pacer.active.fetch_sub(1, Ordering::AcqRel);
             metrics::record_enqueue_failure(op);
             return Err(TransferError::Backend(
                 "session worker channel disconnected".to_string(),
@@ -273,7 +283,7 @@ impl RcSession {
                         } => {
                             let queue_delay = enqueued_at.elapsed();
                             metrics::record_dequeue(op, queue_delay);
-                            debug!(
+                            log::log!(if session.pacer.limited() { log::Level::Info } else { log::Level::Debug },
                                 "rdma_batch_dequeue: local_qpn={} op={op:?} descriptors={} bytes={} queue_delay_us={:.3}",
                                 session.local_endpoint.qp_num,
                                 shape.descriptors,
@@ -283,12 +293,13 @@ impl RcSession {
                             let service_started = Instant::now();
                             let result = Self::execute_batch(&session, ops, op);
                             let service_duration = service_started.elapsed();
+                            session.pacer.active.fetch_sub(1, Ordering::AcqRel);
                             metrics::record_batch_complete(
                                 op,
                                 service_duration,
                                 result.is_ok(),
                             );
-                            debug!(
+                            log::log!(if session.pacer.limited() { log::Level::Info } else { log::Level::Debug },
                                 "rdma_batch_complete: local_qpn={} op={op:?} descriptors={} requested_bytes={} completed_bytes={} service_us={:.3} status={}",
                                 session.local_endpoint.qp_num,
                                 shape.descriptors,
@@ -360,6 +371,24 @@ impl RcSession {
     }
 
     fn execute_batch(session: &Self, ops: Vec<RdmaOp>, op: TransferOp) -> Result<usize> {
+        let ops = if session.pacer.limited() {
+            ops.into_iter()
+                .flat_map(|item| {
+                    (0..item.len)
+                        .step_by(PACING_CHUNK_BYTES)
+                        .map(move |offset| RdmaOp {
+                            local_mr: Arc::clone(&item.local_mr),
+                            local_ptr: item.local_ptr + offset as u64,
+                            remote_ptr: item.remote_ptr + offset as u64,
+                            len: PACING_CHUNK_BYTES.min(item.len - offset),
+                            remote_rkey: item.remote_rkey,
+                        })
+                })
+                .collect::<Vec<_>>()
+        } else {
+            ops
+        };
+        let mut next_release = None;
         let total_ops = ops.len();
         if total_ops == 0 {
             return Ok(0);
@@ -374,7 +403,19 @@ impl RcSession {
             while next_idx < total_ops && inflight.len() < MAX_SEND_WR as usize {
                 let available = MAX_SEND_WR as usize - inflight.len();
                 let remaining = total_ops - next_idx;
-                let chain_len = MAX_WR_CHAIN_OPS.min(available).min(remaining);
+                let limited = session.pacer.limited();
+                let chain_len = if limited {
+                    1
+                } else {
+                    MAX_WR_CHAIN_OPS.min(available).min(remaining)
+                };
+                if limited {
+                    let ready = *next_release
+                        .get_or_insert_with(|| session.pacer.reserve(ops[next_idx].len));
+                    if Instant::now() < ready {
+                        break;
+                    }
+                }
                 let mut qp = session.qp.lock();
                 let posted = Self::post_rdma_wr_chain(
                     &mut qp,
@@ -391,9 +432,25 @@ impl RcSession {
                     inflight.insert(next_wr_id, (rdma_op.len, posted_at));
                     next_wr_id = next_wr_id.wrapping_add(1);
                 }
+                session.pacer.posted_bytes.fetch_add(
+                    ops[next_idx..next_idx + posted]
+                        .iter()
+                        .map(|op| op.len as u64)
+                        .sum(),
+                    Ordering::Relaxed,
+                );
+                next_release = None;
                 next_idx += posted;
             }
 
+            if inflight.is_empty()
+                && let Some(ready) = next_release
+            {
+                let delay = ready.saturating_duration_since(Instant::now());
+                if !delay.is_zero() {
+                    thread::sleep(delay.min(Duration::from_millis(1)));
+                }
+            }
             match session.send_cq.start_poll() {
                 Ok(mut poller) => {
                     let mut did_work = false;
@@ -412,6 +469,10 @@ impl RcSession {
                             )));
                         }
                         transferred = transferred.saturating_add(bytes);
+                        session
+                            .pacer
+                            .completed_bytes
+                            .fetch_add(bytes as u64, Ordering::Relaxed);
                         metrics::record_completion(op, bytes, posted_at.elapsed());
                     }
                     if !did_work {

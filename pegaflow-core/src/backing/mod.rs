@@ -1,4 +1,6 @@
 #[cfg(feature = "rdma")]
+pub(super) mod issue23_background;
+#[cfg(feature = "rdma")]
 pub(super) mod rdma;
 #[cfg(feature = "rdma")]
 pub(super) mod rdma_fetch;

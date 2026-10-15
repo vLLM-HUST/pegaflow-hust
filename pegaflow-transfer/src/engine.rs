@@ -120,6 +120,15 @@ impl TransferEngine {
         })
     }
 
+    /// Set an aggregate software injection budget shared by this engine's QPs.
+    pub fn set_pacing_rate(&self, rate_bps: u64) -> Result<()> {
+        self.backend.set_pacing_rate(rate_bps)
+    }
+
+    pub fn pacing_totals(&self) -> (u64, u64, usize) {
+        self.backend.pacing_totals()
+    }
+
     pub fn register_memory(&self, regions: &[MemoryRegion]) -> Result<()> {
         for region in regions {
             self.backend.register_memory(region.ptr, region.len)?;

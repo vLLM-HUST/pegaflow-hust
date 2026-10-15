@@ -1,3 +1,4 @@
+mod pacing;
 mod runtime;
 mod session;
 mod state;
@@ -104,6 +105,7 @@ pub(crate) struct RcBackend {
     psn_counter: AtomicU64,
     numa_rr: NumaRoundRobin,
     qps_per_peer: usize,
+    pacer: Arc<pacing::SharedPacer>,
 }
 
 /// A fully validated RDMA batch whose memory-region and QP lookups have
@@ -147,7 +149,20 @@ impl RcBackend {
             psn_counter: AtomicU64::new(1),
             numa_rr,
             qps_per_peer,
+            pacer: Arc::new(pacing::SharedPacer::new()),
         })
+    }
+
+    pub(crate) fn set_pacing_rate(&self, rate_bps: u64) -> Result<()> {
+        self.pacer.set_rate(rate_bps)
+    }
+
+    pub(crate) fn pacing_totals(&self) -> (u64, u64, usize) {
+        (
+            self.pacer.posted_bytes.load(Ordering::Relaxed),
+            self.pacer.completed_bytes.load(Ordering::Relaxed),
+            self.pacer.active.load(Ordering::Acquire),
+        )
     }
 
     fn nic_count(&self) -> usize {
@@ -235,12 +250,13 @@ impl RcBackend {
         for (nic_idx, runtime) in self.runtimes.iter().enumerate() {
             for qp_idx in 0..self.qps_per_peer {
                 let psn_seed = self.psn_counter.fetch_add(1, Ordering::Relaxed);
-                let session = RcSession::create(runtime, psn_seed).map_err(|e| {
-                    TransferError::Backend(format!(
-                        "QP creation failed on nic={} qp_idx={qp_idx}: {e}",
-                        runtime.nic_name
-                    ))
-                })?;
+                let session = RcSession::create(runtime, psn_seed, Arc::clone(&self.pacer))
+                    .map_err(|e| {
+                        TransferError::Backend(format!(
+                            "QP creation failed on nic={} qp_idx={qp_idx}: {e}",
+                            runtime.nic_name
+                        ))
+                    })?;
                 sessions_per_nic[nic_idx].push(session);
             }
         }
