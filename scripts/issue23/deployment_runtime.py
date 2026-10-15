@@ -5,6 +5,28 @@ import os
 from pathlib import Path
 
 
+def inference_settings(config):
+    profile = config.get("inference_profile", "performance")
+    if profile == "eager_sync":
+        return {"profile": profile, "enforce_eager": True, "async_scheduling": False}
+    if profile != "performance":
+        raise ValueError(f"Unknown inference profile: {profile}")
+    maximum = config.get("max_num_seqs", 8)
+    sizes = sorted(
+        {value for value in (1, 2, 4, 8, 12, 16, maximum) if value <= maximum}
+    )
+    return {
+        "profile": profile,
+        "enforce_eager": False,
+        "async_scheduling": True,
+        "compilation_config": {
+            "mode": 3,
+            "cudagraph_mode": "FULL_DECODE_ONLY",
+            "cudagraph_capture_sizes": sizes,
+        },
+    }
+
+
 def environment(config, role, output):
     node = config["nodes"][role]
     return {
@@ -23,11 +45,17 @@ def environment(config, role, output):
         "PEGAFLOW_SYNC_SAVE_ON_FINISH": "1",
         "PEGAFLOW_SAVE_ACK_DIR": str(output / "visibility"),
         "PEGAFLOW_ISSUE23_HYBRID_PREFETCH": "1" if role == "decode" else "0",
-        "RUST_LOG": "info,pegaflow_core::backing::rdma_fetch=debug",
+        "PEGAFLOW_ISSUE23_DISCOVERY_GRACE_SECONDS": str(
+            config.get("discovery_grace_seconds", 5)
+        ),
+        "PEGAFLOW_ISSUE23_LOCAL_OBSERVERS": "1" if config.get("scaled") else "0",
+        "RUST_LOG": "info",
     }
 
 
-def engine_command(config, role, output, mode, backend="rdma", schedule="burst", plans_dir=None):
+def engine_command(
+    config, role, output, mode, backend="rdma", schedule="burst", plans_dir=None
+):
     node = config["nodes"][role]
     runtime = config["runtime"]
     meta = config["nodes"]["decode"]
@@ -40,7 +68,7 @@ def engine_command(config, role, output, mode, backend="rdma", schedule="burst",
         "--devices",
         "0,1",
         "--pool-size",
-        str(4 * 1024**3) + "b",
+        str(config.get("host_pool_bytes", 4 * 1024**3)) + "b",
         "--disable-numa-affinity",
         "--enable-prometheus",
         "--nics",
@@ -79,6 +107,16 @@ def model_command(config, role):
             "pegaflow.wait_for_full_prefix": role == "decode",
         },
     }
+    settings = inference_settings(config)
+    execution = (
+        ["--enforce-eager", "--no-async-scheduling"]
+        if settings["enforce_eager"]
+        else [
+            "--async-scheduling",
+            "--compilation-config",
+            json.dumps(settings["compilation_config"]),
+        ]
+    )
     return [
         config["runtime"]["python"],
         "-m",
@@ -100,7 +138,7 @@ def model_command(config, role):
         "--max-model-len",
         "8192",
         "--max-num-seqs",
-        "8",
+        str(config.get("max_num_seqs", 8)),
         "--max-num-batched-tokens",
         "4096",
         "--kv-cache-memory-bytes",
@@ -112,8 +150,7 @@ def model_command(config, role):
         "align",
         "--seed",
         "17",
-        "--no-async-scheduling",
-        "--enforce-eager",
+        *execution,
         "--limit-mm-per-prompt",
         '{"image":0,"video":0}',
         "--generation-config",
@@ -137,8 +174,13 @@ def collector_command(config, role, output):
         "--role",
         role,
     ]
-    for name, port in (("model", node["model_port"]), ("engine", node["engine_http_port"])):
+    for name, port in (
+        ("model", node["model_port"]),
+        ("engine", node["engine_http_port"]),
+    ):
         argv += ["--metrics", f"{name}=http://{node['host']}:{port}"]
+    if config.get("scaled"):
+        argv += ["--smi-every", "0"]
     return argv
 
 

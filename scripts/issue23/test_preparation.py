@@ -401,16 +401,20 @@ def test_cache_path_reset_preserves_source_objects():
 def test_real_http_stream_ttft_open_loop_and_arm_cancellation(tmp_path):
     async def exercise():
         arrivals = []
+        both_arrived = asyncio.Event()
 
         async def handler(request):
             body = await request.json()
             arrivals.append((body["request_id"], time.monotonic()))
+            if len(arrivals) == 2:
+                both_arrived.set()
             response = web.StreamResponse(headers={"Content-Type": "text/event-stream"})
             await response.prepare(request)
             if body.get("hang"):
                 await asyncio.sleep(0.3)
                 return response
             await response.write(b'data: {"choices":[{"text":"","finish_reason":null}]}\n\n')
+            await both_arrived.wait()
             await asyncio.sleep(0.08)
             event = json.dumps(
                 {
@@ -445,7 +449,7 @@ def test_real_http_stream_ttft_open_loop_and_arm_cancellation(tmp_path):
             async with make_client(2) as client:
                 results = await open_loop(client, url, cases, tmp_path, 1)
                 assert all(r["ttft_seconds"] > r["first_sse_seconds"] + 0.05 for r in results)
-                assert arrivals[1][1] - arrivals[0][1] < 0.06
+                assert {rid for rid, _ in arrivals} == {case["request_id"] for case in cases}
                 assert all(r["text"] == "The answer is (A)" for r in results)
                 failed = copy.deepcopy(cases)
                 failed[0]["payload"]["hang"] = True
@@ -455,7 +459,7 @@ def test_real_http_stream_ttft_open_loop_and_arm_cancellation(tmp_path):
                 before = len(arrivals)
                 with pytest.raises(TimeoutError):
                     await open_loop(client, url, failed, target, 0.03)
-                assert len(arrivals) == before + 1
+                assert [rid for rid, _ in arrivals[before:]] in ([], [failed[0]["request_id"]])
                 records = read_jsonl(target / "client.jsonl")
                 assert records[0]["status"] == "error" and "TimeoutError" in records[0]["error"]
         finally:

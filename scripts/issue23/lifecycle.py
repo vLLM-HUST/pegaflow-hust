@@ -9,7 +9,12 @@ import urllib.request
 from pathlib import Path
 
 from common import read_json
-from deployment_runtime import collector_command, engine_command, environment, model_command
+from deployment_runtime import (
+    collector_command,
+    engine_command,
+    environment,
+    model_command,
+)
 
 
 def request(config, role, action, output, processes=None, request_ids=None):
@@ -27,7 +32,10 @@ def request(config, role, action, output, processes=None, request_ids=None):
     message = urllib.request.Request(
         f"http://{node['host']}:{node['control_port']}/control",
         data=body,
-        headers={"Authorization": "Bearer " + token, "Content-Type": "application/json"},
+        headers={
+            "Authorization": "Bearer " + token,
+            "Content-Type": "application/json",
+        },
     )
     with urllib.request.urlopen(message, timeout=90) as response:
         result = json.load(response)
@@ -77,15 +85,25 @@ def start(config, output):
         )
         request(config, role, "start", output, [{"name": "engine", "argv": argv}])
     wait_health(
-        [f"http://{node['host']}:{node['engine_http_port']}" for node in config["nodes"].values()],
+        [
+            f"http://{node['host']}:{node['engine_http_port']}"
+            for node in config["nodes"].values()
+        ],
         120,
     )
     for role in config["nodes"]:
         request(
-            config, role, "start", output, [{"name": "model", "argv": model_command(config, role)}]
+            config,
+            role,
+            "start",
+            output,
+            [{"name": "model", "argv": model_command(config, role)}],
         )
     wait_health(
-        [f"http://{node['host']}:{node['model_port']}" for node in config["nodes"].values()]
+        [
+            f"http://{node['host']}:{node['model_port']}"
+            for node in config["nodes"].values()
+        ]
     )
     prefill = config["nodes"]["prefill"]
     router = [
@@ -109,7 +127,9 @@ def start(config, output):
     deadline = time.monotonic() + 30
     while True:
         try:
-            with socket.create_connection((prefill["host"], config["router_port"]), timeout=2):
+            with socket.create_connection(
+                (prefill["host"], config["router_port"]), timeout=2
+            ):
                 break
         except OSError:
             if time.monotonic() >= deadline:
@@ -140,7 +160,9 @@ if __name__ == "__main__":
             "prefill",
             "clear-markers",
             output,
-            request_ids=[case["request_id"] for case in read_json(os.environ["TG_CASES"])],
+            request_ids=[
+                case["request_id"] for case in read_json(os.environ["TG_CASES"])
+            ],
         )
     else:
         errors = []

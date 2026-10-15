@@ -71,7 +71,9 @@ async def stream_request(client, url, case, output, origin, planned_offset, time
                             + "\n"
                         )
                         raw.flush()
-                        first_event = first_event if first_event is not None else event_time
+                        first_event = (
+                            first_event if first_event is not None else event_time
+                        )
                         if data == "[DONE]":
                             done = True
                             break
@@ -83,8 +85,10 @@ async def stream_request(client, url, case, output, origin, planned_offset, time
                             piece = choice.get("text", "")
                             emitted_ids = choice.get("token_ids") or []
                             token_ids.extend(emitted_ids)
-                            if piece:
-                                first_text = first_text if first_text is not None else event_time
+                            if piece or emitted_ids:
+                                first_text = (
+                                    first_text if first_text is not None else event_time
+                                )
                                 text.append(piece)
                                 token_events.append(
                                     {
@@ -103,7 +107,9 @@ async def stream_request(client, url, case, output, origin, planned_offset, time
                 if not usage or not isinstance(usage.get("completion_tokens"), int):
                     raise ArmFailure("Server did not provide final token usage")
                 if usage.get("prompt_tokens") != case["input_tokens"]:
-                    raise ArmFailure("Server prompt token count differs from the frozen manifest")
+                    raise ArmFailure(
+                        "Server prompt token count differs from the frozen manifest"
+                    )
         record.update(
             status="ok",
             ttft_seconds=first_text - started,
@@ -113,7 +119,9 @@ async def stream_request(client, url, case, output, origin, planned_offset, time
         )
     except BaseException as error:
         record.update(
-            status="cancelled" if isinstance(error, asyncio.CancelledError) else "error",
+            status="cancelled"
+            if isinstance(error, asyncio.CancelledError)
+            else "error",
             error=f"{type(error).__name__}: {error}",
         )
         raise

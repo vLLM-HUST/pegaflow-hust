@@ -17,7 +17,7 @@ def read(path):
         return None
 
 
-def collect(output, role, run_dir, endpoints, interface, nic, interval=1):
+def collect(output, role, run_dir, endpoints, interface, nic, interval=1, smi_every=5):
     output.parent.mkdir(parents=True, exist_ok=True)
     with output.open("x", encoding="utf-8", buffering=1) as stream:
         index = 0
@@ -60,11 +60,19 @@ def collect(output, role, run_dir, endpoints, interface, nic, interval=1):
                 "rx_dropped",
                 "tx_dropped",
             ):
-                row["network"][name] = read(f"/sys/class/net/{interface}/statistics/{name}")
+                row["network"][name] = read(
+                    f"/sys/class/net/{interface}/statistics/{name}"
+                )
             for path in Path(f"/sys/class/infiniband/{nic}/ports/1/counters").glob("*"):
                 row["rdma"][path.name] = read(path)
+            for path in Path(f"/sys/class/infiniband/{nic}/ports/1/hw_counters").glob(
+                "*"
+            ):
+                row["rdma"]["hw/" + path.name] = read(path)
             metadata = run_dir / f"processes-{role}.json"
-            for process in json.loads(metadata.read_text()) if metadata.exists() else []:
+            for process in (
+                json.loads(metadata.read_text()) if metadata.exists() else []
+            ):
                 pid = process["pid"]
                 row["processes"][process["name"]] = {
                     "pid": pid,
@@ -79,14 +87,21 @@ def collect(output, role, run_dir, endpoints, interface, nic, interval=1):
                         url.rstrip("/") + "/metrics", timeout=2
                     ) as response:
                         row["metrics"][name] = response.read().decode()
-                except Exception as error:
+                except (OSError, TimeoutError, ValueError) as error:
                     row["metrics"][name] = {"error": type(error).__name__}
-            if index % 5 == 0:
+            if smi_every and index % smi_every == 0:
                 try:
                     result = subprocess.run(
-                        ["npu-smi", "info"], capture_output=True, text=True, timeout=10
+                        ["npu-smi", "info"],
+                        capture_output=True,
+                        text=True,
+                        timeout=10,
+                        check=False,
                     )
-                    row["npu_info"] = {"exit_code": result.returncode, "text": result.stdout}
+                    row["npu_info"] = {
+                        "exit_code": result.returncode,
+                        "text": result.stdout,
+                    }
                 except (OSError, subprocess.TimeoutExpired) as error:
                     row["npu_info"] = {"error": type(error).__name__}
             row["collector_elapsed_ms"] = (time.monotonic() - started) * 1000
@@ -103,6 +118,7 @@ if __name__ == "__main__":
     parser.add_argument("--metrics", action="append", default=[], help="name=base_url")
     parser.add_argument("--interface", default="bond1")
     parser.add_argument("--nic", default="mlx5_2")
+    parser.add_argument("--smi-every", type=int, default=5)
     args = parser.parse_args()
     collect(
         args.output,
@@ -111,4 +127,5 @@ if __name__ == "__main__":
         dict(value.split("=", 1) for value in args.metrics),
         args.interface,
         args.nic,
+        smi_every=args.smi_every,
     )

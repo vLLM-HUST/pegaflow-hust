@@ -45,7 +45,9 @@ def validate_plan(plan):
             raise ValueError(f"Empty transfer bundle: {rid}")
         for index, op in enumerate(request["operations"]):
             if set(op) != (
-                HYBRID_OPERATION_FIELDS if plan["schema_version"] == 2 else OPERATION_FIELDS
+                HYBRID_OPERATION_FIELDS
+                if plan["schema_version"] == 2
+                else OPERATION_FIELDS
             ):
                 raise ValueError(f"Unexpected operation fields: {rid}")
             value = op["block_hash_hex"]
@@ -71,7 +73,10 @@ def validate_plan(plan):
             op["storage_group_id"] == 0 for op in request["operations"]
         ):
             raise ValueError(f"Frozen request lacks attention group: {rid}")
-    if any(sorted(slots) != [0, 1, 2, 3] for slots in cohorts.values()):
+    if any(
+        sorted(slots) != list(range(plan.get("cohort_size", 4)))
+        for slots in cohorts.values()
+    ):
         raise ValueError("Every cohort must contain slots 0,1,2,3 exactly once")
 
 
@@ -105,7 +110,8 @@ def freeze(
             if key in groups:
                 raise ValueError(f"Repeated group capture: {rid}/{key}")
             if not event["operations"] or any(
-                (op["namespace"], op["storage_group_id"]) != key for op in event["operations"]
+                (op["namespace"], op["storage_group_id"]) != key
+                for op in event["operations"]
             ):
                 raise ValueError(f"Group identity drift: {rid}")
             groups[key] = event["operations"]
@@ -123,12 +129,18 @@ def freeze(
             keys = frozenset(groups)
             previous = cohort_groups.setdefault(case["cohort_id"], keys)
             if keys != previous:
-                raise ValueError("Cohort requests have different storage groups or namespaces")
+                raise ValueError(
+                    "Cohort requests have different storage groups or namespaces"
+                )
             operations = [dict(op) for key in sorted(groups) for op in groups[key]]
             for index, op in enumerate(operations):
                 op["qp_index"] = index % 2
             observed.append(
-                {"request_id": case["request_id"], "phase": "prepare", "operations": operations}
+                {
+                    "request_id": case["request_id"],
+                    "phase": "prepare",
+                    "operations": operations,
+                }
             )
     counts = Counter(event["request_id"] for event in observed)
     if set(counts) != expected or any(n != 1 for n in counts.values()):
@@ -145,6 +157,9 @@ def freeze(
         "protocol_id": contract["protocol_id"],
         "block_id": f"{Path(cases_path).stem}-{engine_id}",
         "qps_per_peer": 2,
+        "cohort_size": contract.get("cohort_size", 4),
+        "smooth_interval_ms": contract.get("smooth_interval_ms", 10),
+        "rdma_rate_bps": contract.get("rdma_rate_bps", 0),
         "requests": [
             {
                 "request_id": case["request_id"],
@@ -169,7 +184,12 @@ def freeze(
     unique = {}
     for request in plan["requests"]:
         for op in request["operations"]:
-            key = (op.get("namespace", ""), op["block_hash_hex"], op["slot_index"], op["segment"])
+            key = (
+                op.get("namespace", ""),
+                op["block_hash_hex"],
+                op["slot_index"],
+                op["segment"],
+            )
             if key in unique and unique[key] != op["logical_payload_bytes"]:
                 raise ValueError("Conflicting logical size for the same hidden segment")
             unique[key] = op["logical_payload_bytes"]
@@ -194,7 +214,12 @@ def main():
     parser.add_argument("--required-groups", type=int, nargs="+")
     args = parser.parse_args()
     summary = freeze(
-        args.cases, args.contract, args.trace, args.output, args.engine_id, args.required_groups
+        args.cases,
+        args.contract,
+        args.trace,
+        args.output,
+        args.engine_id,
+        args.required_groups,
     )
     write_json(args.output.with_suffix(".summary.json"), summary)
     print(summary)

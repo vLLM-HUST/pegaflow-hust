@@ -58,6 +58,17 @@ def process_job(config, role, job):
     metadata = output / f"processes-{role}.json"
     records = read_json(metadata) if metadata.exists() else []
     action = job["action"]
+    if action == "read-trace":
+        names = job.get("request_ids", [])
+        if len(names) != 1 or not re.fullmatch(r"[A-Za-z0-9._-]+\.jsonl", names[0]):
+            raise ValueError("A node-local JSONL filename is required")
+        path = output / names[0]
+        text = path.read_text()
+        complete_lines = text[: text.rfind("\n") + 1].splitlines()
+        return {
+            "status": "read",
+            "events": [json.loads(line) for line in complete_lines if line.strip()],
+        }
     if action in ("stop", "stop-model"):
         stop_records([r for r in records if action == "stop" or r["name"] == "model"])
         return {"status": "stopped"}
@@ -66,7 +77,9 @@ def process_job(config, role, job):
             if not re.fullmatch(r"[A-Za-z0-9._-]+", rid):
                 raise ValueError("Unsafe marker identity")
             for rank in (0, 1):
-                (output / "visibility" / f"{rid}.tp{rank}.visible").unlink(missing_ok=True)
+                (output / "visibility" / f"{rid}.tp{rank}.visible").unlink(
+                    missing_ok=True
+                )
         return {"status": "cleared"}
     if action != "start":
         raise ValueError("Unknown lifecycle action")
@@ -81,7 +94,9 @@ def process_job(config, role, job):
     for specification in job["processes"]:
         argv, name = specification["argv"], specification["name"]
         if argv[0] not in allowed or not re.fullmatch(r"[A-Za-z0-9-]+", name):
-            raise ValueError("Executable or process name outside the configured runtime")
+            raise ValueError(
+                "Executable or process name outside the configured runtime"
+            )
         for old in records:
             if old["name"] == name:
                 path = Path(f"/proc/{old['pid']}/cmdline")
@@ -112,7 +127,9 @@ def process_job(config, role, job):
 def serve(config, role):
     token = Path(config["control_token_path"]).read_text().strip()
     if len(token) < 32:
-        raise ValueError("A private control token of at least 32 characters is required")
+        raise ValueError(
+            "A private control token of at least 32 characters is required"
+        )
     lock = threading.Lock()
 
     class Handler(BaseHTTPRequestHandler):
@@ -128,9 +145,14 @@ def serve(config, role):
                 return
             with lock:
                 try:
-                    result = process_job(config, role, json.loads(self.rfile.read(length)))
-                except Exception as error:
-                    result = {"status": "failed", "error": f"{type(error).__name__}: {error}"}
+                    result = process_job(
+                        config, role, json.loads(self.rfile.read(length))
+                    )
+                except Exception as error:  # noqa: BLE001 -- return structured control errors
+                    result = {
+                        "status": "failed",
+                        "error": f"{type(error).__name__}: {error}",
+                    }
             body = json.dumps(result).encode()
             self.send_response(200)
             self.send_header("Content-Length", str(len(body)))
