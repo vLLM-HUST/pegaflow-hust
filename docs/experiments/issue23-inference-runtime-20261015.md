@@ -46,4 +46,3 @@ AI Core利用率还取决于阶段和负载。上一轮每个独立arm观察35�
 共享目录为 `/data/shared_upload/hust-zsx/issue23-npu-utilization-20261014`。本地实现位于 `pegaflow-hust` 的 `feat/issue23-hybrid-performance` 分支。实际执行源码以归档为准；原生二进制复用上一轮已归档版本。
 
 两台工作区关闭后，已通过 Coder 最新状态确认 hust-zsx-81、zsx-91 均为 stopped，transition=stop；凭据之外的关闭日志与状态保存在本地 workspaces-stopped.json。
-

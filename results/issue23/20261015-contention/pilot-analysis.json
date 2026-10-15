@@ -983,4 +983,3 @@
   "event_interval_scope": "Include full intervals overlapping the common event window, including stalls that extend beyond its boundary.",
   "contract_annotation": "The recorded transport_model string is inherited metadata. rdma_rate_bps=0 is the executed condition and disables the software pacer."
 }
-
