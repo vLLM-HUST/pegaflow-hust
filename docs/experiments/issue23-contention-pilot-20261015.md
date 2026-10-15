@@ -79,7 +79,7 @@ D 容器共同事件窗平均使用约 6.76～7.18 个 CPU 核。RDMA 集中/平
 
 ## 归档与收尾
 
-完整原始归档为 `pilot-01-evidence.tar.gz`，46,408,617 字节，SHA-256 为 `b303269f4870b497e4c737cbb3fa88332d19f83999a94b4f9bceaf228e345018`。包含 2721 个文件：实际执行源码、冻结用例/配置、32 组窗口、原始日志、SSE、模型与网络遥测、校准、原生制品身份、分析器及服务退出记录。CPU 和用例组成的补充分析位于同目录 `analyze_context.py`、`pilot-context-analysis.json`。控制凭据保留在运行环境私有文件中。
+完整原始归档为 `pilot-01-evidence.tar.gz`，46,408,617 字节，SHA-256 为 `b303269f4870b497e4c737cbb3fa88332d19f83999a94b4f9bceaf228e345018`。包含 2721 个文件：启动目录源码快照、冻结用例/配置、32 组窗口、原始日志、SSE、模型与网络遥测、校准、原生制品身份、分析器及服务退出记录。Python overlay 使用归档源码，原生制品复用前一轮构建，构建来源的对应范围见公开材料 README。CPU 和用例组成的补充分析位于同目录 `analyze_context.py`、`pilot-context-analysis.json`。控制凭据保留在运行环境私有文件中。
 
 `pilot-analysis.json` 保存四组分布、配对批次、完整载荷/模型工作验收、队列及服务指标、提交偏差与端口计数。原始 contract 的 `transport_model` 沿用了旧文字，执行条件由 `rdma_rate_bps=0` 及配置日志确认；分析中已注明，后续运行器按实际条件生成该字段。
 

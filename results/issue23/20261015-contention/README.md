@@ -36,7 +36,9 @@ python scripts/issue23/render_contention.py \
 
 ## 运行身份
 
-`execution-identity.json` 记录依赖版本与原生制品 SHA-256。`execution-source.patch.gz` 是相对 `execution-source.json` 所列基线提交的实际运行源码补丁；该 JSON 同时保存 LF 规范化后的源码 hash。可在独立、干净的对应基线 checkout 中解压补丁并使用 `git apply` 重建运行源码。
+`execution-identity.json` 记录依赖版本与原生制品 SHA-256。`execution-source.patch.gz` 保存启动目录的源码快照，相对基线和 LF 规范化后的 41 个文件 hash 见 `execution-source.json`。可在独立、干净的对应基线 checkout 中解压补丁并使用 `git apply` 重建该快照。
+
+Python overlay 直接使用此启动目录；原生二进制和扩展复用了前一轮构建。41 个文件的 hash 验证覆盖快照重建，原生制品以单独记录的 hash 标识；归档未建立这些制品与整份启动快照之间的逐文件构建对应关系。合并版本的编译和硬件回归单独登记。
 
 完整运行归档为 `pilot-01-evidence.tar.gz`，46,408,617 字节，SHA-256：
 

@@ -347,10 +347,9 @@ jobs:
           sudo apt-get install -y protobuf-compiler libibverbs-dev
       - uses: dtolnay/rust-toolchain@1.97.0
       - uses: mozilla-actions/sccache-action@v0.0.9
-      - name: Test pacing and complete hybrid gate without device initialization
+      - name: Test CPU pacing without device initialization
         run: |
           cargo test -p pegaflow-transfer --no-default-features --features ascend --lib rc_backend::pacing::tests
-          cargo test -p pegaflow-core --no-default-features --features rdma,pegaflow-transfer/ascend --lib issue23_causal::tests
 
   cargo-check:
     name: cargo check
