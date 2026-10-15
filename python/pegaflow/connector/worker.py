@@ -503,7 +503,7 @@ class WorkerConnector:
             wrapper_bytes = pickle.dumps(wrapper)
 
             logical_block_size = (
-                self._cache_groups.group_block_sizes[self._layer_to_group[layer_name]]
+                self._cache_groups.group_block_sizes[self._layer_to_group.get(layer_name, 0)]
                 if self._cache_groups.group_block_sizes
                 else self._ctx.block_size
             )
