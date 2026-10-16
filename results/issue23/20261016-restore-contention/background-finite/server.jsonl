@@ -1,0 +1,42 @@
+{"event": "background_started", "unix_ns": 1792149776021227489, "pid": 218508, "argv": ["/usr/bin/stdbuf", "-oL", "-eL", "/usr/bin/ib_read_bw", "-d", "mlx5_2", "-i", "1", "-x", "3", "-p", "30849", "-s", "1048576", "-q", "4", "-t", "32", "-o", "16", "-D", "160", "-f", "0", "-F", "--report_gbits"], "expected_gbps": 90.48}
+{"event": "perftest_output", "unix_ns": 1792149776031169962, "text": ""}
+{"event": "perftest_output", "unix_ns": 1792149776031205982, "text": "************************************"}
+{"event": "perftest_output", "unix_ns": 1792149776031233193, "text": "* Waiting for client to connect... *"}
+{"event": "perftest_output", "unix_ns": 1792149776031250103, "text": "************************************"}
+{"event": "perftest_output", "unix_ns": 1792149780323866660, "text": "---------------------------------------------------------------------------------------"}
+{"event": "perftest_output", "unix_ns": 1792149780323962741, "text": "                    RDMA_Read BW Test"}
+{"event": "perftest_output", "unix_ns": 1792149780323987191, "text": " Dual-port       : OFF\t\tDevice         : mlx5_2"}
+{"event": "perftest_output", "unix_ns": 1792149780324012352, "text": " Number of qps   : 4\t\tTransport type : IB"}
+{"event": "perftest_output", "unix_ns": 1792149780324030422, "text": " Connection type : RC\t\tUsing SRQ      : OFF"}
+{"event": "perftest_output", "unix_ns": 1792149780324045472, "text": " PCIe relax order: ON\t\tLock-free      : OFF"}
+{"event": "perftest_output", "unix_ns": 1792149780328771975, "text": " ibv_wr* API     : ON"}
+{"event": "perftest_output", "unix_ns": 1792149780328794326, "text": " CQ Moderation   : 1"}
+{"event": "perftest_output", "unix_ns": 1792149780328817046, "text": " Mtu             : 1024[B]"}
+{"event": "perftest_output", "unix_ns": 1792149780328831336, "text": " Link type       : Ethernet"}
+{"event": "perftest_output", "unix_ns": 1792149780328844556, "text": " GID index       : 3"}
+{"event": "perftest_output", "unix_ns": 1792149780328857226, "text": " Outstand reads  : 16"}
+{"event": "perftest_output", "unix_ns": 1792149780328870107, "text": " rdma_cm QPs\t : OFF"}
+{"event": "perftest_output", "unix_ns": 1792149780328883127, "text": " Data ex. method : Ethernet"}
+{"event": "perftest_output", "unix_ns": 1792149780328895767, "text": "---------------------------------------------------------------------------------------"}
+{"event": "perftest_output", "unix_ns": 1792149780332690266, "text": " local address: LID 0000 QPN 0x0b11 PSN 0xae7d86 OUT 0x10 RKey 0x204500 VAddr 0x00ffff9e409000"}
+{"event": "perftest_output", "unix_ns": 1792149780332715796, "text": " GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:19:247:224"}
+{"event": "perftest_output", "unix_ns": 1792149780332730586, "text": " local address: LID 0000 QPN 0x0b12 PSN 0x613ff8 OUT 0x10 RKey 0x204500 VAddr 0x00ffff9e509000"}
+{"event": "perftest_output", "unix_ns": 1792149780332744926, "text": " GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:19:247:224"}
+{"event": "perftest_output", "unix_ns": 1792149780332757877, "text": " local address: LID 0000 QPN 0x0b13 PSN 0xf28de2 OUT 0x10 RKey 0x204500 VAddr 0x00ffff9e609000"}
+{"event": "perftest_output", "unix_ns": 1792149780332771057, "text": " GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:19:247:224"}
+{"event": "perftest_output", "unix_ns": 1792149780332784107, "text": " local address: LID 0000 QPN 0x0b14 PSN 0x3e1489 OUT 0x10 RKey 0x204500 VAddr 0x00ffff9e709000"}
+{"event": "perftest_output", "unix_ns": 1792149780332798167, "text": " GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:19:247:224"}
+{"event": "perftest_output", "unix_ns": 1792149780341868537, "text": " remote address: LID 0000 QPN 0x02cd PSN 0x777356 OUT 0x10 RKey 0x203fc3 VAddr 0x00ffff8a200000"}
+{"event": "perftest_output", "unix_ns": 1792149780341884877, "text": " GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:20:05:224"}
+{"event": "perftest_output", "unix_ns": 1792149780341999999, "text": " remote address: LID 0000 QPN 0x02ce PSN 0x8ac988 OUT 0x10 RKey 0x203fc3 VAddr 0x00ffff8a300000"}
+{"event": "perftest_output", "unix_ns": 1792149780342015409, "text": " GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:20:05:224"}
+{"event": "perftest_output", "unix_ns": 1792149780342123881, "text": " remote address: LID 0000 QPN 0x02cf PSN 0xf98032 OUT 0x10 RKey 0x203fc3 VAddr 0x00ffff8a400000"}
+{"event": "perftest_output", "unix_ns": 1792149780342141071, "text": " GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:20:05:224"}
+{"event": "perftest_output", "unix_ns": 1792149780342245413, "text": " remote address: LID 0000 QPN 0x02d0 PSN 0xa72099 OUT 0x10 RKey 0x203fc3 VAddr 0x00ffff8a500000"}
+{"event": "perftest_output", "unix_ns": 1792149780342260313, "text": " GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:20:05:224"}
+{"event": "perftest_output", "unix_ns": 1792149780342368025, "text": "---------------------------------------------------------------------------------------"}
+{"event": "perftest_output", "unix_ns": 1792149780342382315, "text": " #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]"}
+{"event": "perftest_output", "unix_ns": 1792149940567239769, "text": " 1048576    1594750          0.00               83.61  \t\t   0.009967"}
+{"event": "background_bandwidth", "unix_ns": 1792149940567624445, "bandwidth_gbps": 83.61, "report_period_seconds": 160}
+{"event": "perftest_output", "unix_ns": 1792149940567682846, "text": "---------------------------------------------------------------------------------------"}
+{"event": "background_finished", "unix_ns": 1792149940577522665, "returncode": 0, "requested_stop": false}

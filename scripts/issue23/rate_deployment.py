@@ -119,6 +119,7 @@ def command(config, instance):
         "--kv-transfer-config",
         json.dumps(transfer),
     ]
+    engine = [*instance.get("engine_prefix", []), *engine]
     return env, engine, model
 
 

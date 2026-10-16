@@ -1,0 +1,58 @@
+{
+  "root": "/data/shared_upload/hust-zsx/issue23-restore-20261016",
+  "model_path": "/data/shared_models/Qwen2.5-7B-Instruct",
+  "model_revision": "a09a35458c702b33eeacc393d103063234e8bc28",
+  "python": "/data/shared_upload/hust-zsx/hybrid-cache-acceptance-20261013/.venv/bin/python",
+  "site_packages": "/data/shared_upload/hust-zsx/hybrid-cache-acceptance-20261013/.venv/lib/python3.12/site-packages",
+  "bin": "/data/shared_upload/hust-zsx/issue23-scaled-20261014/runtime/bin",
+  "meta_host": "192.168.0.4",
+  "meta_port": 30656,
+  "meta_http_port": 30692,
+  "max_num_seqs": 8,
+  "host_pool_bytes": 8589934592,
+  "kv_cache_bytes": 17179869184,
+  "instances": [
+    {
+      "id": "P0",
+      "role": "P",
+      "node": "81",
+      "device": 0,
+      "host": "192.168.0.4",
+      "model_port": 30680,
+      "engine_port": 30750,
+      "engine_http_port": 30790
+    },
+    {
+      "id": "P1",
+      "role": "P",
+      "node": "81",
+      "device": 1,
+      "host": "192.168.0.4",
+      "model_port": 30681,
+      "engine_port": 30751,
+      "engine_http_port": 30791
+    },
+    {
+      "id": "D0",
+      "role": "D",
+      "node": "91",
+      "device": 0,
+      "host": "192.168.0.2",
+      "model_port": 30682,
+      "engine_port": 30752,
+      "engine_http_port": 30792,
+      "host_pool_bytes": 17179869184
+    },
+    {
+      "id": "D1",
+      "role": "D",
+      "node": "91",
+      "device": 1,
+      "host": "192.168.0.2",
+      "model_port": 30683,
+      "engine_port": 30753,
+      "engine_http_port": 30793,
+      "host_pool_bytes": 17179869184
+    }
+  ]
+}

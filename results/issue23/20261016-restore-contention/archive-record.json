@@ -1,0 +1,8 @@
+{
+  "file": "restore-contention-evidence.tar.gz",
+  "bytes": 30127564,
+  "created_unix_ns": 1792150829903206131,
+  "measurement_requests": 570,
+  "successful": 540,
+  "npu_processes_empty_both_nodes": true
+}

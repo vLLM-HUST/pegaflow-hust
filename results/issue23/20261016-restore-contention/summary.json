@@ -1,0 +1,92 @@
+{
+  "requests": 570,
+  "successful": 540,
+  "foreground_elapsed_s": 773.0232270834967,
+  "points": [
+    {
+      "label": "未绑定，M",
+      "campaign": "baseline",
+      "point": "s17-M",
+      "rate": 1.2487041298678683,
+      "planned": 95,
+      "statuses": {
+        "ok": 95
+      },
+      "ttft_p95_s": 3.982776298187673,
+      "tpot_p95_ms": 23.209445090854867,
+      "rdma_fetch_p95_ms": 122.45,
+      "elapsed_s": 76.29712181258947
+    },
+    {
+      "label": "NUMA 本地绑定，M",
+      "campaign": "local",
+      "point": "s17-M",
+      "rate": 1.2487041298678683,
+      "planned": 95,
+      "statuses": {
+        "ok": 95
+      },
+      "ttft_p95_s": 3.8838615529239178,
+      "tpot_p95_ms": 22.79714243669136,
+      "rdma_fetch_p95_ms": 123.76,
+      "elapsed_s": 94.1087689762935
+    },
+    {
+      "label": "NUMA 本地绑定，H",
+      "campaign": "local",
+      "point": "s17-H",
+      "rate": 1.6159700504172414,
+      "planned": 95,
+      "statuses": {
+        "ok": 65,
+        "error": 30
+      },
+      "ttft_p95_s": 110.77751175500453,
+      "tpot_p95_ms": 76.8829607203895,
+      "rdma_fetch_p95_ms": 124.07,
+      "elapsed_s": 232.48635430261493
+    },
+    {
+      "label": "无竞争，前控",
+      "campaign": "network-before",
+      "point": "s17-L",
+      "rate": 0.734531841098746,
+      "planned": 95,
+      "statuses": {
+        "ok": 95
+      },
+      "ttft_p95_s": 3.2634056489914656,
+      "tpot_p95_ms": 20.006406986538103,
+      "rdma_fetch_p95_ms": 138.24,
+      "elapsed_s": 123.19806280639023
+    },
+    {
+      "label": "CPU RDMA 竞争",
+      "campaign": "network-competing",
+      "point": "s17-L",
+      "rate": 0.734531841098746,
+      "planned": 95,
+      "statuses": {
+        "ok": 95
+      },
+      "ttft_p95_s": 3.4403748512268066,
+      "tpot_p95_ms": 20.76862671357744,
+      "rdma_fetch_p95_ms": 356.64,
+      "elapsed_s": 123.64168333634734
+    },
+    {
+      "label": "无竞争，后控",
+      "campaign": "network-after",
+      "point": "s17-L",
+      "rate": 0.734531841098746,
+      "planned": 95,
+      "statuses": {
+        "ok": 95
+      },
+      "ttft_p95_s": 26.977237350307405,
+      "tpot_p95_ms": 25.851503146045346,
+      "rdma_fetch_p95_ms": 136.25,
+      "elapsed_s": 123.29123584926128
+    }
+  ]
+}

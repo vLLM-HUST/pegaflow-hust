@@ -150,3 +150,24 @@ The report includes per-request stage CSV, p50/p95 latency, rate/throughput,
 cache-path counts, RDMA stages and NPU samples. Ninety-five unique snapshots per
 point provide exploratory tail observations. Larger numbers of repeats should
 be used before making stable p99 claims.
+
+## Restore decomposition and placement controls
+
+`analyze_restore.py` correlates worker restore spans with existing native load
+stage logs by replica, FIFO order, block count and timestamps. It reports the
+wait before the native load worker, descriptor construction, backend API,
+stream synchronization and completion observation. Shared loads are attributed
+to every included request; warmup records are excluded. Unmatched batches are
+retained. These are host-observed intervals, including contention.
+
+An instance may specify `engine_prefix`, for example a `numactl` CPU/memory
+binding command before the engine binary. Record actual memory placement from
+`/proc/<pid>/numa_maps`; an explicit binding is an experimental control.
+
+The CPU READ background helper accepts `--rate-gbps` with `--finite-seconds`
+to pace its own continuous perftest traffic for a fixed duration. Start matching
+finite-duration server/client jobs, warm up the background, and keep the entire
+foreground window inside that duration. The tool reports its average at the
+end; sampled RNIC counters report aggregate endpoint traffic during the run.
+Record both measurement scopes and the actual overlap. Foreground serving and
+cache transfer retain their normal unrestricted paths.

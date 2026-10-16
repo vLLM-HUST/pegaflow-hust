@@ -1,0 +1,18 @@
+{
+  "base_commit": "c9619954b0e41955560872369c2f53c010218868",
+  "purpose": "16 GiB destination restore decomposition",
+  "created_unix_ns": 1792148140172605597,
+  "initial_config": "config.json",
+  "rate": 1.2487041298678683,
+  "requests_per_point": 95,
+  "planned_measurement_requests": 570,
+  "successful_measurement_requests": 540,
+  "timeouts_in_numa_high_point": 30,
+  "native_runtime_version": "0.23.4",
+  "native_bin_directory": "/data/shared_upload/hust-zsx/issue23-scaled-20261014/runtime/bin",
+  "new_branch": "feat/issue23-restore-diagnosis",
+  "background_c0_gbps": 90.48,
+  "background_measured_full_interval_gbps": 83.61,
+  "background_duration_s": 160,
+  "cleanup": "81 and 91 NPU process tables confirmed empty; final-npu-81.txt and final-npu-91.txt retained"
+}

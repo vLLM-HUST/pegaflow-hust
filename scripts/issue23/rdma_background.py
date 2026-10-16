@@ -8,7 +8,7 @@ import time
 from pathlib import Path
 
 
-def command(host, port, duration=2, qps=4):
+def command(host, port, duration=2, qps=4, rate_gbps=None, continuous=True):
     argv = [
         "/usr/bin/stdbuf",
         "-oL",
@@ -36,8 +36,13 @@ def command(host, port, duration=2, qps=4):
         "0",
         "-F",
         "--report_gbits",
-        "--run_infinitely",
     ]
+    if continuous:
+        if rate_gbps is not None:
+            raise ValueError("paced perftest READ requires --finite-seconds")
+        argv.append("--run_infinitely")
+    if rate_gbps is not None:
+        argv.extend([f"--rate_limit={rate_gbps}", "--rate_limit_type=SW"])
     if host:
         argv.append(host)
     return argv
@@ -45,7 +50,15 @@ def command(host, port, duration=2, qps=4):
 
 def measure(args):
     args.output.parent.mkdir(parents=True, exist_ok=True)
-    argv = command(args.host, args.port, qps=args.qps)
+    finite_seconds = getattr(args, "finite_seconds", None)
+    argv = command(
+        args.host,
+        args.port,
+        duration=finite_seconds or 2,
+        qps=args.qps,
+        rate_gbps=getattr(args, "rate_gbps", None),
+        continuous=finite_seconds is None,
+    )
     stopping = False
     child = subprocess.Popen(
         argv, stdout=subprocess.PIPE, stderr=subprocess.STDOUT, text=True
@@ -88,7 +101,7 @@ def measure(args):
                     event(
                         "background_bandwidth",
                         bandwidth_gbps=bandwidth,
-                        report_period_seconds=2,
+                        report_period_seconds=finite_seconds or 2,
                     )
         finally:
             if child.poll() is None:
@@ -105,5 +118,7 @@ if __name__ == "__main__":
     parser.add_argument("--port", type=int, default=29942)
     parser.add_argument("--expected-gbps", type=float, required=True)
     parser.add_argument("--qps", type=int, default=4)
+    parser.add_argument("--rate-gbps", type=float)
+    parser.add_argument("--finite-seconds", type=int)
     parser.add_argument("--output", type=Path, required=True)
     measure(parser.parse_args())

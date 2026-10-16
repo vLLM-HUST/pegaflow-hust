@@ -1,0 +1,37 @@
+---------------------------------------------------------------------------------------
+                    RDMA_Read BW Test
+ Dual-port       : OFF		Device         : mlx5_2
+ Number of qps   : 4		Transport type : IB
+ Connection type : RC		Using SRQ      : OFF
+ PCIe relax order: ON		Lock-free      : OFF
+ ibv_wr* API     : ON
+ TX depth        : 32
+ CQ Moderation   : 1
+ Mtu             : 1024[B]
+ Link type       : Ethernet
+ GID index       : 3
+ Outstand reads  : 16
+ rdma_cm QPs	 : OFF
+ Data ex. method : Ethernet
+---------------------------------------------------------------------------------------
+ local address: LID 0000 QPN 0x02c1 PSN 0xe163c5 OUT 0x10 RKey 0x203f00 VAddr 0x00ffff88404000
+ GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:20:05:224
+ local address: LID 0000 QPN 0x02c2 PSN 0xfde2cb OUT 0x10 RKey 0x203f00 VAddr 0x00ffff88504000
+ GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:20:05:224
+ local address: LID 0000 QPN 0x02c3 PSN 0x7173b9 OUT 0x10 RKey 0x203f00 VAddr 0x00ffff88604000
+ GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:20:05:224
+ local address: LID 0000 QPN 0x02c4 PSN 0xf91b14 OUT 0x10 RKey 0x203f00 VAddr 0x00ffff88704000
+ GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:20:05:224
+ remote address: LID 0000 QPN 0x0b05 PSN 0x86d233 OUT 0x10 RKey 0x204500 VAddr 0x00ffff98e03000
+ GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:19:247:224
+ remote address: LID 0000 QPN 0x0b06 PSN 0xcbba1 OUT 0x10 RKey 0x204500 VAddr 0x00ffff98f03000
+ GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:19:247:224
+ remote address: LID 0000 QPN 0x0b07 PSN 0xdc0ad7 OUT 0x10 RKey 0x204500 VAddr 0x00ffff99003000
+ GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:19:247:224
+ remote address: LID 0000 QPN 0x0b08 PSN 0xc866da OUT 0x10 RKey 0x204500 VAddr 0x00ffff99103000
+ GID: 254:128:00:00:00:00:00:00:158:99:192:255:254:19:247:224
+---------------------------------------------------------------------------------------
+ #bytes     #iterations    BW peak[Gb/sec]    BW average[Gb/sec]   MsgRate[Mpps]
+ 1048576    55248            0.00               77.24  		   0.009208
+---------------------------------------------------------------------------------------
+ Setting burst size to tx depth = 32
