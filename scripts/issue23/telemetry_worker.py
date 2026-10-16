@@ -9,34 +9,38 @@ from vllm_ascend.worker.worker import NPUWorker
 class TelemetryNPUWorker(NPUWorker):
     def load_model(self):
         super().load_model()
-        from vllm.v1.worker import mamba_utils
-
-        original_preprocess = mamba_utils.preprocess_mamba
         context = {"requests": [], "step": 0}
-
-        def preprocess(*args, **kwargs):
-            schedule, _, _, _, batch, requests, _, _, _ = args
-            rows = []
-            for rid in batch.req_ids:
-                request = requests[rid]
-                rows.append(
-                    {
-                        "request_id": rid,
-                        "computed_tokens": request.num_computed_tokens,
-                        "scheduled_tokens": schedule.num_scheduled_tokens.get(rid, 0),
-                        "prompt_tokens": request.num_prompt_tokens,
-                    }
-                )
-            context["requests"] = rows
-            telemetry_event("model_work", tp_rank=self.rank, step=context["step"], requests=rows)
-            return original_preprocess(*args, **kwargs)
-
-        mamba_utils.preprocess_mamba = preprocess
         original_execute = self.model_runner.execute_model
 
         def execute(*args, **kwargs):
             context["step"] += 1
             context["requests"] = []
+            schedule = args[0] if args else kwargs.get("scheduler_output")
+            scheduled = getattr(schedule, "num_scheduled_tokens", {})
+            new = {r.req_id: r for r in getattr(schedule, "scheduled_new_reqs", [])}
+            known = getattr(self.model_runner, "requests", {})
+            for rid, tokens in scheduled.items():
+                request = known.get(rid) or new.get(rid)
+                prompt = getattr(request, "prompt_token_ids", None)
+                context["requests"].append(
+                    {
+                        "request_id": rid,
+                        "computed_tokens": getattr(
+                            request, "num_computed_tokens", None
+                        ),
+                        "scheduled_tokens": tokens,
+                        "prompt_tokens": getattr(request, "num_prompt_tokens", None)
+                        or (len(prompt) if prompt is not None else None),
+                    }
+                )
+            telemetry_event(
+                "model_work",
+                tp_rank=self.rank,
+                step=context["step"],
+                total_scheduled_tokens=sum(scheduled.values()),
+                active_sequences=len(scheduled),
+                requests=context["requests"],
+            )
             started = time.perf_counter_ns()
             try:
                 result = original_execute(*args, **kwargs)

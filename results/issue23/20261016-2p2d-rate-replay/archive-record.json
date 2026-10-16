@@ -1,0 +1,9 @@
+{
+  "file": "first-scan-evidence.tar.gz",
+  "bytes": 72569323,
+  "created_unix_ns": 1792146470359324046,
+  "main_scan_requests": 285,
+  "control_requests": 95,
+  "successful_measurements": 379,
+  "services_stopped": true
+}

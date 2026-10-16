@@ -1,0 +1,48 @@
+{
+  "source_base_commit": "5207137a46b0bae00ff1d6c7001bea7e8ff9fdd4",
+  "branch": "feat/issue23-2p2d-rate-replay",
+  "implementation_files": [
+    "docs/issue23-2p2d-rate-replay.md",
+    "scripts/issue23/analyze_rate_replay.py",
+    "scripts/issue23/prepare_trajectories.py",
+    "scripts/issue23/rate_deployment.py",
+    "scripts/issue23/rate_replay.py",
+    "scripts/issue23/rate_resources.py",
+    "scripts/issue23/telemetry_worker.py",
+    "scripts/issue23/test_rate_replay.py"
+  ],
+  "main_scan": {
+    "campaign": "campaign-03",
+    "seed": 17,
+    "points": [
+      "s17-L",
+      "s17-M",
+      "s17-H"
+    ],
+    "planned_measurement_requests": 285,
+    "success": 284
+  },
+  "memory_control": {
+    "campaign": "target16-confirmation",
+    "point": "s17-M",
+    "planned_measurement_requests": 95,
+    "success": 95
+  },
+  "calibration_main_requests": 32,
+  "selected_unique_main_inputs": 95,
+  "native_runtime_version": "0.23.4",
+  "native_bin_directory": "/data/shared_upload/hust-zsx/issue23-scaled-20261014/runtime/bin",
+  "native_python_extension_source": "/data/shared_upload/hust-zsx/pr37-verification-20261015/source-final/python/pegaflow",
+  "cleanup": "owned experiment services stopped; no NPU processes observed on 81/91",
+  "checks": {
+    "targeted_tests_passed": 5,
+    "ruff": "passed",
+    "git_diff_check": "passed",
+    "source_only_default": {
+      "passed": 344,
+      "skipped": 23,
+      "deselected": 11
+    },
+    "hardware_acceptance": "Four-route Qwen2.5 smoke and 379 completed measurement requests on the recorded implementation; numerical output equality was not a performance acceptance criterion."
+  }
+}
