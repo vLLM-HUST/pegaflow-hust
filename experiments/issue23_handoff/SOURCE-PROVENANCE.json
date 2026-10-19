@@ -1,0 +1,16 @@
+{
+  "prepared_on": "2026-10-19",
+  "base_commit": "c9619954b0e41955560872369c2f53c010218868",
+  "authoritative_workspace": "yanbo-81:/root/pegaflow-hust",
+  "latest_workspace_not_accessible_during_packaging": false,
+  "P_workspace_rechecked_on": "2026-10-19",
+  "P_strategy_sources_match_published_snapshot": true,
+  "new_candidate_P_formal_job_directory_found": false,
+  "fresh_P_evidence_archive_sha256": "3234d950e09a2576fa071b9f942340980c7a2d47b11a59da9edded0ade83f3a8",
+  "published_candidate_status": "source02 preserved snapshot 2026-10-16; completed real result NOT verified",
+  "candidate_archive_sha256": "0e37e3b5c0bac978db5a1789ce17b182c57410dfbf6decd22a9df1df7f1faeef",
+  "candidate_manifest_sha256": "2c3809b4f935701736bf1deddcae9bf541c296289a8d016951883e83bd4c26bc",
+  "production_native_worker_not_rebuilt_or_modified": true,
+  "large_failed_or_obsolete_runs_not_uploaded": true,
+  "negative_arms_of_retained_versions_preserved_to_avoid_cherry_picking": true
+}

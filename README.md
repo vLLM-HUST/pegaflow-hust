@@ -143,6 +143,15 @@ cross-node RDMA or SSD-cache result, nor a CUDA-versus-Ascend comparison.
 Treat the RDMA, SSD, and multi-node documentation below as implementation and
 configuration scope until matching HUST experiment artifacts are published.
 
+## Issue23 / Tailguard Research Handoff
+
+The [research handoff](./experiments/issue23_handoff/README.md) records the
+retained 2P2D policy versions, paired measurements, endpoint timing evidence,
+mathematical model and a runnable causal CPU screening experiment. These are
+small exposed development replays, not a general production-performance claim.
+The newest native-cache comparison remains a candidate pending dual-node real
+validation. Existing release behavior is unchanged by the isolated overlay.
+
 ## Documentation
 
 - [Server Configuration](./docs/server.md) — full CLI options, SSD cache, multi-node setup

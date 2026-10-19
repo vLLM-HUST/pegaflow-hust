@@ -1,0 +1,46 @@
+{
+  "recorded_local": "2026-10-16T01:22:09+08:00",
+  "all_four_arms_complete": true,
+  "requests_per_arm": 95,
+  "original_root_archives_preserved": true,
+  "P": {
+    "remote": "/root/issue23-detached-calendar/20261015-source02/P-detached-calendar-off-on-poisson300-01-evidence.tar.gz",
+    "local": "P-full-reassembled.tar.gz",
+    "bytes": 158638060,
+    "sha256": "d94d99a10de051a203bdd1b14442eab0ec0c67fca9f5659d1fae4a0e48491c6c",
+    "full_archive_sha_verified": true,
+    "exit_code": 0,
+    "stop_reason": null
+  },
+  "D": {
+    "remote": "/root/issue23-detached-calendar/20261015-source02/D-detached-calendar-off-on-poisson300-01-evidence.tar.gz",
+    "local": "D-full-reassembled.tar.gz",
+    "bytes": 112646468,
+    "sha256": "a2143d25813e1275bbc7748a1d64d4ab6c08e604ec62176b3ba97f3d646240db",
+    "full_archive_sha_verified": true,
+    "exit_code": 0,
+    "stop_reason": null
+  },
+  "audit": {
+    "path": "full-audit-01.json",
+    "sha256": "c34077e1dd1fec7e427093bdb28b1c4c18f8442e66fc62cb65c4d921ae4b959d",
+    "passed": true,
+    "strict_initial_cache_equal": true,
+    "comparisons_against_both_baselines": 4,
+    "offline_import_shadowing_fixed_without_relaxing_checks": true
+  },
+  "analysis_sha256": "1c413680238de89588aafeaa6e304adc8ead736095a503e35696ec166c26c6d7",
+  "portable": {
+    "path": "../portable-detached-calendar-off-on-poisson300-01.tar.gz",
+    "sha256": "e5868e80a3a670bf3e92c69d0ff3224da1b7b9391efe8ffe559c25adce864072",
+    "measurements": 380,
+    "native_metric_files": 1568,
+    "tar_read_passed": true,
+    "remote_upload_claimed": false
+  },
+  "partial_transfers_preserved_not_used_as_full_evidence": true,
+  "supervisor_formal_valid_sample_not_relabelled": true,
+  "clean_hardware_certified": false,
+  "automation_status": "PAUSED",
+  "no_extra_experiment_started": true
+}

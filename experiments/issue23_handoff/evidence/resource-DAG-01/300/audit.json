@@ -1,0 +1,91 @@
+{
+  "passed": true,
+  "formal_request_pairs": 95,
+  "summary": {
+    "baseline": {
+      "requests": 95,
+      "ttft_p50_seconds": 40.047678667120636,
+      "ttft_p99_seconds_descriptive": 80.3557573016733,
+      "phase_seconds_including_final_async_commit": 751.9593231119215,
+      "actual_copy_bytes_by_destination": [
+        110100480,
+        0,
+        1981808640,
+        5659164672
+      ],
+      "copy_receipts_including_warmup": 70,
+      "selected_removal_receipts": 0,
+      "failed_copy_attempts_including_cost": 0,
+      "fast_routing_wall_seconds": 63.700820649042726,
+      "fast_routing_cpu_seconds": 26.412290579999993,
+      "copy_RPC_seconds": 1.856465988792479,
+      "link_wait_seconds": 0.00048487260937690735,
+      "pipeline": {
+        "queue_peak_pending_including_active": [
+          1,
+          1,
+          4,
+          4
+        ],
+        "peak_inflight_requests": 8,
+        "global_end_to_end_limit": null,
+        "per_instance_active_limit": 1,
+        "D_queue_includes_priced_handoff": true
+      },
+      "arrival_condition": "poisson-300",
+      "TTFT_origin": "causal_ready_before_router_queue",
+      "offered_to_first_p99_seconds_descriptive": 550.0198218328343,
+      "primary_objective_metric": "offered_to_first_seconds",
+      "upstream_causality_wait_seconds": 14100.492453159377,
+      "realized_causal_ingress_rps": 0.137279574290779,
+      "realized_causal_ingress_gap_cv": 0.8630768862873565,
+      "actual_ingress_identical_across_arms_claimed": false
+    },
+    "treatment": {
+      "requests": 95,
+      "ttft_p50_seconds": 37.243246723897755,
+      "ttft_p99_seconds_descriptive": 72.99212196934968,
+      "phase_seconds_including_final_async_commit": 677.1124647837132,
+      "actual_copy_bytes_by_destination": [
+        0,
+        1130364928,
+        117440512,
+        58720256
+      ],
+      "copy_receipts_including_warmup": 6,
+      "selected_removal_receipts": 0,
+      "failed_copy_attempts_including_cost": 0,
+      "fast_routing_wall_seconds": 69.49513838067651,
+      "fast_routing_cpu_seconds": 26.82569734,
+      "copy_RPC_seconds": 0.8101853905245662,
+      "link_wait_seconds": 2.4629756808280945e-05,
+      "slow_planning_and_execution_wall_seconds": 12.321218523196876,
+      "slow_planning_and_execution_cpu_seconds": 8.262633210000006,
+      "pipeline": {
+        "queue_peak_pending_including_active": [
+          3,
+          1,
+          4,
+          5
+        ],
+        "peak_inflight_requests": 8,
+        "global_end_to_end_limit": null,
+        "per_instance_active_limit": 1,
+        "D_queue_includes_priced_handoff": true
+      },
+      "arrival_condition": "poisson-300",
+      "TTFT_origin": "causal_ready_before_router_queue",
+      "offered_to_first_p99_seconds_descriptive": 473.0557985314564,
+      "primary_objective_metric": "offered_to_first_seconds",
+      "upstream_causality_wait_seconds": 13571.428285556165,
+      "realized_causal_ingress_rps": 0.14749694730657825,
+      "realized_causal_ingress_gap_cv": 0.8199059602785771,
+      "actual_ingress_identical_across_arms_claimed": false
+    }
+  },
+  "candidate_revision": "resource-DAG-01",
+  "exposed_replay_not_fresh_heldout": true,
+  "independent_hardware_interference_audit_pending": true,
+  "stable_p99_or_task_accuracy_claimed": false,
+  "global_optimality_claimed": false
+}

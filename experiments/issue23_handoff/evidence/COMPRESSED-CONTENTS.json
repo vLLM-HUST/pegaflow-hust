@@ -1,0 +1,102 @@
+{
+  "detached-calendar-01/analysis.json.gz": {
+    "uncompressed_sha256": "1c413680238de89588aafeaa6e304adc8ead736095a503e35696ec166c26c6d7",
+    "uncompressed_bytes": 2968100,
+    "compressed_bytes": 365300
+  },
+  "detached-calendar-01/B-after-requests.json.gz": {
+    "uncompressed_sha256": "5242608cf4aedbb758bdc6c08b1e0968fda26c126ad748c35e8ddf52bd021e81",
+    "uncompressed_bytes": 2822326,
+    "compressed_bytes": 525410
+  },
+  "detached-calendar-01/B-before-requests.json.gz": {
+    "uncompressed_sha256": "3dc467a75014f66e2edfc9b07626e82ddf89f8dc34973d08c6ef8422d3d198c6",
+    "uncompressed_bytes": 2825004,
+    "compressed_bytes": 518433
+  },
+  "detached-calendar-01/T-off-requests.json.gz": {
+    "uncompressed_sha256": "2b90e08e67c4fa3b2a7e1b72415125b8aaad73409d662cd867e1ba4036bdee1b",
+    "uncompressed_bytes": 2496597,
+    "compressed_bytes": 480087
+  },
+  "endpoint-drift-alignment.json.gz": {
+    "uncompressed_sha256": "774605c3908cd92860d831d6c68b9d8c8409877b95b39a5c6ebb1502bfe543e1",
+    "uncompressed_bytes": 3320730,
+    "compressed_bytes": 407992
+  },
+  "event-queue-01/150/baseline-requests.json.gz": {
+    "uncompressed_sha256": "e7436c6e28c37c204c36bebbe685b2bb110417d8e13a7b4d7435e5f2436d9741",
+    "uncompressed_bytes": 2680626,
+    "compressed_bytes": 493513
+  },
+  "event-queue-01/150/treatment-requests.json.gz": {
+    "uncompressed_sha256": "8bc2efee674986a908a740e976e7e80c117a3e2ef2028f8712717b03195bdd07",
+    "uncompressed_bytes": 3554325,
+    "compressed_bytes": 613755
+  },
+  "event-queue-01/300/baseline-requests.json.gz": {
+    "uncompressed_sha256": "d0f908cdd927cb3a266705cc0c1dbae1a721589586420a0c34b7a7f82c8898fb",
+    "uncompressed_bytes": 2690971,
+    "compressed_bytes": 502163
+  },
+  "event-queue-01/300/treatment-requests.json.gz": {
+    "uncompressed_sha256": "a48f5d1c8fd332c6f7403a273e2329a4dfe5dbbd01a89d1b3ae32a1058da3732",
+    "uncompressed_bytes": 3367639,
+    "compressed_bytes": 603153
+  },
+  "event-queue-01/600/baseline-requests.json.gz": {
+    "uncompressed_sha256": "f5e5e8c98c99cb1e86bea141345864a0f6a9b29de82e5a8c75d3260fd778050a",
+    "uncompressed_bytes": 2622662,
+    "compressed_bytes": 487993
+  },
+  "event-queue-01/600/treatment-requests.json.gz": {
+    "uncompressed_sha256": "a50a75814cd80a80179d452f7dd435b5ab22577048ffd29f330ca9971a992671",
+    "uncompressed_bytes": 3517427,
+    "compressed_bytes": 610819
+  },
+  "handoff-rescreen-20261019.json.gz": {
+    "uncompressed_sha256": "82f9e54c29583d8b173f8b2d080433fdae615eca92d61b6aca20e01198ba6868",
+    "uncompressed_bytes": 5141839,
+    "compressed_bytes": 336178
+  },
+  "real-results-summary.json.gz": {
+    "uncompressed_sha256": "954bab479a360db6cec6b530e21a7b46f9dc39f2b97e66af8376b779f708459b",
+    "uncompressed_bytes": 1284315,
+    "compressed_bytes": 189184
+  },
+  "resource-DAG-01/150/baseline-requests.json.gz": {
+    "uncompressed_sha256": "5f6570bd4c72a5d13b243b6b59410161d3ac8c5c3fa02c04ae9e2349c103d1ab",
+    "uncompressed_bytes": 2681025,
+    "compressed_bytes": 501676
+  },
+  "resource-DAG-01/150/treatment-requests.json.gz": {
+    "uncompressed_sha256": "66e547bf8642525bd7ebde3988059ba74b773c4906e6ecfbdee703a5e6d128df",
+    "uncompressed_bytes": 2544072,
+    "compressed_bytes": 504737
+  },
+  "resource-DAG-01/300/baseline-requests.json.gz": {
+    "uncompressed_sha256": "fa704d0061f8d865107c2dd303ad88a4806a9d870dceaff7b0546bb13b98f6fe",
+    "uncompressed_bytes": 2674367,
+    "compressed_bytes": 499846
+  },
+  "resource-DAG-01/300/treatment-requests.json.gz": {
+    "uncompressed_sha256": "20260749c823d2ce2fe06c19491fcb3a9f3b81026c1756b726facf49df004974",
+    "uncompressed_bytes": 2023472,
+    "compressed_bytes": 420431
+  },
+  "resource-DAG-01/600/baseline-requests.json.gz": {
+    "uncompressed_sha256": "7e3b60a66a209ca658885e7a62bef5380eb396de4a4088d5f7c139ab5dd7f514",
+    "uncompressed_bytes": 2674487,
+    "compressed_bytes": 498947
+  },
+  "resource-DAG-01/600/treatment-requests.json.gz": {
+    "uncompressed_sha256": "dcb70b81dfac54a2d29180f17f8153c026be4b1f6cd5bed230b63fcd26857e5b",
+    "uncompressed_bytes": 2010644,
+    "compressed_bytes": 412920
+  },
+  "source02-original-screen.json.gz": {
+    "uncompressed_sha256": "25d288af74c0073b5b0ee10f1d8790be1b5373a1150dc0561a365bb784f7b982",
+    "uncompressed_bytes": 4843217,
+    "compressed_bytes": 335353
+  }
+}
