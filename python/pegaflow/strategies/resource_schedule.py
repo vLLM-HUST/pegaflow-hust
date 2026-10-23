@@ -7,11 +7,11 @@ not a guarantee about unknown platform contention or native kernel overlap.
 
 from __future__ import annotations
 
-from collections import deque
-from dataclasses import dataclass, field
 import heapq
 import itertools
 import math
+from collections import deque
+from dataclasses import dataclass
 
 
 @dataclass(frozen=True)
@@ -222,7 +222,7 @@ def schedule(work, now, remaining=None, resource_blocks=None, *, chain_builder=N
                     active[node] = stage
                     starts[(stage.work.key, node)] = at
                     changed = True
-            for stage in sorted(tuple(active.values()), key=lambda s: (s.ready, s.work.order, s.node)):
+            for stage in sorted(active.values(), key=lambda s: (s.ready, s.work.order, s.node)):
                 if stage.ready > at:
                     continue
                 if not stage.operations and chain_builder is not None:

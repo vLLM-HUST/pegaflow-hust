@@ -7,8 +7,8 @@ This module is a source-only predictor, not a cross-machine executor.
 """
 
 from .model import Forecast, nonnegative
-from .resource_schedule import Operation, Work, schedule
 from .residuals import phase_remaining
+from .resource_schedule import Operation, Work, schedule
 
 
 def copy_resources(source, destination, serialize_direction=False):

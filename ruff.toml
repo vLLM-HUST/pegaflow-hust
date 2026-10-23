@@ -13,7 +13,19 @@ extend-exclude = [
     "scripts/",
     # Archived legacy scripts — kept for reference, not linted
     "_archived_scripts/",
+    # Byte-frozen 2026-10-16 executed source, not editable implementation.
+    # python/tests/test_frozen_runtime_integrity.py checks its original hashes.
+    "experiments/issue23_strategies/runtime/code/",
+    "experiments/issue23_strategies/runtime/overlay/",
+    # The verifier itself is covered by the original handoff MANIFEST.sha256.
+    "experiments/issue23_handoff/verify_handoff.py",
 ]
 
 [lint]
 ignore = []
+
+[lint.per-file-ignores]
+# These portable entry points deliberately bind the selected checkout/overlay first.
+"docs/analysis/issue28-qwen35-hybrid-cache-audit-20261013/probes.py" = ["E402"]
+"experiments/issue23_strategies/simulate_policy_feedback.py" = ["E402"]
+"experiments/issue23_strategies/test_live_contract.py" = ["E402"]

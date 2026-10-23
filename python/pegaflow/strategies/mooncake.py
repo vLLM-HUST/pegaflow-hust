@@ -7,6 +7,7 @@ batching and CPP are not reproduced by this Python strategy.
 """
 
 import math
+
 from .model import Decision
 
 

@@ -1,5 +1,5 @@
-from dataclasses import replace
 import unittest
+from dataclasses import replace
 
 from pegaflow.strategies import Candidate, Forecast, Request, Snapshot, Worker, create_strategy
 from pegaflow.strategies.baselines import lmetric_score
@@ -64,7 +64,7 @@ class StrategyTests(unittest.TestCase):
         )
         for value in invalid:
             with self.assertRaises(ValueError):
-                create_strategy("tailguard-pending-release-v1").choose(state, lambda *_: value)
+                create_strategy("tailguard-pending-release-v1").choose(state, lambda *_, value=value: value)
 
     def test_unsafe_candidate_and_immutable_first_are_not_optimized(self):
         state = sample()

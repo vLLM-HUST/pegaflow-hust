@@ -501,7 +501,8 @@ def test_gate5_admission_drift():
     expected = {0: 55000, 1: 55000, 2: 55000, 3: 55000}
     procs_clean = {0: [1000], 1: [1001], 2: [1002], 3: [1003]}
     tracked = {1000, 1001, 1002, 1003}
-    pgid_of = lambda pid: pid
+    def pgid_of(pid):
+        return pid
 
     # Clean: our pids own every device, HBM drop within expected+slack
     v = audit.check_admission_drift(admitted, pre, now_clean, expected,
@@ -544,7 +545,8 @@ def test_gate5b_monitor_polls():
     pre = {0: 64000}
     expected = {0: 55000}
     tracked = {1000}
-    pgid_of = lambda pid: pid
+    def pgid_of(pid):
+        return pid
 
     clean = ({0: 10000}, {0: [1000]})
     drifted = ({0: 10000}, {0: [1000, 99999]})  # foreign pid appears mid-phase
