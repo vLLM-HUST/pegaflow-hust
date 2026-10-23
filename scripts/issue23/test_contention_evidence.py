@@ -3,6 +3,7 @@
 import gzip
 import hashlib
 import json
+import os
 import shutil
 from pathlib import Path
 
@@ -12,7 +13,7 @@ from verify_contention import compressed, verify
 
 
 def test_rehashed_wrong_checkpoint_is_rejected(tmp_path):
-    source = Path(__file__).resolve().parents[2] / "results/issue23/20261015-contention"
+    source = Path(os.environ["BENCHMARK_EVIDENCE_ROOT"]) / "results/issue23/20261015-contention"
     root = tmp_path / "evidence"
     shutil.copytree(source, root)
     arm = compressed(root / "cohort-0000/rdma-burst.json.gz")
