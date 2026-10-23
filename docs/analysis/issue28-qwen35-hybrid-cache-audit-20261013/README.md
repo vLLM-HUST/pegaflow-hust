@@ -25,7 +25,7 @@
 
 离线诊断：[probes.py](probes.py)、[实际结果](probes.json)。单测范围、命令和数量见 [validation.json](validation.json)。诊断采用源码单测的 stub 环境，不生成 GPU/NPU 推理或 RDMA 性能数据。
 
-历史实验身份和范围仍以 [10 月 12 日归档报告](../../../results/issue23/20261012-attention-diagnostic/report.md)为准。该运行使用旧基线及归档补丁；本次诊断直接检查当前 main，二者的运行证据分别解释。
+历史实验身份和范围仍以 [10 月 12 日归档报告](https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/afd47a8e9964b71844dec75a8e908f279ae98202/archive/mod-history-20261023/pegaflow/manifest.json)为准。该运行使用旧基线及归档补丁；本次诊断直接检查当前 main，二者的运行证据分别解释。
 
 ## 2. 已有路径及其边界
 

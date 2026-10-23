@@ -174,8 +174,9 @@ jobs:
             pytest scripts/issue23 -q
       - name: Audit frozen Issue23 pilot evidence
         run: |
+          python scripts/fetch_mod_consumer_evidence.py --config BENCHMARK_HISTORY.json --destination "$RUNNER_TEMP/benchmark-history"
           python scripts/issue23/audit_archive.py \
-            --archive results/issue23/20261012-attention-diagnostic \
+            --archive "$RUNNER_TEMP/benchmark-history/results/issue23/20261012-attention-diagnostic" \
             --output "$RUNNER_TEMP/issue23-archive-review.json"
       - name: Audit frozen contention experiment evidence
         env:

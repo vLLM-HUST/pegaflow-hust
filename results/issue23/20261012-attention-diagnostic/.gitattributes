@@ -1,3 +1,0 @@
-* -text whitespace=cr-at-eol
-*.log -diff
-*.patch -diff

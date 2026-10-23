@@ -1,8 +1,0 @@
-{
-  "kind": "Python connector overlay on the frozen native wheel",
-  "files": {
-    "tp_shards.py": "1511b53cbc32db49f49dd3aa7e63a55cce3f5ca00f6cf9c11eba124d2922e66b",
-    "scheduler.py": "20e62878773ad057fec43cbc3d90caa5425cdc9e5a3b59b884426db36e47a241",
-    "worker.py": "08c30592d61ff32c61165564c4617a1832b1580cc8548c5719aabb675a33cc2f"
-  }
-}

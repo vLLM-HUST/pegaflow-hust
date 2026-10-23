@@ -27,3 +27,22 @@ python scripts/issue23/render_contention.py --root "$BENCHMARK_EVIDENCE_ROOT/res
 
 The corruption regression still changes a checkpoint, recomputes its hash, and requires the
 semantic validator to reject it. Archive integrity does not replace that assertion.
+
+
+## Additional historical directories
+
+[Canonical history manifest](https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/afd47a8e9964b71844dec75a8e908f279ae98202/archive/mod-history-20261023/pegaflow/manifest.json) lists original paths, sizes and SHA256.
+This is a separate capsule from BENCHMARK_EVIDENCE.json; do not reuse its destination.
+No hardware experiment or new performance acceptance is implied.
+
+```sh
+python scripts/fetch_mod_consumer_evidence.py --config BENCHMARK_HISTORY.json \
+  --destination /absolute/new/external/history
+```
+
+The restored root preserves these original paths:
+
+- `results/issue23/20261012-attention-diagnostic/`
+- `docs/experiments/issue23-pilot-20261012.md`
+
+Frozen reports retain original labels and local paths; these do not assert that omitted captures were recovered.
