@@ -1,10 +1,10 @@
 """Provisional P-side four-arm diagnosis; never substitutes for dual-node audit."""
 
 import argparse
-from collections import Counter
 import hashlib
 import json
 import math
+from collections import Counter
 from pathlib import Path
 
 

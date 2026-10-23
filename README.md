@@ -1,5 +1,8 @@
 # Pegaflow
 
+Historical data for the migrated batch is in [benchmark custody](EVIDENCE.md),
+with pinned hashes and an external-directory downloader. Source/runtime behavior is unchanged.
+
 PegaFlow is an external KV-cache storage and transfer system. Its vLLM
 connectors are adapters to that system; the server itself is not an in-process
 vLLM plugin. The `pegaflow-llm-npu` wheel owns both its vLLM general-plugin

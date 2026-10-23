@@ -9,33 +9,33 @@ and must be checked against real native logs before performance claims.
 from __future__ import annotations
 
 import argparse
-from collections import deque
-from dataclasses import replace
 import hashlib
 import heapq
 import itertools
 import json
-import math
-from pathlib import Path
 import sys
 import time
+from collections import deque
+from dataclasses import replace
+from pathlib import Path
 
 import pegaflow
+
 BASE = Path(__file__).resolve().parent
 pegaflow.__path__.insert(0, str(BASE / "runtime/overlay/pegaflow"))
 pegaflow.__path__.append(str(BASE.parents[1] / "python/pegaflow"))
 sys.path.insert(0, str(BASE / "runtime/code"))
 import run as core
-from pegaflow.joint_policy import Costs, Demand, Layout, View, copy_package
-from pegaflow.resource_cache_profile import CacheForecast
-from pegaflow.strategies import Candidate, Request, Snapshot, Worker, create_strategy
-from pegaflow.strategies.resource_forecast import ResourceForecaster, candidate_work
-from pegaflow.strategies.resource_schedule import Operation
-from arrivals import offsets
 from analyze_phase_feedback import quantiles
+from arrivals import offsets
+from pegaflow.joint_policy import Costs, Demand, Layout, View, copy_package
 from pegaflow.phase_release_calendar import PhaseReleaseQueues
-from pegaflow.strategies.live_adapter import controlled_route
+from pegaflow.resource_cache_profile import CacheForecast
 from pegaflow.resource_queue import direction
+from pegaflow.strategies import Candidate, Request, Snapshot, Worker, create_strategy
+from pegaflow.strategies.live_adapter import controlled_route
+from pegaflow.strategies.resource_forecast import candidate_work
+from pegaflow.strategies.resource_schedule import Operation
 
 RATES = (.24516170769071072, .49032341538142143, .9806468307628429)
 
@@ -166,10 +166,10 @@ class Simulation:
         ready = max(offered, self.sessions.get(row["task"], 0.))
         plan, work, cpu, live_route = self.choose(row, ready)
         self.sequence += 1
-        self.jobs[key] = dict(row=row, plan=plan, work=replace(work, completed_operations=frozenset({"control"})),
-                              live_route=live_route,
-                              ready=ready, offered=offered, phase=0, steps=deque(),
-                              first=None, stage_timing={}, pred_CPU=cpu)
+        self.jobs[key] = {"row": row, "plan": plan, "work": replace(work, completed_operations=frozenset({"control"})),
+                              "live_route": live_route,
+                              "ready": ready, "offered": offered, "phase": 0, "steps": deque(),
+                              "first": None, "stage_timing": {}, "pred_CPU": cpu}
         self.active_sessions.add(row["task"])
         self.router_busy = True
         self.event(self.now+cpu+(self.rpc_route if self.mode != "native" else 0.), "routed", key)
@@ -197,7 +197,7 @@ class Simulation:
             if logical >= 512:
                 break
         self.layout = self.layout.remove(node, victims)
-        self.actions.append(dict(kind="native_reclaim", node=node, logical=logical, at=self.now))
+        self.actions.append({"kind": "native_reclaim", "node": node, "logical": logical, "at": self.now})
 
     def stage(self, key, node):
         job, frozen = self.jobs[key], self.frozen()
@@ -294,7 +294,7 @@ class Simulation:
                         self.policy_queues.observe(key,node,"started",self.now)
                     self.stage(key,node)
                     changed = True
-            for node,key in sorted(tuple(self.active.items())):
+            for node,key in sorted(self.active.items()):
                 job = self.jobs[key]
                 if job.get("running") or not job["steps"]:
                     continue
@@ -325,9 +325,9 @@ class Simulation:
                     if name.endswith("_api"):
                         self.pin(node,set(self.item(job["row"]).hashes[:job["count"]]),1)
                 job["running"] = operation
-                self.resource_events.append(dict(request=key,node=node,operation=name,
-                    start=self.now,end=self.now+duration,resources=resources,
-                    first=self.now+first if first is not None else None))
+                self.resource_events.append({"request": key,"node": node,"operation": name,
+                    "start": self.now,"end": self.now+duration,"resources": resources,
+                    "first": self.now+first if first is not None else None})
                 if self.mode != "native" and name!="D_control" and not copy_data:
                     if name.endswith("_api"):
                         self.policy_queues.skip_copy(key,"history" if node<2 else "handoff")
@@ -361,13 +361,13 @@ class Simulation:
                 fit_CPU = time.perf_counter()-fit_began
                 self.fit_CPU.append(fit_CPU)
                 self.now += fit_CPU
-                self.actions.append(dict(kind="software_copy_gate_hold",source=source,destination=destination,
-                    acquired=acquired,released=self.now,link_wait=link_wait,not_RDMA_congestion_evidence=True))
+                self.actions.append({"kind": "software_copy_gate_hold","source": source,"destination": destination,
+                    "acquired": acquired,"released": self.now,"link_wait": link_wait,"not_RDMA_congestion_evidence": True})
             self.pin(source,set(hashes),-1)
             try:
                 transition = copy_package(self.layout,source,destination,hashes)
             except ValueError:
-                self.actions.append(dict(kind="copy_normal_defer",at=self.now,source=source,destination=destination))
+                self.actions.append({"kind": "copy_normal_defer","at": self.now,"source": source,"destination": destination})
                 job["count"] = min(job["count"],self.layout.prefix(node,self.item(job["row"]).hashes))
                 # Recompute both the actual and quoted unacquired API after failed publication.
                 pfirst,ptail = self.physics(key,node,job["row"]["tokens"],job["count"]*128)
@@ -375,8 +375,8 @@ class Simulation:
                 job["steps"][-1] = (api[0],pfirst+ptail,api[2],None,pfirst if node>=2 else None)
             else:
                 self.layout = transition.layout
-                self.actions.append(dict(kind="implicit_copy" if self.mode=="native" else "selected_copy",
-                    at=self.now,source=source,destination=destination,payload=payload,seconds=duration))
+                self.actions.append({"kind": "implicit_copy" if self.mode=="native" else "selected_copy",
+                    "at": self.now,"source": source,"destination": destination,"payload": payload,"seconds": duration})
         if name.endswith("_api"):
             item = self.item(job["row"])
             self.pin(node,set(item.hashes[:job["count"]]),-1)
@@ -398,8 +398,8 @@ class Simulation:
                 self.fit_CPU.append(fit_CPU)
                 self.now += fit_CPU
                 self.policy_queues.observe(key,node,"finished",self.now)
-            self.api_records.append(dict(id=key,node=node,prefix=prefix,tokens=item.tokens,first=actual_first,
-                full=duration,restore_path_not_pure_H2D=restore,completed=self.now))
+            self.api_records.append({"id": key,"node": node,"prefix": prefix,"tokens": item.tokens,"first": actual_first,
+                "full": duration,"restore_path_not_pure_H2D": restore,"completed": self.now})
         job["running"] = None
         job["steps"].popleft()
         job["work"] = replace(job["work"], active_operations=(),
@@ -415,9 +415,9 @@ class Simulation:
         else:
             if job["first"] is None:
                 raise ValueError("Full completion before observed first")
-            self.finished[key] = dict(id=key,TTFT=job["first"]-job["ready"],
-                nominal=job["first"]-job["offered"],dependency=job["ready"]-job["offered"],
-                p=job["plan"].p,d=job["plan"].d,end=self.now)
+            self.finished[key] = {"id": key,"TTFT": job["first"]-job["ready"],
+                "nominal": job["first"]-job["offered"],"dependency": job["ready"]-job["offered"],
+                "p": job["plan"].p,"d": job["plan"].d,"end": self.now}
             self.sessions[job["row"]["task"]] = self.now
             self.active_sessions.remove(job["row"]["task"])
             del self.jobs[key]
@@ -493,9 +493,9 @@ def main():
         before = [json.loads(line) for line in (job/"B-before/baseline/requests.jsonl").read_text(encoding="utf-8").splitlines()]
         by_id = {r["id"]:r for r in before}
         protocol = read(job/"protocol.json")
-        rows = [dict(id=key,task=by_id[key]["task"],tokens=by_id[key]["P"]["prompt_tokens"],
-                     hashes=by_id[key]["P"]["observation"]["full_prompt_hashes"][
-                         :(by_id[key]["P"]["prompt_tokens"]-1)//128])
+        rows = [{"id": key,"task": by_id[key]["task"],"tokens": by_id[key]["P"]["prompt_tokens"],
+                     "hashes": by_id[key]["P"]["observation"]["full_prompt_hashes"][
+                         :(by_id[key]["P"]["prompt_tokens"]-1)//128]}
                 for key in protocol["test_order"]]
         initial = read(job/"B-before/baseline/initial-inventory.json")
         values = dict(read(job/"cost-model.json")["costs"])

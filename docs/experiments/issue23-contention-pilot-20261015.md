@@ -1,10 +1,10 @@
 # Issue #23：原速 RDMA 竞争下的十六请求现象实验
 
-[阶段索引](issue23-stage-20261015.md) · [公开审查材料与复核命令](../../results/issue23/20261015-contention/README.md)
+[阶段索引](issue23-stage-20261015.md) · [公开审查材料与复核命令](../../EVIDENCE.md)
 
-![四组结果](../../results/issue23/20261015-contention/figures/four-arm-results.png)
+![四组结果](https://raw.githubusercontent.com/vLLM-HUST/vllm-hust-benchmark/2144d58de108cddaff3800fdcbf12dc9d3ab1d18/archive/mod-consumers-20261023/pegaflow/figures/four-arm-results.png)
 
-![阶段归因](../../results/issue23/20261015-contention/figures/performance-attribution.png)
+![阶段归因](https://raw.githubusercontent.com/vLLM-HUST/vllm-hust-benchmark/2144d58de108cddaff3800fdcbf12dc9d3ab1d18/archive/mod-consumers-20261023/pegaflow/figures/performance-attribution.png)
 
 本轮研究集中和平滑的缓存访问到达，如何改变共享资源争用、缓存完整可用时间、新请求 TTFT 与已有解码的执行节奏。四组为 RDMA 集中、RDMA 平滑、本地拷贝集中、本地拷贝平滑；模型、对象、命中状态、后台竞争与平均释放偏移保持配对一致。
 

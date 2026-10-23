@@ -39,3 +39,6 @@ docs/p2-3-benchmarks.md
 
 # Perf artifacts: VALID manifest committed, raw logs ignored
 results/perf-*/**/logs/
+
+# Historical measured inputs now live in the pinned benchmark capsule.
+/results/issue23/20261015-contention/

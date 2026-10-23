@@ -1,5 +1,4 @@
 import unittest
-from dataclasses import replace
 
 from pegaflow.strategies import Candidate, Request, Snapshot, Worker, create_strategy
 from pegaflow.strategies.resource_forecast import ResourceForecaster, candidate_work, copy_resources
