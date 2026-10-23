@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import argparse
 import ast
 import hashlib
 import json
@@ -76,4 +77,6 @@ def verify(root: Path) -> dict:
 
 
 if __name__ == "__main__":
-    print(json.dumps(verify(Path(__file__).resolve().parent), indent=2))
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument("--root", type=Path, required=True)
+    print(json.dumps(verify(parser.parse_args().root), indent=2))
