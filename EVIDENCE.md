@@ -46,3 +46,39 @@ The restored root preserves these original paths:
 - `docs/experiments/issue23-pilot-20261012.md`
 
 Frozen reports retain original labels and local paths; these do not assert that omitted captures were recovered.
+
+
+## Remaining collections (formal / handoff / TP4-TP8 / profiler)
+
+[Member manifest](https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/87651130e720d3e41225c16823642508d4857cd4/archive/mod-collections-20261023/pegaflow/manifest.json) preserves the source commit and every original hash.
+
+```sh
+python scripts/fetch_mod_consumer_evidence.py --config BENCHMARK_COLLECTION.json \
+  --destination /absolute/new/external/collection
+export BENCHMARK_COLLECTION_ROOT=/absolute/new/external/collection
+```
+
+This root is separate from BENCHMARK_EVIDENCE_ROOT and BENCHMARK_HISTORY_ROOT.
+Do not execute archived scripts; use the maintained repository validators.
+All paths below are archive-relative; generation commands may still produce ignored local outputs.
+
+- `experiments/issue23_handoff/`
+- `experiments/issue23_strategies/runtime/`
+- `handoff/`
+- `docs/analysis/`
+
+Current forwarding documents, configuration and imported code remain; exact retained paths are tested in tests/test_collection_evidence_boundary.py.
+
+Frozen runtime code/overlay remain available for imports. Their original manifests and calibration inputs are external; preserve all historical hash checks. Run the ordinary source-only Python gate with BENCHMARK_COLLECTION_ROOT set, including handoff and Issue28 verifiers.
+
+Issue28 also requires its recorded implementation files (not current source):
+
+```sh
+python scripts/fetch_mod_consumer_evidence.py --config BENCHMARK_ISSUE28_SOURCE.json \
+  --destination /absolute/new/external/issue28-source
+export BENCHMARK_ISSUE28_SOURCE_ROOT=/absolute/new/external/issue28-source
+```
+
+Only read those archived files for the original LF-normalized hashes; never execute them.
+The policy feedback simulator requires an explicit `--seed` pointing to
+`$BENCHMARK_COLLECTION_ROOT/experiments/issue23_strategies/runtime/calibration-seed`.

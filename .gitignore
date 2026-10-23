@@ -45,3 +45,9 @@ results/perf-*/**/logs/
 
 # Historical originals live in benchmark (issue 326).
 /results/issue23/20261012-attention-diagnostic/
+
+# Migrated collection originals. Retained tracked code/docs are reviewed explicitly.
+/experiments/issue23_handoff/
+/experiments/issue23_strategies/runtime/
+/handoff/
+/docs/analysis/

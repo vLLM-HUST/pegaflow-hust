@@ -2,13 +2,14 @@
 
 import hashlib
 import json
+import os
 import subprocess
 import sys
 from pathlib import Path
 
 
 def test_original_runtime_source_hashes():
-    root = Path(__file__).resolve().parents[2] / "experiments/issue23_strategies/runtime"
+    root = Path(os.environ["BENCHMARK_COLLECTION_ROOT"]) / "experiments/issue23_strategies/runtime"
     rows = {}
     for line in (root / "source.sha256").read_text().splitlines():
         sha, name = line.split(maxsplit=1)
@@ -18,8 +19,8 @@ def test_original_runtime_source_hashes():
     confirmation = json.loads((root / "confirmation-sources.json").read_text())
     for name, sha in confirmation.items():
         assert rows[name] == sha
-    repo = root.parents[2]
-    prefix = root.relative_to(repo).as_posix() + "/"
+    repo = Path(__file__).resolve().parents[2]
+    prefix = "experiments/issue23_strategies/runtime/"
     tracked = subprocess.check_output(
         [
             "git",
@@ -34,6 +35,10 @@ def test_original_runtime_source_hashes():
     ).splitlines()
     assert tracked
     assert all(path.removeprefix(prefix) in rows for path in tracked)
+    assert all(
+        hashlib.sha256((repo / path).read_bytes()).hexdigest() == rows[path.removeprefix(prefix)]
+        for path in tracked
+    )
 
 
 def test_original_handoff_verifier_and_measurements():

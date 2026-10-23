@@ -13,8 +13,8 @@ def digest(path: Path) -> str:
     return hashlib.sha256(path.read_bytes().replace(b"\r\n", b"\n")).hexdigest()
 
 
-def verify(root: Path) -> dict:
-    repo = root.parents[2]
+def verify(root: Path, source_root: Path) -> dict:
+    repo = source_root
     manifest = json.loads((root / "manifest.json").read_text(encoding="utf-8"))
     for name, expected in manifest["files_sha256"].items():
         if digest(root / name) != expected:
@@ -154,8 +154,10 @@ def verify(root: Path) -> dict:
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--require-model-correctness", action="store_true")
+    parser.add_argument("--root", type=Path, required=True)
+    parser.add_argument("--source-root", type=Path, required=True)
     arguments = parser.parse_args()
-    result = verify(Path(__file__).resolve().parent)
+    result = verify(arguments.root, arguments.source_root)
     print(json.dumps(result, indent=2))
     if arguments.require_model_correctness and result["model_output_gate"] != "passed":
         raise SystemExit(1)

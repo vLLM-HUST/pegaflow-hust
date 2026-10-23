@@ -1,7 +1,0 @@
-{
-  "digest": "7e06dc75996ad7b84b7356403252df9f3425742825fcf8b290545471d9a3f5b0",
-  "reference": "7e06dc75996ad7b84b7356403252df9f3425742825fcf8b290545471d9a3f5b0",
-  "empty_before_warmup_passed": true,
-  "serving_phase": "baseline",
-  "policy_phase": "baseline"
-}
