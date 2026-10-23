@@ -31,7 +31,7 @@ semantic validator to reject it. Archive integrity does not replace that asserti
 
 ## Additional historical directories
 
-[Canonical history manifest](https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/aadff9107d2514ab8a319a5f6385a99671c98cfd/archive/mod-history-20261023/pegaflow/manifest.json) lists original paths, sizes and SHA256.
+[Canonical history manifest](https://github.com/vLLM-HUST/vllm-hust-benchmark/blob/afd47a8e9964b71844dec75a8e908f279ae98202/archive/mod-history-20261023/pegaflow/manifest.json) lists original paths, sizes and SHA256.
 This is a separate capsule from BENCHMARK_EVIDENCE.json; do not reuse its destination.
 No hardware experiment or new performance acceptance is implied.
 
