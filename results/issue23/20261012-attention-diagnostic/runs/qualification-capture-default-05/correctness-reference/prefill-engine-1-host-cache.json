@@ -1,6 +1,0 @@
-{
-  "evicted_blocks": 5,
-  "evicted_bytes": 34816000,
-  "reclaimed_bytes": 34816000,
-  "still_referenced_blocks": 0
-}

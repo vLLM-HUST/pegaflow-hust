@@ -42,3 +42,6 @@ results/perf-*/**/logs/
 
 # Historical measured inputs now live in the pinned benchmark capsule.
 /results/issue23/20261015-contention/
+
+# Historical originals live in benchmark (issue 326).
+/results/issue23/20261012-attention-diagnostic/

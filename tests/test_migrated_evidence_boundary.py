@@ -13,6 +13,7 @@ def test_migrated_directory_has_no_tracked_copies():
             str(root),
             "ls-files",
             "--",
+            "results/issue23/20261012-attention-diagnostic/",
             "results/issue23/20261015-contention/",
         ]
     )

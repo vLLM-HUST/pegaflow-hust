@@ -1,3 +1,0 @@
-{"offset_seconds": 1.2679786514490843, "data": "{\"id\":\"cmpl-issue23-mmlu-pro-smoke-0000-2\",\"object\":\"text_completion\",\"created\":1791798350,\"model\":\"tailguard-qwen35\",\"choices\":[{\"index\":0,\"text\":\"Let\",\"logprobs\":null,\"finish_reason\":\"length\",\"stop_reason\":null,\"prompt_token_ids\":null,\"token_ids\":null}]}"}
-{"offset_seconds": 1.2681779842823744, "data": "{\"id\":\"cmpl-issue23-mmlu-pro-smoke-0000-2\",\"object\":\"text_completion\",\"created\":1791798350,\"model\":\"tailguard-qwen35\",\"choices\":[],\"usage\":{\"prompt_tokens\":4105,\"total_tokens\":4106,\"completion_tokens\":1},\"system_fingerprint\":\"vllm-0.23.0-tp2-88c13e1a\"}"}
-{"offset_seconds": 1.268273925408721, "data": "[DONE]"}
