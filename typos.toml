@@ -7,6 +7,10 @@ extend-exclude = [
     "docs/analysis/issue28-qwen35-hybrid-cache-evidence-20261013/publications.json",
 ]
 
+[default]
+# Opaque original request IDs are not prose; never rewrite measured identities.
+extend-ignore-re = ['"request_id": "r[0-9]+-[0-9a-f]{8}"']
+
 [default.extend-words]
 # Rust std library path (std::f64::consts)
 consts = "consts"

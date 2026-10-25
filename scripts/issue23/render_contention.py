@@ -18,7 +18,8 @@ parser = argparse.ArgumentParser(description=__doc__)
 parser.add_argument(
     "--root",
     type=Path,
-    default=Path(__file__).resolve().parents[2] / "results/issue23/20261015-contention",
+    required=True,
+    help="Verified external contention directory (see EVIDENCE.md)",
 )
 parser.add_argument("--output", type=Path)
 parser.add_argument(

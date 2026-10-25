@@ -1,5 +1,0 @@
-ARM_START rdma-burst
-ARM_COMPLETED rdma-burst
-ARM_START local_copy-burst
-ARM_COMPLETED local_copy-burst
-PILOT_FINISHED completed

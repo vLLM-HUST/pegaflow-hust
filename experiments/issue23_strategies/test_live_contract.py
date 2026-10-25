@@ -1,18 +1,20 @@
 """Small CPU wiring contracts, not a mock claim of NPU correctness."""
 import importlib.util
-from pathlib import Path
 import sys
-from types import SimpleNamespace
 import unittest
+from pathlib import Path
+from types import SimpleNamespace
 from unittest.mock import patch
+
 import pegaflow
 
 BASE = Path(__file__).resolve().parent
 pegaflow.__path__.insert(0,str(BASE/"runtime/overlay/pegaflow"))
 pegaflow.__path__.append(str(BASE.parents[1]/"python/pegaflow"))
 sys.path.insert(0,str(BASE/"runtime/code"))
-from pegaflow.strategies.live_adapter import native_pair,request_payload
-from confirmation_control import ARMS,Sequence,SERVING_PHASE
+from confirmation_control import ARMS, SERVING_PHASE, Sequence
+from pegaflow.strategies.live_adapter import native_pair, request_payload
+
 spec = importlib.util.spec_from_file_location("strategy_shared_worker",BASE/"runtime/code/worker.py")
 shared_worker = importlib.util.module_from_spec(spec)
 spec.loader.exec_module(shared_worker)

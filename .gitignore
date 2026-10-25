@@ -39,3 +39,15 @@ docs/p2-3-benchmarks.md
 
 # Perf artifacts: VALID manifest committed, raw logs ignored
 results/perf-*/**/logs/
+
+# Historical measured inputs now live in the pinned benchmark capsule.
+/results/issue23/20261015-contention/
+
+# Historical originals live in benchmark (issue 326).
+/results/issue23/20261012-attention-diagnostic/
+
+# Migrated collection originals. Retained tracked code/docs are reviewed explicitly.
+/experiments/issue23_handoff/
+/experiments/issue23_strategies/runtime/
+/handoff/
+/docs/analysis/

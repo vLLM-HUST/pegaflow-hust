@@ -150,6 +150,9 @@ jobs:
   python-unit-tests:
     name: python unit tests
     runs-on: ubuntu-latest
+    env:
+      BENCHMARK_COLLECTION_ROOT: ${{ github.workspace }}/../benchmark-collection
+      BENCHMARK_ISSUE28_SOURCE_ROOT: ${{ github.workspace }}/../benchmark-issue28-source
     steps:
       - name: Checkout
         uses: actions/checkout@v4
@@ -164,20 +167,28 @@ jobs:
       - name: Run default Python test gate
         working-directory: python
         run: |
+          python ../scripts/fetch_mod_consumer_evidence.py --config ../BENCHMARK_COLLECTION.json --destination "$BENCHMARK_COLLECTION_ROOT"
+          python ../scripts/fetch_mod_consumer_evidence.py --config ../BENCHMARK_ISSUE28_SOURCE.json --destination "$BENCHMARK_ISSUE28_SOURCE_ROOT"
           uv run --isolated --no-project --with pytest --with numpy --with 'requests>=2.26.0' pytest
       - name: Run Issue23 preparation and analysis tests
+        env:
+          BENCHMARK_EVIDENCE_ROOT: ${{ runner.temp }}/benchmark-evidence
         run: |
+          python scripts/fetch_mod_consumer_evidence.py --destination "$BENCHMARK_EVIDENCE_ROOT"
           uv run --isolated --no-project --with pytest --with httpx --with aiohttp \
             pytest scripts/issue23 -q
       - name: Audit frozen Issue23 pilot evidence
         run: |
+          python scripts/fetch_mod_consumer_evidence.py --config BENCHMARK_HISTORY.json --destination "$RUNNER_TEMP/benchmark-history"
           python scripts/issue23/audit_archive.py \
-            --archive results/issue23/20261012-attention-diagnostic \
+            --archive "$RUNNER_TEMP/benchmark-history/results/issue23/20261012-attention-diagnostic" \
             --output "$RUNNER_TEMP/issue23-archive-review.json"
       - name: Audit frozen contention experiment evidence
+        env:
+          BENCHMARK_EVIDENCE_ROOT: ${{ runner.temp }}/benchmark-evidence
         run: |
           python scripts/issue23/verify_contention.py \
-            --root results/issue23/20261015-contention
+            --root "$BENCHMARK_EVIDENCE_ROOT/results/issue23/20261015-contention"
 
   ecpa-package:
     name: ECPA package contract (Python ${{ matrix.python-version }})

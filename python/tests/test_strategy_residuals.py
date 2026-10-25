@@ -1,4 +1,5 @@
 import unittest
+
 from pegaflow.strategies.residuals import conditional_remaining, phase_remaining
 from pegaflow.strategies.resource_schedule import Operation, Work
 
