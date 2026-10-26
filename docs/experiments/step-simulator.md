@@ -12,7 +12,7 @@ python scripts/issue23/step_simulator.py --help
 ## 数据与复现
 
 标定测量、预测输入、模拟结果及分析图保存在
-[benchmark 实验目录](https://github.com/vLLM-HUST/vllm-hust-benchmark/tree/26d6aad7736e0634ecca15cb592136c3802118d6/reports/pegaflow-step-simulator-20261026)。
+[benchmark 实验目录](https://github.com/vLLM-HUST/vllm-hust-benchmark/tree/b5143f94bb1637a26075770db250e351b06e3024/reports/pegaflow-step-simulator-20261026)。
 先将该目录取到本地，以下用 `$R` 表示其绝对路径。新分析输出应写到独立目录。
 
 ```sh

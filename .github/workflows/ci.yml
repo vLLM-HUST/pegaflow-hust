@@ -376,7 +376,7 @@ jobs:
         uses: actions/checkout@v4
         with:
           repository: vLLM-HUST/vllm-hust-benchmark
-          ref: 26d6aad7736e0634ecca15cb592136c3802118d6
+          ref: b5143f94bb1637a26075770db250e351b06e3024
           path: .step-evidence
           sparse-checkout: reports/pegaflow-step-simulator-20261026
           persist-credentials: false
