@@ -22,5 +22,6 @@ Som = "Som"
 SAV = "SAV"
 # Benchmark metrics / abbreviations
 TTFT = "TTFT"
+MAPE = "MAPE"
 gmu = "gmu"
 tok = "tok"

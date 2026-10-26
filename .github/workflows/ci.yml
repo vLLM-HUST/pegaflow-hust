@@ -362,6 +362,31 @@ jobs:
         run: |
           cargo test -p pegaflow-transfer --no-default-features --features ascend --lib rc_backend::pacing::tests
 
+  step-simulator-evidence:
+    name: step simulator and measured evidence
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.11'
+      - name: Check out fixed calibration and validation evidence
+        uses: actions/checkout@v4
+        with:
+          repository: vLLM-HUST/vllm-hust-benchmark
+          ref: b5143f94bb1637a26075770db250e351b06e3024
+          path: .step-evidence
+          sparse-checkout: reports/pegaflow-step-simulator-20261026
+          persist-credentials: false
+      - name: Check simulator state transitions and measured development cases
+        run: |
+          python -m pip install pytest
+          python -m pytest -q scripts/issue23/test_step_simulator.py
+          python scripts/issue23/verify_step_evidence.py \
+            --root .step-evidence/reports/pegaflow-step-simulator-20261026
+
   cargo-check:
     name: cargo check
     if: always()
