@@ -1,5 +1,7 @@
 # 单引擎调度模拟器
 
+四实例 CPU 缓存、D 并发与目标服务流程的后续模型见 [P/D 服务模拟器](pd-serving-simulator.md)。
+
 `scripts/issue23/step_simulator.py` 使用输入长度、输出预算、到达时间和前缀身份预测单引擎的逐步调度、KV 页占用及请求完成时间。计算耗时由独立标定的步成本模型给出。
 
 实现使用 Python 标准库。运行不需要模型、NPU、vLLM 或 PegaFlow 服务。
