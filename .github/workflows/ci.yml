@@ -175,7 +175,7 @@ jobs:
           BENCHMARK_EVIDENCE_ROOT: ${{ runner.temp }}/benchmark-evidence
         run: |
           python scripts/fetch_mod_consumer_evidence.py --destination "$BENCHMARK_EVIDENCE_ROOT"
-          uv run --isolated --no-project --with pytest --with httpx --with aiohttp \
+          uv run --isolated --no-project --with pytest --with numpy --with httpx --with aiohttp \
             pytest scripts/issue23 -q
       - name: Audit frozen Issue23 pilot evidence
         run: |
