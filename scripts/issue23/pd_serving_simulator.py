@@ -1,4 +1,4 @@
-"""Four graph-mode engines with GPU APC, CPU cache and staged P/D handoff."""
+"""Graph-mode engines with GPU APC, CPU cache and staged P/D handoff."""
 
 from __future__ import annotations
 
@@ -109,14 +109,18 @@ class ServingSimulation:
         max_sequences=128,
         overlap=True,
         npu_gib=None,
+        p_count=2,
+        d_count=2,
     ):
         self.rows = {row["id"]: row for row in bundle["rows"]}
         if any(
             set(row) != {"id", "task", "tokens", "hashes"} for row in bundle["rows"]
         ):
             raise ValueError("Unexpected workload fields")
-        if min(p_tokens, d_tokens, max_sequences) < 1:
+        if min(p_tokens, d_tokens, max_sequences, p_count, d_count) < 1:
             raise ValueError("Positive serving budgets required")
+        self.p_count, self.d_count = p_count, d_count
+        self.node_count = p_count + d_count
         self.order, self.protocol = protocol["test_order"], protocol
         if list(self.rows) != self.order:
             raise ValueError("Workload order differs")
@@ -132,10 +136,10 @@ class ServingSimulation:
         if npu_gib is not None:
             self.budget["NPU_KV_GiB"] = npu_gib
         blocks = int(self.budget["NPU_KV_GiB"] * 2**30 // BLOCK_BYTES)
-        self.pools = [KVPool(blocks, 128) for _ in range(4)]
+        self.pools = [KVPool(blocks, 128) for _ in range(self.node_count)]
         self.host = [
             HostCache(self.budget["CPU_pool_GiB_per_instance"] * 2**30)
-            for _ in range(4)
+            for _ in range(self.node_count)
         ]
         for node, payload in enumerate(bundle["initial_inventory"]):
             self.host[node].add(
@@ -148,14 +152,18 @@ class ServingSimulation:
         self.max_sequences, self.overlap = max_sequences, overlap
         self.network_s_per_byte = bundle["costs"]["seconds_per_pd_byte"]
         self.events, self.sequence, self.now = [], itertools.count(), 0.0
-        self.waiting = [deque() for _ in range(4)]
-        self.running, self.preparing = [[] for _ in range(4)], set()
+        self.waiting = [deque() for _ in range(self.node_count)]
+        self.running, self.preparing = [[] for _ in range(self.node_count)], set()
         self.engine_busy, self.copy_busy = set(), Counter()
         self.engine_until, self.device_copy_free = {}, {}
         self.resource_free, self.jobs = {}, {}
         self.arrived, self.live_tasks, self.sessions = [], set(), {}
         self.finished, self.steps, self.transfers = {}, [], []
-        self.peak_live, self.peak_running, self.peak_resident = 0, [0] * 4, [0] * 4
+        self.peak_live = 0
+        self.peak_running, self.peak_resident = (
+            [0] * self.node_count,
+            [0] * self.node_count,
+        )
         self.extrapolated_steps = 0
         for key in self.order:
             self.event(self.offered[key], "arrival", key)
@@ -172,12 +180,12 @@ class ServingSimulation:
             if row["task"] in self.live_tasks:
                 remaining.append(key)
                 continue
-            lane = self.tasks.index(row["task"]) % 2
+            lane = self.tasks.index(row["task"]) % self.p_count
             self.live_tasks.add(row["task"])
             self.jobs[key] = {
                 "id": key,
                 "P": lane,
-                "D": lane + 2,
+                "D": self.p_count + lane % self.d_count,
                 "offered": self.offered[key],
                 "ready": max(self.offered[key], self.sessions.get(row["task"], 0.0)),
                 "stages": {},
@@ -218,7 +226,7 @@ class ServingSimulation:
             key,
             self.now,
             row["tokens"],
-            1 if node < 2 else 128,
+            1 if node < self.p_count else 128,
             tuple(row["hashes"]),
             DOMAIN,
             task=row["task"],
@@ -229,17 +237,17 @@ class ServingSimulation:
         gpu = len(self.pools[node].prefix(job))
         target = (
             max(gpu, self.host[node].prefix(row["hashes"]))
-            if node < 2
+            if node < self.p_count
             else len(row["hashes"])
         )
-        live["stages"]["P" if node < 2 else "D"] = {
+        live["stages"]["P" if node < self.p_count else "D"] = {
             "prepare": self.now,
             "node": node,
             "NPU_initial_prefix_blocks": gpu,
             "target_prefix_blocks": target,
             "restore_bytes": (target - gpu) * BLOCK_BYTES,
         }
-        if node >= 2:
+        if node >= self.p_count:
             missing = [
                 h for h in row["hashes"][gpu:target] if h not in self.host[node].keys
             ]
@@ -282,13 +290,15 @@ class ServingSimulation:
     def admit(self, key, node):
         self.preparing.remove((node, key))
         self.waiting[node].append(self.jobs[key]["engine_jobs"][node])
-        self.jobs[key]["stages"]["P" if node < 2 else "D"]["engine_queued"] = self.now
+        self.jobs[key]["stages"]["P" if node < self.p_count else "D"][
+            "engine_queued"
+        ] = self.now
 
     def schedule(self, node):
         if node in self.engine_busy or (not self.overlap and self.copy_busy[node]):
             return
         pool, running = self.pools[node], self.running[node]
-        budget = self.p_tokens if node < 2 else self.d_tokens
+        budget = self.p_tokens if node < self.p_count else self.d_tokens
         scheduled = []
         for job in running:
             take = min(budget, job.request.prompt_tokens + job.generated - job.computed)
@@ -309,7 +319,7 @@ class ServingSimulation:
             running.append(job)
             job.admitted_s = self.now
             live = self.jobs[job.request.id]
-            live["stages"]["P" if node < 2 else "D"].update(
+            live["stages"]["P" if node < self.p_count else "D"].update(
                 engine_start=self.now, cached_tokens=job.cached_tokens
             )
             scheduled.append((job, take, computed))
@@ -354,12 +364,12 @@ class ServingSimulation:
             key = job.request.id
             if job.first_s is None:
                 job.first_s = self.now + self.model.data["response_delay_s"]
-                if node >= 2:
+                if node >= self.p_count:
                     self.jobs[key]["first"] = job.first_s
             if job.generated == job.request.output_tokens:
                 self.running[node].remove(job)
                 job.finish_s = self.now + self.model.data["response_delay_s"]
-                if node >= 2:
+                if node >= self.p_count:
                     self.pools[node].release(job)
                 self.event(job.finish_s, "request_engine_done", key, node)
         self.event(
@@ -371,8 +381,8 @@ class ServingSimulation:
 
     def engine_done(self, key, node):
         live, row = self.jobs[key], self.rows[key]
-        live["stages"]["P" if node < 2 else "D"]["engine_end"] = self.now
-        if node < 2:
+        live["stages"]["P" if node < self.p_count else "D"]["engine_end"] = self.now
+        if node < self.p_count:
             missing = [h for h in row["hashes"] if h not in self.host[node].keys]
             seconds = interpolate(self.native, len(missing) * 128, "save_RPC_seconds")
             self.resource(
@@ -395,6 +405,9 @@ class ServingSimulation:
             self.sessions[row["task"]] = self.now
             self.live_tasks.remove(row["task"])
             del self.jobs[key]
+
+    def extra_event(self, kind, key, data):
+        return False
 
     def run(self):
         while self.events:
@@ -423,10 +436,12 @@ class ServingSimulation:
                 self.engine_busy.remove(data)
             elif kind == "request_engine_done":
                 self.engine_done(key, data)
+            elif self.extra_event(kind, key, data):
+                pass
             else:
                 raise ValueError(f"Unknown event {kind}")
             self.submit_ready()
-            for node in range(4):
+            for node in range(self.node_count):
                 self.peak_resident[node] = max(
                     self.peak_resident[node], len(self.pools[node].cached) * BLOCK_BYTES
                 )
@@ -443,8 +458,8 @@ class ServingSimulation:
             "schema": "pegaflow-pd-serving-simulation/v1",
             "scope": "Production-oriented architecture scenario; component-calibrated, full P/D unvalidated",
             "settings": {
-                "P": 2,
-                "D": 2,
+                "P": self.p_count,
+                "D": self.d_count,
                 "TP": 1,
                 "model": DOMAIN,
                 "graph_mode": True,
@@ -454,7 +469,7 @@ class ServingSimulation:
                 "GPU_APC": True,
                 "copy_compute_overlap": self.overlap,
                 "memory_budget": self.budget,
-                "routing": "session affinity; four sessions per P/D pair",
+                "routing": "session affinity across configured producer and consumer engines",
                 "arrivals": "historical nominal ledger with same-session completion dependency",
                 "handoff": "full completed prefix blocks from P; D computes logits suffix",
                 "transfer_model": "CPU save, P-to-D FIFO service, H2D restore; no background traffic",

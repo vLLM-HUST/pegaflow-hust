@@ -197,6 +197,8 @@ def features(assignments):
         "prefill_attention": 0.0,
         "decode_context": 0,
         "context_sum": 0,
+        "max_context": 0,
+        "padded_sequences": (1 << (len(assignments) - 1).bit_length()) if assignments else 0,
     }
     for computed, count, prompt in assignments:
         head = min(count, max(0, prompt - computed))
@@ -205,6 +207,7 @@ def features(assignments):
         result["prefill_attention"] += head * (computed + (head + 1) / 2)
         result["decode_context"] += (count - head) * (computed + count)
         result["context_sum"] += computed + count
+        result["max_context"] = max(result["max_context"], computed + count)
     return result
 
 
