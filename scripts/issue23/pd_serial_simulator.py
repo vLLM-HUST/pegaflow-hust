@@ -17,39 +17,60 @@ from dataclasses import replace
 from pathlib import Path
 
 
+_RUNTIME_CACHE = None
+
+
 def load_runtime():
+    global _RUNTIME_CACHE
+    if _RUNTIME_CACHE is not None:
+        return _RUNTIME_CACHE
     root = Path(__file__).resolve().parents[2]
     runtime = root / "experiments/issue23_strategies/runtime"
-    sys.path.insert(0, str(root / "python"))
-    import pegaflow
+    paths = list(sys.path)
+    names = {p.stem for p in (runtime / "code").glob("*.py")}
+    previous = {name: sys.modules.get(name) for name in names}
+    try:
+        for name in names:
+            sys.modules.pop(name, None)
+        sys.path.insert(0, str(root / "python"))
+        import pegaflow
 
-    pegaflow.__path__.insert(0, str(runtime / "overlay/pegaflow"))
-    sys.path.insert(0, str(runtime / "code"))
-    import run as core
-    from confirmation_state import state_digest
-    from pegaflow.joint_policy import (
-        Calendar,
-        Costs,
-        Demand,
-        Layout,
-        Unit,
-        View,
-        copy_package,
-    )
-    from pegaflow.joint_queue import QueueLedger
+        overlay = str(runtime / "overlay/pegaflow")
+        if overlay not in pegaflow.__path__:
+            pegaflow.__path__.insert(0, overlay)
+        sys.path.insert(0, str(runtime / "code"))
+        import run as core
+        from confirmation_state import state_digest
+        from pegaflow.joint_policy import (
+            Calendar,
+            Costs,
+            Demand,
+            Layout,
+            Unit,
+            View,
+            copy_package,
+        )
+        from pegaflow.joint_queue import QueueLedger
 
-    return {
-        "core": core,
-        "state_digest": state_digest,
-        "Calendar": Calendar,
-        "Costs": Costs,
-        "Demand": Demand,
-        "Layout": Layout,
-        "Unit": Unit,
-        "View": View,
-        "copy_package": copy_package,
-        "QueueLedger": QueueLedger,
-    }
+        _RUNTIME_CACHE = {
+            "core": core,
+            "state_digest": state_digest,
+            "Calendar": Calendar,
+            "Costs": Costs,
+            "Demand": Demand,
+            "Layout": Layout,
+            "Unit": Unit,
+            "View": View,
+            "copy_package": copy_package,
+            "QueueLedger": QueueLedger,
+        }
+    finally:
+        sys.path[:] = paths
+        for name, module in previous.items():
+            sys.modules.pop(name, None)
+            if module is not None:
+                sys.modules[name] = module
+    return _RUNTIME_CACHE
 
 
 def read(path):

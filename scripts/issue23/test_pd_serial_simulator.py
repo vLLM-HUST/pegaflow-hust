@@ -1,7 +1,9 @@
 """Contracts required to compare a fresh serial simulation with historical runs."""
 
-from types import SimpleNamespace
+import sys
+from types import ModuleType, SimpleNamespace
 
+import pd_serial_simulator
 import pytest
 from pd_serial_simulator import OriginalWorld, Simulation, load_runtime, quantiles
 
@@ -47,3 +49,15 @@ def test_target_latencies_cannot_enter_workload_rows():
     bundle = {"rows": [{"id": "x", "task": "s", "tokens": 1, "hashes": [], "TTFT": 5}]}
     with pytest.raises(ValueError, match="unexpected fields"):
         Simulation({}, bundle, {}, None)
+
+
+def test_frozen_runtime_import_preserves_callers_common_module_and_paths(monkeypatch):
+    caller = ModuleType("common")
+    monkeypatch.setitem(sys.modules, "common", caller)
+    monkeypatch.setattr(pd_serial_simulator, "_RUNTIME_CACHE", None)
+    paths = list(sys.path)
+    runtime = load_runtime()
+    assert runtime["core"].AGENT_PORT > 0
+    assert sys.modules["common"] is caller
+    assert sys.path == paths
+    assert load_runtime() is runtime
