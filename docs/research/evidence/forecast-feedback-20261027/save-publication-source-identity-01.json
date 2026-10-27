@@ -1,0 +1,14 @@
+[
+  {
+    "file": "pegaflow-core/src/offload.rs",
+    "remote_snapshot": "native-offload-P-20261027.rs",
+    "normalized_equal": true,
+    "remote_sha256": "d41f5946899c905646aa13023f6a612c06b3d5ad749093f92d7a3a174a6e3588"
+  },
+  {
+    "file": "pegaflow-core/src/storage/mod.rs",
+    "remote_snapshot": "native-storage-P-20261027.rs",
+    "normalized_equal": true,
+    "remote_sha256": "e0c9943dc15c5cb116e88cb64c81b99043ef25b7a36399e1e7cbda82fe374d08"
+  }
+]

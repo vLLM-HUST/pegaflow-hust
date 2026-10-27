@@ -1,0 +1,32 @@
+{
+  "scope": "CPU trace accounting, not hardware timer validation",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "completed_owned_D_records": 95,
+      "model_maintenance_CPU": 0.30414252169430256,
+      "all_phase_labels_reconciled": true,
+      "no_future_observations": true,
+      "not_trained_on_batched_residence": true,
+      "fit_parameters_per_forecast": "Not separately logged; frozen source reviewed, completed labels reconciled"
+    },
+    {
+      "rate": 0.49032341538142143,
+      "completed_owned_D_records": 95,
+      "model_maintenance_CPU": 0.2658020108938217,
+      "all_phase_labels_reconciled": true,
+      "no_future_observations": true,
+      "not_trained_on_batched_residence": true,
+      "fit_parameters_per_forecast": "Not separately logged; frozen source reviewed, completed labels reconciled"
+    },
+    {
+      "rate": 0.9806468307628429,
+      "completed_owned_D_records": 95,
+      "model_maintenance_CPU": 0.2678332533687353,
+      "all_phase_labels_reconciled": true,
+      "no_future_observations": true,
+      "not_trained_on_batched_residence": true,
+      "fit_parameters_per_forecast": "Not separately logged; frozen source reviewed, completed labels reconciled"
+    }
+  ]
+}

@@ -1,0 +1,15 @@
+{
+  "pid": 197420,
+  "pgid": 197420,
+  "started_unix": 1793059830.8385577,
+  "source_sha256": "e86aa21d266acce5158d4afbf252af2451e90f2527a08f5abe1d02a7934994ad",
+  "runner_sha256": "a0be73e3b6b680697c053b480724c3199bc3c8478f11ecc6bc59fb70a2ba9b8d",
+  "command": [
+    "python3",
+    "/root/yielding-decode-pipeline-02.py"
+  ],
+  "pipeline": "/root/issue23-yielding-decode-pipeline-02",
+  "no_gpu_work": true,
+  "failed01_archive_sha256": "d1069321aba1f83caced279e32bd38c6e2badd554bb5728f9223deb56eecfe08",
+  "root_free": 35240611840
+}

@@ -1,0 +1,14 @@
+{
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "/root/linear-reclaim-pipeline-01.py",
+    "diagnostic"
+  ],
+  "pid": 358411,
+  "pgid": 358411,
+  "started": 1793071515.4467897,
+  "pipeline_limit_seconds": 4500,
+  "matrix_limit_seconds": 1800,
+  "workers": 3,
+  "source_sha256": "ff32196d32766d5f52712432effc99abbf0938f5b31c5911aba70326999429dc"
+}

@@ -1,0 +1,45 @@
+{
+  "CPU_only": true,
+  "all_checks_passed": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "all_checks_passed": true,
+      "phase_inversions_avoided": 59,
+      "advice": {
+        "calls": 44,
+        "moves": 3,
+        "partial_searches": 10,
+        "CPU_wall": 6.506848409771919,
+        "all_checks_passed": true
+      },
+      "forecast_execution_rule_matches": true
+    },
+    {
+      "rate": 0.49032341538142143,
+      "all_checks_passed": true,
+      "phase_inversions_avoided": 178,
+      "advice": {
+        "calls": 36,
+        "moves": 1,
+        "partial_searches": 8,
+        "CPU_wall": 5.381268268451095,
+        "all_checks_passed": true
+      },
+      "forecast_execution_rule_matches": true
+    },
+    {
+      "rate": 0.9806468307628429,
+      "all_checks_passed": true,
+      "phase_inversions_avoided": 192,
+      "advice": {
+        "calls": 40,
+        "moves": 4,
+        "partial_searches": 5,
+        "CPU_wall": 10.070330158807337,
+        "all_checks_passed": true
+      },
+      "forecast_execution_rule_matches": true
+    }
+  ]
+}

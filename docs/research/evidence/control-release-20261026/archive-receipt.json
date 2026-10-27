@@ -1,0 +1,22 @@
+{
+  "CPU_only": true,
+  "automation": "PAUSED",
+  "base_git": "2b4b8028993aee093bff27367a4ac3bd98d35e98",
+  "exact_equal_control_requests": 285,
+  "measured_three_rate_matrices": 4,
+  "validated_measured_arms": 36,
+  "archives": {
+    "issue23-sparse-cache-equivalence-01": "6dd7a7e55d255e1bf3c4188932b110cbf79974d5089bd621799a2177b91be7e5",
+    "issue23-sparse-cache-01": "aca9fda1889b88945ed82a59e08375249b7b6977f7b30719c64c4e383aaa238a",
+    "issue23-sparse-cache-02": "9c7f45e46f84b29872010c3a474a826ecf85c8196640d06d3588ac3a3ee6c999",
+    "issue23-control-release-01": "dcc8067c3312d0ba7e7574a9b05a43560c63ad9a428b0750cbc05fe391bf6c3d",
+    "issue23-control-release-02": "c1f41a365107cedf7a6d601c0692ab1ae26854e33d87c4710c6a5d8e11aace46",
+    "issue23-control-objective-diagnostic-01": "1b87d903e3e959ad116d08ce9165becdb8b6261473958c465f7468c376f9647b"
+  },
+  "source_archives": {
+    "sparse-cache-source-01.tar.gz": "62d0b94fd315149f5c3dfacf28762bd12cd5a36c4585c841104014027ef8980a",
+    "control-release-source-01.tar.gz": "82c057cec11f991f6cc1e1907ba3f9d6b27a4b344dc2a44102d97299ba4834dc"
+  },
+  "real_serving_validated": false,
+  "default_reference_unchanged": true
+}

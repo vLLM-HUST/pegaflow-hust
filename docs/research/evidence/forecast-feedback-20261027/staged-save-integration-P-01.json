@@ -1,0 +1,182 @@
+{
+  "all_checks_passed": true,
+  "original_requests": 1,
+  "checks": [
+    {
+      "class": "ReadyPrefillSimulation",
+      "mode": "native",
+      "two_stage_publications": [
+        {
+          "kind": "save_publication",
+          "requested_blocks": 2,
+          "published_new_blocks": 2,
+          "peak_unique_bytes": 88080384,
+          "capacity_bytes": 2147483648,
+          "staged_bytes": 14680064,
+          "new_owners": [
+            "staged:0:distribution-search:2:5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "staged:0:distribution-search:2:a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3"
+          ],
+          "filtered_hits": 5,
+          "new_keys": [
+            "5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3"
+          ],
+          "request": "distribution-search:2",
+          "node": 0,
+          "at": 0.215233007864561,
+          "publication_model": "staged-save-publication-01"
+        },
+        {
+          "kind": "save_publication",
+          "requested_blocks": 1,
+          "published_new_blocks": 1,
+          "peak_unique_bytes": 183500800,
+          "capacity_bytes": 2147483648,
+          "staged_bytes": 7340032,
+          "new_owners": [
+            "staged:2:distribution-search:2:8c77b91a5631f5838d14cb2a70d8c631e7836c9e00a75e78dcbd715a23d1b217"
+          ],
+          "filtered_hits": 7,
+          "new_keys": [
+            "8c77b91a5631f5838d14cb2a70d8c631e7836c9e00a75e78dcbd715a23d1b217"
+          ],
+          "request": "distribution-search:2",
+          "node": 2,
+          "at": 7.605197537665328,
+          "publication_model": "staged-save-publication-01"
+        }
+      ],
+      "save_model": {
+        "version": "staged-save-publication-01",
+        "same_world_and_forecast": true,
+        "save_model_CPU_wall": 0.00024172663688659668,
+        "CPU_in_virtual_clock": true,
+        "native_binary_executed": false,
+        "geometry": "retained whole physical owner closures, 4096 rounding, reclaim512",
+        "limitation": "not layer-stride fragmentation or native insert-worker timing emulation"
+      },
+      "not_performance": true
+    },
+    {
+      "class": "PrefixReclaimSimulation",
+      "mode": "ours",
+      "two_stage_publications": [
+        {
+          "kind": "save_publication",
+          "requested_blocks": 2,
+          "published_new_blocks": 2,
+          "peak_unique_bytes": 58720256,
+          "capacity_bytes": 2147483648,
+          "staged_bytes": 14680064,
+          "new_owners": [
+            "staged:1:distribution-search:2:5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "staged:1:distribution-search:2:a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3"
+          ],
+          "filtered_hits": 5,
+          "new_keys": [
+            "5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3"
+          ],
+          "request": "distribution-search:2",
+          "node": 1,
+          "at": 0.9109441138066017,
+          "publication_model": "staged-save-publication-01"
+        },
+        {
+          "kind": "save_publication",
+          "requested_blocks": 3,
+          "published_new_blocks": 3,
+          "peak_unique_bytes": 183500800,
+          "capacity_bytes": 2147483648,
+          "staged_bytes": 22020096,
+          "new_owners": [
+            "staged:2:distribution-search:2:5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "staged:2:distribution-search:2:a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3",
+            "staged:2:distribution-search:2:8c77b91a5631f5838d14cb2a70d8c631e7836c9e00a75e78dcbd715a23d1b217"
+          ],
+          "filtered_hits": 5,
+          "new_keys": [
+            "5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3",
+            "8c77b91a5631f5838d14cb2a70d8c631e7836c9e00a75e78dcbd715a23d1b217"
+          ],
+          "request": "distribution-search:2",
+          "node": 2,
+          "at": 8.937241584948671,
+          "publication_model": "staged-save-publication-01"
+        }
+      ],
+      "save_model": {
+        "version": "staged-save-publication-01",
+        "same_world_and_forecast": true,
+        "save_model_CPU_wall": 0.0002231355756521225,
+        "CPU_in_virtual_clock": true,
+        "native_binary_executed": false,
+        "geometry": "retained whole physical owner closures, 4096 rounding, reclaim512",
+        "limitation": "not layer-stride fragmentation or native insert-worker timing emulation"
+      },
+      "not_performance": true
+    },
+    {
+      "class": "ReadyPrefillSimulation",
+      "mode": "ours",
+      "two_stage_publications": [
+        {
+          "kind": "save_publication",
+          "requested_blocks": 2,
+          "published_new_blocks": 2,
+          "peak_unique_bytes": 58720256,
+          "capacity_bytes": 2147483648,
+          "staged_bytes": 14680064,
+          "new_owners": [
+            "staged:1:distribution-search:2:5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "staged:1:distribution-search:2:a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3"
+          ],
+          "filtered_hits": 5,
+          "new_keys": [
+            "5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3"
+          ],
+          "request": "distribution-search:2",
+          "node": 1,
+          "at": 0.9110337256647312,
+          "publication_model": "staged-save-publication-01"
+        },
+        {
+          "kind": "save_publication",
+          "requested_blocks": 3,
+          "published_new_blocks": 3,
+          "peak_unique_bytes": 183500800,
+          "capacity_bytes": 2147483648,
+          "staged_bytes": 22020096,
+          "new_owners": [
+            "staged:2:distribution-search:2:5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "staged:2:distribution-search:2:a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3",
+            "staged:2:distribution-search:2:8c77b91a5631f5838d14cb2a70d8c631e7836c9e00a75e78dcbd715a23d1b217"
+          ],
+          "filtered_hits": 5,
+          "new_keys": [
+            "5e56daf7feb33860a8a63b78c654c887f1a2c515916f4070605bc80fb9338e4d",
+            "a9b799c2bea9599f3357d80affcb75683ecfcadb443932bc5f9ac1e155bde1b3",
+            "8c77b91a5631f5838d14cb2a70d8c631e7836c9e00a75e78dcbd715a23d1b217"
+          ],
+          "request": "distribution-search:2",
+          "node": 2,
+          "at": 8.937336876943183,
+          "publication_model": "staged-save-publication-01"
+        }
+      ],
+      "save_model": {
+        "version": "staged-save-publication-01",
+        "same_world_and_forecast": true,
+        "save_model_CPU_wall": 0.00022709649056196213,
+        "CPU_in_virtual_clock": true,
+        "native_binary_executed": false,
+        "geometry": "retained whole physical owner closures, 4096 rounding, reclaim512",
+        "limitation": "not layer-stride fragmentation or native insert-worker timing emulation"
+      },
+      "not_performance": true
+    }
+  ]
+}

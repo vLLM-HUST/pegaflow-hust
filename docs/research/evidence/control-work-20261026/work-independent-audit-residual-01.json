@@ -1,0 +1,337 @@
+{
+  "kind": "completed-CPU-screen-accounting-not-real-output-audit",
+  "screen_sha256": "b366714ccd9d452a564d2741475c862f81c9eaba564486ccdc72655128451fa0",
+  "validated_arms": 9,
+  "requests_per_arm": 95,
+  "real_parallel_serving_validated": false,
+  "summary": [
+    {
+      "rate": 0.24516170769071072,
+      "max_sequences": 4,
+      "shared_fraction": 0.0,
+      "native": {
+        "TTFT": {
+          "n": 95,
+          "mean": 16.012852563784715,
+          "p50": 7.175516738112918,
+          "p90": 52.68488095829241,
+          "p95": 68.41113889845559,
+          "p99": 81.20466293645916,
+          "max": 81.20466293645916
+        },
+        "makespan": 630.821000343159,
+        "planning_wall": 0.04114313516765833,
+        "boundary_CPU_wall": 0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2165309440
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4704960512
+          }
+        },
+        "P_distribution": [
+          48,
+          47
+        ],
+        "D_distribution": [
+          48,
+          47
+        ]
+      },
+      "reference": {
+        "TTFT": {
+          "n": 95,
+          "mean": 12.717896395927179,
+          "p50": 9.252876966081203,
+          "p90": 28.026338080389905,
+          "p95": 29.19078634971811,
+          "p99": 31.80045479950195,
+          "max": 31.80045479950195
+        },
+        "makespan": 508.74636656834565,
+        "planning_wall": 73.66327724419534,
+        "boundary_CPU_wall": 37.058236193843186,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3816816640
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2268069888
+          }
+        },
+        "P_distribution": [
+          33,
+          62
+        ],
+        "D_distribution": [
+          57,
+          38
+        ]
+      },
+      "ours": {
+        "TTFT": {
+          "n": 95,
+          "mean": 12.716529151797907,
+          "p50": 9.847546416971142,
+          "p90": 24.432045928070863,
+          "p95": 25.488588609816986,
+          "p99": 34.176853909436886,
+          "max": 34.176853909436886
+        },
+        "makespan": 510.70269026680074,
+        "planning_wall": 79.51638192217797,
+        "boundary_CPU_wall": 34.463905239477754,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3824156672
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2436890624
+          }
+        },
+        "P_distribution": [
+          35,
+          60
+        ],
+        "D_distribution": [
+          57,
+          38
+        ]
+      },
+      "gain": 0.579126953138399
+    },
+    {
+      "rate": 0.49032341538142143,
+      "max_sequences": 4,
+      "shared_fraction": 0.0,
+      "native": {
+        "TTFT": {
+          "n": 95,
+          "mean": 18.970461459454874,
+          "p50": 8.790414833592848,
+          "p90": 64.36936644484075,
+          "p95": 65.85692335244795,
+          "p99": 81.40839252955351,
+          "max": 81.40839252955351
+        },
+        "makespan": 629.3674276824926,
+        "planning_wall": 0.04133907053619623,
+        "boundary_CPU_wall": 0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2635071488
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4227858432
+          }
+        },
+        "P_distribution": [
+          48,
+          47
+        ],
+        "D_distribution": [
+          48,
+          47
+        ]
+      },
+      "reference": {
+        "TTFT": {
+          "n": 95,
+          "mean": 14.187395988505047,
+          "p50": 13.566061060115857,
+          "p90": 28.059997416303872,
+          "p95": 31.022812863367108,
+          "p99": 38.37267480980017,
+          "max": 38.37267480980017
+        },
+        "makespan": 508.73279456294244,
+        "planning_wall": 79.60549058951437,
+        "boundary_CPU_wall": 37.50793825648725,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4147118080
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2708471808
+          }
+        },
+        "P_distribution": [
+          42,
+          53
+        ],
+        "D_distribution": [
+          58,
+          37
+        ]
+      },
+      "ours": {
+        "TTFT": {
+          "n": 95,
+          "mean": 12.216758773393511,
+          "p50": 11.391129640077992,
+          "p90": 20.979453331283537,
+          "p95": 22.913623152181003,
+          "p99": 24.47391452346949,
+          "max": 24.47391452346949
+        },
+        "makespan": 489.71475571487474,
+        "planning_wall": 61.65458396449685,
+        "boundary_CPU_wall": 23.024400824680924,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3479175168
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2840592384
+          }
+        },
+        "P_distribution": [
+          40,
+          55
+        ],
+        "D_distribution": [
+          56,
+          39
+        ]
+      },
+      "gain": 0.6993686552085551
+    },
+    {
+      "rate": 0.9806468307628429,
+      "max_sequences": 4,
+      "shared_fraction": 0.0,
+      "native": {
+        "TTFT": {
+          "n": 95,
+          "mean": 16.944116823697968,
+          "p50": 7.361897481522931,
+          "p90": 53.60536040960389,
+          "p95": 70.04375473786604,
+          "p99": 74.77862760949773,
+          "max": 74.77862760949773
+        },
+        "makespan": 612.7749255678557,
+        "planning_wall": 0.04312765784561634,
+        "boundary_CPU_wall": 0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 1930428416
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4470079488
+          }
+        },
+        "P_distribution": [
+          48,
+          47
+        ],
+        "D_distribution": [
+          48,
+          47
+        ]
+      },
+      "reference": {
+        "TTFT": {
+          "n": 95,
+          "mean": 13.35766688984304,
+          "p50": 14.905135499550681,
+          "p90": 22.068973524710316,
+          "p95": 23.95416172367493,
+          "p99": 25.676833139382552,
+          "max": 25.676833139382552
+        },
+        "makespan": 503.15286639179345,
+        "planning_wall": 84.13126417342573,
+        "boundary_CPU_wall": 38.197568255476654,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3222274048
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2517630976
+          }
+        },
+        "P_distribution": [
+          49,
+          46
+        ],
+        "D_distribution": [
+          57,
+          38
+        ]
+      },
+      "ours": {
+        "TTFT": {
+          "n": 95,
+          "mean": 13.638701129427757,
+          "p50": 13.42661857738321,
+          "p90": 24.72810163669618,
+          "p95": 27.026784704512806,
+          "p99": 29.904708746745712,
+          "max": 29.904708746745712
+        },
+        "makespan": 501.2286837231864,
+        "planning_wall": 90.66466850787401,
+        "boundary_CPU_wall": 44.380713718011975,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4271898624
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2451570688
+          }
+        },
+        "P_distribution": [
+          41,
+          54
+        ],
+        "D_distribution": [
+          56,
+          39
+        ]
+      },
+      "gain": 0.600090163423279
+    }
+  ],
+  "all_285_control_quotes_recomputed_from_completed_only": true,
+  "route_labels_match_charged_decision_CPU": true,
+  "boundary_labels_match_completed_control_history": true,
+  "state_feature_future_independence": "Source inspection; not a separate trace of every inventory input"
+}

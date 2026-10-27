@@ -1,0 +1,53 @@
+{
+  "archive": "/root/yielding-decode-failed-01-full.tar.gz",
+  "sha256": "d1069321aba1f83caced279e32bd38c6e2badd554bb5728f9223deb56eecfe08",
+  "bytes": 6192471,
+  "included": [
+    "issue23-yielding-decode-pipeline-01",
+    "issue23-yielding-decode-default-01",
+    "yielding-decode-pipeline-01.log",
+    "yielding-decode-pipeline-01.py",
+    "yielding-decode-source-receipt-01.json",
+    "yielding-decode-source-01.tar.gz"
+  ],
+  "failure": "acquired snapshot epoch mismatched pre-setup forecast time",
+  "candidate_valid_samples": 0,
+  "source_archive_sha256": "b6dc255dd8886b0d3146f2532c994d7876e69d2f9c39f20d951140b460260a94",
+  "result": {
+    "started": 1793058968.9290335,
+    "finished": 1793059204.7420783,
+    "steps": [
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-yielding-decode-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+          "--repo",
+          "/root/issue23-yielding-decode-source-01",
+          "--inputs",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+          "--seed",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+          "--output",
+          "/root/issue23-yielding-decode-default-01",
+          "--policy",
+          "yielding-decode",
+          "--workers",
+          "3",
+          "--residual-world",
+          "--phase-residual-world",
+          "--decode-sharing-fraction",
+          "0"
+        ],
+        "pid": 185019,
+        "started": 1793058968.9294631,
+        "finished": 1793059204.7416024,
+        "exit_code": 1,
+        "stop": null,
+        "limit_seconds": 1800
+      }
+    ],
+    "archives": [],
+    "failure": "RuntimeError(\"{'command': ['/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python', '/root/issue23-yielding-decode-source-01/experiments/issue23_strategies/run_pcie_matrix.py', '--repo', '/root/issue23-yielding-decode-source-01', '--inputs', '/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json', '--seed', '/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed', '--output', '/root/issue23-yielding-decode-default-01', '--policy', 'yielding-decode', '--workers', '3', '--residual-world', '--phase-residual-world', '--decode-sharing-fraction', '0'], 'pid': 185019, 'started': 1793058968.9294631, 'finished': 1793059204.7416024, 'exit_code': 1, 'stop': None, 'limit_seconds': 1800}\")",
+    "no_gpu_work": true
+  }
+}

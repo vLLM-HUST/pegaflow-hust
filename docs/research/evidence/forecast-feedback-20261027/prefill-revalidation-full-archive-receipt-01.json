@@ -1,0 +1,15 @@
+{
+  "all_local_archives_verified": true,
+  "archives": [
+    {
+      "path": "/root/issue23-prefill-revalidation-default-01-full.tar.gz",
+      "sha256": "6751780fb4682f4fbec4fb400b60160a38c92aaf0fb133a5ed7e56202717cd9b",
+      "bytes": 18850948
+    },
+    {
+      "path": "/root/issue23-prefill-revalidation-sharing-01-full.tar.gz",
+      "sha256": "6d76d703a4028c7e67416cb22540f71e54b85897eb2445ce32edc6bb3aeb15f6",
+      "bytes": 17386786
+    }
+  ]
+}

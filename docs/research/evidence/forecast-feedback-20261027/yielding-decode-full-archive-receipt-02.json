@@ -1,0 +1,15 @@
+{
+  "all_local_archives_verified": true,
+  "archives": [
+    {
+      "path": "/root/issue23-yielding-decode-default-02-full.tar.gz",
+      "sha256": "ce1bef6c3b3fe6ac69deb1a73d33dbcd1c84c5b20d69c4d0b33b16afd5d78b16",
+      "bytes": 25495111
+    },
+    {
+      "path": "/root/issue23-yielding-decode-sharing-02-full.tar.gz",
+      "sha256": "7876fb17b6872baa3b82f568006a017bf6ab3a3c1842a9d9cb4d6510ce658620",
+      "bytes": 23560685
+    }
+  ]
+}

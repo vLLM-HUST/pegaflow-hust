@@ -1,0 +1,8 @@
+{
+  "container_logical": 0,
+  "process_logical": 0,
+  "free_bytes": 65020780544,
+  "total_bytes": 65452113920,
+  "gpu_memory_utilization": 0.35,
+  "kv_cache_memory_bytes": 2147483648
+}

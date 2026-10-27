@@ -1,0 +1,15 @@
+{
+  "pid": 309782,
+  "pgid": 309782,
+  "started": 1793068116.611992,
+  "command": [
+    "python3",
+    "/root/exact-calendar-pipeline-02.py",
+    "diagnostic"
+  ],
+  "source_sha256": "1a3be47bff9d6e5867727c0ae51a70b95febd07ef078ced3cd8168b371f95261",
+  "runner_sha256": "9624dc22ce32368a7c03d57e924a750e128f706490f57b944bde51b67e2de48c",
+  "CPU_only": true,
+  "not_net_performance": true,
+  "limit_seconds": 4500
+}

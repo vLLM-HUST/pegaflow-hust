@@ -1,0 +1,389 @@
+{
+  "scope": "Retrospective observed simulated paths; not causal attribution or hardware timers",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "arms": {
+        "reference": {
+          "fix-git:12": {
+            "path": {
+              "TTFT": 44.5125030497415,
+              "nominal": 95.60169046260984,
+              "dependency": 51.08918741286834,
+              "P": 0,
+              "D": 3,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 378.2522614113783,
+              "first": 422.7647644611198,
+              "before_P": 24.297235267271958,
+              "P_API": 5.081760551901201,
+              "P_to_D": 7.911037240266523,
+              "D_API_to_first": 7.222469990301818
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.5388379210886001,
+              "control_end_to_D_API": 7.372199319177923
+            },
+            "D_API_holders_at_target_P_end": [],
+            "ready_to_full_completion": 52.19454077348934,
+            "D_first_to_full_completion": 7.68203772374784
+          }
+        },
+        "ours": {
+          "dna-insert:12": {
+            "path": {
+              "TTFT": 18.54548690564701,
+              "nominal": 69.71254552594831,
+              "dependency": 51.167058620301304,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 256,
+              "ready": 374.0106974265647,
+              "first": 392.5561843322117,
+              "before_P": 1.5474955152578218,
+              "P_API": 5.406356817354102,
+              "P_to_D": 11.116995918100429,
+              "D_API_to_first": 0.4746386549346653
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 2.4524964704289687,
+              "D_control_interval": 0.6715068800654649,
+              "control_end_to_D_API": 7.992992567605995
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "fix-code-vulnerability:11",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 2.446056639321114
+              },
+              {
+                "request": "git-multibranch:11",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 10.3968670499263
+              },
+              {
+                "request": "fix-git:12",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 21.015335386961397
+              }
+            ],
+            "ready_to_full_completion": 49.367458855005395,
+            "D_first_to_full_completion": 30.821971949358385
+          },
+          "feal-differential-cryptanalysis:13": {
+            "path": {
+              "TTFT": 29.592993893843357,
+              "nominal": 115.59799580031927,
+              "dependency": 86.00500190647591,
+              "P": 0,
+              "D": 3,
+              "P_prefix": 6784,
+              "D_prefix": 8192,
+              "ready": 423.6481172028562,
+              "first": 453.24111109669957,
+              "before_P": 4.027710354539579,
+              "P_API": 8.613021518395453,
+              "P_to_D": 1.269946434749329,
+              "D_API_to_first": 15.682315586159007
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 1.269946434749329,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [],
+            "ready_to_full_completion": 37.55239591207396,
+            "D_first_to_full_completion": 7.959402018230605
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "arms": {
+        "reference": {
+          "dna-insert:7": {
+            "path": {
+              "TTFT": 17.72095674104918,
+              "nominal": 93.91442096212455,
+              "dependency": 76.19346422107537,
+              "P": 0,
+              "D": 3,
+              "P_prefix": 0,
+              "D_prefix": 3712,
+              "ready": 170.2678457451726,
+              "first": 187.98880248622177,
+              "before_P": 1.7050933149980096,
+              "P_API": 3.9052825562970073,
+              "P_to_D": 1.6462087558862208,
+              "D_API_to_first": 10.464372113867938
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 1.6462087558862208,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "git-leak-recovery:6",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 11.752081512830955
+              },
+              {
+                "request": "git-multibranch:6",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 23.775822697161686
+              }
+            ],
+            "ready_to_full_completion": 48.303680331925506,
+            "D_first_to_full_completion": 30.582723590876327
+          },
+          "dna-insert:13": {
+            "path": {
+              "TTFT": 26.64405761238214,
+              "nominal": 242.49318603170187,
+              "dependency": 215.84912841931973,
+              "P": 0,
+              "D": 3,
+              "P_prefix": 5760,
+              "D_prefix": 7040,
+              "ready": 383.43386571434,
+              "first": 410.07792332672216,
+              "before_P": 6.614721084070027,
+              "P_API": 4.956886890970824,
+              "P_to_D": 2.4176647832896947,
+              "D_API_to_first": 12.65478485405157
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 2.4176647832896947,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "git-multibranch:12",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 20.20643543092308
+              }
+            ],
+            "ready_to_full_completion": 41.912363690517395,
+            "D_first_to_full_completion": 15.268306078135254
+          }
+        },
+        "ours": {
+          "fix-code-vulnerability:7": {
+            "path": {
+              "TTFT": 15.9586362107338,
+              "nominal": 94.32344670686248,
+              "dependency": 78.36481049612868,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6784,
+              "D_prefix": 0,
+              "ready": 176.8417938212532,
+              "first": 192.800430031987,
+              "before_P": 4.0085045706275935,
+              "P_API": 3.6612136742763957,
+              "P_to_D": 7.785778524875809,
+              "D_API_to_first": 0.5031394409540155
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 7.08845060349455,
+              "D_control_interval": 0.6973279213812589,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "git-multibranch:6",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 7.086062002303208
+              },
+              {
+                "request": "headless-terminal:6",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 7.350076148358738
+              },
+              {
+                "request": "dna-insert:7",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 11.969339117207568
+              },
+              {
+                "request": "git-leak-recovery:7",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 27.15589270059573
+              }
+            ],
+            "ready_to_full_completion": 52.75843748262412,
+            "D_first_to_full_completion": 36.79980127189032
+          },
+          "fix-code-vulnerability:11": {
+            "path": {
+              "TTFT": 22.96631185373218,
+              "nominal": 206.42636526368852,
+              "dependency": 183.46005340995634,
+              "P": 1,
+              "D": 3,
+              "P_prefix": 6784,
+              "D_prefix": 6784,
+              "ready": 336.3935176007573,
+              "first": 359.3598294544895,
+              "before_P": 4.666090828349411,
+              "P_API": 6.456219770330757,
+              "P_to_D": 1.1290086677577733,
+              "D_API_to_first": 10.714992587294262
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 1.1290086677577733,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [],
+            "ready_to_full_completion": 40.42242889686048,
+            "D_first_to_full_completion": 17.4561170431283
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "arms": {
+        "reference": {
+          "distribution-search:13": {
+            "path": {
+              "TTFT": 32.73117654169016,
+              "nominal": 341.0297367496447,
+              "dependency": 308.29856020795455,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 392.06715909368717,
+              "first": 424.7983356353773,
+              "before_P": 1.9405074032072775,
+              "P_API": 9.120984558610688,
+              "P_to_D": 0.44757794796493044,
+              "D_API_to_first": 21.222106631907252
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.44757794796493044,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "feal-differential-cryptanalysis:12",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 5.54827186391185
+              },
+              {
+                "request": "git-multibranch:12",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 15.53032759966095
+              },
+              {
+                "request": "headless-terminal:12",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 21.56894949483643
+              }
+            ],
+            "ready_to_full_completion": 40.589829399657674,
+            "D_first_to_full_completion": 7.858652857967513
+          },
+          "fix-code-vulnerability:6": {
+            "path": {
+              "TTFT": 14.20030576968523,
+              "nominal": 129.57662592338488,
+              "dependency": 115.37632015369964,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 10880,
+              "D_prefix": 8960,
+              "ready": 151.71333160213334,
+              "first": 165.91363737181857,
+              "before_P": 1.0739775915967016,
+              "P_API": 1.5931239116217393,
+              "P_to_D": 1.0915810074453418,
+              "D_API_to_first": 10.44162325902144
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.895053783645892,
+              "control_end_to_D_API": 0.19652722379944976
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "distribution-search:6",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 13.26211133279557
+              },
+              {
+                "request": "feal-differential-cryptanalysis:6",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 26.532529651709808
+              },
+              {
+                "request": "dna-insert:6",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 29.342820832478736
+              }
+            ],
+            "ready_to_full_completion": 50.409451627068904,
+            "D_first_to_full_completion": 36.209145857383675
+          }
+        },
+        "ours": {
+          "feal-differential-cryptanalysis:11": {
+            "path": {
+              "TTFT": 21.84627289678025,
+              "nominal": 248.8902384867116,
+              "dependency": 227.04396558993136,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6784,
+              "D_prefix": 0,
+              "ready": 303.4077910427508,
+              "first": 325.254063939531,
+              "before_P": 1.73414883123354,
+              "P_API": 7.004689750097121,
+              "P_to_D": 12.25710186468126,
+              "D_API_to_first": 0.8503324507683487
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 11.579009883018784,
+              "D_control_interval": 0.678091981662476,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "dna-insert:10",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 11.574543346563928
+              },
+              {
+                "request": "fix-git:10",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 14.375068308625146
+              },
+              {
+                "request": "fix-code-vulnerability:10",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 17.847132899178973
+              },
+              {
+                "request": "headless-terminal:10",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 22.00174118861065
+              }
+            ],
+            "ready_to_full_completion": 51.13053295000145,
+            "D_first_to_full_completion": 29.284260053221203
+          }
+        }
+      }
+    }
+  ]
+}

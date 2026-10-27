@@ -1,0 +1,1547 @@
+{
+  "CPU_only": true,
+  "not_original_route_forecasts": true,
+  "posthoc_accepted_prefix_not_policy_input": true,
+  "cases": [
+    {
+      "setting": "default",
+      "rate": 0.24516170769071072,
+      "raw_sha256": "19cc1549e8e6ff81afd9bf332e73cfb9387cd3e01f6ad06444a86baf08c2b349",
+      "arms": {
+        "reference": {
+          "2": {
+            "n": 4,
+            "MAE": 0.2935455922678239,
+            "bias": 0.2935455922678239,
+            "worst_underprediction": 0.044362664050838156,
+            "actual_sum": 0.9606310790186958,
+            "predicted_sum": 2.134813448089991,
+            "largest_errors": [
+              {
+                "id": "fix-git:14",
+                "node": 2,
+                "origin": 418.3948772786512,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.044362664050838156,
+                "actual_restore": 0.0,
+                "error_predicted_minus_actual": 0.044362664050838156,
+                "phase_latest": 415.705027726323,
+                "fit": {
+                  "observations": 19,
+                  "coefficients": [
+                    0.0,
+                    6.0439333303776e-09
+                  ]
+                }
+              },
+              {
+                "id": "headless-terminal:6",
+                "node": 2,
+                "origin": 181.60516361094733,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.04436513968948992,
+                "actual_restore": 0.0,
+                "error_predicted_minus_actual": 0.04436513968948992,
+                "phase_latest": 179.34080677190684,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.0,
+                    6.044270609377442e-09
+                  ]
+                }
+              },
+              {
+                "id": "git-multibranch:11",
+                "node": 2,
+                "origin": 376.5138648844569,
+                "accepted_prefix_diagnostic_only": 512,
+                "predicted_restore": 0.17745997328629867,
+                "actual_restore": 0.0009460899200997019,
+                "error_predicted_minus_actual": 0.17651388336619897,
+                "phase_latest": 376.5024031264021,
+                "fit": {
+                  "observations": 18,
+                  "coefficients": [
+                    0.0,
+                    6.04425066833151e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 21,
+            "MAE": 0.6793967196509151,
+            "bias": 0.2846197086883718,
+            "worst_underprediction": -1.2489032656498256,
+            "actual_sum": 34.94681392262302,
+            "predicted_sum": 40.92382780507883,
+            "largest_errors": [
+              {
+                "id": "fix-git:7",
+                "node": 3,
+                "origin": 201.09897357707524,
+                "accepted_prefix_diagnostic_only": 4864,
+                "predicted_restore": 1.779692665543131,
+                "actual_restore": 3.0285959311929567,
+                "error_predicted_minus_actual": -1.2489032656498256,
+                "phase_latest": 200.93532548077485,
+                "fit": {
+                  "observations": 24,
+                  "coefficients": [
+                    0.44112607017325134,
+                    4.799084897757939e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:4",
+                "node": 3,
+                "origin": 89.85891663338685,
+                "accepted_prefix_diagnostic_only": 1920,
+                "predicted_restore": 1.0887840791772698,
+                "actual_restore": 2.13937374561742,
+                "error_predicted_minus_actual": -1.0505896664401504,
+                "phase_latest": 87.4103744203544,
+                "fit": {
+                  "observations": 16,
+                  "coefficients": [
+                    0.5653044836402654,
+                    4.754562337394028e-09
+                  ]
+                }
+              },
+              {
+                "id": "dna-insert:11",
+                "node": 3,
+                "origin": 311.8751057968944,
+                "accepted_prefix_diagnostic_only": 9472,
+                "predicted_restore": 2.939432404127616,
+                "actual_restore": 3.6676099335978507,
+                "error_predicted_minus_actual": -0.7281775294702348,
+                "phase_latest": 309.9487111505163,
+                "fit": {
+                  "observations": 32,
+                  "coefficients": [
+                    0.41677709215409986,
+                    4.644385289913008e-09
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "ours": {
+          "2": {
+            "n": 6,
+            "MAE": 0.2335610823951012,
+            "bias": 0.2335610823951012,
+            "worst_underprediction": 0.04444064618281328,
+            "actual_sum": 0.5109995228749983,
+            "predicted_sum": 1.9123660172456054,
+            "largest_errors": [
+              {
+                "id": "feal-differential-cryptanalysis:14",
+                "node": 2,
+                "origin": 488.87631353322877,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.04444064618281328,
+                "actual_restore": 0.0,
+                "error_predicted_minus_actual": 0.04444064618281328,
+                "phase_latest": 483.8133550116457,
+                "fit": {
+                  "observations": 21,
+                  "coefficients": [
+                    0.0,
+                    6.054557552720925e-09
+                  ]
+                }
+              },
+              {
+                "id": "git-multibranch:5",
+                "node": 2,
+                "origin": 133.81286497060267,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.0444791315234086,
+                "actual_restore": 0.0,
+                "error_predicted_minus_actual": 0.0444791315234086,
+                "phase_latest": 133.81017441507487,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.0,
+                    6.059800764275769e-09
+                  ]
+                }
+              },
+              {
+                "id": "feal-differential-cryptanalysis:7",
+                "node": 2,
+                "origin": 197.64577183443512,
+                "accepted_prefix_diagnostic_only": 384,
+                "predicted_restore": 0.13336169342038295,
+                "actual_restore": 0.0,
+                "error_predicted_minus_actual": 0.13336169342038295,
+                "phase_latest": 197.6409317165559,
+                "fit": {
+                  "observations": 19,
+                  "coefficients": [
+                    0.0,
+                    6.056362943212553e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 17,
+            "MAE": 1.0776608152911757,
+            "bias": -0.3090506495650166,
+            "worst_underprediction": -2.309455915900153,
+            "actual_sum": 41.58648354745538,
+            "predicted_sum": 36.3326225048501,
+            "largest_errors": [
+              {
+                "id": "feal-differential-cryptanalysis:6",
+                "node": 3,
+                "origin": 142.36712046187117,
+                "accepted_prefix_diagnostic_only": 6656,
+                "predicted_restore": 2.3931910323699537,
+                "actual_restore": 4.7026469482701065,
+                "error_predicted_minus_actual": -2.309455915900153,
+                "phase_latest": 141.55558707799284,
+                "fit": {
+                  "observations": 20,
+                  "coefficients": [
+                    0.6177853444965025,
+                    4.6515351805672584e-09
+                  ]
+                }
+              },
+              {
+                "id": "dna-insert:8",
+                "node": 3,
+                "origin": 224.41057968634044,
+                "accepted_prefix_diagnostic_only": 8320,
+                "predicted_restore": 2.88217200733971,
+                "actual_restore": 5.156329264402176,
+                "error_predicted_minus_actual": -2.274157257062466,
+                "phase_latest": 222.74873977021576,
+                "fit": {
+                  "observations": 23,
+                  "coefficients": [
+                    0.6366592935508206,
+                    4.706566598470686e-09
+                  ]
+                }
+              },
+              {
+                "id": "headless-terminal:11",
+                "node": 3,
+                "origin": 322.50617132705673,
+                "accepted_prefix_diagnostic_only": 9600,
+                "predicted_restore": 3.301948110515248,
+                "actual_restore": 5.505315661426846,
+                "error_predicted_minus_actual": -2.203367550911598,
+                "phase_latest": 319.2087824895362,
+                "fit": {
+                  "observations": 29,
+                  "coefficients": [
+                    0.6563754670187361,
+                    4.805742251980213e-09
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "setting": "default",
+      "rate": 0.49032341538142143,
+      "raw_sha256": "23a58ca9a5edf3a65523a6e06e04c8dcc5bf325e5b2a20456365d22b117be389",
+      "arms": {
+        "reference": {
+          "2": {
+            "n": 11,
+            "MAE": 0.5666070727229582,
+            "bias": -0.0261479194733273,
+            "worst_underprediction": -2.667074180322216,
+            "actual_sum": 7.656041960762054,
+            "predicted_sum": 7.368414846555453,
+            "largest_errors": [
+              {
+                "id": "git-leak-recovery:5",
+                "node": 2,
+                "origin": 117.07376797508687,
+                "accepted_prefix_diagnostic_only": 384,
+                "predicted_restore": 0.1334728192907788,
+                "actual_restore": 2.8005469996129952,
+                "error_predicted_minus_actual": -2.667074180322216,
+                "phase_latest": 116.6338432238834,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.0,
+                    6.061409509330878e-09
+                  ]
+                }
+              },
+              {
+                "id": "distribution-search:6",
+                "node": 2,
+                "origin": 122.6751259243214,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.044490939763592946,
+                "actual_restore": 0.4402571231484923,
+                "error_predicted_minus_actual": -0.39576618338489933,
+                "phase_latest": 122.67376540173828,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.0,
+                    6.061409509330878e-09
+                  ]
+                }
+              },
+              {
+                "id": "feal-differential-cryptanalysis:6",
+                "node": 2,
+                "origin": 131.3503299105948,
+                "accepted_prefix_diagnostic_only": 1920,
+                "predicted_restore": 0.6673640964538942,
+                "actual_restore": 0.847667774533303,
+                "error_predicted_minus_actual": -0.18030367807940884,
+                "phase_latest": 131.34869432561456,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.0,
+                    6.061409509330878e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 13,
+            "MAE": 0.7377084324476346,
+            "bias": 0.23288064930134686,
+            "worst_underprediction": -1.19077664916992,
+            "actual_sum": 21.40577113020017,
+            "predicted_sum": 24.43321957111768,
+            "largest_errors": [
+              {
+                "id": "fix-git:7",
+                "node": 3,
+                "origin": 175.1280210559987,
+                "accepted_prefix_diagnostic_only": 4480,
+                "predicted_restore": 1.7331233629156353,
+                "actual_restore": 2.9239000120855554,
+                "error_predicted_minus_actual": -1.19077664916992,
+                "phase_latest": 172.68550754672415,
+                "fit": {
+                  "observations": 24,
+                  "coefficients": [
+                    0.49464855614930636,
+                    4.820822917262209e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:4",
+                "node": 3,
+                "origin": 70.86357348339179,
+                "accepted_prefix_diagnostic_only": 1920,
+                "predicted_restore": 1.0887840791772698,
+                "actual_restore": 2.13937374561742,
+                "error_predicted_minus_actual": -1.0505896664401504,
+                "phase_latest": 69.09888213981257,
+                "fit": {
+                  "observations": 16,
+                  "coefficients": [
+                    0.5653044836402654,
+                    4.754562337394028e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-code-vulnerability:6",
+                "node": 3,
+                "origin": 134.7656576325082,
+                "accepted_prefix_diagnostic_only": 13824,
+                "predicted_restore": 4.300251078464635,
+                "actual_restore": 4.854163683481727,
+                "error_predicted_minus_actual": -0.5539126050170919,
+                "phase_latest": 131.34869432561456,
+                "fit": {
+                  "observations": 21,
+                  "coefficients": [
+                    0.5477121975764003,
+                    4.733730095263177e-09
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "ours": {
+          "2": {
+            "n": 6,
+            "MAE": 0.39419304662569127,
+            "bias": -0.002539206757757375,
+            "worst_underprediction": -0.3986671338855361,
+            "actual_sum": 3.972063769902455,
+            "predicted_sum": 3.9568285293559105,
+            "largest_errors": [
+              {
+                "id": "fix-code-vulnerability:7",
+                "node": 2,
+                "origin": 178.8886049671072,
+                "accepted_prefix_diagnostic_only": 6144,
+                "predicted_restore": 2.1326710973576737,
+                "actual_restore": 2.53133823124321,
+                "error_predicted_minus_actual": -0.3986671338855361,
+                "phase_latest": 178.88588999137016,
+                "fit": {
+                  "observations": 18,
+                  "coefficients": [
+                    0.0,
+                    6.053195389559364e-09
+                  ]
+                }
+              },
+              {
+                "id": "distribution-search:6",
+                "node": 2,
+                "origin": 126.55309111046483,
+                "accepted_prefix_diagnostic_only": 1152,
+                "predicted_restore": 0.4004197866564353,
+                "actual_restore": 0.796185822398657,
+                "error_predicted_minus_actual": -0.3957660357422217,
+                "phase_latest": 126.55149966551801,
+                "fit": {
+                  "observations": 16,
+                  "coefficients": [
+                    0.0,
+                    6.061429624049403e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:8",
+                "node": 2,
+                "origin": 220.73336790915894,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.04449353262590415,
+                "actual_restore": 0.4402571231484923,
+                "error_predicted_minus_actual": -0.39576359052258814,
+                "phase_latest": 218.73853698478553,
+                "fit": {
+                  "observations": 19,
+                  "coefficients": [
+                    0.0,
+                    6.0617627587869035e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 24,
+            "MAE": 0.8654497296458422,
+            "bias": 0.20410932918115288,
+            "worst_underprediction": -2.445552670637535,
+            "actual_sum": 39.82535174221858,
+            "predicted_sum": 44.72397564256625,
+            "largest_errors": [
+              {
+                "id": "dna-insert:8",
+                "node": 3,
+                "origin": 190.36220084719844,
+                "accepted_prefix_diagnostic_only": 7424,
+                "predicted_restore": 2.466486115847373,
+                "actual_restore": 4.912038786484908,
+                "error_predicted_minus_actual": -2.445552670637535,
+                "phase_latest": 188.90978958958664,
+                "fit": {
+                  "observations": 27,
+                  "coefficients": [
+                    0.4335148369259645,
+                    4.775350972164813e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:7",
+                "node": 3,
+                "origin": 172.44561084638244,
+                "accepted_prefix_diagnostic_only": 384,
+                "predicted_restore": 0.592397698002179,
+                "actual_restore": 1.8071435416066128,
+                "error_predicted_minus_actual": -1.2147458436044338,
+                "phase_latest": 171.08093940101932,
+                "fit": {
+                  "observations": 26,
+                  "coefficients": [
+                    0.4882126015522734,
+                    4.73136431602776e-09
+                  ]
+                }
+              },
+              {
+                "id": "headless-terminal:7",
+                "node": 3,
+                "origin": 175.73746747492507,
+                "accepted_prefix_diagnostic_only": 7168,
+                "predicted_restore": 2.4330010686171777,
+                "actual_restore": 3.5702179734185657,
+                "error_predicted_minus_actual": -1.137216904801388,
+                "phase_latest": 171.08093940101932,
+                "fit": {
+                  "observations": 26,
+                  "coefficients": [
+                    0.4882126015522734,
+                    4.73136431602776e-09
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "setting": "default",
+      "rate": 0.9806468307628429,
+      "raw_sha256": "98dd9066b2936b23f07465d610ccb734f1ca02300d8c9079b1dd271747ea1a36",
+      "arms": {
+        "reference": {
+          "2": {
+            "n": 8,
+            "MAE": 0.8984004399197002,
+            "bias": -0.5487360044971176,
+            "worst_underprediction": -2.667075040805303,
+            "actual_sum": 9.066183383255327,
+            "predicted_sum": 4.676295347278386,
+            "largest_errors": [
+              {
+                "id": "git-leak-recovery:5",
+                "node": 2,
+                "origin": 108.95229694565796,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.0444897839951506,
+                "actual_restore": 2.711564824800454,
+                "error_predicted_minus_actual": -2.667075040805303,
+                "phase_latest": 108.95112024473065,
+                "fit": {
+                  "observations": 18,
+                  "coefficients": [
+                    0.0,
+                    6.06125204837671e-09
+                  ]
+                }
+              },
+              {
+                "id": "headless-terminal:7",
+                "node": 2,
+                "origin": 188.03567257185463,
+                "accepted_prefix_diagnostic_only": 6144,
+                "predicted_restore": 2.304551804280542,
+                "actual_restore": 4.802645932895171,
+                "error_predicted_minus_actual": -2.4980941286146288,
+                "phase_latest": 188.03293196612034,
+                "fit": {
+                  "observations": 19,
+                  "coefficients": [
+                    0.23518246152234834,
+                    5.87352498019932e-09
+                  ]
+                }
+              },
+              {
+                "id": "distribution-search:11",
+                "node": 2,
+                "origin": 279.28535847980294,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.47117530044386624,
+                "actual_restore": 0.9312098822737155,
+                "error_predicted_minus_actual": -0.46003458182984924,
+                "phase_latest": 279.2781252810708,
+                "fit": {
+                  "observations": 21,
+                  "coefficients": [
+                    0.42883257777143324,
+                    5.76873815705885e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 20,
+            "MAE": 0.851711448428463,
+            "bias": 0.06709014624330736,
+            "worst_underprediction": -2.391622667422884,
+            "actual_sum": 35.06537322160449,
+            "predicted_sum": 36.40717614647063,
+            "largest_errors": [
+              {
+                "id": "dna-insert:8",
+                "node": 3,
+                "origin": 203.39921745591727,
+                "accepted_prefix_diagnostic_only": 8320,
+                "predicted_restore": 2.764706596979292,
+                "actual_restore": 5.156329264402176,
+                "error_predicted_minus_actual": -2.391622667422884,
+                "phase_latest": 201.05620120287176,
+                "fit": {
+                  "observations": 28,
+                  "coefficients": [
+                    0.42947853653152324,
+                    4.894608844396086e-09
+                  ]
+                }
+              },
+              {
+                "id": "dna-insert:7",
+                "node": 3,
+                "origin": 160.94561523272114,
+                "accepted_prefix_diagnostic_only": 7936,
+                "predicted_restore": 2.6316640256581305,
+                "actual_restore": 4.6588449846127205,
+                "error_predicted_minus_actual": -2.02718095895459,
+                "phase_latest": 157.78353248439467,
+                "fit": {
+                  "observations": 25,
+                  "coefficients": [
+                    0.46004993195000554,
+                    4.771918401648097e-09
+                  ]
+                }
+              },
+              {
+                "id": "distribution-search:8",
+                "node": 3,
+                "origin": 190.17718573904003,
+                "accepted_prefix_diagnostic_only": 7424,
+                "predicted_restore": 2.43656937561288,
+                "actual_restore": 3.726568725242296,
+                "error_predicted_minus_actual": -1.289999349629416,
+                "phase_latest": 188.03293196612034,
+                "fit": {
+                  "observations": 27,
+                  "coefficients": [
+                    0.37348218000383215,
+                    4.846091800391493e-09
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "ours": {
+          "2": {
+            "n": 9,
+            "MAE": 0.15257959513140912,
+            "bias": -0.03906804927366275,
+            "worst_underprediction": -0.3957666575413292,
+            "actual_sum": 4.624289637484823,
+            "predicted_sum": 4.272677194021859,
+            "largest_errors": [
+              {
+                "id": "feal-differential-cryptanalysis:8",
+                "node": 2,
+                "origin": 213.11341891331017,
+                "accepted_prefix_diagnostic_only": 2176,
+                "predicted_restore": 0.7563478641074923,
+                "actual_restore": 1.1521145216488216,
+                "error_predicted_minus_actual": -0.3957666575413292,
+                "phase_latest": 211.9942860940946,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.0,
+                    6.0614246409079e-09
+                  ]
+                }
+              },
+              {
+                "id": "dna-insert:14",
+                "node": 2,
+                "origin": 453.0918262517766,
+                "accepted_prefix_diagnostic_only": 6784,
+                "predicted_restore": 2.359072076094317,
+                "actual_restore": 2.5383290959715854,
+                "error_predicted_minus_actual": -0.1792570198772685,
+                "phase_latest": 450.73935841472985,
+                "fit": {
+                  "observations": 24,
+                  "coefficients": [
+                    0.0,
+                    6.064114419197629e-09
+                  ]
+                }
+              },
+              {
+                "id": "dna-insert:12",
+                "node": 2,
+                "origin": 370.4663933518235,
+                "accepted_prefix_diagnostic_only": 384,
+                "predicted_restore": 0.13353019525594004,
+                "actual_restore": 0.2772621192005772,
+                "error_predicted_minus_actual": -0.14373192394463716,
+                "phase_latest": 370.459633636557,
+                "fit": {
+                  "observations": 21,
+                  "coefficients": [
+                    0.0,
+                    6.064015127633415e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 19,
+            "MAE": 0.6335959731225245,
+            "bias": 0.2777670704455102,
+            "worst_underprediction": -1.3154098894342443,
+            "actual_sum": 29.205868032975182,
+            "predicted_sum": 34.48344237143988,
+            "largest_errors": [
+              {
+                "id": "distribution-search:8",
+                "node": 3,
+                "origin": 181.75833075978284,
+                "accepted_prefix_diagnostic_only": 9856,
+                "predicted_restore": 3.0742329901549237,
+                "actual_restore": 4.389642879589168,
+                "error_predicted_minus_actual": -1.3154098894342443,
+                "phase_latest": 176.86338487579832,
+                "fit": {
+                  "observations": 27,
+                  "coefficients": [
+                    0.3258622344471733,
+                    4.862802600520441e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:4",
+                "node": 3,
+                "origin": 68.69880306982043,
+                "accepted_prefix_diagnostic_only": 1920,
+                "predicted_restore": 1.0887840791772698,
+                "actual_restore": 2.13937374561742,
+                "error_predicted_minus_actual": -1.0505896664401504,
+                "phase_latest": 67.20171047237933,
+                "fit": {
+                  "observations": 16,
+                  "coefficients": [
+                    0.5653044836402654,
+                    4.754562337394028e-09
+                  ]
+                }
+              },
+              {
+                "id": "git-multibranch:7",
+                "node": 3,
+                "origin": 177.75932166748245,
+                "accepted_prefix_diagnostic_only": 6016,
+                "predicted_restore": 2.003439189229826,
+                "actual_restore": 2.52980251536546,
+                "error_predicted_minus_actual": -0.5263633261356344,
+                "phase_latest": 176.86338487579832,
+                "fit": {
+                  "observations": 27,
+                  "coefficients": [
+                    0.3258622344471733,
+                    4.862802600520441e-09
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "setting": "sharing",
+      "rate": 0.24516170769071072,
+      "raw_sha256": "ca50e1d1a4f36021ec46dffa50db021e8cc03c427ba54261e4983b48aa2dc247",
+      "arms": {
+        "reference": {
+          "2": {
+            "n": 11,
+            "MAE": 0.2783720053024322,
+            "bias": -0.06417505520010584,
+            "worst_underprediction": -0.8867165414564588,
+            "actual_sum": 4.40051897654933,
+            "predicted_sum": 3.6945933693481656,
+            "largest_errors": [
+              {
+                "id": "fix-git:7",
+                "node": 2,
+                "origin": 201.21785784248894,
+                "accepted_prefix_diagnostic_only": 640,
+                "predicted_restore": 0.22245769044233898,
+                "actual_restore": 1.1091742318987978,
+                "error_predicted_minus_actual": -0.8867165414564588,
+                "phase_latest": 199.4096507087192,
+                "fit": {
+                  "observations": 18,
+                  "coefficients": [
+                    0.0,
+                    6.061491024626022e-09
+                  ]
+                }
+              },
+              {
+                "id": "git-leak-recovery:7",
+                "node": 2,
+                "origin": 205.52755439021678,
+                "accepted_prefix_diagnostic_only": 768,
+                "predicted_restore": 0.2669492285308067,
+                "actual_restore": 0.6627125601798451,
+                "error_predicted_minus_actual": -0.39576333164903843,
+                "phase_latest": 199.4096507087192,
+                "fit": {
+                  "observations": 18,
+                  "coefficients": [
+                    0.0,
+                    6.061491024626022e-09
+                  ]
+                }
+              },
+              {
+                "id": "feal-differential-cryptanalysis:8",
+                "node": 2,
+                "origin": 223.304592197696,
+                "accepted_prefix_diagnostic_only": 1664,
+                "predicted_restore": 0.6403693634855077,
+                "actual_restore": 0.9741501720237393,
+                "error_predicted_minus_actual": -0.33378080853823167,
+                "phase_latest": 220.5738579107369,
+                "fit": {
+                  "observations": 21,
+                  "coefficients": [
+                    0.06693696636385127,
+                    6.009535706925197e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 5,
+            "MAE": 0.6760758180872692,
+            "bias": 0.2597653338787433,
+            "worst_underprediction": -0.5209700985462846,
+            "actual_sum": 10.483269533226949,
+            "predicted_sum": 11.782096202620666,
+            "largest_errors": [
+              {
+                "id": "fix-git:9",
+                "node": 3,
+                "origin": 267.81625938743446,
+                "accepted_prefix_diagnostic_only": 7040,
+                "predicted_restore": 2.4835656807046935,
+                "actual_restore": 3.004535779250978,
+                "error_predicted_minus_actual": -0.5209700985462846,
+                "phase_latest": 263.9290862602434,
+                "fit": {
+                  "observations": 18,
+                  "coefficients": [
+                    0.576033554699662,
+                    4.725102328028076e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:5",
+                "node": 3,
+                "origin": 105.04936766480509,
+                "accepted_prefix_diagnostic_only": 2816,
+                "predicted_restore": 1.3330745570945386,
+                "actual_restore": 1.8528806690695687,
+                "error_predicted_minus_actual": -0.5198061119750301,
+                "phase_latest": 103.0477837247464,
+                "fit": {
+                  "observations": 16,
+                  "coefficients": [
+                    0.5653044836402654,
+                    4.754562337394028e-09
+                  ]
+                }
+              },
+              {
+                "id": "dna-insert:5",
+                "node": 3,
+                "origin": 100.15614645088102,
+                "accepted_prefix_diagnostic_only": 5760,
+                "predicted_restore": 2.135743270251279,
+                "actual_restore": 1.559954939336127,
+                "error_predicted_minus_actual": 0.5757883309151519,
+                "phase_latest": 98.63574359223853,
+                "fit": {
+                  "observations": 16,
+                  "coefficients": [
+                    0.5653044836402654,
+                    4.754562337394028e-09
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "ours": {
+          "2": {
+            "n": 25,
+            "MAE": 0.3007775880162816,
+            "bias": 0.03009858327730086,
+            "worst_underprediction": -0.8868673115606245,
+            "actual_sum": 5.073241229736343,
+            "predicted_sum": 5.825705811668865,
+            "largest_errors": [
+              {
+                "id": "distribution-search:11",
+                "node": 2,
+                "origin": 310.88094445658595,
+                "accepted_prefix_diagnostic_only": 640,
+                "predicted_restore": 0.22230692033817337,
+                "actual_restore": 1.1091742318987978,
+                "error_predicted_minus_actual": -0.8868673115606245,
+                "phase_latest": 308.19653380213606,
+                "fit": {
+                  "observations": 33,
+                  "coefficients": [
+                    0.0,
+                    6.0573828653110334e-09
+                  ]
+                }
+              },
+              {
+                "id": "headless-terminal:8",
+                "node": 2,
+                "origin": 252.58451067210171,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.04446111486257015,
+                "actual_restore": 0.9312098822737155,
+                "error_predicted_minus_actual": -0.8867487674111454,
+                "phase_latest": 235.6538340090917,
+                "fit": {
+                  "observations": 22,
+                  "coefficients": [
+                    0.0,
+                    6.057346189031621e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:8",
+                "node": 2,
+                "origin": 246.20153407228085,
+                "accepted_prefix_diagnostic_only": 256,
+                "predicted_restore": 0.0889222297251403,
+                "actual_restore": 0.48474821055476286,
+                "error_predicted_minus_actual": -0.39582598082962256,
+                "phase_latest": 235.6538340090917,
+                "fit": {
+                  "observations": 22,
+                  "coefficients": [
+                    0.0,
+                    6.057346189031621e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 6,
+            "MAE": 0.976766424572234,
+            "bias": -0.1998996680567854,
+            "worst_underprediction": -2.399351562650244,
+            "actual_sum": 12.51923197964949,
+            "predicted_sum": 11.319833971308778,
+            "largest_errors": [
+              {
+                "id": "headless-terminal:11",
+                "node": 3,
+                "origin": 323.74177270532147,
+                "accepted_prefix_diagnostic_only": 1024,
+                "predicted_restore": 0.767755238711316,
+                "actual_restore": 3.1671068013615598,
+                "error_predicted_minus_actual": -2.399351562650244,
+                "phase_latest": 320.7348041361116,
+                "fit": {
+                  "observations": 21,
+                  "coefficients": [
+                    0.48657022308419773,
+                    4.788552277890585e-09
+                  ]
+                }
+              },
+              {
+                "id": "dna-insert:11",
+                "node": 3,
+                "origin": 305.9578375737032,
+                "accepted_prefix_diagnostic_only": 8960,
+                "predicted_restore": 2.9171747715261986,
+                "actual_restore": 3.5280153747879828,
+                "error_predicted_minus_actual": -0.6108406032617841,
+                "phase_latest": 303.17907399575853,
+                "fit": {
+                  "observations": 20,
+                  "coefficients": [
+                    0.4630229789498075,
+                    4.776452108454006e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:5",
+                "node": 3,
+                "origin": 105.07202367899421,
+                "accepted_prefix_diagnostic_only": 2816,
+                "predicted_restore": 1.3330745570945386,
+                "actual_restore": 1.8528806690695687,
+                "error_predicted_minus_actual": -0.5198061119750301,
+                "phase_latest": 103.10569810287537,
+                "fit": {
+                  "observations": 16,
+                  "coefficients": [
+                    0.5653044836402654,
+                    4.754562337394028e-09
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "setting": "sharing",
+      "rate": 0.49032341538142143,
+      "raw_sha256": "9866b0d742f09834be62b43e003fd400cebede2796e235966a7fff3d5b22b12a",
+      "arms": {
+        "reference": {
+          "2": {
+            "n": 14,
+            "MAE": 0.6258986972361803,
+            "bias": -0.26222859748818883,
+            "worst_underprediction": -2.667121169520785,
+            "actual_sum": 7.438265698634744,
+            "predicted_sum": 3.7670653338001006,
+            "largest_errors": [
+              {
+                "id": "fix-git:12",
+                "node": 2,
+                "origin": 196.71700645100978,
+                "accepted_prefix_diagnostic_only": 512,
+                "predicted_restore": 0.17791691749848104,
+                "actual_restore": 2.8450380870192657,
+                "error_predicted_minus_actual": -2.667121169520785,
+                "phase_latest": 196.67670715023996,
+                "fit": {
+                  "observations": 24,
+                  "coefficients": [
+                    0.0,
+                    6.059814095445396e-09
+                  ]
+                }
+              },
+              {
+                "id": "distribution-search:13",
+                "node": 2,
+                "origin": 212.69019910456308,
+                "accepted_prefix_diagnostic_only": 640,
+                "predicted_restore": 0.37026805607189095,
+                "actual_restore": 2.8895291744255363,
+                "error_predicted_minus_actual": -2.5192611183536453,
+                "phase_latest": 211.81871779664624,
+                "fit": {
+                  "observations": 25,
+                  "coefficients": [
+                    0.152251935717981,
+                    5.9404678441159376e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:7",
+                "node": 2,
+                "origin": 101.79778925186325,
+                "accepted_prefix_diagnostic_only": 384,
+                "predicted_restore": 0.13347213887186854,
+                "actual_restore": 1.0201920570862566,
+                "error_predicted_minus_actual": -0.8867199182143881,
+                "phase_latest": 95.8185393399891,
+                "fit": {
+                  "observations": 18,
+                  "coefficients": [
+                    0.0,
+                    6.061378609424251e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 8,
+            "MAE": 0.8215243787403084,
+            "bias": -0.14188858135059923,
+            "worst_underprediction": -2.4074375252017286,
+            "actual_sum": 15.757940263695039,
+            "predicted_sum": 14.622831612890245,
+            "largest_errors": [
+              {
+                "id": "feal-differential-cryptanalysis:6",
+                "node": 3,
+                "origin": 70.37704257851573,
+                "accepted_prefix_diagnostic_only": 6656,
+                "predicted_restore": 2.295209423068378,
+                "actual_restore": 4.7026469482701065,
+                "error_predicted_minus_actual": -2.4074375252017286,
+                "phase_latest": 70.3552087492625,
+                "fit": {
+                  "observations": 20,
+                  "coefficients": [
+                    0.4406342477088865,
+                    4.8589580016070446e-09
+                  ]
+                }
+              },
+              {
+                "id": "headless-terminal:4",
+                "node": 3,
+                "origin": 49.24549279421656,
+                "accepted_prefix_diagnostic_only": 1024,
+                "predicted_restore": 0.7641257194241778,
+                "actual_restore": 1.3642997132350312,
+                "error_predicted_minus_actual": -0.6001739938108533,
+                "phase_latest": 44.995918239172944,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.4794753704926684,
+                    4.847566552358175e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:9",
+                "node": 3,
+                "origin": 138.01040702479335,
+                "accepted_prefix_diagnostic_only": 640,
+                "predicted_restore": 0.7124625751427892,
+                "actual_restore": 1.2596037941276303,
+                "error_predicted_minus_actual": -0.5471412189848411,
+                "phase_latest": 134.71074983720973,
+                "fit": {
+                  "observations": 23,
+                  "coefficients": [
+                    0.5340885931431689,
+                    4.860305295661388e-09
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "ours": {
+          "2": {
+            "n": 18,
+            "MAE": 0.5455193409613004,
+            "bias": -0.014788475811161685,
+            "worst_underprediction": -2.6509404261718412,
+            "actual_sum": 7.761834670526209,
+            "predicted_sum": 7.495642105925298,
+            "largest_errors": [
+              {
+                "id": "fix-git:12",
+                "node": 2,
+                "origin": 198.758416116414,
+                "accepted_prefix_diagnostic_only": 256,
+                "predicted_restore": 0.10511548603488298,
+                "actual_restore": 2.7560559122067243,
+                "error_predicted_minus_actual": -2.6509404261718412,
+                "phase_latest": 198.00451462547812,
+                "fit": {
+                  "observations": 25,
+                  "coefficients": [
+                    0.016418677704154394,
+                    6.0419905751588405e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:6",
+                "node": 2,
+                "origin": 75.72431663023683,
+                "accepted_prefix_diagnostic_only": 256,
+                "predicted_restore": 0.08898202850832532,
+                "actual_restore": 1.2022184914236596,
+                "error_predicted_minus_actual": -1.1132364629153342,
+                "phase_latest": 74.89628759940067,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.0,
+                    6.061419657865614e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:7",
+                "node": 2,
+                "origin": 102.07692380049308,
+                "accepted_prefix_diagnostic_only": 384,
+                "predicted_restore": 0.16972188962139428,
+                "actual_restore": 1.0201920570862566,
+                "error_predicted_minus_actual": -0.8504701674648623,
+                "phase_latest": 97.56453825687515,
+                "fit": {
+                  "observations": 19,
+                  "coefficients": [
+                    0.036896362626687385,
+                    6.03201398371319e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 7,
+            "MAE": 0.7523245590594577,
+            "bias": 0.4045295135051143,
+            "worst_underprediction": -1.217282659440202,
+            "actual_sum": 9.384765287092083,
+            "predicted_sum": 12.216471881627882,
+            "largest_errors": [
+              {
+                "id": "headless-terminal:7",
+                "node": 3,
+                "origin": 109.33457931423601,
+                "accepted_prefix_diagnostic_only": 7680,
+                "predicted_restore": 2.4925298727882317,
+                "actual_restore": 3.7098125322284337,
+                "error_predicted_minus_actual": -1.217282659440202,
+                "phase_latest": 107.0928513735502,
+                "fit": {
+                  "observations": 21,
+                  "coefficients": [
+                    0.2966544822682162,
+                    4.986071338017817e-09
+                  ]
+                }
+              },
+              {
+                "id": "headless-terminal:6",
+                "node": 3,
+                "origin": 85.24854652006069,
+                "accepted_prefix_diagnostic_only": 6784,
+                "predicted_restore": 2.2628682655820636,
+                "actual_restore": 1.714964970434787,
+                "error_predicted_minus_actual": 0.5479032951472766,
+                "phase_latest": 84.85688960405162,
+                "fit": {
+                  "observations": 20,
+                  "coefficients": [
+                    0.326672366244118,
+                    4.977089759379245e-09
+                  ]
+                }
+              },
+              {
+                "id": "dna-insert:6",
+                "node": 3,
+                "origin": 69.66012218419782,
+                "accepted_prefix_diagnostic_only": 7040,
+                "predicted_restore": 2.397765511057142,
+                "actual_restore": 1.7847622498397206,
+                "error_predicted_minus_actual": 0.6130032612174214,
+                "phase_latest": 68.10868083574768,
+                "fit": {
+                  "observations": 18,
+                  "coefficients": [
+                    0.4231887415189921,
+                    4.891177015275213e-09
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    },
+    {
+      "setting": "sharing",
+      "rate": 0.9806468307628429,
+      "raw_sha256": "3506508e19af329e6be46bb1632c41a3b47281281845aca3dee5e6f694e72bfe",
+      "arms": {
+        "reference": {
+          "2": {
+            "n": 19,
+            "MAE": 0.5763138564353186,
+            "bias": -0.1621888890844587,
+            "worst_underprediction": -2.6670981323888667,
+            "actual_sum": 15.019883843575604,
+            "predicted_sum": 11.938294950970889,
+            "largest_errors": [
+              {
+                "id": "headless-terminal:7",
+                "node": 2,
+                "origin": 85.15084886541828,
+                "accepted_prefix_diagnostic_only": 128,
+                "predicted_restore": 0.0444666924115872,
+                "actual_restore": 2.711564824800454,
+                "error_predicted_minus_actual": -2.6670981323888667,
+                "phase_latest": 84.79703501257141,
+                "fit": {
+                  "observations": 21,
+                  "coefficients": [
+                    0.0,
+                    6.058106069781058e-09
+                  ]
+                }
+              },
+              {
+                "id": "distribution-search:13",
+                "node": 2,
+                "origin": 187.03430374915894,
+                "accepted_prefix_diagnostic_only": 640,
+                "predicted_restore": 0.3523860070787546,
+                "actual_restore": 2.8895291744255363,
+                "error_predicted_minus_actual": -2.5371431673467817,
+                "phase_latest": 185.47720034655123,
+                "fit": {
+                  "observations": 33,
+                  "coefficients": [
+                    0.13414944789619687,
+                    5.946474325522226e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:7",
+                "node": 2,
+                "origin": 80.46930819985917,
+                "accepted_prefix_diagnostic_only": 384,
+                "predicted_restore": 0.1334286445822129,
+                "actual_restore": 1.0201920570862566,
+                "error_predicted_minus_actual": -0.8867634125040437,
+                "phase_latest": 80.46634186947247,
+                "fit": {
+                  "observations": 19,
+                  "coefficients": [
+                    0.0,
+                    6.059403400521638e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 11,
+            "MAE": 0.8557342198778282,
+            "bias": 0.11608376271264291,
+            "worst_underprediction": -2.374881417026878,
+            "actual_sum": 19.929879813345554,
+            "predicted_sum": 21.206801203184625,
+            "largest_errors": [
+              {
+                "id": "dna-insert:8",
+                "node": 3,
+                "origin": 87.0976796292239,
+                "accepted_prefix_diagnostic_only": 8320,
+                "predicted_restore": 2.781447847375298,
+                "actual_restore": 5.156329264402176,
+                "error_predicted_minus_actual": -2.374881417026878,
+                "phase_latest": 84.79703501257141,
+                "fit": {
+                  "observations": 20,
+                  "coefficients": [
+                    0.4998333458203996,
+                    4.782235494665834e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:4",
+                "node": 3,
+                "origin": 29.958876743408776,
+                "accepted_prefix_diagnostic_only": 1920,
+                "predicted_restore": 1.0131947747392487,
+                "actual_restore": 2.13937374561742,
+                "error_predicted_minus_actual": -1.1261789708781715,
+                "phase_latest": 29.683164428083696,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.4794753704926684,
+                    4.847566552358175e-09
+                  ]
+                }
+              },
+              {
+                "id": "dna-insert:11",
+                "node": 3,
+                "origin": 154.97869405064523,
+                "accepted_prefix_diagnostic_only": 8320,
+                "predicted_restore": 2.7865050497721784,
+                "actual_restore": 3.3535221762756477,
+                "error_predicted_minus_actual": -0.5670171265034694,
+                "phase_latest": 153.66019146346807,
+                "fit": {
+                  "observations": 25,
+                  "coefficients": [
+                    0.43811912068840364,
+                    4.922187572696759e-09
+                  ]
+                }
+              }
+            ]
+          }
+        },
+        "ours": {
+          "2": {
+            "n": 7,
+            "MAE": 0.9986871355320432,
+            "bias": -0.3145949995624813,
+            "worst_underprediction": -2.66795595163523,
+            "actual_sum": 6.5797884844705115,
+            "predicted_sum": 4.377623487533142,
+            "largest_errors": [
+              {
+                "id": "distribution-search:13",
+                "node": 2,
+                "origin": 198.76520774364687,
+                "accepted_prefix_diagnostic_only": 384,
+                "predicted_restore": 0.13259104797776544,
+                "actual_restore": 2.8005469996129952,
+                "error_predicted_minus_actual": -2.66795595163523,
+                "phase_latest": 196.00335905743114,
+                "fit": {
+                  "observations": 20,
+                  "coefficients": [
+                    0.0,
+                    6.0213655734182744e-09
+                  ]
+                }
+              },
+              {
+                "id": "distribution-search:4",
+                "node": 2,
+                "origin": 24.274790399468465,
+                "accepted_prefix_diagnostic_only": 2560,
+                "predicted_restore": 0.8898217481254118,
+                "actual_restore": 2.00305806473653,
+                "error_predicted_minus_actual": -1.1132363166111183,
+                "phase_latest": 23.763516222663956,
+                "fit": {
+                  "observations": 16,
+                  "coefficients": [
+                    0.0,
+                    6.061429624049403e-09
+                  ]
+                }
+              },
+              {
+                "id": "fix-git:7",
+                "node": 2,
+                "origin": 73.40032716999532,
+                "accepted_prefix_diagnostic_only": 384,
+                "predicted_restore": 0.20489685250176878,
+                "actual_restore": 1.0201920570862566,
+                "error_predicted_minus_actual": -0.8152952045844878,
+                "phase_latest": 73.39711517720254,
+                "fit": {
+                  "observations": 17,
+                  "coefficients": [
+                    0.0724923501550867,
+                    6.0128939649800845e-09
+                  ]
+                }
+              }
+            ]
+          },
+          "3": {
+            "n": 11,
+            "MAE": 1.0989683811421407,
+            "bias": -0.12224211995688679,
+            "worst_underprediction": -2.437197194129609,
+            "actual_sum": 21.51800766233636,
+            "predicted_sum": 20.173344342810605,
+            "largest_errors": [
+              {
+                "id": "feal-differential-cryptanalysis:6",
+                "node": 3,
+                "origin": 54.506624687290135,
+                "accepted_prefix_diagnostic_only": 6656,
+                "predicted_restore": 2.2654497541404974,
+                "actual_restore": 4.7026469482701065,
+                "error_predicted_minus_actual": -2.437197194129609,
+                "phase_latest": 54.35752899425199,
+                "fit": {
+                  "observations": 18,
+                  "coefficients": [
+                    0.37145340471101473,
+                    4.962240862137624e-09
+                  ]
+                }
+              },
+              {
+                "id": "headless-terminal:11",
+                "node": 3,
+                "origin": 180.15087221742561,
+                "accepted_prefix_diagnostic_only": 9600,
+                "predicted_restore": 3.086950185772018,
+                "actual_restore": 5.505315661426846,
+                "error_predicted_minus_actual": -2.418365475654828,
+                "phase_latest": 171.74530944946815,
+                "fit": {
+                  "observations": 25,
+                  "coefficients": [
+                    0.3556930197855013,
+                    4.961390115622596e-09
+                  ]
+                }
+              },
+              {
+                "id": "headless-terminal:12",
+                "node": 3,
+                "origin": 203.518210888889,
+                "accepted_prefix_diagnostic_only": 6400,
+                "predicted_restore": 2.2647766346317466,
+                "actual_restore": 3.44737960762256,
+                "error_predicted_minus_actual": -1.1826029729908134,
+                "phase_latest": 196.00335905743114,
+                "fit": {
+                  "observations": 26,
+                  "coefficients": [
+                    0.40613902191550766,
+                    5.0643855850117234e-09
+                  ]
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "full_diagnostics": [
+    {
+      "path": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\progress-decode-default-restore-01.json",
+      "sha256": "09da996437822229c856c5103df8b2699f8dbedcbd50e6367a3a3098bf9fbc9a"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\progress-decode-sharing-restore-01.json",
+      "sha256": "af91e5a9ba10348aa4e2bf872e140e2c2cb48618e6ca1d717a8f2dd1e74103b2"
+    }
+  ]
+}

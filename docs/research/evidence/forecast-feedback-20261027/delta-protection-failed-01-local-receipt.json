@@ -1,0 +1,9 @@
+{
+  "path": "/root/delta-protection-failed-01-full.tar.gz",
+  "sha256": "d29f5e75b56fd15df60fd9e4f721ce3b3020cc5e07c2ab0bce7ce6a292d85420",
+  "bytes": 3718228,
+  "equivalence_passed": false,
+  "charged_matrix_started": false,
+  "reason": "Candidate inherited SparseCacheProjection and lost parent D_control admit behavior; fixed source02 inherits full parent projection type. Old pipeline did_not_change_policy_semantics field was intended scope, contradicted by failed equality and must not be treated as a result.",
+  "local_sha_verified": true
+}

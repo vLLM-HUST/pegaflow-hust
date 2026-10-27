@@ -1,0 +1,16 @@
+{
+  "remote": {
+    "path": "/root/paired-protection-profile-03-full.tar.gz",
+    "sha256": "a4a4a496e19edc3f42f4a6f4e7cedd0240d1bbc628f6544b6e7ac7b3977b5d28",
+    "bytes": 1799276,
+    "result": {
+      "started": 1793050734.2330651,
+      "finished": 1793050893.0914679,
+      "exit_code": 0,
+      "stop": null,
+      "source_sha256": "302af9006ffa3806fd2ed934da2dfc5b236291a66d1ded124df73d2cc2cbdf8c"
+    }
+  },
+  "local_path": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\paired-protection-profile-03-full.tar.gz",
+  "local_sha_verified": true
+}

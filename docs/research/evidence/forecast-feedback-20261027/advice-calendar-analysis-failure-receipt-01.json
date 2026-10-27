@@ -1,0 +1,9 @@
+{
+  "path": "/root/advice-calendar-default-analysis-failure-01-full.tar.gz",
+  "sha256": "c37ce25ccda0c0be929e3eaaeca8feb2a965684d10b5ec2d0da79c3e86dfaaa5",
+  "bytes": 19322983,
+  "simulation_arms_completed": 9,
+  "algorithm_unchanged": true,
+  "failure": "offline analyzer expects top-level all_checks_passed; per-case audits passed",
+  "sharing_started": false
+}

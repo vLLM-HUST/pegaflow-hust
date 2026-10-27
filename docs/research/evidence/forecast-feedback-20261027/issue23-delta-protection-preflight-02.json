@@ -1,0 +1,6 @@
+{
+  "tests_stdout": ".......                                                                  [100%]\n7 passed in 0.75s\n",
+  "returncode": 0,
+  "cpu_max": "400000 100000",
+  "source_sha256": "771bf0b7704732c91cd59d12e3b966d2fa435ef2169f01584b116d398c897fd1"
+}

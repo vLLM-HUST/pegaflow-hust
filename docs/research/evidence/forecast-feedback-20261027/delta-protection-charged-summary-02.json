@@ -1,0 +1,279 @@
+{
+  "CPU_only": true,
+  "reference": "release-preserving-cobatch-01",
+  "candidate": "delta-protection-cobatch-02",
+  "sharing_fraction": 1,
+  "hardware_sharing_measured": false,
+  "promoted": false,
+  "all_costs_charged": true,
+  "zero_control_exact_equivalence_passed": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "source_result_sha256": "4920c545d0d34431e562ddedca7c56579ae822b24663fe4a357ac7af2dd423e5",
+      "p99_reduction_percent": 10.028397096176633,
+      "arms": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 6.992469609186031,
+            "p50": 6.006836014993752,
+            "p90": 14.095080612882612,
+            "p95": 15.725115527830042,
+            "p99": 17.086326653984543,
+            "max": 17.086326653984543
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 8.91877553229923,
+            "p50": 6.14650242927442,
+            "p90": 22.3499833703778,
+            "p95": 27.150261790036666,
+            "p99": 32.2583692610516,
+            "max": 32.2583692610516
+          },
+          "makespan": 419.1297319997312,
+          "planning_wall": 57.59255386237055,
+          "boundary_CPU_wall": 31.552015704102814,
+          "fit_CPU_wall": 0.507299174554646,
+          "iteration_scheduler_wall_charged": 0.2435509916394949,
+          "search_by_kind": {
+            "route": {
+              "considered": 5618,
+              "full": 647,
+              "calendar_full": 647,
+              "pruned_calendars": 4817,
+              "bound_checks": 518210
+            },
+            "boundary": {
+              "considered": 0,
+              "full": 0,
+              "calendar_full": 234,
+              "pruned_calendars": 2839,
+              "bound_checks": 217626
+            }
+          }
+        },
+        "candidate": {
+          "TTFT": {
+            "n": 95,
+            "mean": 6.722504752602353,
+            "p50": 6.277871891472472,
+            "p90": 13.511724164000157,
+            "p95": 13.92905001831889,
+            "p99": 15.372841967973102,
+            "max": 15.372841967973102
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 8.36006680604448,
+            "p50": 6.331317460155333,
+            "p90": 19.264402245821202,
+            "p95": 24.2066529251191,
+            "p99": 30.92250076433976,
+            "max": 30.92250076433976
+          },
+          "makespan": 419.05673941723427,
+          "planning_wall": 54.19069193676114,
+          "boundary_CPU_wall": 31.945512785576284,
+          "fit_CPU_wall": 0.5134356878697872,
+          "iteration_scheduler_wall_charged": 0.24323851987719536,
+          "search_by_kind": {
+            "route": {
+              "considered": 5628,
+              "full": 615,
+              "calendar_full": 615,
+              "pruned_calendars": 4859,
+              "bound_checks": 428854
+            },
+            "boundary": {
+              "considered": 0,
+              "full": 0,
+              "calendar_full": 216,
+              "pruned_calendars": 2822,
+              "bound_checks": 188731
+            }
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "source_result_sha256": "3fd4407ae2e3e155b61d4294826cf4d93647873b5e4ed4700064186806a86737",
+      "p99_reduction_percent": -3.408933915266976,
+      "arms": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.882637618298932,
+            "p50": 7.547651607340306,
+            "p90": 13.90244405261592,
+            "p95": 15.384547578614871,
+            "p99": 17.3925678025511,
+            "max": 17.3925678025511
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 21.033546131896067,
+            "p50": 10.578656072699445,
+            "p90": 58.77312872076649,
+            "p95": 69.27084330046134,
+            "p99": 80.79239986894981,
+            "max": 80.79239986894981
+          },
+          "makespan": 285.3710413766497,
+          "planning_wall": 71.5692973062396,
+          "boundary_CPU_wall": 36.703952917829156,
+          "fit_CPU_wall": 0.42699511628597975,
+          "iteration_scheduler_wall_charged": 0.30232713371515274,
+          "search_by_kind": {
+            "route": {
+              "considered": 5486,
+              "full": 633,
+              "calendar_full": 633,
+              "pruned_calendars": 4694,
+              "bound_checks": 611906
+            },
+            "boundary": {
+              "considered": 0,
+              "full": 0,
+              "calendar_full": 273,
+              "pruned_calendars": 2733,
+              "bound_checks": 240517
+            }
+          }
+        },
+        "candidate": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.379857298487973,
+            "p50": 7.787894006677703,
+            "p90": 12.032607107857018,
+            "p95": 13.961680025392695,
+            "p99": 17.985468945108067,
+            "max": 17.985468945108067
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 21.148365606370298,
+            "p50": 10.878597462953934,
+            "p90": 59.992656436105875,
+            "p95": 69.92348367255633,
+            "p99": 77.64759044218226,
+            "max": 77.64759044218226
+          },
+          "makespan": 278.18812623343524,
+          "planning_wall": 70.69230006355792,
+          "boundary_CPU_wall": 45.332128438167274,
+          "fit_CPU_wall": 0.4421599553897977,
+          "iteration_scheduler_wall_charged": 0.2912057861685753,
+          "search_by_kind": {
+            "route": {
+              "considered": 5391,
+              "full": 578,
+              "calendar_full": 578,
+              "pruned_calendars": 4655,
+              "bound_checks": 586530
+            },
+            "boundary": {
+              "considered": 0,
+              "full": 0,
+              "calendar_full": 287,
+              "pruned_calendars": 3246,
+              "bound_checks": 299200
+            }
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "source_result_sha256": "732ed4194e755bf0bee131d1aadc21a01ab14c49a851a29b72ac0c80a8fceed5",
+      "p99_reduction_percent": 8.9669489664698,
+      "arms": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.642899536565358,
+            "p50": 7.324767511584042,
+            "p90": 12.643925206417492,
+            "p95": 13.230750821860227,
+            "p99": 18.336536421746075,
+            "max": 18.336536421746075
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 51.1779495051766,
+            "p50": 35.7008405616679,
+            "p90": 117.41309347446588,
+            "p95": 132.53766773759642,
+            "p99": 152.33930935999228,
+            "max": 152.33930935999228
+          },
+          "makespan": 258.7318742840549,
+          "planning_wall": 79.61679804511368,
+          "boundary_CPU_wall": 37.80331104435027,
+          "fit_CPU_wall": 0.42002327274531126,
+          "iteration_scheduler_wall_charged": 0.29353490844368935,
+          "search_by_kind": {
+            "route": {
+              "considered": 5391,
+              "full": 593,
+              "calendar_full": 593,
+              "pruned_calendars": 4633,
+              "bound_checks": 681947
+            },
+            "boundary": {
+              "considered": 0,
+              "full": 0,
+              "calendar_full": 205,
+              "pruned_calendars": 2864,
+              "bound_checks": 232367
+            }
+          }
+        },
+        "candidate": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.451210913255993,
+            "p50": 8.524322462297121,
+            "p90": 13.57286992983012,
+            "p95": 14.514270791490105,
+            "p99": 16.692308558589957,
+            "max": 16.692308558589957
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 53.358437092885936,
+            "p50": 38.82744848114947,
+            "p90": 126.60609391522905,
+            "p95": 139.2111999394744,
+            "p99": 157.39331082647635,
+            "max": 157.39331082647635
+          },
+          "makespan": 263.7864006038951,
+          "planning_wall": 78.18970013130456,
+          "boundary_CPU_wall": 40.04914648272097,
+          "fit_CPU_wall": 0.4225451033562422,
+          "iteration_scheduler_wall_charged": 0.27100849710404873,
+          "search_by_kind": {
+            "route": {
+              "considered": 5368,
+              "full": 570,
+              "calendar_full": 570,
+              "pruned_calendars": 4629,
+              "bound_checks": 642032
+            },
+            "boundary": {
+              "considered": 0,
+              "full": 0,
+              "calendar_full": 219,
+              "pruned_calendars": 3011,
+              "bound_checks": 254557
+            }
+          }
+        }
+      }
+    }
+  ]
+}

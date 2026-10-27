@@ -1,0 +1,8 @@
+{
+  "changed_files": [
+    "experiments/issue23_strategies/paper_baseline_search.py",
+    "experiments/issue23_strategies/run_pcie_matrix.py",
+    "experiments/issue23_strategies/test_paper_baselines.py"
+  ],
+  "note": "Reference class, batch calendar, common physical simulation and cost modules unchanged; runner adds candidate choice and paper adapter changes do not execute in reference. Controller wall is measured each run and can change trajectories."
+}

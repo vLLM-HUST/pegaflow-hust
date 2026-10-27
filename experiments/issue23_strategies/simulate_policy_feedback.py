@@ -477,6 +477,11 @@ class Simulation:
                 )
         return first, tail
 
+    def api_phase_split(self, key, node, prefix, first, tail):
+        restore = min(first, self.world.restore(node, prefix)) if prefix else 0.0
+        save = min(tail, self.world.fits[node][4]) if node >= 2 else 0.0
+        return restore, save
+
     def pump(self):
         changed = True
         while changed:
@@ -622,7 +627,7 @@ class Simulation:
                     pfirst if node >= 2 else None,
                 )
             else:
-                self.layout = transition.layout
+                self.commit_copy(transition, key)
                 self.actions.append(
                     {
                         "kind": "implicit_copy"
@@ -638,16 +643,11 @@ class Simulation:
         if name.endswith("_api"):
             item = self.item(job["row"])
             self.pin(node, set(item.hashes[: job["count"]]), -1)
-            state = CacheForecast(
-                self.layout, {key: item}, {key: job["plan"]}, self.world, 512
-            )
-            state.save(node, item)
-            self.layout = state.layout
-            self.actions.extend(state.events)
+            self.save_cache(node, item, self.world)
             prefix = job["count"] * 128
             actual_first = first if node >= 2 else duration
-            restore = (
-                min(actual_first, self.world.restore(node, prefix)) if prefix else 0.0
+            restore, _ = self.api_phase_split(
+                key, node, prefix, actual_first, duration - actual_first
             )
             result = {
                 "id": key,
@@ -691,10 +691,7 @@ class Simulation:
             return
         del self.active[node]
         if node < 2:
-            job["work"] = replace(job["work"], p_done=self.now, d_enqueued=self.now)
-            self.queues[job["plan"].d].append(key)
-            if self.mode != "native":
-                self.policy_queues.observe(key, job["plan"].d, "enqueued", self.now)
+            self.enqueue_decode(key)
         else:
             if job["first"] is None:
                 raise ValueError("Full completion before observed first")
@@ -710,6 +707,22 @@ class Simulation:
             self.sessions[job["row"]["task"]] = self.now
             self.active_sessions.remove(job["row"]["task"])
             del self.jobs[key]
+
+    def enqueue_decode(self, key):
+        job = self.jobs[key]
+        job["work"] = replace(job["work"], p_done=self.now, d_enqueued=self.now)
+        self.queues[job["plan"].d].append(key)
+        if self.mode != "native":
+            self.policy_queues.observe(key, job["plan"].d, "enqueued", self.now)
+
+    def save_cache(self, node, item, costs):
+        state = CacheForecast(self.layout, {item.key: item}, {}, costs, 512)
+        state.save(node, item)
+        self.layout = state.layout
+        self.actions.extend(state.events)
+
+    def commit_copy(self, transition, key):
+        self.layout = transition.layout
 
     def run(self):
         while self.events:

@@ -1,0 +1,299 @@
+{
+  "scope": "Trace-conditioned cost diagnosis, not a new policy counterfactual or hardware proof",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "sharing": 0.0,
+      "release_steps": 2373,
+      "with_companions": 0,
+      "positive_actual_stretch_steps": 0,
+      "extra_physical_step": {
+        "n": 2373,
+        "mean": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "sum_extra_device_work_not_TTFT_penalty": 0.0,
+      "rank_error": {
+        "n": 2373,
+        "mean": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "largest_stretch_examples": [
+        {
+          "origin": 31.033952554536484,
+          "node": 2,
+          "selected": "dna-insert:2",
+          "cohort": [
+            "dna-insert:2"
+          ],
+          "blocked": [
+            "distribution-search:3"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 55.867166832511025,
+          "node": 2,
+          "selected": "distribution-search:3",
+          "cohort": [
+            "distribution-search:3"
+          ],
+          "blocked": [
+            "git-multibranch:3"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 69.76375812809277,
+          "node": 2,
+          "selected": "feal-differential-cryptanalysis:3",
+          "cohort": [
+            "feal-differential-cryptanalysis:3"
+          ],
+          "blocked": [
+            "dna-insert:4"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 69.82240233210749,
+          "node": 2,
+          "selected": "feal-differential-cryptanalysis:3",
+          "cohort": [
+            "feal-differential-cryptanalysis:3"
+          ],
+          "blocked": [
+            "dna-insert:4"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 69.8810397952094,
+          "node": 2,
+          "selected": "feal-differential-cryptanalysis:3",
+          "cohort": [
+            "feal-differential-cryptanalysis:3"
+          ],
+          "blocked": [
+            "dna-insert:4"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        }
+      ]
+    },
+    {
+      "rate": 0.49032341538142143,
+      "sharing": 0.0,
+      "release_steps": 2384,
+      "with_companions": 0,
+      "positive_actual_stretch_steps": 0,
+      "extra_physical_step": {
+        "n": 2384,
+        "mean": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "sum_extra_device_work_not_TTFT_penalty": 0.0,
+      "rank_error": {
+        "n": 2384,
+        "mean": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "largest_stretch_examples": [
+        {
+          "origin": 49.443690479544074,
+          "node": 2,
+          "selected": "distribution-search:3",
+          "cohort": [
+            "distribution-search:3"
+          ],
+          "blocked": [
+            "headless-terminal:3"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 49.502397819124184,
+          "node": 2,
+          "selected": "distribution-search:3",
+          "cohort": [
+            "distribution-search:3"
+          ],
+          "blocked": [
+            "headless-terminal:3"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 49.56109492812581,
+          "node": 2,
+          "selected": "distribution-search:3",
+          "cohort": [
+            "distribution-search:3"
+          ],
+          "blocked": [
+            "headless-terminal:3"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 49.619782667091016,
+          "node": 2,
+          "selected": "distribution-search:3",
+          "cohort": [
+            "distribution-search:3"
+          ],
+          "blocked": [
+            "headless-terminal:3"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 49.67846697599518,
+          "node": 2,
+          "selected": "distribution-search:3",
+          "cohort": [
+            "distribution-search:3"
+          ],
+          "blocked": [
+            "headless-terminal:3"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        }
+      ]
+    },
+    {
+      "rate": 0.9806468307628429,
+      "sharing": 0.0,
+      "release_steps": 2542,
+      "with_companions": 0,
+      "positive_actual_stretch_steps": 0,
+      "extra_physical_step": {
+        "n": 2542,
+        "mean": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "sum_extra_device_work_not_TTFT_penalty": 0.0,
+      "rank_error": {
+        "n": 2542,
+        "mean": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "largest_stretch_examples": [
+        {
+          "origin": 78.73145398128628,
+          "node": 2,
+          "selected": "distribution-search:4",
+          "cohort": [
+            "distribution-search:4"
+          ],
+          "blocked": [
+            "git-multibranch:4"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 78.79027598168685,
+          "node": 2,
+          "selected": "distribution-search:4",
+          "cohort": [
+            "distribution-search:4"
+          ],
+          "blocked": [
+            "git-multibranch:4"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 78.84905557152001,
+          "node": 2,
+          "selected": "distribution-search:4",
+          "cohort": [
+            "distribution-search:4"
+          ],
+          "blocked": [
+            "git-multibranch:4"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 78.90783054106188,
+          "node": 2,
+          "selected": "distribution-search:4",
+          "cohort": [
+            "distribution-search:4"
+          ],
+          "blocked": [
+            "git-multibranch:4"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 78.96659914035735,
+          "node": 2,
+          "selected": "distribution-search:4",
+          "cohort": [
+            "distribution-search:4"
+          ],
+          "blocked": [
+            "git-multibranch:4"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        }
+      ]
+    }
+  ]
+}

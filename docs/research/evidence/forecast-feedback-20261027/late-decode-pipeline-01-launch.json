@@ -1,0 +1,34 @@
+{
+  "pid": 101619,
+  "started": 1793052696.6757019,
+  "limit_seconds": 4500,
+  "source_sha256": "578834dcd8a35c6f57b886526d659167e43430d5aa257f97d556edcf03043c98",
+  "runner_sha256": "7c61cf662bbd034f407b7c9083440f6d31860255f624a11d2bcfcef148a969ab",
+  "CPU_only": true,
+  "quota": [
+    "400000",
+    "100000"
+  ],
+  "stages": [
+    "charged-default-sharing0",
+    "charged-sharing1-sensitivity"
+  ],
+  "no_simultaneous_matrix": true,
+  "verified_controller_pid": 101621,
+  "verified_workers": [
+    101622,
+    101623,
+    101624
+  ],
+  "stage_observed": "default sharing0 native/reference/candidate matrix; native arms completed; no final result at verification",
+  "runner": "/root/late-decode-pipeline-01.py",
+  "pipeline": "/root/issue23-late-decode-pipeline-01",
+  "runtime": "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+  "outputs": [
+    "/root/issue23-late-decode-default-01",
+    "/root/issue23-late-decode-sharing-01"
+  ],
+  "source": "/root/issue23-late-decode-source-01",
+  "three_workers_four_CPU": true,
+  "no_real_GPU_job": true
+}

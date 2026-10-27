@@ -1,0 +1,7 @@
+{
+  "status": "failed diagnostic assumption; outputs retained",
+  "reason": "Native route is admission-sequence round robin, not fixed input-sequence parity. Phase changes change causally ready ordering.",
+  "route_changes": 6,
+  "completed_arms": 2,
+  "not_net_performance": true
+}

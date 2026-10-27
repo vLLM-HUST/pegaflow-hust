@@ -1,0 +1,58 @@
+{
+  "started": 1793089385.1693702,
+  "finished": 1793089386.882876,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "-c",
+        "import simulate_continuous_batch; from ready_prefill_search import ReadyPrefillSimulation; from prefix_reclaim_search import PrefixReclaimSimulation; assert issubclass(ReadyPrefillSimulation, PrefixReclaimSimulation); import analyze_ready_prefill, audit_ready_prefill, audit_staged_save; print(\"ready-prefill exact class and audit imported\")"
+      ],
+      "pid": 606592,
+      "started": 1793089385.169729,
+      "finished": 1793089385.6855671,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 30
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-staged-save-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-staged-save-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-staged-save-charged-default-01",
+        "--policy",
+        "ready-prefill",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--staged-save-world",
+        "--decode-sharing-fraction",
+        "0"
+      ],
+      "pid": 606593,
+      "started": 1793089385.6863966,
+      "finished": 1793089386.854885,
+      "exit_code": 1,
+      "stop": null,
+      "limit_seconds": 1800
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/issue23-staged-save-charged-default-01-failure-full.tar.gz",
+      "sha256": "29517f5f482499d4b717872b6b0b2d0ffecbeab543cbd176db55155659d9ea1d",
+      "bytes": 81693,
+      "partial_not_performance": true
+    }
+  ],
+  "failure": "RuntimeError(\"{'command': ['/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python', '/root/issue23-staged-save-source-01/experiments/issue23_strategies/run_pcie_matrix.py', '--repo', '/root/issue23-staged-save-source-01', '--inputs', '/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json', '--seed', '/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed', '--output', '/root/issue23-staged-save-charged-default-01', '--policy', 'ready-prefill', '--workers', '3', '--residual-world', '--phase-residual-world', '--staged-save-world', '--decode-sharing-fraction', '0'], 'pid': 606593, 'started': 1793089385.6863966, 'finished': 1793089386.854885, 'exit_code': 1, 'stop': None, 'limit_seconds': 1800}\")",
+  "no_gpu_work": true
+}

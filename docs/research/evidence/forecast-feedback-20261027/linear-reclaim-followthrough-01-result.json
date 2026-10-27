@@ -1,0 +1,18 @@
+{
+  "started": 1793071765.7820337,
+  "finished": 1793072668.8435326,
+  "charged_process": {
+    "command": [
+      "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+      "/root/linear-reclaim-pipeline-01.py",
+      "charged"
+    ],
+    "pid": 367292,
+    "pgid": 367292,
+    "started": 1793072087.605557,
+    "limit_seconds": 4500,
+    "exit_code": 0,
+    "finished": 1793072668.843193
+  },
+  "failure": null
+}

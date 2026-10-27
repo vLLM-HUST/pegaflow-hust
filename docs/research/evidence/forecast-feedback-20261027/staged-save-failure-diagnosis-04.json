@@ -1,0 +1,1286 @@
+{
+  "diagnostic_not_performance": true,
+  "error": "SaveAllocationError('staged-save-publication-02: save allocation failed for dna-insert:15 on 0')",
+  "at": 536.6307536267326,
+  "save_failure": {
+    "kind": "save_allocation_failed",
+    "requested_blocks": 156,
+    "rolled_back_staging_bytes": 822083584,
+    "published_new_blocks": 0,
+    "peak_unique_bytes": 2143289344,
+    "capacity_bytes": 2147483648,
+    "failed_key": "2e71f239f58d66510abb8a6de1c7aed8dc1e0d9cf60d7e0584305a744eb44732",
+    "request": "dna-insert:15",
+    "node": 0,
+    "at": 536.6295380267314,
+    "publication_model": "staged-save-publication-02"
+  },
+  "used": 1321205760,
+  "capacity": 2147483648,
+  "hidden": 0,
+  "virtual_bytes": 0,
+  "protected_bytes": 1321205760,
+  "units": [
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:5343b18744af5315c9c7ff177377f8f5746af368460f356c2937fad709b7c982",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:2ada0e9297415664d74de11df5ff7079c5a88726a71f2f9f46e8112da0515670",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:6a42062b6a3beae8724118862860929a058c6ce121dd91ff2ee56ed3a424034f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:769a6363def8468577fc2599c9458c16fde1ee3b4346e9b6e8eb5b68a384903a",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:048f2a5032bb6f8055aacb29eb04985c0fe30bdd42d7d07d78c89a4ecf3bed6f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:951b85f65b16311dce2aeea6c9f10a29a12041df6a24cbceec843f31dece7f8b",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:675611d24b10e2aeab9267b8b6beabfec2f4e21cdec8c2cf4746aa9a8e453e97",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:4f7a0d6c52860dcb8e0e670d736901997b8737c3760f18afcb03751b06644071",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:be3bd4165742c50c5c33a2b6f2a3d61ebd2eba37cb0b09334816fa82ed9d8401",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:fafda36e3d9b6263bc8efdbd5e0e9c791ee94811c141fe61c12a176b15281a67",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:b9b48d8e2930392234836cfdb093e12f4c6d9b61caaeed1cb368cd85d219ffdb",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:6bc42d3c467c5146778af4b79cc00c664a877e1f693d902491adee03fa6396e5",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:478cf3c1180e64d9af792ca8da4abf041a6ad22bc319c32381960ea7588246b8",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:da04080ac4c78cf93564cce35c0e54da29463560bef89be78817d5d249ff2424",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:06014b7d741377f4e5d65b5928573d8740c61a260aee33663deb8109beaf4e3b",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:c2d29854149f54b5580f8919e2df9adf2c1c30d572d84c5dc916578811b13b0d",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:a30349ac64f34378af51d7ee30187db3438dba2fae4b1fc6e6a834de4746563e",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:37da37c2b4e0c967208267508c8b649b3057f26d44dab83c3ff7554af94a07c0",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:adcf9d6f9cadd14822a60a516d6ebaeed72d312a7be54ffaf3a30ae2c932ff1d",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:5f2300e2845219a39b2c02087d22d4818731f3da2841def5f682c88eeea6060c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:fe6a73fa7d155a1a4eb6adae64612603e6a69d60b7d792be7cd1447d9f7fef4f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:95ff936ed2958bb6ae1f18f8af326e8c613c6964158add19ace3473e5f9b0b98",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d05ac45a6bfd77de7e48d16ac9c6deec0e5932e0939e1ca342196fe197ea7a87",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d08d7dd59e59fc311bebaefb87031bb5530860e7a6610399cd682517ef325e34",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:14a13e06de0bbceb76ca3b8eaab41b07b4ee366b85a277ec311936f15b4a7b43",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:a818f1de76eb7afed77678d3760cab8cb7e5532d9073a3d35d6d7bc6e0eecea8",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:9eef2d7cb638c71d9b4c79c9f3d30a7355ab3af96f24174c6464d962f1001adb",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:b4d6982fd7cc580806a9dae01344d18427f718ffa68187b7b6f781e3b7029879",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:8694674cca90a714a850a6a9fed805ec444b5d19eda20c085e8f55d3f8af7c8f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:223d9f1fed38ac1a36cfdea6763114e97fa97c56b2c9aee04de9fb1608e827d0",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:002d1c55885cc073633927419a4d5241724632351fd0d99b03e517c15bedb424",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:18cd9178814f4b1d30771a1aa64bf7474321055bc41c68340a8a33182e950369",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:05382ab4f8382779133b63c4ace36e4e3c9748fb8bbc0349a91c8a60eb7eeaef",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d2d0d9fb5791487d1affe81831050f32f1f3165aa4ee0a9f3c6fe7f076c197f6",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:006376cbe057a9793d9eac3781ce73394c0a134cca027ecc7f958be6d0683d90",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:9a9ef890a5dfb624ce42e952b81465122432d3541691c123d938a28113abf84e",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:f5fa81580384ae02c905d5a379b67cbd865adb676d7eb7542dd13b10023b8887",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:ec1446b1136e7ac66c66eb2ec6947305cbc65d96f67316a0ba60770832d7349e",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:f10c32ff0b728e5748579a992938b84a2d06a52e711231b769cb58c38adaec61",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:e08565a9d1cfa4d28402741f2260a9e91346bd7477e7f95ccf07a731ec50ead1",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:4575460da8026815c8862ad1b824a71ea746c00eb34d6f765c09ab4923cbc31c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:9fb8a5ced7a138611de20e6b4d00b2dc79f0145e9430151b938106ac34f4487c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:63ec740bb90f5a3ecc543eb9c71679c3028a5213428087f056c076fb8b3714bc",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d65b243ad69bd841da04f60fb61267ba42cf1c34ad499ee8cefc0501b74c0d12",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:9c6ac86f7c0e5ef4c5ab2a816c03bb98f27abade549995ea03641ccb956af23c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:c2c51f9a4a9af4541b5cf254496bbcbb31652e7fae46b37356af053b378245d6",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:7917c0598294635ad0cded42d9b8d7e275118c77b5b14df57a727bfca9c86bb2",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:7b223ae3d5066c25bf99d23767b5b8f572495f4f0d71b67a93cf239a97d220c0",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:c3baf19394c633ab3f0f958f3bdf4f32aef084af3f05ac1de33b35288f5a05ad",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d3a4e81ffa00d486af53cd0cc5517b323e5cb5888987ea90d3508894e27a57d9",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d6231e32d999ea9e1b34fef2732211ad7036daf37370bf486b4bed2a5e566e55",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:451f66dbbb0c327fde4dbaecf33101fd4e24a3764499bd87c4ba2a174e23d32b",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:3376e0848eacd4f3a305875a89213a027cfff678be17fd0308046a5266915a77",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:2a20a551736c4abd15d3a215d4114d47e4ae17d8133aacc4c1a3e47f3ad3dc6e",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:048100f4ab68ceb32c1dc220f8d8c84ea0db47f0033ae91f87f9f5fe74a50312",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:5c776c6e16a1fc128ff6e49fde88072bfd599b35bbeb1b91b81882b1c26ba0fb",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:7dc6a0b9767188c150a727d4c1dfe5b71073a25cd0bcc38766906644add38c6d",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:886da6a147a307e0ec6f39fac7e0c5611f6de95fbad3cf935cac23cbc4a28e79",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:4366d67af48ee9cfd2dc9402e06922ade52b71432ec3a77a8b85615a326dc3a3",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:71c371ade6420e7c09fae624410329f976830e9011c303935f2a36a4e884245c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:53cc9857016f2e73285ca8bc2b5a28dedc58ff6d0145218f349a92b83dab0797",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:dcccb53fab4d0527787f80bf94365b016b3f420af7947e7278701a705ea3531c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:a931268335d6d6d9f879c28f4b41d8da69763a8811bc9f0153966e10637ecb77",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:3c111270571d1584a3b961247f33eb98df70bf151ce13f208df24de97732e6e5",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:020190c7cdace581f51a7100870b2913174dcb556abfa7f1ecae526f3e0c72d5",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:fa25a342033e8adedb8423285b6e394c86912b233c194fc6049fd578e73ff992",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:a059802ef31184d3df9e2ec0ead8e4f53ec5211682a9854d56540c8df086b483",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:99cb1deb7d9d909b58cb91cccc254e933952fcbcb1754f77e0b31b81fd8f8042",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:f159c71f172d2c0097316963eef33de2cf5cee0543344c9c7acfcc2b0d69dd42",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:32f6d0b52b8e439f583cc458ccf18c00e3a3e0fcc66d3ea5875f9c68e1a74068",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:dce7a7019d7f72b2366fabacd441d7e00e140ea04e64419365140f3ef90e79b4",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:570fe559cb9614bc8fdc11f0f3c567101c4a7fa20a721a50fcbd3c79f8b136e3",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:f3d5b6ea619da4711f3f4e9cb2f053cc43295d6c3a76bbe5d395026b6a6febad",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d372e6babd0062df376d66c147b6a779203b82ca6d2a069555c294312fd65db6",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:5d65be471582bb0c59df0d6a62e54894f6538358a87aa361d1bafd55b45e517c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:c9819e75b3a618190802296b5d00fcf3b0ad2fdd41dce1ee107850bd94e3eed6",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:e6f82f7b2f22c17abc74c233c4c58d0e12bf6b3626b98e1ffbceb90e09a36be2",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:4cd2c8a978dc680b40e862f67442841ca9b2f32b8a5c7b4ede69266e6f6b5928",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:03db6ceb21138b6c878453745bb70acfdcfb7925451211ea0ab0f44e84c95b9f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:ed6701a14c2ab1f19ab2e5e4928102d1256ebd6557361c5653b7ad8073aaabb8",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:bd7d608c1e4387178695c87d01400ae5fc82cd538ccb1bded31ab02d4c51e168",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:cccb0196c7c7ccacec6c8d574c5e4181d2e2469db1fd11c85a6036a05d513883",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:b99a15b4dd131f09a86f62e959fef4f6f1b561efa8aee32ea7824a9805091b1a",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:c06f0f5f603c3a0e7b176dc0d5f20acea075373d76378eabf94715fe10f189c5",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:43909fc6b3e402c08f3e53d1273d38ff3dab3bfa92c1baa5bfd5fe28c6963465",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:5af3ea51b37a88310b65e037be9d5b6ddd3381943330189f6e69523eacca0eb9",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:962132545cbf12f93dd951595ab2afe5a614821d2ed174051d030d5184bba6b6",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:3ce1b0705332964b459486df428ca5c677698e3808979b1a6413d6aef155c50e",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:c6eef1ffb0e0e6c91dc43c1059199ddde8b2a32439a7a1c0db9e001acd26dcb2",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:0b4f24e5b5602c15dc0a412fcbe15eb5373ae30e3f3688c322c01d39f806344e",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:8c54b24a08787cd9b1d19a9b5abfda758218ed622affa374795ff55828adb8b0",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:daed42f39fa894b5a9907cdd387d39eadfe0d83a54809f0a2eb520970fe9632a",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:6b6d07ab9829d94c188090a4c7d600ec246ca8f7f21e8367c3713f775f38a12f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:ff1a3fa1a494576187420777ad0d94e769b18c3e2d64eb49fc0973a0b4fa9813",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:19120253636d5aa63da4afe9e0c8c82e89427e5b8d2e445e5dea27ad0e4c115b",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:7dfd68699c5aa54c6cd4cfea74a5f35f6bd1ff35216c54985a59c33e0fdd080a",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d1c9c3beb3cd13803f54a44ed7d125da324616cf96bf10664b6c2b9077a71b3f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:0d05ecba7558a0898fe17c27ea79b8660dce7a9a0cf9e8c891395b674953e9bf",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:39551a6736a768d894413df104c17b6391f1eeb6c22f2106e16c6a3b73d28dd0",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:68f07235b2340455ad6f646656223b45caf2308ef1b351d9947725171dba1d26",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:5858ab585acd639defe074e518300d036e2a93fe13c94bb818dbf8253dbd2443",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d87bb7cb792e6f596ffd4b829d75aa4aa7b8c4b1b4b414d44601e3bd5da4a437",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:8b0ea782a9f03a2e5dde577d7c1a4e4d9dc9a635f9b191594ae1aa618df1b931",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:0b9218b1b1f6725c1fccea6dce19605e5c6ea766279a687cf7050b7dca8850b5",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:f385ee9d6435ab1b593774d9a10ecd3d9bc5ee2fb681970ce4c190f3015e5551",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:beba2c5920972eeac803d62fcc734d56f8e86a6c3ee822d858dc6ab764f05fb6",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:993e674a62d2df3391fc4ceeab658f0c8ded5659f69b04cab27cefa8db195b9f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:1a6797583ac9515e487acb49bde6a14735d8e2e7d706bb252a0862e5abf89c7d",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:ac7ba8fc7a9c32063926e16bb320c1753ddea76f1ae80614e219753fa783879d",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:ad0ced2e2f70afd502856f46cccee790f55f58bc22e79a36c5a417df57ba1c2c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:ea745b63fd2278494a75067b5d6b608129618d7ee776220dabcda4e6634dd924",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:fe20b065da7d7e012481358c05b1e8c737ec4456f280a04affb88bdf490c31d9",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:8a9e50757c20df666fc7a20d82fbd99b0988a57be3320f21f865cc46dfe98cb4",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:a48c2f5ae4f2693fa8cd4b6503dace9dcc3c988430ace791dbe2d206fba8c610",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:dbe470e2fb496ab00e1915bce92235783f4c44b26709c433026f21dac334e70c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:67d13febda118a007180654c2570c000450cceaa4fcd70af7760a27b1a8cb3ef",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:7e6aadd6b9fc2956261c90b7e60a1bab9a5a494487dae7e364b636e01ce7113c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:b989a4f868c33c24b0f09f8fe73f03668d9d4887cde0a93b7307a2abfb516845",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:20b83a55967e838249e427a71855c77a8f3d02a31afeff7642db3eac61abadf3",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:1939626936045b990b1085111ed091da53a13a2bc8344ef9ece2b81fd855259f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:461ef6590b3c8145099ecd2ff92156525d2a77506a5c9d3361cd5b4913c26710",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:1b76d9f4ff0ee69bf47bbe944787e620fc61f31627e688c81c7d0e2c57d1aa9b",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:61c050373c52971e3d11c4da7fd6200f63f03400af5e37ed7ab895f02bc404c6",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:e5b4ec4e452d022c2d90689a23e42d500fb0e71d9c815680ace937c6b76a5bf7",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:72ff75a6299b526898feaaf98f84d46ac9bd59092a38687ab22ce84f69bc9b72",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:545353388d08a8b248b5bb159ca24a8a8c7aa3cc892027333351c3c81284a4ef",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:ff25b7dd57749aabff5e51f0efb65a648d65805b3e09fc4bd4a1fe7a470a1e16",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:7c0a5f0efc62176e6e5b620e485502405a1b11d06ca8858f605475ce5aa13ea4",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:66e0075342295ba2336b8a9caa6698318b7b0188b655ac78c5f0a94d0a764b25",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:c9d897eeff96e091b9402f2ff7c6a35ee69795f1f68f324dfb94fa85c5962bee",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:30cb41c828855f9417c27dcf7de160cb5a5d40ce957be90be47dd1ae441e02a4",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:15c7d2925895b2a3543dc9647830bca3823b7f8a6e6b704acc6558bf9f53b7bd",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:90894c5533cbef729290ce032cd60229d0464f51693b43c3f220f6c1a1cf1e44",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:97cbb101fd1b84d5b952778a44f32c2c804cd48287483886f9504a26547dec19",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:7a6c4f344581c3d2faf6cf8e0d069585c812969afd173d765f59dc718c9a2fcf",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:882dd9a83d801e3a006823262563cd14b86822f4994016506ba4af67a07c8055",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:428f1cef2c952503a1a69ccd9955b0b22b8fd908b3a296864d28eb9dd5ae6ff0",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:9de17dd09cffc1b8e202ebb48147985b2d4ea28240fda08988356880a01c87f7",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:39fb27b8e12f22cd45b71b358526ec53876d81fb634957ef8d636f1cc5b2d9f2",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:9af67f2d5870cbab98319f25cb45272eed45fbc813bce024ab8a94767c02b74e",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:53900924bc792bbc21eeac9c280b58f3afea4f019d51194c0ef09f78eb8fb6b0",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:5187bb2ec738af941d33afa7b67ee632086d34ca943fc4865b07445e08d7ee65",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:243079b4e1d068a0cdc7cc4951418a47d383e7bb5050c1938e54cddbe184d437",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:bf19ce31e9528330a2ac0428d7bfe76d64e035eaefc7dcefde855e2164aaac1a",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:e5071586809ccbceb6ec7e3a45a3740798046779176f81b30eb5cbd519da5f5a",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:c884509ba4541655cb0814a74cd1015a80d4c2daebd624a8ea4a62dfb5c75a75",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:1757630cc0553d51575fe527e2d3809ee64cfb8294ba15408746625cde8e4048",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:583a6bcdfc33ab0b1b2ac2894e3a6284a040a0a9d4c348d036e65c1d40164f4e",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d706a9947427e0a81205d2322fbe22fbfef703f1072d275693a2db14457a509f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:84827808dc45f82db85e95b7d68784570da2d294da42a5fbf6731d26f017ae44",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:1d2f79e96f41578877225c13cd1777b206f30a34cd1570512e700c556928ffa9",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:b1d504b1d23fb213c81d13ac56ba5649b9c13d99a08184f4489c96f9e547251a",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:aa9fd532b87849acd11998d61c2e338993b09f946952f8cbe06574f8884c1335",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:726ba63b6b64bfb1b607fc103662071663456a91c02e8d538870cfbff772fe23",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:d8dd71f8bc00612bb1b15f00687e68ed15ed970532f2a058c513fe75b731f2cd",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:a2b6b4e6255a07e4207764b6c1036b7c6285bd030831e16bf482d02414d5cad9",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:61d5902456a6ca35d3e1928cd0afffd66bf52157058b7711a9ff117c1a84237c",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:5162a969aef988799d2ca44df9ab58c5beeeef92855a67fb4cb29ec4fba15951",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:4cf24a8bb0437eac008416233246eb3f741818faa5aed17a4f519501e3841abe",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:7c4cf5b11e4ce74275af498f92c59b3f7ae7d508a556760909b16d41c3ab8449",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:6747f768795bfe2e609da2a15fbf613f25f6613d7c994a64f4e05454f8e0aae9",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:ee808e9b7cda60c699ac66a5cc2e4097c6ae71bdd7254b4ed4a88ee57177b5a4",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:7223ccda91306e4d37d7d9b84aa754ad22b1146fc1b5d2b83b89c9e0fd637c28",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:8527bce07b7549b54f98980d839d39c3905cddeb54a9dfc206fb3a3ca5c9843b",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:fad8444ad046512c439ae682b71571ed1429ef135512b622769343190cee6be3",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:67c904b2e588ba96fe4d8fb0e0a16e38cebb2ce7b6b1107fcf1a0924f0807dad",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:b739d67e13c0e849fb43a0c0d321c61c23c40d0adda6493ef8213d571e8015f9",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:75e121e2cc75e564045be2ebf8bedbab268942d8122f770cc2674c1fc84e4bf0",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:afeb9c553987ce5d538bd7f404f7693cee1aa74e9ed16ca43cc977b6b9a69c6e",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:b74d0b63f64ca2ea1ba6f144e4c37d10fa7ed6423ec6fc287ed149b02a80e4cf",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:76f9b84c1749f77a503654078f9741b828d58d143c5a45de773669302772cfc5",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:74200325f6479d2461e0ac33e08607cdc41968fddf91e1dfec97f8e67eb428b2",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:183bb411faf927443eb41afa3f8099ccbb98514ba33ad4c181f75a653d120a7a",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:781fac6fb067f55795beeee35185caf741e0651dc7efb78e766bfeccc6409b61",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "staged:0:feal-differential-cryptanalysis:12:8a50a1dba8fca349108e4aebb22fb734770f5dbb8fd21556f0f8c353c9b0287f",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "published-copy:0:dna-insert:15:1fe9fa0905a5e78a596833dd19052f50fea5c7bf255991f6e46da683e75d4dbd",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "published-copy:0:dna-insert:15:e1a6d6baf66128b26c6356f26f970c1baf2c07a35ad6315d5d95ff5f4437f720",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "published-copy:0:dna-insert:15:421461acc31fd26933be68f57a6ba70a562e1d84eedd214aacf491abbed3daa0",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "published-copy:0:dna-insert:15:07dc0ba32d4b8cae453a82b7cad5f68630b8a23b7291aa4fa42ac8bf3ed18ed4",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    },
+    {
+      "identity": "published-copy:0:dna-insert:15:fd29cbfc511a3d962a890d0ebd3f9ae9c1c7b490d6dca49abc0ed79d487cfa39",
+      "charged": 7340032,
+      "virtual": false,
+      "protected": true,
+      "keys": []
+    }
+  ],
+  "completed": 89
+}

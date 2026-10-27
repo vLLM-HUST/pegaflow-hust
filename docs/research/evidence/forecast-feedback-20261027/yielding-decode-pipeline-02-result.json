@@ -1,0 +1,252 @@
+{
+  "started": 1793059831.0408807,
+  "finished": 1793060661.0612552,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-yielding-decode-source-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-yielding-decode-default-02",
+        "--policy",
+        "yielding-decode",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "0"
+      ],
+      "pid": 197422,
+      "started": 1793059831.0413082,
+      "finished": 1793060190.7934592,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-yielding-decode-default-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/yielding-decode-source-receipt-02.json",
+        "--output",
+        "/root/issue23-yielding-decode-default-02/source-control-audit.json"
+      ],
+      "pid": 202660,
+      "started": 1793060190.7940655,
+      "finished": 1793060202.526454,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-yielding-decode-default-02",
+        "--output",
+        "/root/issue23-yielding-decode-default-02/work-conservation-audit.json"
+      ],
+      "pid": 202862,
+      "started": 1793060202.5269763,
+      "finished": 1793060205.6467783,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-yielding-decode-default-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-yielding-decode-default-02/release-estimate-audit.json"
+      ],
+      "pid": 202863,
+      "started": 1793060205.6473129,
+      "finished": 1793060209.7687016,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-yielding-decode-default-02",
+        "--output",
+        "/root/issue23-yielding-decode-default-02/feedback-alignment.json"
+      ],
+      "pid": 202865,
+      "started": 1793060209.7692494,
+      "finished": 1793060212.6389441,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/audit_yielding_decode.py",
+        "--result",
+        "/root/issue23-yielding-decode-default-02",
+        "--output",
+        "/root/issue23-yielding-decode-default-02/yielding-decode-audit.json"
+      ],
+      "pid": 202884,
+      "started": 1793060212.6396267,
+      "finished": 1793060215.1584845,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-yielding-decode-source-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-yielding-decode-sharing-02",
+        "--policy",
+        "yielding-decode",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1"
+      ],
+      "pid": 203087,
+      "started": 1793060231.173229,
+      "finished": 1793060623.813034,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-yielding-decode-sharing-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/yielding-decode-source-receipt-02.json",
+        "--output",
+        "/root/issue23-yielding-decode-sharing-02/source-control-audit.json"
+      ],
+      "pid": 208184,
+      "started": 1793060623.8137748,
+      "finished": 1793060635.2493906,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-yielding-decode-sharing-02",
+        "--output",
+        "/root/issue23-yielding-decode-sharing-02/work-conservation-audit.json"
+      ],
+      "pid": 208398,
+      "started": 1793060635.2499814,
+      "finished": 1793060638.170527,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-yielding-decode-sharing-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-yielding-decode-sharing-02/release-estimate-audit.json"
+      ],
+      "pid": 208400,
+      "started": 1793060638.1710696,
+      "finished": 1793060641.6421156,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-yielding-decode-sharing-02",
+        "--output",
+        "/root/issue23-yielding-decode-sharing-02/feedback-alignment.json"
+      ],
+      "pid": 208401,
+      "started": 1793060641.6427584,
+      "finished": 1793060644.212589,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-yielding-decode-source-02/experiments/issue23_strategies/audit_yielding_decode.py",
+        "--result",
+        "/root/issue23-yielding-decode-sharing-02",
+        "--output",
+        "/root/issue23-yielding-decode-sharing-02/yielding-decode-audit.json"
+      ],
+      "pid": 208402,
+      "started": 1793060644.2131484,
+      "finished": 1793060646.6325595,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/issue23-yielding-decode-default-02-full.tar.gz",
+      "sha256": "ce1bef6c3b3fe6ac69deb1a73d33dbcd1c84c5b20d69c4d0b33b16afd5d78b16",
+      "bytes": 25495111
+    },
+    {
+      "path": "/root/issue23-yielding-decode-sharing-02-full.tar.gz",
+      "sha256": "7876fb17b6872baa3b82f568006a017bf6ab3a3c1842a9d9cb4d6510ce658620",
+      "bytes": 23560685
+    }
+  ],
+  "failure": null,
+  "no_gpu_work": true
+}

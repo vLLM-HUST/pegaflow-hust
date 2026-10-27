@@ -1,0 +1,32 @@
+{
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/advice-calendar-analysis-support-02/audit_advice_calendar.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-default-01",
+        "--output",
+        "/root/issue23-advice-calendar-charged-default-01/advice-calendar-audit-02.json"
+      ],
+      "exit_code": 0,
+      "stdout": "",
+      "stderr": ""
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/advice-calendar-analysis-support-02/analyze_advice_calendar.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-default-01",
+        "--output",
+        "/root/issue23-advice-calendar-charged-default-01/charged-feedback.json"
+      ],
+      "exit_code": 0,
+      "stdout": "[{\"rate\": 0.24516170769071072, \"p99_reduction_percent\": 45.849654184532454, \"requests_faster\": 59}, {\"rate\": 0.49032341538142143, \"p99_reduction_percent\": 15.762278246004492, \"requests_faster\": 49}, {\"rate\": 0.9806468307628429, \"p99_reduction_percent\": -0.5301545874137004, \"requests_faster\": 40}]\n",
+      "stderr": ""
+    }
+  ],
+  "raw_simulation_rerun": false,
+  "source_unchanged": true
+}

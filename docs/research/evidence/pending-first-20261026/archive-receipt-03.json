@@ -1,0 +1,34 @@
+[
+  {
+    "case": "acquired-phase-01",
+    "archive": "issue23-acquired-phase-01-full.tar.gz",
+    "sha256": "3a1bdf6da3de1114b12ef096a9b1af9b596893226c474366d5dab325a0446bb2",
+    "bytes": 14214998,
+    "remote": "/root/issue23-acquired-phase-01-full.tar.gz",
+    "CPU_only": true
+  },
+  {
+    "case": "pending-first-01",
+    "archive": "issue23-pending-first-01-full.tar.gz",
+    "sha256": "61def19bdd0d18eb6d8bfc1dbfeb0b58d07eccc10bc7673d5f1e46961ee7a5d8",
+    "bytes": 15008801,
+    "remote": "/root/issue23-pending-first-01-full.tar.gz",
+    "CPU_only": true
+  },
+  {
+    "case": "pending-first-02",
+    "archive": "issue23-pending-first-02-full.tar.gz",
+    "sha256": "526a4b377e91b1c6de06801a28c292da5dfc673d7751cd771fc8e35606ca8d90",
+    "bytes": 14948086,
+    "remote": "/root/issue23-pending-first-02-full.tar.gz",
+    "CPU_only": true
+  },
+  {
+    "case": "pending-first-reference-01",
+    "archive": "issue23-pending-first-reference-01-full.tar.gz",
+    "sha256": "b20c60bdfec1b229bce0627d29d6ed586f14d0458e4b7a1214f39632bf964ef7",
+    "bytes": 14414278,
+    "remote": "/root/issue23-pending-first-reference-01-full.tar.gz",
+    "CPU_only": true
+  }
+]

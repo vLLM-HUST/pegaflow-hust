@@ -1,0 +1,252 @@
+{
+  "started": 1793052696.6757019,
+  "finished": 1793053281.294134,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-late-decode-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-late-decode-default-01",
+        "--policy",
+        "late-decode",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "0"
+      ],
+      "pid": 101621,
+      "started": 1793052696.6761546,
+      "finished": 1793052960.5651484,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-late-decode-default-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/late-decode-source-receipt-01.json",
+        "--output",
+        "/root/issue23-late-decode-default-01/source-control-audit.json"
+      ],
+      "pid": 105203,
+      "started": 1793052960.5657263,
+      "finished": 1793052969.3585393,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-late-decode-default-01",
+        "--output",
+        "/root/issue23-late-decode-default-01/work-conservation-audit.json"
+      ],
+      "pid": 105417,
+      "started": 1793052969.359081,
+      "finished": 1793052971.728203,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-late-decode-default-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-late-decode-default-01/release-estimate-audit.json"
+      ],
+      "pid": 105418,
+      "started": 1793052971.728777,
+      "finished": 1793052974.9048676,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-late-decode-default-01",
+        "--output",
+        "/root/issue23-late-decode-default-01/feedback-alignment.json"
+      ],
+      "pid": 105419,
+      "started": 1793052974.9054363,
+      "finished": 1793052977.0242832,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/audit_late_decode.py",
+        "--result",
+        "/root/issue23-late-decode-default-01",
+        "--output",
+        "/root/issue23-late-decode-default-01/late-decode-audit.json"
+      ],
+      "pid": 105420,
+      "started": 1793052977.0247815,
+      "finished": 1793052978.843048,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-late-decode-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-late-decode-sharing-01",
+        "--policy",
+        "late-decode",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1"
+      ],
+      "pid": 105623,
+      "started": 1793052990.25062,
+      "finished": 1793053254.3482158,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-late-decode-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/late-decode-source-receipt-01.json",
+        "--output",
+        "/root/issue23-late-decode-sharing-01/source-control-audit.json"
+      ],
+      "pid": 109029,
+      "started": 1793053254.348884,
+      "finished": 1793053262.5364058,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-late-decode-sharing-01",
+        "--output",
+        "/root/issue23-late-decode-sharing-01/work-conservation-audit.json"
+      ],
+      "pid": 109031,
+      "started": 1793053262.536968,
+      "finished": 1793053264.7056203,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-late-decode-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-late-decode-sharing-01/release-estimate-audit.json"
+      ],
+      "pid": 109032,
+      "started": 1793053264.706185,
+      "finished": 1793053267.0753946,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-late-decode-sharing-01",
+        "--output",
+        "/root/issue23-late-decode-sharing-01/feedback-alignment.json"
+      ],
+      "pid": 109051,
+      "started": 1793053267.0759637,
+      "finished": 1793053269.0443633,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-late-decode-source-01/experiments/issue23_strategies/audit_late_decode.py",
+        "--result",
+        "/root/issue23-late-decode-sharing-01",
+        "--output",
+        "/root/issue23-late-decode-sharing-01/late-decode-audit.json"
+      ],
+      "pid": 109247,
+      "started": 1793053269.0449018,
+      "finished": 1793053270.812755,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/issue23-late-decode-default-01-full.tar.gz",
+      "sha256": "aa09a15e9b6751b5dbdf7fc7772ab6a1bba19f6060f1ab69c1a50496f2b33a98",
+      "bytes": 18196359
+    },
+    {
+      "path": "/root/issue23-late-decode-sharing-01-full.tar.gz",
+      "sha256": "fe08e6ff6fa9785c98b0bea8ec1abb08097869cfcc26085e7830323fa8b8a156",
+      "bytes": 17174133
+    }
+  ],
+  "failure": null,
+  "no_gpu_work": true
+}

@@ -1,0 +1,791 @@
+{
+  "CPU_only": true,
+  "trace_conditioned_NOT_causal_ablation": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "raw_sha256": "538d3a366b173e58c7e83050afd2a710d41ca6ac07332c571bfa868259229a63",
+      "metrics": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.356601817680616,
+            "p50": 7.083888278943647,
+            "p90": 13.502647451417431,
+            "p95": 14.564681226474761,
+            "p99": 18.860657230198626,
+            "max": 18.860657230198626
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 32.141633363149154,
+            "p50": 16.248502176459425,
+            "p90": 98.21826713240335,
+            "p95": 117.73469953323865,
+            "p99": 139.71211580336825,
+            "max": 139.71211580336825
+          },
+          "makespan": 542.3202602373664,
+          "planning_wall": 47.41821875516325,
+          "boundary_CPU_wall": 31.919268327765167,
+          "fit_CPU_wall": 0.4446068536490202,
+          "iteration_scheduler_wall_charged": 0.5395525619387627,
+          "decode_advice_CPU_wall": 3.318438906222582,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 2,
+          "copy_wait_diagnostic": {
+            "copies": 14,
+            "copy_execution_seconds_sum": 10.683669034391642,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 1.3731642786601554,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 1.3731642786601554
+            },
+            "younger_source_blocked_copies": 0
+          }
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.234313515641605,
+            "p50": 6.253669450867363,
+            "p90": 12.977673613633783,
+            "p95": 15.845603334966938,
+            "p99": 18.68716002587763,
+            "max": 18.68716002587763
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 27.09132827254752,
+            "p50": 10.963337966490215,
+            "p90": 81.20894198168583,
+            "p95": 106.02215560647056,
+            "p99": 130.11127642158698,
+            "max": 130.11127642158698
+          },
+          "makespan": 515.0618592175582,
+          "planning_wall": 57.81015415024012,
+          "boundary_CPU_wall": 30.83406985271722,
+          "fit_CPU_wall": 0.469880317337811,
+          "iteration_scheduler_wall_charged": 0.5062436684966087,
+          "decode_advice_CPU_wall": 8.27208148688078,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 2,
+          "copy_wait_diagnostic": {
+            "copies": 14,
+            "copy_execution_seconds_sum": 9.503165831789374,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.8217586717261298,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 0.7708668137114074,
+              "destination_gate+source_gate": 0.04016320932333883,
+              "unexplained_or_bookkeeping": 0.00013043172657489777,
+              "direction_slot+source_gate": 0.010598216964808671
+            },
+            "younger_source_blocked_copies": 1
+          }
+        }
+      },
+      "p99_reduction_percent": 0.9198894937934687,
+      "P_decisions": 0,
+      "P_changes": 0,
+      "no_P_decision_does_not_identify_a_revalidation_effect": true,
+      "worst": {
+        "reference": "fix-git:11",
+        "ours": "fix-code-vulnerability:11"
+      },
+      "aligned": {
+        "fix-code-vulnerability:11": {
+          "reference": {
+            "TTFT": 6.49916294208208,
+            "nominal": 66.41562257861523,
+            "dependency": 59.91645963653315,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 10880,
+            "D_prefix": 0,
+            "ready": 365.7833880181351,
+            "first": 372.2825509602172,
+            "before_P": 0.8104741798119335,
+            "P_API": 4.486340488392592,
+            "P_to_D": 0.4979069365468263,
+            "D_API_to_first": 0.7044413373307066
+          },
+          "ours": {
+            "TTFT": 18.68716002587763,
+            "nominal": 59.06821799512301,
+            "dependency": 40.381057969245376,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 11008,
+            "D_prefix": 0,
+            "ready": 346.2479863508473,
+            "first": 364.93514637672496,
+            "before_P": 2.011495824098745,
+            "P_API": 4.504217192810531,
+            "P_to_D": 11.26448321140839,
+            "D_API_to_first": 0.9069637975599676
+          }
+        },
+        "fix-git:11": {
+          "reference": {
+            "TTFT": 18.860657230198626,
+            "nominal": 43.105684173874124,
+            "dependency": 24.245026943675498,
+            "P": 0,
+            "D": 3,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 335.4154640058758,
+            "first": 354.2761212360744,
+            "before_P": 5.652368407349002,
+            "P_API": 4.420958600091728,
+            "P_to_D": 0.9656231891923426,
+            "D_API_to_first": 7.821707033565531
+          },
+          "ours": {
+            "TTFT": 11.388429739155924,
+            "nominal": 36.02216728155372,
+            "dependency": 24.633737542397796,
+            "P": 1,
+            "D": 3,
+            "P_prefix": 4864,
+            "D_prefix": 3584,
+            "ready": 335.8041746045981,
+            "first": 347.192604343754,
+            "before_P": 2.779957296157079,
+            "P_API": 2.5418741213095712,
+            "P_to_D": 1.1576200492959856,
+            "D_API_to_first": 4.908978272393313
+          }
+        }
+      },
+      "actions": [],
+      "first_original_route_difference_by_reference_ready": {
+        "id": "fix-git:2",
+        "records": {
+          "reference": {
+            "id": "fix-git:2",
+            "CPU_wall": 0.1389977252110839,
+            "model_latest": 13.354230575547296,
+            "origin": 18.76731243112016,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 1,
+              "d": 2,
+              "source": 0,
+              "P_prefix_command": 640,
+              "D_prefix_command": 0,
+              "P_end": 19.631522187132553,
+              "first": 20.437589273726644,
+              "full": 39.46338045056458,
+              "origin": 18.76731243112016,
+              "latest_completed": 13.354230575547296,
+              "not_after_P_revised_forecast": true
+            }
+          },
+          "ours": {
+            "id": "fix-git:2",
+            "CPU_wall": 0.13468159828335047,
+            "model_latest": 13.34621610707112,
+            "origin": 18.76731243112016,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 0,
+              "d": 2,
+              "source": 0,
+              "P_prefix_command": 640,
+              "D_prefix_command": 0,
+              "P_end": 19.674880103202135,
+              "first": 20.43759117341865,
+              "full": 39.463398940900184,
+              "origin": 18.76731243112016,
+              "latest_completed": 13.34621610707112,
+              "not_after_P_revised_forecast": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "raw_sha256": "888275607f351acb10f93e7d0824f01924d43945ecb6b24ef7665415b42238be",
+      "metrics": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.097351766205144,
+            "p50": 8.382217062506129,
+            "p90": 13.988567525683933,
+            "p95": 15.812826319824467,
+            "p99": 18.362749807663647,
+            "max": 18.362749807663647
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 113.51076406986138,
+            "p50": 98.94196052977546,
+            "p90": 238.33333827270053,
+            "p95": 268.0106827937332,
+            "p99": 309.94206116635723,
+            "max": 309.94206116635723
+          },
+          "makespan": 514.8200300449265,
+          "planning_wall": 60.12576480768621,
+          "boundary_CPU_wall": 37.61992014572024,
+          "fit_CPU_wall": 0.4647123608738184,
+          "iteration_scheduler_wall_charged": 0.5925165554508567,
+          "decode_advice_CPU_wall": 11.02834755461663,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 1,
+          "copy_wait_diagnostic": {
+            "copies": 21,
+            "copy_execution_seconds_sum": 11.932708480395377,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 1.7121661449001522,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 1.7121661449001522
+            },
+            "younger_source_blocked_copies": 0
+          }
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.735976093195344,
+            "p50": 7.976373334344359,
+            "p90": 16.389098138170027,
+            "p95": 17.173195666682886,
+            "p99": 22.047099089909523,
+            "max": 22.047099089909523
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 109.98621511105922,
+            "p50": 92.79570719813125,
+            "p90": 242.2532554420651,
+            "p95": 262.33914083791444,
+            "p99": 310.0127120211672,
+            "max": 310.0127120211672
+          },
+          "makespan": 515.1447538588828,
+          "planning_wall": 62.06392821390182,
+          "boundary_CPU_wall": 33.392063926905394,
+          "fit_CPU_wall": 0.4406562075018883,
+          "iteration_scheduler_wall_charged": 0.6605472071096301,
+          "decode_advice_CPU_wall": 4.165361133404076,
+          "P_revalidation_CPU_wall": 0.06419589556753635,
+          "D_moves": 1,
+          "copy_wait_diagnostic": {
+            "copies": 8,
+            "copy_execution_seconds_sum": 6.802849086001515,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.5272047639945043,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 0.5272047639945043
+            },
+            "younger_source_blocked_copies": 0
+          }
+        }
+      },
+      "p99_reduction_percent": -20.064256828834104,
+      "P_decisions": 1,
+      "P_changes": 1,
+      "no_P_decision_does_not_identify_a_revalidation_effect": false,
+      "worst": {
+        "reference": "distribution-search:14",
+        "ours": "dna-insert:14"
+      },
+      "aligned": {
+        "distribution-search:14": {
+          "reference": {
+            "TTFT": 18.362749807663647,
+            "nominal": 266.57544789931035,
+            "dependency": 248.21269809164673,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 9344,
+            "D_prefix": 0,
+            "ready": 422.077031786898,
+            "first": 440.4397815945616,
+            "before_P": 0.8561830819921283,
+            "P_API": 6.204643896683001,
+            "P_to_D": 10.280427020382092,
+            "D_API_to_first": 1.021495808606403
+          },
+          "ours": {
+            "TTFT": 10.16845875280518,
+            "nominal": 244.22735378895592,
+            "dependency": 234.05889503615074,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 10880,
+            "D_prefix": 0,
+            "ready": 407.923228731402,
+            "first": 418.09168748420717,
+            "before_P": 1.3040403000428,
+            "P_API": 5.679239760672482,
+            "P_to_D": 2.2447908355202912,
+            "D_API_to_first": 0.9403878565696004
+          }
+        },
+        "dna-insert:14": {
+          "reference": {
+            "TTFT": 15.288478663917658,
+            "nominal": 247.75786432599966,
+            "dependency": 232.469385662082,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 10112,
+            "D_prefix": 0,
+            "ready": 408.5674552811992,
+            "first": 423.8559339451169,
+            "before_P": 0.8111079802142172,
+            "P_API": 4.308559502391315,
+            "P_to_D": 9.36648244585865,
+            "D_API_to_first": 0.8023287354535
+          },
+          "ours": {
+            "TTFT": 22.047099089909523,
+            "nominal": 258.3890964550135,
+            "dependency": 236.34199736510396,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 412.4400669842212,
+            "first": 434.4871660741307,
+            "before_P": 8.385905232079494,
+            "P_API": 8.685777403497276,
+            "P_to_D": 4.191647376176377,
+            "D_API_to_first": 0.7837690781563538
+          }
+        },
+        "feal-differential-cryptanalysis:7": {
+          "reference": {
+            "TTFT": 8.648847376138434,
+            "nominal": 76.71667537142152,
+            "dependency": 68.06782799528308,
+            "P": 0,
+            "D": 3,
+            "P_prefix": 640,
+            "D_prefix": 6656,
+            "ready": 165.6267416428759,
+            "first": 174.27558901901435,
+            "before_P": 3.316292992348167,
+            "P_API": 2.9441006231395876,
+            "P_to_D": 0.8229724953230857,
+            "D_API_to_first": 1.5654812653276053
+          },
+          "ours": {
+            "TTFT": 6.210777693431311,
+            "nominal": 74.24756029934726,
+            "dependency": 68.03678260591595,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 128,
+            "ready": 165.59569625350878,
+            "first": 171.8064739469401,
+            "before_P": 1.8648480409337083,
+            "P_API": 3.068874671614957,
+            "P_to_D": 1.149326916998291,
+            "D_API_to_first": 0.12772806388434788
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "feal-differential-cryptanalysis:7",
+          "node": 1,
+          "source": 0,
+          "source_owner": [
+            "dna-insert:7",
+            "P_api"
+          ],
+          "origin": 166.97580449517577,
+          "model_latest": 166.97516971502213,
+          "initial_prefix": 52,
+          "selected_prefix": 5,
+          "selected_source": 1,
+          "predicted_CPU": 0.0,
+          "CPU_latest": null,
+          "completed_CPU_samples": 0,
+          "evaluations": [
+            {
+              "kind": "keep",
+              "prefix": 52,
+              "objective": [
+                6.344471176237789,
+                [
+                  6.344471176237789,
+                  5.8680193700661505,
+                  4.319180274287049
+                ],
+                [
+                  44.61050900068139,
+                  39.651232312940095,
+                  38.985684527789346,
+                  36.83685297786215,
+                  34.39718857363292,
+                  33.82993550693729,
+                  32.44858972630047,
+                  31.386650012358416
+                ],
+                [
+                  5.393908171868048,
+                  5.204181681842385,
+                  4.841766443735054,
+                  3.9431390337045116,
+                  3.541335753207335,
+                  3.2946072750800397,
+                  3.1097875896672633,
+                  1.9761919079275003
+                ]
+              ],
+              "first": 169.91487652779583,
+              "P_end": 168.70548384317604,
+              "delay": 0.0
+            },
+            {
+              "kind": "local",
+              "prefix": 5,
+              "objective": [
+                6.344471176237761,
+                [
+                  6.344471176237761,
+                  6.087275979242804,
+                  5.868019370066122
+                ],
+                [
+                  44.61050900068139,
+                  39.651232312940095,
+                  38.985684527789346,
+                  36.83685297786215,
+                  33.80979759822651,
+                  33.24254453153088,
+                  31.86119875089406,
+                  31.387116337275273
+                ],
+                [
+                  5.393908171868048,
+                  5.204181681842385,
+                  4.862700484601675,
+                  4.841766443735054,
+                  3.9431390337045116,
+                  3.541335753207335,
+                  3.2946072750800397,
+                  1.9761919079275003
+                ]
+              ],
+              "first": 171.68297223275158,
+              "P_end": 170.45839673811045,
+              "delay": 0.41992161351259943
+            },
+            {
+              "kind": "local",
+              "prefix": 0,
+              "objective": [
+                6.344471176237761,
+                [
+                  6.344471176237761,
+                  6.2640855497383825,
+                  5.868019370066122
+                ],
+                [
+                  44.61050900068139,
+                  39.651232312940095,
+                  38.985684527789346,
+                  36.83685297786215,
+                  33.75105850068587,
+                  33.183805433990244,
+                  31.802459653353424,
+                  31.387162969766962
+                ],
+                [
+                  5.393908171868048,
+                  5.204181681842385,
+                  5.1516432606111096,
+                  4.841766443735054,
+                  3.9431390337045116,
+                  3.541335753207335,
+                  3.2946072750800397,
+                  1.9761919079275003
+                ]
+              ],
+              "first": 171.85978180324716,
+              "P_end": 170.7473395141199,
+              "delay": 0.41992161351259943
+            }
+          ],
+          "queue_before": [
+            "feal-differential-cryptanalysis:7"
+          ],
+          "search": {
+            "considered": 0,
+            "full": 0,
+            "refresh_reused": 0,
+            "refresh_full": 1,
+            "route_reused": 0,
+            "calendar_reused": 0,
+            "calendar_full": 3,
+            "bound_checks": 0,
+            "pruned_calendars": 0,
+            "pruned_proof_reused": 0,
+            "pruned_route_reused": 0
+          },
+          "CPU_wall": 0.06368220783770084,
+          "RPC_seconds": 0.41992161351259943,
+          "decision_ready": 167.45940831652607,
+          "status": "local",
+          "queue_after": [
+            "feal-differential-cryptanalysis:7"
+          ],
+          "commit_CPU_wall": 0.0005136877298355103,
+          "resolved": 167.4599220042559
+        }
+      ],
+      "first_original_route_difference_by_reference_ready": {
+        "id": "headless-terminal:3",
+        "records": {
+          "reference": {
+            "id": "headless-terminal:3",
+            "CPU_wall": 0.599546623416245,
+            "model_latest": 47.23109028858337,
+            "origin": 48.07307376163901,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 0,
+              "d": 2,
+              "source": 3,
+              "P_prefix_command": 768,
+              "D_prefix_command": 0,
+              "P_end": 49.67272538589828,
+              "first": 51.46811268143377,
+              "full": 69.87222469523883,
+              "origin": 48.07307376163901,
+              "latest_completed": 47.23109028858337,
+              "not_after_P_revised_forecast": true
+            }
+          },
+          "ours": {
+            "id": "headless-terminal:3",
+            "CPU_wall": 0.6100572953000665,
+            "model_latest": 45.90353274150568,
+            "origin": 46.73271808684305,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 1,
+              "d": 2,
+              "source": 1,
+              "P_prefix_command": 768,
+              "D_prefix_command": 0,
+              "P_end": 48.13662106347561,
+              "first": 50.244857920872946,
+              "full": 69.87739510907649,
+              "origin": 46.73271808684305,
+              "latest_completed": 45.90353274150568,
+              "not_after_P_revised_forecast": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "raw_sha256": "e49dab28c8271cf8b971bb4d384fd55945fe8218e406d5251c41695ed6766ba2",
+      "metrics": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.19581104432289,
+            "p50": 7.3912331390421,
+            "p90": 15.075880099822484,
+            "p95": 16.388155864940245,
+            "p99": 20.3469482472118,
+            "max": 20.3469482472118
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 154.76374189297468,
+            "p50": 136.23066969857155,
+            "p90": 315.4479569435779,
+            "p95": 337.9938342962852,
+            "p99": 383.4006553718168,
+            "max": 383.4006553718168
+          },
+          "makespan": 492.1554161617264,
+          "planning_wall": 64.525405716151,
+          "boundary_CPU_wall": 35.17315147537738,
+          "fit_CPU_wall": 0.4304992090910673,
+          "iteration_scheduler_wall_charged": 0.5894671063870192,
+          "decode_advice_CPU_wall": 10.142609252594411,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 2,
+          "copy_wait_diagnostic": {
+            "copies": 11,
+            "copy_execution_seconds_sum": 8.247563782148063,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.5030744275291852,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 0.5030744275291852
+            },
+            "younger_source_blocked_copies": 0
+          }
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.204324242821563,
+            "p50": 7.343334473802088,
+            "p90": 17.51836051596473,
+            "p95": 19.701939701410424,
+            "p99": 25.349257200930367,
+            "max": 25.349257200930367
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 157.65514125230175,
+            "p50": 142.5636657628615,
+            "p90": 319.81835253301136,
+            "p95": 355.9884406731011,
+            "p99": 385.82409410553544,
+            "max": 385.82409410553544
+          },
+          "makespan": 502.9704142126285,
+          "planning_wall": 67.42158717662096,
+          "boundary_CPU_wall": 36.93322612904012,
+          "fit_CPU_wall": 0.43437071703374386,
+          "iteration_scheduler_wall_charged": 0.501937247812748,
+          "decode_advice_CPU_wall": 8.685465510934591,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 4,
+          "copy_wait_diagnostic": {
+            "copies": 13,
+            "copy_execution_seconds_sum": 10.06730351317674,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.7653141243637975,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 0.7653141243637975
+            },
+            "younger_source_blocked_copies": 0
+          }
+        }
+      },
+      "p99_reduction_percent": -24.585057635874463,
+      "P_decisions": 0,
+      "P_changes": 0,
+      "no_P_decision_does_not_identify_a_revalidation_effect": true,
+      "worst": {
+        "reference": "dna-insert:13",
+        "ours": "headless-terminal:13"
+      },
+      "aligned": {
+        "dna-insert:13": {
+          "reference": {
+            "TTFT": 20.3469482472118,
+            "nominal": 304.4855379209003,
+            "dependency": 284.1385896736885,
+            "P": 0,
+            "D": 3,
+            "P_prefix": 5760,
+            "D_prefix": 7936,
+            "ready": 367.93095832119866,
+            "first": 388.27790656841046,
+            "before_P": 3.651428057622752,
+            "P_API": 4.956886890970824,
+            "P_to_D": 3.713819730524051,
+            "D_API_to_first": 8.024813568094146
+          },
+          "ours": {
+            "TTFT": 15.19297713717674,
+            "nominal": 278.28724998193366,
+            "dependency": 263.0942728447569,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 512,
+            "D_prefix": 0,
+            "ready": 346.8866414922671,
+            "first": 362.0796186294438,
+            "before_P": 2.8170626897015154,
+            "P_API": 7.3398791705679765,
+            "P_to_D": 4.295635053955834,
+            "D_API_to_first": 0.7404002229513935
+          }
+        },
+        "headless-terminal:13": {
+          "reference": {
+            "TTFT": 10.96284995576741,
+            "nominal": 298.20100032627187,
+            "dependency": 287.23815037050446,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 373.2043386568924,
+            "first": 384.1671886126598,
+            "before_P": 0.9010243985207467,
+            "P_API": 7.822567475289358,
+            "P_to_D": 1.5159649806029165,
+            "D_API_to_first": 0.7232931013543862
+          },
+          "ours": {
+            "TTFT": 25.349257200930367,
+            "nominal": 316.4521908226538,
+            "dependency": 291.1029336217234,
+            "P": 1,
+            "D": 3,
+            "P_prefix": 640,
+            "D_prefix": 8832,
+            "ready": 377.06912190811136,
+            "first": 402.4183791090417,
+            "before_P": 4.868162987179687,
+            "P_API": 7.822567475289358,
+            "P_to_D": 2.214992105243766,
+            "D_API_to_first": 10.443534633217553
+          }
+        }
+      },
+      "actions": [],
+      "first_original_route_difference_by_reference_ready": {
+        "id": "headless-terminal:4",
+        "records": {
+          "reference": {
+            "id": "headless-terminal:4",
+            "CPU_wall": 0.9495241846889257,
+            "model_latest": 75.42823347176746,
+            "origin": 76.53322571262173,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 1,
+              "d": 3,
+              "source": 1,
+              "P_prefix_command": 1024,
+              "D_prefix_command": 0,
+              "P_end": 78.85950128339414,
+              "first": 80.49450721493713,
+              "full": 99.10360983425102,
+              "origin": 76.53322571262173,
+              "latest_completed": 75.42823347176746,
+              "not_after_P_revised_forecast": true
+            }
+          },
+          "ours": {
+            "id": "headless-terminal:4",
+            "CPU_wall": 0.9178378861397505,
+            "model_latest": 75.4319838528274,
+            "origin": 76.54241585477642,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 0,
+              "d": 3,
+              "source": 0,
+              "P_prefix_command": 640,
+              "D_prefix_command": 0,
+              "P_end": 78.33803210039686,
+              "first": 79.94759257737834,
+              "full": 99.0335278532184,
+              "origin": 76.54241585477642,
+              "latest_completed": 75.4319838528274,
+              "not_after_P_revised_forecast": true
+            }
+          }
+        }
+      }
+    }
+  ]
+}

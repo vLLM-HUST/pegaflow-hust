@@ -1,0 +1,10 @@
+{
+  "intended_policy": "advice-window",
+  "actual_policy": "no-decode-advice",
+  "candidate_samples": 0,
+  "actual_CPU_arms": 9,
+  "not_candidate_performance": true,
+  "cause": "launcher retained old --policy and old audit after filename template conversion",
+  "core_source_unchanged": true,
+  "recovery03_not_launched": true
+}

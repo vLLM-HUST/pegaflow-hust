@@ -1,0 +1,18 @@
+{
+  "source01_qualified_as_numerical_fix": false,
+  "reason": "ControlReleaseSnapshot.configure_projection replaced the options dictionary, dropping exact_timeline. Original-input scoped check observed 0 enabled of 68 calendars. Preserve all 18 arms as failed activation diagnostic, not corrected forecasts or gain evidence.",
+  "source02_fix": "Apply arithmetic option at schedule boundary and audit actual selected forecast metadata",
+  "old_result_unchanged": true,
+  "old_archives": [
+    {
+      "path": "/root/issue23-exact-calendar-diagnostic-default-01-full.tar.gz",
+      "sha256": "63512cb28508f0b6593673567f5ffaf4634f2ff33ed06d2e00cd98deb9643b28",
+      "bytes": 13002073
+    },
+    {
+      "path": "/root/issue23-exact-calendar-diagnostic-sharing-01-full.tar.gz",
+      "sha256": "b1eed9a48f7246ec770716c82f3136c89693246e462acdf030d1b73d1f7ae080",
+      "bytes": 11796088
+    }
+  ]
+}

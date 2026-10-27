@@ -1,0 +1,23 @@
+{
+  "upstream": "2b4b8028993aee093bff27367a4ac3bd98d35e98",
+  "CPU_only": true,
+  "automation": "PAUSED",
+  "runs": [
+    {
+      "name": "issue23-cache-evolution-01",
+      "archive_sha256": "4aa3450d223b3659ca1012872acbe6804d6f2169c94c6ad94f927e5b143dec76",
+      "source_sha256": "8e48f7ca479bf0781488ce3f10706a0a6ae8b4c7a064c8db224050ca605f2cd2",
+      "validated_arms": 9,
+      "source_files_checked": 79,
+      "order": "native-reference-candidate"
+    },
+    {
+      "name": "issue23-cache-evolution-02",
+      "archive_sha256": "c321999d1e8346ba4155b9e779316cb53b0f7ce318e497fdb189fafe3010ef0c",
+      "source_sha256": "3fde192016fb1c215b0254f4b1c7c32b52991c04497eb4dd83d14f653c49c0db",
+      "validated_arms": 9,
+      "source_files_checked": 80,
+      "order": "native-candidate-reference"
+    }
+  ]
+}

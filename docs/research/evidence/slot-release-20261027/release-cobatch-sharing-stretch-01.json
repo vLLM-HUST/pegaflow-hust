@@ -1,0 +1,334 @@
+{
+  "scope": "Trace-conditioned cost diagnosis, not a new policy counterfactual or hardware proof",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "sharing": 1.0,
+      "release_steps": 134,
+      "with_companions": 110,
+      "positive_actual_stretch_steps": 21,
+      "extra_physical_step": {
+        "n": 134,
+        "mean": 8.531950750548442e-05,
+        "p50": 0.0,
+        "p90": 0.0005444197145588053,
+        "p95": 0.0005444197145588053,
+        "p99": 0.0005444197145588053,
+        "max": 0.0005444197145588053
+      },
+      "sum_extra_device_work_not_TTFT_penalty": 0.011432814005734912,
+      "rank_error": {
+        "n": 134,
+        "mean": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "largest_stretch_examples": [
+        {
+          "origin": 101.81111607273584,
+          "node": 2,
+          "selected": "git-leak-recovery:4",
+          "cohort": [
+            "git-leak-recovery:4",
+            "headless-terminal:4"
+          ],
+          "blocked": [
+            "feal-differential-cryptanalysis:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0005444197145588053,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 101.87036464367272,
+          "node": 2,
+          "selected": "git-leak-recovery:4",
+          "cohort": [
+            "git-leak-recovery:4",
+            "headless-terminal:4"
+          ],
+          "blocked": [
+            "feal-differential-cryptanalysis:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0005444197145588053,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 101.9295970142534,
+          "node": 2,
+          "selected": "git-leak-recovery:4",
+          "cohort": [
+            "git-leak-recovery:4",
+            "headless-terminal:4"
+          ],
+          "blocked": [
+            "feal-differential-cryptanalysis:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0005444197145588053,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 101.98882274450413,
+          "node": 2,
+          "selected": "git-leak-recovery:4",
+          "cohort": [
+            "git-leak-recovery:4",
+            "headless-terminal:4"
+          ],
+          "blocked": [
+            "feal-differential-cryptanalysis:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0005444197145588053,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 102.04804482583302,
+          "node": 2,
+          "selected": "git-leak-recovery:4",
+          "cohort": [
+            "git-leak-recovery:4",
+            "headless-terminal:4"
+          ],
+          "blocked": [
+            "feal-differential-cryptanalysis:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0005444197145588053,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        }
+      ]
+    },
+    {
+      "rate": 0.49032341538142143,
+      "sharing": 1.0,
+      "release_steps": 270,
+      "with_companions": 245,
+      "positive_actual_stretch_steps": 168,
+      "extra_physical_step": {
+        "n": 270,
+        "mean": 0.00044150208210904046,
+        "p50": 0.00045713907916289376,
+        "p90": 0.0008206471753634328,
+        "p95": 0.0008206471753634328,
+        "p99": 0.0008206471753634328,
+        "max": 0.0008206471753634328
+      },
+      "sum_extra_device_work_not_TTFT_penalty": 0.11920556216944092,
+      "rank_error": {
+        "n": 270,
+        "mean": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "largest_stretch_examples": [
+        {
+          "origin": 131.317585698072,
+          "node": 2,
+          "selected": "fix-code-vulnerability:8",
+          "cohort": [
+            "fix-code-vulnerability:8",
+            "fix-git:8",
+            "headless-terminal:8",
+            "git-multibranch:8"
+          ],
+          "blocked": [
+            "dna-insert:9"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0008206471753634328,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 131.37697337976965,
+          "node": 2,
+          "selected": "fix-code-vulnerability:8",
+          "cohort": [
+            "fix-code-vulnerability:8",
+            "fix-git:8",
+            "headless-terminal:8",
+            "git-multibranch:8"
+          ],
+          "blocked": [
+            "dna-insert:9"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0008206471753634328,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 131.4363479419262,
+          "node": 2,
+          "selected": "fix-code-vulnerability:8",
+          "cohort": [
+            "fix-code-vulnerability:8",
+            "fix-git:8",
+            "headless-terminal:8",
+            "git-multibranch:8"
+          ],
+          "blocked": [
+            "dna-insert:9"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0008206471753634328,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 131.49571268328617,
+          "node": 2,
+          "selected": "fix-code-vulnerability:8",
+          "cohort": [
+            "fix-code-vulnerability:8",
+            "fix-git:8",
+            "headless-terminal:8",
+            "git-multibranch:8"
+          ],
+          "blocked": [
+            "dna-insert:9"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0008206471753634328,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 131.55507878437712,
+          "node": 2,
+          "selected": "fix-code-vulnerability:8",
+          "cohort": [
+            "fix-code-vulnerability:8",
+            "fix-git:8",
+            "headless-terminal:8",
+            "git-multibranch:8"
+          ],
+          "blocked": [
+            "dna-insert:9"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0008206471753634328,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        }
+      ]
+    },
+    {
+      "rate": 0.9806468307628429,
+      "sharing": 1.0,
+      "release_steps": 439,
+      "with_companions": 360,
+      "positive_actual_stretch_steps": 85,
+      "extra_physical_step": {
+        "n": 439,
+        "mean": 0.00021180918878851485,
+        "p50": 0.0,
+        "p90": 0.0018446745997264327,
+        "p95": 0.0018446745997264327,
+        "p99": 0.0018446745997264327,
+        "max": 0.0018446745997264327
+      },
+      "sum_extra_device_work_not_TTFT_penalty": 0.09298423387815802,
+      "rank_error": {
+        "n": 439,
+        "mean": 0.0,
+        "p50": 0.0,
+        "p90": 0.0,
+        "p95": 0.0,
+        "p99": 0.0,
+        "max": 0.0
+      },
+      "largest_stretch_examples": [
+        {
+          "origin": 53.91776339448926,
+          "node": 2,
+          "selected": "fix-code-vulnerability:5",
+          "cohort": [
+            "fix-code-vulnerability:5",
+            "git-multibranch:5",
+            "distribution-search:6",
+            "git-leak-recovery:5"
+          ],
+          "blocked": [
+            "headless-terminal:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0018446745997264327,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 53.97879732048064,
+          "node": 2,
+          "selected": "fix-code-vulnerability:5",
+          "cohort": [
+            "fix-code-vulnerability:5",
+            "git-multibranch:5",
+            "distribution-search:6",
+            "git-leak-recovery:5"
+          ],
+          "blocked": [
+            "headless-terminal:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0018446745997264327,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 54.03981344610364,
+          "node": 2,
+          "selected": "fix-code-vulnerability:5",
+          "cohort": [
+            "fix-code-vulnerability:5",
+            "git-multibranch:5",
+            "distribution-search:6",
+            "git-leak-recovery:5"
+          ],
+          "blocked": [
+            "headless-terminal:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0018446745997264327,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 54.10082857241753,
+          "node": 2,
+          "selected": "fix-code-vulnerability:5",
+          "cohort": [
+            "fix-code-vulnerability:5",
+            "git-multibranch:5",
+            "distribution-search:6",
+            "git-leak-recovery:5"
+          ],
+          "blocked": [
+            "headless-terminal:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0018446745997264327,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        },
+        {
+          "origin": 54.161841158083426,
+          "node": 2,
+          "selected": "fix-code-vulnerability:5",
+          "cohort": [
+            "fix-code-vulnerability:5",
+            "git-multibranch:5",
+            "distribution-search:6",
+            "git-leak-recovery:5"
+          ],
+          "blocked": [
+            "headless-terminal:5"
+          ],
+          "extra_physical_step_vs_selected_alone": 0.0018446745997264327,
+          "actual_remaining_rank_regret": 0.0,
+          "not_online_oracle": true
+        }
+      ]
+    }
+  ]
+}

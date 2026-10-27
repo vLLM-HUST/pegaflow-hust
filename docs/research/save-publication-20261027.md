@@ -1,0 +1,19 @@
+# Save publication lifetime — 2026-10-27
+
+## Evidence and narrowly established result
+
+Ready-prefill18 full-cost arms completed, audited and archived; net p99 defaults -7.73/-6.36/+23.01%, sharing1 -0.93/-7.91/-12.69%. No promotion. Read ready-prefill-20261027.md FINAL first. Both P-cache collapses and queue growth remain. Instead of adding a cost penalty, inspect publication lifetime.
+
+Current CacheForecast.save immediately appends each newly allocated Unit to its evictable list. When its source-derived512-block reclamation runs before this same save completes, these new units can be victims. In contrast current native offload.rs holds pages/RawBlock allocations in local vectors and Arc references through allocation and GPU copy, then submits RawSaveBatch to the insert worker. storage/mod.rs reclaims read-cache entries, not unpublished staging ownership.
+
+Minimal model/source-contract counterexample, no hardware or new workload matrix: capacity12blocks, old10, new6, unchanged reclaim512. All new6 fit after old eviction. Old simulator removes its first2 newly inserted blocks and retains only4suffix blocks, usable prefix0; staging-first calculation preserves all6. Reproduced locally and on P. This is a source-contract calculation, NOT execution of the installed native binary, and not yet an attribution of any entire95request tail.
+
+P/local Rust source content matches after CRLF normalization. P raw offload SHA d41f5946899c905646aa13023f6a612c06b3d5ad749093f92d7a3a174a6e3588; storage SHA e0c9943dc15c5cb116e88cb64c81b99043ef25b7a36399e1e7cbda82fe374d08. Simulator cache file606b8254a095db4d1322f47ad3e40b4d620ff6d0392f463ddbc6275110bee825. Exact raw source snapshots and both counterexample receipts are in evidence/forecast-feedback-20261027. First diagnostic fixture incorrectly recovered the logits token and was rejected before output; fixed fixture uses6×128+1tokens/6hashes. No experiment rerun or changed matrix input.
+
+## Model correction to implement and verify next
+
+Separate published resident U, unpublished staging S, and leased/inflight ownership L. Capacity charges unique physical owners in U∪S∪L once; reclamation cannot free an owner while S/L retains it. Reserve save allocations privately, keep them protected from reclamation until copy/publication completes, then expose reusable hashes. If allocation fails, preserve actual native rollback/error semantics and outstanding ownership; do not silently publish a suffix or assume success. Existing hit filtering and eviction of old already-published hashes must follow source semantics; do not assume every prior hit is resaved.
+
+Before a new policy experiment: trace save_batch caller error handling and installed stable source provenance; reproduce fitting save, protected-owner pressure, oversized/partial-allocation rollback, shared owner and memo/no-memo consistency with small CPU contracts. Then implement an opt-in independently versioned model using the same save semantics in P-world, D-world and prediction. Do not alter old frozen archives. Apply corrected world to BOTH reference and candidate in the same new three-rate full-cost matrix; a changed-world improvement over old data is not an algorithm gain. Retain all controls, H2D/full decode/sync, lease/capacity and512 geometry. No change to95/8/seed/rates/host2GiB/deviceKV or cost seed, no fitted penalties.
+
+Instrument time/request/owner lineage of actual simulated reclaim, distinguish initial route command and effective acceptance, and test whether the documented P-cache collapse is attributable to this publication shortcut. Correct model may eliminate false collapse or expose genuine allocation failures; neither can be hidden or waved through. Native serving parallelism still unvalidated. Hourly research remains ACTIVE; no current experiment. Next work is this concrete lifetime correction and causally fair evaluation, not another unmotivated phase-priority variation.

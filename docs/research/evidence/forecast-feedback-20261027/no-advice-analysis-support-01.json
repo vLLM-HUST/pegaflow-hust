@@ -1,0 +1,8 @@
+{
+  "archive_sha256": "b379712788155ad24ba770b7f1b34ae3018fb67cf9666e7a1915f9f81cb35b6d",
+  "files": {
+    "analyze_numerical_charged.py": "d541a861b4b719251667c4baf3025dd6279b3697352f4a6a903ae42b14aa562a"
+  },
+  "scope": "offline-only missing helper; simulation source unchanged",
+  "simulation_source_sha256": "c58d7e557029a9d3759c8fad8aa5eb0a2354e2fa52795f3d21b01563d3bbcaf6"
+}

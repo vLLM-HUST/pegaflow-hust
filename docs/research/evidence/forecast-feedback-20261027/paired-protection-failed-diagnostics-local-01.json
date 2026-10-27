@@ -1,0 +1,11 @@
+{
+  "path": "/root/paired-protection-failed-diagnostics-01.tar.gz",
+  "sha256": "ca48b5e24383259ed657a04cbb02d5885e3438b6f7b56c01e916a659e6d7fefc",
+  "bytes": 431008,
+  "failures_preserved": [
+    "live model lock copy",
+    "mappingproxy/warm-index clone"
+  ],
+  "local_sha_verified": true,
+  "local_path": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\paired-protection-failed-diagnostics-01.tar.gz"
+}

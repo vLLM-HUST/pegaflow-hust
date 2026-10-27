@@ -1,0 +1,9 @@
+{
+  "reason": "launcher predecessor result path accidentally changed during name templating",
+  "no_samples": true,
+  "no_output_directory": true,
+  "algorithm_source_unchanged": true,
+  "exit_code_not_retained": true,
+  "old_launcher_sha256": "d43ef94c9c1026ec56c3793f6cabc1b385239c2ba4f90d21a898a4d3ae6a2d8e",
+  "console_sha256": "88fd741eef7dda3e4bf337b8ecf82e81767441be93825835c4ec16431a2fd42f"
+}

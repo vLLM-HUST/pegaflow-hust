@@ -1,0 +1,618 @@
+{
+  "request": "dna-insert:11",
+  "path": {
+    "TTFT": 49.70724740247692,
+    "nominal": 327.00220638380847,
+    "dependency": 277.29495898133155,
+    "P": 1,
+    "D": 3,
+    "P_prefix": 9472,
+    "D_prefix": 7040,
+    "ready": 353.41351420549586,
+    "first": 403.1207616079728,
+    "before_P": 21.33402511167401,
+    "P_API": 0.6077911989499116,
+    "P_to_D": 14.160299020398952,
+    "D_API_to_first": 13.605132071454022
+  },
+  "decision": {
+    "id": "dna-insert:11",
+    "CPU_wall": 1.4190554320812225,
+    "model_latest": 350.31840431567076,
+    "origin": 354.20004346057266,
+    "candidates": 64,
+    "initial_forecast": {
+      "p": 1,
+      "d": 3,
+      "source": 3,
+      "P_prefix_command": 9472,
+      "D_prefix_command": 9472,
+      "P_end": 375.28909391714063,
+      "first": 379.364525572145,
+      "full": 389.5276141359725,
+      "origin": 354.20004346057266,
+      "latest_completed": 350.31840431567076,
+      "not_after_P_revised_forecast": true
+    }
+  },
+  "original_quote": {
+    "origin": 354.20004346057266,
+    "latest_completed": 350.31840431567076,
+    "model_version": 188,
+    "effective_API": [
+      {
+        "request": "dna-insert:11",
+        "node": 1,
+        "effective_blocks": 74,
+        "prefix_tokens": 9472,
+        "first_service_seconds": 0.6078858109328328,
+        "full_service_seconds": 0.6078858109328328
+      },
+      {
+        "request": "dna-insert:11",
+        "node": 3,
+        "effective_blocks": 74,
+        "prefix_tokens": 9472,
+        "first_service_seconds": 3.6625925354473265,
+        "full_service_seconds": 11.33918249206621
+      }
+    ],
+    "predicted_API_intervals": [
+      {
+        "key": "fix-code-vulnerability:11",
+        "operation": "P_api",
+        "start": 354.20004346057266,
+        "end": 359.9677009908342,
+        "resources": [
+          "gate1"
+        ]
+      },
+      {
+        "key": "feal-differential-cryptanalysis:12",
+        "operation": "P_api",
+        "start": 359.9677009908342,
+        "end": 370.81495347725865,
+        "resources": [
+          "gate1"
+        ]
+      },
+      {
+        "key": "fix-git:12",
+        "operation": "history",
+        "start": 370.8294692377285,
+        "end": 371.83391675378243,
+        "resources": [
+          "gate3",
+          "gate1",
+          "link:dp"
+        ]
+      },
+      {
+        "key": "fix-git:12",
+        "operation": "P_api",
+        "start": 371.83391675378243,
+        "end": 374.4694560966831,
+        "resources": [
+          "gate1"
+        ]
+      },
+      {
+        "key": "__candidate__",
+        "operation": "history",
+        "start": 374.4757529324695,
+        "end": 374.6812081062078,
+        "resources": [
+          "gate3",
+          "gate1",
+          "link:dp"
+        ]
+      },
+      {
+        "key": "__candidate__",
+        "operation": "P_api",
+        "start": 374.6812081062078,
+        "end": 375.28909391714063,
+        "resources": [
+          "gate1"
+        ]
+      }
+    ],
+    "current_decision_CPU_not_prospectively_predicted": true,
+    "future_P_publication_assumed": "projected admitted work, not a guaranteed hit",
+    "batch_scaling_measured": false,
+    "cache_evolution_shadow_executed": true,
+    "forecast_cache_events": [
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 1,
+        "logical_blocks": 96,
+        "charged": 704643072
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 1,
+        "logical_blocks": 96,
+        "charged": 704643072
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 1,
+        "logical_blocks": 96,
+        "charged": 704643072
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 1,
+        "logical_blocks": 96,
+        "charged": 704643072
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 3,
+        "logical_blocks": 16,
+        "charged": 117440512
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 3,
+        "logical_blocks": 16,
+        "charged": 117440512
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 3,
+        "logical_blocks": 16,
+        "charged": 117440512
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 3,
+        "logical_blocks": 16,
+        "charged": 117440512
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      },
+      {
+        "kind": "forecast_native_reclaim",
+        "node": 2,
+        "logical_blocks": 24,
+        "charged": 176160768
+      }
+    ]
+  },
+  "own_resource_events": [
+    {
+      "request": "dna-insert:11",
+      "node": 1,
+      "operation": "history",
+      "start": 374.54134986822464,
+      "end": 374.74680504196294,
+      "resources": [
+        "link:dp"
+      ]
+    },
+    {
+      "request": "dna-insert:11",
+      "node": 1,
+      "operation": "P_api",
+      "start": 374.7469299034492,
+      "end": 375.35472110239914,
+      "resources": [
+        "gate1"
+      ]
+    },
+    {
+      "request": "dna-insert:11",
+      "node": 3,
+      "operation": "D_control",
+      "start": 375.3553305161198,
+      "end": 378.2286481240125,
+      "resources": []
+    },
+    {
+      "request": "dna-insert:11",
+      "node": 3,
+      "operation": "handoff",
+      "start": 389.51309167313553,
+      "end": 389.5155014656949,
+      "resources": [
+        "link:pd"
+      ]
+    }
+  ],
+  "other_resource_events": [
+    {
+      "request": "fix-code-vulnerability:11",
+      "node": 1,
+      "operation": "P_api",
+      "start": 350.31902090895716,
+      "end": 359.98708603044963,
+      "resources": [
+        "gate1"
+      ]
+    },
+    {
+      "request": "fix-code-vulnerability:11",
+      "node": 3,
+      "operation": "D_control",
+      "start": 359.98762252347535,
+      "end": 363.7364319292921,
+      "resources": []
+    },
+    {
+      "request": "feal-differential-cryptanalysis:12",
+      "node": 1,
+      "operation": "P_api",
+      "start": 359.98762252347535,
+      "end": 370.83379645209084,
+      "resources": [
+        "gate1"
+      ]
+    },
+    {
+      "request": "feal-differential-cryptanalysis:12",
+      "node": 2,
+      "operation": "D_control",
+      "start": 370.83440792589704,
+      "end": 371.5240126192037,
+      "resources": []
+    },
+    {
+      "request": "fix-git:12",
+      "node": 1,
+      "operation": "history",
+      "start": 370.89190147248837,
+      "end": 371.8963489885423,
+      "resources": [
+        "link:dp"
+      ]
+    },
+    {
+      "request": "fix-git:12",
+      "node": 1,
+      "operation": "P_api",
+      "start": 371.896479319686,
+      "end": 374.53785121837404,
+      "resources": [
+        "gate1"
+      ]
+    },
+    {
+      "request": "distribution-search:13",
+      "node": 0,
+      "operation": "P_api",
+      "start": 373.9000325576245,
+      "end": 382.82779682303214,
+      "resources": [
+        "gate0"
+      ]
+    },
+    {
+      "request": "fix-git:12",
+      "node": 2,
+      "operation": "D_control",
+      "start": 374.5384592127591,
+      "end": 375.22523009170555,
+      "resources": []
+    },
+    {
+      "request": "git-multibranch:12",
+      "node": 1,
+      "operation": "P_api",
+      "start": 375.3553305161198,
+      "end": 384.19101598030477,
+      "resources": [
+        "gate1"
+      ]
+    },
+    {
+      "request": "distribution-search:13",
+      "node": 3,
+      "operation": "D_control",
+      "start": 382.82851795820886,
+      "end": 383.63592577715775,
+      "resources": []
+    },
+    {
+      "request": "distribution-search:13",
+      "node": 3,
+      "operation": "handoff",
+      "start": 383.6418445507196,
+      "end": 383.64345107909253,
+      "resources": [
+        "link:pd"
+      ]
+    },
+    {
+      "request": "feal-differential-cryptanalysis:13",
+      "node": 0,
+      "operation": "P_api",
+      "start": 383.8807396508405,
+      "end": 395.36587648671724,
+      "resources": [
+        "gate0"
+      ]
+    },
+    {
+      "request": "git-multibranch:12",
+      "node": 2,
+      "operation": "D_control",
+      "start": 384.1916447748482,
+      "end": 386.49319959835674,
+      "resources": []
+    },
+    {
+      "request": "headless-terminal:11",
+      "node": 1,
+      "operation": "P_api",
+      "start": 384.1916447748482,
+      "end": 389.48062360173486,
+      "resources": [
+        "gate1"
+      ]
+    },
+    {
+      "request": "headless-terminal:11",
+      "node": 2,
+      "operation": "D_control",
+      "start": 389.481148316324,
+      "end": 390.0887479633226,
+      "resources": []
+    },
+    {
+      "request": "feal-differential-cryptanalysis:13",
+      "node": 2,
+      "operation": "D_control",
+      "start": 395.3664979917989,
+      "end": 395.88658275589023,
+      "resources": []
+    },
+    {
+      "request": "fix-git:13",
+      "node": 0,
+      "operation": "P_api",
+      "start": 395.3664979917989,
+      "end": 400.7116977304168,
+      "resources": [
+        "gate0"
+      ]
+    },
+    {
+      "request": "fix-git:13",
+      "node": 2,
+      "operation": "D_control",
+      "start": 400.71232531610354,
+      "end": 401.33185779529106,
+      "resources": []
+    },
+    {
+      "request": "fix-git:13",
+      "node": 2,
+      "operation": "handoff",
+      "start": 401.36063921357305,
+      "end": 401.3662620628783,
+      "resources": [
+        "link:pd"
+      ]
+    }
+  ],
+  "batch_overlap": {
+    "D0:compute": {
+      "overlap_seconds": 46.70818251322163,
+      "requests": [
+        "distribution-search:12",
+        "feal-differential-cryptanalysis:12",
+        "feal-differential-cryptanalysis:13",
+        "fix-git:12",
+        "git-multibranch:11",
+        "git-multibranch:12",
+        "headless-terminal:10",
+        "headless-terminal:11"
+      ]
+    },
+    "D0:save": {
+      "overlap_seconds": 0.5003120069741271,
+      "requests": [
+        "distribution-search:12",
+        "feal-differential-cryptanalysis:12",
+        "fix-git:12",
+        "git-multibranch:11",
+        "git-multibranch:12",
+        "headless-terminal:10"
+      ]
+    },
+    "D1:restore": {
+      "overlap_seconds": 5.95359029355069,
+      "requests": [
+        "distribution-search:13",
+        "dna-insert:11",
+        "fix-code-vulnerability:11"
+      ]
+    },
+    "D1:compute": {
+      "overlap_seconds": 32.132851921238,
+      "requests": [
+        "distribution-search:13",
+        "dna-insert:11",
+        "fix-code-vulnerability:11"
+      ]
+    },
+    "D0:restore": {
+      "overlap_seconds": 2.1356582552948,
+      "requests": [
+        "feal-differential-cryptanalysis:12",
+        "feal-differential-cryptanalysis:13",
+        "fix-git:12",
+        "fix-git:13",
+        "git-multibranch:12",
+        "headless-terminal:11"
+      ]
+    },
+    "D1:save": {
+      "overlap_seconds": 0.08345762832323089,
+      "requests": [
+        "fix-code-vulnerability:11"
+      ]
+    }
+  },
+  "copy_holds": [
+    {
+      "kind": "software_copy_gate_hold",
+      "source": 3,
+      "destination": 1,
+      "acquired": 370.89190147248837,
+      "released": 371.896479319686,
+      "link_wait": 0.0,
+      "not_RDMA_congestion_evidence": true
+    },
+    {
+      "kind": "software_copy_gate_hold",
+      "source": 3,
+      "destination": 1,
+      "acquired": 374.54134986822464,
+      "released": 374.7469299034492,
+      "link_wait": 0.0,
+      "not_RDMA_congestion_evidence": true
+    },
+    {
+      "kind": "software_copy_gate_hold",
+      "source": 0,
+      "destination": 3,
+      "acquired": 383.6418445507196,
+      "released": 383.64357864048293,
+      "link_wait": 0.0,
+      "not_RDMA_congestion_evidence": true
+    },
+    {
+      "kind": "software_copy_gate_hold",
+      "source": 1,
+      "destination": 3,
+      "acquired": 389.51309167313553,
+      "released": 389.51562953651876,
+      "link_wait": 0.0,
+      "not_RDMA_congestion_evidence": true
+    },
+    {
+      "kind": "software_copy_gate_hold",
+      "source": 0,
+      "destination": 2,
+      "acquired": 401.36063921357305,
+      "released": 401.36638225378186,
+      "link_wait": 0.0,
+      "not_RDMA_congestion_evidence": true
+    }
+  ],
+  "interpretation": "Observed simulated overlap, not pure queue attribution, real RDMA telemetry or policy counterfactual."
+}

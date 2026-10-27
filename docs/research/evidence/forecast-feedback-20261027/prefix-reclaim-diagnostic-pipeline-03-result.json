@@ -1,0 +1,333 @@
+{
+  "started": 1793073045.375141,
+  "finished": 1793073613.6520398,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/test_linear_reclaim.py"
+      ],
+      "pid": 381135,
+      "started": 1793073045.375527,
+      "finished": 1793073046.89272,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 60
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-prefix-reclaim-source-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03",
+        "--policy",
+        "prefix-reclaim",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "0",
+        "--zero-control-diagnostic"
+      ],
+      "pid": 381154,
+      "started": 1793073046.893299,
+      "finished": 1793073289.924989,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/prefix-reclaim-source-receipt-02.json",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03/source-control-audit.json"
+      ],
+      "pid": 385368,
+      "started": 1793073289.925618,
+      "finished": 1793073299.1563764,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03/work-conservation-audit.json"
+      ],
+      "pid": 385759,
+      "started": 1793073299.1569474,
+      "finished": 1793073301.525684,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03/release-estimate-audit.json"
+      ],
+      "pid": 385972,
+      "started": 1793073301.5262678,
+      "finished": 1793073304.896479,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03/feedback-alignment.json"
+      ],
+      "pid": 385973,
+      "started": 1793073304.897369,
+      "finished": 1793073307.0159638,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_prefill_revalidation.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03/prefill-revalidation-audit.json"
+      ],
+      "pid": 385974,
+      "started": 1793073307.0165231,
+      "finished": 1793073308.834474,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_prefill_feedback.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03/numerical-feedback.json"
+      ],
+      "pid": 385976,
+      "started": 1793073308.835033,
+      "finished": 1793073311.7553303,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_prefix_reclaim.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-default-03/prefix-reclaim-activation-audit.json"
+      ],
+      "pid": 385977,
+      "started": 1793073311.7559073,
+      "finished": 1793073313.6245222,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-prefix-reclaim-source-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03",
+        "--policy",
+        "prefix-reclaim",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1",
+        "--zero-control-diagnostic"
+      ],
+      "pid": 385997,
+      "started": 1793073323.111014,
+      "finished": 1793073584.5197277,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/prefix-reclaim-source-receipt-02.json",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03/source-control-audit.json"
+      ],
+      "pid": 389385,
+      "started": 1793073584.5203648,
+      "finished": 1793073592.7988882,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03/work-conservation-audit.json"
+      ],
+      "pid": 389490,
+      "started": 1793073592.7994328,
+      "finished": 1793073595.0682254,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03/release-estimate-audit.json"
+      ],
+      "pid": 389491,
+      "started": 1793073595.0687594,
+      "finished": 1793073597.4877827,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03/feedback-alignment.json"
+      ],
+      "pid": 389589,
+      "started": 1793073597.4882898,
+      "finished": 1793073599.3566887,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_prefill_revalidation.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03/prefill-revalidation-audit.json"
+      ],
+      "pid": 389661,
+      "started": 1793073599.3571546,
+      "finished": 1793073601.02473,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_prefill_feedback.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03/numerical-feedback.json"
+      ],
+      "pid": 389804,
+      "started": 1793073601.025216,
+      "finished": 1793073603.3440907,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_prefix_reclaim.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-diagnostic-sharing-03/prefix-reclaim-activation-audit.json"
+      ],
+      "pid": 389805,
+      "started": 1793073603.3446267,
+      "finished": 1793073605.012249,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/issue23-prefix-reclaim-diagnostic-default-03-full.tar.gz",
+      "sha256": "429309bede5020ed4e8d8be7f00f264c50395e84c89a667d4a7fcd732ccf23ad",
+      "bytes": 12690730
+    },
+    {
+      "path": "/root/issue23-prefix-reclaim-diagnostic-sharing-03-full.tar.gz",
+      "sha256": "a850c61a8c0260e1784068416312f7aa47365ae7f0d37b12be2deb34d5dddcd0",
+      "bytes": 11862564
+    }
+  ],
+  "failure": null,
+  "no_gpu_work": true
+}

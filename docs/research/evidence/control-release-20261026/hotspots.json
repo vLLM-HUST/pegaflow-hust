@@ -1,0 +1,1091 @@
+{
+  "scope": "cProfile of routing/boundary ordinals 32..39 within complete causal replay; not a performance comparison",
+  "requests": 95,
+  "total_profiled_self_seconds": 23.635957577,
+  "cumulative": [
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 170,
+      "function": "predict_batch",
+      "primitive_calls": 850,
+      "calls": 850,
+      "self_seconds": 0.020375584000000002,
+      "cumulative_seconds": 26.971050387000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 41,
+      "function": "schedule_batched",
+      "primitive_calls": 850,
+      "calls": 850,
+      "self_seconds": 4.0102812640000005,
+      "cumulative_seconds": 26.774855178000003
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/timed_recovery_search.py",
+      "line": 90,
+      "function": "choose",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_seconds": 0.00019190600000000002,
+      "cumulative_seconds": 16.143833006
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+      "line": 189,
+      "function": "choose",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_seconds": 0.000494232,
+      "cumulative_seconds": 16.143630689000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/live_adapter.py",
+      "line": 16,
+      "function": "controlled_route",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_seconds": 0.000507181,
+      "cumulative_seconds": 16.133671674000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+      "line": 307,
+      "function": "best_route",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_seconds": 0.023941300000000002,
+      "cumulative_seconds": 16.072405697
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/detached_control.py",
+      "line": 62,
+      "function": "forecast",
+      "primitive_calls": 478,
+      "calls": 478,
+      "self_seconds": 0.001241701,
+      "cumulative_seconds": 15.960249482000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 218,
+      "function": "forecast",
+      "primitive_calls": 478,
+      "calls": 478,
+      "self_seconds": 0.002920619,
+      "cumulative_seconds": 15.958342729000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/bounded_search.py",
+      "line": 177,
+      "function": "forecast",
+      "primitive_calls": 478,
+      "calls": 478,
+      "self_seconds": 0.004018986,
+      "cumulative_seconds": 15.952928994
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/bounded_search.py",
+      "line": 74,
+      "function": "forecast",
+      "primitive_calls": 459,
+      "calls": 459,
+      "self_seconds": 0.001074602,
+      "cumulative_seconds": 15.945091294000001
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/memo_search.py",
+      "line": 28,
+      "function": "forecast",
+      "primitive_calls": 459,
+      "calls": 459,
+      "self_seconds": 0.0023896240000000003,
+      "cumulative_seconds": 15.943989952
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 368,
+      "function": "forecast",
+      "primitive_calls": 446,
+      "calls": 446,
+      "self_seconds": 0.010140391,
+      "cumulative_seconds": 15.940067220000001
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+      "line": 328,
+      "function": "stage",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_seconds": 0.032456228000000004,
+      "cumulative_seconds": 11.564261172
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/memo_search.py",
+      "line": 97,
+      "function": "decode_boundary",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_seconds": 0.000246616,
+      "cumulative_seconds": 11.51405607
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/bounded_search.py",
+      "line": 82,
+      "function": "decode_boundary",
+      "primitive_calls": 8,
+      "calls": 8,
+      "self_seconds": 0.026818030000000003,
+      "cumulative_seconds": 11.499304292000001
+    },
+    {
+      "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+      "line": 1540,
+      "function": "replace",
+      "primitive_calls": 821365,
+      "calls": 821365,
+      "self_seconds": 4.535042944000001,
+      "cumulative_seconds": 9.78808609
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 108,
+      "function": "sync_protection",
+      "primitive_calls": 6684,
+      "calls": 6684,
+      "self_seconds": 0.21675734600000002,
+      "cumulative_seconds": 9.320606762
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 110,
+      "function": "<genexpr>",
+      "primitive_calls": 633112,
+      "calls": 633112,
+      "self_seconds": 0.8803270120000001,
+      "cumulative_seconds": 9.032200199
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 137,
+      "function": "finish",
+      "primitive_calls": 3526,
+      "calls": 3526,
+      "self_seconds": 0.029150626000000002,
+      "cumulative_seconds": 6.890888214
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 120,
+      "function": "start",
+      "primitive_calls": 8384,
+      "calls": 8384,
+      "self_seconds": 0.033906579,
+      "cumulative_seconds": 4.5817972000000005
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 152,
+      "function": "begin",
+      "primitive_calls": 87032,
+      "calls": 87032,
+      "self_seconds": 1.16417301,
+      "cumulative_seconds": 2.493211333
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.sorted>",
+      "primitive_calls": 260265,
+      "calls": 260265,
+      "self_seconds": 1.0123770170000002,
+      "cumulative_seconds": 1.842845061
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.getattr>",
+      "primitive_calls": 4734044,
+      "calls": 4777000,
+      "self_seconds": 1.2859612790000001,
+      "cumulative_seconds": 1.310186126
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+      "line": 102,
+      "function": "save",
+      "primitive_calls": 3042,
+      "calls": 3042,
+      "self_seconds": 0.082999415,
+      "cumulative_seconds": 1.182631647
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.any>",
+      "primitive_calls": 293712,
+      "calls": 293712,
+      "self_seconds": 0.562197731,
+      "cumulative_seconds": 1.0935140140000001
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 182,
+      "function": "guard",
+      "primitive_calls": 82648,
+      "calls": 82648,
+      "self_seconds": 0.149006818,
+      "cumulative_seconds": 0.995108041
+    },
+    {
+      "file": "/usr/local/python3.12.13/lib/python3.12/functools.py",
+      "line": 982,
+      "function": "__get__",
+      "primitive_calls": 9222,
+      "calls": 9222,
+      "self_seconds": 0.021249160000000003,
+      "cumulative_seconds": 0.914004001
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/bounded_search.py",
+      "line": 26,
+      "function": "first_lower_bound",
+      "primitive_calls": 82648,
+      "calls": 82648,
+      "self_seconds": 0.25266767900000003,
+      "cumulative_seconds": 0.846101223
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.min>",
+      "primitive_calls": 398541,
+      "calls": 398541,
+      "self_seconds": 0.553294048,
+      "cumulative_seconds": 0.7369189190000001
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 65,
+      "function": "admit",
+      "primitive_calls": 7900,
+      "calls": 7900,
+      "self_seconds": 0.041342809,
+      "cumulative_seconds": 0.690047103
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 43,
+      "function": "protected",
+      "primitive_calls": 626428,
+      "calls": 626428,
+      "self_seconds": 0.415396036,
+      "cumulative_seconds": 0.674593203
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+      "line": 168,
+      "function": "copy_package",
+      "primitive_calls": 976,
+      "calls": 976,
+      "self_seconds": 0.09774255100000001,
+      "cumulative_seconds": 0.670066547
+    },
+    {
+      "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+      "line": 1296,
+      "function": "_is_dataclass_instance",
+      "primitive_calls": 821365,
+      "calls": 821365,
+      "self_seconds": 0.43529068400000004,
+      "cumulative_seconds": 0.655151751
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+      "line": 177,
+      "function": "finished",
+      "primitive_calls": 484,
+      "calls": 484,
+      "self_seconds": 0.010372008,
+      "cumulative_seconds": 0.606017533
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.max>",
+      "primitive_calls": 626047,
+      "calls": 626047,
+      "self_seconds": 0.517296399,
+      "cumulative_seconds": 0.517296399
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'get' of 'dict' objects>",
+      "primitive_calls": 1221014,
+      "calls": 1221014,
+      "self_seconds": 0.507201746,
+      "cumulative_seconds": 0.507201746
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.sum>",
+      "primitive_calls": 260408,
+      "calls": 260408,
+      "self_seconds": 0.344747723,
+      "cumulative_seconds": 0.5056477420000001
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+      "line": 36,
+      "function": "__eq__",
+      "primitive_calls": 5416,
+      "calls": 5416,
+      "self_seconds": 0.16007453600000002,
+      "cumulative_seconds": 0.489727422
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 130,
+      "function": "<lambda>",
+      "primitive_calls": 1132621,
+      "calls": 1132621,
+      "self_seconds": 0.467182878,
+      "cumulative_seconds": 0.467182878
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'values' of 'dict' objects>",
+      "primitive_calls": 1132916,
+      "calls": 1132916,
+      "self_seconds": 0.46550468600000006,
+      "cumulative_seconds": 0.46550468600000006
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 204,
+      "function": "finish",
+      "primitive_calls": 85057,
+      "calls": 85057,
+      "self_seconds": 0.357255506,
+      "cumulative_seconds": 0.44996785100000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.hash>",
+      "primitive_calls": 11833,
+      "calls": 309628,
+      "self_seconds": 0.260045146,
+      "cumulative_seconds": 0.43587605900000004
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+      "line": 33,
+      "function": "__hash__",
+      "primitive_calls": 6084,
+      "calls": 6084,
+      "self_seconds": 0.005393743,
+      "cumulative_seconds": 0.41523653400000005
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+      "line": 29,
+      "function": "signature",
+      "primitive_calls": 3042,
+      "calls": 3042,
+      "self_seconds": 0.0024396590000000003,
+      "cumulative_seconds": 0.39988342600000004
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+      "line": 95,
+      "function": "compute",
+      "primitive_calls": 18150,
+      "calls": 18150,
+      "self_seconds": 0.054096289000000006,
+      "cumulative_seconds": 0.395541705
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 140,
+      "function": "admit",
+      "primitive_calls": 87032,
+      "calls": 87032,
+      "self_seconds": 0.18383753300000003,
+      "cumulative_seconds": 0.36158006200000004
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'extend' of 'list' objects>",
+      "primitive_calls": 176260,
+      "calls": 176260,
+      "self_seconds": 0.259880531,
+      "cumulative_seconds": 0.347714244
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 45,
+      "function": "api",
+      "primitive_calls": 8384,
+      "calls": 8384,
+      "self_seconds": 0.054918873,
+      "cumulative_seconds": 0.346243381
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+      "line": 68,
+      "function": "keys",
+      "primitive_calls": 42393,
+      "calls": 42393,
+      "self_seconds": 0.030423356000000002,
+      "cumulative_seconds": 0.341533593
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 24,
+      "function": "sequence_for",
+      "primitive_calls": 6708,
+      "calls": 6708,
+      "self_seconds": 0.046814513,
+      "cumulative_seconds": 0.334657872
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/bounded_search.py",
+      "line": 29,
+      "function": "<genexpr>",
+      "primitive_calls": 354605,
+      "calls": 354605,
+      "self_seconds": 0.20027735700000002,
+      "cumulative_seconds": 0.308152986
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 225,
+      "function": "<genexpr>",
+      "primitive_calls": 872529,
+      "calls": 872529,
+      "self_seconds": 0.21512024400000002,
+      "cumulative_seconds": 0.301424197
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 39,
+      "function": "effective_route",
+      "primitive_calls": 6708,
+      "calls": 6708,
+      "self_seconds": 0.018746729,
+      "cumulative_seconds": 0.299572175
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.hasattr>",
+      "primitive_calls": 907241,
+      "calls": 907241,
+      "self_seconds": 0.25414171,
+      "cumulative_seconds": 0.25414171
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+      "line": 33,
+      "function": "optional_work",
+      "primitive_calls": 1001,
+      "calls": 1001,
+      "self_seconds": 0.00495935,
+      "cumulative_seconds": 0.24101458
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'items' of 'dict' objects>",
+      "primitive_calls": 525892,
+      "calls": 525892,
+      "self_seconds": 0.237234666,
+      "cumulative_seconds": 0.237234666
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+      "line": 86,
+      "function": "_dot",
+      "primitive_calls": 40442,
+      "calls": 40442,
+      "self_seconds": 0.107914061,
+      "cumulative_seconds": 0.23195753100000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+      "line": 176,
+      "function": "<genexpr>",
+      "primitive_calls": 20498,
+      "calls": 20498,
+      "self_seconds": 0.023034595,
+      "cumulative_seconds": 0.23020910100000003
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+      "line": 137,
+      "function": "prefix",
+      "primitive_calls": 6740,
+      "calls": 6740,
+      "self_seconds": 0.029497219,
+      "cumulative_seconds": 0.22871126000000003
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+      "line": 14,
+      "function": "keys",
+      "primitive_calls": 2431,
+      "calls": 2431,
+      "self_seconds": 0.10800377000000001,
+      "cumulative_seconds": 0.227734924
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 24,
+      "function": "acquire",
+      "primitive_calls": 8384,
+      "calls": 8384,
+      "self_seconds": 0.08237725300000001,
+      "cumulative_seconds": 0.22662405900000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_context_profile.py",
+      "line": 12,
+      "function": "context_work",
+      "primitive_calls": 1001,
+      "calls": 1001,
+      "self_seconds": 0.006449682,
+      "cumulative_seconds": 0.199453969
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'append' of 'list' objects>",
+      "primitive_calls": 476183,
+      "calls": 476183,
+      "self_seconds": 0.18759134300000002,
+      "cumulative_seconds": 0.18759134300000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 262,
+      "function": "<genexpr>",
+      "primitive_calls": 312131,
+      "calls": 312131,
+      "self_seconds": 0.16479922600000002,
+      "cumulative_seconds": 0.18362487100000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 254,
+      "function": "<genexpr>",
+      "primitive_calls": 641273,
+      "calls": 641273,
+      "self_seconds": 0.17966583600000002,
+      "cumulative_seconds": 0.17966583600000002
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.len>",
+      "primitive_calls": 566795,
+      "calls": 566795,
+      "self_seconds": 0.155658455,
+      "cumulative_seconds": 0.155658455
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+      "line": 90,
+      "function": "restore",
+      "primitive_calls": 24858,
+      "calls": 24858,
+      "self_seconds": 0.032093675,
+      "cumulative_seconds": 0.14035321
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_queue.py",
+      "line": 28,
+      "function": "build_work",
+      "primitive_calls": 1009,
+      "calls": 1009,
+      "self_seconds": 0.015576602,
+      "cumulative_seconds": 0.134026337
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.next>",
+      "primitive_calls": 94910,
+      "calls": 95446,
+      "self_seconds": 0.037633159,
+      "cumulative_seconds": 0.12831033
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+      "line": 66,
+      "function": "prefill_features",
+      "primitive_calls": 18150,
+      "calls": 18150,
+      "self_seconds": 0.065503302,
+      "cumulative_seconds": 0.126897057
+    }
+  ],
+  "self": [
+    {
+      "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+      "line": 1540,
+      "function": "replace",
+      "primitive_calls": 821365,
+      "calls": 821365,
+      "self_seconds": 4.535042944000001,
+      "cumulative_seconds": 9.78808609
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 41,
+      "function": "schedule_batched",
+      "primitive_calls": 850,
+      "calls": 850,
+      "self_seconds": 4.0102812640000005,
+      "cumulative_seconds": 26.774855178000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.getattr>",
+      "primitive_calls": 4734044,
+      "calls": 4777000,
+      "self_seconds": 1.2859612790000001,
+      "cumulative_seconds": 1.310186126
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 152,
+      "function": "begin",
+      "primitive_calls": 87032,
+      "calls": 87032,
+      "self_seconds": 1.16417301,
+      "cumulative_seconds": 2.493211333
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.sorted>",
+      "primitive_calls": 260265,
+      "calls": 260265,
+      "self_seconds": 1.0123770170000002,
+      "cumulative_seconds": 1.842845061
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 110,
+      "function": "<genexpr>",
+      "primitive_calls": 633112,
+      "calls": 633112,
+      "self_seconds": 0.8803270120000001,
+      "cumulative_seconds": 9.032200199
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.any>",
+      "primitive_calls": 293712,
+      "calls": 293712,
+      "self_seconds": 0.562197731,
+      "cumulative_seconds": 1.0935140140000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.min>",
+      "primitive_calls": 398541,
+      "calls": 398541,
+      "self_seconds": 0.553294048,
+      "cumulative_seconds": 0.7369189190000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.max>",
+      "primitive_calls": 626047,
+      "calls": 626047,
+      "self_seconds": 0.517296399,
+      "cumulative_seconds": 0.517296399
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'get' of 'dict' objects>",
+      "primitive_calls": 1221014,
+      "calls": 1221014,
+      "self_seconds": 0.507201746,
+      "cumulative_seconds": 0.507201746
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 130,
+      "function": "<lambda>",
+      "primitive_calls": 1132621,
+      "calls": 1132621,
+      "self_seconds": 0.467182878,
+      "cumulative_seconds": 0.467182878
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'values' of 'dict' objects>",
+      "primitive_calls": 1132916,
+      "calls": 1132916,
+      "self_seconds": 0.46550468600000006,
+      "cumulative_seconds": 0.46550468600000006
+    },
+    {
+      "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+      "line": 1296,
+      "function": "_is_dataclass_instance",
+      "primitive_calls": 821365,
+      "calls": 821365,
+      "self_seconds": 0.43529068400000004,
+      "cumulative_seconds": 0.655151751
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 43,
+      "function": "protected",
+      "primitive_calls": 626428,
+      "calls": 626428,
+      "self_seconds": 0.415396036,
+      "cumulative_seconds": 0.674593203
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 204,
+      "function": "finish",
+      "primitive_calls": 85057,
+      "calls": 85057,
+      "self_seconds": 0.357255506,
+      "cumulative_seconds": 0.44996785100000003
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.sum>",
+      "primitive_calls": 260408,
+      "calls": 260408,
+      "self_seconds": 0.344747723,
+      "cumulative_seconds": 0.5056477420000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.hash>",
+      "primitive_calls": 11833,
+      "calls": 309628,
+      "self_seconds": 0.260045146,
+      "cumulative_seconds": 0.43587605900000004
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'extend' of 'list' objects>",
+      "primitive_calls": 176260,
+      "calls": 176260,
+      "self_seconds": 0.259880531,
+      "cumulative_seconds": 0.347714244
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.hasattr>",
+      "primitive_calls": 907241,
+      "calls": 907241,
+      "self_seconds": 0.25414171,
+      "cumulative_seconds": 0.25414171
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/bounded_search.py",
+      "line": 26,
+      "function": "first_lower_bound",
+      "primitive_calls": 82648,
+      "calls": 82648,
+      "self_seconds": 0.25266767900000003,
+      "cumulative_seconds": 0.846101223
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'items' of 'dict' objects>",
+      "primitive_calls": 525892,
+      "calls": 525892,
+      "self_seconds": 0.237234666,
+      "cumulative_seconds": 0.237234666
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 108,
+      "function": "sync_protection",
+      "primitive_calls": 6684,
+      "calls": 6684,
+      "self_seconds": 0.21675734600000002,
+      "cumulative_seconds": 9.320606762
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 225,
+      "function": "<genexpr>",
+      "primitive_calls": 872529,
+      "calls": 872529,
+      "self_seconds": 0.21512024400000002,
+      "cumulative_seconds": 0.301424197
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/bounded_search.py",
+      "line": 29,
+      "function": "<genexpr>",
+      "primitive_calls": 354605,
+      "calls": 354605,
+      "self_seconds": 0.20027735700000002,
+      "cumulative_seconds": 0.308152986
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'append' of 'list' objects>",
+      "primitive_calls": 476183,
+      "calls": 476183,
+      "self_seconds": 0.18759134300000002,
+      "cumulative_seconds": 0.18759134300000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 140,
+      "function": "admit",
+      "primitive_calls": 87032,
+      "calls": 87032,
+      "self_seconds": 0.18383753300000003,
+      "cumulative_seconds": 0.36158006200000004
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 254,
+      "function": "<genexpr>",
+      "primitive_calls": 641273,
+      "calls": 641273,
+      "self_seconds": 0.17966583600000002,
+      "cumulative_seconds": 0.17966583600000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 262,
+      "function": "<genexpr>",
+      "primitive_calls": 312131,
+      "calls": 312131,
+      "self_seconds": 0.16479922600000002,
+      "cumulative_seconds": 0.18362487100000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+      "line": 36,
+      "function": "__eq__",
+      "primitive_calls": 5416,
+      "calls": 5416,
+      "self_seconds": 0.16007453600000002,
+      "cumulative_seconds": 0.489727422
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method builtins.len>",
+      "primitive_calls": 566795,
+      "calls": 566795,
+      "self_seconds": 0.155658455,
+      "cumulative_seconds": 0.155658455
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 182,
+      "function": "guard",
+      "primitive_calls": 82648,
+      "calls": 82648,
+      "self_seconds": 0.149006818,
+      "cumulative_seconds": 0.995108041
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+      "line": 16,
+      "function": "<genexpr>",
+      "primitive_calls": 497555,
+      "calls": 497555,
+      "self_seconds": 0.119731154,
+      "cumulative_seconds": 0.119731154
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 132,
+      "function": "<genexpr>",
+      "primitive_calls": 53022,
+      "calls": 53022,
+      "self_seconds": 0.11008627200000001,
+      "cumulative_seconds": 0.11008627200000001
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+      "line": 14,
+      "function": "keys",
+      "primitive_calls": 2431,
+      "calls": 2431,
+      "self_seconds": 0.10800377000000001,
+      "cumulative_seconds": 0.227734924
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+      "line": 86,
+      "function": "_dot",
+      "primitive_calls": 40442,
+      "calls": 40442,
+      "self_seconds": 0.107914061,
+      "cumulative_seconds": 0.23195753100000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+      "line": 168,
+      "function": "copy_package",
+      "primitive_calls": 976,
+      "calls": 976,
+      "self_seconds": 0.09774255100000001,
+      "cumulative_seconds": 0.670066547
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'intersection' of 'frozenset' objects>",
+      "primitive_calls": 102219,
+      "calls": 102219,
+      "self_seconds": 0.09741371600000001,
+      "cumulative_seconds": 0.09741371600000001
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<method 'update' of 'dict' objects>",
+      "primitive_calls": 98922,
+      "calls": 98922,
+      "self_seconds": 0.09649832400000001,
+      "cumulative_seconds": 0.09649832400000001
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 278,
+      "function": "<genexpr>",
+      "primitive_calls": 259380,
+      "calls": 259380,
+      "self_seconds": 0.08621937,
+      "cumulative_seconds": 0.08621937
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+      "line": 102,
+      "function": "save",
+      "primitive_calls": 3042,
+      "calls": 3042,
+      "self_seconds": 0.082999415,
+      "cumulative_seconds": 1.182631647
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 24,
+      "function": "acquire",
+      "primitive_calls": 8384,
+      "calls": 8384,
+      "self_seconds": 0.08237725300000001,
+      "cumulative_seconds": 0.22662405900000002
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 103,
+      "function": "remaining_prefill",
+      "primitive_calls": 188392,
+      "calls": 188392,
+      "self_seconds": 0.07404334800000001,
+      "cumulative_seconds": 0.07404334800000001
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+      "line": 66,
+      "function": "prefill_features",
+      "primitive_calls": 18150,
+      "calls": 18150,
+      "self_seconds": 0.065503302,
+      "cumulative_seconds": 0.126897057
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+      "line": 45,
+      "function": "get",
+      "primitive_calls": 50410,
+      "calls": 50410,
+      "self_seconds": 0.062009456000000004,
+      "cumulative_seconds": 0.106621668
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+      "line": 45,
+      "function": "api",
+      "primitive_calls": 8384,
+      "calls": 8384,
+      "self_seconds": 0.054918873,
+      "cumulative_seconds": 0.346243381
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+      "line": 95,
+      "function": "compute",
+      "primitive_calls": 18150,
+      "calls": 18150,
+      "self_seconds": 0.054096289000000006,
+      "cumulative_seconds": 0.395541705
+    },
+    {
+      "file": "~",
+      "line": 0,
+      "function": "<built-in method _heapq.heappop>",
+      "primitive_calls": 86699,
+      "calls": 86699,
+      "self_seconds": 0.049582149000000006,
+      "cumulative_seconds": 0.049582149000000006
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+      "line": 88,
+      "function": "<genexpr>",
+      "primitive_calls": 157620,
+      "calls": 157620,
+      "self_seconds": 0.047620241,
+      "cumulative_seconds": 0.047620241
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/experiments/issue23_strategies/batch_calendar.py",
+      "line": 24,
+      "function": "sequence_for",
+      "primitive_calls": 6708,
+      "calls": 6708,
+      "self_seconds": 0.046814513,
+      "cumulative_seconds": 0.334657872
+    },
+    {
+      "file": "/root/issue23-cache-evolution-source-02/python/pegaflow/strategies/continuous_batch.py",
+      "line": 34,
+      "function": "release",
+      "primitive_calls": 3526,
+      "calls": 3526,
+      "self_seconds": 0.042631709000000004,
+      "cumulative_seconds": 0.066677811
+    }
+  ],
+  "empty_final": true,
+  "pid": 3827148
+}

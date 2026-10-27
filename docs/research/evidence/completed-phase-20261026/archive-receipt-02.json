@@ -1,0 +1,39 @@
+{
+  "CPU_only": true,
+  "automation": "PAUSED",
+  "base_git": "2b4b8028993aee093bff27367a4ac3bd98d35e98",
+  "measured_three_rate_matrices": 10,
+  "validated_measured_arms": 90,
+  "requests_per_arm": 95,
+  "exact_equal_control_requests": 285,
+  "not_counted_as_performance": [
+    "objective/late-D/fixed-zero phase-location diagnostics",
+    "failed route-equality diagnostic assumption"
+  ],
+  "archives": {
+    "issue23-completed-phase-01-evidence.tar.gz": "7881d5d86e58009c94cd94d8ec30045362bd37998f5201d8d04b9dd00a19fa84",
+    "issue23-completed-phase-02-evidence.tar.gz": "bfd23758741cb93b2bf70ffe0118fac2a69fa1d576dee98da5523832f74c9725",
+    "issue23-control-objective-diagnostic-01-evidence.tar.gz": "1b87d903e3e959ad116d08ce9165becdb8b6261473958c465f7468c376f9647b",
+    "issue23-control-release-01-evidence.tar.gz": "dcc8067c3312d0ba7e7574a9b05a43560c63ad9a428b0750cbc05fe391bf6c3d",
+    "issue23-control-release-02-evidence.tar.gz": "c1f41a365107cedf7a6d601c0692ab1ae26854e33d87c4710c6a5d8e11aace46",
+    "issue23-control-work-01-evidence.tar.gz": "1e8bb27131bda45f9f6765b24a949cf31d099368b15e0beb702b180dabe69e5f",
+    "issue23-control-work-02-evidence.tar.gz": "8cd66136620c34488b2be43e6c47a082d7dc2a03cbd17a692e1f21adf24c63a5",
+    "issue23-control-work-residual-01-evidence.tar.gz": "69ffb43a341ed23bc6f4986c99ed4667ef42aac5bdeb79ebea15c6bcfbf29841",
+    "issue23-late-D-diagnostic-01-evidence.tar.gz": "85b7be729d46e6355df1bf373e37a6450c26ca78ec4ea2b8f56dc9c68791f5d9",
+    "issue23-phase-location-diagnostic-01-evidence.tar.gz": "343bc83cfe867f766638ab50461bb15aedae9b2cc6b959e0887c3bd8e8321d92",
+    "issue23-phase-location-diagnostic-02-evidence.tar.gz": "df27d377ac44998eacb4d2a9359bfcac8cec5e876dc8ec82505ff8dfdbb829e6",
+    "issue23-phase-residual-01-evidence.tar.gz": "a15154204b962937dcb814c397173f0f75173d0b62c8d381e8fc92b3469fb537",
+    "issue23-sparse-cache-01-evidence.tar.gz": "aca9fda1889b88945ed82a59e08375249b7b6977f7b30719c64c4e383aaa238a",
+    "issue23-sparse-cache-02-evidence.tar.gz": "9c7f45e46f84b29872010c3a474a826ecf85c8196640d06d3588ac3a3ee6c999",
+    "issue23-sparse-cache-equivalence-01-evidence.tar.gz": "6dd7a7e55d255e1bf3c4188932b110cbf79974d5089bd621799a2177b91be7e5"
+  },
+  "source_archives": {
+    "completed-phase-source-01.tar.gz": "5c000d44159e35e9dd15a050cf45f25e230c432a0f1d07e5b336c9c10565b610",
+    "control-release-source-01.tar.gz": "82c057cec11f991f6cc1e1907ba3f9d6b27a4b344dc2a44102d97299ba4834dc",
+    "control-work-source-01.tar.gz": "6a22f7e617de7a8b4bf5cf2aeda116e4d625b47cd0caae540f18e2ae1ddd6cc9",
+    "phase-residual-source-01.tar.gz": "f7a70b711424b4583edcda267c98048f68c2c6ad972e9d0b908b07814934a376",
+    "sparse-cache-source-01.tar.gz": "62d0b94fd315149f5c3dfacf28762bd12cd5a36c4585c841104014027ef8980a"
+  },
+  "real_serving_validated": false,
+  "default_reference_unchanged": true
+}

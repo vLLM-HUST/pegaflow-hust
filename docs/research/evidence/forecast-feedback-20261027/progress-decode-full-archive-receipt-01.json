@@ -1,0 +1,18 @@
+[
+  {
+    "path": "/root/issue23-progress-decode-default-01-full.tar.gz",
+    "sha256": "cd7ab310041353d438bf32cf94b301cc8d96eeb7eefdb8ccfad2298f446f0f00",
+    "bytes": 18130206,
+    "local": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\issue23-progress-decode-default-01-full.tar.gz",
+    "extracted": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\result-progress-decode-default-01",
+    "verified": true
+  },
+  {
+    "path": "/root/issue23-progress-decode-sharing-01-full.tar.gz",
+    "sha256": "79df36a33f87a9604c1f887fce4beeae1c4fa81740863a49a0024626542c8c29",
+    "bytes": 17080716,
+    "local": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\issue23-progress-decode-sharing-01-full.tar.gz",
+    "extracted": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\result-progress-decode-sharing-01",
+    "verified": true
+  }
+]

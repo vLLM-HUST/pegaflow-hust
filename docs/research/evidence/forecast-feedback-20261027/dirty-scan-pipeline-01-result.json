@@ -1,0 +1,221 @@
+{
+  "started": 1793051121.823283,
+  "finished": 1793051712.2181354,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-dirty-scan-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-dirty-scan-equivalence-01",
+        "--policy",
+        "dirty-scan",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1",
+        "--zero-control-diagnostic"
+      ],
+      "pid": 79237,
+      "started": 1793051121.823729,
+      "finished": 1793051389.7191854,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-dirty-scan-equivalence-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/dirty-scan-source-receipt-01.json",
+        "--output",
+        "/root/issue23-dirty-scan-equivalence-01/source-control-audit.json"
+      ],
+      "pid": 83130,
+      "started": 1793051391.3955436,
+      "finished": 1793051399.6751332,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-dirty-scan-equivalence-01",
+        "--output",
+        "/root/issue23-dirty-scan-equivalence-01/work-conservation-audit.json"
+      ],
+      "pid": 83132,
+      "started": 1793051399.6760318,
+      "finished": 1793051401.7952313,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-dirty-scan-equivalence-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-dirty-scan-equivalence-01/release-estimate-audit.json"
+      ],
+      "pid": 83133,
+      "started": 1793051401.7958639,
+      "finished": 1793051404.2653325,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-dirty-scan-equivalence-01",
+        "--output",
+        "/root/issue23-dirty-scan-equivalence-01/feedback-alignment.json"
+      ],
+      "pid": 83152,
+      "started": 1793051404.2659256,
+      "finished": 1793051406.1844022,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-dirty-scan-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-dirty-scan-sharing-01",
+        "--policy",
+        "dirty-scan",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1"
+      ],
+      "pid": 83548,
+      "started": 1793051414.636646,
+      "finished": 1793051685.7726927,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-dirty-scan-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/dirty-scan-source-receipt-01.json",
+        "--output",
+        "/root/issue23-dirty-scan-sharing-01/source-control-audit.json"
+      ],
+      "pid": 87812,
+      "started": 1793051685.773394,
+      "finished": 1793051694.9663982,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-dirty-scan-sharing-01",
+        "--output",
+        "/root/issue23-dirty-scan-sharing-01/work-conservation-audit.json"
+      ],
+      "pid": 87814,
+      "started": 1793051694.9668977,
+      "finished": 1793051697.3360522,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-dirty-scan-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-dirty-scan-sharing-01/release-estimate-audit.json"
+      ],
+      "pid": 87815,
+      "started": 1793051697.3366654,
+      "finished": 1793051699.806432,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-dirty-scan-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-dirty-scan-sharing-01",
+        "--output",
+        "/root/issue23-dirty-scan-sharing-01/feedback-alignment.json"
+      ],
+      "pid": 87817,
+      "started": 1793051699.806967,
+      "finished": 1793051701.7756267,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/issue23-dirty-scan-equivalence-01-full.tar.gz",
+      "sha256": "7cd5ea6aa2d7be05ca2a76ee81b04b05696e42aacf7b12e8588b874011ff6ff0",
+      "bytes": 11578539
+    },
+    {
+      "path": "/root/issue23-dirty-scan-sharing-01-full.tar.gz",
+      "sha256": "e85cb41ad8a72fdd9ef57235a8978197f7a9909183f545726d44057a89eefa5e",
+      "bytes": 17133887
+    }
+  ],
+  "failure": null,
+  "no_gpu_work": true
+}

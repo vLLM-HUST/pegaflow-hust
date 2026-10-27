@@ -1,0 +1,17 @@
+{
+  "pid": 544667,
+  "pgid": 544667,
+  "started": 1793085013.3260376,
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "/root/advice-calendar-pipeline-02.py"
+  ],
+  "cwd": "/root/issue23-advice-calendar-source-01",
+  "runner_sha256": "ad0eb98f4f62f957008df3354c4b6505ac7762c74ec20add3b8505a1bb7db989",
+  "source_sha256": "db9523e651348d50cc9e4e0976ac22482787fe68791d9e1ff825c9f1741af4c0",
+  "root": "/root/issue23-advice-calendar-charged-pipeline-02",
+  "console": "/root/advice-calendar-pipeline-02-console.log",
+  "new_simulation": "sharing only",
+  "default_rerun": false,
+  "limit_seconds": 4500
+}

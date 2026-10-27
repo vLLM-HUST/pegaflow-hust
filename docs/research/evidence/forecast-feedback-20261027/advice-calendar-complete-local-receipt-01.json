@@ -1,0 +1,21 @@
+{
+  "archives": [
+    {
+      "local": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\advice-calendar-completed-default-01-full.tar.gz",
+      "remote": "/root/advice-calendar-completed-default-01-full.tar.gz",
+      "sha256": "97a1e0bda2848b981315b619b4dfe2774df320dd86f1752aecb181e6d489660b",
+      "bytes": 19411328,
+      "extracted": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\result-advice-calendar-default-01"
+    },
+    {
+      "local": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\advice-calendar-completed-sharing-01-full.tar.gz",
+      "remote": "/root/advice-calendar-completed-sharing-01-full.tar.gz",
+      "sha256": "cea99ec9aef0e6997dc0e60ce1d0f817ad28fa31d06675aa4ea1eb2b6b6012c4",
+      "bytes": 17388609,
+      "extracted": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\result-advice-calendar-sharing-01"
+    }
+  ],
+  "full_archives": true,
+  "all_steps_exit0": true,
+  "original_report_failure_preserved": true
+}

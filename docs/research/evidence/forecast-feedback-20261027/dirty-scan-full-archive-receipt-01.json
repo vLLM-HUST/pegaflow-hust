@@ -1,0 +1,16 @@
+[
+  {
+    "archive": "cache-profile-20261026\\issue23-dirty-scan-equivalence-01-full.tar.gz",
+    "sha256": "7cd5ea6aa2d7be05ca2a76ee81b04b05696e42aacf7b12e8588b874011ff6ff0",
+    "bytes": 11578539,
+    "extracted": "cache-profile-20261026\\result-dirty-scan-equivalence-01",
+    "remote_sha_verified": true
+  },
+  {
+    "archive": "cache-profile-20261026\\issue23-dirty-scan-sharing-01-full.tar.gz",
+    "sha256": "e85cb41ad8a72fdd9ef57235a8978197f7a9909183f545726d44057a89eefa5e",
+    "bytes": 17133887,
+    "extracted": "cache-profile-20261026\\result-dirty-scan-sharing-01",
+    "remote_sha_verified": true
+  }
+]

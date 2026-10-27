@@ -1,0 +1,18 @@
+[
+  {
+    "path": "/root/issue23-late-decode-default-01-full.tar.gz",
+    "sha256": "aa09a15e9b6751b5dbdf7fc7772ab6a1bba19f6060f1ab69c1a50496f2b33a98",
+    "bytes": 18196359,
+    "local": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\issue23-late-decode-default-01-full.tar.gz",
+    "extracted": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\result-late-decode-default-01",
+    "verified": true
+  },
+  {
+    "path": "/root/issue23-late-decode-sharing-01-full.tar.gz",
+    "sha256": "fe08e6ff6fa9785c98b0bea8ec1abb08097869cfcc26085e7830323fa8b8a156",
+    "bytes": 17174133,
+    "local": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\issue23-late-decode-sharing-01-full.tar.gz",
+    "extracted": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\result-late-decode-sharing-01",
+    "verified": true
+  }
+]

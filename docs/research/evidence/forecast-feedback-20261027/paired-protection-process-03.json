@@ -1,0 +1,18 @@
+{
+  "supervisor_pid": 72526,
+  "child_pid": 72527,
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "/root/issue23-paired-protection-source-03/experiments/issue23_strategies/profile_paired_protection.py",
+    "--inputs",
+    "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+    "--seed",
+    "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+    "--output",
+    "/root/issue23-paired-protection-profile-03"
+  ],
+  "started": 1793050734.2330651,
+  "limit_seconds": 900,
+  "source_sha256": "302af9006ffa3806fd2ed934da2dfc5b236291a66d1ded124df73d2cc2cbdf8c",
+  "CPU_only": true
+}

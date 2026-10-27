@@ -1,0 +1,75 @@
+{
+  "evidence": "C:\\Users\\Lenovo\\Desktop\\issue23\\bounded-search-20261026\\issue23-bounded-proof-memo-09-result\\issue23-bounded-proof-memo-09\\case-03-ours.json",
+  "request": "git-multibranch:11",
+  "interpretation": "Observed simulation resource intervals, not device telemetry or a causal ablation",
+  "route": {
+    "p": 1,
+    "d": 3,
+    "source": 0,
+    "P_prefix_command": 6784,
+    "D_prefix_command": 16640,
+    "P_end": 361.11978447120225,
+    "first": 367.4774801168346,
+    "full": 382.31667582439775,
+    "origin": 344.93493464037033,
+    "latest_completed": 342.3288414569463,
+    "not_after_P_revised_forecast": true
+  },
+  "planner_wall": 0.6686090733855963,
+  "candidate_P_API": {
+    "request": "git-multibranch:11",
+    "node": 1,
+    "operation": "P_api",
+    "start": 358.7286529324321,
+    "end": 364.1165829107321,
+    "resources": [
+      "gate1"
+    ]
+  },
+  "candidate_history_copy": {
+    "request": "git-multibranch:11",
+    "node": 1,
+    "operation": "history",
+    "start": 357.8283825402452,
+    "end": 358.7285279331101,
+    "resources": [
+      "link:P"
+    ]
+  },
+  "other_P_API_intervals_before_copy": [
+    {
+      "request": "fix-code-vulnerability:11",
+      "node": 1,
+      "operation": "P_api",
+      "start": 342.3294611850645,
+      "end": 351.7079440113683,
+      "resources": [
+        "gate1"
+      ]
+    },
+    {
+      "request": "fix-git:11",
+      "node": 1,
+      "operation": "P_api",
+      "start": 351.7085783994351,
+      "end": 354.85246131375885,
+      "resources": [
+        "gate1"
+      ]
+    },
+    {
+      "request": "dna-insert:12",
+      "node": 0,
+      "operation": "P_api",
+      "start": 352.4221874095375,
+      "end": 357.82774895218444,
+      "resources": [
+        "gate0"
+      ]
+    }
+  ],
+  "ready_to_copy_service": 12.893447899874843,
+  "copy_service_seconds": 0.9001453928649426,
+  "conclusion": "Both endpoint gates were needed. P1 was occupied by prior jobs, then source P0 remained occupied by dna-insert:12. Network service duration alone cannot explain the pre-copy delay.",
+  "unresolved": "Initial active-source gate acquire and accepted D-prefix projection were absent from old output; endpoint residual is not pure queue or RDMA congestion."
+}

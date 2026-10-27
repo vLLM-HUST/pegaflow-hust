@@ -1,0 +1,959 @@
+{
+  "CPU_only": true,
+  "not_promoted": true,
+  "reference": "same-round exact-binary-calendar-02",
+  "all_control_charged": true,
+  "95_exposed_p99_is_max": true,
+  "cases": {
+    "default": [
+      {
+        "rate": 0.24516170769071072,
+        "costs": {
+          "reference": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.682612551351732,
+              "p50": 7.281565794379105,
+              "p90": 12.213017710947327,
+              "p95": 16.59019105728538,
+              "p99": 19.046431936552267,
+              "max": 19.046431936552267
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 29.468125527381414,
+              "p50": 16.478163949507177,
+              "p90": 82.67344768329667,
+              "p95": 107.87434917008903,
+              "p99": 116.64841596607636,
+              "max": 116.64841596607636
+            },
+            "makespan": 517.7685887652941,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5064,
+                  "full": 625,
+                  "calendar_full": 625,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 4793,
+                  "bound_checks": 397996,
+                  "pruned_calendars": 4263
+                },
+                "measured_wall": 58.1167949559167,
+                "wall_per_full_calendar_including_other_search_work": 0.09298687192946672
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 207,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 162260,
+                  "pruned_calendars": 3668
+                },
+                "measured_wall": 31.809189787134528,
+                "wall_per_full_calendar_including_other_search_work": 0.1536675835127272
+              }
+            },
+            "D_advice_calls": 47,
+            "D_advice_status": {
+              "acquired_or_completed": 3,
+              "no_predicted_improvement": 37,
+              "route_priority": 3,
+              "move": 4
+            },
+            "D_advice_wall": 10.89605617057532,
+            "P_revalidation_calls": 0,
+            "P_distribution": {
+              "1": 64,
+              "0": 31
+            },
+            "D_distribution": {
+              "2": 64,
+              "3": 31
+            }
+          },
+          "ours": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.990437390545229,
+              "p50": 7.274988602112046,
+              "p90": 14.751807378512524,
+              "p95": 16.992994054386486,
+              "p99": 20.242410019604506,
+              "max": 20.242410019604506
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 30.174336860523066,
+              "p50": 16.643338169684483,
+              "p90": 89.21442482532638,
+              "p95": 112.14968991352129,
+              "p99": 133.80136102008208,
+              "max": 133.80136102008208
+            },
+            "makespan": 533.7350630727983,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5220,
+                  "full": 621,
+                  "calendar_full": 621,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 4948,
+                  "bound_checks": 446036,
+                  "pruned_calendars": 4422
+                },
+                "measured_wall": 64.49982653930783,
+                "wall_per_full_calendar_including_other_search_work": 0.1038644549747308
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 273,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 166546,
+                  "pruned_calendars": 3573
+                },
+                "measured_wall": 33.488665918819606,
+                "wall_per_full_calendar_including_other_search_work": 0.12266910592974214
+              }
+            },
+            "D_advice_calls": 46,
+            "D_advice_status": {
+              "acquired_or_completed": 4,
+              "no_predicted_improvement": 39,
+              "route_priority": 1,
+              "move": 2
+            },
+            "D_advice_wall": 11.833877496421337,
+            "P_revalidation_calls": 0,
+            "P_distribution": {
+              "1": 66,
+              "0": 29
+            },
+            "D_distribution": {
+              "2": 65,
+              "3": 30
+            }
+          }
+        },
+        "p99_reduction_percent": -6.279276281438428,
+        "requests_faster": 40,
+        "accepted_cache_tokens": {
+          "reference": {
+            "P": 526080,
+            "D": 120704
+          },
+          "ours": {
+            "P": 517248,
+            "D": 129536
+          }
+        }
+      },
+      {
+        "rate": 0.49032341538142143,
+        "costs": {
+          "reference": {
+            "TTFT": {
+              "n": 95,
+              "mean": 8.46964165566147,
+              "p50": 8.3860941893995,
+              "p90": 14.970800991680505,
+              "p95": 15.856028259896902,
+              "p99": 20.87444556762341,
+              "max": 20.87444556762341
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 114.39917000595358,
+              "p50": 98.49197904601255,
+              "p90": 235.2685474212981,
+              "p95": 282.4581330017661,
+              "p99": 302.0325255530263,
+              "max": 302.0325255530263
+            },
+            "makespan": 507.16560567850826,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 4963,
+                  "full": 644,
+                  "calendar_full": 644,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 4692,
+                  "bound_checks": 488657,
+                  "pruned_calendars": 4143
+                },
+                "measured_wall": 70.288858034648,
+                "wall_per_full_calendar_including_other_search_work": 0.10914418949479503
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 201,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 167304,
+                  "pruned_calendars": 2863
+                },
+                "measured_wall": 35.69517549034208,
+                "wall_per_full_calendar_including_other_search_work": 0.17758793776289591
+              }
+            },
+            "D_advice_calls": 35,
+            "D_advice_status": {
+              "acquired_or_completed": 4,
+              "no_predicted_improvement": 25,
+              "move": 4,
+              "route_priority": 2
+            },
+            "D_advice_wall": 6.899020308628678,
+            "P_revalidation_calls": 0,
+            "P_distribution": {
+              "1": 60,
+              "0": 35
+            },
+            "D_distribution": {
+              "2": 62,
+              "3": 33
+            }
+          },
+          "ours": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.910321169942606,
+              "p50": 7.740979749248822,
+              "p90": 12.802944876774404,
+              "p95": 16.544163700396496,
+              "p99": 19.069985500230928,
+              "max": 19.069985500230928
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 106.32294374309603,
+              "p50": 92.01100086654942,
+              "p90": 223.91600005944414,
+              "p95": 267.75506878034207,
+              "p99": 295.6616290932877,
+              "max": 295.6616290932877
+            },
+            "makespan": 498.58254400141806,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5001,
+                  "full": 605,
+                  "calendar_full": 605,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 4728,
+                  "bound_checks": 490471,
+                  "pruned_calendars": 4218
+                },
+                "measured_wall": 71.44071498140693,
+                "wall_per_full_calendar_including_other_search_work": 0.11808382641554864
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 184,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 156043,
+                  "pruned_calendars": 3611
+                },
+                "measured_wall": 33.73203018121421,
+                "wall_per_full_calendar_including_other_search_work": 0.18332625098485986
+              }
+            },
+            "D_advice_calls": 43,
+            "D_advice_status": {
+              "acquired_or_completed": 1,
+              "no_predicted_improvement": 38,
+              "route_priority": 3,
+              "move": 1
+            },
+            "D_advice_wall": 6.4810425359755754,
+            "P_revalidation_calls": 0,
+            "P_distribution": {
+              "1": 63,
+              "0": 32
+            },
+            "D_distribution": {
+              "2": 62,
+              "3": 33
+            }
+          }
+        },
+        "p99_reduction_percent": 8.64434967408777,
+        "requests_faster": 58,
+        "accepted_cache_tokens": {
+          "reference": {
+            "P": 470528,
+            "D": 91904
+          },
+          "ours": {
+            "P": 526848,
+            "D": 113280
+          }
+        }
+      },
+      {
+        "rate": 0.9806468307628429,
+        "costs": {
+          "reference": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.980014909704585,
+              "p50": 7.6532378557288325,
+              "p90": 14.06730812064069,
+              "p95": 15.987225843525096,
+              "p99": 20.927899621407505,
+              "max": 20.927899621407505
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 155.60972721766498,
+              "p50": 136.8379762404211,
+              "p90": 319.1154565969059,
+              "p95": 359.95702445314487,
+              "p99": 387.80289619772157,
+              "max": 387.80289619772157
+            },
+            "makespan": 492.86603912844043,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5243,
+                  "full": 658,
+                  "calendar_full": 658,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 4966,
+                  "bound_checks": 477682,
+                  "pruned_calendars": 4403
+                },
+                "measured_wall": 68.04938640352339,
+                "wall_per_full_calendar_including_other_search_work": 0.10341852037009633
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 314,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 215972,
+                  "pruned_calendars": 2777
+                },
+                "measured_wall": 41.47517041582614,
+                "wall_per_full_calendar_including_other_search_work": 0.13208652998670745
+              }
+            },
+            "D_advice_calls": 32,
+            "D_advice_status": {
+              "no_predicted_improvement": 29,
+              "route_priority": 2,
+              "move": 1
+            },
+            "D_advice_wall": 6.15831811260432,
+            "P_revalidation_calls": 0,
+            "P_distribution": {
+              "1": 62,
+              "0": 33
+            },
+            "D_distribution": {
+              "2": 61,
+              "3": 34
+            }
+          },
+          "ours": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.633963252525177,
+              "p50": 7.698221116310947,
+              "p90": 13.867031316363637,
+              "p95": 15.216435382659256,
+              "p99": 15.625965742392623,
+              "max": 15.625965742392623
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 153.09333361627716,
+              "p50": 138.05843972999332,
+              "p90": 308.2369912185505,
+              "p95": 353.91533364395264,
+              "p99": 390.68164600272854,
+              "max": 390.68164600272854
+            },
+            "makespan": 497.0777899808189,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5092,
+                  "full": 625,
+                  "calendar_full": 625,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 4819,
+                  "bound_checks": 438074,
+                  "pruned_calendars": 4289
+                },
+                "measured_wall": 66.73913185391575,
+                "wall_per_full_calendar_including_other_search_work": 0.1067826109662652
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 199,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 211393,
+                  "pruned_calendars": 4044
+                },
+                "measured_wall": 44.30334155168384,
+                "wall_per_full_calendar_including_other_search_work": 0.2226298570436374
+              }
+            },
+            "D_advice_calls": 34,
+            "D_advice_status": {
+              "no_predicted_improvement": 28,
+              "route_priority": 5,
+              "move": 1
+            },
+            "D_advice_wall": 9.096551268361509,
+            "P_revalidation_calls": 0,
+            "P_distribution": {
+              "1": 67,
+              "0": 28
+            },
+            "D_distribution": {
+              "2": 60,
+              "3": 35
+            }
+          }
+        },
+        "p99_reduction_percent": 25.334285690052926,
+        "requests_faster": 49,
+        "accepted_cache_tokens": {
+          "reference": {
+            "P": 492928,
+            "D": 141952
+          },
+          "ours": {
+            "P": 594176,
+            "D": 172288
+          }
+        }
+      }
+    ],
+    "sharing": [
+      {
+        "rate": 0.24516170769071072,
+        "costs": {
+          "reference": {
+            "TTFT": {
+              "n": 95,
+              "mean": 6.3752377869281895,
+              "p50": 5.963865842228444,
+              "p90": 12.107445402684334,
+              "p95": 13.026947210710034,
+              "p99": 14.021878571871923,
+              "max": 14.021878571871923
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 7.8412262719258035,
+              "p50": 5.972688922473026,
+              "p90": 17.94091222554755,
+              "p95": 23.562218179995057,
+              "p99": 28.450588320458337,
+              "max": 28.450588320458337
+            },
+            "makespan": 428.1069290002889,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5552,
+                  "full": 613,
+                  "calendar_full": 613,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 5306,
+                  "bound_checks": 278555,
+                  "pruned_calendars": 4788
+                },
+                "measured_wall": 40.70759127661586,
+                "wall_per_full_calendar_including_other_search_work": 0.06640716358338639
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 241,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 134485,
+                  "pruned_calendars": 2990
+                },
+                "measured_wall": 25.981185267679393,
+                "wall_per_full_calendar_including_other_search_work": 0.10780574799866968
+              }
+            },
+            "D_advice_calls": 4,
+            "D_advice_status": {
+              "acquired_or_completed": 2,
+              "no_predicted_improvement": 2
+            },
+            "D_advice_wall": 1.3350589964538813,
+            "P_revalidation_calls": 0,
+            "P_distribution": {
+              "1": 61,
+              "0": 34
+            },
+            "D_distribution": {
+              "2": 84,
+              "3": 11
+            }
+          },
+          "ours": {
+            "TTFT": {
+              "n": 95,
+              "mean": 6.39239078686973,
+              "p50": 5.684870494406653,
+              "p90": 12.691259901897809,
+              "p95": 13.600579773897323,
+              "p99": 15.440441967699428,
+              "max": 15.440441967699428
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 7.665800102752408,
+              "p50": 5.753051899863422,
+              "p90": 16.554789724516127,
+              "p95": 22.251142142122717,
+              "p99": 28.942385271940225,
+              "max": 28.942385271940225
+            },
+            "makespan": 428.18733447492934,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5570,
+                  "full": 590,
+                  "calendar_full": 590,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 5321,
+                  "bound_checks": 280909,
+                  "pruned_calendars": 4826
+                },
+                "measured_wall": 40.97757822647691,
+                "wall_per_full_calendar_including_other_search_work": 0.06945352241775747
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 187,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 174654,
+                  "pruned_calendars": 3146
+                },
+                "measured_wall": 31.619006398133934,
+                "wall_per_full_calendar_including_other_search_work": 0.16908559571194617
+              }
+            },
+            "D_advice_calls": 8,
+            "D_advice_status": {
+              "acquired_or_completed": 4,
+              "no_predicted_improvement": 4
+            },
+            "D_advice_wall": 1.6770650604739785,
+            "P_revalidation_calls": 1,
+            "P_distribution": {
+              "1": 57,
+              "0": 38
+            },
+            "D_distribution": {
+              "2": 85,
+              "3": 10
+            }
+          }
+        },
+        "p99_reduction_percent": -10.116785625808822,
+        "requests_faster": 42,
+        "accepted_cache_tokens": {
+          "reference": {
+            "P": 367744,
+            "D": 91520
+          },
+          "ours": {
+            "P": 366848,
+            "D": 84224
+          }
+        }
+      },
+      {
+        "rate": 0.49032341538142143,
+        "costs": {
+          "reference": {
+            "TTFT": {
+              "n": 95,
+              "mean": 8.011283040919995,
+              "p50": 8.60975057947411,
+              "p90": 13.746786341207581,
+              "p95": 14.44379611777822,
+              "p99": 15.903630002976996,
+              "max": 15.903630002976996
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 22.562813234262087,
+              "p50": 11.950552762102376,
+              "p90": 65.73566655780178,
+              "p95": 72.8554451692178,
+              "p99": 79.8992149673075,
+              "max": 79.8992149673075
+            },
+            "makespan": 285.00867000170143,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5728,
+                  "full": 678,
+                  "calendar_full": 678,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 5467,
+                  "bound_checks": 588150,
+                  "pruned_calendars": 4884
+                },
+                "measured_wall": 76.47783051710576,
+                "wall_per_full_calendar_including_other_search_work": 0.11279916005472826
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 218,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 262606,
+                  "pruned_calendars": 2870
+                },
+                "measured_wall": 41.07650362048298,
+                "wall_per_full_calendar_including_other_search_work": 0.1884243285343256
+              }
+            },
+            "D_advice_calls": 12,
+            "D_advice_status": {
+              "acquired_or_completed": 6,
+              "route_priority": 2,
+              "no_predicted_improvement": 4
+            },
+            "D_advice_wall": 2.6873015454038978,
+            "P_revalidation_calls": 1,
+            "P_distribution": {
+              "1": 56,
+              "0": 39
+            },
+            "D_distribution": {
+              "2": 80,
+              "3": 15
+            }
+          },
+          "ours": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.739542928947246,
+              "p50": 8.03275501922073,
+              "p90": 13.258646284965636,
+              "p95": 15.208237849510624,
+              "p99": 18.89786229661138,
+              "max": 18.89786229661138
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 21.277729467136584,
+              "p50": 11.056153041687296,
+              "p90": 57.81343236899255,
+              "p95": 75.10588134248223,
+              "p99": 93.81457361016831,
+              "max": 93.81457361016831
+            },
+            "makespan": 298.9486960774637,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5547,
+                  "full": 656,
+                  "calendar_full": 656,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 5290,
+                  "bound_checks": 574333,
+                  "pruned_calendars": 4729
+                },
+                "measured_wall": 75.28774571139365,
+                "wall_per_full_calendar_including_other_search_work": 0.11476790504785618
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 200,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 253488,
+                  "pruned_calendars": 3252
+                },
+                "measured_wall": 43.099630636163056,
+                "wall_per_full_calendar_including_other_search_work": 0.21549815318081528
+              }
+            },
+            "D_advice_calls": 19,
+            "D_advice_status": {
+              "acquired_or_completed": 8,
+              "route_priority": 2,
+              "no_predicted_improvement": 8,
+              "move": 1
+            },
+            "D_advice_wall": 4.934101056307554,
+            "P_revalidation_calls": 0,
+            "P_distribution": {
+              "1": 62,
+              "0": 33
+            },
+            "D_distribution": {
+              "2": 81,
+              "3": 14
+            }
+          }
+        },
+        "p99_reduction_percent": -18.827351322144015,
+        "requests_faster": 60,
+        "accepted_cache_tokens": {
+          "reference": {
+            "P": 306560,
+            "D": 84224
+          },
+          "ours": {
+            "P": 350464,
+            "D": 89600
+          }
+        }
+      },
+      {
+        "rate": 0.9806468307628429,
+        "costs": {
+          "reference": {
+            "TTFT": {
+              "n": 95,
+              "mean": 8.270970118288583,
+              "p50": 7.09766197930179,
+              "p90": 14.856357678345319,
+              "p95": 21.64871156009687,
+              "p99": 28.619533569134717,
+              "max": 28.619533569134717
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 50.04866933885366,
+              "p50": 35.539001385189096,
+              "p90": 125.46868947122101,
+              "p95": 134.5385821694578,
+              "p99": 148.72852583544648,
+              "max": 148.72852583544648
+            },
+            "makespan": 255.21926588096633,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5181,
+                  "full": 583,
+                  "calendar_full": 583,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 4916,
+                  "bound_checks": 614863,
+                  "pruned_calendars": 4428
+                },
+                "measured_wall": 81.78315813466907,
+                "wall_per_full_calendar_including_other_search_work": 0.14027985957919223
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 201,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 222544,
+                  "pruned_calendars": 3112
+                },
+                "measured_wall": 40.76726955268532,
+                "wall_per_full_calendar_including_other_search_work": 0.20282223658052398
+              }
+            },
+            "D_advice_calls": 19,
+            "D_advice_status": {
+              "acquired_or_completed": 6,
+              "route_priority": 5,
+              "no_predicted_improvement": 8
+            },
+            "D_advice_wall": 4.894764121621847,
+            "P_revalidation_calls": 1,
+            "P_distribution": {
+              "1": 57,
+              "0": 38
+            },
+            "D_distribution": {
+              "2": 77,
+              "3": 18
+            }
+          },
+          "ours": {
+            "TTFT": {
+              "n": 95,
+              "mean": 8.406844030397412,
+              "p50": 8.792166454491621,
+              "p90": 14.17658196071065,
+              "p95": 14.938442879599393,
+              "p99": 17.455467141066293,
+              "max": 17.455467141066293
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 51.31050904131647,
+              "p50": 37.548215138303796,
+              "p90": 125.27282099240438,
+              "p95": 138.38251946039134,
+              "p99": 153.89883436431035,
+              "max": 153.89883436431035
+            },
+            "makespan": 260.2923236791137,
+            "search": {
+              "route": {
+                "calls": 95,
+                "counts": {
+                  "considered": 5473,
+                  "full": 612,
+                  "calendar_full": 612,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 5216,
+                  "bound_checks": 699762,
+                  "pruned_calendars": 4699
+                },
+                "measured_wall": 88.12145288847387,
+                "wall_per_full_calendar_including_other_search_work": 0.14398930210534946
+              },
+              "boundary": {
+                "calls": 95,
+                "counts": {
+                  "considered": 0,
+                  "full": 0,
+                  "calendar_full": 276,
+                  "calendar_reused": 0,
+                  "refresh_full": 95,
+                  "refresh_reused": 0,
+                  "bound_checks": 255621,
+                  "pruned_calendars": 3054
+                },
+                "measured_wall": 42.478152610361576,
+                "wall_per_full_calendar_including_other_search_work": 0.15390635003754194
+              }
+            },
+            "D_advice_calls": 17,
+            "D_advice_status": {
+              "no_predicted_improvement": 11,
+              "route_priority": 2,
+              "acquired_or_completed": 3,
+              "move": 1
+            },
+            "D_advice_wall": 3.0762820802628994,
+            "P_revalidation_calls": 0,
+            "P_distribution": {
+              "1": 59,
+              "0": 36
+            },
+            "D_distribution": {
+              "2": 75,
+              "3": 20
+            }
+          }
+        },
+        "p99_reduction_percent": 39.008554772913996,
+        "requests_faster": 40,
+        "accepted_cache_tokens": {
+          "reference": {
+            "P": 424064,
+            "D": 71936
+          },
+          "ours": {
+            "P": 342912,
+            "D": 104064
+          }
+        }
+      }
+    ]
+  },
+  "archives": [
+    {
+      "path": "/root/issue23-prefix-reclaim-charged-default-03-full.tar.gz",
+      "sha256": "9ae7aae8db2a5560a87900d558bcbcca72d4d78a20429200f61162b7b2b79882",
+      "bytes": 19273200
+    },
+    {
+      "path": "/root/issue23-prefix-reclaim-charged-sharing-03-full.tar.gz",
+      "sha256": "e8fde03439e652df99cee9bb7d9ad3e8dac70bee1cc66a22327cffc13af83890",
+      "bytes": 17436073
+    }
+  ]
+}

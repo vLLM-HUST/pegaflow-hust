@@ -1,0 +1,23 @@
+{
+  "scope": "CPU acquired-state accounting, not hardware validation",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "checked_phase_quotes": 14,
+      "route_decisions_with_acquired_phase": 7,
+      "completed_only_samples_recomputed": true
+    },
+    {
+      "rate": 0.49032341538142143,
+      "checked_phase_quotes": 6,
+      "route_decisions_with_acquired_phase": 2,
+      "completed_only_samples_recomputed": true
+    },
+    {
+      "rate": 0.9806468307628429,
+      "checked_phase_quotes": 6,
+      "route_decisions_with_acquired_phase": 3,
+      "completed_only_samples_recomputed": true
+    }
+  ]
+}

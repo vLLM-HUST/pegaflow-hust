@@ -1,0 +1,1756 @@
+{
+  "audit": {
+    "kind": "completed-CPU-screen-accounting-not-real-output-audit",
+    "screen_sha256": "c434e2dc0d19378071cb912ac0d9415de6f5c6c66b5fd67345488271e31cdf80",
+    "validated_arms": 9,
+    "requests_per_arm": 95,
+    "real_parallel_serving_validated": false,
+    "summary": [
+      {
+        "rate": 0.24516170769071072,
+        "max_sequences": 4,
+        "shared_fraction": 0.0,
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 16.53189030163759,
+            "p50": 7.146944608476929,
+            "p90": 51.03872082466637,
+            "p95": 69.06737832415894,
+            "p99": 82.21612310742745,
+            "max": 82.21612310742745
+          },
+          "makespan": 646.7026057649397,
+          "planning_wall": 0.04189874976873398,
+          "boundary_CPU_wall": 0,
+          "D_summary": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2165309440
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4749000704
+            }
+          },
+          "P_distribution": [
+            48,
+            47
+          ],
+          "D_distribution": [
+            48,
+            47
+          ]
+        },
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.768657349585797,
+            "p50": 6.650452292328254,
+            "p90": 15.510119905297586,
+            "p95": 17.434021751010675,
+            "p99": 21.4885994659993,
+            "max": 21.4885994659993
+          },
+          "makespan": 543.6443936254246,
+          "planning_wall": 43.99429105129093,
+          "boundary_CPU_wall": 23.160073113627732,
+          "D_summary": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4954521600
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2003828736
+            }
+          },
+          "P_distribution": [
+            33,
+            62
+          ],
+          "D_distribution": [
+            66,
+            29
+          ]
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.391342035232803,
+            "p50": 7.540863121868682,
+            "p90": 14.848202947421044,
+            "p95": 17.22105861226504,
+            "p99": 18.531112604826603,
+            "max": 18.531112604826603
+          },
+          "makespan": 531.4425725318985,
+          "planning_wall": 61.52745663840324,
+          "boundary_CPU_wall": 33.96103274729103,
+          "D_summary": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 5020581888
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 1835008000
+            }
+          },
+          "P_distribution": [
+            34,
+            61
+          ],
+          "D_distribution": [
+            65,
+            30
+          ]
+        },
+        "gain": 0.7746048840005143
+      },
+      {
+        "rate": 0.49032341538142143,
+        "max_sequences": 4,
+        "shared_fraction": 0.0,
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 17.67296867005458,
+            "p50": 8.248624110675479,
+            "p90": 56.005539766203015,
+            "p95": 57.39977779730111,
+            "p99": 62.66359150845881,
+            "max": 62.66359150845881
+          },
+          "makespan": 665.2575588436208,
+          "planning_wall": 0.04116031248122454,
+          "boundary_CPU_wall": 0,
+          "D_summary": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 1849688064
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4139778048
+            }
+          },
+          "P_distribution": [
+            48,
+            47
+          ],
+          "D_distribution": [
+            48,
+            47
+          ]
+        },
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.291218682324317,
+            "p50": 6.3983341632933275,
+            "p90": 17.69438109382446,
+            "p95": 20.46346787979843,
+            "p99": 26.405223084751867,
+            "max": 26.405223084751867
+          },
+          "makespan": 508.59080086131956,
+          "planning_wall": 44.19340269360691,
+          "boundary_CPU_wall": 28.3334786510095,
+          "D_summary": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4969201664
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 1908408320
+            }
+          },
+          "P_distribution": [
+            37,
+            58
+          ],
+          "D_distribution": [
+            62,
+            33
+          ]
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.368101602036031,
+            "p50": 8.024517356039496,
+            "p90": 15.595602889978636,
+            "p95": 16.735718755510163,
+            "p99": 18.43646460268667,
+            "max": 18.43646460268667
+          },
+          "makespan": 498.8524231043334,
+          "planning_wall": 65.77596031408757,
+          "boundary_CPU_wall": 42.316295901313424,
+          "D_summary": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 5020581888
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 1754267648
+            }
+          },
+          "P_distribution": [
+            35,
+            60
+          ],
+          "D_distribution": [
+            62,
+            33
+          ]
+        },
+        "gain": 0.7057866592246316
+      },
+      {
+        "rate": 0.9806468307628429,
+        "max_sequences": 4,
+        "shared_fraction": 0.0,
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 17.730062507874155,
+            "p50": 7.740293134670196,
+            "p90": 57.62760806368482,
+            "p95": 64.47227137999863,
+            "p99": 78.2580747501861,
+            "max": 78.2580747501861
+          },
+          "makespan": 626.5256417473569,
+          "planning_wall": 0.04065273702144623,
+          "boundary_CPU_wall": 0,
+          "D_summary": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 1937768448
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4139778048
+            }
+          },
+          "P_distribution": [
+            48,
+            47
+          ],
+          "D_distribution": [
+            48,
+            47
+          ]
+        },
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.476508985809678,
+            "p50": 6.649323158139282,
+            "p90": 17.866771588953583,
+            "p95": 18.151432343617785,
+            "p99": 28.869700529830652,
+            "max": 28.869700529830652
+          },
+          "makespan": 501.3711559898541,
+          "planning_wall": 49.797736938111484,
+          "boundary_CPU_wall": 26.87929360102862,
+          "D_summary": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4822401024
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2495610880
+            }
+          },
+          "P_distribution": [
+            41,
+            54
+          ],
+          "D_distribution": [
+            61,
+            34
+          ]
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.818009481553601,
+            "p50": 7.837264875100743,
+            "p90": 14.10659043679749,
+            "p95": 14.605848409825114,
+            "p99": 16.61347810713437,
+            "max": 16.61347810713437
+          },
+          "makespan": 491.8714812053968,
+          "planning_wall": 66.04878816287965,
+          "boundary_CPU_wall": 36.09824261907488,
+          "D_summary": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4917821440
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 1871708160
+            }
+          },
+          "P_distribution": [
+            38,
+            57
+          ],
+          "D_distribution": [
+            61,
+            34
+          ]
+        },
+        "gain": 0.7877090873987433
+      }
+    ],
+    "all_285_control_quotes_recomputed_from_completed_only": true,
+    "route_labels_match_charged_decision_CPU": true,
+    "boundary_labels_match_completed_control_history": true,
+    "state_feature_future_independence": "Source inspection; not a separate trace of every inventory input"
+  },
+  "analysis": {
+    "scope": "same-run CPU simulation; no parallel NPU qualification",
+    "cases": [
+      {
+        "rate": 0.24516170769071072,
+        "arms": {
+          "reference": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.768657349585797,
+              "p50": 6.650452292328254,
+              "p90": 15.510119905297586,
+              "p95": 17.434021751010675,
+              "p99": 21.4885994659993,
+              "max": 21.4885994659993
+            },
+            "makespan": 543.6443936254246,
+            "routing_wall": 43.99429105129093,
+            "boundary_wall": 23.160073113627732,
+            "iteration_wall": 0.16084018256515265,
+            "P_distribution": [
+              33,
+              62
+            ],
+            "D_distribution": [
+              66,
+              29
+            ],
+            "first_endpoint_error": {
+              "MAE": 0.6241824484107823,
+              "RMSE": 1.2549003494631317,
+              "bias_actual_minus_prediction": 0.1576528079220355,
+              "not_pure_queue_error": true
+            },
+            "software_link_wait_sum": 0.0,
+            "software_copy_gate_hold_sum": 10.794836812931052,
+            "restore_path_sum": 40.10161976793274,
+            "accepted_prefix_tokens": {
+              "P": 422656,
+              "D": 75392
+            },
+            "worst_request": "distribution-search:10"
+          },
+          "ours": {
+            "TTFT": {
+              "n": 95,
+              "mean": 8.391342035232803,
+              "p50": 7.540863121868682,
+              "p90": 14.848202947421044,
+              "p95": 17.22105861226504,
+              "p99": 18.531112604826603,
+              "max": 18.531112604826603
+            },
+            "makespan": 531.4425725318985,
+            "routing_wall": 61.52745663840324,
+            "boundary_wall": 33.96103274729103,
+            "iteration_wall": 0.6560462964698672,
+            "P_distribution": [
+              34,
+              61
+            ],
+            "D_distribution": [
+              65,
+              30
+            ],
+            "first_endpoint_error": {
+              "MAE": 0.7742620028728708,
+              "RMSE": 1.3616377658551433,
+              "bias_actual_minus_prediction": 0.21964217561054075,
+              "not_pure_queue_error": true
+            },
+            "software_link_wait_sum": 0.0,
+            "software_copy_gate_hold_sum": 9.34677639345314,
+            "restore_path_sum": 44.771514159037515,
+            "accepted_prefix_tokens": {
+              "P": 457856,
+              "D": 88960
+            },
+            "worst_request": "headless-terminal:11"
+          }
+        },
+        "net_p99_reduction_percent": 13.763050802134547,
+        "faster_requests": 41,
+        "focused": {
+          "distribution-search:10": {
+            "reference": {
+              "TTFT": 21.4885994659993,
+              "nominal": 37.16329805947703,
+              "dependency": 15.674698593477729,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 289.9724765293234,
+              "first": 311.4610759953227,
+              "before_P": 2.2794153501349115,
+              "P_API": 6.1658569969807475,
+              "P_to_D": 12.439640487152872,
+              "D_API_to_first": 0.6036866317307954
+            },
+            "candidate": {
+              "TTFT": 8.200050337282335,
+              "nominal": 20.419118117076778,
+              "dependency": 12.219067779794443,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 12672,
+              "D_prefix": 0,
+              "ready": 286.5168457156401,
+              "first": 294.71689605292244,
+              "before_P": 1.1908890671433596,
+              "P_API": 0.7024112827823982,
+              "P_to_D": 5.75894831333261,
+              "D_API_to_first": 0.5478016740239582
+            },
+            "delta": {
+              "TTFT": -13.288549128716966,
+              "before_P": -1.0885262829915519,
+              "P_API": -5.4634457141983495,
+              "P_to_D": -6.680692173820262,
+              "D_API_to_first": -0.05588495770683721
+            }
+          },
+          "headless-terminal:11": {
+            "reference": {
+              "TTFT": 20.320190829922524,
+              "nominal": 57.9346218967911,
+              "dependency": 37.614431066868576,
+              "P": 1,
+              "D": 3,
+              "P_prefix": 640,
+              "D_prefix": 640,
+              "ready": 353.50750318459626,
+              "first": 373.8276940145188,
+              "before_P": 1.987407694606361,
+              "P_API": 4.909982866512521,
+              "P_to_D": 0.5458523176890253,
+              "D_API_to_first": 12.87694795111463
+            },
+            "candidate": {
+              "TTFT": 18.531112604826603,
+              "nominal": 59.912375456638586,
+              "dependency": 41.38126285181198,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 0,
+              "D_prefix": 0,
+              "ready": 357.27433496953967,
+              "first": 375.80544757436627,
+              "before_P": 0.8719836428167014,
+              "P_API": 5.16059938748964,
+              "P_to_D": 11.918887568837818,
+              "D_API_to_first": 0.5796420056824445
+            },
+            "delta": {
+              "TTFT": -1.7890782250959205,
+              "before_P": -1.1154240517896596,
+              "P_API": 0.2506165209771192,
+              "P_to_D": 11.373035251148792,
+              "D_API_to_first": -12.297305945432186
+            }
+          },
+          "git-multibranch:11": {
+            "reference": {
+              "TTFT": 7.789964369140591,
+              "nominal": 61.424479493790784,
+              "dependency": 53.63451512465019,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 12544,
+              "D_prefix": 0,
+              "ready": 368.4043411630766,
+              "first": 376.1943055322172,
+              "before_P": 1.0636395170690207,
+              "P_API": 2.6454908748486963,
+              "P_to_D": 3.4001018360046373,
+              "D_API_to_first": 0.6807321412182432
+            },
+            "candidate": {
+              "TTFT": 17.22105861226504,
+              "nominal": 82.08855285159973,
+              "dependency": 64.86749423933469,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6016,
+              "D_prefix": 0,
+              "ready": 379.6373202777611,
+              "first": 396.85837889002613,
+              "before_P": 0.9324069797398238,
+              "P_API": 5.662222131016318,
+              "P_to_D": 9.949449498422553,
+              "D_API_to_first": 0.676980003086328
+            },
+            "delta": {
+              "TTFT": 9.431094243124448,
+              "before_P": -0.13123253732919693,
+              "P_API": 3.0167312561676214,
+              "P_to_D": 6.549347662417915,
+              "D_API_to_first": -0.003752138131915217
+            }
+          }
+        },
+        "fit_methods": {
+          "mean_until_identifiable": 3,
+          "nonnegative_visible_work": 92
+        },
+        "component_prediction": {
+          "reference": {
+            "route_CPU": {
+              "MAE": 0.15704237226477127,
+              "RMSE": 0.19477241092355665,
+              "bias": -0.05669990428488452,
+              "max_absolute": 0.48185473345265195
+            },
+            "P_end": {
+              "MAE": 0.15428892602209526,
+              "RMSE": 0.19789429999134253,
+              "bias": -0.08300197900733014,
+              "max_absolute": 0.4920893565690676
+            },
+            "first": {
+              "MAE": 0.6241824484107823,
+              "RMSE": 1.2549003494631317,
+              "bias": 0.1576528079220355,
+              "max_absolute": 8.763747130335446
+            }
+          },
+          "ours": {
+            "route_CPU": {
+              "MAE": 0.2980149167491732,
+              "RMSE": 0.3794053984889862,
+              "bias": -0.09794107931074521,
+              "max_absolute": 1.1880475506723378
+            },
+            "P_end": {
+              "MAE": 0.2993517780037596,
+              "RMSE": 0.383723715623709,
+              "bias": -0.11212076745353915,
+              "max_absolute": 1.1701867828618333
+            },
+            "first": {
+              "MAE": 0.7742620028728708,
+              "RMSE": 1.3616377658551433,
+              "bias": 0.21964217561054075,
+              "max_absolute": 6.543133411854626
+            }
+          }
+        }
+      },
+      {
+        "rate": 0.49032341538142143,
+        "arms": {
+          "reference": {
+            "TTFT": {
+              "n": 95,
+              "mean": 8.291218682324317,
+              "p50": 6.3983341632933275,
+              "p90": 17.69438109382446,
+              "p95": 20.46346787979843,
+              "p99": 26.405223084751867,
+              "max": 26.405223084751867
+            },
+            "makespan": 508.59080086131956,
+            "routing_wall": 44.19340269360691,
+            "boundary_wall": 28.3334786510095,
+            "iteration_wall": 0.15923141781240702,
+            "P_distribution": [
+              37,
+              58
+            ],
+            "D_distribution": [
+              62,
+              33
+            ],
+            "first_endpoint_error": {
+              "MAE": 0.6606266402043497,
+              "RMSE": 1.1648453640973813,
+              "bias_actual_minus_prediction": 0.20241455592125865,
+              "not_pure_queue_error": true
+            },
+            "software_link_wait_sum": 0.0,
+            "software_copy_gate_hold_sum": 9.244895236449082,
+            "restore_path_sum": 47.72723175869927,
+            "accepted_prefix_tokens": {
+              "P": 425600,
+              "D": 92288
+            },
+            "worst_request": "distribution-search:14"
+          },
+          "ours": {
+            "TTFT": {
+              "n": 95,
+              "mean": 8.368101602036031,
+              "p50": 8.024517356039496,
+              "p90": 15.595602889978636,
+              "p95": 16.735718755510163,
+              "p99": 18.43646460268667,
+              "max": 18.43646460268667
+            },
+            "makespan": 498.8524231043334,
+            "routing_wall": 65.77596031408757,
+            "boundary_wall": 42.316295901313424,
+            "iteration_wall": 0.6407136535272002,
+            "P_distribution": [
+              35,
+              60
+            ],
+            "D_distribution": [
+              62,
+              33
+            ],
+            "first_endpoint_error": {
+              "MAE": 0.7284238168737013,
+              "RMSE": 1.101865919091317,
+              "bias_actual_minus_prediction": 0.06350734408565473,
+              "not_pure_queue_error": true
+            },
+            "software_link_wait_sum": 0.0,
+            "software_copy_gate_hold_sum": 11.675327846083349,
+            "restore_path_sum": 63.812201151092054,
+            "accepted_prefix_tokens": {
+              "P": 487296,
+              "D": 165888
+            },
+            "worst_request": "feal-differential-cryptanalysis:13"
+          }
+        },
+        "net_p99_reduction_percent": 30.17872053755489,
+        "faster_requests": 37,
+        "focused": {
+          "distribution-search:14": {
+            "reference": {
+              "TTFT": 26.405223084751867,
+              "nominal": 278.1250072972906,
+              "dependency": 251.7197842125387,
+              "P": 0,
+              "D": 3,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 425.58411790778996,
+              "first": 451.9893409925418,
+              "before_P": 0.8507354856805591,
+              "P_API": 10.156923775039255,
+              "P_to_D": 0.45973267148252717,
+              "D_API_to_first": 14.937831152549506
+            },
+            "candidate": {
+              "TTFT": 15.318151772947033,
+              "nominal": 239.24583301116198,
+              "dependency": 223.92768123821494,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 7296,
+              "D_prefix": 128,
+              "ready": 397.7920149334662,
+              "first": 413.1101667064132,
+              "before_P": 0.9572903217153339,
+              "P_API": 7.13459210335506,
+              "P_to_D": 6.877743695593608,
+              "D_API_to_first": 0.3485256522830582
+            },
+            "delta": {
+              "TTFT": -11.087071311804834,
+              "before_P": 0.10655483603477478,
+              "P_API": -3.022331671684195,
+              "P_to_D": 6.418011024111081,
+              "D_API_to_first": -14.589305500266448
+            }
+          },
+          "feal-differential-cryptanalysis:13": {
+            "reference": {
+              "TTFT": 11.658280818748949,
+              "nominal": 258.91881761460326,
+              "dependency": 247.2605367958543,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 6656,
+              "D_prefix": 0,
+              "ready": 416.08209444404446,
+              "first": 427.7403752627934,
+              "before_P": 0.7226444390939264,
+              "P_API": 8.671143281312457,
+              "P_to_D": 0.6260100856703161,
+              "D_API_to_first": 1.638483012672225
+            },
+            "candidate": {
+              "TTFT": 18.43646460268667,
+              "nominal": 253.91942545609953,
+              "dependency": 235.48296085341286,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 4096,
+              "D_prefix": 0,
+              "ready": 404.304518501603,
+              "first": 422.7409831042897,
+              "before_P": 0.8447714365424304,
+              "P_API": 10.017964456573353,
+              "P_to_D": 6.4476110338895865,
+              "D_API_to_first": 1.1261176756813143
+            },
+            "delta": {
+              "TTFT": 6.77818378393772,
+              "before_P": 0.12212699744850397,
+              "P_API": 1.3468211752608958,
+              "P_to_D": 5.82160094821927,
+              "D_API_to_first": -0.5123653369909107
+            }
+          },
+          "git-multibranch:11": {
+            "reference": {
+              "TTFT": 19.25202290348983,
+              "nominal": 174.03405172726454,
+              "dependency": 154.7820288237747,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 128,
+              "ready": 312.1669418429879,
+              "first": 331.41896474647774,
+              "before_P": 3.034644406740597,
+              "P_API": 8.146589047860243,
+              "P_to_D": 7.571745516367287,
+              "D_API_to_first": 0.4990439325217153
+            },
+            "candidate": {
+              "TTFT": 9.76232472131187,
+              "nominal": 232.15440796464216,
+              "dependency": 222.3920832433303,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6784,
+              "D_prefix": 0,
+              "ready": 379.7769962625435,
+              "first": 389.53932098385536,
+              "before_P": 0.9753367194311409,
+              "P_API": 5.307312571467186,
+              "P_to_D": 2.7894587100396393,
+              "D_API_to_first": 0.6902167203738827
+            },
+            "delta": {
+              "TTFT": -9.48969818217796,
+              "before_P": -2.059307687309456,
+              "P_API": -2.8392764763930565,
+              "P_to_D": -4.782286806327647,
+              "D_API_to_first": 0.1911727878521674
+            }
+          }
+        },
+        "fit_methods": {
+          "mean_until_identifiable": 3,
+          "nonnegative_visible_work": 92
+        },
+        "component_prediction": {
+          "reference": {
+            "route_CPU": {
+              "MAE": 0.1729277517672304,
+              "RMSE": 0.215715714462735,
+              "bias": -0.0643470510458827,
+              "max_absolute": 0.646583456819391
+            },
+            "P_end": {
+              "MAE": 0.18224996772591423,
+              "RMSE": 0.2254199164163946,
+              "bias": -0.0511154297085468,
+              "max_absolute": 0.5750569270431356
+            },
+            "first": {
+              "MAE": 0.6606266402043497,
+              "RMSE": 1.1648453640973813,
+              "bias": 0.20241455592125865,
+              "max_absolute": 5.1453706637179835
+            }
+          },
+          "ours": {
+            "route_CPU": {
+              "MAE": 0.2532074868542768,
+              "RMSE": 0.3388093156058424,
+              "bias": -0.08273086849123246,
+              "max_absolute": 0.9607845261241506
+            },
+            "P_end": {
+              "MAE": 0.2836580454026445,
+              "RMSE": 0.4483445022830176,
+              "bias": -0.06799009680237607,
+              "max_absolute": 2.9426127370729205
+            },
+            "first": {
+              "MAE": 0.7284238168737013,
+              "RMSE": 1.101865919091317,
+              "bias": 0.06350734408565473,
+              "max_absolute": 5.076038007264117
+            }
+          }
+        }
+      },
+      {
+        "rate": 0.9806468307628429,
+        "arms": {
+          "reference": {
+            "TTFT": {
+              "n": 95,
+              "mean": 8.476508985809678,
+              "p50": 6.649323158139282,
+              "p90": 17.866771588953583,
+              "p95": 18.151432343617785,
+              "p99": 28.869700529830652,
+              "max": 28.869700529830652
+            },
+            "makespan": 501.3711559898541,
+            "routing_wall": 49.797736938111484,
+            "boundary_wall": 26.87929360102862,
+            "iteration_wall": 0.15566298738121986,
+            "P_distribution": [
+              41,
+              54
+            ],
+            "D_distribution": [
+              61,
+              34
+            ],
+            "first_endpoint_error": {
+              "MAE": 0.8880772007049933,
+              "RMSE": 2.370190422372959,
+              "bias_actual_minus_prediction": 0.2170769078622806,
+              "not_pure_queue_error": true
+            },
+            "software_link_wait_sum": 0.0,
+            "software_copy_gate_hold_sum": 11.210553601591812,
+            "restore_path_sum": 43.80866493740745,
+            "accepted_prefix_tokens": {
+              "P": 375680,
+              "D": 115456
+            },
+            "worst_request": "git-multibranch:11"
+          },
+          "ours": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.818009481553601,
+              "p50": 7.837264875100743,
+              "p90": 14.10659043679749,
+              "p95": 14.605848409825114,
+              "p99": 16.61347810713437,
+              "max": 16.61347810713437
+            },
+            "makespan": 491.8714812053968,
+            "routing_wall": 66.04878816287965,
+            "boundary_wall": 36.09824261907488,
+            "iteration_wall": 0.7181955855339766,
+            "P_distribution": [
+              38,
+              57
+            ],
+            "D_distribution": [
+              61,
+              34
+            ],
+            "first_endpoint_error": {
+              "MAE": 0.4464973553736588,
+              "RMSE": 0.6858071001965073,
+              "bias_actual_minus_prediction": -0.00850769172758555,
+              "not_pure_queue_error": true
+            },
+            "software_link_wait_sum": 0.5384860191498717,
+            "software_copy_gate_hold_sum": 11.526104729840469,
+            "restore_path_sum": 55.80780839605121,
+            "accepted_prefix_tokens": {
+              "P": 542080,
+              "D": 137600
+            },
+            "worst_request": "git-multibranch:12"
+          }
+        },
+        "net_p99_reduction_percent": 42.453583507151734,
+        "faster_requests": 38,
+        "focused": {
+          "git-multibranch:11": {
+            "reference": {
+              "TTFT": 28.869700529830652,
+              "nominal": 293.16115035826436,
+              "dependency": 264.2914498284337,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 10240,
+              "D_prefix": 2304,
+              "ready": 342.9839063380403,
+              "first": 371.85360686787095,
+              "before_P": 1.09470556130276,
+              "P_API": 3.710219553496092,
+              "P_to_D": 22.992809524212873,
+              "D_API_to_first": 1.0719658908189444
+            },
+            "candidate": {
+              "TTFT": 14.605848409825114,
+              "nominal": 278.37631191788995,
+              "dependency": 263.77046350806484,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6784,
+              "D_prefix": 384,
+              "ready": 342.4629200176714,
+              "first": 357.06876842749654,
+              "before_P": 2.1281168527306704,
+              "P_API": 5.307312571467186,
+              "P_to_D": 6.509797021140685,
+              "D_API_to_first": 0.6606219644865519
+            },
+            "delta": {
+              "TTFT": -14.263852120005538,
+              "before_P": 1.0334112914279103,
+              "P_API": 1.597093017971094,
+              "P_to_D": -16.48301250307219,
+              "D_API_to_first": -0.4113439263323926
+            }
+          },
+          "git-multibranch:12": {
+            "reference": {
+              "TTFT": 16.072383396379053,
+              "nominal": 337.3983772763989,
+              "dependency": 321.32599388001984,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 10240,
+              "D_prefix": 5760,
+              "ready": 403.28266336722896,
+              "first": 419.355046763608,
+              "before_P": 0.7563489741982607,
+              "P_API": 4.32112839722075,
+              "P_to_D": 8.349554940367454,
+              "D_API_to_first": 2.645351084592562
+            },
+            "candidate": {
+              "TTFT": 16.61347810713437,
+              "nominal": 325.70757140920523,
+              "dependency": 309.09409330207086,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 391.05076278928,
+              "first": 407.66424089641436,
+              "before_P": 0.975056795467367,
+              "P_API": 8.544000368231139,
+              "P_to_D": 6.305773468565064,
+              "D_API_to_first": 0.7886474748707997
+            },
+            "delta": {
+              "TTFT": 0.541094710755317,
+              "before_P": 0.21870782126910626,
+              "P_API": 4.222871971010388,
+              "P_to_D": -2.04378147180239,
+              "D_API_to_first": -1.8567036097217624
+            }
+          }
+        },
+        "fit_methods": {
+          "mean_until_identifiable": 3,
+          "nonnegative_visible_work": 92
+        },
+        "component_prediction": {
+          "reference": {
+            "route_CPU": {
+              "MAE": 0.16096792811645916,
+              "RMSE": 0.2169847929909303,
+              "bias": -0.049986914338871105,
+              "max_absolute": 0.7910524749955512
+            },
+            "P_end": {
+              "MAE": 0.17154228533875512,
+              "RMSE": 0.21288356686850524,
+              "bias": -0.06927823487056974,
+              "max_absolute": 0.5395024595090945
+            },
+            "first": {
+              "MAE": 0.8880772007049933,
+              "RMSE": 2.370190422372959,
+              "bias": 0.2170769078622806,
+              "max_absolute": 20.462791135274472
+            }
+          },
+          "ours": {
+            "route_CPU": {
+              "MAE": 0.23011150924744042,
+              "RMSE": 0.30827702090756803,
+              "bias": -0.05248301254332341,
+              "max_absolute": 0.9508943685350391
+            },
+            "P_end": {
+              "MAE": 0.23501579895074187,
+              "RMSE": 0.3108525345796906,
+              "bias": -0.074632608143712,
+              "max_absolute": 0.849562905751327
+            },
+            "first": {
+              "MAE": 0.4464973553736588,
+              "RMSE": 0.6858071001965073,
+              "bias": -0.00850769172758555,
+              "max_absolute": 3.30135860618401
+            }
+          }
+        }
+      }
+    ],
+    "path_behavior": {
+      "scope": "Observed path decomposition; overlapping batch sums are not added to TTFT; neither pure queue nor causal hardware proof",
+      "cases": [
+        {
+          "rate": 0.24516170769071072,
+          "worst_reference": "distribution-search:10",
+          "worst_candidate": "headless-terminal:11",
+          "candidate_faster_requests": 41,
+          "changed_P_assignments": 27,
+          "changed_D_assignments": 23,
+          "changed_D_accepted_prefix": 35,
+          "nodes": {
+            "reference": {
+              "batch_seconds": {
+                "D0:restore": 5.7540380699138325,
+                "D0:compute": 514.1842415092301,
+                "D0:save": 5.53133644873742,
+                "D1:restore": 28.286646467530048,
+                "D1:compute": 301.89991643040537,
+                "D1:save": 2.418707302538678
+              },
+              "accepted_prefix_tokens": {
+                "P": 422656,
+                "D": 75392
+              }
+            },
+            "ours": {
+              "batch_seconds": {
+                "D0:restore": 10.436326104478297,
+                "D0:compute": 506.8107842689258,
+                "D0:save": 5.43875820908579,
+                "D1:restore": 27.886660701414286,
+                "D1:compute": 314.3578551601763,
+                "D1:save": 2.431417227257043
+              },
+              "accepted_prefix_tokens": {
+                "P": 457856,
+                "D": 88960
+              }
+            }
+          },
+          "paired": {
+            "headless-terminal:11": {
+              "reference": {
+                "TTFT": 20.320190829922524,
+                "nominal": 57.9346218967911,
+                "dependency": 37.614431066868576,
+                "P": 1,
+                "D": 3,
+                "P_prefix": 640,
+                "D_prefix": 640,
+                "ready": 353.50750318459626,
+                "first": 373.8276940145188,
+                "before_P": 1.987407694606361,
+                "P_API": 4.909982866512521,
+                "P_to_D": 0.5458523176890253,
+                "D_API_to_first": 12.87694795111463
+              },
+              "candidate": {
+                "TTFT": 18.531112604826603,
+                "nominal": 59.912375456638586,
+                "dependency": 41.38126285181198,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 0,
+                "D_prefix": 0,
+                "ready": 357.27433496953967,
+                "first": 375.80544757436627,
+                "before_P": 0.8719836428167014,
+                "P_API": 5.16059938748964,
+                "P_to_D": 11.918887568837818,
+                "D_API_to_first": 0.5796420056824445
+              },
+              "component_delta": {
+                "before_P": -1.1154240517896596,
+                "P_API": 0.2506165209771192,
+                "P_to_D": 11.373035251148792,
+                "D_API_to_first": -12.297305945432186
+              },
+              "TTFT_delta": -1.7890782250959205
+            },
+            "distribution-search:10": {
+              "reference": {
+                "TTFT": 21.4885994659993,
+                "nominal": 37.16329805947703,
+                "dependency": 15.674698593477729,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 289.9724765293234,
+                "first": 311.4610759953227,
+                "before_P": 2.2794153501349115,
+                "P_API": 6.1658569969807475,
+                "P_to_D": 12.439640487152872,
+                "D_API_to_first": 0.6036866317307954
+              },
+              "candidate": {
+                "TTFT": 8.200050337282335,
+                "nominal": 20.419118117076778,
+                "dependency": 12.219067779794443,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 12672,
+                "D_prefix": 0,
+                "ready": 286.5168457156401,
+                "first": 294.71689605292244,
+                "before_P": 1.1908890671433596,
+                "P_API": 0.7024112827823982,
+                "P_to_D": 5.75894831333261,
+                "D_API_to_first": 0.5478016740239582
+              },
+              "component_delta": {
+                "before_P": -1.0885262829915519,
+                "P_API": -5.4634457141983495,
+                "P_to_D": -6.680692173820262,
+                "D_API_to_first": -0.05588495770683721
+              },
+              "TTFT_delta": -13.288549128716966
+            },
+            "fix-code-vulnerability:11": {
+              "reference": {
+                "TTFT": 4.538865580802906,
+                "nominal": 46.52452684805678,
+                "dependency": 41.985661267253874,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 17024,
+                "D_prefix": 640,
+                "ready": 347.8525896488558,
+                "first": 352.39145522965873,
+                "before_P": 1.698255983461479,
+                "P_API": 1.6964958683764144,
+                "P_to_D": 0.8532256122958302,
+                "D_API_to_first": 0.2908881166691799
+              },
+              "candidate": {
+                "TTFT": 17.10544523385198,
+                "nominal": 75.07484628296538,
+                "dependency": 57.9694010491134,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 18048,
+                "D_prefix": 0,
+                "ready": 363.83632943071535,
+                "first": 380.94177466456733,
+                "before_P": 1.9992187965066819,
+                "P_API": 1.250879563610154,
+                "P_to_D": 13.046268834707291,
+                "D_API_to_first": 0.8090780390278383
+              },
+              "component_delta": {
+                "before_P": 0.3009628130452029,
+                "P_API": -0.44561630476626046,
+                "P_to_D": 12.193043222411461,
+                "D_API_to_first": 0.5181899223586584
+              },
+              "TTFT_delta": 12.566579653049075
+            },
+            "fix-git:13": {
+              "reference": {
+                "TTFT": 6.008587001687999,
+                "nominal": 94.83016796806675,
+                "dependency": 88.82158096637875,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 2816,
+                "D_prefix": 512,
+                "ready": 430.08139781651664,
+                "first": 436.08998481820464,
+                "before_P": 0.8754691212774901,
+                "P_API": 4.257059348087039,
+                "P_to_D": 0.5237909194361805,
+                "D_API_to_first": 0.3522676128873172
+              },
+              "candidate": {
+                "TTFT": 17.295573689076434,
+                "nominal": 71.34598585867008,
+                "dependency": 54.05041216959364,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 8448,
+                "D_prefix": 0,
+                "ready": 395.31022901973154,
+                "first": 412.60580270880797,
+                "before_P": 2.1108212472276477,
+                "P_API": 1.6997017797388758,
+                "P_to_D": 12.958392454770888,
+                "D_API_to_first": 0.5266582073390396
+              },
+              "component_delta": {
+                "before_P": 1.2353521259501576,
+                "P_API": -2.5573575683481633,
+                "P_to_D": 12.434601535334707,
+                "D_API_to_first": 0.17439059445172234
+              },
+              "TTFT_delta": 11.286986687388435
+            },
+            "git-multibranch:11": {
+              "reference": {
+                "TTFT": 7.789964369140591,
+                "nominal": 61.424479493790784,
+                "dependency": 53.63451512465019,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 12544,
+                "D_prefix": 0,
+                "ready": 368.4043411630766,
+                "first": 376.1943055322172,
+                "before_P": 1.0636395170690207,
+                "P_API": 2.6454908748486963,
+                "P_to_D": 3.4001018360046373,
+                "D_API_to_first": 0.6807321412182432
+              },
+              "candidate": {
+                "TTFT": 17.22105861226504,
+                "nominal": 82.08855285159973,
+                "dependency": 64.86749423933469,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 6016,
+                "D_prefix": 0,
+                "ready": 379.6373202777611,
+                "first": 396.85837889002613,
+                "before_P": 0.9324069797398238,
+                "P_API": 5.662222131016318,
+                "P_to_D": 9.949449498422553,
+                "D_API_to_first": 0.676980003086328
+              },
+              "component_delta": {
+                "before_P": -0.13123253732919693,
+                "P_API": 3.0167312561676214,
+                "P_to_D": 6.549347662417915,
+                "D_API_to_first": -0.003752138131915217
+              },
+              "TTFT_delta": 9.431094243124448
+            }
+          }
+        },
+        {
+          "rate": 0.49032341538142143,
+          "worst_reference": "distribution-search:14",
+          "worst_candidate": "feal-differential-cryptanalysis:13",
+          "candidate_faster_requests": 37,
+          "changed_P_assignments": 36,
+          "changed_D_assignments": 28,
+          "changed_D_accepted_prefix": 42,
+          "nodes": {
+            "reference": {
+              "batch_seconds": {
+                "D0:restore": 10.03851860950607,
+                "D0:compute": 482.7836547172521,
+                "D1:restore": 31.590764627918176,
+                "D1:compute": 357.6929556722877,
+                "D0:save": 5.15484885929618,
+                "D1:save": 2.7065067982766777
+              },
+              "accepted_prefix_tokens": {
+                "P": 425600,
+                "D": 92288
+              }
+            },
+            "ours": {
+              "batch_seconds": {
+                "D0:restore": 3.290541213318619,
+                "D0:compute": 482.9998265665597,
+                "D1:restore": 53.77363458745551,
+                "D1:compute": 304.7401808357586,
+                "D0:save": 5.141529262153199,
+                "D1:save": 2.6723005045205355
+              },
+              "accepted_prefix_tokens": {
+                "P": 487296,
+                "D": 165888
+              }
+            }
+          },
+          "paired": {
+            "feal-differential-cryptanalysis:13": {
+              "reference": {
+                "TTFT": 11.658280818748949,
+                "nominal": 258.91881761460326,
+                "dependency": 247.2605367958543,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 6656,
+                "D_prefix": 0,
+                "ready": 416.08209444404446,
+                "first": 427.7403752627934,
+                "before_P": 0.7226444390939264,
+                "P_API": 8.671143281312457,
+                "P_to_D": 0.6260100856703161,
+                "D_API_to_first": 1.638483012672225
+              },
+              "candidate": {
+                "TTFT": 18.43646460268667,
+                "nominal": 253.91942545609953,
+                "dependency": 235.48296085341286,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 4096,
+                "D_prefix": 0,
+                "ready": 404.304518501603,
+                "first": 422.7409831042897,
+                "before_P": 0.8447714365424304,
+                "P_API": 10.017964456573353,
+                "P_to_D": 6.4476110338895865,
+                "D_API_to_first": 1.1261176756813143
+              },
+              "component_delta": {
+                "before_P": 0.12212699744850397,
+                "P_API": 1.3468211752608958,
+                "P_to_D": 5.82160094821927,
+                "D_API_to_first": -0.5123653369909107
+              },
+              "TTFT_delta": 6.77818378393772
+            },
+            "distribution-search:14": {
+              "reference": {
+                "TTFT": 26.405223084751867,
+                "nominal": 278.1250072972906,
+                "dependency": 251.7197842125387,
+                "P": 0,
+                "D": 3,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 425.58411790778996,
+                "first": 451.9893409925418,
+                "before_P": 0.8507354856805591,
+                "P_API": 10.156923775039255,
+                "P_to_D": 0.45973267148252717,
+                "D_API_to_first": 14.937831152549506
+              },
+              "candidate": {
+                "TTFT": 15.318151772947033,
+                "nominal": 239.24583301116198,
+                "dependency": 223.92768123821494,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 7296,
+                "D_prefix": 128,
+                "ready": 397.7920149334662,
+                "first": 413.1101667064132,
+                "before_P": 0.9572903217153339,
+                "P_API": 7.13459210335506,
+                "P_to_D": 6.877743695593608,
+                "D_API_to_first": 0.3485256522830582
+              },
+              "component_delta": {
+                "before_P": 0.10655483603477478,
+                "P_API": -3.022331671684195,
+                "P_to_D": 6.418011024111081,
+                "D_API_to_first": -14.589305500266448
+              },
+              "TTFT_delta": -11.087071311804834
+            },
+            "git-multibranch:6": {
+              "reference": {
+                "TTFT": 5.0637507423531645,
+                "nominal": 70.28318733192167,
+                "dependency": 65.2194365895685,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 6784,
+                "D_prefix": 0,
+                "ready": 144.65970328200532,
+                "first": 149.7234540243585,
+                "before_P": 1.0441438054071455,
+                "P_API": 2.930537350725097,
+                "P_to_D": 0.5918243436422586,
+                "D_API_to_first": 0.4972452425786571
+              },
+              "candidate": {
+                "TTFT": 15.356167455832377,
+                "nominal": 94.17269982174808,
+                "dependency": 78.8165323659157,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 6784,
+                "D_prefix": 0,
+                "ready": 158.25679905835253,
+                "first": 173.6129665141849,
+                "before_P": 4.905242045373143,
+                "P_API": 2.930537350725097,
+                "P_to_D": 6.3993513753358116,
+                "D_API_to_first": 1.1210366843983195
+              },
+              "component_delta": {
+                "before_P": 3.8610982399659974,
+                "P_API": 0.0,
+                "P_to_D": 5.807527031693553,
+                "D_API_to_first": 0.6237914418196624
+              },
+              "TTFT_delta": 10.292416713479213
+            },
+            "dna-insert:15": {
+              "reference": {
+                "TTFT": 7.262961357333268,
+                "nominal": 267.2856375959356,
+                "dependency": 260.02267623860234,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 8320,
+                "D_prefix": 640,
+                "ready": 456.87026555585226,
+                "first": 464.1332269131855,
+                "before_P": 0.7228988149540214,
+                "P_API": 6.056643724533078,
+                "P_to_D": 0.48145448531028023,
+                "D_API_to_first": 0.0019643325358629227
+              },
+              "candidate": {
+                "TTFT": 16.43797084822438,
+                "nominal": 240.58233517270804,
+                "dependency": 224.14436432448366,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 8320,
+                "D_prefix": 0,
+                "ready": 420.9919536417336,
+                "first": 437.42992448995795,
+                "before_P": 2.070372842379072,
+                "P_API": 6.056643724533078,
+                "P_to_D": 7.350041263928858,
+                "D_API_to_first": 0.9609130173833478
+              },
+              "component_delta": {
+                "before_P": 1.3474740274250507,
+                "P_API": 0.0,
+                "P_to_D": 6.868586778618578,
+                "D_API_to_first": 0.9589486848474849
+              },
+              "TTFT_delta": 9.175009490891114
+            },
+            "dna-insert:13": {
+              "reference": {
+                "TTFT": 8.697524843821384,
+                "nominal": 216.6399885330313,
+                "dependency": 207.94246368920992,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 8320,
+                "D_prefix": 0,
+                "ready": 375.5272009842302,
+                "first": 384.2247258280516,
+                "before_P": 0.7391542821528105,
+                "P_API": 3.8533070246422794,
+                "P_to_D": 3.343318142551311,
+                "D_API_to_first": 0.7617453944749855
+              },
+              "candidate": {
+                "TTFT": 16.97791507450546,
+                "nominal": 196.1418015338435,
+                "dependency": 179.16388645933804,
+                "P": 0,
+                "D": 3,
+                "P_prefix": 8320,
+                "D_prefix": 0,
+                "ready": 346.74862375435833,
+                "first": 363.7265388288638,
+                "before_P": 2.084926621183911,
+                "P_API": 3.7944516326307487,
+                "P_to_D": 0.6097354704793929,
+                "D_API_to_first": 10.488801350211418
+              },
+              "component_delta": {
+                "before_P": 1.3457723390311003,
+                "P_API": -0.05885539201153067,
+                "P_to_D": -2.7335826720719183,
+                "D_API_to_first": 9.727055955736432
+              },
+              "TTFT_delta": 8.280390230684077
+            }
+          }
+        },
+        {
+          "rate": 0.9806468307628429,
+          "worst_reference": "git-multibranch:11",
+          "worst_candidate": "git-multibranch:12",
+          "candidate_faster_requests": 38,
+          "changed_P_assignments": 27,
+          "changed_D_assignments": 28,
+          "changed_D_accepted_prefix": 38,
+          "nodes": {
+            "reference": {
+              "batch_seconds": {
+                "D0:restore": 9.6639166530432,
+                "D0:compute": 475.17555875563755,
+                "D1:restore": 28.70806025143716,
+                "D1:compute": 355.85784227776657,
+                "D0:save": 5.012419364618836,
+                "D1:save": 2.8352670274325646
+              },
+              "accepted_prefix_tokens": {
+                "P": 375680,
+                "D": 115456
+              }
+            },
+            "ours": {
+              "batch_seconds": {
+                "D0:restore": 0.37557236097265356,
+                "D0:compute": 477.74200223111916,
+                "D1:restore": 47.881044697402515,
+                "D1:compute": 310.47036728341396,
+                "D0:save": 5.04919389239512,
+                "D1:save": 2.8127917384845205
+              },
+              "accepted_prefix_tokens": {
+                "P": 542080,
+                "D": 137600
+              }
+            }
+          },
+          "paired": {
+            "git-multibranch:12": {
+              "reference": {
+                "TTFT": 16.072383396379053,
+                "nominal": 337.3983772763989,
+                "dependency": 321.32599388001984,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 10240,
+                "D_prefix": 5760,
+                "ready": 403.28266336722896,
+                "first": 419.355046763608,
+                "before_P": 0.7563489741982607,
+                "P_API": 4.32112839722075,
+                "P_to_D": 8.349554940367454,
+                "D_API_to_first": 2.645351084592562
+              },
+              "candidate": {
+                "TTFT": 16.61347810713437,
+                "nominal": 325.70757140920523,
+                "dependency": 309.09409330207086,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 391.05076278928,
+                "first": 407.66424089641436,
+                "before_P": 0.975056795467367,
+                "P_API": 8.544000368231139,
+                "P_to_D": 6.305773468565064,
+                "D_API_to_first": 0.7886474748707997
+              },
+              "component_delta": {
+                "before_P": 0.21870782126910626,
+                "P_API": 4.222871971010388,
+                "P_to_D": -2.04378147180239,
+                "D_API_to_first": -1.8567036097217624
+              },
+              "TTFT_delta": 0.541094710755317
+            },
+            "git-multibranch:11": {
+              "reference": {
+                "TTFT": 28.869700529830652,
+                "nominal": 293.16115035826436,
+                "dependency": 264.2914498284337,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 10240,
+                "D_prefix": 2304,
+                "ready": 342.9839063380403,
+                "first": 371.85360686787095,
+                "before_P": 1.09470556130276,
+                "P_API": 3.710219553496092,
+                "P_to_D": 22.992809524212873,
+                "D_API_to_first": 1.0719658908189444
+              },
+              "candidate": {
+                "TTFT": 14.605848409825114,
+                "nominal": 278.37631191788995,
+                "dependency": 263.77046350806484,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 6784,
+                "D_prefix": 384,
+                "ready": 342.4629200176714,
+                "first": 357.06876842749654,
+                "before_P": 2.1281168527306704,
+                "P_API": 5.307312571467186,
+                "P_to_D": 6.509797021140685,
+                "D_API_to_first": 0.6606219644865519
+              },
+              "component_delta": {
+                "before_P": 1.0334112914279103,
+                "P_API": 1.597093017971094,
+                "P_to_D": -16.48301250307219,
+                "D_API_to_first": -0.4113439263323926
+              },
+              "TTFT_delta": -14.263852120005538
+            },
+            "headless-terminal:11": {
+              "reference": {
+                "TTFT": 3.266253209873412,
+                "nominal": 247.82584980053892,
+                "dependency": 244.5595965906655,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 8192,
+                "D_prefix": 0,
+                "ready": 323.5328646200974,
+                "first": 326.79911782997084,
+                "before_P": 0.7366495441050915,
+                "P_API": 1.4137775674398076,
+                "P_to_D": 0.6427751837578057,
+                "D_API_to_first": 0.473050914570706
+              },
+              "candidate": {
+                "TTFT": 14.32981477340877,
+                "nominal": 241.36291771759946,
+                "dependency": 227.0331029441907,
+                "P": 0,
+                "D": 3,
+                "P_prefix": 7680,
+                "D_prefix": 640,
+                "ready": 306.0063709736226,
+                "first": 320.3361857470314,
+                "before_P": 2.3234777116553573,
+                "P_API": 1.6462646191078223,
+                "P_to_D": 0.5776911827084064,
+                "D_API_to_first": 9.78238125993721
+              },
+              "component_delta": {
+                "before_P": 1.5868281675502658,
+                "P_API": 0.23248705166801464,
+                "P_to_D": -0.06508400104939938,
+                "D_API_to_first": 9.309330345366504
+              },
+              "TTFT_delta": 11.063561563535359
+            },
+            "git-multibranch:10": {
+              "reference": {
+                "TTFT": 6.256679349275316,
+                "nominal": 243.8465010788659,
+                "dependency": 237.5898217295906,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 10240,
+                "D_prefix": 0,
+                "ready": 308.21606254511227,
+                "first": 314.4727418943876,
+                "before_P": 1.77324912432357,
+                "P_API": 3.326734164024919,
+                "P_to_D": 0.6666326841619252,
+                "D_API_to_first": 0.4900633767649083
+              },
+              "candidate": {
+                "TTFT": 13.991737660596527,
+                "nominal": 236.92063392773213,
+                "dependency": 222.9288962671356,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 6784,
+                "D_prefix": 0,
+                "ready": 293.55513708265727,
+                "first": 307.5468747432538,
+                "before_P": 1.7369018813000707,
+                "P_API": 4.923827181996013,
+                "P_to_D": 6.543029016603214,
+                "D_API_to_first": 0.7879795806972538
+              },
+              "component_delta": {
+                "before_P": -0.03634724302349923,
+                "P_API": 1.597093017971094,
+                "P_to_D": 5.8763963324412885,
+                "D_API_to_first": 0.2979162039323455
+              },
+              "TTFT_delta": 7.735058311321211
+            },
+            "fix-code-vulnerability:9": {
+              "reference": {
+                "TTFT": 3.8990193966225775,
+                "nominal": 196.85233654724172,
+                "dependency": 192.95331715061914,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 17024,
+                "D_prefix": 0,
+                "ready": 257.1058758974516,
+                "first": 261.0048952940742,
+                "before_P": 1.6364503766565122,
+                "P_API": 0.9300740591759045,
+                "P_to_D": 0.6511199448537468,
+                "D_API_to_first": 0.6813750159363963
+              },
+              "candidate": {
+                "TTFT": 10.502320154788748,
+                "nominal": 189.955949223935,
+                "dependency": 179.45362906914625,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 13824,
+                "D_prefix": 0,
+                "ready": 243.6061878159787,
+                "first": 254.10850797076745,
+                "before_P": 1.1133928840385465,
+                "P_API": 2.202469454997255,
+                "P_to_D": 6.491619700820877,
+                "D_API_to_first": 0.6948381149320824
+              },
+              "component_delta": {
+                "before_P": -0.5230574926179656,
+                "P_API": 1.2723953958213507,
+                "P_to_D": 5.84049975596713,
+                "D_API_to_first": 0.013463098995686096
+              },
+              "TTFT_delta": 6.603300758166171
+            }
+          }
+        }
+      ]
+    }
+  }
+}

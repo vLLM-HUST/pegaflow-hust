@@ -1,0 +1,162 @@
+[
+  {
+    "name": "slot-release-01",
+    "cases": [
+      {
+        "rate": 0.24516170769071072,
+        "sharing": 0.0,
+        "reference_p99": 22.02738819750931,
+        "candidate_p99": 17.530120419748073,
+        "p99_reduction_percent": 20.416709132450638,
+        "reference_makespan": 537.9702835059926,
+        "candidate_makespan": 523.2927837165918
+      },
+      {
+        "rate": 0.49032341538142143,
+        "sharing": 0.0,
+        "reference_p99": 19.157408091522313,
+        "candidate_p99": 17.386889046575334,
+        "p99_reduction_percent": 9.241955052001439,
+        "reference_makespan": 502.8976693018079,
+        "candidate_makespan": 502.23316946685173
+      },
+      {
+        "rate": 0.9806468307628429,
+        "sharing": 0.0,
+        "reference_p99": 22.42659432982981,
+        "candidate_p99": 17.93806337217623,
+        "p99_reduction_percent": 20.014322690464624,
+        "reference_makespan": 497.0816105650114,
+        "candidate_makespan": 496.6007819826525
+      }
+    ]
+  },
+  {
+    "name": "slot-release-02",
+    "cases": [
+      {
+        "rate": 0.24516170769071072,
+        "sharing": 0.0,
+        "reference_p99": 24.57236450741891,
+        "candidate_p99": 18.150601757250968,
+        "p99_reduction_percent": 26.134085501739477,
+        "reference_makespan": 513.7324709076404,
+        "candidate_makespan": 531.4860515504736
+      },
+      {
+        "rate": 0.49032341538142143,
+        "sharing": 0.0,
+        "reference_p99": 24.015193330170916,
+        "candidate_p99": 18.13810606126185,
+        "p99_reduction_percent": 24.472371253099702,
+        "reference_makespan": 506.3965613045674,
+        "candidate_makespan": 508.07349456617186
+      },
+      {
+        "rate": 0.9806468307628429,
+        "sharing": 0.0,
+        "reference_p99": 21.909745681227946,
+        "candidate_p99": 19.62949577544134,
+        "p99_reduction_percent": 10.407468616764003,
+        "reference_makespan": 512.4905865609487,
+        "candidate_makespan": 514.0215920309264
+      }
+    ]
+  },
+  {
+    "name": "slot-release-sharing-01",
+    "cases": [
+      {
+        "rate": 0.24516170769071072,
+        "sharing": 1.0,
+        "reference_p99": 16.103212770515995,
+        "candidate_p99": 22.23315362781551,
+        "p99_reduction_percent": -38.06657059467702,
+        "reference_makespan": 428.8511370444898,
+        "candidate_makespan": 426.20557323622717
+      },
+      {
+        "rate": 0.49032341538142143,
+        "sharing": 1.0,
+        "reference_p99": 14.640545617142863,
+        "candidate_p99": 17.037283033034214,
+        "p99_reduction_percent": -16.370547099590137,
+        "reference_makespan": 284.0112962312151,
+        "candidate_makespan": 295.95857945873485
+      },
+      {
+        "rate": 0.9806468307628429,
+        "sharing": 1.0,
+        "reference_p99": 17.333439056324238,
+        "candidate_p99": 14.288581193153462,
+        "p99_reduction_percent": 17.566380527699355,
+        "reference_makespan": 249.90260381361585,
+        "candidate_makespan": 266.95249411183255
+      }
+    ]
+  },
+  {
+    "name": "release-cobatch-sharing-01",
+    "cases": [
+      {
+        "rate": 0.24516170769071072,
+        "sharing": 1.0,
+        "reference_p99": 16.181003384852033,
+        "candidate_p99": 15.405103866622028,
+        "p99_reduction_percent": 4.795126110389236,
+        "reference_makespan": 427.27351672392916,
+        "candidate_makespan": 426.7425686340567
+      },
+      {
+        "rate": 0.49032341538142143,
+        "sharing": 1.0,
+        "reference_p99": 14.459397513550442,
+        "candidate_p99": 18.813553043280933,
+        "p99_reduction_percent": -30.112980334416072,
+        "reference_makespan": 275.80718121828414,
+        "candidate_makespan": 276.01282349484546
+      },
+      {
+        "rate": 0.9806468307628429,
+        "sharing": 1.0,
+        "reference_p99": 18.04818033218902,
+        "candidate_p99": 18.80533770524346,
+        "p99_reduction_percent": -4.195200619222783,
+        "reference_makespan": 260.34671527245166,
+        "candidate_makespan": 280.26341588165064
+      }
+    ]
+  },
+  {
+    "name": "release-cobatch-01",
+    "cases": [
+      {
+        "rate": 0.24516170769071072,
+        "sharing": 0.0,
+        "reference_p99": 21.4885994659993,
+        "candidate_p99": 18.531112604826603,
+        "p99_reduction_percent": 13.763050802134547,
+        "reference_makespan": 543.6443936254246,
+        "candidate_makespan": 531.4425725318985
+      },
+      {
+        "rate": 0.49032341538142143,
+        "sharing": 0.0,
+        "reference_p99": 26.405223084751867,
+        "candidate_p99": 18.43646460268667,
+        "p99_reduction_percent": 30.17872053755489,
+        "reference_makespan": 508.59080086131956,
+        "candidate_makespan": 498.8524231043334
+      },
+      {
+        "rate": 0.9806468307628429,
+        "sharing": 0.0,
+        "reference_p99": 28.869700529830652,
+        "candidate_p99": 16.61347810713437,
+        "p99_reduction_percent": 42.453583507151734,
+        "reference_makespan": 501.3711559898541,
+        "candidate_makespan": 491.8714812053968
+      }
+    ]
+  }
+]

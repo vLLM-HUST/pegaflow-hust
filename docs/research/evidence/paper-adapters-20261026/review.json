@@ -1,0 +1,2367 @@
+{
+  "scope": "Paper adapters on shared CPU physical model, not full systems. Strata corrected only in independent run04 with its own matched RR; all other arms from03.",
+  "raw03_strata_invalid_for_mechanism_claim": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "arms": {
+        "native": {
+          "label": "Native RR model",
+          "TTFT": {
+            "n": 95,
+            "mean": 14.51422343010563,
+            "p50": 5.4450687532618645,
+            "p90": 49.93767345744908,
+            "p95": 62.54164623376806,
+            "p99": 69.73783716019773,
+            "max": 69.73783716019773
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 50.28190007630138,
+            "p50": 17.775421104286536,
+            "p90": 157.40580004394343,
+            "p95": 194.40990338422716,
+            "p99": 236.75901614019187,
+            "max": 236.75901614019187
+          },
+          "makespan": 614.8347326891264,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ],
+          "accepted_prefix_tokens": {
+            "P": 384640,
+            "D": 353920
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 132.42760638616835,
+            "compute": 880.7689195206015,
+            "save": 7.924990977568086
+          },
+          "planning_wall": 0.040749954991042614,
+          "boundary_CPU_wall": 0,
+          "iteration_scheduler_wall": 0.14069176465272903,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7787773952,
+          "copy_service_sum": 10.781620208118085,
+          "action_counts": {
+            "implicit_copy": 52,
+            "forecast_native_reclaim": 808,
+            "native_reclaim": 52
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2025848832
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4205838336
+            }
+          },
+          "release_priority_opportunities": {
+            "2": 0,
+            "3": 0
+          },
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "feal-differential-cryptanalysis:11",
+              "TTFT": 69.73783716019773,
+              "nominal": 145.94225161124552,
+              "dependency": 76.2044144510478,
+              "p": 1,
+              "d": 3,
+              "end": 473.74746902350194,
+              "before_P": 0.0005037542432546616,
+              "P_API": 9.93445487322462,
+              "P_to_D": 16.335285029659076,
+              "D_API_to_first": 43.46759350307076,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "distribution-search:12",
+              "TTFT": 65.27396229892389,
+              "nominal": 78.70373154926187,
+              "dependency": 13.429769250337984,
+              "p": 1,
+              "d": 3,
+              "end": 430.63419588768056,
+              "before_P": 0.0004809834063053131,
+              "P_API": 6.34727728541166,
+              "P_to_D": 12.829813954857855,
+              "D_API_to_first": 46.09639007524805,
+              "P_prefix": 5504,
+              "D_prefix": 7296
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "TTFT": 65.08768828018867,
+              "nominal": 83.27399789876927,
+              "dependency": 18.186309618580594,
+              "p": 1,
+              "d": 3,
+              "end": 381.6597162623255,
+              "before_P": 0.0005092239007353783,
+              "P_API": 8.833595686595697,
+              "P_to_D": 9.6243687822315,
+              "D_API_to_first": 46.62921458746075,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "fix-code-vulnerability:9",
+              "TTFT": 64.2289948676177,
+              "nominal": 109.50617023008459,
+              "dependency": 45.27717536246689,
+              "p": 1,
+              "d": 3,
+              "end": 395.58280504940797,
+              "before_P": 0.00048070400953292847,
+              "P_API": 3.737907266484577,
+              "P_to_D": 34.32116703601554,
+              "D_API_to_first": 26.16943986110806,
+              "P_prefix": 10880,
+              "D_prefix": 10880
+            },
+            {
+              "id": "fix-git:11",
+              "TTFT": 62.54164623376806,
+              "nominal": 64.84809992519035,
+              "dependency": 2.3064536914222913,
+              "p": 1,
+              "d": 3,
+              "end": 407.9299599194525,
+              "before_P": 0.0004406627267599106,
+              "P_API": 3.557944067131075,
+              "P_to_D": 32.609800077613386,
+              "D_API_to_first": 26.373461426296842,
+              "P_prefix": 2816,
+              "D_prefix": 3712
+            }
+          ]
+        },
+        "mooncake": {
+          "label": "Mooncake prefill routing adapter; ratio=1",
+          "TTFT": {
+            "n": 95,
+            "mean": 13.52174380011067,
+            "p50": 11.469644059843318,
+            "p90": 28.728579520962626,
+            "p95": 34.027200143060895,
+            "p99": 45.77610612741677,
+            "max": 45.77610612741677
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 39.95390706109782,
+            "p50": 20.243189799769198,
+            "p90": 115.35470471077593,
+            "p95": 136.20531484622188,
+            "p99": 154.92311898435662,
+            "max": 154.92311898435662
+          },
+          "makespan": 531.6188196272151,
+          "P_counts": [
+            41,
+            54
+          ],
+          "D_counts": [
+            54,
+            41
+          ],
+          "accepted_prefix_tokens": {
+            "P": 189952,
+            "D": 424064
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 154.15999533736814,
+            "compute": 866.0218415944953,
+            "save": 7.9245873019099236
+          },
+          "planning_wall": 4.739006324671209,
+          "boundary_CPU_wall": 1.0841311942785978,
+          "iteration_scheduler_wall": 0.12834691908210516,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 4572839936,
+          "copy_service_sum": 1.3636288284561293,
+          "action_counts": {
+            "software_copy_gate_hold": 62,
+            "selected_copy": 53,
+            "forecast_native_reclaim": 2320,
+            "copy_normal_defer": 9
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4477419520
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3097493504
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": {
+            "name": "mooncake",
+            "full_system_reproduction": false,
+            "D_boundary": "largest currently published feasible prefix",
+            "cache_allocator": "common PegaFlow host authority",
+            "world_costs_unchanged": true,
+            "balancing_ratio": 1.0
+          },
+          "worst_requests": [
+            {
+              "id": "fix-git:12",
+              "TTFT": 45.77610612741677,
+              "nominal": 84.4253156074817,
+              "dependency": 38.64920948006494,
+              "p": 0,
+              "d": 3,
+              "end": 429.4842424018989,
+              "before_P": 5.123401585883471,
+              "P_API": 5.171770158485184,
+              "P_to_D": 0.45850866029974213,
+              "D_API_to_first": 35.02242572274838,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:11",
+              "TTFT": 36.34509130423402,
+              "nominal": 78.95997512846043,
+              "dependency": 42.61488382422641,
+              "p": 1,
+              "d": 3,
+              "end": 404.76575938310214,
+              "before_P": 8.357879414592276,
+              "P_API": 8.928877787835413,
+              "P_to_D": 4.944208375753874,
+              "D_API_to_first": 14.114125726052464,
+              "P_prefix": 2816,
+              "D_prefix": 0
+            },
+            {
+              "id": "headless-terminal:11",
+              "TTFT": 35.9061001183029,
+              "nominal": 80.59959497976871,
+              "dependency": 44.69349486146581,
+              "p": 1,
+              "d": 3,
+              "end": 416.3518922666035,
+              "before_P": 4.771006966687025,
+              "P_API": 4.940244938439799,
+              "P_to_D": 0.45715824442919484,
+              "D_API_to_first": 25.737689968746906,
+              "P_prefix": 768,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-git:13",
+              "TTFT": 35.90417223884327,
+              "nominal": 124.12859779060426,
+              "dependency": 88.22442555176099,
+              "p": 1,
+              "d": 3,
+              "end": 478.2830770486606,
+              "before_P": 0.6673253096045642,
+              "P_API": 5.4168273521529136,
+              "P_to_D": 0.4534079881664752,
+              "D_API_to_first": 29.36661158891934,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "headless-terminal:12",
+              "TTFT": 34.027200143060895,
+              "nominal": 116.30877923358219,
+              "dependency": 82.28157909052129,
+              "p": 0,
+              "d": 3,
+              "end": 469.660385835025,
+              "before_P": 1.4256582428056959,
+              "P_API": 5.410160928197594,
+              "P_to_D": 8.704151188025492,
+              "D_API_to_first": 18.487229784032138,
+              "P_prefix": 768,
+              "D_prefix": 0
+            }
+          ]
+        },
+        "memserve": {
+          "label": "MemServe Eq1/2 adapter",
+          "TTFT": {
+            "n": 95,
+            "mean": 12.64717153052883,
+            "p50": 11.510564507591425,
+            "p90": 25.44382088239098,
+            "p95": 28.362046268629967,
+            "p99": 40.11549928992372,
+            "max": 40.11549928992372
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 42.35325790387026,
+            "p50": 27.93588863145905,
+            "p90": 120.70654383707796,
+            "p95": 135.0632928287494,
+            "p99": 150.73290428519954,
+            "max": 150.73290428519954
+          },
+          "makespan": 530.0806164795356,
+          "P_counts": [
+            52,
+            43
+          ],
+          "D_counts": [
+            55,
+            40
+          ],
+          "accepted_prefix_tokens": {
+            "P": 475392,
+            "D": 412928
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 152.13676315213547,
+            "compute": 864.0891723175653,
+            "save": 7.924517531966558
+          },
+          "planning_wall": 4.567059315741062,
+          "boundary_CPU_wall": 0.3818970937281847,
+          "iteration_scheduler_wall": 0.145564884878695,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7890534400,
+          "copy_service_sum": 11.915416044729986,
+          "action_counts": {
+            "software_copy_gate_hold": 62,
+            "selected_copy": 61,
+            "forecast_native_reclaim": 644,
+            "copy_normal_defer": 1
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3875536896
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3714056192
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": {
+            "name": "memserve",
+            "full_system_reproduction": false,
+            "D_boundary": "largest currently published feasible prefix",
+            "cache_allocator": "common PegaFlow host authority",
+            "world_costs_unchanged": true,
+            "balancing_ratio": null
+          },
+          "worst_requests": [
+            {
+              "id": "feal-differential-cryptanalysis:11",
+              "TTFT": 40.11549928992372,
+              "nominal": 77.46577678929128,
+              "dependency": 37.350277499367564,
+              "p": 0,
+              "d": 3,
+              "end": 410.43239823349893,
+              "before_P": 0.5624931483866362,
+              "P_API": 6.968730392612826,
+              "P_to_D": 0.4316297194268941,
+              "D_API_to_first": 32.15264602949736,
+              "P_prefix": 6784,
+              "D_prefix": 640
+            },
+            {
+              "id": "feal-differential-cryptanalysis:12",
+              "TTFT": 36.2090151140236,
+              "nominal": 120.70654383707796,
+              "dependency": 84.49752872305436,
+              "p": 0,
+              "d": 3,
+              "end": 470.3907123195636,
+              "before_P": 0.572371373079875,
+              "P_API": 7.8612051335778315,
+              "P_to_D": 0.4308323266264438,
+              "D_API_to_first": 27.34460628073947,
+              "P_prefix": 6784,
+              "D_prefix": 640
+            },
+            {
+              "id": "distribution-search:14",
+              "TTFT": 31.514564375187206,
+              "nominal": 135.09607806300477,
+              "dependency": 103.58151368781756,
+              "p": 0,
+              "d": 3,
+              "end": 501.61113814605625,
+              "before_P": 0.5713298117147474,
+              "P_API": 6.343243735401487,
+              "P_to_D": 0.423865203959906,
+              "D_API_to_first": 24.17612562411108,
+              "P_prefix": 9344,
+              "D_prefix": 7296
+            },
+            {
+              "id": "git-multibranch:12",
+              "TTFT": 31.229977500124903,
+              "nominal": 124.82706173989004,
+              "dependency": 93.59708423976514,
+              "p": 0,
+              "d": 2,
+              "end": 468.3749781285742,
+              "before_P": 2.6152210747663958,
+              "P_API": 5.895266539333894,
+              "P_to_D": 0.4201531691756486,
+              "D_API_to_first": 22.299336716848984,
+              "P_prefix": 6784,
+              "D_prefix": 6784
+            },
+            {
+              "id": "fix-code-vulnerability:8",
+              "TTFT": 28.362046268629967,
+              "nominal": 28.362046268629967,
+              "dependency": 0.0,
+              "p": 0,
+              "d": 2,
+              "end": 285.5854845493825,
+              "before_P": 0.5682351488025574,
+              "P_API": 7.8478461845580805,
+              "P_to_D": 0.4201292490866422,
+              "D_API_to_first": 19.52583568618269,
+              "P_prefix": 640,
+              "D_prefix": 640
+            }
+          ]
+        },
+        "reference": {
+          "label": "Tailguard FIFO + exact memo (internal reference)",
+          "TTFT": {
+            "n": 95,
+            "mean": 12.821795780437085,
+            "p50": 13.423786214481737,
+            "p90": 22.506652478516372,
+            "p95": 24.77872187931206,
+            "p99": 39.7419798514523,
+            "max": 39.7419798514523
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 31.08688593503035,
+            "p50": 19.821984117309995,
+            "p90": 75.75034280758786,
+            "p95": 101.18893794695333,
+            "p99": 118.1274635276522,
+            "max": 118.1274635276522
+          },
+          "makespan": 488.08166273410603,
+          "P_counts": [
+            41,
+            54
+          ],
+          "D_counts": [
+            57,
+            38
+          ],
+          "accepted_prefix_tokens": {
+            "P": 205184,
+            "D": 235520
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 89.27755621968896,
+            "compute": 807.8096032222958,
+            "save": 7.924359561206074
+          },
+          "planning_wall": 74.02377994731069,
+          "boundary_CPU_wall": 48.36885454971343,
+          "iteration_scheduler_wall": 0.1500480817630887,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 5827985408,
+          "copy_service_sum": 7.488713171405577,
+          "action_counts": {
+            "software_copy_gate_hold": 59,
+            "selected_copy": 49,
+            "forecast_native_reclaim": 104,
+            "copy_normal_defer": 10
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3295674368
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2385510400
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "headless-terminal:9",
+              "TTFT": 39.7419798514523,
+              "nominal": 59.766925221712256,
+              "dependency": 20.024945370259957,
+              "p": 0,
+              "d": 3,
+              "end": 335.8210897436893,
+              "before_P": 13.85977522510234,
+              "P_API": 4.03568145651157,
+              "P_to_D": 9.348095382776364,
+              "D_API_to_first": 12.498427787062042,
+              "P_prefix": 640,
+              "D_prefix": 6528
+            },
+            {
+              "id": "fix-git:12",
+              "TTFT": 28.970714628921883,
+              "nominal": 101.18893794695333,
+              "dependency": 72.21822331803145,
+              "p": 1,
+              "d": 3,
+              "end": 440.0664391410167,
+              "before_P": 1.4765298127806545,
+              "P_API": 3.8244037638517967,
+              "P_to_D": 9.86120955897536,
+              "D_API_to_first": 13.808571493314048,
+              "P_prefix": 3712,
+              "D_prefix": 3712
+            },
+            {
+              "id": "dna-insert:11",
+              "TTFT": 28.66523469407838,
+              "nominal": 58.79301677281421,
+              "dependency": 30.127782078735834,
+              "p": 1,
+              "d": 3,
+              "end": 383.85712501677637,
+              "before_P": 8.45602083328771,
+              "P_API": 4.9788334289536,
+              "P_to_D": 0.9629073731881022,
+              "D_API_to_first": 14.267473058648989,
+              "P_prefix": 0,
+              "D_prefix": 4224
+            },
+            {
+              "id": "fix-code-vulnerability:11",
+              "TTFT": 24.994155538943517,
+              "nominal": 35.82766386709329,
+              "dependency": 10.833508328149776,
+              "p": 0,
+              "d": 2,
+              "end": 349.5826330872432,
+              "before_P": 5.526598223924509,
+              "P_API": 9.218352219217975,
+              "P_to_D": 2.006118905013466,
+              "D_API_to_first": 8.243086190787551,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "distribution-search:12",
+              "TTFT": 24.77872187931206,
+              "nominal": 45.346024269296436,
+              "dependency": 20.567302389984377,
+              "p": 0,
+              "d": 2,
+              "end": 374.31214541417785,
+              "before_P": 13.466982871366781,
+              "P_API": 8.733486476670235,
+              "P_to_D": 0.44965097143318644,
+              "D_API_to_first": 2.1286015598418544,
+              "P_prefix": 0,
+              "D_prefix": 0
+            }
+          ]
+        },
+        "ours": {
+          "label": "Tailguard completed-save-first candidate",
+          "TTFT": {
+            "n": 95,
+            "mean": 13.400851878637939,
+            "p50": 12.493574902897876,
+            "p90": 25.89847529138484,
+            "p95": 30.89561703522378,
+            "p99": 33.980249170904926,
+            "max": 33.980249170904926
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 38.131708408560684,
+            "p50": 25.15833511610566,
+            "p90": 101.6787726475846,
+            "p95": 112.76521844902635,
+            "p99": 124.32851991720935,
+            "max": 124.32851991720935
+          },
+          "makespan": 523.2506300251275,
+          "P_counts": [
+            46,
+            49
+          ],
+          "D_counts": [
+            58,
+            37
+          ],
+          "accepted_prefix_tokens": {
+            "P": 258432,
+            "D": 313856
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 115.23193442686714,
+            "compute": 831.3999130541192,
+            "save": 7.924502983107232
+          },
+          "planning_wall": 73.75303392950445,
+          "boundary_CPU_wall": 58.337252674624324,
+          "iteration_scheduler_wall": 0.1545612271875143,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 5996806144,
+          "copy_service_sum": 8.01209477408166,
+          "action_counts": {
+            "software_copy_gate_hold": 57,
+            "selected_copy": 53,
+            "forecast_native_reclaim": 385,
+            "copy_normal_defer": 4
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3758096384
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2708471808
+            }
+          },
+          "release_priority_opportunities": {
+            "2": 0,
+            "3": 0
+          },
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "distribution-search:11",
+              "TTFT": 33.980249170904926,
+              "nominal": 70.02281969219274,
+              "dependency": 36.042570521287814,
+              "p": 0,
+              "d": 3,
+              "end": 380.8349262647266,
+              "before_P": 9.84254103787356,
+              "P_API": 5.623053121504984,
+              "P_to_D": 9.89668659609822,
+              "D_API_to_first": 8.617968415428152,
+              "P_prefix": 4096,
+              "D_prefix": 6144
+            },
+            {
+              "id": "feal-differential-cryptanalysis:12",
+              "TTFT": 31.101554588264776,
+              "nominal": 65.88288644414621,
+              "dependency": 34.78133185588143,
+              "p": 1,
+              "d": 2,
+              "end": 400.09411539815136,
+              "before_P": 1.813838383309701,
+              "P_API": 10.787022335357268,
+              "P_to_D": 2.843448952985966,
+              "D_API_to_first": 15.65724491661183,
+              "P_prefix": 768,
+              "D_prefix": 0
+            },
+            {
+              "id": "git-multibranch:11",
+              "TTFT": 31.040599339745484,
+              "nominal": 79.35088419433987,
+              "dependency": 48.310284854594386,
+              "p": 1,
+              "d": 3,
+              "end": 411.37653190186353,
+              "before_P": 10.237762261244654,
+              "P_API": 8.227206454693055,
+              "P_to_D": 0.6719871554465158,
+              "D_API_to_first": 11.903643468361281,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "dna-insert:13",
+              "TTFT": 30.90932909741224,
+              "nominal": 112.76521844902635,
+              "dependency": 81.85588935161411,
+              "p": 0,
+              "d": 2,
+              "end": 458.4948389761047,
+              "before_P": 10.848969795542757,
+              "P_API": 4.059667098011233,
+              "P_to_D": 0.5234200639930009,
+              "D_API_to_first": 15.47727213986525,
+              "P_prefix": 7936,
+              "D_prefix": 4864
+            },
+            {
+              "id": "distribution-search:10",
+              "TTFT": 30.89561703522378,
+              "nominal": 46.0387264264956,
+              "dependency": 15.143109391271821,
+              "p": 0,
+              "d": 3,
+              "end": 339.159426336528,
+              "before_P": 6.94715552657442,
+              "P_API": 3.2804233008051447,
+              "P_to_D": 0.5335659740772485,
+              "D_API_to_first": 20.134472233766985,
+              "P_prefix": 7296,
+              "D_prefix": 6144
+            }
+          ]
+        }
+      },
+      "candidate_gain_vs_reference": 0.1449784510505916,
+      "strata03_invalid_p99": 69.73774630396474,
+      "strata04": {
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.514249488815173,
+            "p50": 5.445042371687293,
+            "p90": 49.93772168133199,
+            "p95": 62.541644032121496,
+            "p99": 69.737849486252,
+            "max": 69.737849486252
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 50.28195339046998,
+            "p50": 17.775474293050095,
+            "p90": 157.40597044524094,
+            "p95": 194.41012692120285,
+            "p99": 236.7593002829841,
+            "max": 236.7593002829841
+          },
+          "admission_CPU_wall": 0,
+          "reorders": 0
+        },
+        "strata": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.514452234132017,
+            "p50": 5.445068178635836,
+            "p90": 49.93798742025882,
+            "p95": 62.54259132129033,
+            "p99": 69.73863399327331,
+            "max": 69.73863399327331
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 50.282890348928454,
+            "p50": 17.775561835509464,
+            "p90": 157.40869131904384,
+            "p95": 194.4131033033541,
+            "p99": 236.76194981188985,
+            "max": 236.76194981188985
+          },
+          "admission_CPU_wall": 0.01846989430487156,
+          "reorders": 0
+        }
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "arms": {
+        "native": {
+          "label": "Native RR model",
+          "TTFT": {
+            "n": 95,
+            "mean": 17.261170041472838,
+            "p50": 5.674611327220532,
+            "p90": 63.35313638543323,
+            "p95": 72.69299742741589,
+            "p99": 78.63825175082707,
+            "max": 78.63825175082707
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 144.79319898685358,
+            "p50": 109.9384299618077,
+            "p90": 335.61977277103426,
+            "p95": 379.27644287523214,
+            "p99": 442.555788180501,
+            "max": 442.555788180501
+          },
+          "makespan": 632.9813326104744,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ],
+          "accepted_prefix_tokens": {
+            "P": 373120,
+            "D": 323968
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 122.97658773146361,
+            "compute": 893.637146683815,
+            "save": 7.925001037714537
+          },
+          "planning_wall": 0.04081605840474367,
+          "boundary_CPU_wall": 0,
+          "iteration_scheduler_wall": 0.15731266885995865,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7707033600,
+          "copy_service_sum": 10.986028988843936,
+          "action_counts": {
+            "implicit_copy": 58,
+            "native_reclaim": 60,
+            "forecast_native_reclaim": 1671
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2040528896
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4462739456
+            }
+          },
+          "release_priority_opportunities": {
+            "2": 0,
+            "3": 0
+          },
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "distribution-search:12",
+              "TTFT": 78.63825175082707,
+              "nominal": 241.94546002943295,
+              "dependency": 163.30720827860588,
+              "p": 1,
+              "d": 3,
+              "end": 421.31617781514643,
+              "before_P": 0.00047594308853149414,
+              "P_API": 8.595037829222829,
+              "P_to_D": 41.080583163187384,
+              "D_API_to_first": 28.962154815328347,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "feal-differential-cryptanalysis:12",
+              "TTFT": 77.25944472676304,
+              "nominal": 260.32805463024397,
+              "dependency": 183.06860990348096,
+              "p": 1,
+              "d": 3,
+              "end": 442.5671913453573,
+              "before_P": 0.0005146842449903488,
+              "P_API": 8.06604904548059,
+              "P_to_D": 24.38719549764096,
+              "D_API_to_first": 44.805685499396475,
+              "P_prefix": 6656,
+              "D_prefix": 6784
+            },
+            {
+              "id": "distribution-search:14",
+              "TTFT": 74.87152327317841,
+              "nominal": 335.61977277103426,
+              "dependency": 260.7482494978559,
+              "p": 1,
+              "d": 3,
+              "end": 528.475411021575,
+              "before_P": 0.0005078641697764397,
+              "P_API": 10.48424844727278,
+              "P_to_D": 26.79351296805737,
+              "D_API_to_first": 37.5932539936785,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "fix-code-vulnerability:10",
+              "TTFT": 74.52494634126526,
+              "nominal": 300.26387325991675,
+              "dependency": 225.73892691865146,
+              "p": 1,
+              "d": 3,
+              "end": 471.89085247260704,
+              "before_P": 0.0004948843270540237,
+              "P_API": 9.259567337198117,
+              "P_to_D": 13.29129976683737,
+              "D_API_to_first": 51.97358435290272,
+              "P_prefix": 640,
+              "D_prefix": 4992
+            },
+            {
+              "id": "feal-differential-cryptanalysis:14",
+              "TTFT": 72.69299742741589,
+              "nominal": 353.91968266769254,
+              "dependency": 281.22668524027665,
+              "p": 1,
+              "d": 3,
+              "end": 558.9047252135189,
+              "before_P": 0.0005660764873027802,
+              "P_API": 9.038815893590026,
+              "P_to_D": 8.604550065365913,
+              "D_API_to_first": 55.04906539197265,
+              "P_prefix": 6656,
+              "D_prefix": 6784
+            }
+          ]
+        },
+        "mooncake": {
+          "label": "Mooncake prefill routing adapter; ratio=1",
+          "TTFT": {
+            "n": 95,
+            "mean": 13.968699091580525,
+            "p50": 12.05880979314324,
+            "p90": 30.372591738188305,
+            "p95": 35.90634798469375,
+            "p99": 41.966303889986364,
+            "max": 41.966303889986364
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 132.60916931371042,
+            "p50": 110.54634524818688,
+            "p90": 286.16449096562593,
+            "p95": 316.5193073660895,
+            "p99": 348.9214959897895,
+            "max": 348.9214959897895
+          },
+          "makespan": 550.2319593722107,
+          "P_counts": [
+            41,
+            54
+          ],
+          "D_counts": [
+            54,
+            41
+          ],
+          "accepted_prefix_tokens": {
+            "P": 243968,
+            "D": 455424
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 166.03423581243143,
+            "compute": 846.9710098958773,
+            "save": 7.924609932117164
+          },
+          "planning_wall": 4.566965280100703,
+          "boundary_CPU_wall": 0.9189793989062309,
+          "iteration_scheduler_wall": 0.11657193955034018,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 5079302144,
+          "copy_service_sum": 2.7701422595114225,
+          "action_counts": {
+            "software_copy_gate_hold": 70,
+            "selected_copy": 65,
+            "forecast_native_reclaim": 1908,
+            "copy_normal_defer": 5
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3552575488
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3457155072
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": {
+            "name": "mooncake",
+            "full_system_reproduction": false,
+            "D_boundary": "largest currently published feasible prefix",
+            "cache_allocator": "common PegaFlow host authority",
+            "world_costs_unchanged": true,
+            "balancing_ratio": 1.0
+          },
+          "worst_requests": [
+            {
+              "id": "distribution-search:12",
+              "TTFT": 41.966303889986364,
+              "nominal": 245.80867360932226,
+              "dependency": 203.8423697193359,
+              "p": 1,
+              "d": 3,
+              "end": 427.4851575863294,
+              "before_P": 0.5776250745506673,
+              "P_API": 8.595037829222829,
+              "P_to_D": 0.42013612969782343,
+              "D_API_to_first": 32.37350485651507,
+              "P_prefix": 640,
+              "D_prefix": 4352
+            },
+            {
+              "id": "headless-terminal:13",
+              "TTFT": 41.85976921664155,
+              "nominal": 302.2913519556897,
+              "dependency": 260.43158273904817,
+              "p": 0,
+              "d": 3,
+              "end": 485.36720646623905,
+              "before_P": 1.8640442270971107,
+              "P_API": 7.497501514468641,
+              "P_to_D": 0.4489247139823078,
+              "D_API_to_first": 32.049298761093496,
+              "P_prefix": 1280,
+              "D_prefix": 7808
+            },
+            {
+              "id": "distribution-search:11",
+              "TTFT": 40.817702683212076,
+              "nominal": 195.5862631924887,
+              "dependency": 154.76856050927663,
+              "p": 0,
+              "d": 3,
+              "end": 364.340864497553,
+              "before_P": 6.1757756590157555,
+              "P_API": 7.1923407202640846,
+              "P_to_D": 0.4947629415245842,
+              "D_API_to_first": 26.954823362407637,
+              "P_prefix": 640,
+              "D_prefix": 4352
+            },
+            {
+              "id": "feal-differential-cryptanalysis:12",
+              "TTFT": 36.11432085199294,
+              "nominal": 282.80239628129743,
+              "dependency": 246.68807542930446,
+              "p": 0,
+              "d": 3,
+              "end": 464.71126810987727,
+              "before_P": 0.5603745236398368,
+              "P_API": 7.919326896494836,
+              "P_to_D": 0.4296531250980138,
+              "D_API_to_first": 27.20496630676024,
+              "P_prefix": 6656,
+              "D_prefix": 768
+            },
+            {
+              "id": "distribution-search:13",
+              "TTFT": 35.90634798469375,
+              "nominal": 295.854307799558,
+              "dependency": 259.94795981486425,
+              "p": 1,
+              "d": 3,
+              "end": 481.0263197814339,
+              "before_P": 0.5808679341675429,
+              "P_API": 9.203971138190681,
+              "P_to_D": 0.4201375397202014,
+              "D_API_to_first": 25.701371372615313,
+              "P_prefix": 640,
+              "D_prefix": 4352
+            }
+          ]
+        },
+        "memserve": {
+          "label": "MemServe Eq1/2 adapter",
+          "TTFT": {
+            "n": 95,
+            "mean": 13.38718294567671,
+            "p50": 11.999209012429645,
+            "p90": 27.75091565183854,
+            "p95": 29.551319749206016,
+            "p99": 34.18114907901315,
+            "max": 34.18114907901315
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 132.41863240013924,
+            "p50": 110.89134488611948,
+            "p90": 279.631891872081,
+            "p95": 308.3089970542541,
+            "p99": 330.5141955460091,
+            "max": 330.5141955460091
+          },
+          "makespan": 535.6358284234419,
+          "P_counts": [
+            39,
+            56
+          ],
+          "D_counts": [
+            55,
+            40
+          ],
+          "accepted_prefix_tokens": {
+            "P": 413056,
+            "D": 405120
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 149.55711868647762,
+            "compute": 858.8320634358032,
+            "save": 7.92451512356638
+          },
+          "planning_wall": 4.804231623187661,
+          "boundary_CPU_wall": 0.5254944255575538,
+          "iteration_scheduler_wall": 0.10227970313280821,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7347372032,
+          "copy_service_sum": 10.459327690741846,
+          "action_counts": {
+            "software_copy_gate_hold": 65,
+            "selected_copy": 62,
+            "forecast_native_reclaim": 569,
+            "copy_normal_defer": 3
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3978297344
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3464495104
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": {
+            "name": "memserve",
+            "full_system_reproduction": false,
+            "D_boundary": "largest currently published feasible prefix",
+            "cache_allocator": "common PegaFlow host authority",
+            "world_costs_unchanged": true,
+            "balancing_ratio": null
+          },
+          "worst_requests": [
+            {
+              "id": "git-multibranch:10",
+              "TTFT": 34.18114907901315,
+              "nominal": 231.81993931779013,
+              "dependency": 197.63879023877698,
+              "p": 0,
+              "d": 3,
+              "end": 399.71394506554583,
+              "before_P": 3.7281033597548117,
+              "P_API": 4.823561228301894,
+              "P_to_D": 0.42180425695147505,
+              "D_API_to_first": 25.207680234004954,
+              "P_prefix": 6912,
+              "D_prefix": 6016
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "TTFT": 32.576364047367576,
+              "nominal": 203.01826992995237,
+              "dependency": 170.4419058825848,
+              "p": 0,
+              "d": 3,
+              "end": 361.21835393685063,
+              "before_P": 3.0975725797218843,
+              "P_API": 5.952280854861298,
+              "P_to_D": 0.4310610529315113,
+              "D_API_to_first": 23.09544955985291,
+              "P_prefix": 6656,
+              "D_prefix": 640
+            },
+            {
+              "id": "distribution-search:12",
+              "TTFT": 29.765287404987703,
+              "nominal": 233.64387002985094,
+              "dependency": 203.87858262486324,
+              "p": 1,
+              "d": 3,
+              "end": 419.2766169629311,
+              "before_P": 4.483279037710247,
+              "P_API": 5.400851793280641,
+              "P_to_D": 0.4201579207834243,
+              "D_API_to_first": 19.46099865321338,
+              "P_prefix": 7552,
+              "D_prefix": 7552
+            },
+            {
+              "id": "dna-insert:13",
+              "TTFT": 29.60741651294535,
+              "nominal": 250.61516678395813,
+              "dependency": 221.00775027101278,
+              "p": 1,
+              "d": 2,
+              "end": 428.2908052517565,
+              "before_P": 0.5817480824293284,
+              "P_API": 4.120175469602312,
+              "P_to_D": 0.4318921055924534,
+              "D_API_to_first": 24.47360085532125,
+              "P_prefix": 7936,
+              "D_prefix": 640
+            },
+            {
+              "id": "fix-git:13",
+              "TTFT": 29.551319749206016,
+              "nominal": 270.09356032191414,
+              "dependency": 240.54224057270812,
+              "p": 1,
+              "d": 3,
+              "end": 466.92350883242534,
+              "before_P": 0.578090779610136,
+              "P_API": 3.4648247746326875,
+              "P_to_D": 0.4468232032191395,
+              "D_API_to_first": 25.06158099174405,
+              "P_prefix": 4864,
+              "D_prefix": 640
+            }
+          ]
+        },
+        "reference": {
+          "label": "Tailguard FIFO + exact memo (internal reference)",
+          "TTFT": {
+            "n": 95,
+            "mean": 12.609363340549821,
+            "p50": 11.266169729358666,
+            "p90": 23.255285746509486,
+            "p95": 24.6862830345965,
+            "p99": 27.42444811414049,
+            "max": 27.42444811414049
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 123.79485231890482,
+            "p50": 113.95135686317238,
+            "p90": 254.83911286722184,
+            "p95": 270.95281194287605,
+            "p99": 290.14712982845333,
+            "max": 290.14712982845333
+          },
+          "makespan": 490.70346410725875,
+          "P_counts": [
+            50,
+            45
+          ],
+          "D_counts": [
+            55,
+            40
+          ],
+          "accepted_prefix_tokens": {
+            "P": 252032,
+            "D": 303744
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 110.43274154510706,
+            "compute": 823.7297079368776,
+            "save": 7.924547124741366
+          },
+          "planning_wall": 69.11241308506578,
+          "boundary_CPU_wall": 52.04379112366587,
+          "iteration_scheduler_wall": 0.12176043447107077,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 6099566592,
+          "copy_service_sum": 6.276676453099665,
+          "action_counts": {
+            "software_copy_gate_hold": 63,
+            "selected_copy": 61,
+            "forecast_native_reclaim": 590,
+            "copy_normal_defer": 2
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3662675968
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2569011200
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "headless-terminal:13",
+              "TTFT": 27.42444811414049,
+              "nominal": 270.95281194287605,
+              "dependency": 243.52836382873556,
+              "p": 1,
+              "d": 3,
+              "end": 455.0311452239246,
+              "before_P": 3.790268256909485,
+              "P_API": 6.259180967417365,
+              "P_to_D": 0.6957032300811647,
+              "D_API_to_first": 16.679295659732475,
+              "P_prefix": 4224,
+              "D_prefix": 0
+            },
+            {
+              "id": "git-multibranch:10",
+              "TTFT": 26.241206515272836,
+              "nominal": 216.2816026851078,
+              "dependency": 190.04039616983496,
+              "p": 0,
+              "d": 3,
+              "end": 367.47769272897017,
+              "before_P": 1.1089633937330632,
+              "P_API": 2.2662036599537294,
+              "P_to_D": 0.4889483025577306,
+              "D_API_to_first": 22.37709115902834,
+              "P_prefix": 12544,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:11",
+              "TTFT": 25.368454932677025,
+              "nominal": 206.04428838444917,
+              "dependency": 180.67583345177215,
+              "p": 0,
+              "d": 2,
+              "end": 369.75343680604834,
+              "before_P": 1.899562398098567,
+              "P_API": 9.700453249712002,
+              "P_to_D": 0.6531117225345611,
+              "D_API_to_first": 13.115327562331913,
+              "P_prefix": 768,
+              "D_prefix": 256
+            },
+            {
+              "id": "dna-insert:14",
+              "TTFT": 24.73755771648871,
+              "nominal": 263.600187232874,
+              "dependency": 238.8626295163853,
+              "p": 0,
+              "d": 2,
+              "end": 447.8411971994897,
+              "before_P": 1.9771965994836478,
+              "P_API": 8.912645893296997,
+              "P_to_D": 2.661915350919628,
+              "D_API_to_first": 11.185799872788436,
+              "P_prefix": 0,
+              "D_prefix": 0
+            },
+            {
+              "id": "distribution-search:15",
+              "TTFT": 24.6862830345965,
+              "nominal": 254.39637592093717,
+              "dependency": 229.71009288634068,
+              "p": 1,
+              "d": 2,
+              "end": 456.22027890496497,
+              "before_P": 2.1503021143257115,
+              "P_API": 10.659214434861836,
+              "P_to_D": 0.5847471777629494,
+              "D_API_to_first": 11.292019307646001,
+              "P_prefix": 640,
+              "D_prefix": 0
+            }
+          ]
+        },
+        "ours": {
+          "label": "Tailguard completed-save-first candidate",
+          "TTFT": {
+            "n": 95,
+            "mean": 13.712431915783114,
+            "p50": 15.254925988029356,
+            "p90": 24.62803970817305,
+            "p95": 24.904680071804023,
+            "p99": 34.87605623249385,
+            "max": 34.87605623249385
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 125.69963243555625,
+            "p50": 117.27507192829442,
+            "p90": 253.22093758396943,
+            "p95": 273.93247694299146,
+            "p99": 298.7935292006604,
+            "max": 298.7935292006604
+          },
+          "makespan": 503.9154456024873,
+          "P_counts": [
+            49,
+            46
+          ],
+          "D_counts": [
+            56,
+            39
+          ],
+          "accepted_prefix_tokens": {
+            "P": 234624,
+            "D": 225664
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 87.99317728323697,
+            "compute": 845.3286958817519,
+            "save": 7.924641343939584
+          },
+          "planning_wall": 71.4250524956733,
+          "boundary_CPU_wall": 35.57942724041641,
+          "iteration_scheduler_wall": 0.15057660080492496,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 5380243456,
+          "copy_service_sum": 5.89286529904206,
+          "action_counts": {
+            "software_copy_gate_hold": 54,
+            "selected_copy": 53,
+            "forecast_native_reclaim": 261,
+            "copy_normal_defer": 1
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3853516800
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2466250752
+            }
+          },
+          "release_priority_opportunities": {
+            "2": 1,
+            "3": 0
+          },
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "git-multibranch:9",
+              "TTFT": 34.87605623249385,
+              "nominal": 171.14054621479988,
+              "dependency": 136.26448998230603,
+              "p": 0,
+              "d": 3,
+              "end": 318.29299373101895,
+              "before_P": 7.458757937826022,
+              "P_API": 7.075998751878022,
+              "P_to_D": 0.5063960833754777,
+              "D_API_to_first": 19.834903459414306,
+              "P_prefix": 640,
+              "D_prefix": 7168
+            },
+            {
+              "id": "feal-differential-cryptanalysis:11",
+              "TTFT": 29.119460044213497,
+              "nominal": 196.37290483839465,
+              "dependency": 167.25344479418115,
+              "p": 1,
+              "d": 2,
+              "end": 357.15107262513106,
+              "before_P": 11.417045539287074,
+              "P_API": 8.928877787835413,
+              "P_to_D": 0.4636943863984584,
+              "D_API_to_first": 8.309842330692561,
+              "P_prefix": 2816,
+              "D_prefix": 0
+            },
+            {
+              "id": "dna-insert:14",
+              "TTFT": 25.07905039629958,
+              "nominal": 288.11956035213655,
+              "dependency": 263.04050995583697,
+              "p": 1,
+              "d": 2,
+              "end": 471.84988649104065,
+              "before_P": 3.4118360458262487,
+              "P_API": 5.821055843945131,
+              "P_to_D": 0.4772040799539923,
+              "D_API_to_first": 15.368954426574192,
+              "P_prefix": 7040,
+              "D_prefix": 0
+            },
+            {
+              "id": "distribution-search:15",
+              "TTFT": 24.929837832576084,
+              "nominal": 262.3858705527149,
+              "dependency": 237.45603272013884,
+              "p": 1,
+              "d": 2,
+              "end": 464.1452558819448,
+              "before_P": 0.7840984083117633,
+              "P_API": 10.659214434861836,
+              "P_to_D": 0.45734441953715077,
+              "D_API_to_first": 13.029180569865332,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "distribution-search:14",
+              "TTFT": 24.904680071804023,
+              "nominal": 249.17583171298205,
+              "dependency": 224.27115164117802,
+              "p": 0,
+              "d": 2,
+              "end": 431.10643803121803,
+              "before_P": 2.4470103034842055,
+              "P_API": 10.29552361375774,
+              "P_to_D": 0.4607817467581867,
+              "D_API_to_first": 11.701364407803908,
+              "P_prefix": 640,
+              "D_prefix": 0
+            }
+          ]
+        }
+      },
+      "candidate_gain_vs_reference": -0.2717140591978291,
+      "strata03_invalid_p99": 72.68854814564094,
+      "strata04": {
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 17.26112641779406,
+            "p50": 5.673889248614046,
+            "p90": 63.35301335213319,
+            "p95": 72.69299347860817,
+            "p99": 78.63806210654252,
+            "max": 78.63806210654252
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 144.79260568782703,
+            "p50": 109.93783713307944,
+            "p90": 335.61872236024203,
+            "p95": 379.2753622653741,
+            "p99": 442.5546397396259,
+            "max": 442.5546397396259
+          },
+          "admission_CPU_wall": 0,
+          "reorders": 0
+        },
+        "strata": {
+          "TTFT": {
+            "n": 95,
+            "mean": 17.26134827244825,
+            "p50": 5.674136197176608,
+            "p90": 63.35395898634181,
+            "p95": 72.69345901789222,
+            "p99": 78.63946222151094,
+            "max": 78.63946222151094
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 144.7939353973773,
+            "p50": 109.93808595918831,
+            "p90": 335.6225868665016,
+            "p95": 379.27923878942016,
+            "p99": 442.55898900859876,
+            "max": 442.55898900859876
+          },
+          "admission_CPU_wall": 0.018096966668963432,
+          "reorders": 0
+        }
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "arms": {
+        "native": {
+          "label": "Native RR model",
+          "TTFT": {
+            "n": 95,
+            "mean": 16.426846848432657,
+            "p50": 6.24638143293987,
+            "p90": 48.88900282786341,
+            "p95": 67.5351469842957,
+            "p99": 71.01017447544842,
+            "max": 71.01017447544842
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 193.53123438647373,
+            "p50": 168.14228285967476,
+            "p90": 422.6470026984297,
+            "p95": 487.0645718276441,
+            "p99": 514.6789420053692,
+            "max": 514.6789420053692
+          },
+          "makespan": 619.1208365463573,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ],
+          "accepted_prefix_tokens": {
+            "P": 338944,
+            "D": 298880
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 116.33788812589077,
+            "compute": 897.924994514514,
+            "save": 7.92501754820114
+          },
+          "planning_wall": 0.04121935833245516,
+          "boundary_CPU_wall": 0,
+          "iteration_scheduler_wall": 0.13678522314876318,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7472152576,
+          "copy_service_sum": 10.874299896286466,
+          "action_counts": {
+            "implicit_copy": 64,
+            "native_reclaim": 65,
+            "forecast_native_reclaim": 2213
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2099249152
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4580179968
+            }
+          },
+          "release_priority_opportunities": {
+            "2": 0,
+            "3": 0
+          },
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "feal-differential-cryptanalysis:13",
+              "TTFT": 71.01017447544842,
+              "nominal": 396.57842170223915,
+              "dependency": 325.56824722679073,
+              "p": 1,
+              "d": 3,
+              "end": 499.31601663142965,
+              "before_P": 0.6181012016743352,
+              "P_API": 8.919082665427661,
+              "P_to_D": 13.22874148208092,
+              "D_API_to_first": 48.244249126265515,
+              "P_prefix": 6656,
+              "D_prefix": 4096
+            },
+            {
+              "id": "dna-insert:16",
+              "TTFT": 70.2407853175576,
+              "nominal": 449.34800841956775,
+              "dependency": 379.10722310201015,
+              "p": 1,
+              "d": 3,
+              "end": 568.8865336841898,
+              "before_P": 0.0005038036033511162,
+              "P_API": 9.806907694076251,
+              "P_to_D": 11.664106910870885,
+              "D_API_to_first": 48.769266909007115,
+              "P_prefix": 640,
+              "D_prefix": 7040
+            },
+            {
+              "id": "distribution-search:12",
+              "TTFT": 70.15129868746953,
+              "nominal": 422.6470026984297,
+              "dependency": 352.49570401096014,
+              "p": 1,
+              "d": 3,
+              "end": 523.6880492781199,
+              "before_P": 0.0004865722730755806,
+              "P_API": 8.595037829222829,
+              "P_to_D": 7.754594565401192,
+              "D_API_to_first": 53.80117972057246,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "headless-terminal:13",
+              "TTFT": 67.53567698806671,
+              "nominal": 429.59833827829266,
+              "dependency": 362.06266129022595,
+              "p": 1,
+              "d": 3,
+              "end": 540.725669040127,
+              "before_P": 0.0004989244043827057,
+              "P_API": 5.490210255060911,
+              "P_to_D": 6.458292508333102,
+              "D_API_to_first": 55.586675300268325,
+              "P_prefix": 5888,
+              "D_prefix": 5888
+            },
+            {
+              "id": "fix-git:12",
+              "TTFT": 67.5351469842957,
+              "nominal": 445.7222297490805,
+              "dependency": 378.1870827647848,
+              "p": 1,
+              "d": 3,
+              "end": 551.6234566377559,
+              "before_P": 0.0005003232508897781,
+              "P_API": 4.238464916659118,
+              "P_to_D": 12.177460261926853,
+              "D_API_to_first": 51.11872148245885,
+              "P_prefix": 2816,
+              "D_prefix": 2816
+            }
+          ]
+        },
+        "mooncake": {
+          "label": "Mooncake prefill routing adapter; ratio=1",
+          "TTFT": {
+            "n": 95,
+            "mean": 12.549914121994114,
+            "p50": 10.613360839466054,
+            "p90": 23.831580963328065,
+            "p95": 30.075577522595097,
+            "p99": 41.21198657852153,
+            "max": 41.21198657852153
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 180.61196519674237,
+            "p50": 164.11930671730457,
+            "p90": 366.5071312095565,
+            "p95": 397.03198456977276,
+            "p99": 423.30722123922124,
+            "max": 423.30722123922124
+          },
+          "makespan": 522.3297590211034,
+          "P_counts": [
+            39,
+            56
+          ],
+          "D_counts": [
+            52,
+            43
+          ],
+          "accepted_prefix_tokens": {
+            "P": 204160,
+            "D": 509440
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 182.27575715164718,
+            "compute": 818.1351029810647,
+            "save": 7.924756855529267
+          },
+          "planning_wall": 4.419927302747965,
+          "boundary_CPU_wall": 0.7701669447124004,
+          "iteration_scheduler_wall": 0.10930321924388409,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 4837081088,
+          "copy_service_sum": 2.199446237698527,
+          "action_counts": {
+            "software_copy_gate_hold": 80,
+            "selected_copy": 73,
+            "forecast_native_reclaim": 962,
+            "copy_normal_defer": 7
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3802136576
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3875536896
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": {
+            "name": "mooncake",
+            "full_system_reproduction": false,
+            "D_boundary": "largest currently published feasible prefix",
+            "cache_allocator": "common PegaFlow host authority",
+            "world_costs_unchanged": true,
+            "balancing_ratio": 1.0
+          },
+          "worst_requests": [
+            {
+              "id": "feal-differential-cryptanalysis:13",
+              "TTFT": 41.21198657852153,
+              "nominal": 364.92060629183345,
+              "dependency": 323.7086197133119,
+              "p": 1,
+              "d": 3,
+              "end": 472.93330374387875,
+              "before_P": 0.5739230021239905,
+              "P_API": 11.640055955304339,
+              "P_to_D": 0.42014028898444167,
+              "D_API_to_first": 28.57786733210878,
+              "P_prefix": 768,
+              "D_prefix": 640
+            },
+            {
+              "id": "git-multibranch:11",
+              "TTFT": 35.5043394188815,
+              "nominal": 298.9390600183544,
+              "dependency": 263.4347205994729,
+              "p": 1,
+              "d": 3,
+              "end": 405.2190925456346,
+              "before_P": 0.5791588585229306,
+              "P_API": 8.108903268176677,
+              "P_to_D": 0.4201257184427618,
+              "D_API_to_first": 26.396151573739132,
+              "P_prefix": 896,
+              "D_prefix": 640
+            },
+            {
+              "id": "headless-terminal:12",
+              "TTFT": 34.88522302741086,
+              "nominal": 366.5071312095565,
+              "dependency": 331.62190818214566,
+              "p": 0,
+              "d": 3,
+              "end": 473.7553204779248,
+              "before_P": 5.233754795084678,
+              "P_API": 5.293917402363587,
+              "P_to_D": 0.5300845496118995,
+              "D_API_to_first": 23.827466280350677,
+              "P_prefix": 1024,
+              "D_prefix": 11392
+            },
+            {
+              "id": "distribution-search:12",
+              "TTFT": 31.218520846539832,
+              "nominal": 340.4605862220456,
+              "dependency": 309.2420653755058,
+              "p": 0,
+              "d": 3,
+              "end": 443.68610757417036,
+              "before_P": 0.5746974750758795,
+              "P_API": 8.733486476670235,
+              "P_to_D": 0.4201268993597864,
+              "D_API_to_first": 21.49020999543393,
+              "P_prefix": 0,
+              "D_prefix": 1152
+            },
+            {
+              "id": "fix-code-vulnerability:10",
+              "TTFT": 30.075577522595097,
+              "nominal": 279.3941676029306,
+              "dependency": 249.31859008033553,
+              "p": 0,
+              "d": 2,
+              "end": 358.63547703569935,
+              "before_P": 1.0728044005891206,
+              "P_API": 9.385814048454947,
+              "P_to_D": 0.6282534690911916,
+              "D_API_to_first": 18.988705604459824,
+              "P_prefix": 0,
+              "D_prefix": 3072
+            }
+          ]
+        },
+        "memserve": {
+          "label": "MemServe Eq1/2 adapter",
+          "TTFT": {
+            "n": 95,
+            "mean": 12.80934396307299,
+            "p50": 13.983043155219661,
+            "p90": 24.219491716026255,
+            "p95": 25.54471966803368,
+            "p99": 29.83678689156534,
+            "max": 29.83678689156534
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 181.20996198309962,
+            "p50": 169.16308041226375,
+            "p90": 365.32050164028993,
+            "p95": 392.6758542215552,
+            "p99": 432.2865027685083,
+            "max": 432.2865027685083
+          },
+          "makespan": 531.3888693746323,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            54,
+            41
+          ],
+          "accepted_prefix_tokens": {
+            "P": 486400,
+            "D": 422528
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 153.93884526763497,
+            "compute": 851.2263438418648,
+            "save": 7.92460301425308
+          },
+          "planning_wall": 4.727126249112189,
+          "boundary_CPU_wall": 0.45066387113183737,
+          "iteration_scheduler_wall": 0.10732655692845583,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7670333440,
+          "copy_service_sum": 11.561574442750642,
+          "action_counts": {
+            "software_copy_gate_hold": 65,
+            "selected_copy": 63,
+            "copy_normal_defer": 2,
+            "forecast_native_reclaim": 490
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4213178368
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3082813440
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": {
+            "name": "memserve",
+            "full_system_reproduction": false,
+            "D_boundary": "largest currently published feasible prefix",
+            "cache_allocator": "common PegaFlow host authority",
+            "world_costs_unchanged": true,
+            "balancing_ratio": null
+          },
+          "worst_requests": [
+            {
+              "id": "feal-differential-cryptanalysis:13",
+              "TTFT": 29.83678689156534,
+              "nominal": 332.47987413284704,
+              "dependency": 302.6430872412817,
+              "p": 1,
+              "d": 2,
+              "end": 430.2535562600435,
+              "before_P": 0.5860498912037997,
+              "P_API": 7.558596020489323,
+              "P_to_D": 0.4201624702942013,
+              "D_API_to_first": 21.27197850957799,
+              "P_prefix": 9600,
+              "D_prefix": 9600
+            },
+            {
+              "id": "distribution-search:14",
+              "TTFT": 29.23465344894339,
+              "nominal": 392.6758542215552,
+              "dependency": 363.4412007726118,
+              "p": 1,
+              "d": 3,
+              "end": 491.0060381678893,
+              "before_P": 1.2369287712811001,
+              "P_API": 8.887155429301686,
+              "P_to_D": 0.420163970654869,
+              "D_API_to_first": 18.690405277705736,
+              "P_prefix": 4096,
+              "D_prefix": 9344
+            },
+            {
+              "id": "fix-code-vulnerability:9",
+              "TTFT": 27.760754475690987,
+              "nominal": 260.63561107484827,
+              "dependency": 232.8748565991573,
+              "p": 1,
+              "d": 3,
+              "end": 349.26014294702577,
+              "before_P": 0.581074025608757,
+              "P_API": 3.737907266484577,
+              "P_to_D": 0.42503017581071845,
+              "D_API_to_first": 23.016743007786943,
+              "P_prefix": 10880,
+              "D_prefix": 8064
+            },
+            {
+              "id": "feal-differential-cryptanalysis:12",
+              "TTFT": 25.75880398796386,
+              "nominal": 294.9245761077991,
+              "dependency": 269.16577211983525,
+              "p": 1,
+              "d": 2,
+              "end": 387.0538660653768,
+              "before_P": 3.7061863700012623,
+              "P_API": 6.70556240054225,
+              "P_to_D": 0.42016326098706713,
+              "D_API_to_first": 14.92689195643328,
+              "P_prefix": 9600,
+              "D_prefix": 9600
+            },
+            {
+              "id": "distribution-search:12",
+              "TTFT": 25.54471966803368,
+              "nominal": 305.0108627580016,
+              "dependency": 279.46614308996794,
+              "p": 0,
+              "d": 2,
+              "end": 400.08425057243596,
+              "before_P": 0.5838943832890777,
+              "P_API": 4.496150903641835,
+              "P_to_D": 0.43072506527420273,
+              "D_API_to_first": 20.03394931582858,
+              "P_prefix": 9344,
+              "D_prefix": 4096
+            }
+          ]
+        },
+        "reference": {
+          "label": "Tailguard FIFO + exact memo (internal reference)",
+          "TTFT": {
+            "n": 95,
+            "mean": 15.023081732077971,
+            "p50": 16.058509982209586,
+            "p90": 26.187919053238943,
+            "p95": 28.840274087499097,
+            "p99": 30.001357312257312,
+            "max": 30.001357312257312
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 175.49648544952373,
+            "p50": 162.55666778679114,
+            "p90": 348.2891759389816,
+            "p95": 375.26243813127456,
+            "p99": 393.22233335989,
+            "max": 393.22233335989
+          },
+          "makespan": 499.6067419666664,
+          "P_counts": [
+            45,
+            50
+          ],
+          "D_counts": [
+            58,
+            37
+          ],
+          "accepted_prefix_tokens": {
+            "P": 222464,
+            "D": 256000
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 94.65295456712361,
+            "compute": 856.7740965919335,
+            "save": 7.924306766479276
+          },
+          "planning_wall": 79.1064593596384,
+          "boundary_CPU_wall": 55.14709777664393,
+          "iteration_scheduler_wall": 0.1310243383049965,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 5872025600,
+          "copy_service_sum": 6.8662556230257765,
+          "action_counts": {
+            "software_copy_gate_hold": 57,
+            "selected_copy": 55,
+            "copy_normal_defer": 2,
+            "forecast_native_reclaim": 606
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3890216960
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3207593984
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "fix-code-vulnerability:10",
+              "TTFT": 30.001357312257312,
+              "nominal": 259.2821125548383,
+              "dependency": 229.280755242581,
+              "p": 0,
+              "d": 2,
+              "end": 338.75759045745826,
+              "before_P": 8.513479734089117,
+              "P_API": 4.2766520316714915,
+              "P_to_D": 0.5179009495582818,
+              "D_API_to_first": 16.693324596938396,
+              "P_prefix": 11264,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:13",
+              "TTFT": 29.97414162874685,
+              "nominal": 347.90630644502613,
+              "dependency": 317.9321648162793,
+              "p": 0,
+              "d": 2,
+              "end": 440.2087849330169,
+              "before_P": 7.815694889678525,
+              "P_API": 9.741483948366605,
+              "P_to_D": 1.5352647250797986,
+              "D_API_to_first": 10.881698065621947,
+              "P_prefix": 4480,
+              "D_prefix": 0
+            },
+            {
+              "id": "distribution-search:14",
+              "TTFT": 29.688434831769484,
+              "nominal": 361.9199875505906,
+              "dependency": 332.2315527188211,
+              "p": 0,
+              "d": 2,
+              "end": 456.68283813272944,
+              "before_P": 14.537363702013636,
+              "P_API": 10.179280087923733,
+              "P_to_D": 0.6682634597923993,
+              "D_API_to_first": 4.303527582039692,
+              "P_prefix": 896,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-git:11",
+              "TTFT": 29.11924096497438,
+              "nominal": 275.720232907461,
+              "dependency": 246.60099194248664,
+              "p": 0,
+              "d": 3,
+              "end": 368.43446112763917,
+              "before_P": 1.2511694460512786,
+              "P_API": 4.51096820667571,
+              "P_to_D": 0.5663015555870174,
+              "D_API_to_first": 22.790801756660358,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-git:12",
+              "TTFT": 28.840274087499097,
+              "nominal": 315.48396671551075,
+              "dependency": 286.64369262801165,
+              "p": 0,
+              "d": 2,
+              "end": 407.7122224108878,
+              "before_P": 10.21876894594061,
+              "P_API": 5.171770158485184,
+              "P_to_D": 0.6475340592285193,
+              "D_API_to_first": 12.802200923844794,
+              "P_prefix": 640,
+              "D_prefix": 640
+            }
+          ]
+        },
+        "ours": {
+          "label": "Tailguard completed-save-first candidate",
+          "TTFT": {
+            "n": 95,
+            "mean": 15.023002028338308,
+            "p50": 15.194781167779212,
+            "p90": 25.276205800847208,
+            "p95": 30.94475685205265,
+            "p99": 32.054847424103286,
+            "max": 32.054847424103286
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 173.86551362831838,
+            "p50": 165.4396101227125,
+            "p90": 344.0388256593345,
+            "p95": 369.62146634890934,
+            "p99": 393.26153744446634,
+            "max": 393.26153744446634
+          },
+          "makespan": 499.64616432903983,
+          "P_counts": [
+            45,
+            50
+          ],
+          "D_counts": [
+            59,
+            36
+          ],
+          "accepted_prefix_tokens": {
+            "P": 283648,
+            "D": 208128
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 77.57558946759899,
+            "compute": 870.8850693579135,
+            "save": 7.92444771665032
+          },
+          "planning_wall": 71.31327649950981,
+          "boundary_CPU_wall": 46.45720316469669,
+          "iteration_scheduler_wall": 0.14944242406636477,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7332691968,
+          "copy_service_sum": 10.374080723593423,
+          "action_counts": {
+            "software_copy_gate_hold": 56,
+            "selected_copy": 52,
+            "forecast_native_reclaim": 409,
+            "copy_normal_defer": 4
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3846176768
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3156213760
+            }
+          },
+          "release_priority_opportunities": {
+            "2": 0,
+            "3": 0
+          },
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "distribution-search:12",
+              "TTFT": 32.054847424103286,
+              "nominal": 311.4559896618685,
+              "dependency": 279.4011422377652,
+              "p": 1,
+              "d": 2,
+              "end": 399.80214958137924,
+              "before_P": 1.3427899062039046,
+              "P_API": 8.595037829222829,
+              "P_to_D": 0.7127535477909532,
+              "D_API_to_first": 21.404266140885625,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:11",
+              "TTFT": 31.945501323631674,
+              "nominal": 283.437661872936,
+              "dependency": 251.49216054930434,
+              "p": 0,
+              "d": 2,
+              "end": 369.83477362128207,
+              "before_P": 7.664928936651847,
+              "P_API": 7.02685215552983,
+              "P_to_D": 2.5349280473124622,
+              "D_API_to_first": 14.718792184137556,
+              "P_prefix": 6656,
+              "D_prefix": 0
+            },
+            {
+              "id": "distribution-search:11",
+              "TTFT": 31.70284149167884,
+              "nominal": 275.5151891768611,
+              "dependency": 243.81234768518226,
+              "p": 1,
+              "d": 2,
+              "end": 359.6503896268738,
+              "before_P": 7.702766670697656,
+              "P_API": 7.306128830098051,
+              "P_to_D": 0.4478975992929577,
+              "D_API_to_first": 16.246048391590193,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "git-multibranch:11",
+              "TTFT": 31.014201705536493,
+              "nominal": 297.07275888207727,
+              "dependency": 266.0585571765408,
+              "p": 0,
+              "d": 2,
+              "end": 386.18618555038984,
+              "before_P": 0.8270830606447248,
+              "P_API": 8.374830594211184,
+              "P_to_D": 0.7088775227126121,
+              "D_API_to_first": 21.10341052796798,
+              "P_prefix": 0,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:12",
+              "TTFT": 30.94475685205265,
+              "nominal": 319.2958130957236,
+              "dependency": 288.35105624367094,
+              "p": 0,
+              "d": 3,
+              "end": 413.0447168225212,
+              "before_P": 0.799247068479815,
+              "P_API": 7.919326896494836,
+              "P_to_D": 0.4811276758369445,
+              "D_API_to_first": 21.745055211241038,
+              "P_prefix": 6656,
+              "D_prefix": 0
+            }
+          ]
+        }
+      },
+      "candidate_gain_vs_reference": -0.06844657361575446,
+      "strata03_invalid_p99": 82.27811408488299,
+      "strata04": {
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 16.42690013005398,
+            "p50": 6.246380929094357,
+            "p90": 48.8890421520278,
+            "p95": 67.53515428958997,
+            "p99": 71.01101019776075,
+            "max": 71.01101019776075
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 193.53228933534598,
+            "p50": 168.14190220392413,
+            "p90": 422.6491031716995,
+            "p95": 487.06670315656214,
+            "p99": 514.6810050469221,
+            "max": 514.6810050469221
+          },
+          "admission_CPU_wall": 0,
+          "reorders": 0
+        },
+        "strata": {
+          "TTFT": {
+            "n": 95,
+            "mean": 16.427045421992965,
+            "p50": 6.246671313610477,
+            "p90": 48.88939875171633,
+            "p95": 67.5356978792937,
+            "p99": 71.01132684277951,
+            "max": 71.01132684277951
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 193.53225588802312,
+            "p50": 168.14161899897374,
+            "p90": 422.65042013073787,
+            "p95": 487.0680568413749,
+            "p99": 514.6825943591402,
+            "max": 514.6825943591402
+          },
+          "admission_CPU_wall": 0.01695859059691429,
+          "reorders": 0
+        }
+      }
+    }
+  ]
+}

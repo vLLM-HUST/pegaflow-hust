@@ -1,0 +1,12 @@
+{
+  "supervisor_pid": 185017,
+  "started": 1793058968.734034,
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "-u",
+    "/root/yielding-decode-pipeline-01.py"
+  ],
+  "source_sha256": "b6dc255dd8886b0d3146f2532c994d7876e69d2f9c39f20d951140b460260a94",
+  "CPU_only": true,
+  "limit_seconds": 4500
+}

@@ -1,0 +1,193 @@
+{
+  "started": 1793042402.1794493,
+  "finished": 1793042711.4563637,
+  "failure": null,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-delta-audit-kit-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-delta-protection-equivalence-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/delta-protection-source-receipt-02.json",
+        "--output",
+        "/root/issue23-delta-protection-equivalence-02/source-control-audit.json"
+      ],
+      "pid": 4157135,
+      "started": 1793042403.736278,
+      "finished": 1793042412.0652487,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-delta-audit-kit-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-delta-protection-equivalence-02",
+        "--output",
+        "/root/issue23-delta-protection-equivalence-02/work-conservation-audit.json"
+      ],
+      "pid": 4157349,
+      "started": 1793042412.0657866,
+      "finished": 1793042414.2854216,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-delta-audit-kit-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-delta-protection-equivalence-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-delta-protection-equivalence-02/release-estimate-audit.json"
+      ],
+      "pid": 4157356,
+      "started": 1793042414.285917,
+      "finished": 1793042416.7050648,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-delta-audit-kit-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-delta-protection-equivalence-02",
+        "--output",
+        "/root/issue23-delta-protection-equivalence-02/feedback-alignment.json"
+      ],
+      "pid": 4157357,
+      "started": 1793042416.7055347,
+      "finished": 1793042418.8241742,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-delta-protection-source-02/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-delta-protection-source-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-delta-protection-sharing-02",
+        "--policy",
+        "delta-protection",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1"
+      ],
+      "pid": 4157359,
+      "started": 1793042427.3364449,
+      "finished": 1793042685.7258859,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-delta-audit-kit-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-delta-protection-sharing-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/delta-protection-source-receipt-02.json",
+        "--output",
+        "/root/issue23-delta-protection-sharing-02/source-control-audit.json"
+      ],
+      "pid": 4161232,
+      "started": 1793042685.726479,
+      "finished": 1793042694.1570823,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-delta-audit-kit-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-delta-protection-sharing-02",
+        "--output",
+        "/root/issue23-delta-protection-sharing-02/work-conservation-audit.json"
+      ],
+      "pid": 4161446,
+      "started": 1793042694.1576338,
+      "finished": 1793042696.37689,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-delta-audit-kit-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-delta-protection-sharing-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-delta-protection-sharing-02/release-estimate-audit.json"
+      ],
+      "pid": 4161447,
+      "started": 1793042696.3774302,
+      "finished": 1793042698.9467728,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-delta-audit-kit-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-delta-protection-sharing-02",
+        "--output",
+        "/root/issue23-delta-protection-sharing-02/feedback-alignment.json"
+      ],
+      "pid": 4161449,
+      "started": 1793042698.9472942,
+      "finished": 1793042700.9655764,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/issue23-delta-protection-equivalence-02-full.tar.gz",
+      "bytes": 11577777,
+      "sha256": "1b1b5e34c97331850d70002d303c79113709b8236ec977813a0329c05bdf7a34"
+    },
+    {
+      "path": "/root/issue23-delta-protection-sharing-02-full.tar.gz",
+      "bytes": 17096189,
+      "sha256": "30346b691d7423d01f4beb6bd37009c2ae9aeeefdf527db01113f4a92bc146ea"
+    }
+  ],
+  "no_gpu_work": true,
+  "intended_equivalent_policy_semantics": true
+}

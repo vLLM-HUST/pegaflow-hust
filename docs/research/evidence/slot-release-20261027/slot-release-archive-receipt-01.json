@@ -1,0 +1,82 @@
+[
+  {
+    "name": "slot-release-01",
+    "archive": "issue23-slot-release-01-full.tar.gz",
+    "sha256": "ea3b94e6a69268a3a84530195257071870ee69793f8c5e72b5cfe6400e13c95a",
+    "bytes": 16704451,
+    "remote": "/root/issue23-slot-release-01-full.tar.gz",
+    "process": {
+      "exit_code": 0,
+      "stop": null,
+      "started": 1793031906.4033587,
+      "finished": 1793032106.91595,
+      "limit_seconds": 1800,
+      "CPU_only": true
+    },
+    "CPU_only": true
+  },
+  {
+    "name": "slot-release-02",
+    "archive": "issue23-slot-release-02-full.tar.gz",
+    "sha256": "e55ced1c4dadc2132cc6d1d1b77d4107014df9089f47bc55ef38dee6dabb161f",
+    "bytes": 16770629,
+    "remote": "/root/issue23-slot-release-02-full.tar.gz",
+    "process": {
+      "exit_code": 0,
+      "stop": null,
+      "started": 1793032248.7194333,
+      "finished": 1793032456.708166,
+      "limit_seconds": 1800,
+      "CPU_only": true
+    },
+    "CPU_only": true
+  },
+  {
+    "name": "slot-release-sharing-01",
+    "archive": "issue23-slot-release-sharing-01-full.tar.gz",
+    "sha256": "678cbcf34d3b330fe6276935b61669dd76b2493e3dbb73b2968cde04d41bba99",
+    "bytes": 16532002,
+    "remote": "/root/issue23-slot-release-sharing-01-full.tar.gz",
+    "process": {
+      "exit_code": 0,
+      "stop": null,
+      "started": 1793032521.8106437,
+      "finished": 1793032749.2996645,
+      "limit_seconds": 1800,
+      "CPU_only": true
+    },
+    "CPU_only": true
+  },
+  {
+    "name": "release-cobatch-sharing-01",
+    "archive": "issue23-release-cobatch-sharing-01-full.tar.gz",
+    "sha256": "1c483dab51fc3932084de0aeb849d5624e03239988f321a6873faefc20be8cee",
+    "bytes": 16656886,
+    "remote": "/root/issue23-release-cobatch-sharing-01-full.tar.gz",
+    "process": {
+      "exit_code": 0,
+      "stop": null,
+      "started": 1793033034.6095517,
+      "finished": 1793033289.0479195,
+      "limit_seconds": 1800,
+      "CPU_only": true
+    },
+    "CPU_only": true
+  },
+  {
+    "name": "release-cobatch-01",
+    "archive": "issue23-release-cobatch-01-full.tar.gz",
+    "sha256": "ec5894402aa1d8de1b34a4228c5fbc0063f3fcf4cbbe4cd0d054c31badec31a7",
+    "bytes": 16852787,
+    "remote": "/root/issue23-release-cobatch-01-full.tar.gz",
+    "process": {
+      "exit_code": 0,
+      "stop": null,
+      "started": 1793033394.870157,
+      "finished": 1793033598.679398,
+      "limit_seconds": 1800,
+      "CPU_only": true
+    },
+    "CPU_only": true
+  }
+]

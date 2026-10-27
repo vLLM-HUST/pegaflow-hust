@@ -1,0 +1,15 @@
+{
+  "pid": 456419,
+  "pgid": 456419,
+  "started": 1793078563.7872045,
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "/root/advice-window-pipeline-01.py"
+  ],
+  "cwd": "/root/issue23-advice-window-source-01",
+  "source_sha256": "caa91cd838efe30be16628052e364c03ed412ac76b6f1e7f52d55bdc1caa33dc",
+  "runner_sha256": "d43ef94c9c1026ec56c3793f6cabc1b385239c2ba4f90d21a898a4d3ae6a2d8e",
+  "limit_seconds": 4500,
+  "workers": 3,
+  "CPU_only": true
+}

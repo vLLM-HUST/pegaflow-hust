@@ -1,0 +1,24 @@
+{
+  "pid": 560774,
+  "pgid": 560774,
+  "started": 1793086175.0921462,
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "/root/ready-prefill-pipeline-01.py"
+  ],
+  "cwd": "/root/issue23-ready-prefill-source-01",
+  "source_sha256": "e409d33886ca206a49eba847719a4cce999a4f576dd81d794ad6fc54474dfc8d",
+  "runner_sha256": "de68f3ddd860479227bd93301c26ca51cccf588006fbcb7e8d8cde9e1e26201d",
+  "root": "/root/issue23-ready-prefill-charged-pipeline-01",
+  "outputs": [
+    "/root/issue23-ready-prefill-charged-default-01",
+    "/root/issue23-ready-prefill-charged-sharing-01"
+  ],
+  "policy": "ready-prefill",
+  "expected_revision": "ready-prefill-before-restore-01",
+  "limit_seconds": 4500,
+  "matrix_limit_seconds": 1800,
+  "workers": 3,
+  "CPU_only": true,
+  "console": "/root/ready-prefill-pipeline-01-console.log"
+}

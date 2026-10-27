@@ -1,0 +1,3431 @@
+{
+  "CPU_only": true,
+  "net_performance_claim": false,
+  "causal_replay_unchanged": true,
+  "equal_cloned_and_original_calendar_predictions": true,
+  "input_sha256": "2b91a55f74a49837867145881d2b696a773fb964a2789ba1cc3acff281020dea",
+  "raw_profile_sha256": "f5b7fc2a882d6d9bbb0b91cd7e2444da298ea6af940753730b200a26ce00e338",
+  "summary": {
+    "route": {
+      "calendars": 104,
+      "implementations": {
+        "parent": {
+          "unprofiled_CPU_sum_two_repeats": 1.43646384,
+          "unprofiled_wall_sum_two_repeats": 1.437429284,
+          "clone_CPU_excluded": 5.8266269600000005,
+          "profiled_functions_nested_not_additive": {
+            "batch_calendar.py:41:schedule_batched": {
+              "calls": 104,
+              "self_seconds": 0.254597303,
+              "cumulative_seconds": 1.4664137460000002
+            },
+            "sparse_cache_search.py:18:sync_protection": {
+              "calls": 1291,
+              "self_seconds": 0.08646577200000001,
+              "cumulative_seconds": 0.21830775599999996
+            },
+            "dataclasses.py:1540:replace": {
+              "calls": 10764,
+              "self_seconds": 0.07106510600000002,
+              "cumulative_seconds": 0.147629301
+            },
+            "continuous_batch.py:43:protected": {
+              "calls": 108551,
+              "self_seconds": 0.06101449899999999,
+              "cumulative_seconds": 0.09750743
+            },
+            "continuous_batch.py:153:begin": {
+              "calls": 11541,
+              "self_seconds": 0.05806323200000001,
+              "cumulative_seconds": 0.12661835100000007
+            },
+            "~:0:<method 'get' of 'dict' objects>": {
+              "calls": 140103,
+              "self_seconds": 0.05005587099999999,
+              "cumulative_seconds": 0.05005587099999999
+            },
+            "~:0:<built-in method builtins.max>": {
+              "calls": 61418,
+              "self_seconds": 0.04422501000000001,
+              "cumulative_seconds": 0.04422501000000001
+            },
+            "~:0:<built-in method builtins.sorted>": {
+              "calls": 13059,
+              "self_seconds": 0.04361666300000001,
+              "cumulative_seconds": 0.08499975300000003
+            },
+            "continuous_batch.py:141:admit": {
+              "calls": 23082,
+              "self_seconds": 0.03952024100000001,
+              "cumulative_seconds": 0.07829092399999998
+            },
+            "resource_cache_profile.py:102:save": {
+              "calls": 649,
+              "self_seconds": 0.033742693,
+              "cumulative_seconds": 0.14195511000000005
+            },
+            "slot_release_search.py:39:begin": {
+              "calls": 11541,
+              "self_seconds": 0.031458828,
+              "cumulative_seconds": 0.201924937
+            },
+            "~:0:<built-in method builtins.sum>": {
+              "calls": 18930,
+              "self_seconds": 0.030522294000000005,
+              "cumulative_seconds": 0.04673250400000002
+            },
+            "~:0:<built-in method builtins.getattr>": {
+              "calls": 79024,
+              "self_seconds": 0.030067182999999997,
+              "cumulative_seconds": 0.034361739000000016
+            },
+            "~:0:<built-in method builtins.any>": {
+              "calls": 14966,
+              "self_seconds": 0.027229466000000004,
+              "cumulative_seconds": 0.06787240200000001
+            },
+            "~:0:<built-in method builtins.min>": {
+              "calls": 16323,
+              "self_seconds": 0.023629313000000013,
+              "cumulative_seconds": 0.028427733000000014
+            },
+            "~:0:<built-in method builtins.hash>": {
+              "calls": 22074,
+              "self_seconds": 0.021758353000000008,
+              "cumulative_seconds": 0.035698326
+            },
+            "cache_evolving_search.py:132:<genexpr>": {
+              "calls": 1881,
+              "self_seconds": 0.018189811,
+              "cumulative_seconds": 0.018189811
+            },
+            "~:0:<method 'values' of 'dict' objects>": {
+              "calls": 41047,
+              "self_seconds": 0.017935766,
+              "cumulative_seconds": 0.017935766
+            },
+            "batch_calendar.py:249:<genexpr>": {
+              "calls": 42632,
+              "self_seconds": 0.017189066000000003,
+              "cumulative_seconds": 0.031703336
+            },
+            "batch_calendar.py:154:<lambda>": {
+              "calls": 33014,
+              "self_seconds": 0.016378272000000003,
+              "cumulative_seconds": 0.016378272000000003
+            },
+            "<string>:2:__eq__": {
+              "calls": 23222,
+              "self_seconds": 0.014898069999999996,
+              "cumulative_seconds": 0.014898069999999996
+            },
+            "~:0:<method 'extend' of 'list' objects>": {
+              "calls": 8910,
+              "self_seconds": 0.014341635000000002,
+              "cumulative_seconds": 0.019568896999999995
+            },
+            "continuous_batch.py:205:finish": {
+              "calls": 3371,
+              "self_seconds": 0.014042257,
+              "cumulative_seconds": 0.018361229000000003
+            },
+            "~:0:<built-in method builtins.len>": {
+              "calls": 51987,
+              "self_seconds": 0.013917737999999997,
+              "cumulative_seconds": 0.013917737999999997
+            },
+            "bounded_search.py:26:first_lower_bound": {
+              "calls": 4184,
+              "self_seconds": 0.013808420000000004,
+              "cumulative_seconds": 0.048418334
+            },
+            "bounded_search.py:29:<genexpr>": {
+              "calls": 20920,
+              "self_seconds": 0.012412927,
+              "cumulative_seconds": 0.018806514000000003
+            },
+            "~:0:<method 'items' of 'dict' objects>": {
+              "calls": 25541,
+              "self_seconds": 0.011647420999999995,
+              "cumulative_seconds": 0.011647420999999995
+            },
+            "<string>:2:__init__": {
+              "calls": 558,
+              "self_seconds": 0.00924171,
+              "cumulative_seconds": 0.00924171
+            },
+            "cache_evolving_search.py:187:guard": {
+              "calls": 4184,
+              "self_seconds": 0.009164134,
+              "cumulative_seconds": 0.057582468
+            },
+            "projection_index.py:45:get": {
+              "calls": 4675,
+              "self_seconds": 0.008276093,
+              "cumulative_seconds": 0.012613099000000003
+            },
+            "~:0:<method 'remove' of 'list' objects>": {
+              "calls": 4102,
+              "self_seconds": 0.008272373,
+              "cumulative_seconds": 0.022022486000000004
+            },
+            "operation_cost.py:86:_dot": {
+              "calls": 2664,
+              "self_seconds": 0.008102550000000002,
+              "cumulative_seconds": 0.017974201000000006
+            },
+            "slot_release_search.py:79:<lambda>": {
+              "calls": 11541,
+              "self_seconds": 0.007933792999999998,
+              "cumulative_seconds": 0.011044884
+            },
+            "joint_policy.py:139:<genexpr>": {
+              "calls": 2342,
+              "self_seconds": 0.007821125,
+              "cumulative_seconds": 0.007821125
+            },
+            "dataclasses.py:1296:_is_dataclass_instance": {
+              "calls": 10764,
+              "self_seconds": 0.0077507539999999995,
+              "cumulative_seconds": 0.011922175999999993
+            },
+            "~:0:<method 'append' of 'list' objects>": {
+              "calls": 18688,
+              "self_seconds": 0.007537430000000003,
+              "cumulative_seconds": 0.007537430000000003
+            },
+            "batch_calendar.py:93:add": {
+              "calls": 974,
+              "self_seconds": 0.0074406249999999985,
+              "cumulative_seconds": 0.017568933999999994
+            },
+            "completed_phase_search.py:67:fits": {
+              "calls": 1686,
+              "self_seconds": 0.007440516000000002,
+              "cumulative_seconds": 0.016385005
+            },
+            "cache_evolving_search.py:65:admit": {
+              "calls": 974,
+              "self_seconds": 0.007302788000000001,
+              "cumulative_seconds": 0.11693030800000002
+            },
+            "cache_evolving_search.py:45:api": {
+              "calls": 986,
+              "self_seconds": 0.006783331000000002,
+              "cumulative_seconds": 0.06535207100000001
+            },
+            "cache_evolving_search.py:175:predict_batch": {
+              "calls": 104,
+              "self_seconds": 0.006620882999999999,
+              "cumulative_seconds": 1.4903144369999999
+            },
+            "operation_cost.py:66:prefill_features": {
+              "calls": 1544,
+              "self_seconds": 0.0065835519999999995,
+              "cumulative_seconds": 0.012520396000000001
+            },
+            "~:0:<method 'disable' of '_lsprof.Profiler' objects>": {
+              "calls": 104,
+              "self_seconds": 0.006442894999999998,
+              "cumulative_seconds": 0.006442894999999998
+            },
+            "projection_index.py:16:<genexpr>": {
+              "calls": 25948,
+              "self_seconds": 0.006299866,
+              "cumulative_seconds": 0.006299866
+            },
+            "completed_phase_search.py:69:<genexpr>": {
+              "calls": 8430,
+              "self_seconds": 0.006276573999999998,
+              "cumulative_seconds": 0.006276573999999998
+            },
+            "joint_policy.py:137:prefix": {
+              "calls": 1286,
+              "self_seconds": 0.006065738000000003,
+              "cumulative_seconds": 0.02682587199999999
+            },
+            "cache_evolving_search.py:137:finish": {
+              "calls": 1011,
+              "self_seconds": 0.005943597000000003,
+              "cumulative_seconds": 0.27697968700000014
+            },
+            "cache_evolving_search.py:120:start": {
+              "calls": 1336,
+              "self_seconds": 0.005723766000000003,
+              "cumulative_seconds": 0.14009441500000003
+            },
+            "batch_calendar.py:299:<genexpr>": {
+              "calls": 16262,
+              "self_seconds": 0.005682666000000003,
+              "cumulative_seconds": 0.005682666000000003
+            },
+            "operation_cost.py:95:compute": {
+              "calls": 1544,
+              "self_seconds": 0.005674775999999999,
+              "cumulative_seconds": 0.033751479
+            },
+            "~:0:<built-in method builtins.hasattr>": {
+              "calls": 14154,
+              "self_seconds": 0.005638046,
+              "cumulative_seconds": 0.005638046
+            },
+            "completed_phase_search.py:92:compute": {
+              "calls": 1544,
+              "self_seconds": 0.005635411999999998,
+              "cumulative_seconds": 0.05541407799999999
+            },
+            "projection_index.py:14:keys": {
+              "calls": 116,
+              "self_seconds": 0.005345077000000003,
+              "cumulative_seconds": 0.011644943000000003
+            },
+            "batch_calendar.py:141:<genexpr>": {
+              "calls": 24464,
+              "self_seconds": 0.005118973999999999,
+              "cumulative_seconds": 0.005118973999999999
+            },
+            "operation_schedule.py:36:__post_init__": {
+              "calls": 1496,
+              "self_seconds": 0.004537726999999998,
+              "cumulative_seconds": 0.005720204
+            },
+            "batch_calendar.py:251:<genexpr>": {
+              "calls": 21838,
+              "self_seconds": 0.004403002999999999,
+              "cumulative_seconds": 0.004403002999999999
+            },
+            "batch_calendar.py:307:<genexpr>": {
+              "calls": 7466,
+              "self_seconds": 0.0043229750000000015,
+              "cumulative_seconds": 0.004798420000000003
+            },
+            "control_release_search.py:27:admit": {
+              "calls": 974,
+              "self_seconds": 0.004133120000000001,
+              "cumulative_seconds": 0.12325390800000002
+            },
+            "continuous_batch.py:24:acquire": {
+              "calls": 986,
+              "self_seconds": 0.004129107,
+              "cumulative_seconds": 0.022949209999999998
+            },
+            "operation_cost.py:88:<genexpr>": {
+              "calls": 11080,
+              "self_seconds": 0.0041086890000000004,
+              "cumulative_seconds": 0.0041086890000000004
+            },
+            "~:0:<method 'intersection' of 'frozenset' objects>": {
+              "calls": 2268,
+              "self_seconds": 0.004052346,
+              "cumulative_seconds": 0.004052346
+            },
+            "batch_calendar.py:24:sequence_for": {
+              "calls": 558,
+              "self_seconds": 0.004030488999999999,
+              "cumulative_seconds": 0.04432477299999999
+            },
+            "completed_phase_search.py:99:decode_tail": {
+              "calls": 1128,
+              "self_seconds": 0.003899486000000001,
+              "cumulative_seconds": 0.023040493000000002
+            },
+            "batch_calendar.py:323:<genexpr>": {
+              "calls": 11683,
+              "self_seconds": 0.0038344000000000004,
+              "cumulative_seconds": 0.0038344000000000004
+            },
+            "joint_policy.py:168:copy_package": {
+              "calls": 38,
+              "self_seconds": 0.0037703890000000007,
+              "cumulative_seconds": 0.029715440000000003
+            },
+            "operation_phase_release.py:16:__getattr__": {
+              "calls": 8697,
+              "self_seconds": 0.003549304,
+              "cumulative_seconds": 0.017703480000000008
+            },
+            "resource_queue.py:72:_remaining_operation": {
+              "calls": 148,
+              "self_seconds": 0.003532557999999999,
+              "cumulative_seconds": 0.004026781
+            },
+            "projection_index.py:68:keys": {
+              "calls": 3860,
+              "self_seconds": 0.0035119740000000006,
+              "cumulative_seconds": 0.024394899999999994
+            },
+            "resource_headroom_profile.py:48:__getattr__": {
+              "calls": 8697,
+              "self_seconds": 0.003507161,
+              "cumulative_seconds": 0.007983889
+            },
+            "slot_release_search.py:33:set_context": {
+              "calls": 11541,
+              "self_seconds": 0.003111091000000001,
+              "cumulative_seconds": 0.003111091000000001
+            },
+            "completed_phase_search.py:84:restore": {
+              "calls": 2102,
+              "self_seconds": 0.003012872,
+              "cumulative_seconds": 0.009569613
+            },
+            "operation_cost.py:90:restore": {
+              "calls": 5112,
+              "self_seconds": 0.0028552130000000005,
+              "cumulative_seconds": 0.008353206000000005
+            },
+            "~:0:<built-in method _heapq.heappop>": {
+              "calls": 4187,
+              "self_seconds": 0.0028424900000000005,
+              "cumulative_seconds": 0.0028424900000000005
+            },
+            "operation_cost.py:67:<genexpr>": {
+              "calls": 6176,
+              "self_seconds": 0.0026164170000000007,
+              "cumulative_seconds": 0.0026164170000000007
+            },
+            "~:0:<built-in method math.ceil>": {
+              "calls": 7143,
+              "self_seconds": 0.0025933840000000015,
+              "cumulative_seconds": 0.0025933840000000015
+            },
+            "~:0:<built-in method builtins.next>": {
+              "calls": 5558,
+              "self_seconds": 0.0025529059999999998,
+              "cumulative_seconds": 0.009535707000000004
+            },
+            "~:0:<method 'update' of 'dict' objects>": {
+              "calls": 2008,
+              "self_seconds": 0.0024311659999999994,
+              "cumulative_seconds": 0.0024311659999999994
+            },
+            "~:0:<built-in method _heapq.heappush>": {
+              "calls": 4272,
+              "self_seconds": 0.002370015000000001,
+              "cumulative_seconds": 0.002370015000000001
+            },
+            "resource_cache_profile.py:201:<genexpr>": {
+              "calls": 676,
+              "self_seconds": 0.0022669030000000002,
+              "cumulative_seconds": 0.005173849000000001
+            },
+            "projection_index.py:36:__eq__": {
+              "calls": 910,
+              "self_seconds": 0.0022575050000000004,
+              "cumulative_seconds": 0.003693306000000002
+            },
+            "operation_context.py:9:decode_features": {
+              "calls": 1128,
+              "self_seconds": 0.002255669,
+              "cumulative_seconds": 0.002255669
+            },
+            "continuous_batch.py:107:reservation": {
+              "calls": 1415,
+              "self_seconds": 0.002227359,
+              "cumulative_seconds": 0.002676839000000001
+            },
+            "continuous_batch.py:134:submit": {
+              "calls": 558,
+              "self_seconds": 0.002121746,
+              "cumulative_seconds": 0.004415443999999999
+            },
+            "continuous_batch.py:86:__post_init__": {
+              "calls": 558,
+              "self_seconds": 0.002085700000000001,
+              "cumulative_seconds": 0.002731935
+            },
+            "detached_calendar.py:21:token": {
+              "calls": 624,
+              "self_seconds": 0.002072517000000001,
+              "cumulative_seconds": 0.005170554
+            },
+            "~:0:<method 'difference_update' of 'set' objects>": {
+              "calls": 4102,
+              "self_seconds": 0.002068734,
+              "cumulative_seconds": 0.002068734
+            },
+            "operation_phase_release.py:19:decode_tail": {
+              "calls": 1128,
+              "self_seconds": 0.0020442540000000006,
+              "cumulative_seconds": 0.004299922999999999
+            },
+            "~:0:<method 'hex' of 'bytes' objects>": {
+              "calls": 4387,
+              "self_seconds": 0.0020078520000000005,
+              "cumulative_seconds": 0.0020078520000000005
+            },
+            "detached_calendar.py:22:<genexpr>": {
+              "calls": 4992,
+              "self_seconds": 0.0019809370000000003,
+              "cumulative_seconds": 0.0030980370000000005
+            },
+            "cache_evolving_search.py:39:effective_route": {
+              "calls": 558,
+              "self_seconds": 0.00196149,
+              "cumulative_seconds": 0.02816171199999999
+            },
+            "continuous_batch.py:34:release": {
+              "calls": 661,
+              "self_seconds": 0.0017823589999999994,
+              "cumulative_seconds": 0.002790657
+            },
+            "resource_reservation.py:12:permitted": {
+              "calls": 1339,
+              "self_seconds": 0.0017696860000000001,
+              "cumulative_seconds": 0.004170738000000001
+            },
+            "continuous_batch.py:103:remaining_prefill": {
+              "calls": 4093,
+              "self_seconds": 0.0017369890000000002,
+              "cumulative_seconds": 0.0017369890000000002
+            },
+            "~:0:<built-in method builtins.id>": {
+              "calls": 4675,
+              "self_seconds": 0.0016108630000000006,
+              "cumulative_seconds": 0.0016108630000000006
+            },
+            "functools.py:982:__get__": {
+              "calls": 572,
+              "self_seconds": 0.0015215699999999994,
+              "cumulative_seconds": 0.05201223899999999
+            },
+            "joint_policy.py:176:<genexpr>": {
+              "calls": 2320,
+              "self_seconds": 0.00149897,
+              "cumulative_seconds": 0.011714829999999999
+            },
+            "projection_index.py:27:<genexpr>": {
+              "calls": 9910,
+              "self_seconds": 0.0014273889999999998,
+              "cumulative_seconds": 0.0014273889999999998
+            },
+            "~:0:<method 'add' of 'set' objects>": {
+              "calls": 3699,
+              "self_seconds": 0.0014130599999999998,
+              "cumulative_seconds": 0.0014130599999999998
+            },
+            "<string>:2:__hash__": {
+              "calls": 702,
+              "self_seconds": 0.0014008650000000003,
+              "cumulative_seconds": 0.004406426000000001
+            },
+            "cache_evolving_search.py:28:__init__": {
+              "calls": 104,
+              "self_seconds": 0.0013940880000000004,
+              "cumulative_seconds": 0.004331713000000001
+            },
+            "resource_cache_profile.py:115:<genexpr>": {
+              "calls": 981,
+              "self_seconds": 0.0013928620000000001,
+              "cumulative_seconds": 0.0013928620000000001
+            },
+            "~:0:<built-in method builtins.all>": {
+              "calls": 995,
+              "self_seconds": 0.0013396969999999997,
+              "cumulative_seconds": 0.003740804999999999
+            },
+            "~:0:<method 'pop' of 'dict' objects>": {
+              "calls": 1373,
+              "self_seconds": 0.0011714889999999993,
+              "cumulative_seconds": 0.0011714889999999993
+            },
+            "~:0:<built-in method math.floor>": {
+              "calls": 3062,
+              "self_seconds": 0.0011647630000000003,
+              "cumulative_seconds": 0.0011647630000000003
+            },
+            "~:0:<built-in method math.isfinite>": {
+              "calls": 3728,
+              "self_seconds": 0.0011539659999999998,
+              "cumulative_seconds": 0.0011539659999999998
+            },
+            "~:0:<method 'popleft' of 'collections.deque' objects>": {
+              "calls": 2543,
+              "self_seconds": 0.001095162,
+              "cumulative_seconds": 0.001095162
+            },
+            "projection_index.py:33:__hash__": {
+              "calls": 1298,
+              "self_seconds": 0.0010706390000000004,
+              "cumulative_seconds": 0.035130182999999995
+            },
+            "batch_calendar.py:123:finish_stage": {
+              "calls": 649,
+              "self_seconds": 0.0009643329999999998,
+              "cumulative_seconds": 0.0036865080000000024
+            },
+            "batch_calendar.py:96:<genexpr>": {
+              "calls": 1975,
+              "self_seconds": 0.000951831,
+              "cumulative_seconds": 0.000951831
+            },
+            "joint_policy.py:129:remove": {
+              "calls": 38,
+              "self_seconds": 0.000886511,
+              "cumulative_seconds": 0.0033779650000000006
+            },
+            "resource_reservation.py:13:<genexpr>": {
+              "calls": 1646,
+              "self_seconds": 0.0008455890000000001,
+              "cumulative_seconds": 0.0011034960000000005
+            },
+            "batch_calendar.py:219:<genexpr>": {
+              "calls": 1227,
+              "self_seconds": 0.0008429910000000002,
+              "cumulative_seconds": 0.0015455799999999997
+            },
+            "~:0:<method 'append' of 'collections.deque' objects>": {
+              "calls": 1532,
+              "self_seconds": 0.0008158440000000004,
+              "cumulative_seconds": 0.0008158440000000004
+            },
+            "resource_cache_profile.py:45:__init__": {
+              "calls": 104,
+              "self_seconds": 0.0007681360000000003,
+              "cumulative_seconds": 0.0015998190000000002
+            },
+            "phase_release_calendar.py:23:_remaining_operation": {
+              "calls": 148,
+              "self_seconds": 0.0007059439999999998,
+              "cumulative_seconds": 0.004732724999999999
+            },
+            "~:0:<method 'startswith' of 'str' objects>": {
+              "calls": 461,
+              "self_seconds": 0.0007025889999999999,
+              "cumulative_seconds": 0.0007025889999999999
+            },
+            "joint_policy.py:131:<genexpr>": {
+              "calls": 3326,
+              "self_seconds": 0.000682636,
+              "cumulative_seconds": 0.000682636
+            },
+            "cache_evolving_search.py:179:<genexpr>": {
+              "calls": 728,
+              "self_seconds": 0.0006809230000000003,
+              "cumulative_seconds": 0.005851477000000001
+            },
+            "joint_policy.py:134:<genexpr>": {
+              "calls": 3326,
+              "self_seconds": 0.000659728,
+              "cumulative_seconds": 0.000659728
+            },
+            "projection_index.py:18:payload": {
+              "calls": 20,
+              "self_seconds": 0.000644125,
+              "cumulative_seconds": 0.0023288970000000003
+            },
+            "resource_cache_profile.py:147:<genexpr>": {
+              "calls": 4125,
+              "self_seconds": 0.0005619570000000001,
+              "cumulative_seconds": 0.0005619570000000001
+            },
+            "slot_release_search.py:25:__init__": {
+              "calls": 208,
+              "self_seconds": 0.0005132000000000001,
+              "cumulative_seconds": 0.0009484860000000003
+            },
+            "joint_policy.py:186:<genexpr>": {
+              "calls": 2320,
+              "self_seconds": 0.0004969560000000001,
+              "cumulative_seconds": 0.0004969560000000001
+            },
+            "resource_cache_profile.py:177:finished": {
+              "calls": 12,
+              "self_seconds": 0.000449814,
+              "cumulative_seconds": 0.018961251
+            },
+            "completed_phase_search.py:64:__getattr__": {
+              "calls": 771,
+              "self_seconds": 0.00043440200000000013,
+              "cumulative_seconds": 0.003968553
+            },
+            "operation_cost.py:83:__getattr__": {
+              "calls": 759,
+              "self_seconds": 0.0004339860000000001,
+              "cumulative_seconds": 0.0007723200000000001
+            },
+            "cache_evolving_search.py:158:after_copy": {
+              "calls": 712,
+              "self_seconds": 0.000421476,
+              "cumulative_seconds": 0.0016490660000000002
+            },
+            "joint_policy.py:173:<genexpr>": {
+              "calls": 38,
+              "self_seconds": 0.00042147000000000007,
+              "cumulative_seconds": 0.00042147000000000007
+            },
+            "release_cobatch_search.py:40:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.000384884,
+              "cumulative_seconds": 0.0014087610000000001
+            },
+            "joint_policy.py:190:<genexpr>": {
+              "calls": 1352,
+              "self_seconds": 0.000373517,
+              "cumulative_seconds": 0.000373517
+            },
+            "~:0:<built-in method builtins.setattr>": {
+              "calls": 1040,
+              "self_seconds": 0.000368751,
+              "cumulative_seconds": 0.000368751
+            },
+            "batch_calendar.py:109:<lambda>": {
+              "calls": 624,
+              "self_seconds": 0.00034682699999999996,
+              "cumulative_seconds": 0.00034682699999999996
+            },
+            "projection_index.py:64:wrap": {
+              "calls": 104,
+              "self_seconds": 0.00033651800000000006,
+              "cumulative_seconds": 0.0008316829999999997
+            },
+            "slot_release_search.py:76:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.00032973300000000013,
+              "cumulative_seconds": 0.0010238770000000003
+            },
+            "~:0:<built-in method builtins.isinstance>": {
+              "calls": 910,
+              "self_seconds": 0.0002878440000000001,
+              "cumulative_seconds": 0.0002878440000000001
+            },
+            "projection_index.py:71:usage": {
+              "calls": 118,
+              "self_seconds": 0.0002859560000000001,
+              "cumulative_seconds": 0.004213283
+            },
+            "batch_calendar.py:229:<genexpr>": {
+              "calls": 1206,
+              "self_seconds": 0.0002844740000000001,
+              "cumulative_seconds": 0.0002844740000000001
+            },
+            "acquired_phase_search.py:87:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.000281766,
+              "cumulative_seconds": 0.0004512480000000002
+            },
+            "batch_calendar.py:228:<genexpr>": {
+              "calls": 1206,
+              "self_seconds": 0.00026120600000000005,
+              "cumulative_seconds": 0.00026120600000000005
+            },
+            "projection_index.py:29:signature": {
+              "calls": 335,
+              "self_seconds": 0.000258434,
+              "cumulative_seconds": 0.032951199000000014
+            },
+            "cache_evolving_search.py:185:<genexpr>": {
+              "calls": 520,
+              "self_seconds": 0.000245463,
+              "cumulative_seconds": 0.000245463
+            },
+            "pending_first_search.py:21:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.000242896,
+              "cumulative_seconds": 0.0006941440000000001
+            },
+            "resource_cache_profile.py:126:<genexpr>": {
+              "calls": 55,
+              "self_seconds": 0.000219714,
+              "cumulative_seconds": 0.000437798
+            },
+            "continuous_batch.py:135:<genexpr>": {
+              "calls": 662,
+              "self_seconds": 0.00019422100000000006,
+              "cumulative_seconds": 0.00019422100000000006
+            },
+            "control_release_search.py:49:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.00016948200000000001,
+              "cumulative_seconds": 0.00016948200000000001
+            },
+            "projection_index.py:25:charged": {
+              "calls": 101,
+              "self_seconds": 0.00015288100000000003,
+              "cumulative_seconds": 0.003329296
+            },
+            "~:0:<built-in method _hashlib.openssl_sha256>": {
+              "calls": 23,
+              "self_seconds": 0.00010690300000000002,
+              "cumulative_seconds": 0.00010690300000000002
+            },
+            "joint_policy.py:182:<genexpr>": {
+              "calls": 490,
+              "self_seconds": 9.324200000000001e-05,
+              "cumulative_seconds": 9.324200000000001e-05
+            },
+            "~:0:<method 'setdefault' of 'dict' objects>": {
+              "calls": 104,
+              "self_seconds": 9.160200000000001e-05,
+              "cumulative_seconds": 9.160200000000001e-05
+            },
+            "projection_index.py:80:<genexpr>": {
+              "calls": 60,
+              "self_seconds": 6.8001e-05,
+              "cumulative_seconds": 0.002576213000000001
+            },
+            "~:0:<method 'digest' of '_hashlib.HASH' objects>": {
+              "calls": 23,
+              "self_seconds": 6.576e-05,
+              "cumulative_seconds": 6.576e-05
+            },
+            "joint_policy.py:124:<genexpr>": {
+              "calls": 60,
+              "self_seconds": 6.459200000000001e-05,
+              "cumulative_seconds": 0.001297612
+            },
+            "projection_index.py:78:payload_maps": {
+              "calls": 12,
+              "self_seconds": 5.5049999999999996e-05,
+              "cumulative_seconds": 0.0026312630000000004
+            },
+            "operation_cost.py:102:copy_seconds": {
+              "calls": 12,
+              "self_seconds": 4.562e-05,
+              "cumulative_seconds": 0.000154252
+            },
+            "joint_policy.py:123:feasible": {
+              "calls": 12,
+              "self_seconds": 3.861e-05,
+              "cumulative_seconds": 0.001378363
+            },
+            "resource_cache_profile.py:157:<genexpr>": {
+              "calls": 55,
+              "self_seconds": 3.5381000000000006e-05,
+              "cumulative_seconds": 3.5381000000000006e-05
+            },
+            "~:0:<method 'encode' of 'str' objects>": {
+              "calls": 23,
+              "self_seconds": 2.6201000000000005e-05,
+              "cumulative_seconds": 2.6201000000000005e-05
+            },
+            "~:0:<method 'to_bytes' of 'int' objects>": {
+              "calls": 23,
+              "self_seconds": 1.9220000000000002e-05,
+              "cumulative_seconds": 1.9220000000000002e-05
+            },
+            "batch_calendar.py:223:<genexpr>": {
+              "calls": 45,
+              "self_seconds": 1.6660000000000003e-05,
+              "cumulative_seconds": 1.6660000000000003e-05
+            },
+            "~:0:<method 'join' of 'str' objects>": {
+              "calls": 24,
+              "self_seconds": 1.663e-05,
+              "cumulative_seconds": 1.663e-05
+            },
+            "cache_evolving_search.py:162:<genexpr>": {
+              "calls": 24,
+              "self_seconds": 1.193e-05,
+              "cumulative_seconds": 1.193e-05
+            },
+            "resource_queue.py:15:direction": {
+              "calls": 12,
+              "self_seconds": 5.99e-06,
+              "cumulative_seconds": 5.99e-06
+            }
+          }
+        },
+        "delta": {
+          "unprofiled_CPU_sum_two_repeats": 1.48169155,
+          "unprofiled_wall_sum_two_repeats": 1.48318864,
+          "clone_CPU_excluded": 5.85777779,
+          "profiled_functions_nested_not_additive": {
+            "batch_calendar.py:41:schedule_batched": {
+              "calls": 104,
+              "self_seconds": 0.2549971290000001,
+              "cumulative_seconds": 1.6101563090000004
+            },
+            "delta_protection_search.py:49:sync_protection": {
+              "calls": 1291,
+              "self_seconds": 0.16068104000000002,
+              "cumulative_seconds": 0.31209508399999997
+            },
+            "dataclasses.py:1540:replace": {
+              "calls": 10764,
+              "self_seconds": 0.07126962500000002,
+              "cumulative_seconds": 0.14837245300000004
+            },
+            "resource_cache_profile.py:102:save": {
+              "calls": 649,
+              "self_seconds": 0.06499732500000005,
+              "cumulative_seconds": 0.17364256199999997
+            },
+            "continuous_batch.py:153:begin": {
+              "calls": 11541,
+              "self_seconds": 0.05847421900000001,
+              "cumulative_seconds": 0.12743530600000003
+            },
+            "~:0:<built-in method builtins.max>": {
+              "calls": 61418,
+              "self_seconds": 0.04445169700000001,
+              "cumulative_seconds": 0.04445169700000001
+            },
+            "~:0:<built-in method builtins.sorted>": {
+              "calls": 13059,
+              "self_seconds": 0.044060394999999995,
+              "cumulative_seconds": 0.08562535299999996
+            },
+            "continuous_batch.py:43:protected": {
+              "calls": 70136,
+              "self_seconds": 0.040002585999999986,
+              "cumulative_seconds": 0.06374152799999999
+            },
+            "continuous_batch.py:141:admit": {
+              "calls": 23082,
+              "self_seconds": 0.039952612000000005,
+              "cumulative_seconds": 0.07890473700000003
+            },
+            "~:0:<method 'get' of 'dict' objects>": {
+              "calls": 103692,
+              "self_seconds": 0.038207824999999994,
+              "cumulative_seconds": 0.038207824999999994
+            },
+            "~:0:<method 'append' of 'list' objects>": {
+              "calls": 86154,
+              "self_seconds": 0.031244377999999996,
+              "cumulative_seconds": 0.031244377999999996
+            },
+            "slot_release_search.py:39:begin": {
+              "calls": 11541,
+              "self_seconds": 0.031071792999999986,
+              "cumulative_seconds": 0.20279355500000004
+            },
+            "~:0:<built-in method builtins.sum>": {
+              "calls": 18930,
+              "self_seconds": 0.030626974999999997,
+              "cumulative_seconds": 0.046671447
+            },
+            "~:0:<built-in method builtins.getattr>": {
+              "calls": 79024,
+              "self_seconds": 0.030503685000000006,
+              "cumulative_seconds": 0.03483458500000001
+            },
+            "~:0:<method 'setdefault' of 'dict' objects>": {
+              "calls": 70508,
+              "self_seconds": 0.030480514,
+              "cumulative_seconds": 0.030480514
+            },
+            "~:0:<built-in method builtins.any>": {
+              "calls": 14966,
+              "self_seconds": 0.027417917000000003,
+              "cumulative_seconds": 0.06857374600000002
+            },
+            "~:0:<built-in method builtins.min>": {
+              "calls": 16323,
+              "self_seconds": 0.023825748,
+              "cumulative_seconds": 0.028671735
+            },
+            "~:0:<built-in method builtins.hash>": {
+              "calls": 22074,
+              "self_seconds": 0.022380004000000005,
+              "cumulative_seconds": 0.036575078000000004
+            },
+            "cache_evolving_search.py:132:<genexpr>": {
+              "calls": 1881,
+              "self_seconds": 0.019019115000000003,
+              "cumulative_seconds": 0.019019115000000003
+            },
+            "~:0:<method 'values' of 'dict' objects>": {
+              "calls": 41047,
+              "self_seconds": 0.018180002,
+              "cumulative_seconds": 0.018180002
+            },
+            "batch_calendar.py:249:<genexpr>": {
+              "calls": 42632,
+              "self_seconds": 0.017359335,
+              "cumulative_seconds": 0.031994659000000016
+            },
+            "batch_calendar.py:154:<lambda>": {
+              "calls": 33014,
+              "self_seconds": 0.016534872000000006,
+              "cumulative_seconds": 0.016534872000000006
+            },
+            "<string>:2:__eq__": {
+              "calls": 23222,
+              "self_seconds": 0.014886040000000007,
+              "cumulative_seconds": 0.014886040000000007
+            },
+            "~:0:<method 'extend' of 'list' objects>": {
+              "calls": 8910,
+              "self_seconds": 0.014447285,
+              "cumulative_seconds": 0.019060294
+            },
+            "~:0:<built-in method builtins.len>": {
+              "calls": 52787,
+              "self_seconds": 0.014221199000000002,
+              "cumulative_seconds": 0.014221199000000002
+            },
+            "continuous_batch.py:205:finish": {
+              "calls": 3371,
+              "self_seconds": 0.014164293000000003,
+              "cumulative_seconds": 0.01860659800000001
+            },
+            "bounded_search.py:26:first_lower_bound": {
+              "calls": 4184,
+              "self_seconds": 0.014048843000000007,
+              "cumulative_seconds": 0.04904306600000002
+            },
+            "bounded_search.py:29:<genexpr>": {
+              "calls": 20920,
+              "self_seconds": 0.012577889000000004,
+              "cumulative_seconds": 0.01902495099999999
+            },
+            "~:0:<method 'items' of 'dict' objects>": {
+              "calls": 25645,
+              "self_seconds": 0.011814695000000002,
+              "cumulative_seconds": 0.011814695000000002
+            },
+            "cache_evolving_search.py:187:guard": {
+              "calls": 4184,
+              "self_seconds": 0.009180824000000002,
+              "cumulative_seconds": 0.05822388999999999
+            },
+            "<string>:2:__init__": {
+              "calls": 558,
+              "self_seconds": 0.009178620999999998,
+              "cumulative_seconds": 0.009178620999999998
+            },
+            "projection_index.py:45:get": {
+              "calls": 4675,
+              "self_seconds": 0.008824411000000002,
+              "cumulative_seconds": 0.013267315000000002
+            },
+            "slot_release_search.py:79:<lambda>": {
+              "calls": 11541,
+              "self_seconds": 0.008734921,
+              "cumulative_seconds": 0.011808099000000006
+            },
+            "~:0:<method 'remove' of 'list' objects>": {
+              "calls": 4102,
+              "self_seconds": 0.008301922,
+              "cumulative_seconds": 0.022037874000000002
+            },
+            "operation_cost.py:86:_dot": {
+              "calls": 2664,
+              "self_seconds": 0.008195832999999998,
+              "cumulative_seconds": 0.017815599
+            },
+            "joint_policy.py:139:<genexpr>": {
+              "calls": 2342,
+              "self_seconds": 0.008077634999999998,
+              "cumulative_seconds": 0.008077634999999998
+            },
+            "dataclasses.py:1296:_is_dataclass_instance": {
+              "calls": 10764,
+              "self_seconds": 0.007800548000000003,
+              "cumulative_seconds": 0.012099080999999994
+            },
+            "completed_phase_search.py:67:fits": {
+              "calls": 1686,
+              "self_seconds": 0.007390930999999999,
+              "cumulative_seconds": 0.016138690000000004
+            },
+            "cache_evolving_search.py:65:admit": {
+              "calls": 974,
+              "self_seconds": 0.007245156000000001,
+              "cumulative_seconds": 0.117827728
+            },
+            "batch_calendar.py:93:add": {
+              "calls": 974,
+              "self_seconds": 0.007059252,
+              "cumulative_seconds": 0.017179034
+            },
+            "cache_evolving_search.py:45:api": {
+              "calls": 986,
+              "self_seconds": 0.006867595000000001,
+              "cumulative_seconds": 0.065571816
+            },
+            "operation_cost.py:66:prefill_features": {
+              "calls": 1544,
+              "self_seconds": 0.006680169999999999,
+              "cumulative_seconds": 0.012648239000000002
+            },
+            "delta_protection_search.py:23:acquire": {
+              "calls": 986,
+              "self_seconds": 0.006480692999999999,
+              "cumulative_seconds": 0.031461368
+            },
+            "~:0:<method 'disable' of '_lsprof.Profiler' objects>": {
+              "calls": 104,
+              "self_seconds": 0.006392275,
+              "cumulative_seconds": 0.006392275
+            },
+            "cache_evolving_search.py:120:start": {
+              "calls": 1336,
+              "self_seconds": 0.006273347,
+              "cumulative_seconds": 0.19593910600000003
+            },
+            "projection_index.py:16:<genexpr>": {
+              "calls": 25948,
+              "self_seconds": 0.006263516000000001,
+              "cumulative_seconds": 0.006263516000000001
+            },
+            "completed_phase_search.py:69:<genexpr>": {
+              "calls": 8430,
+              "self_seconds": 0.006069494999999997,
+              "cumulative_seconds": 0.006069494999999997
+            },
+            "cache_evolving_search.py:137:finish": {
+              "calls": 1011,
+              "self_seconds": 0.005954337,
+              "cumulative_seconds": 0.3601331540000001
+            },
+            "batch_calendar.py:299:<genexpr>": {
+              "calls": 16262,
+              "self_seconds": 0.005871990999999999,
+              "cumulative_seconds": 0.005871990999999999
+            },
+            "joint_policy.py:137:prefix": {
+              "calls": 1286,
+              "self_seconds": 0.005857712,
+              "cumulative_seconds": 0.026770101999999997
+            },
+            "~:0:<built-in method builtins.hasattr>": {
+              "calls": 14154,
+              "self_seconds": 0.005778419000000002,
+              "cumulative_seconds": 0.005778419000000002
+            },
+            "operation_cost.py:95:compute": {
+              "calls": 1544,
+              "self_seconds": 0.005690538,
+              "cumulative_seconds": 0.033746908
+            },
+            "completed_phase_search.py:92:compute": {
+              "calls": 1544,
+              "self_seconds": 0.005570628999999998,
+              "cumulative_seconds": 0.055434726000000004
+            },
+            "projection_index.py:14:keys": {
+              "calls": 116,
+              "self_seconds": 0.005372966,
+              "cumulative_seconds": 0.011636482
+            },
+            "batch_calendar.py:141:<genexpr>": {
+              "calls": 24464,
+              "self_seconds": 0.005188337,
+              "cumulative_seconds": 0.005188337
+            },
+            "cache_evolving_search.py:175:predict_batch": {
+              "calls": 104,
+              "self_seconds": 0.0049218260000000015,
+              "cumulative_seconds": 1.6367494130000004
+            },
+            "operation_schedule.py:36:__post_init__": {
+              "calls": 1496,
+              "self_seconds": 0.004543518999999999,
+              "cumulative_seconds": 0.005763309000000002
+            },
+            "batch_calendar.py:251:<genexpr>": {
+              "calls": 21838,
+              "self_seconds": 0.004390385999999999,
+              "cumulative_seconds": 0.004390385999999999
+            },
+            "batch_calendar.py:307:<genexpr>": {
+              "calls": 7466,
+              "self_seconds": 0.004364507000000002,
+              "cumulative_seconds": 0.004845986999999997
+            },
+            "~:0:<method 'intersection' of 'frozenset' objects>": {
+              "calls": 2268,
+              "self_seconds": 0.0040475319999999995,
+              "cumulative_seconds": 0.0040475319999999995
+            },
+            "batch_calendar.py:24:sequence_for": {
+              "calls": 558,
+              "self_seconds": 0.004009364000000003,
+              "cumulative_seconds": 0.043867967999999986
+            },
+            "batch_calendar.py:323:<genexpr>": {
+              "calls": 11683,
+              "self_seconds": 0.003947066999999999,
+              "cumulative_seconds": 0.003947066999999999
+            },
+            "control_release_search.py:27:admit": {
+              "calls": 974,
+              "self_seconds": 0.003911243,
+              "cumulative_seconds": 0.12394169800000003
+            },
+            "operation_cost.py:88:<genexpr>": {
+              "calls": 11080,
+              "self_seconds": 0.003884472,
+              "cumulative_seconds": 0.003884472
+            },
+            "completed_phase_search.py:99:decode_tail": {
+              "calls": 1128,
+              "self_seconds": 0.0038488329999999994,
+              "cumulative_seconds": 0.022737219000000003
+            },
+            "joint_policy.py:168:copy_package": {
+              "calls": 38,
+              "self_seconds": 0.0037490040000000007,
+              "cumulative_seconds": 0.030307841999999998
+            },
+            "resource_queue.py:72:_remaining_operation": {
+              "calls": 148,
+              "self_seconds": 0.00369308,
+              "cumulative_seconds": 0.004207413
+            },
+            "operation_phase_release.py:16:__getattr__": {
+              "calls": 8697,
+              "self_seconds": 0.003608651000000001,
+              "cumulative_seconds": 0.017871423
+            },
+            "resource_headroom_profile.py:48:__getattr__": {
+              "calls": 8697,
+              "self_seconds": 0.003512373000000001,
+              "cumulative_seconds": 0.008046478999999997
+            },
+            "projection_index.py:68:keys": {
+              "calls": 3860,
+              "self_seconds": 0.003485058000000001,
+              "cumulative_seconds": 0.024948253000000004
+            },
+            "continuous_batch.py:24:acquire": {
+              "calls": 1342,
+              "self_seconds": 0.0034513059999999995,
+              "cumulative_seconds": 0.004131156
+            },
+            "delta_protection_search.py:31:release": {
+              "calls": 661,
+              "self_seconds": 0.003261878,
+              "cumulative_seconds": 0.009484373999999997
+            },
+            "slot_release_search.py:33:set_context": {
+              "calls": 11541,
+              "self_seconds": 0.003073177999999999,
+              "cumulative_seconds": 0.003073177999999999
+            },
+            "completed_phase_search.py:84:restore": {
+              "calls": 2102,
+              "self_seconds": 0.0030049479999999995,
+              "cumulative_seconds": 0.009550883000000003
+            },
+            "operation_cost.py:90:restore": {
+              "calls": 5112,
+              "self_seconds": 0.0029241889999999993,
+              "cumulative_seconds": 0.008466302
+            },
+            "~:0:<built-in method _heapq.heappop>": {
+              "calls": 4187,
+              "self_seconds": 0.0028853420000000004,
+              "cumulative_seconds": 0.0028853420000000004
+            },
+            "~:0:<built-in method math.ceil>": {
+              "calls": 7143,
+              "self_seconds": 0.002710288999999999,
+              "cumulative_seconds": 0.002710288999999999
+            },
+            "operation_cost.py:67:<genexpr>": {
+              "calls": 6176,
+              "self_seconds": 0.0026401610000000007,
+              "cumulative_seconds": 0.0026401610000000007
+            },
+            "~:0:<built-in method builtins.next>": {
+              "calls": 5558,
+              "self_seconds": 0.0025951999999999998,
+              "cumulative_seconds": 0.009821114000000002
+            },
+            "~:0:<method 'update' of 'dict' objects>": {
+              "calls": 2008,
+              "self_seconds": 0.0024808210000000002,
+              "cumulative_seconds": 0.0024808210000000002
+            },
+            "~:0:<built-in method _heapq.heappush>": {
+              "calls": 4272,
+              "self_seconds": 0.0024085319999999993,
+              "cumulative_seconds": 0.0024085319999999993
+            },
+            "continuous_batch.py:107:reservation": {
+              "calls": 1415,
+              "self_seconds": 0.002321076,
+              "cumulative_seconds": 0.0027972340000000017
+            },
+            "projection_index.py:36:__eq__": {
+              "calls": 910,
+              "self_seconds": 0.002307925000000001,
+              "cumulative_seconds": 0.0037494670000000016
+            },
+            "operation_context.py:9:decode_features": {
+              "calls": 1128,
+              "self_seconds": 0.0022772089999999992,
+              "cumulative_seconds": 0.0022772089999999992
+            },
+            "resource_cache_profile.py:201:<genexpr>": {
+              "calls": 676,
+              "self_seconds": 0.002186464,
+              "cumulative_seconds": 0.005128785
+            },
+            "continuous_batch.py:134:submit": {
+              "calls": 558,
+              "self_seconds": 0.0021180279999999997,
+              "cumulative_seconds": 0.004414983000000003
+            },
+            "detached_calendar.py:21:token": {
+              "calls": 624,
+              "self_seconds": 0.0020848380000000003,
+              "cumulative_seconds": 0.0049801700000000025
+            },
+            "continuous_batch.py:86:__post_init__": {
+              "calls": 558,
+              "self_seconds": 0.0020745130000000005,
+              "cumulative_seconds": 0.002725590000000001
+            },
+            "~:0:<method 'difference_update' of 'set' objects>": {
+              "calls": 4102,
+              "self_seconds": 0.0020733550000000002,
+              "cumulative_seconds": 0.0020733550000000002
+            },
+            "~:0:<method 'update' of 'set' objects>": {
+              "calls": 1647,
+              "self_seconds": 0.002055329000000001,
+              "cumulative_seconds": 0.0036398519999999994
+            },
+            "operation_phase_release.py:19:decode_tail": {
+              "calls": 1128,
+              "self_seconds": 0.0020167639999999994,
+              "cumulative_seconds": 0.004293973000000001
+            },
+            "~:0:<method 'hex' of 'bytes' objects>": {
+              "calls": 4387,
+              "self_seconds": 0.002006082,
+              "cumulative_seconds": 0.002006082
+            },
+            "cache_evolving_search.py:39:effective_route": {
+              "calls": 558,
+              "self_seconds": 0.0018867870000000002,
+              "cumulative_seconds": 0.027928559999999995
+            },
+            "continuous_batch.py:34:release": {
+              "calls": 661,
+              "self_seconds": 0.0018623769999999997,
+              "cumulative_seconds": 0.0029056850000000003
+            },
+            "resource_reservation.py:12:permitted": {
+              "calls": 1339,
+              "self_seconds": 0.0018114799999999999,
+              "cumulative_seconds": 0.004117887999999998
+            },
+            "continuous_batch.py:103:remaining_prefill": {
+              "calls": 4093,
+              "self_seconds": 0.0017843260000000008,
+              "cumulative_seconds": 0.0017843260000000008
+            },
+            "detached_calendar.py:22:<genexpr>": {
+              "calls": 4992,
+              "self_seconds": 0.0017678980000000004,
+              "cumulative_seconds": 0.0028953320000000005
+            },
+            "~:0:<built-in method builtins.id>": {
+              "calls": 4675,
+              "self_seconds": 0.001650239,
+              "cumulative_seconds": 0.001650239
+            },
+            "joint_policy.py:176:<genexpr>": {
+              "calls": 2320,
+              "self_seconds": 0.0015206109999999998,
+              "cumulative_seconds": 0.012328752000000002
+            },
+            "functools.py:982:__get__": {
+              "calls": 572,
+              "self_seconds": 0.001500359,
+              "cumulative_seconds": 0.05284272499999999
+            },
+            "projection_index.py:27:<genexpr>": {
+              "calls": 9910,
+              "self_seconds": 0.001425915,
+              "cumulative_seconds": 0.001425915
+            },
+            "~:0:<method 'add' of 'set' objects>": {
+              "calls": 3699,
+              "self_seconds": 0.00141726,
+              "cumulative_seconds": 0.00141726
+            },
+            "<string>:2:__hash__": {
+              "calls": 702,
+              "self_seconds": 0.0014104590000000004,
+              "cumulative_seconds": 0.004465387999999998
+            },
+            "cache_evolving_search.py:28:__init__": {
+              "calls": 104,
+              "self_seconds": 0.0013375930000000004,
+              "cumulative_seconds": 0.004289130000000001
+            },
+            "~:0:<built-in method builtins.all>": {
+              "calls": 995,
+              "self_seconds": 0.0013271030000000003,
+              "cumulative_seconds": 0.003582129000000001
+            },
+            "delta_protection_search.py:40:__init__": {
+              "calls": 104,
+              "self_seconds": 0.001323904,
+              "cumulative_seconds": 0.009068302000000002
+            },
+            "~:0:<method 'pop' of 'dict' objects>": {
+              "calls": 1373,
+              "self_seconds": 0.0012028670000000003,
+              "cumulative_seconds": 0.0012028670000000003
+            },
+            "~:0:<built-in method math.isfinite>": {
+              "calls": 3728,
+              "self_seconds": 0.0012002880000000005,
+              "cumulative_seconds": 0.0012002880000000005
+            },
+            "~:0:<built-in method math.floor>": {
+              "calls": 3062,
+              "self_seconds": 0.001174685,
+              "cumulative_seconds": 0.001174685
+            },
+            "~:0:<method 'popleft' of 'collections.deque' objects>": {
+              "calls": 2543,
+              "self_seconds": 0.0011032860000000004,
+              "cumulative_seconds": 0.0011032860000000004
+            },
+            "batch_calendar.py:123:finish_stage": {
+              "calls": 649,
+              "self_seconds": 0.0010031699999999998,
+              "cumulative_seconds": 0.003774253000000002
+            },
+            "batch_calendar.py:96:<genexpr>": {
+              "calls": 1975,
+              "self_seconds": 0.0009912279999999998,
+              "cumulative_seconds": 0.0009912279999999998
+            },
+            "projection_index.py:33:__hash__": {
+              "calls": 1298,
+              "self_seconds": 0.000943492,
+              "cumulative_seconds": 0.03584470500000001
+            },
+            "joint_policy.py:129:remove": {
+              "calls": 38,
+              "self_seconds": 0.000850677,
+              "cumulative_seconds": 0.0033539940000000003
+            },
+            "~:0:<method 'append' of 'collections.deque' objects>": {
+              "calls": 1532,
+              "self_seconds": 0.0008356010000000002,
+              "cumulative_seconds": 0.0008356010000000002
+            },
+            "batch_calendar.py:219:<genexpr>": {
+              "calls": 1227,
+              "self_seconds": 0.0008218290000000006,
+              "cumulative_seconds": 0.0015122179999999996
+            },
+            "~:0:<method 'clear' of 'set' objects>": {
+              "calls": 1291,
+              "self_seconds": 0.0007617359999999999,
+              "cumulative_seconds": 0.0007617359999999999
+            },
+            "resource_cache_profile.py:45:__init__": {
+              "calls": 104,
+              "self_seconds": 0.0007563469999999999,
+              "cumulative_seconds": 0.001555615
+            },
+            "resource_reservation.py:13:<genexpr>": {
+              "calls": 1646,
+              "self_seconds": 0.0007540830000000001,
+              "cumulative_seconds": 0.0010136349999999997
+            },
+            "delta_protection_search.py:33:<genexpr>": {
+              "calls": 1360,
+              "self_seconds": 0.0007530570000000003,
+              "cumulative_seconds": 0.0015845230000000013
+            },
+            "joint_policy.py:131:<genexpr>": {
+              "calls": 3326,
+              "self_seconds": 0.0006955469999999999,
+              "cumulative_seconds": 0.0006955469999999999
+            },
+            "~:0:<method 'startswith' of 'str' objects>": {
+              "calls": 461,
+              "self_seconds": 0.0006903890000000002,
+              "cumulative_seconds": 0.0006903890000000002
+            },
+            "resource_cache_profile.py:115:<genexpr>": {
+              "calls": 981,
+              "self_seconds": 0.0006659420000000003,
+              "cumulative_seconds": 0.0006659420000000003
+            },
+            "cache_evolving_search.py:179:<genexpr>": {
+              "calls": 728,
+              "self_seconds": 0.000662432,
+              "cumulative_seconds": 0.005642602
+            },
+            "projection_index.py:18:payload": {
+              "calls": 20,
+              "self_seconds": 0.000652239,
+              "cumulative_seconds": 0.0023387290000000008
+            },
+            "joint_policy.py:134:<genexpr>": {
+              "calls": 3326,
+              "self_seconds": 0.000628229,
+              "cumulative_seconds": 0.000628229
+            },
+            "delta_protection_search.py:54:<genexpr>": {
+              "calls": 959,
+              "self_seconds": 0.000607524,
+              "cumulative_seconds": 0.0008006169999999997
+            },
+            "phase_release_calendar.py:23:_remaining_operation": {
+              "calls": 148,
+              "self_seconds": 0.0005924310000000001,
+              "cumulative_seconds": 0.004799843999999999
+            },
+            "resource_cache_profile.py:147:<genexpr>": {
+              "calls": 4125,
+              "self_seconds": 0.0005619310000000001,
+              "cumulative_seconds": 0.0005619310000000001
+            },
+            "joint_policy.py:186:<genexpr>": {
+              "calls": 2320,
+              "self_seconds": 0.0004999390000000001,
+              "cumulative_seconds": 0.0004999390000000001
+            },
+            "slot_release_search.py:25:__init__": {
+              "calls": 208,
+              "self_seconds": 0.00045292799999999996,
+              "cumulative_seconds": 0.0008998029999999999
+            },
+            "operation_cost.py:83:__getattr__": {
+              "calls": 759,
+              "self_seconds": 0.0004516600000000002,
+              "cumulative_seconds": 0.0008083470000000001
+            },
+            "joint_policy.py:173:<genexpr>": {
+              "calls": 38,
+              "self_seconds": 0.00044315600000000005,
+              "cumulative_seconds": 0.00044315600000000005
+            },
+            "cache_evolving_search.py:158:after_copy": {
+              "calls": 712,
+              "self_seconds": 0.00042756399999999985,
+              "cumulative_seconds": 0.0015885050000000003
+            },
+            "completed_phase_search.py:64:__getattr__": {
+              "calls": 771,
+              "self_seconds": 0.0004198380000000001,
+              "cumulative_seconds": 0.004055508000000003
+            },
+            "resource_cache_profile.py:177:finished": {
+              "calls": 12,
+              "self_seconds": 0.000388275,
+              "cumulative_seconds": 0.018762086
+            },
+            "~:0:<built-in method builtins.setattr>": {
+              "calls": 1040,
+              "self_seconds": 0.0003745360000000001,
+              "cumulative_seconds": 0.0003745360000000001
+            },
+            "joint_policy.py:190:<genexpr>": {
+              "calls": 1352,
+              "self_seconds": 0.0003735550000000001,
+              "cumulative_seconds": 0.0003735550000000001
+            },
+            "batch_calendar.py:109:<lambda>": {
+              "calls": 624,
+              "self_seconds": 0.0003625330000000001,
+              "cumulative_seconds": 0.0003625330000000001
+            },
+            "projection_index.py:64:wrap": {
+              "calls": 104,
+              "self_seconds": 0.000291625,
+              "cumulative_seconds": 0.0007992680000000001
+            },
+            "~:0:<built-in method builtins.isinstance>": {
+              "calls": 910,
+              "self_seconds": 0.0002914539999999999,
+              "cumulative_seconds": 0.0002914539999999999
+            },
+            "batch_calendar.py:229:<genexpr>": {
+              "calls": 1206,
+              "self_seconds": 0.00028965100000000004,
+              "cumulative_seconds": 0.00028965100000000004
+            },
+            "slot_release_search.py:76:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.0002872179999999999,
+              "cumulative_seconds": 0.000990671
+            },
+            "acquired_phase_search.py:87:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.00026986600000000006,
+              "cumulative_seconds": 0.00047543099999999995
+            },
+            "projection_index.py:29:signature": {
+              "calls": 335,
+              "self_seconds": 0.000264634,
+              "cumulative_seconds": 0.033784783000000006
+            },
+            "batch_calendar.py:228:<genexpr>": {
+              "calls": 1206,
+              "self_seconds": 0.00026403700000000017,
+              "cumulative_seconds": 0.00026403700000000017
+            },
+            "cache_evolving_search.py:185:<genexpr>": {
+              "calls": 520,
+              "self_seconds": 0.000243846,
+              "cumulative_seconds": 0.000243846
+            },
+            "release_cobatch_search.py:40:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.00022962599999999997,
+              "cumulative_seconds": 0.0012202970000000004
+            },
+            "projection_index.py:71:usage": {
+              "calls": 118,
+              "self_seconds": 0.000229404,
+              "cumulative_seconds": 0.004144487
+            },
+            "pending_first_search.py:21:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.00022802199999999998,
+              "cumulative_seconds": 0.0007034529999999999
+            },
+            "delta_protection_search.py:19:__init__": {
+              "calls": 104,
+              "self_seconds": 0.00022465299999999995,
+              "cumulative_seconds": 0.000357775
+            },
+            "resource_cache_profile.py:126:<genexpr>": {
+              "calls": 55,
+              "self_seconds": 0.000207772,
+              "cumulative_seconds": 0.000464687
+            },
+            "control_release_search.py:49:configure_projection": {
+              "calls": 104,
+              "self_seconds": 0.000205565,
+              "cumulative_seconds": 0.000205565
+            },
+            "continuous_batch.py:135:<genexpr>": {
+              "calls": 662,
+              "self_seconds": 0.00020513599999999991,
+              "cumulative_seconds": 0.00020513599999999991
+            },
+            "projection_index.py:25:charged": {
+              "calls": 101,
+              "self_seconds": 0.000162453,
+              "cumulative_seconds": 0.003342453
+            },
+            "~:0:<built-in method _hashlib.openssl_sha256>": {
+              "calls": 23,
+              "self_seconds": 0.000132722,
+              "cumulative_seconds": 0.000132722
+            },
+            "joint_policy.py:182:<genexpr>": {
+              "calls": 490,
+              "self_seconds": 9.3492e-05,
+              "cumulative_seconds": 9.3492e-05
+            },
+            "~:0:<method 'digest' of '_hashlib.HASH' objects>": {
+              "calls": 23,
+              "self_seconds": 7.675100000000001e-05,
+              "cumulative_seconds": 7.675100000000001e-05
+            },
+            "projection_index.py:80:<genexpr>": {
+              "calls": 60,
+              "self_seconds": 6.914100000000001e-05,
+              "cumulative_seconds": 0.0025811930000000003
+            },
+            "joint_policy.py:124:<genexpr>": {
+              "calls": 60,
+              "self_seconds": 5.9671e-05,
+              "cumulative_seconds": 0.0012413910000000003
+            },
+            "joint_policy.py:123:feasible": {
+              "calls": 12,
+              "self_seconds": 5.1493e-05,
+              "cumulative_seconds": 0.0013272140000000002
+            },
+            "projection_index.py:78:payload_maps": {
+              "calls": 12,
+              "self_seconds": 5.0299999999999996e-05,
+              "cumulative_seconds": 0.002631493
+            },
+            "operation_cost.py:102:copy_seconds": {
+              "calls": 12,
+              "self_seconds": 4.6612000000000014e-05,
+              "cumulative_seconds": 0.00015695199999999997
+            },
+            "resource_cache_profile.py:157:<genexpr>": {
+              "calls": 55,
+              "self_seconds": 3.8429999999999996e-05,
+              "cumulative_seconds": 3.8429999999999996e-05
+            },
+            "~:0:<method 'encode' of 'str' objects>": {
+              "calls": 23,
+              "self_seconds": 2.8702e-05,
+              "cumulative_seconds": 2.8702e-05
+            },
+            "~:0:<method 'to_bytes' of 'int' objects>": {
+              "calls": 23,
+              "self_seconds": 1.874e-05,
+              "cumulative_seconds": 1.874e-05
+            },
+            "~:0:<method 'join' of 'str' objects>": {
+              "calls": 24,
+              "self_seconds": 1.8049999999999998e-05,
+              "cumulative_seconds": 1.8049999999999998e-05
+            },
+            "batch_calendar.py:223:<genexpr>": {
+              "calls": 45,
+              "self_seconds": 1.677e-05,
+              "cumulative_seconds": 1.677e-05
+            },
+            "cache_evolving_search.py:162:<genexpr>": {
+              "calls": 24,
+              "self_seconds": 1.1231000000000001e-05,
+              "cumulative_seconds": 1.1231000000000001e-05
+            },
+            "resource_queue.py:15:direction": {
+              "calls": 12,
+              "self_seconds": 6.33e-06,
+              "cumulative_seconds": 6.33e-06
+            }
+          }
+        }
+      },
+      "CPU_reduction_percent": -3.1485449713791525
+    },
+    "boundary": {
+      "calendars": 63,
+      "implementations": {
+        "parent": {
+          "unprofiled_CPU_sum_two_repeats": 3.54477763,
+          "unprofiled_wall_sum_two_repeats": 3.548174868,
+          "clone_CPU_excluded": 3.28958897,
+          "profiled_functions_nested_not_additive": {
+            "batch_calendar.py:41:schedule_batched": {
+              "calls": 63,
+              "self_seconds": 1.066493195,
+              "cumulative_seconds": 3.838663232
+            },
+            "continuous_batch.py:153:begin": {
+              "calls": 45195,
+              "self_seconds": 0.25742041,
+              "cumulative_seconds": 0.557100534
+            },
+            "dataclasses.py:1540:replace": {
+              "calls": 33489,
+              "self_seconds": 0.18211232000000005,
+              "cumulative_seconds": 0.379756634
+            },
+            "~:0:<built-in method builtins.max>": {
+              "calls": 242382,
+              "self_seconds": 0.17517820900000003,
+              "cumulative_seconds": 0.17517820900000003
+            },
+            "~:0:<built-in method builtins.sorted>": {
+              "calls": 45742,
+              "self_seconds": 0.16281125899999999,
+              "cumulative_seconds": 0.28877463300000006
+            },
+            "continuous_batch.py:141:admit": {
+              "calls": 90390,
+              "self_seconds": 0.14817051,
+              "cumulative_seconds": 0.295588755
+            },
+            "slot_release_search.py:39:begin": {
+              "calls": 45195,
+              "self_seconds": 0.11931891599999998,
+              "cumulative_seconds": 0.8377041680000002
+            },
+            "~:0:<built-in method builtins.any>": {
+              "calls": 76501,
+              "self_seconds": 0.100235063,
+              "cumulative_seconds": 0.18006621700000003
+            },
+            "~:0:<method 'get' of 'dict' objects>": {
+              "calls": 251377,
+              "self_seconds": 0.09769353099999997,
+              "cumulative_seconds": 0.09769353099999997
+            },
+            "~:0:<built-in method builtins.min>": {
+              "calls": 54558,
+              "self_seconds": 0.07067873000000001,
+              "cumulative_seconds": 0.071152166
+            },
+            "batch_calendar.py:154:<lambda>": {
+              "calls": 158441,
+              "self_seconds": 0.070026789,
+              "cumulative_seconds": 0.070026789
+            },
+            "resource_reservation.py:13:<genexpr>": {
+              "calls": 119218,
+              "self_seconds": 0.05961690900000001,
+              "cumulative_seconds": 0.09064144800000003
+            },
+            "~:0:<method 'startswith' of 'str' objects>": {
+              "calls": 89155,
+              "self_seconds": 0.056594406000000014,
+              "cumulative_seconds": 0.056594406000000014
+            },
+            "continuous_batch.py:205:finish": {
+              "calls": 14872,
+              "self_seconds": 0.05616810700000001,
+              "cumulative_seconds": 0.07205657699999998
+            },
+            "batch_calendar.py:219:<genexpr>": {
+              "calls": 89407,
+              "self_seconds": 0.05542310500000001,
+              "cumulative_seconds": 0.11201751100000007
+            },
+            "~:0:<method 'values' of 'dict' objects>": {
+              "calls": 110273,
+              "self_seconds": 0.048136827999999986,
+              "cumulative_seconds": 0.048136827999999986
+            },
+            "~:0:<method 'extend' of 'list' objects>": {
+              "calls": 30499,
+              "self_seconds": 0.04778465999999999,
+              "cumulative_seconds": 0.063028788
+            },
+            "~:0:<built-in method builtins.getattr>": {
+              "calls": 144595,
+              "self_seconds": 0.04774944100000001,
+              "cumulative_seconds": 0.050055387
+            },
+            "bounded_search.py:26:first_lower_bound": {
+              "calls": 15177,
+              "self_seconds": 0.04770106900000002,
+              "cumulative_seconds": 0.15329695899999998
+            },
+            "~:0:<built-in method builtins.len>": {
+              "calls": 170841,
+              "self_seconds": 0.047539621000000004,
+              "cumulative_seconds": 0.047539621000000004
+            },
+            "~:0:<built-in method builtins.all>": {
+              "calls": 30055,
+              "self_seconds": 0.04591528599999999,
+              "cumulative_seconds": 0.14103992599999998
+            },
+            "~:0:<method 'items' of 'dict' objects>": {
+              "calls": 91199,
+              "self_seconds": 0.042155136,
+              "cumulative_seconds": 0.042155136
+            },
+            "batch_calendar.py:299:<genexpr>": {
+              "calls": 82883,
+              "self_seconds": 0.04180492600000001,
+              "cumulative_seconds": 0.04180492600000001
+            },
+            "resource_reservation.py:12:permitted": {
+              "calls": 30246,
+              "self_seconds": 0.03729591699999999,
+              "cumulative_seconds": 0.1736692070000001
+            },
+            "bounded_search.py:29:<genexpr>": {
+              "calls": 60678,
+              "self_seconds": 0.03497516200000002,
+              "cumulative_seconds": 0.05237840399999999
+            },
+            "batch_calendar.py:249:<genexpr>": {
+              "calls": 151835,
+              "self_seconds": 0.033255098999999996,
+              "cumulative_seconds": 0.034975585
+            },
+            "sparse_cache_search.py:18:sync_protection": {
+              "calls": 514,
+              "self_seconds": 0.031239797000000007,
+              "cumulative_seconds": 0.10094014100000004
+            },
+            "slot_release_search.py:79:<lambda>": {
+              "calls": 45195,
+              "self_seconds": 0.030348632000000007,
+              "cumulative_seconds": 0.04150262799999999
+            },
+            "batch_calendar.py:223:<genexpr>": {
+              "calls": 59531,
+              "self_seconds": 0.028632105000000005,
+              "cumulative_seconds": 0.028632105000000005
+            },
+            "cache_evolving_search.py:187:guard": {
+              "calls": 15177,
+              "self_seconds": 0.028541080999999992,
+              "cumulative_seconds": 0.18183803999999995
+            },
+            "~:0:<built-in method builtins.sum>": {
+              "calls": 32489,
+              "self_seconds": 0.026674754999999998,
+              "cumulative_seconds": 0.03329634200000002
+            },
+            "dataclasses.py:1296:_is_dataclass_instance": {
+              "calls": 33489,
+              "self_seconds": 0.024498445,
+              "cumulative_seconds": 0.037147504
+            },
+            "~:0:<method 'append' of 'list' objects>": {
+              "calls": 55187,
+              "self_seconds": 0.022496293,
+              "cumulative_seconds": 0.022496293
+            },
+            "continuous_batch.py:43:protected": {
+              "calls": 34683,
+              "self_seconds": 0.019956156000000003,
+              "cumulative_seconds": 0.031914068000000004
+            },
+            "resource_cache_profile.py:102:save": {
+              "calls": 205,
+              "self_seconds": 0.019864344,
+              "cumulative_seconds": 0.07952556500000002
+            },
+            "~:0:<built-in method builtins.hasattr>": {
+              "calls": 48361,
+              "self_seconds": 0.019595974000000002,
+              "cumulative_seconds": 0.019595974000000002
+            },
+            "batch_calendar.py:323:<genexpr>": {
+              "calls": 45187,
+              "self_seconds": 0.014989633000000002,
+              "cumulative_seconds": 0.014989633000000002
+            },
+            "~:0:<built-in method builtins.hash>": {
+              "calls": 11884,
+              "self_seconds": 0.011299926000000002,
+              "cumulative_seconds": 0.018794805999999997
+            },
+            "slot_release_search.py:33:set_context": {
+              "calls": 45195,
+              "self_seconds": 0.011153996,
+              "cumulative_seconds": 0.011153996
+            },
+            "continuous_batch.py:103:remaining_prefill": {
+              "calls": 26308,
+              "self_seconds": 0.010430153000000001,
+              "cumulative_seconds": 0.010430153000000001
+            },
+            "projection_index.py:16:<genexpr>": {
+              "calls": 38475,
+              "self_seconds": 0.009401591000000006,
+              "cumulative_seconds": 0.009401591000000006
+            },
+            "<string>:2:__eq__": {
+              "calls": 14219,
+              "self_seconds": 0.009130768,
+              "cumulative_seconds": 0.009130768
+            },
+            "~:0:<built-in method _heapq.heappop>": {
+              "calls": 15183,
+              "self_seconds": 0.008915630999999999,
+              "cumulative_seconds": 0.008915630999999999
+            },
+            "projection_index.py:14:keys": {
+              "calls": 207,
+              "self_seconds": 0.008132375,
+              "cumulative_seconds": 0.017533966
+            },
+            "~:0:<built-in method _heapq.heappush>": {
+              "calls": 15183,
+              "self_seconds": 0.007483189000000001,
+              "cumulative_seconds": 0.007483189000000001
+            },
+            "cache_evolving_search.py:132:<genexpr>": {
+              "calls": 2379,
+              "self_seconds": 0.006580272000000001,
+              "cumulative_seconds": 0.006580272000000001
+            },
+            "~:0:<built-in method math.ceil>": {
+              "calls": 16709,
+              "self_seconds": 0.005701577999999999,
+              "cumulative_seconds": 0.005701577999999999
+            },
+            "resource_cache_profile.py:201:<genexpr>": {
+              "calls": 1829,
+              "self_seconds": 0.005648637999999999,
+              "cumulative_seconds": 0.013132614000000003
+            },
+            "~:0:<built-in method builtins.next>": {
+              "calls": 15435,
+              "self_seconds": 0.0055331179999999975,
+              "cumulative_seconds": 0.0062408739999999996
+            },
+            "~:0:<built-in method math.floor>": {
+              "calls": 14805,
+              "self_seconds": 0.005262589999999997,
+              "cumulative_seconds": 0.005262589999999997
+            },
+            "<string>:2:__init__": {
+              "calls": 317,
+              "self_seconds": 0.005262464,
+              "cumulative_seconds": 0.005262464
+            },
+            "~:0:<method 'remove' of 'list' objects>": {
+              "calls": 2748,
+              "self_seconds": 0.005234071000000001,
+              "cumulative_seconds": 0.013738510000000002
+            },
+            "projection_index.py:45:get": {
+              "calls": 2859,
+              "self_seconds": 0.005061604000000001,
+              "cumulative_seconds": 0.007730368999999999
+            },
+            "operation_cost.py:86:_dot": {
+              "calls": 1559,
+              "self_seconds": 0.004982495999999998,
+              "cumulative_seconds": 0.010272701
+            },
+            "joint_policy.py:168:copy_package": {
+              "calls": 59,
+              "self_seconds": 0.004969384999999998,
+              "cumulative_seconds": 0.03719585800000001
+            },
+            "completed_phase_search.py:67:fits": {
+              "calls": 1058,
+              "self_seconds": 0.0045079360000000014,
+              "cumulative_seconds": 0.009640865000000004
+            },
+            "~:0:<method 'disable' of '_lsprof.Profiler' objects>": {
+              "calls": 63,
+              "self_seconds": 0.0042553899999999995,
+              "cumulative_seconds": 0.0042553899999999995
+            },
+            "~:0:<method 'update' of 'dict' objects>": {
+              "calls": 2173,
+              "self_seconds": 0.004142177000000001,
+              "cumulative_seconds": 0.004142177000000001
+            },
+            "cache_evolving_search.py:175:predict_batch": {
+              "calls": 63,
+              "self_seconds": 0.003914675999999999,
+              "cumulative_seconds": 3.852802937
+            },
+            "cache_evolving_search.py:137:finish": {
+              "calls": 392,
+              "self_seconds": 0.003668839,
+              "cumulative_seconds": 0.19725994300000005
+            },
+            "batch_calendar.py:93:add": {
+              "calls": 500,
+              "self_seconds": 0.003662621000000001,
+              "cumulative_seconds": 0.008120210999999999
+            },
+            "completed_phase_search.py:69:<genexpr>": {
+              "calls": 5290,
+              "self_seconds": 0.003486872,
+              "cumulative_seconds": 0.003486872
+            },
+            "operation_cost.py:66:prefill_features": {
+              "calls": 817,
+              "self_seconds": 0.003486593000000001,
+              "cumulative_seconds": 0.006589278000000001
+            },
+            "continuous_batch.py:24:acquire": {
+              "calls": 500,
+              "self_seconds": 0.003449081,
+              "cumulative_seconds": 0.010885519000000001
+            },
+            "cache_evolving_search.py:45:api": {
+              "calls": 500,
+              "self_seconds": 0.0034078840000000003,
+              "cumulative_seconds": 0.035050868000000006
+            },
+            "completed_phase_search.py:92:compute": {
+              "calls": 817,
+              "self_seconds": 0.002965075,
+              "cumulative_seconds": 0.03044815500000001
+            },
+            "operation_cost.py:95:compute": {
+              "calls": 817,
+              "self_seconds": 0.002922036,
+              "cumulative_seconds": 0.018426550000000007
+            },
+            "cache_evolving_search.py:120:start": {
+              "calls": 628,
+              "self_seconds": 0.002915631000000001,
+              "cumulative_seconds": 0.07049450699999998
+            },
+            "projection_index.py:27:<genexpr>": {
+              "calls": 16250,
+              "self_seconds": 0.0023994,
+              "cumulative_seconds": 0.0023994
+            },
+            "batch_calendar.py:24:sequence_for": {
+              "calls": 317,
+              "self_seconds": 0.0023664700000000007,
+              "cumulative_seconds": 0.025364173000000007
+            },
+            "completed_phase_search.py:99:decode_tail": {
+              "calls": 717,
+              "self_seconds": 0.002341169000000001,
+              "cumulative_seconds": 0.013566305000000002
+            },
+            "~:0:<method 'intersection' of 'frozenset' objects>": {
+              "calls": 1711,
+              "self_seconds": 0.0023027079999999992,
+              "cumulative_seconds": 0.0023027079999999992
+            },
+            "operation_schedule.py:36:__post_init__": {
+              "calls": 689,
+              "self_seconds": 0.0022027260000000008,
+              "cumulative_seconds": 0.0027605330000000003
+            },
+            "cache_evolving_search.py:65:admit": {
+              "calls": 441,
+              "self_seconds": 0.0021968220000000006,
+              "cumulative_seconds": 0.035046399
+            },
+            "~:0:<method 'hex' of 'bytes' objects>": {
+              "calls": 4412,
+              "self_seconds": 0.0020680830000000005,
+              "cumulative_seconds": 0.0020680830000000005
+            },
+            "operation_cost.py:88:<genexpr>": {
+              "calls": 6311,
+              "self_seconds": 0.0020588290000000007,
+              "cumulative_seconds": 0.0020588290000000007
+            },
+            "projection_index.py:68:keys": {
+              "calls": 2102,
+              "self_seconds": 0.0018941410000000002,
+              "cumulative_seconds": 0.02473831400000001
+            },
+            "operation_phase_release.py:16:__getattr__": {
+              "calls": 4772,
+              "self_seconds": 0.0018938619999999998,
+              "cumulative_seconds": 0.009461433
+            },
+            "resource_headroom_profile.py:48:__getattr__": {
+              "calls": 4772,
+              "self_seconds": 0.0018430120000000004,
+              "cumulative_seconds": 0.004304028999999999
+            },
+            "control_release_search.py:27:admit": {
+              "calls": 441,
+              "self_seconds": 0.0017948809999999997,
+              "cumulative_seconds": 0.037636437
+            },
+            "resource_cache_profile.py:177:finished": {
+              "calls": 59,
+              "self_seconds": 0.0017892779999999996,
+              "cumulative_seconds": 0.06343180600000002
+            },
+            "completed_phase_search.py:84:restore": {
+              "calls": 1134,
+              "self_seconds": 0.0016773279999999998,
+              "cumulative_seconds": 0.0052453210000000024
+            },
+            "operation_cost.py:90:restore": {
+              "calls": 2520,
+              "self_seconds": 0.0015840590000000003,
+              "cumulative_seconds": 0.0052296750000000005
+            },
+            "functools.py:982:__get__": {
+              "calls": 616,
+              "self_seconds": 0.0014794639999999996,
+              "cumulative_seconds": 0.04622904300000001
+            },
+            "joint_policy.py:129:remove": {
+              "calls": 59,
+              "self_seconds": 0.0014275210000000004,
+              "cumulative_seconds": 0.005231521000000001
+            },
+            "~:0:<method 'difference_update' of 'set' objects>": {
+              "calls": 2748,
+              "self_seconds": 0.0013865340000000002,
+              "cumulative_seconds": 0.0013865340000000002
+            },
+            "operation_cost.py:67:<genexpr>": {
+              "calls": 3268,
+              "self_seconds": 0.0013708470000000001,
+              "cumulative_seconds": 0.0013708470000000001
+            },
+            "operation_context.py:9:decode_features": {
+              "calls": 717,
+              "self_seconds": 0.0013532230000000002,
+              "cumulative_seconds": 0.0013532230000000002
+            },
+            "detached_calendar.py:21:token": {
+              "calls": 376,
+              "self_seconds": 0.001268414,
+              "cumulative_seconds": 0.00293743
+            },
+            "resource_queue.py:72:_remaining_operation": {
+              "calls": 61,
+              "self_seconds": 0.0012178100000000002,
+              "cumulative_seconds": 0.001432404
+            },
+            "continuous_batch.py:134:submit": {
+              "calls": 317,
+              "self_seconds": 0.001188813,
+              "cumulative_seconds": 0.002608840999999999
+            },
+            "joint_policy.py:176:<genexpr>": {
+              "calls": 1829,
+              "self_seconds": 0.001179943,
+              "cumulative_seconds": 0.010863397000000006
+            },
+            "continuous_batch.py:86:__post_init__": {
+              "calls": 317,
+              "self_seconds": 0.0011481470000000006,
+              "cumulative_seconds": 0.001511389
+            },
+            "continuous_batch.py:107:reservation": {
+              "calls": 715,
+              "self_seconds": 0.0011474830000000001,
+              "cumulative_seconds": 0.0013773860000000006
+            },
+            "operation_phase_release.py:19:decode_tail": {
+              "calls": 717,
+              "self_seconds": 0.001131293,
+              "cumulative_seconds": 0.0024845159999999995
+            },
+            "cache_evolving_search.py:39:effective_route": {
+              "calls": 317,
+              "self_seconds": 0.001088207,
+              "cumulative_seconds": 0.015809841
+            },
+            "joint_policy.py:131:<genexpr>": {
+              "calls": 5015,
+              "self_seconds": 0.001065373,
+              "cumulative_seconds": 0.001065373
+            },
+            "joint_policy.py:137:prefix": {
+              "calls": 252,
+              "self_seconds": 0.001039739,
+              "cumulative_seconds": 0.015598716000000004
+            },
+            "detached_calendar.py:22:<genexpr>": {
+              "calls": 3008,
+              "self_seconds": 0.000994647,
+              "cumulative_seconds": 0.0016690160000000004
+            },
+            "~:0:<method 'add' of 'set' objects>": {
+              "calls": 2583,
+              "self_seconds": 0.000985985,
+              "cumulative_seconds": 0.000985985
+            },
+            "projection_index.py:36:__eq__": {
+              "calls": 250,
+              "self_seconds": 0.0009601570000000001,
+              "cumulative_seconds": 0.0016737059999999992
+            },
+            "~:0:<built-in method builtins.id>": {
+              "calls": 2859,
+              "self_seconds": 0.000952729,
+              "cumulative_seconds": 0.000952729
+            },
+            "joint_policy.py:134:<genexpr>": {
+              "calls": 5015,
+              "self_seconds": 0.000952482,
+              "cumulative_seconds": 0.000952482
+            },
+            "projection_index.py:18:payload": {
+              "calls": 63,
+              "self_seconds": 0.0009494229999999997,
+              "cumulative_seconds": 0.004319606999999999
+            },
+            "cache_evolving_search.py:28:__init__": {
+              "calls": 63,
+              "self_seconds": 0.0008809240000000004,
+              "cumulative_seconds": 0.0027008609999999997
+            },
+            "continuous_batch.py:34:release": {
+              "calls": 264,
+              "self_seconds": 0.000876649,
+              "cumulative_seconds": 0.0013412699999999999
+            },
+            "joint_policy.py:139:<genexpr>": {
+              "calls": 386,
+              "self_seconds": 0.000802757,
+              "cumulative_seconds": 0.000802757
+            },
+            "<string>:2:__hash__": {
+              "calls": 398,
+              "self_seconds": 0.0008018449999999997,
+              "cumulative_seconds": 0.0026235669999999994
+            },
+            "batch_calendar.py:141:<genexpr>": {
+              "calls": 3213,
+              "self_seconds": 0.0007737330000000001,
+              "cumulative_seconds": 0.0007737330000000001
+            },
+            "joint_policy.py:173:<genexpr>": {
+              "calls": 59,
+              "self_seconds": 0.0007276809999999999,
+              "cumulative_seconds": 0.0007276809999999999
+            },
+            "~:0:<built-in method math.isfinite>": {
+              "calls": 1957,
+              "self_seconds": 0.0005987150000000001,
+              "cumulative_seconds": 0.0005987150000000001
+            },
+            "batch_calendar.py:251:<genexpr>": {
+              "calls": 2197,
+              "self_seconds": 0.0005203160000000002,
+              "cumulative_seconds": 0.0005203160000000002
+            },
+            "projection_index.py:71:usage": {
+              "calls": 316,
+              "self_seconds": 0.000519988,
+              "cumulative_seconds": 0.007469809000000001
+            },
+            "joint_policy.py:190:<genexpr>": {
+              "calls": 1829,
+              "self_seconds": 0.0005199040000000001,
+              "cumulative_seconds": 0.0005199040000000001
+            },
+            "cache_evolving_search.py:158:after_copy": {
+              "calls": 311,
+              "self_seconds": 0.0005189229999999999,
+              "cumulative_seconds": 0.006237353000000002
+            },
+            "batch_calendar.py:96:<genexpr>": {
+              "calls": 1059,
+              "self_seconds": 0.000505384,
+              "cumulative_seconds": 0.000505384
+            },
+            "~:0:<method 'popleft' of 'collections.deque' objects>": {
+              "calls": 1150,
+              "self_seconds": 0.0005025699999999999,
+              "cumulative_seconds": 0.0005025699999999999
+            },
+            "~:0:<method 'pop' of 'dict' objects>": {
+              "calls": 575,
+              "self_seconds": 0.00048656100000000005,
+              "cumulative_seconds": 0.00048656100000000005
+            },
+            "resource_cache_profile.py:45:__init__": {
+              "calls": 63,
+              "self_seconds": 0.00046969500000000006,
+              "cumulative_seconds": 0.0009722010000000002
+            },
+            "batch_calendar.py:307:<genexpr>": {
+              "calls": 766,
+              "self_seconds": 0.00045635499999999987,
+              "cumulative_seconds": 0.0004700959999999999
+            },
+            "projection_index.py:33:__hash__": {
+              "calls": 410,
+              "self_seconds": 0.00043701099999999995,
+              "cumulative_seconds": 0.018024115000000004
+            },
+            "joint_policy.py:186:<genexpr>": {
+              "calls": 1829,
+              "self_seconds": 0.00043045,
+              "cumulative_seconds": 0.00043045
+            },
+            "~:0:<method 'append' of 'collections.deque' objects>": {
+              "calls": 817,
+              "self_seconds": 0.00042965600000000005,
+              "cumulative_seconds": 0.00042965600000000005
+            },
+            "cache_evolving_search.py:179:<genexpr>": {
+              "calls": 439,
+              "self_seconds": 0.00039666600000000005,
+              "cumulative_seconds": 0.0033340959999999995
+            },
+            "resource_cache_profile.py:147:<genexpr>": {
+              "calls": 2762,
+              "self_seconds": 0.00037656900000000005,
+              "cumulative_seconds": 0.00037656900000000005
+            },
+            "batch_calendar.py:123:finish_stage": {
+              "calls": 205,
+              "self_seconds": 0.00037422599999999996,
+              "cumulative_seconds": 0.001352264
+            },
+            "slot_release_search.py:25:__init__": {
+              "calls": 126,
+              "self_seconds": 0.0003589980000000001,
+              "cumulative_seconds": 0.0006651770000000002
+            },
+            "~:0:<built-in method builtins.setattr>": {
+              "calls": 945,
+              "self_seconds": 0.0003258369999999998,
+              "cumulative_seconds": 0.0003258369999999998
+            },
+            "phase_release_calendar.py:23:_remaining_operation": {
+              "calls": 61,
+              "self_seconds": 0.0003243130000000001,
+              "cumulative_seconds": 0.0017567170000000005
+            },
+            "projection_index.py:80:<genexpr>": {
+              "calls": 295,
+              "self_seconds": 0.00031974500000000013,
+              "cumulative_seconds": 0.005458862
+            },
+            "joint_policy.py:124:<genexpr>": {
+              "calls": 295,
+              "self_seconds": 0.000286907,
+              "cumulative_seconds": 0.004483192
+            },
+            "projection_index.py:25:charged": {
+              "calls": 200,
+              "self_seconds": 0.00028130699999999995,
+              "cumulative_seconds": 0.005560437
+            },
+            "projection_index.py:78:payload_maps": {
+              "calls": 59,
+              "self_seconds": 0.000259246,
+              "cumulative_seconds": 0.0057181079999999995
+            },
+            "resource_cache_profile.py:115:<genexpr>": {
+              "calls": 365,
+              "self_seconds": 0.00025449499999999993,
+              "cumulative_seconds": 0.00025449499999999993
+            },
+            "operation_cost.py:83:__getattr__": {
+              "calls": 474,
+              "self_seconds": 0.000248584,
+              "cumulative_seconds": 0.00045233000000000003
+            },
+            "completed_phase_search.py:64:__getattr__": {
+              "calls": 474,
+              "self_seconds": 0.00024043400000000006,
+              "cumulative_seconds": 0.002338467
+            },
+            "release_cobatch_search.py:40:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.00023679200000000002,
+              "cumulative_seconds": 0.00084461
+            },
+            "batch_calendar.py:109:<lambda>": {
+              "calls": 376,
+              "self_seconds": 0.00022408499999999995,
+              "cumulative_seconds": 0.00022408499999999995
+            },
+            "slot_release_search.py:50:<genexpr>": {
+              "calls": 336,
+              "self_seconds": 0.000206256,
+              "cumulative_seconds": 0.000206256
+            },
+            "projection_index.py:64:wrap": {
+              "calls": 63,
+              "self_seconds": 0.00020005299999999998,
+              "cumulative_seconds": 0.000502506
+            },
+            "slot_release_search.py:76:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.00019340400000000007,
+              "cumulative_seconds": 0.0006078179999999998
+            },
+            "resource_cache_profile.py:126:<genexpr>": {
+              "calls": 39,
+              "self_seconds": 0.000163424,
+              "cumulative_seconds": 0.00034280500000000006
+            },
+            "acquired_phase_search.py:87:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.00016319400000000008,
+              "cumulative_seconds": 0.00026721400000000005
+            },
+            "continuous_batch.py:135:<genexpr>": {
+              "calls": 506,
+              "self_seconds": 0.00015201100000000002,
+              "cumulative_seconds": 0.00015201100000000002
+            },
+            "joint_policy.py:123:feasible": {
+              "calls": 59,
+              "self_seconds": 0.00015046099999999998,
+              "cumulative_seconds": 0.004817097
+            },
+            "pending_first_search.py:21:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.00014720000000000008,
+              "cumulative_seconds": 0.000414414
+            },
+            "batch_calendar.py:228:<genexpr>": {
+              "calls": 494,
+              "self_seconds": 0.00014194100000000003,
+              "cumulative_seconds": 0.00014194100000000003
+            },
+            "cache_evolving_search.py:185:<genexpr>": {
+              "calls": 250,
+              "self_seconds": 0.000121542,
+              "cumulative_seconds": 0.000121542
+            },
+            "projection_index.py:29:signature": {
+              "calls": 146,
+              "self_seconds": 0.00011634100000000002,
+              "cumulative_seconds": 0.017089425
+            },
+            "batch_calendar.py:229:<genexpr>": {
+              "calls": 494,
+              "self_seconds": 0.00011166199999999999,
+              "cumulative_seconds": 0.00011166199999999999
+            },
+            "control_release_search.py:49:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.00010402000000000002,
+              "cumulative_seconds": 0.00010402000000000002
+            },
+            "~:0:<built-in method _hashlib.openssl_sha256>": {
+              "calls": 18,
+              "self_seconds": 8.953100000000001e-05,
+              "cumulative_seconds": 8.953100000000001e-05
+            },
+            "~:0:<built-in method builtins.isinstance>": {
+              "calls": 250,
+              "self_seconds": 8.722000000000001e-05,
+              "cumulative_seconds": 8.722000000000001e-05
+            },
+            "joint_policy.py:182:<genexpr>": {
+              "calls": 227,
+              "self_seconds": 6.228999999999999e-05,
+              "cumulative_seconds": 6.228999999999999e-05
+            },
+            "~:0:<method 'digest' of '_hashlib.HASH' objects>": {
+              "calls": 18,
+              "self_seconds": 5.441e-05,
+              "cumulative_seconds": 5.441e-05
+            },
+            "cache_evolving_search.py:162:<genexpr>": {
+              "calls": 118,
+              "self_seconds": 5.2740000000000013e-05,
+              "cumulative_seconds": 5.2740000000000013e-05
+            },
+            "~:0:<method 'setdefault' of 'dict' objects>": {
+              "calls": 63,
+              "self_seconds": 4.741000000000001e-05,
+              "cumulative_seconds": 4.741000000000001e-05
+            },
+            "~:0:<method 'join' of 'str' objects>": {
+              "calls": 59,
+              "self_seconds": 4.356e-05,
+              "cumulative_seconds": 4.356e-05
+            },
+            "slot_release_search.py:16:release_estimate": {
+              "calls": 12,
+              "self_seconds": 4.0621e-05,
+              "cumulative_seconds": 0.000349116
+            },
+            "release_cobatch_search.py:22:release_cohort": {
+              "calls": 3,
+              "self_seconds": 3.3121000000000004e-05,
+              "cumulative_seconds": 0.000375096
+            },
+            "release_cobatch_search.py:11:decode_step_cost": {
+              "calls": 12,
+              "self_seconds": 3.243e-05,
+              "cumulative_seconds": 0.00030513400000000004
+            },
+            "resource_cache_profile.py:157:<genexpr>": {
+              "calls": 35,
+              "self_seconds": 2.339e-05,
+              "cumulative_seconds": 2.339e-05
+            },
+            "~:0:<method 'encode' of 'str' objects>": {
+              "calls": 18,
+              "self_seconds": 2.048e-05,
+              "cumulative_seconds": 2.048e-05
+            },
+            "~:0:<method 'to_bytes' of 'int' objects>": {
+              "calls": 18,
+              "self_seconds": 1.4960000000000002e-05,
+              "cumulative_seconds": 1.4960000000000002e-05
+            },
+            "release_cobatch_search.py:17:shared_step_cost": {
+              "calls": 12,
+              "self_seconds": 1.166e-05,
+              "cumulative_seconds": 3.4801e-05
+            },
+            "completed_phase_search.py:76:latest_completed_seconds": {
+              "calls": 3,
+              "self_seconds": 3.5600000000000002e-06,
+              "cumulative_seconds": 1.0460000000000001e-05
+            },
+            "slot_release_search.py:60:<lambda>": {
+              "calls": 12,
+              "self_seconds": 3.34e-06,
+              "cumulative_seconds": 3.34e-06
+            },
+            "slot_release_search.py:72:<lambda>": {
+              "calls": 12,
+              "self_seconds": 3.31e-06,
+              "cumulative_seconds": 3.31e-06
+            }
+          }
+        },
+        "delta": {
+          "unprofiled_CPU_sum_two_repeats": 3.6073397,
+          "unprofiled_wall_sum_two_repeats": 3.611661483,
+          "clone_CPU_excluded": 3.0859822,
+          "profiled_functions_nested_not_additive": {
+            "batch_calendar.py:41:schedule_batched": {
+              "calls": 63,
+              "self_seconds": 1.0731581450000003,
+              "cumulative_seconds": 3.920920292
+            },
+            "continuous_batch.py:153:begin": {
+              "calls": 45195,
+              "self_seconds": 0.25916770699999997,
+              "cumulative_seconds": 0.55951458
+            },
+            "dataclasses.py:1540:replace": {
+              "calls": 33489,
+              "self_seconds": 0.18621777100000003,
+              "cumulative_seconds": 0.3839258790000001
+            },
+            "~:0:<built-in method builtins.max>": {
+              "calls": 242382,
+              "self_seconds": 0.17565898900000002,
+              "cumulative_seconds": 0.17565898900000002
+            },
+            "~:0:<built-in method builtins.sorted>": {
+              "calls": 45742,
+              "self_seconds": 0.163743198,
+              "cumulative_seconds": 0.29128642300000007
+            },
+            "continuous_batch.py:141:admit": {
+              "calls": 90390,
+              "self_seconds": 0.14857185100000003,
+              "cumulative_seconds": 0.29634952500000006
+            },
+            "slot_release_search.py:39:begin": {
+              "calls": 45195,
+              "self_seconds": 0.11858153000000002,
+              "cumulative_seconds": 0.840039921
+            },
+            "~:0:<built-in method builtins.any>": {
+              "calls": 76501,
+              "self_seconds": 0.10025077400000001,
+              "cumulative_seconds": 0.18057173699999993
+            },
+            "~:0:<method 'get' of 'dict' objects>": {
+              "calls": 251609,
+              "self_seconds": 0.09826226599999999,
+              "cumulative_seconds": 0.09826226599999999
+            },
+            "~:0:<built-in method builtins.min>": {
+              "calls": 54558,
+              "self_seconds": 0.07142088800000003,
+              "cumulative_seconds": 0.07190924899999998
+            },
+            "batch_calendar.py:154:<lambda>": {
+              "calls": 158441,
+              "self_seconds": 0.071217294,
+              "cumulative_seconds": 0.071217294
+            },
+            "delta_protection_search.py:49:sync_protection": {
+              "calls": 514,
+              "self_seconds": 0.06366970000000002,
+              "cumulative_seconds": 0.157315408
+            },
+            "resource_reservation.py:13:<genexpr>": {
+              "calls": 119218,
+              "self_seconds": 0.059054054,
+              "cumulative_seconds": 0.09018598199999997
+            },
+            "~:0:<method 'startswith' of 'str' objects>": {
+              "calls": 89155,
+              "self_seconds": 0.056827762000000004,
+              "cumulative_seconds": 0.056827762000000004
+            },
+            "continuous_batch.py:205:finish": {
+              "calls": 14872,
+              "self_seconds": 0.056488253,
+              "cumulative_seconds": 0.07240895100000003
+            },
+            "batch_calendar.py:219:<genexpr>": {
+              "calls": 89407,
+              "self_seconds": 0.05556615800000001,
+              "cumulative_seconds": 0.11239392000000004
+            },
+            "~:0:<method 'values' of 'dict' objects>": {
+              "calls": 110273,
+              "self_seconds": 0.048293317999999995,
+              "cumulative_seconds": 0.048293317999999995
+            },
+            "bounded_search.py:26:first_lower_bound": {
+              "calls": 15177,
+              "self_seconds": 0.047977827000000015,
+              "cumulative_seconds": 0.15424356599999994
+            },
+            "~:0:<built-in method builtins.getattr>": {
+              "calls": 144595,
+              "self_seconds": 0.047817807000000025,
+              "cumulative_seconds": 0.05014125
+            },
+            "~:0:<method 'extend' of 'list' objects>": {
+              "calls": 30499,
+              "self_seconds": 0.047794986,
+              "cumulative_seconds": 0.063191523
+            },
+            "~:0:<built-in method builtins.len>": {
+              "calls": 171223,
+              "self_seconds": 0.04758019199999998,
+              "cumulative_seconds": 0.04758019199999998
+            },
+            "~:0:<built-in method builtins.all>": {
+              "calls": 30055,
+              "self_seconds": 0.04605099300000002,
+              "cumulative_seconds": 0.14087485800000002
+            },
+            "batch_calendar.py:299:<genexpr>": {
+              "calls": 82883,
+              "self_seconds": 0.042214870999999994,
+              "cumulative_seconds": 0.042214870999999994
+            },
+            "~:0:<method 'items' of 'dict' objects>": {
+              "calls": 91262,
+              "self_seconds": 0.042186776999999995,
+              "cumulative_seconds": 0.042186776999999995
+            },
+            "resource_reservation.py:12:permitted": {
+              "calls": 30246,
+              "self_seconds": 0.037362555,
+              "cumulative_seconds": 0.17343441599999998
+            },
+            "bounded_search.py:29:<genexpr>": {
+              "calls": 60678,
+              "self_seconds": 0.035314133000000004,
+              "cumulative_seconds": 0.052826304
+            },
+            "~:0:<method 'append' of 'list' objects>": {
+              "calls": 86141,
+              "self_seconds": 0.033597867999999996,
+              "cumulative_seconds": 0.033597867999999996
+            },
+            "batch_calendar.py:249:<genexpr>": {
+              "calls": 151835,
+              "self_seconds": 0.03318978600000001,
+              "cumulative_seconds": 0.035029491999999995
+            },
+            "slot_release_search.py:79:<lambda>": {
+              "calls": 45195,
+              "self_seconds": 0.03101019900000001,
+              "cumulative_seconds": 0.04225493400000001
+            },
+            "batch_calendar.py:223:<genexpr>": {
+              "calls": 59531,
+              "self_seconds": 0.028860383000000007,
+              "cumulative_seconds": 0.028860383000000007
+            },
+            "cache_evolving_search.py:187:guard": {
+              "calls": 15177,
+              "self_seconds": 0.028782880000000004,
+              "cumulative_seconds": 0.183026446
+            },
+            "~:0:<built-in method builtins.sum>": {
+              "calls": 32489,
+              "self_seconds": 0.026751418000000013,
+              "cumulative_seconds": 0.033507774000000004
+            },
+            "dataclasses.py:1296:_is_dataclass_instance": {
+              "calls": 33489,
+              "self_seconds": 0.024468192000000003,
+              "cumulative_seconds": 0.037230138
+            },
+            "continuous_batch.py:43:protected": {
+              "calls": 33959,
+              "self_seconds": 0.019928283000000005,
+              "cumulative_seconds": 0.031825253
+            },
+            "~:0:<built-in method builtins.hasattr>": {
+              "calls": 48361,
+              "self_seconds": 0.019770174,
+              "cumulative_seconds": 0.019770174
+            },
+            "resource_cache_profile.py:102:save": {
+              "calls": 205,
+              "self_seconds": 0.019351544000000002,
+              "cumulative_seconds": 0.07954909200000002
+            },
+            "batch_calendar.py:323:<genexpr>": {
+              "calls": 45187,
+              "self_seconds": 0.015125778000000001,
+              "cumulative_seconds": 0.015125778000000001
+            },
+            "~:0:<method 'setdefault' of 'dict' objects>": {
+              "calls": 32295,
+              "self_seconds": 0.013975877000000005,
+              "cumulative_seconds": 0.013975877000000005
+            },
+            "~:0:<built-in method builtins.hash>": {
+              "calls": 11884,
+              "self_seconds": 0.011518346999999998,
+              "cumulative_seconds": 0.018983546
+            },
+            "slot_release_search.py:33:set_context": {
+              "calls": 45195,
+              "self_seconds": 0.011244735,
+              "cumulative_seconds": 0.011244735
+            },
+            "continuous_batch.py:103:remaining_prefill": {
+              "calls": 26308,
+              "self_seconds": 0.010455078,
+              "cumulative_seconds": 0.010455078
+            },
+            "projection_index.py:16:<genexpr>": {
+              "calls": 38475,
+              "self_seconds": 0.009478641000000001,
+              "cumulative_seconds": 0.009478641000000001
+            },
+            "<string>:2:__eq__": {
+              "calls": 14219,
+              "self_seconds": 0.009153988000000002,
+              "cumulative_seconds": 0.009153988000000002
+            },
+            "~:0:<built-in method _heapq.heappop>": {
+              "calls": 15183,
+              "self_seconds": 0.008964911,
+              "cumulative_seconds": 0.008964911
+            },
+            "projection_index.py:14:keys": {
+              "calls": 207,
+              "self_seconds": 0.008099793999999999,
+              "cumulative_seconds": 0.017578435
+            },
+            "~:0:<built-in method _heapq.heappush>": {
+              "calls": 15183,
+              "self_seconds": 0.007499517,
+              "cumulative_seconds": 0.007499517
+            },
+            "cache_evolving_search.py:132:<genexpr>": {
+              "calls": 2379,
+              "self_seconds": 0.006604129000000002,
+              "cumulative_seconds": 0.006604129000000002
+            },
+            "resource_cache_profile.py:201:<genexpr>": {
+              "calls": 1829,
+              "self_seconds": 0.005919780000000003,
+              "cumulative_seconds": 0.013693454000000006
+            },
+            "~:0:<built-in method math.ceil>": {
+              "calls": 16709,
+              "self_seconds": 0.005753877000000001,
+              "cumulative_seconds": 0.005753877000000001
+            },
+            "~:0:<built-in method builtins.next>": {
+              "calls": 15435,
+              "self_seconds": 0.0054604319999999994,
+              "cumulative_seconds": 0.006180133
+            },
+            "~:0:<built-in method math.floor>": {
+              "calls": 14805,
+              "self_seconds": 0.005250686999999999,
+              "cumulative_seconds": 0.005250686999999999
+            },
+            "~:0:<method 'remove' of 'list' objects>": {
+              "calls": 2748,
+              "self_seconds": 0.005223699,
+              "cumulative_seconds": 0.013744056000000001
+            },
+            "<string>:2:__init__": {
+              "calls": 317,
+              "self_seconds": 0.0051813130000000025,
+              "cumulative_seconds": 0.0051813130000000025
+            },
+            "projection_index.py:45:get": {
+              "calls": 2859,
+              "self_seconds": 0.005045330000000001,
+              "cumulative_seconds": 0.0077375690000000006
+            },
+            "joint_policy.py:168:copy_package": {
+              "calls": 59,
+              "self_seconds": 0.0047904090000000015,
+              "cumulative_seconds": 0.036924754
+            },
+            "operation_cost.py:86:_dot": {
+              "calls": 1559,
+              "self_seconds": 0.004571355000000002,
+              "cumulative_seconds": 0.009860593999999999
+            },
+            "delta_protection_search.py:23:acquire": {
+              "calls": 500,
+              "self_seconds": 0.004500990000000002,
+              "cumulative_seconds": 0.01724019299999999
+            },
+            "completed_phase_search.py:67:fits": {
+              "calls": 1058,
+              "self_seconds": 0.004482692000000002,
+              "cumulative_seconds": 0.009677455
+            },
+            "~:0:<method 'disable' of '_lsprof.Profiler' objects>": {
+              "calls": 63,
+              "self_seconds": 0.0043219700000000005,
+              "cumulative_seconds": 0.0043219700000000005
+            },
+            "~:0:<method 'update' of 'dict' objects>": {
+              "calls": 2173,
+              "self_seconds": 0.004208238000000001,
+              "cumulative_seconds": 0.004208238000000001
+            },
+            "batch_calendar.py:93:add": {
+              "calls": 500,
+              "self_seconds": 0.003660478000000002,
+              "cumulative_seconds": 0.007895796
+            },
+            "completed_phase_search.py:69:<genexpr>": {
+              "calls": 5290,
+              "self_seconds": 0.0035397280000000002,
+              "cumulative_seconds": 0.0035397280000000002
+            },
+            "cache_evolving_search.py:45:api": {
+              "calls": 500,
+              "self_seconds": 0.003486659,
+              "cumulative_seconds": 0.035031831000000006
+            },
+            "operation_cost.py:66:prefill_features": {
+              "calls": 817,
+              "self_seconds": 0.003453311,
+              "cumulative_seconds": 0.00652789
+            },
+            "cache_evolving_search.py:137:finish": {
+              "calls": 392,
+              "self_seconds": 0.003355931,
+              "cumulative_seconds": 0.22549472099999995
+            },
+            "cache_evolving_search.py:120:start": {
+              "calls": 628,
+              "self_seconds": 0.0033216519999999996,
+              "cumulative_seconds": 0.10759440799999997
+            },
+            "continuous_batch.py:24:acquire": {
+              "calls": 750,
+              "self_seconds": 0.0029110720000000002,
+              "cumulative_seconds": 0.0037705110000000007
+            },
+            "completed_phase_search.py:92:compute": {
+              "calls": 817,
+              "self_seconds": 0.0028944889999999997,
+              "cumulative_seconds": 0.029905768
+            },
+            "operation_cost.py:95:compute": {
+              "calls": 817,
+              "self_seconds": 0.0028591890000000007,
+              "cumulative_seconds": 0.017892321000000003
+            },
+            "cache_evolving_search.py:175:predict_batch": {
+              "calls": 63,
+              "self_seconds": 0.002778996,
+              "cumulative_seconds": 3.936393735
+            },
+            "projection_index.py:27:<genexpr>": {
+              "calls": 16250,
+              "self_seconds": 0.0023644140000000004,
+              "cumulative_seconds": 0.0023644140000000004
+            },
+            "~:0:<method 'intersection' of 'frozenset' objects>": {
+              "calls": 1711,
+              "self_seconds": 0.0023251630000000003,
+              "cumulative_seconds": 0.0023251630000000003
+            },
+            "batch_calendar.py:24:sequence_for": {
+              "calls": 317,
+              "self_seconds": 0.002273974,
+              "cumulative_seconds": 0.024703647000000006
+            },
+            "completed_phase_search.py:99:decode_tail": {
+              "calls": 717,
+              "self_seconds": 0.0022498029999999994,
+              "cumulative_seconds": 0.013532976000000006
+            },
+            "cache_evolving_search.py:65:admit": {
+              "calls": 441,
+              "self_seconds": 0.0021595259999999997,
+              "cumulative_seconds": 0.034889695000000005
+            },
+            "operation_schedule.py:36:__post_init__": {
+              "calls": 689,
+              "self_seconds": 0.002134427,
+              "cumulative_seconds": 0.0026929460000000003
+            },
+            "~:0:<method 'hex' of 'bytes' objects>": {
+              "calls": 4412,
+              "self_seconds": 0.002110866,
+              "cumulative_seconds": 0.002110866
+            },
+            "operation_cost.py:88:<genexpr>": {
+              "calls": 6311,
+              "self_seconds": 0.0020766240000000004,
+              "cumulative_seconds": 0.0020766240000000004
+            },
+            "operation_phase_release.py:16:__getattr__": {
+              "calls": 4772,
+              "self_seconds": 0.0019017740000000004,
+              "cumulative_seconds": 0.009516627000000003
+            },
+            "projection_index.py:68:keys": {
+              "calls": 2102,
+              "self_seconds": 0.0018906460000000006,
+              "cumulative_seconds": 0.024735444000000006
+            },
+            "resource_headroom_profile.py:48:__getattr__": {
+              "calls": 4772,
+              "self_seconds": 0.0018445099999999997,
+              "cumulative_seconds": 0.00431828
+            },
+            "completed_phase_search.py:84:restore": {
+              "calls": 1134,
+              "self_seconds": 0.0016728860000000008,
+              "cumulative_seconds": 0.005232495000000001
+            },
+            "operation_cost.py:90:restore": {
+              "calls": 2520,
+              "self_seconds": 0.001647109,
+              "cumulative_seconds": 0.0053425439999999986
+            },
+            "control_release_search.py:27:admit": {
+              "calls": 441,
+              "self_seconds": 0.0016257299999999997,
+              "cumulative_seconds": 0.03731065499999999
+            },
+            "resource_cache_profile.py:177:finished": {
+              "calls": 59,
+              "self_seconds": 0.0015892590000000002,
+              "cumulative_seconds": 0.06378879900000002
+            },
+            "functools.py:982:__get__": {
+              "calls": 616,
+              "self_seconds": 0.0014663130000000001,
+              "cumulative_seconds": 0.04651365400000001
+            },
+            "joint_policy.py:129:remove": {
+              "calls": 59,
+              "self_seconds": 0.0014350820000000005,
+              "cumulative_seconds": 0.005248486
+            },
+            "delta_protection_search.py:31:release": {
+              "calls": 264,
+              "self_seconds": 0.001412279,
+              "cumulative_seconds": 0.004569415999999998
+            },
+            "operation_context.py:9:decode_features": {
+              "calls": 717,
+              "self_seconds": 0.0014029730000000007,
+              "cumulative_seconds": 0.0014029730000000007
+            },
+            "~:0:<method 'difference_update' of 'set' objects>": {
+              "calls": 2748,
+              "self_seconds": 0.0013967060000000002,
+              "cumulative_seconds": 0.0013967060000000002
+            },
+            "operation_cost.py:67:<genexpr>": {
+              "calls": 3268,
+              "self_seconds": 0.0013495450000000004,
+              "cumulative_seconds": 0.0013495450000000004
+            },
+            "detached_calendar.py:21:token": {
+              "calls": 376,
+              "self_seconds": 0.001231878,
+              "cumulative_seconds": 0.0028791059999999998
+            },
+            "resource_queue.py:72:_remaining_operation": {
+              "calls": 61,
+              "self_seconds": 0.001217058,
+              "cumulative_seconds": 0.0014289020000000001
+            },
+            "continuous_batch.py:107:reservation": {
+              "calls": 715,
+              "self_seconds": 0.0012063759999999999,
+              "cumulative_seconds": 0.0014472719999999994
+            },
+            "joint_policy.py:176:<genexpr>": {
+              "calls": 1829,
+              "self_seconds": 0.0011881679999999996,
+              "cumulative_seconds": 0.010759554000000001
+            },
+            "continuous_batch.py:134:submit": {
+              "calls": 317,
+              "self_seconds": 0.0011696580000000003,
+              "cumulative_seconds": 0.0025853610000000004
+            },
+            "continuous_batch.py:86:__post_init__": {
+              "calls": 317,
+              "self_seconds": 0.0011480299999999995,
+              "cumulative_seconds": 0.001506037
+            },
+            "joint_policy.py:137:prefix": {
+              "calls": 252,
+              "self_seconds": 0.0010977439999999999,
+              "cumulative_seconds": 0.015755674999999997
+            },
+            "operation_phase_release.py:19:decode_tail": {
+              "calls": 717,
+              "self_seconds": 0.0010891840000000004,
+              "cumulative_seconds": 0.002492157
+            },
+            "cache_evolving_search.py:39:effective_route": {
+              "calls": 317,
+              "self_seconds": 0.001079754,
+              "cumulative_seconds": 0.015638935000000003
+            },
+            "joint_policy.py:131:<genexpr>": {
+              "calls": 5015,
+              "self_seconds": 0.001053912,
+              "cumulative_seconds": 0.001053912
+            },
+            "~:0:<method 'add' of 'set' objects>": {
+              "calls": 2583,
+              "self_seconds": 0.0010481190000000001,
+              "cumulative_seconds": 0.0010481190000000001
+            },
+            "~:0:<method 'update' of 'set' objects>": {
+              "calls": 764,
+              "self_seconds": 0.001035092,
+              "cumulative_seconds": 0.0019913389999999995
+            },
+            "projection_index.py:36:__eq__": {
+              "calls": 250,
+              "self_seconds": 0.0010002000000000004,
+              "cumulative_seconds": 0.001722661
+            },
+            "projection_index.py:18:payload": {
+              "calls": 63,
+              "self_seconds": 0.000985631,
+              "cumulative_seconds": 0.004412550000000002
+            },
+            "joint_policy.py:134:<genexpr>": {
+              "calls": 5015,
+              "self_seconds": 0.0009802270000000002,
+              "cumulative_seconds": 0.0009802270000000002
+            },
+            "detached_calendar.py:22:<genexpr>": {
+              "calls": 3008,
+              "self_seconds": 0.0009752949999999999,
+              "cumulative_seconds": 0.0016472279999999997
+            },
+            "~:0:<built-in method builtins.id>": {
+              "calls": 2859,
+              "self_seconds": 0.0009580080000000002,
+              "cumulative_seconds": 0.0009580080000000002
+            },
+            "continuous_batch.py:34:release": {
+              "calls": 264,
+              "self_seconds": 0.0009185780000000001,
+              "cumulative_seconds": 0.0014010540000000005
+            },
+            "joint_policy.py:139:<genexpr>": {
+              "calls": 386,
+              "self_seconds": 0.0008168239999999998,
+              "cumulative_seconds": 0.0008168239999999998
+            },
+            "cache_evolving_search.py:28:__init__": {
+              "calls": 63,
+              "self_seconds": 0.0008162229999999998,
+              "cumulative_seconds": 0.0025051110000000004
+            },
+            "delta_protection_search.py:40:__init__": {
+              "calls": 63,
+              "self_seconds": 0.0007919350000000001,
+              "cumulative_seconds": 0.005442646000000001
+            },
+            "<string>:2:__hash__": {
+              "calls": 398,
+              "self_seconds": 0.000789999,
+              "cumulative_seconds": 0.002607885
+            },
+            "batch_calendar.py:141:<genexpr>": {
+              "calls": 3213,
+              "self_seconds": 0.0007821630000000003,
+              "cumulative_seconds": 0.0007821630000000003
+            },
+            "joint_policy.py:173:<genexpr>": {
+              "calls": 59,
+              "self_seconds": 0.0007462329999999998,
+              "cumulative_seconds": 0.0007462329999999998
+            },
+            "batch_calendar.py:251:<genexpr>": {
+              "calls": 2197,
+              "self_seconds": 0.0006619080000000002,
+              "cumulative_seconds": 0.0006619080000000002
+            },
+            "~:0:<built-in method math.isfinite>": {
+              "calls": 1957,
+              "self_seconds": 0.00059443,
+              "cumulative_seconds": 0.00059443
+            },
+            "batch_calendar.py:96:<genexpr>": {
+              "calls": 1059,
+              "self_seconds": 0.0005679060000000001,
+              "cumulative_seconds": 0.0005679060000000001
+            },
+            "projection_index.py:71:usage": {
+              "calls": 316,
+              "self_seconds": 0.0005307250000000001,
+              "cumulative_seconds": 0.007474168000000002
+            },
+            "joint_policy.py:190:<genexpr>": {
+              "calls": 1829,
+              "self_seconds": 0.0005269550000000002,
+              "cumulative_seconds": 0.0005269550000000002
+            },
+            "~:0:<method 'popleft' of 'collections.deque' objects>": {
+              "calls": 1150,
+              "self_seconds": 0.00051586,
+              "cumulative_seconds": 0.00051586
+            },
+            "~:0:<method 'pop' of 'dict' objects>": {
+              "calls": 575,
+              "self_seconds": 0.0005144059999999999,
+              "cumulative_seconds": 0.0005144059999999999
+            },
+            "cache_evolving_search.py:158:after_copy": {
+              "calls": 311,
+              "self_seconds": 0.000496628,
+              "cumulative_seconds": 0.006364282000000001
+            },
+            "batch_calendar.py:307:<genexpr>": {
+              "calls": 766,
+              "self_seconds": 0.00047158099999999994,
+              "cumulative_seconds": 0.00048542099999999993
+            },
+            "~:0:<method 'append' of 'collections.deque' objects>": {
+              "calls": 817,
+              "self_seconds": 0.000469428,
+              "cumulative_seconds": 0.000469428
+            },
+            "resource_cache_profile.py:45:__init__": {
+              "calls": 63,
+              "self_seconds": 0.00043900299999999993,
+              "cumulative_seconds": 0.00088895
+            },
+            "delta_protection_search.py:33:<genexpr>": {
+              "calls": 693,
+              "self_seconds": 0.0004386170000000001,
+              "cumulative_seconds": 0.0009562470000000003
+            },
+            "joint_policy.py:186:<genexpr>": {
+              "calls": 1829,
+              "self_seconds": 0.00043063800000000006,
+              "cumulative_seconds": 0.00043063800000000006
+            },
+            "joint_policy.py:124:<genexpr>": {
+              "calls": 295,
+              "self_seconds": 0.0004045970000000001,
+              "cumulative_seconds": 0.004637882999999998
+            },
+            "batch_calendar.py:123:finish_stage": {
+              "calls": 205,
+              "self_seconds": 0.00039209300000000004,
+              "cumulative_seconds": 0.0014008490000000007
+            },
+            "cache_evolving_search.py:179:<genexpr>": {
+              "calls": 439,
+              "self_seconds": 0.000383077,
+              "cumulative_seconds": 0.003262183000000001
+            },
+            "resource_cache_profile.py:147:<genexpr>": {
+              "calls": 2762,
+              "self_seconds": 0.000377627,
+              "cumulative_seconds": 0.000377627
+            },
+            "projection_index.py:33:__hash__": {
+              "calls": 410,
+              "self_seconds": 0.0003598160000000001,
+              "cumulative_seconds": 0.018154956000000003
+            },
+            "delta_protection_search.py:54:<genexpr>": {
+              "calls": 440,
+              "self_seconds": 0.00035767399999999994,
+              "cumulative_seconds": 0.0004860349999999999
+            },
+            "projection_index.py:80:<genexpr>": {
+              "calls": 295,
+              "self_seconds": 0.00034299900000000003,
+              "cumulative_seconds": 0.0055712220000000015
+            },
+            "~:0:<method 'clear' of 'set' objects>": {
+              "calls": 514,
+              "self_seconds": 0.00034047900000000014,
+              "cumulative_seconds": 0.00034047900000000014
+            },
+            "~:0:<built-in method builtins.setattr>": {
+              "calls": 945,
+              "self_seconds": 0.000326115,
+              "cumulative_seconds": 0.000326115
+            },
+            "projection_index.py:25:charged": {
+              "calls": 200,
+              "self_seconds": 0.00028761400000000016,
+              "cumulative_seconds": 0.005527359
+            },
+            "slot_release_search.py:25:__init__": {
+              "calls": 126,
+              "self_seconds": 0.00027134600000000005,
+              "cumulative_seconds": 0.0005886410000000001
+            },
+            "resource_cache_profile.py:115:<genexpr>": {
+              "calls": 365,
+              "self_seconds": 0.00027075900000000014,
+              "cumulative_seconds": 0.00027075900000000014
+            },
+            "operation_cost.py:83:__getattr__": {
+              "calls": 474,
+              "self_seconds": 0.00025743299999999995,
+              "cumulative_seconds": 0.0004720979999999999
+            },
+            "completed_phase_search.py:64:__getattr__": {
+              "calls": 474,
+              "self_seconds": 0.000251581,
+              "cumulative_seconds": 0.0023886219999999987
+            },
+            "phase_release_calendar.py:23:_remaining_operation": {
+              "calls": 61,
+              "self_seconds": 0.00025047399999999993,
+              "cumulative_seconds": 0.0016793759999999996
+            },
+            "batch_calendar.py:109:<lambda>": {
+              "calls": 376,
+              "self_seconds": 0.00023744399999999999,
+              "cumulative_seconds": 0.00023744399999999999
+            },
+            "projection_index.py:78:payload_maps": {
+              "calls": 59,
+              "self_seconds": 0.00023587199999999995,
+              "cumulative_seconds": 0.005807094
+            },
+            "slot_release_search.py:50:<genexpr>": {
+              "calls": 336,
+              "self_seconds": 0.00021793399999999995,
+              "cumulative_seconds": 0.00021793399999999995
+            },
+            "projection_index.py:64:wrap": {
+              "calls": 63,
+              "self_seconds": 0.00016520299999999997,
+              "cumulative_seconds": 0.00044994699999999997
+            },
+            "slot_release_search.py:76:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.00016429399999999997,
+              "cumulative_seconds": 0.0005602630000000001
+            },
+            "resource_cache_profile.py:126:<genexpr>": {
+              "calls": 39,
+              "self_seconds": 0.00016189200000000001,
+              "cumulative_seconds": 0.000331964
+            },
+            "continuous_batch.py:135:<genexpr>": {
+              "calls": 506,
+              "self_seconds": 0.000159702,
+              "cumulative_seconds": 0.000159702
+            },
+            "joint_policy.py:123:feasible": {
+              "calls": 59,
+              "self_seconds": 0.000159412,
+              "cumulative_seconds": 0.004962409000000001
+            },
+            "acquired_phase_search.py:87:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.000149525,
+              "cumulative_seconds": 0.000264768
+            },
+            "batch_calendar.py:228:<genexpr>": {
+              "calls": 494,
+              "self_seconds": 0.00013535200000000004,
+              "cumulative_seconds": 0.00013535200000000004
+            },
+            "pending_first_search.py:21:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.000131201,
+              "cumulative_seconds": 0.0003959689999999999
+            },
+            "release_cobatch_search.py:40:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.00013039200000000004,
+              "cumulative_seconds": 0.0006906550000000003
+            },
+            "delta_protection_search.py:19:__init__": {
+              "calls": 63,
+              "self_seconds": 0.00012462200000000001,
+              "cumulative_seconds": 0.00020228199999999997
+            },
+            "cache_evolving_search.py:185:<genexpr>": {
+              "calls": 250,
+              "self_seconds": 0.00012228200000000006,
+              "cumulative_seconds": 0.00012228200000000006
+            },
+            "projection_index.py:29:signature": {
+              "calls": 146,
+              "self_seconds": 0.00011740300000000001,
+              "cumulative_seconds": 0.017283062999999998
+            },
+            "batch_calendar.py:229:<genexpr>": {
+              "calls": 494,
+              "self_seconds": 0.00011611099999999997,
+              "cumulative_seconds": 0.00011611099999999997
+            },
+            "control_release_search.py:49:configure_projection": {
+              "calls": 63,
+              "self_seconds": 0.00011524299999999997,
+              "cumulative_seconds": 0.00011524299999999997
+            },
+            "~:0:<built-in method builtins.isinstance>": {
+              "calls": 250,
+              "self_seconds": 8.883000000000002e-05,
+              "cumulative_seconds": 8.883000000000002e-05
+            },
+            "~:0:<built-in method _hashlib.openssl_sha256>": {
+              "calls": 18,
+              "self_seconds": 8.3651e-05,
+              "cumulative_seconds": 8.3651e-05
+            },
+            "joint_policy.py:182:<genexpr>": {
+              "calls": 227,
+              "self_seconds": 6.298199999999999e-05,
+              "cumulative_seconds": 6.298199999999999e-05
+            },
+            "cache_evolving_search.py:162:<genexpr>": {
+              "calls": 118,
+              "self_seconds": 5.6000999999999995e-05,
+              "cumulative_seconds": 5.6000999999999995e-05
+            },
+            "~:0:<method 'digest' of '_hashlib.HASH' objects>": {
+              "calls": 18,
+              "self_seconds": 5.1110000000000004e-05,
+              "cumulative_seconds": 5.1110000000000004e-05
+            },
+            "~:0:<method 'join' of 'str' objects>": {
+              "calls": 59,
+              "self_seconds": 4.592999999999999e-05,
+              "cumulative_seconds": 4.592999999999999e-05
+            },
+            "slot_release_search.py:16:release_estimate": {
+              "calls": 12,
+              "self_seconds": 4.0091000000000006e-05,
+              "cumulative_seconds": 0.00035000600000000004
+            },
+            "release_cobatch_search.py:22:release_cohort": {
+              "calls": 3,
+              "self_seconds": 3.3192000000000003e-05,
+              "cumulative_seconds": 0.000378876
+            },
+            "release_cobatch_search.py:11:decode_step_cost": {
+              "calls": 12,
+              "self_seconds": 3.2340000000000005e-05,
+              "cumulative_seconds": 0.00030754400000000004
+            },
+            "resource_cache_profile.py:157:<genexpr>": {
+              "calls": 35,
+              "self_seconds": 2.3510000000000004e-05,
+              "cumulative_seconds": 2.3510000000000004e-05
+            },
+            "~:0:<method 'encode' of 'str' objects>": {
+              "calls": 18,
+              "self_seconds": 2.0781000000000003e-05,
+              "cumulative_seconds": 2.0781000000000003e-05
+            },
+            "~:0:<method 'to_bytes' of 'int' objects>": {
+              "calls": 18,
+              "self_seconds": 1.4530000000000001e-05,
+              "cumulative_seconds": 1.4530000000000001e-05
+            },
+            "release_cobatch_search.py:17:shared_step_cost": {
+              "calls": 12,
+              "self_seconds": 1.2430000000000001e-05,
+              "cumulative_seconds": 3.605e-05
+            },
+            "slot_release_search.py:72:<lambda>": {
+              "calls": 12,
+              "self_seconds": 3.6300000000000004e-06,
+              "cumulative_seconds": 3.6300000000000004e-06
+            },
+            "completed_phase_search.py:76:latest_completed_seconds": {
+              "calls": 3,
+              "self_seconds": 3.2000000000000003e-06,
+              "cumulative_seconds": 1.007e-05
+            },
+            "slot_release_search.py:60:<lambda>": {
+              "calls": 12,
+              "self_seconds": 2.9400000000000002e-06,
+              "cumulative_seconds": 2.9400000000000002e-06
+            }
+          }
+        }
+      },
+      "CPU_reduction_percent": -1.7649081699942837
+    }
+  },
+  "limitations": "Two requests in a zero-control middle-rate replay; paired-state implementation timing only, not all states or an end-to-end speedup. Profiler totals are separate and nested."
+}

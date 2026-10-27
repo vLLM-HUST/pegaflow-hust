@@ -1,0 +1,1308 @@
+{
+  "scope": "CPU causal model; scoped mechanisms, not full paper-system or hardware ranking",
+  "validated_arms": 9,
+  "costs_already_in_TTFT_do_not_add_again": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "arms": {
+        "native": {
+          "label": "Tailguard service-portfolio candidate",
+          "TTFT": {
+            "n": 95,
+            "mean": 14.514282490103161,
+            "p50": 5.444335699018836,
+            "p90": 49.93766829605937,
+            "p95": 62.54160750565012,
+            "p99": 69.73780630268686,
+            "max": 69.73780630268686
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 50.2822226083964,
+            "p50": 17.775468016867265,
+            "p90": 157.40642241794905,
+            "p95": 194.41057263449193,
+            "p99": 236.7595929892874,
+            "max": 236.7595929892874
+          },
+          "makespan": 614.8353292282438,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ],
+          "accepted_prefix_tokens": {
+            "P": 384640,
+            "D": 353920
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 132.42762484684442,
+            "compute": 880.7686176621912,
+            "save": 7.925006896664854
+          },
+          "planning_wall": 0.04416012577712536,
+          "boundary_CPU_wall": 0,
+          "iteration_scheduler_wall": 0.14042428601533175,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7787773952,
+          "copy_service_sum": 10.781620208118085,
+          "action_counts": {
+            "implicit_copy": 52,
+            "forecast_native_reclaim": 808,
+            "native_reclaim": 52
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2025848832
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4205838336
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "feal-differential-cryptanalysis:11",
+              "TTFT": 69.73780630268686,
+              "nominal": 145.94289051715816,
+              "dependency": 76.2050842144713,
+              "p": 1,
+              "d": 3,
+              "end": 473.7481034292639,
+              "before_P": 0.000551542267203331,
+              "P_API": 9.93445487322462,
+              "P_to_D": 16.335227640630706,
+              "D_API_to_first": 43.467572246564316,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "distribution-search:12",
+              "TTFT": 65.27386842905895,
+              "nominal": 78.7044045602072,
+              "dependency": 13.430536131148244,
+              "p": 1,
+              "d": 3,
+              "end": 430.6348314184802,
+              "before_P": 0.0005301209166646004,
+              "P_API": 6.34727728541166,
+              "P_to_D": 12.82966729576674,
+              "D_API_to_first": 46.09639372696387,
+              "P_prefix": 5504,
+              "D_prefix": 7296
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "TTFT": 65.08862425751352,
+              "nominal": 83.27466934509266,
+              "dependency": 18.186045087579146,
+              "p": 1,
+              "d": 3,
+              "end": 381.660386025749,
+              "before_P": 0.0005440516397356987,
+              "P_API": 8.833595686595697,
+              "P_to_D": 9.625267044717361,
+              "D_API_to_first": 46.62921747456073,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "fix-code-vulnerability:9",
+              "TTFT": 64.2290053794556,
+              "nominal": 109.50683984449648,
+              "dependency": 45.27783446504088,
+              "p": 1,
+              "d": 3,
+              "end": 395.5834793446471,
+              "before_P": 0.000518331304192543,
+              "P_API": 3.737907266484577,
+              "P_to_D": 34.3211334320344,
+              "D_API_to_first": 26.169446349632437,
+              "P_prefix": 10880,
+              "D_prefix": 10880
+            },
+            {
+              "id": "fix-git:11",
+              "TTFT": 62.54160750565012,
+              "nominal": 64.84876670186236,
+              "dependency": 2.3071591962122397,
+              "p": 1,
+              "d": 3,
+              "end": 407.93062008187155,
+              "before_P": 0.0004742201417684555,
+              "P_API": 3.557944067131075,
+              "P_to_D": 32.609734578628036,
+              "D_API_to_first": 26.37345463974924,
+              "P_prefix": 2816,
+              "D_prefix": 3712
+            }
+          ]
+        },
+        "reference": {
+          "label": "Tailguard FIFO + exact memo (internal reference)",
+          "TTFT": {
+            "n": 95,
+            "mean": 13.157199305065301,
+            "p50": 11.416123742728558,
+            "p90": 24.56861119124875,
+            "p95": 24.766864159598526,
+            "p99": 27.076277882994077,
+            "max": 27.076277882994077
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 31.414778359939145,
+            "p50": 19.213294936619732,
+            "p90": 80.94888671671168,
+            "p95": 94.4912846764168,
+            "p99": 112.29211820613853,
+            "max": 112.29211820613853
+          },
+          "makespan": 503.33769362115936,
+          "P_counts": [
+            44,
+            51
+          ],
+          "D_counts": [
+            58,
+            37
+          ],
+          "accepted_prefix_tokens": {
+            "P": 249472,
+            "D": 222848
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 84.42407289212159,
+            "compute": 819.2933851168196,
+            "save": 7.924293597578071
+          },
+          "planning_wall": 69.44253688305616,
+          "boundary_CPU_wall": 64.00062892958522,
+          "iteration_scheduler_wall": 0.13883854914456606,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 6371147776,
+          "copy_service_sum": 9.173080784066869,
+          "action_counts": {
+            "software_copy_gate_hold": 54,
+            "selected_copy": 50,
+            "forecast_native_reclaim": 130,
+            "copy_normal_defer": 4
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3662675968
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2319450112
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "fix-git:11",
+              "TTFT": 27.076277882994077,
+              "nominal": 62.44747566281853,
+              "dependency": 35.371197779824456,
+              "p": 1,
+              "d": 3,
+              "end": 384.60819026044163,
+              "before_P": 10.149458229629658,
+              "P_API": 3.1438829143237546,
+              "P_to_D": 5.785646183975814,
+              "D_API_to_first": 7.997290555064865,
+              "P_prefix": 3712,
+              "D_prefix": 4352
+            },
+            {
+              "id": "feal-differential-cryptanalysis:9",
+              "TTFT": 26.646022501570485,
+              "nominal": 33.09441911827062,
+              "dependency": 6.448396616700137,
+              "p": 1,
+              "d": 3,
+              "end": 310.48903996171646,
+              "before_P": 1.9711741890163808,
+              "P_API": 3.8831444841752596,
+              "P_to_D": 11.099889556710082,
+              "D_API_to_first": 9.691814271668761,
+              "P_prefix": 4096,
+              "D_prefix": 9216
+            },
+            {
+              "id": "feal-differential-cryptanalysis:13",
+              "TTFT": 24.93443430271583,
+              "nominal": 93.00722946471865,
+              "dependency": 68.07279516200282,
+              "p": 0,
+              "d": 2,
+              "end": 440.77354880896786,
+              "before_P": 1.410921914629796,
+              "P_API": 9.915849237117616,
+              "P_to_D": 1.574923434509003,
+              "D_API_to_first": 12.032739716459389,
+              "P_prefix": 4096,
+              "D_prefix": 0
+            },
+            {
+              "id": "dna-insert:15",
+              "TTFT": 24.86458942912492,
+              "nominal": 85.99963784781386,
+              "dependency": 61.13504841868894,
+              "p": 1,
+              "d": 2,
+              "end": 487.3401662887774,
+              "before_P": 1.0394024347291975,
+              "P_API": 9.97593902204588,
+              "P_to_D": 0.48845638728704444,
+              "D_API_to_first": 13.36079158506277,
+              "P_prefix": 0,
+              "D_prefix": 0
+            },
+            {
+              "id": "distribution-search:14",
+              "TTFT": 24.766864159598526,
+              "nominal": 74.41857958445064,
+              "dependency": 49.651715424852114,
+              "p": 1,
+              "d": 2,
+              "end": 430.3537810760507,
+              "before_P": 1.3857110581697611,
+              "P_API": 10.48424844727278,
+              "P_to_D": 1.2244257882517218,
+              "D_API_to_first": 11.672478865904282,
+              "P_prefix": 640,
+              "D_prefix": 0
+            }
+          ]
+        },
+        "ours": {
+          "label": "Tailguard service-portfolio candidate",
+          "TTFT": {
+            "n": 95,
+            "mean": 13.61958883314956,
+            "p50": 11.147091921823517,
+            "p90": 26.581486772573953,
+            "p95": 29.04770367289302,
+            "p99": 30.91789916988705,
+            "max": 30.91789916988705
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 31.101532945813165,
+            "p50": 16.049900371886878,
+            "p90": 88.70217889611894,
+            "p95": 96.41269615538056,
+            "p99": 102.6299777707215,
+            "max": 102.6299777707215
+          },
+          "makespan": 502.00162762939095,
+          "P_counts": [
+            46,
+            49
+          ],
+          "D_counts": [
+            62,
+            33
+          ],
+          "accepted_prefix_tokens": {
+            "P": 372608,
+            "D": 84096
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 29.713355713436112,
+            "compute": 873.6543697355766,
+            "save": 7.924015000229701
+          },
+          "planning_wall": 9.183866821229458,
+          "boundary_CPU_wall": 1.0118432901799679,
+          "iteration_scheduler_wall": 0.15310328360646963,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 5541724160,
+          "copy_service_sum": 10.422111784491497,
+          "action_counts": {
+            "software_copy_gate_hold": 30,
+            "selected_copy": 29,
+            "forecast_native_reclaim": 225,
+            "copy_normal_defer": 1
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3985637376
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2400190464
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "distribution-search:12",
+              "TTFT": 30.91789916988705,
+              "nominal": 62.951213918096414,
+              "dependency": 32.033314748209364,
+              "p": 1,
+              "d": 3,
+              "end": 398.1727837199274,
+              "before_P": 10.090891137602569,
+              "P_API": 5.519154979797018,
+              "P_to_D": 0.43528351767923823,
+              "D_API_to_first": 14.872569534808235,
+              "P_prefix": 7296,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-git:12",
+              "TTFT": 29.79850559575368,
+              "nominal": 71.71028278609077,
+              "dependency": 41.91177719033709,
+              "p": 1,
+              "d": 3,
+              "end": 410.35430783539044,
+              "before_P": 12.15611875110136,
+              "P_API": 5.00743562901557,
+              "P_to_D": 0.42214353124614945,
+              "D_API_to_first": 12.212807684390611,
+              "P_prefix": 1152,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:12",
+              "TTFT": 29.399546991706643,
+              "nominal": 67.5732115787689,
+              "dependency": 38.17366458706226,
+              "p": 1,
+              "d": 2,
+              "end": 403.8187728001546,
+              "before_P": 7.281223081137796,
+              "P_API": 9.84059684322625,
+              "P_to_D": 0.42636426466521016,
+              "D_API_to_first": 11.851362802677386,
+              "P_prefix": 2816,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-code-vulnerability:9",
+              "TTFT": 29.16899339983422,
+              "nominal": 30.143990143823657,
+              "dependency": 0.9749967439894363,
+              "p": 1,
+              "d": 3,
+              "end": 300.5713059711555,
+              "before_P": 5.070460247808171,
+              "P_API": 3.737907266484577,
+              "P_to_D": 0.4614061733987569,
+              "D_API_to_first": 19.899219712142724,
+              "P_prefix": 10880,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-code-vulnerability:11",
+              "TTFT": 29.04770367289302,
+              "nominal": 63.322864641391504,
+              "dependency": 34.27516096849848,
+              "p": 0,
+              "d": 2,
+              "end": 377.26090221325194,
+              "before_P": 2.6825739459871443,
+              "P_API": 9.218352219217975,
+              "P_to_D": 0.4216594856512188,
+              "D_API_to_first": 16.725118022036668,
+              "P_prefix": 640,
+              "D_prefix": 0
+            }
+          ]
+        }
+      },
+      "candidate_gain_vs_reference": -0.14188143966810873
+    },
+    {
+      "rate": 0.49032341538142143,
+      "arms": {
+        "native": {
+          "label": "Tailguard service-portfolio candidate",
+          "TTFT": {
+            "n": 95,
+            "mean": 17.261139488524062,
+            "p50": 5.6745657436371175,
+            "p90": 63.3531377209498,
+            "p95": 72.69292940454636,
+            "p99": 78.63821641086065,
+            "max": 78.63821641086065
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 144.7927825209951,
+            "p50": 109.93805527862874,
+            "p90": 335.6189320894292,
+            "p95": 379.27552046448324,
+            "p99": 442.55476915527953,
+            "max": 442.55476915527953
+          },
+          "makespan": 632.9802543782829,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ],
+          "accepted_prefix_tokens": {
+            "P": 373120,
+            "D": 323968
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 122.97659177154094,
+            "compute": 893.6340657132073,
+            "save": 7.924976378155407
+          },
+          "planning_wall": 0.04158128146082163,
+          "boundary_CPU_wall": 0,
+          "iteration_scheduler_wall": 0.1542110787704587,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7707033600,
+          "copy_service_sum": 10.986028988843936,
+          "action_counts": {
+            "implicit_copy": 58,
+            "native_reclaim": 60,
+            "forecast_native_reclaim": 1671
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2040528896
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4462739456
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "distribution-search:12",
+              "TTFT": 78.63821641086065,
+              "nominal": 241.94480944846052,
+              "dependency": 163.30659303759987,
+              "p": 1,
+              "d": 3,
+              "end": 421.315451691806,
+              "before_P": 0.0004962999373674393,
+              "P_API": 8.595037829222829,
+              "P_to_D": 41.08060040941882,
+              "D_API_to_first": 28.962081872281658,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "feal-differential-cryptanalysis:12",
+              "TTFT": 77.25940775046286,
+              "nominal": 260.3273515962528,
+              "dependency": 183.06794384578998,
+              "p": 1,
+              "d": 3,
+              "end": 442.56648286219774,
+              "before_P": 0.0005289921537041664,
+              "P_API": 8.06604904548059,
+              "P_to_D": 24.387266170123212,
+              "D_API_to_first": 44.80556354270533,
+              "P_prefix": 6656,
+              "D_prefix": 6784
+            },
+            {
+              "id": "distribution-search:14",
+              "TTFT": 74.87149812094964,
+              "nominal": 335.6189320894292,
+              "dependency": 260.74743396847964,
+              "p": 1,
+              "d": 3,
+              "end": 528.4745086100471,
+              "before_P": 0.0005182214081287384,
+              "P_API": 10.48424844727278,
+              "P_to_D": 26.79356685903815,
+              "D_API_to_first": 37.5931645932306,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "fix-code-vulnerability:10",
+              "TTFT": 74.52492095713717,
+              "nominal": 300.263168139763,
+              "dependency": 225.73824718262583,
+              "p": 1,
+              "d": 3,
+              "end": 471.8901011914499,
+              "before_P": 0.000508350320160389,
+              "P_API": 9.259567337198117,
+              "P_to_D": 13.291365561983298,
+              "D_API_to_first": 51.97347970763559,
+              "P_prefix": 640,
+              "D_prefix": 4992
+            },
+            {
+              "id": "feal-differential-cryptanalysis:14",
+              "TTFT": 72.69292940454636,
+              "nominal": 353.91877489826584,
+              "dependency": 281.2258454937195,
+              "p": 1,
+              "d": 3,
+              "end": 558.9038328602747,
+              "before_P": 0.0005508428439497948,
+              "P_API": 9.038815893590026,
+              "P_to_D": 8.604658443373921,
+              "D_API_to_first": 55.048904224738465,
+              "P_prefix": 6656,
+              "D_prefix": 6784
+            }
+          ]
+        },
+        "reference": {
+          "label": "Tailguard FIFO + exact memo (internal reference)",
+          "TTFT": {
+            "n": 95,
+            "mean": 14.63594746926073,
+            "p50": 14.2602844582714,
+            "p90": 27.394946372248228,
+            "p95": 28.175827531961545,
+            "p99": 31.28790379988135,
+            "max": 31.28790379988135
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 128.84906535526525,
+            "p50": 110.78227062828583,
+            "p90": 265.4856552853788,
+            "p95": 284.6844963151814,
+            "p99": 305.20418319624906,
+            "max": 305.20418319624906
+          },
+          "makespan": 503.9011665948191,
+          "P_counts": [
+            43,
+            52
+          ],
+          "D_counts": [
+            58,
+            37
+          ],
+          "accepted_prefix_tokens": {
+            "P": 211200,
+            "D": 231040
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 83.94879479647827,
+            "compute": 861.7763683811654,
+            "save": 7.924293748452328
+          },
+          "planning_wall": 67.32965347077698,
+          "boundary_CPU_wall": 35.2681286521256,
+          "iteration_scheduler_wall": 0.12527817487716675,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 6415187968,
+          "copy_service_sum": 7.998163433530349,
+          "action_counts": {
+            "software_copy_gate_hold": 50,
+            "selected_copy": 46,
+            "copy_normal_defer": 4,
+            "forecast_native_reclaim": 272
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3559915520
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2414870528
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "git-multibranch:12",
+              "TTFT": 31.28790379988135,
+              "nominal": 248.54392690350616,
+              "dependency": 217.2560231036248,
+              "p": 0,
+              "d": 3,
+              "end": 424.44939060704695,
+              "before_P": 0.9596745121629624,
+              "P_API": 8.685111159350074,
+              "P_to_D": 0.4527289124485492,
+              "D_API_to_first": 21.190389215919765,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-code-vulnerability:11",
+              "TTFT": 29.408774447938924,
+              "nominal": 228.34721200908382,
+              "dependency": 198.9384375611449,
+              "p": 1,
+              "d": 2,
+              "end": 389.36368750553015,
+              "before_P": 6.408281936671472,
+              "P_API": 9.378482826303806,
+              "P_to_D": 0.4700863074791073,
+              "D_API_to_first": 13.151923377484536,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-git:12",
+              "TTFT": 29.03532447779918,
+              "nominal": 239.83593210815002,
+              "dependency": 210.80060763035084,
+              "p": 1,
+              "d": 2,
+              "end": 413.6172869631267,
+              "before_P": 16.90236782281579,
+              "P_API": 3.8244037638517967,
+              "P_to_D": 0.45373015592809907,
+              "D_API_to_first": 7.85482273520347,
+              "P_prefix": 3712,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:11",
+              "TTFT": 28.65707208113332,
+              "nominal": 212.230083397014,
+              "dependency": 183.57301131588068,
+              "p": 0,
+              "d": 2,
+              "end": 373.03780693387927,
+              "before_P": 1.2656699112953333,
+              "P_API": 10.043630707301151,
+              "P_to_D": 0.45907472374852887,
+              "D_API_to_first": 16.888696738788326,
+              "P_prefix": 0,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "TTFT": 28.175827531961545,
+              "nominal": 187.95023243214425,
+              "dependency": 159.7744049001827,
+              "p": 0,
+              "d": 2,
+              "end": 336.30066222151953,
+              "before_P": 1.3500942542554526,
+              "P_API": 8.62588194904347,
+              "P_to_D": 0.5327594952937602,
+              "D_API_to_first": 17.667091833368886,
+              "P_prefix": 768,
+              "D_prefix": 0
+            }
+          ]
+        },
+        "ours": {
+          "label": "Tailguard service-portfolio candidate",
+          "TTFT": {
+            "n": 95,
+            "mean": 15.774157959428203,
+            "p50": 16.644144206497856,
+            "p90": 28.15848753317141,
+            "p95": 29.077031371175565,
+            "p99": 35.670121256604716,
+            "max": 35.670121256604716
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 112.34860920792138,
+            "p50": 92.99963855307415,
+            "p90": 240.27214690958965,
+            "p95": 261.9789028482915,
+            "p99": 280.62660427927074,
+            "max": 280.62660427927074
+          },
+          "makespan": 485.74824855702326,
+          "P_counts": [
+            30,
+            65
+          ],
+          "D_counts": [
+            60,
+            35
+          ],
+          "accepted_prefix_tokens": {
+            "P": 365568,
+            "D": 66176
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 24.827513788837315,
+            "compute": 874.9889025014625,
+            "save": 7.924168671073858
+          },
+          "planning_wall": 10.215082350187004,
+          "boundary_CPU_wall": 0.8166002640500665,
+          "iteration_scheduler_wall": 0.13496113196015358,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 5233442816,
+          "copy_service_sum": 10.238967469132144,
+          "action_counts": {
+            "software_copy_gate_hold": 25,
+            "selected_copy": 25,
+            "forecast_native_reclaim": 272
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4293918720
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2576351232
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "distribution-search:12",
+              "TTFT": 35.670121256604716,
+              "nominal": 170.07353395132967,
+              "dependency": 134.40341269472495,
+              "p": 1,
+              "d": 3,
+              "end": 338.27555360822214,
+              "before_P": 3.937525160803659,
+              "P_API": 4.572729487665999,
+              "P_to_D": 0.4366295358445882,
+              "D_API_to_first": 26.723237072290488,
+              "P_prefix": 9344,
+              "D_prefix": 0
+            },
+            {
+              "id": "distribution-search:13",
+              "TTFT": 33.07190444258589,
+              "nominal": 203.81026027934283,
+              "dependency": 170.73835583675694,
+              "p": 0,
+              "d": 2,
+              "end": 381.2232094916957,
+              "before_P": 1.9425830736671514,
+              "P_API": 9.044007791241647,
+              "P_to_D": 0.4210933774989485,
+              "D_API_to_first": 21.664220200178136,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "headless-terminal:12",
+              "TTFT": 30.10805373702641,
+              "nominal": 210.23104241328218,
+              "dependency": 180.12298867625577,
+              "p": 1,
+              "d": 2,
+              "end": 387.252569043515,
+              "before_P": 0.7258012120851163,
+              "P_API": 2.7068243929167632,
+              "P_to_D": 8.039651728635135,
+              "D_API_to_first": 18.6357764033894,
+              "P_prefix": 6784,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-code-vulnerability:8",
+              "TTFT": 29.746562628998532,
+              "nominal": 115.45807215732162,
+              "dependency": 85.71150952832309,
+              "p": 1,
+              "d": 2,
+              "end": 247.74860119694614,
+              "before_P": 0.6520510820077163,
+              "P_API": 7.976655091155621,
+              "P_to_D": 0.4212160680722832,
+              "D_API_to_first": 20.696640387762898,
+              "P_prefix": 640,
+              "D_prefix": 0
+            },
+            {
+              "id": "headless-terminal:11",
+              "TTFT": 29.077031371175565,
+              "nominal": 178.67213499689808,
+              "dependency": 149.59510362572252,
+              "p": 1,
+              "d": 2,
+              "end": 347.1581452642969,
+              "before_P": 0.6960379044862179,
+              "P_API": 2.160120055304932,
+              "P_to_D": 8.866525729921761,
+              "D_API_to_first": 17.354347681462627,
+              "P_prefix": 6784,
+              "D_prefix": 0
+            }
+          ]
+        }
+      },
+      "candidate_gain_vs_reference": -0.14006107551187186
+    },
+    {
+      "rate": 0.9806468307628429,
+      "arms": {
+        "native": {
+          "label": "Tailguard service-portfolio candidate",
+          "TTFT": {
+            "n": 95,
+            "mean": 16.426878352291194,
+            "p50": 6.246357712153895,
+            "p90": 48.888953259150696,
+            "p95": 67.53514274305269,
+            "p99": 71.01024084522038,
+            "max": 71.01024084522038
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 193.53137644690963,
+            "p50": 168.14206008172698,
+            "p90": 422.64755661650076,
+            "p95": 487.0651780692801,
+            "p99": 514.6794563496815,
+            "max": 514.6794563496815
+          },
+          "makespan": 619.1212574575949,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ],
+          "accepted_prefix_tokens": {
+            "P": 338944,
+            "D": 298880
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 116.33785833008764,
+            "compute": 897.923621340845,
+            "save": 7.925008891557809
+          },
+          "planning_wall": 0.04173446260392666,
+          "boundary_CPU_wall": 0,
+          "iteration_scheduler_wall": 0.13537359703332186,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 7472152576,
+          "copy_service_sum": 10.874299896286466,
+          "action_counts": {
+            "implicit_copy": 64,
+            "native_reclaim": 65,
+            "forecast_native_reclaim": 2213
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2099249152
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4580179968
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "feal-differential-cryptanalysis:13",
+              "TTFT": 71.01024084522038,
+              "nominal": 396.57898408696377,
+              "dependency": 325.5687432417434,
+              "p": 1,
+              "d": 3,
+              "end": 499.3165803945117,
+              "before_P": 0.6182858000531724,
+              "P_API": 8.919082665427661,
+              "P_to_D": 13.228693048650427,
+              "D_API_to_first": 48.24417933108913,
+              "P_prefix": 6656,
+              "D_prefix": 4096
+            },
+            {
+              "id": "dna-insert:16",
+              "TTFT": 70.2408656916271,
+              "nominal": 449.3485565718208,
+              "dependency": 379.1076908801937,
+              "p": 1,
+              "d": 3,
+              "end": 568.887118059303,
+              "before_P": 0.0005136001855134964,
+              "P_API": 9.806907694076251,
+              "P_to_D": 11.66419309918723,
+              "D_API_to_first": 48.76925129817812,
+              "P_prefix": 640,
+              "D_prefix": 7040
+            },
+            {
+              "id": "distribution-search:12",
+              "TTFT": 70.15122042563962,
+              "nominal": 422.64755661650076,
+              "dependency": 352.49633619086114,
+              "p": 1,
+              "d": 3,
+              "end": 523.6886199823491,
+              "before_P": 0.0005032811313867569,
+              "P_API": 8.595037829222829,
+              "P_to_D": 7.754574567111547,
+              "D_API_to_first": 53.801104748173884,
+              "P_prefix": 640,
+              "D_prefix": 640
+            },
+            {
+              "id": "headless-terminal:13",
+              "TTFT": 67.53566174976675,
+              "nominal": 429.5989250087207,
+              "dependency": 362.06326325895395,
+              "p": 1,
+              "d": 3,
+              "end": 540.7262186703889,
+              "before_P": 0.0004985807463526726,
+              "P_API": 5.490210255060911,
+              "P_to_D": 6.458264825700894,
+              "D_API_to_first": 55.5866880882586,
+              "P_prefix": 5888,
+              "D_prefix": 5888
+            },
+            {
+              "id": "fix-git:12",
+              "TTFT": 67.53514274305269,
+              "nominal": 445.72279945027526,
+              "dependency": 378.1876567072226,
+              "p": 1,
+              "d": 3,
+              "end": 551.6239998558619,
+              "before_P": 0.0004655616357922554,
+              "P_API": 4.238464916659118,
+              "P_to_D": 12.177487235822582,
+              "D_API_to_first": 51.118725028935216,
+              "P_prefix": 2816,
+              "D_prefix": 2816
+            }
+          ]
+        },
+        "reference": {
+          "label": "Tailguard FIFO + exact memo (internal reference)",
+          "TTFT": {
+            "n": 95,
+            "mean": 14.581158411920361,
+            "p50": 15.46913447952474,
+            "p90": 26.225645589454018,
+            "p95": 30.227223390091012,
+            "p99": 32.00446407621581,
+            "max": 32.00446407621581
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 174.6688518792276,
+            "p50": 163.5133175326693,
+            "p90": 346.93666299994914,
+            "p95": 369.1578112020741,
+            "p99": 394.59972272696757,
+            "max": 394.59972272696757
+          },
+          "makespan": 500.9841285435015,
+          "P_counts": [
+            43,
+            52
+          ],
+          "D_counts": [
+            58,
+            37
+          ],
+          "accepted_prefix_tokens": {
+            "P": 258176,
+            "D": 265088
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 96.93952881868908,
+            "compute": 844.2229564529121,
+            "save": 7.924312292016111
+          },
+          "planning_wall": 73.78740993142128,
+          "boundary_CPU_wall": 51.506770766340196,
+          "iteration_scheduler_wall": 0.12907035183161497,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 5776605184,
+          "copy_service_sum": 7.192628422987109,
+          "action_counts": {
+            "software_copy_gate_hold": 59,
+            "selected_copy": 54,
+            "forecast_native_reclaim": 123,
+            "copy_normal_defer": 5
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 3978297344
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2576351232
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "fix-code-vulnerability:11",
+              "TTFT": 32.00446407621581,
+              "nominal": 316.27537157401434,
+              "dependency": 284.2709074977986,
+              "p": 0,
+              "d": 2,
+              "end": 400.8448679366024,
+              "before_P": 7.55286582922696,
+              "P_API": 4.568611185857677,
+              "P_to_D": 0.98487997076478,
+              "D_API_to_first": 18.89810709036641,
+              "P_prefix": 10880,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "TTFT": 30.68865476934576,
+              "nominal": 251.0412832202246,
+              "dependency": 220.35262845087885,
+              "p": 1,
+              "d": 3,
+              "end": 342.05345043776975,
+              "before_P": 6.775738696186579,
+              "P_API": 3.687407073133283,
+              "P_to_D": 0.4703725438844799,
+              "D_API_to_first": 19.75513645614143,
+              "P_prefix": 11776,
+              "D_prefix": 0
+            },
+            {
+              "id": "headless-terminal:10",
+              "TTFT": 30.55578655239748,
+              "nominal": 262.06669598738904,
+              "dependency": 231.5109094349916,
+              "p": 1,
+              "d": 2,
+              "end": 344.45619344169637,
+              "before_P": 11.614284351540903,
+              "P_API": 4.2724207575608215,
+              "P_to_D": 0.7864116547187336,
+              "D_API_to_first": 13.882669788577005,
+              "P_prefix": 1024,
+              "D_prefix": 896
+            },
+            {
+              "id": "feal-differential-cryptanalysis:12",
+              "TTFT": 30.34768101177849,
+              "nominal": 336.0044372776205,
+              "dependency": 305.65675626584203,
+              "p": 1,
+              "d": 2,
+              "end": 425.6198078838024,
+              "before_P": 8.50156291979431,
+              "P_API": 6.883017180316815,
+              "P_to_D": 0.49029241058048,
+              "D_API_to_first": 14.472808501086888,
+              "P_prefix": 9216,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-code-vulnerability:9",
+              "TTFT": 30.227223390091012,
+              "nominal": 256.4925734551754,
+              "dependency": 226.26535006508433,
+              "p": 1,
+              "d": 2,
+              "end": 328.9103648598609,
+              "before_P": 9.000910147253364,
+              "P_API": 8.759617022328339,
+              "P_to_D": 0.5089613005798697,
+              "D_API_to_first": 11.957734919929464,
+              "P_prefix": 0,
+              "D_prefix": 0
+            }
+          ]
+        },
+        "ours": {
+          "label": "Tailguard service-portfolio candidate",
+          "TTFT": {
+            "n": 95,
+            "mean": 15.088050683971826,
+            "p50": 16.167093145127694,
+            "p90": 24.609431993173644,
+            "p95": 25.70967850897989,
+            "p99": 32.57045944406963,
+            "max": 32.57045944406963
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 159.8678652257312,
+            "p50": 150.2611182230665,
+            "p90": 317.8754700606585,
+            "p95": 344.9295691900392,
+            "p99": 364.69330155508356,
+            "max": 364.69330155508356
+          },
+          "makespan": 471.07764278439697,
+          "P_counts": [
+            43,
+            52
+          ],
+          "D_counts": [
+            59,
+            36
+          ],
+          "accepted_prefix_tokens": {
+            "P": 337024,
+            "D": 88448
+          },
+          "D_phase_occupied_sum_not_arm_wall": {
+            "restore": 32.59573754176304,
+            "compute": 854.3067693346492,
+            "save": 7.924228334304644
+          },
+          "planning_wall": 9.673622875474393,
+          "boundary_CPU_wall": 0.6035576686263084,
+          "iteration_scheduler_wall": 0.1324651027098298,
+          "admission_scheduler_wall": 0,
+          "copied_bytes": 5622464512,
+          "copy_service_sum": 11.362359271663236,
+          "action_counts": {
+            "software_copy_gate_hold": 32,
+            "selected_copy": 31,
+            "forecast_native_reclaim": 229,
+            "copy_normal_defer": 1
+          },
+          "D_peak": {
+            "2": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 4484759552
+            },
+            "3": {
+              "peak_active": 4,
+              "peak_iteration_sequences": 4,
+              "peak_kv_bytes": 2202009600
+            }
+          },
+          "release_priority_opportunities": {},
+          "strata_reordered_admissions": 0,
+          "paper_scope": null,
+          "worst_requests": [
+            {
+              "id": "fix-code-vulnerability:11",
+              "TTFT": 32.57045944406963,
+              "nominal": 297.22513293152394,
+              "dependency": 264.65467348745426,
+              "p": 1,
+              "d": 2,
+              "end": 381.8002659289426,
+              "before_P": 3.713763148285068,
+              "P_API": 4.646355365648713,
+              "P_to_D": 0.44771456087943307,
+              "D_API_to_first": 23.762626369256395,
+              "P_prefix": 10880,
+              "D_prefix": 0
+            },
+            {
+              "id": "feal-differential-cryptanalysis:13",
+              "TTFT": 27.974668804951136,
+              "nominal": 293.0207984183322,
+              "dependency": 265.0461296133811,
+              "p": 0,
+              "d": 3,
+              "end": 394.55816944824494,
+              "before_P": 0.6773783686907677,
+              "P_API": 8.753413978777541,
+              "P_to_D": 0.4324487990048169,
+              "D_API_to_first": 18.11142765847802,
+              "P_prefix": 6656,
+              "D_prefix": 0
+            },
+            {
+              "id": "fix-git:12",
+              "TTFT": 27.83202469164047,
+              "nominal": 308.24479277497755,
+              "dependency": 280.412768083337,
+              "p": 0,
+              "d": 3,
+              "end": 400.026342398089,
+              "before_P": 0.6828709879295616,
+              "P_API": 4.18370018889612,
+              "P_to_D": 0.42438926941719046,
+              "D_API_to_first": 22.541064245397592,
+              "P_prefix": 2816,
+              "D_prefix": 0
+            },
+            {
+              "id": "headless-terminal:7",
+              "TTFT": 27.36028023473611,
+              "nominal": 133.07449012060502,
+              "dependency": 105.71420988586891,
+              "p": 0,
+              "d": 3,
+              "end": 220.65796172329127,
+              "before_P": 0.8693593537032314,
+              "P_API": 0.7100919825292646,
+              "P_to_D": 0.43519059217538825,
+              "D_API_to_first": 25.345638306328226,
+              "P_prefix": 6784,
+              "D_prefix": 0
+            },
+            {
+              "id": "dna-insert:13",
+              "TTFT": 25.70967850897989,
+              "nominal": 297.8021257929286,
+              "dependency": 272.09244728394873,
+              "p": 1,
+              "d": 2,
+              "end": 389.81146422186214,
+              "before_P": 0.6990780710579543,
+              "P_API": 7.255209912286312,
+              "P_to_D": 0.4226476971339821,
+              "D_API_to_first": 17.332742828501637,
+              "P_prefix": 1152,
+              "D_prefix": 0
+            }
+          ]
+        }
+      },
+      "candidate_gain_vs_reference": -0.01768488816141245
+    }
+  ]
+}

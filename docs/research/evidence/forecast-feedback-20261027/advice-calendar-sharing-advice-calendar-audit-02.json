@@ -1,0 +1,39 @@
+{
+  "CPU_only": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "calls": 8,
+      "moves": 2,
+      "partial_searches": 5,
+      "CPU_wall": 2.2199963247403502,
+      "all_checks_passed": true,
+      "window_checks": 8,
+      "window_cancellations": 0,
+      "trigger_CPU_wall": 0.00022969115525484085
+    },
+    {
+      "rate": 0.49032341538142143,
+      "calls": 8,
+      "moves": 0,
+      "partial_searches": 7,
+      "CPU_wall": 0.8603710709139705,
+      "all_checks_passed": true,
+      "window_checks": 8,
+      "window_cancellations": 0,
+      "trigger_CPU_wall": 0.0001621795818209648
+    },
+    {
+      "rate": 0.9806468307628429,
+      "calls": 14,
+      "moves": 1,
+      "partial_searches": 6,
+      "CPU_wall": 2.8448986737057567,
+      "all_checks_passed": true,
+      "window_checks": 14,
+      "window_cancellations": 0,
+      "trigger_CPU_wall": 0.0012378795072436333
+    }
+  ],
+  "all_checks_passed": true
+}

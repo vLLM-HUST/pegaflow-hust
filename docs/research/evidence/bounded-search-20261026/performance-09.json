@@ -1,0 +1,356 @@
+{
+  "directory": "/root/issue23-bounded-proof-memo-09",
+  "screen_sha256": "586e209347073c3966792c167e0a1c595c06ea0fd1d3d27e3d64c0d372546ab5",
+  "audit": "completed-CPU-screen-accounting-not-real-output-audit",
+  "validated_arms": 12,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "arms": {
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.51438377440358,
+            "p50": 5.444434667874873,
+            "p90": 49.93759151037574,
+            "p95": 62.54156852421244,
+            "p99": 69.73781600799941,
+            "max": 69.73781600799941
+          },
+          "makespan": 614.835828975006,
+          "planning_seconds": 0.04602804407477379,
+          "boundary_seconds": 0,
+          "planning_plus_boundary_seconds": 0.04602804407477379,
+          "iteration_cpu_seconds": 0.1495253061875701,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 0,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ]
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 12.670651864551468,
+            "p50": 8.898375807414595,
+            "p90": 25.055092174209904,
+            "p95": 26.608244875020944,
+            "p99": 31.233488434023855,
+            "max": 31.233488434023855
+          },
+          "makespan": 508.77944489666896,
+          "planning_seconds": 43.618311318568885,
+          "boundary_seconds": 23.659917668439448,
+          "planning_plus_boundary_seconds": 67.27822898700833,
+          "iteration_cpu_seconds": 0.13802086934447289,
+          "pruned_calendars": 5599,
+          "bound_checks": 846518,
+          "calendar_full": 708,
+          "P_counts": [
+            40,
+            55
+          ],
+          "D_counts": [
+            58,
+            37
+          ]
+        },
+        "bounded": {
+          "TTFT": {
+            "n": 95,
+            "mean": 13.787637637090045,
+            "p50": 13.169950940764835,
+            "p90": 25.462781986485368,
+            "p95": 29.885935550102374,
+            "p99": 32.134374966912446,
+            "max": 32.134374966912446
+          },
+          "makespan": 506.46317517362223,
+          "planning_seconds": 56.15423896815628,
+          "boundary_seconds": 15.213277477771044,
+          "planning_plus_boundary_seconds": 71.36751644592732,
+          "iteration_cpu_seconds": 0.14450762793421745,
+          "pruned_calendars": 5753,
+          "bound_checks": 890803,
+          "calendar_full": 667,
+          "P_counts": [
+            41,
+            54
+          ],
+          "D_counts": [
+            58,
+            37
+          ]
+        },
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 13.787192742198853,
+            "p50": 13.60485169218785,
+            "p90": 24.4976713340497,
+            "p95": 29.06576841168254,
+            "p99": 31.96551058388735,
+            "max": 31.96551058388735
+          },
+          "makespan": 518.17383265259,
+          "planning_seconds": 64.69001414813101,
+          "boundary_seconds": 44.75857283268124,
+          "planning_plus_boundary_seconds": 109.44858698081225,
+          "iteration_cpu_seconds": 0.1306894589215517,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 6206,
+          "P_counts": [
+            36,
+            59
+          ],
+          "D_counts": [
+            58,
+            37
+          ]
+        }
+      },
+      "net_p99_reduction_vs_reference_percent": 2.29003740748156,
+      "search_wall_reduction_percent": 38.52983319117398,
+      "exact_mechanism_equivalence": null
+    },
+    {
+      "rate": 0.49032341538142143,
+      "arms": {
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 17.261140678695494,
+            "p50": 5.673963102494213,
+            "p90": 63.35311105625317,
+            "p95": 72.69303533596997,
+            "p99": 78.63823030246817,
+            "max": 78.63823030246817
+          },
+          "makespan": 632.9811544913067,
+          "planning_seconds": 0.0411731731146574,
+          "boundary_seconds": 0,
+          "planning_plus_boundary_seconds": 0.0411731731146574,
+          "iteration_cpu_seconds": 0.13596354611217976,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 0,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ]
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 13.384001692739842,
+            "p50": 14.787213875133148,
+            "p90": 24.475489961300298,
+            "p95": 24.75959198822892,
+            "p99": 28.981243935163945,
+            "max": 28.981243935163945
+          },
+          "makespan": 502.0576484267907,
+          "planning_seconds": 46.90046058036387,
+          "boundary_seconds": 16.20502732694149,
+          "planning_plus_boundary_seconds": 63.10548790730536,
+          "iteration_cpu_seconds": 0.13409214746207,
+          "pruned_calendars": 4793,
+          "bound_checks": 766486,
+          "calendar_full": 726,
+          "P_counts": [
+            41,
+            54
+          ],
+          "D_counts": [
+            57,
+            38
+          ]
+        },
+        "bounded": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.675351847668658,
+            "p50": 14.679589829511087,
+            "p90": 25.36349446287778,
+            "p95": 28.971275580013298,
+            "p99": 31.556215413065843,
+            "max": 31.556215413065843
+          },
+          "makespan": 510.12652688023365,
+          "planning_seconds": 70.39419370889664,
+          "boundary_seconds": 32.01351181790233,
+          "planning_plus_boundary_seconds": 102.40770552679896,
+          "iteration_cpu_seconds": 0.13791246991604567,
+          "pruned_calendars": 7196,
+          "bound_checks": 1308475,
+          "calendar_full": 779,
+          "P_counts": [
+            45,
+            50
+          ],
+          "D_counts": [
+            58,
+            37
+          ]
+        },
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 15.481897474666328,
+            "p50": 17.51398179356613,
+            "p90": 26.080619016633193,
+            "p95": 29.49850581639174,
+            "p99": 32.10106715055764,
+            "max": 32.10106715055764
+          },
+          "makespan": 496.37872409964785,
+          "planning_seconds": 70.98160367365927,
+          "boundary_seconds": 38.99988023843616,
+          "planning_plus_boundary_seconds": 109.98148391209543,
+          "iteration_cpu_seconds": 0.13027197867631912,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 5238,
+          "P_counts": [
+            44,
+            51
+          ],
+          "D_counts": [
+            59,
+            36
+          ]
+        }
+      },
+      "net_p99_reduction_vs_reference_percent": 9.718752341663194,
+      "search_wall_reduction_percent": 42.621716253852796,
+      "exact_mechanism_equivalence": null
+    },
+    {
+      "rate": 0.9806468307628429,
+      "arms": {
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 16.426908038110028,
+            "p50": 6.246463870820207,
+            "p90": 48.88900751986654,
+            "p95": 67.53521878647223,
+            "p99": 71.0101767516008,
+            "max": 71.0101767516008
+          },
+          "makespan": 619.1225859966981,
+          "planning_seconds": 0.043358633294701576,
+          "boundary_seconds": 0,
+          "planning_plus_boundary_seconds": 0.043358633294701576,
+          "iteration_cpu_seconds": 0.13872810825705528,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 0,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ]
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 13.808372933645654,
+            "p50": 13.952156860437867,
+            "p90": 24.660288404351206,
+            "p95": 26.53413557031473,
+            "p99": 35.08383675054898,
+            "max": 35.08383675054898
+          },
+          "makespan": 492.5568214325378,
+          "planning_seconds": 45.89746539015323,
+          "boundary_seconds": 18.412909884937108,
+          "planning_plus_boundary_seconds": 64.31037527509034,
+          "iteration_cpu_seconds": 0.12967052683234215,
+          "pruned_calendars": 4835,
+          "bound_checks": 774274,
+          "calendar_full": 716,
+          "P_counts": [
+            44,
+            51
+          ],
+          "D_counts": [
+            57,
+            38
+          ]
+        },
+        "bounded": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.48966008780359,
+            "p50": 12.12562243472641,
+            "p90": 28.416921741682074,
+            "p95": 33.30608354910771,
+            "p99": 44.08607207213589,
+            "max": 44.08607207213589
+          },
+          "makespan": 511.4626789768018,
+          "planning_seconds": 69.06433330755681,
+          "boundary_seconds": 27.2296792678535,
+          "planning_plus_boundary_seconds": 96.2940125754103,
+          "iteration_cpu_seconds": 0.1330781141296029,
+          "pruned_calendars": 6847,
+          "bound_checks": 1193404,
+          "calendar_full": 811,
+          "P_counts": [
+            44,
+            51
+          ],
+          "D_counts": [
+            58,
+            37
+          ]
+        },
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.631114494068795,
+            "p50": 14.065497816086435,
+            "p90": 27.95841003810355,
+            "p95": 29.590713663778047,
+            "p99": 31.930533897773273,
+            "max": 31.930533897773273
+          },
+          "makespan": 510.4395552232062,
+          "planning_seconds": 65.6941382214427,
+          "boundary_seconds": 37.30640242435038,
+          "planning_plus_boundary_seconds": 103.00054064579308,
+          "iteration_cpu_seconds": 0.13143465388566256,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 5436,
+          "P_counts": [
+            40,
+            55
+          ],
+          "D_counts": [
+            58,
+            37
+          ]
+        }
+      },
+      "net_p99_reduction_vs_reference_percent": -9.87550932556005,
+      "search_wall_reduction_percent": 37.5630701820816,
+      "exact_mechanism_equivalence": null
+    }
+  ]
+}

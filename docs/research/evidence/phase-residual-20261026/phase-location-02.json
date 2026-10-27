@@ -1,0 +1,40 @@
+{
+  "scope": "Mechanism diagnostic: fixed input-sequence parity routing, not admission-sequence native RR. Zero controller CPU, residual worlds, cache feedback retained. Neither net policy performance nor a hardware effect",
+  "input_sha256": "2b91a55f74a49837867145881d2b696a773fb964a2789ba1cc3acff281020dea",
+  "source_sha256": "f7a70b711424b4583edcda267c98048f68c2c6ad972e9d0b908b07814934a376",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "aggregate_p99": 67.32579461644508,
+      "joint_p99": 68.25371634583598,
+      "aggregate_phase": 622.3822982034426,
+      "joint_phase": 622.5266018047927,
+      "identical_routes": true,
+      "same_stage_prefix_coordinates": 190,
+      "total_stages": 190,
+      "all_control_CPU_zero": true
+    },
+    {
+      "rate": 0.49032341538142143,
+      "aggregate_p99": 67.50430413589106,
+      "joint_p99": 68.43222586528395,
+      "aggregate_phase": 618.7560640199159,
+      "joint_phase": 618.7560640199024,
+      "identical_routes": true,
+      "same_stage_prefix_coordinates": 190,
+      "total_stages": 190,
+      "all_control_CPU_zero": true
+    },
+    {
+      "rate": 0.9806468307628429,
+      "aggregate_p99": 67.44483586540298,
+      "joint_p99": 68.37271677631719,
+      "aggregate_phase": 617.4302614655503,
+      "joint_phase": 617.4302614655368,
+      "identical_routes": true,
+      "same_stage_prefix_coordinates": 190,
+      "total_stages": 190,
+      "all_control_CPU_zero": true
+    }
+  ]
+}

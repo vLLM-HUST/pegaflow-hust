@@ -1,0 +1,23 @@
+{
+  "name": "Ascend910B2-Qwen2.5-7B-BF16-TP1-normal-memory-scenario",
+  "nominal_HBM_class": "64G",
+  "hardware_source": "https://www.hiascend.com/doc_center/source/zh/HDK/2610/A2/A2DCMI/dcmi_050.html",
+  "runtime_visible_bytes": 65452113920,
+  "runtime_visible_source": "historical-visible-capacity.json; observed on the user P allocation 2026-10-15, not measured today",
+  "historical_capacity_sha256": "a3148784bcd3611708172054667bf45af98e526e9836754ac85d479fe4e89004",
+  "system_reserve_note": "Already reflected in runtime-visible total; do not subtract nominal system memory again.",
+  "weights_bytes": 15231233024,
+  "weights_source": "/data/shared_models/Qwen2.5-7B-Instruct/model.safetensors.index.json metadata.total_size",
+  "weight_index_sha256": "624bf7c47cd12468fdc16e38a47cf4f19e0415b859a223ba3c027eed2f0e1028",
+  "model_config_sha256": "7463bb0ea78315365e6c6b74de4e73bbcc8359dfb0c5a737584e077d42c0b03c",
+  "bytes_per_token": 57344,
+  "bytes_per_token_formula": "2 KV * 28 layers * 4 KV heads * 128 head dimension * 2 BF16 bytes / TP1",
+  "utilization": 0.9,
+  "non_weight_runtime_reserve_GiB": 4,
+  "reserve_status": "Explicit unmeasured activation/backend/workspace scenario; sensitivity 2/4/8 GiB, not a latency penalty or fitted parameter.",
+  "real_serving": "gpu_memory_utilization=0.9; omit kv_cache_memory_bytes; use actual engine profile, not the CPU scenario bytes.",
+  "host_pool_bytes_per_instance": 2147483648,
+  "D_max_sequences": 4,
+  "native_GPU_prefix_cache": "Existing shared host-authority comparison fixture retained. Persistent GPU prefix reuse not modelled; not a stock production vLLM capacity benchmark.",
+  "original_2GiB_evidence_preserved": true
+}

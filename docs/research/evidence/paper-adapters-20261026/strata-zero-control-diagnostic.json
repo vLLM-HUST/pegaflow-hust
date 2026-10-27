@@ -1,0 +1,35 @@
+{
+  "scope": "Zero controller CPU cost mechanism diagnostic, NOT net performance or deployable forecast. Same mean serving world, no world service costs removed.",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "p99": {
+        "native": 69.7329935554468,
+        "strata": 69.7329935554468
+      },
+      "different_requests": 0,
+      "strata_reorders": 0,
+      "first_differences": []
+    },
+    {
+      "rate": 0.49032341538142143,
+      "p99": {
+        "native": 78.6350300145375,
+        "strata": 78.6350300145375
+      },
+      "different_requests": 0,
+      "strata_reorders": 0,
+      "first_differences": []
+    },
+    {
+      "rate": 0.9806468307628429,
+      "p99": {
+        "native": 71.01071896108448,
+        "strata": 71.01071896108448
+      },
+      "different_requests": 0,
+      "strata_reorders": 0,
+      "first_differences": []
+    }
+  ]
+}

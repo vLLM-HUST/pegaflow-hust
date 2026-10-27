@@ -1,0 +1,98 @@
+{
+  "scope": "Zero controller CPU cost mechanism diagnostic, NOT net performance or deployable forecast. Same mean serving world, no world service costs removed.",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "p99": {
+        "native": 69.7329935554468,
+        "strata": 69.73289542092789
+      },
+      "different_requests": 26,
+      "strata_reorders": 0,
+      "first_differences": [
+        {
+          "id": "headless-terminal:5",
+          "delta": 0.17914741445460436
+        },
+        {
+          "id": "fix-code-vulnerability:6",
+          "delta": 0.05968717633976439
+        },
+        {
+          "id": "fix-git:6",
+          "delta": 0.11934000335355677
+        },
+        {
+          "id": "dna-insert:7",
+          "delta": 0.05965236643709204
+        },
+        {
+          "id": "headless-terminal:8",
+          "delta": 0.015928105751555677
+        }
+      ]
+    },
+    {
+      "rate": 0.49032341538142143,
+      "p99": {
+        "native": 78.6350300145375,
+        "strata": 72.68635407072708
+      },
+      "different_requests": 59,
+      "strata_reorders": 0,
+      "first_differences": [
+        {
+          "id": "git-multibranch:3",
+          "delta": 0.1787966489312538
+        },
+        {
+          "id": "fix-git:4",
+          "delta": 0.1192286165132117
+        },
+        {
+          "id": "fix-code-vulnerability:4",
+          "delta": 0.0595926853922748
+        },
+        {
+          "id": "git-leak-recovery:4",
+          "delta": 0.1192286165132117
+        },
+        {
+          "id": "git-multibranch:4",
+          "delta": 0.05668146014602371
+        }
+      ]
+    },
+    {
+      "rate": 0.9806468307628429,
+      "p99": {
+        "native": 71.01071896108448,
+        "strata": 82.27127556203152
+      },
+      "different_requests": 79,
+      "strata_reorders": 0,
+      "first_differences": [
+        {
+          "id": "feal-differential-cryptanalysis:3",
+          "delta": 0.1787056729112635
+        },
+        {
+          "id": "fix-code-vulnerability:3",
+          "delta": -0.05733270359904452
+        },
+        {
+          "id": "git-leak-recovery:3",
+          "delta": 0.002241122389143868
+        },
+        {
+          "id": "fix-git:3",
+          "delta": 0.11912447769577028
+        },
+        {
+          "id": "git-multibranch:3",
+          "delta": 1.0200411842224284
+        }
+      ]
+    }
+  ]
+}

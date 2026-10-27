@@ -1,0 +1,361 @@
+{
+  "started": 1793086175.1953492,
+  "finished": 1793086813.9480157,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "-c",
+        "import simulate_continuous_batch; from ready_prefill_search import ReadyPrefillSimulation; from prefix_reclaim_search import PrefixReclaimSimulation; assert issubclass(ReadyPrefillSimulation, PrefixReclaimSimulation); import analyze_ready_prefill, audit_ready_prefill; print(\"ready-prefill exact class and audit imported\")"
+      ],
+      "pid": 560776,
+      "started": 1793086175.1956809,
+      "finished": 1793086175.6612833,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 30
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-ready-prefill-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-ready-prefill-charged-default-01",
+        "--policy",
+        "ready-prefill",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "0"
+      ],
+      "pid": 560777,
+      "started": 1793086175.6621232,
+      "finished": 1793086449.4236953,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-default-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/ready-prefill-source-receipt-01.json",
+        "--output",
+        "/root/issue23-ready-prefill-charged-default-01/source-control-audit.json"
+      ],
+      "pid": 565441,
+      "started": 1793086451.351159,
+      "finished": 1793086460.4821298,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-default-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-default-01/work-conservation-audit.json"
+      ],
+      "pid": 565752,
+      "started": 1793086460.4827118,
+      "finished": 1793086462.9018972,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-default-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-ready-prefill-charged-default-01/release-estimate-audit.json"
+      ],
+      "pid": 565753,
+      "started": 1793086462.9024236,
+      "finished": 1793086465.9226701,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-default-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-default-01/feedback-alignment.json"
+      ],
+      "pid": 565754,
+      "started": 1793086465.9232368,
+      "finished": 1793086468.0919826,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/audit_prefill_revalidation.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-default-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-default-01/prefill-revalidation-audit.json"
+      ],
+      "pid": 565756,
+      "started": 1793086468.09259,
+      "finished": 1793086470.0111847,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_prefill_feedback.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-default-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-default-01/numerical-feedback.json"
+      ],
+      "pid": 565757,
+      "started": 1793086470.0117033,
+      "finished": 1793086472.7315822,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/audit_ready_prefill.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-default-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-default-01/ready-prefill-audit.json"
+      ],
+      "pid": 565758,
+      "started": 1793086472.7321138,
+      "finished": 1793086476.052625,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_ready_prefill.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-default-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-default-01/charged-feedback.json"
+      ],
+      "pid": 565759,
+      "started": 1793086476.05315,
+      "finished": 1793086482.639454,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-ready-prefill-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-ready-prefill-charged-sharing-01",
+        "--policy",
+        "ready-prefill",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1"
+      ],
+      "pid": 566077,
+      "started": 1793086494.7194238,
+      "finished": 1793086772.2977655,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/ready-prefill-source-receipt-01.json",
+        "--output",
+        "/root/issue23-ready-prefill-charged-sharing-01/source-control-audit.json"
+      ],
+      "pid": 570073,
+      "started": 1793086774.0216465,
+      "finished": 1793086782.1535432,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-sharing-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-sharing-01/work-conservation-audit.json"
+      ],
+      "pid": 570287,
+      "started": 1793086782.154127,
+      "finished": 1793086784.373078,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-ready-prefill-charged-sharing-01/release-estimate-audit.json"
+      ],
+      "pid": 570288,
+      "started": 1793086784.373603,
+      "finished": 1793086786.7426593,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-sharing-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-sharing-01/feedback-alignment.json"
+      ],
+      "pid": 570289,
+      "started": 1793086786.7432313,
+      "finished": 1793086788.7624722,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/audit_prefill_revalidation.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-sharing-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-sharing-01/prefill-revalidation-audit.json"
+      ],
+      "pid": 570291,
+      "started": 1793086788.7629888,
+      "finished": 1793086790.4309423,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_prefill_feedback.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-sharing-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-sharing-01/numerical-feedback.json"
+      ],
+      "pid": 570292,
+      "started": 1793086790.4315012,
+      "finished": 1793086792.8007565,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/audit_ready_prefill.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-sharing-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-sharing-01/ready-prefill-audit.json"
+      ],
+      "pid": 570293,
+      "started": 1793086792.8011975,
+      "finished": 1793086797.3238244,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/analyze_ready_prefill.py",
+        "--result",
+        "/root/issue23-ready-prefill-charged-sharing-01",
+        "--output",
+        "/root/issue23-ready-prefill-charged-sharing-01/charged-feedback.json"
+      ],
+      "pid": 570294,
+      "started": 1793086797.3244252,
+      "finished": 1793086803.2999938,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/ready-prefill-completed-default-01-full.tar.gz",
+      "sha256": "8a0c03f87c280191f3532db7932a7bfd7d5ac1dc1204d1477b6a08e6e47d4b98",
+      "bytes": 19372325
+    },
+    {
+      "path": "/root/ready-prefill-completed-sharing-01-full.tar.gz",
+      "sha256": "3bb92839f2db4abb59e313f024bc6c8ea8031882fc125c8d7845bce09b20f1a7",
+      "bytes": 17458882
+    }
+  ],
+  "failure": null,
+  "no_gpu_work": true
+}

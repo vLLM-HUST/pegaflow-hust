@@ -1,0 +1,7 @@
+{
+  "path": "/root/prefix-reclaim-launch-failure-02.tar.gz",
+  "sha256": "3d071a7d88b34083e64760e55aa3f2f852f38e2ba9a2f68764036aa6f8fcd485",
+  "bytes": 4038,
+  "samples": 0,
+  "cause": "launcher replaced the stable pipeline-01 Python runtime path with nonexistent pipeline-02; no simulation child started"
+}

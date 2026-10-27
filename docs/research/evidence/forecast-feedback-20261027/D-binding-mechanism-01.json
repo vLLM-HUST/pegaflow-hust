@@ -1,0 +1,944 @@
+{
+  "CPU_only": true,
+  "fixed_route_wait_is_not_net_gain": true,
+  "sources": [
+    {
+      "version": "delta-protection",
+      "raw_alignment_sha256": "bd5354abc818b7aecb90cc3be2b49a5c4cafb48e9daec0977d5727c85747a4c2",
+      "cases": [
+        {
+          "rate": 0.24516170769071072,
+          "arms": {
+            "reference": {
+              "blocked_D_requests": 3,
+              "blocked_with_empty_alternative": 1,
+              "D_wait_sum_not_gain": 3.6624053326326163,
+              "later_predecessor_exposed": 8,
+              "worst": {
+                "id": "git-multibranch:10",
+                "route_origin": 283.27215105526346,
+                "P_done": 298.19844241094313,
+                "binding_age_at_P_done": 14.926291355679666,
+                "D": 2,
+                "actual_D_admit": 298.19844241094313,
+                "P_done_to_D_admit": 0.0,
+                "predicted_D_admit_at_route": 297.57893559144594,
+                "D_admit_endpoint_residual": 0.6195068194971896,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "fix-code-vulnerability:10",
+                        "route_origin": 279.9719224518256,
+                        "P_done": 290.61586335886466,
+                        "D_admit": 290.61586335886466,
+                        "full_end": 299.8629406094422,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "fix-git:10",
+                        "route_origin": 281.6502576920632,
+                        "P_done": 290.61895428646505,
+                        "D_admit": 290.61895428646505,
+                        "full_end": 300.00323397649123,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [
+                      {
+                        "id": "headless-terminal:10",
+                        "route_origin": 284.8796054111964,
+                        "P_done": 291.72324149237534,
+                        "D_admit": 291.72324149237534,
+                        "full_end": 306.82169774804504,
+                        "admitted_after_target_route": true
+                      }
+                    ],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 17.086326653984543,
+                  "nominal": 17.086326653984543,
+                  "dependency": 0.0,
+                  "P": 0,
+                  "D": 2,
+                  "P_prefix": 640,
+                  "D_prefix": 0,
+                  "ready": 282.50496326208673,
+                  "first": 299.5912899160713,
+                  "before_P": 8.111961144205281,
+                  "P_API": 7.581518004651092,
+                  "P_to_D": 0.8466820989083885,
+                  "D_API_to_first": 0.5461654062197567
+                }
+              }
+            },
+            "ours": {
+              "blocked_D_requests": 4,
+              "blocked_with_empty_alternative": 2,
+              "D_wait_sum_not_gain": 5.269739118190081,
+              "later_predecessor_exposed": 11,
+              "worst": {
+                "id": "fix-code-vulnerability:11",
+                "route_origin": 306.84717361018807,
+                "P_done": 320.09142803420167,
+                "binding_age_at_P_done": 13.244254424013604,
+                "D": 2,
+                "actual_D_admit": 320.09142803420167,
+                "P_done_to_D_admit": 0.0,
+                "predicted_D_admit_at_route": 319.64617582289725,
+                "D_admit_endpoint_residual": 0.44525221130442105,
+                "later_predecessors": [
+                  {
+                    "id": "fix-git:11",
+                    "route_origin": 311.1704370622003,
+                    "P_done": 317.65474677156817,
+                    "D_admit": 317.65474677156817,
+                    "full_end": 329.9363053326122,
+                    "admitted_after_target_route": true
+                  }
+                ],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "distribution-search:11",
+                        "route_origin": 303.11685581524017,
+                        "P_done": 310.9547234213248,
+                        "D_admit": 310.9547234213248,
+                        "full_end": 321.88941633152234,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "feal-differential-cryptanalysis:11",
+                        "route_origin": 305.4553018112777,
+                        "P_done": 311.5455966446612,
+                        "D_admit": 311.5455966446612,
+                        "full_end": 321.74057861316084,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "fix-git:11",
+                        "route_origin": 311.1704370622003,
+                        "P_done": 317.65474677156817,
+                        "D_admit": 317.65474677156817,
+                        "full_end": 329.9363053326122,
+                        "admitted_after_target_route": true
+                      }
+                    ],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [
+                      {
+                        "id": "dna-insert:11",
+                        "route_origin": 304.47422089665724,
+                        "P_done": 306.03579604391365,
+                        "D_admit": 306.03579604391365,
+                        "full_end": 320.1521248953455,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 15.372841967973102,
+                  "nominal": 15.372841967973102,
+                  "dependency": 0.0,
+                  "P": 0,
+                  "D": 2,
+                  "P_prefix": 640,
+                  "D_prefix": 0,
+                  "ready": 305.86692838160195,
+                  "first": 321.23977034957505,
+                  "before_P": 5.088418130846833,
+                  "P_API": 9.13608152175289,
+                  "P_to_D": 0.4724452786427378,
+                  "D_API_to_first": 0.675897036730646
+                }
+              }
+            }
+          }
+        },
+        {
+          "rate": 0.49032341538142143,
+          "arms": {
+            "reference": {
+              "blocked_D_requests": 15,
+              "blocked_with_empty_alternative": 4,
+              "D_wait_sum_not_gain": 23.921607181877803,
+              "later_predecessor_exposed": 5,
+              "worst": {
+                "id": "feal-differential-cryptanalysis:11",
+                "route_origin": 173.52010097138722,
+                "P_done": 189.12913028380913,
+                "binding_age_at_P_done": 15.60902931242191,
+                "D": 2,
+                "actual_D_admit": 189.12913028380913,
+                "P_done_to_D_admit": 0.0,
+                "predicted_D_admit_at_route": 188.8970546341961,
+                "D_admit_endpoint_residual": 0.23207564961302296,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "distribution-search:11",
+                        "route_origin": 167.04911548778736,
+                        "P_done": 177.9076682112885,
+                        "D_admit": 177.9076682112885,
+                        "full_end": 189.40402618729235,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "fix-git:11",
+                        "route_origin": 172.03721583499137,
+                        "P_done": 182.31117924735835,
+                        "D_admit": 185.45395110367096,
+                        "full_end": 195.43436904177636,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [
+                      {
+                        "id": "headless-terminal:11",
+                        "route_origin": 170.92424810809004,
+                        "P_done": 178.81476648994246,
+                        "D_admit": 178.81476648994246,
+                        "full_end": 195.14320993256518,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 17.3925678025511,
+                  "nominal": 37.67813502826985,
+                  "dependency": 20.28556722571875,
+                  "P": 1,
+                  "D": 2,
+                  "P_prefix": 640,
+                  "D_prefix": 0,
+                  "ready": 173.0132181313576,
+                  "first": 190.4057859339087,
+                  "before_P": 6.271945925961347,
+                  "P_API": 9.843966226490178,
+                  "P_to_D": 0.5243801132124304,
+                  "D_API_to_first": 0.7522755368871401
+                }
+              }
+            },
+            "ours": {
+              "blocked_D_requests": 22,
+              "blocked_with_empty_alternative": 7,
+              "D_wait_sum_not_gain": 44.07519583534725,
+              "later_predecessor_exposed": 11,
+              "worst": {
+                "id": "headless-terminal:12",
+                "route_origin": 200.5065042480834,
+                "P_done": 214.31911565904855,
+                "binding_age_at_P_done": 13.812611410965161,
+                "D": 2,
+                "actual_D_admit": 217.6207890402295,
+                "P_done_to_D_admit": 3.3016733811809615,
+                "predicted_D_admit_at_route": 213.96474841817013,
+                "D_admit_endpoint_residual": 3.656040622059379,
+                "later_predecessors": [
+                  {
+                    "id": "dna-insert:13",
+                    "route_origin": 203.09985708579302,
+                    "P_done": 211.3493831897076,
+                    "D_admit": 214.5098795672197,
+                    "full_end": 226.26159007772438,
+                    "admitted_after_target_route": true
+                  }
+                ],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "distribution-search:12",
+                        "route_origin": 192.88009379890627,
+                        "P_done": 198.24491894730605,
+                        "D_admit": 198.24491894730605,
+                        "full_end": 220.42064676219772,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "git-multibranch:11",
+                        "route_origin": 191.12357560619017,
+                        "P_done": 200.23235230666577,
+                        "D_admit": 200.23235230666577,
+                        "full_end": 214.50207693830768,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "fix-git:12",
+                        "route_origin": 194.47080092324398,
+                        "P_done": 203.5210330791061,
+                        "D_admit": 203.5210330791061,
+                        "full_end": 217.6133739886575,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "feal-differential-cryptanalysis:12",
+                        "route_origin": 196.93651378756363,
+                        "P_done": 209.152191456842,
+                        "D_admit": 209.152191456842,
+                        "full_end": 225.3387025449296,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": [
+                      {
+                        "id": "dna-insert:13",
+                        "route_origin": 203.09985708579302,
+                        "P_done": 211.3493831897076,
+                        "D_admit": 214.5098795672197,
+                        "full_end": 226.26159007772438,
+                        "admitted_after_target_route": true
+                      }
+                    ]
+                  },
+                  "3": {
+                    "holders": [],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 17.985468945108067,
+                  "nominal": 51.45164860305155,
+                  "dependency": 33.466179657943485,
+                  "P": 1,
+                  "D": 2,
+                  "P_prefix": 1280,
+                  "D_prefix": 0,
+                  "ready": 200.5013362459846,
+                  "first": 218.48680519109266,
+                  "before_P": 8.651586584063182,
+                  "P_API": 5.166192829000791,
+                  "P_to_D": 3.8278658155273035,
+                  "D_API_to_first": 0.3398237165168041
+                }
+              }
+            }
+          }
+        },
+        {
+          "rate": 0.9806468307628429,
+          "arms": {
+            "reference": {
+              "blocked_D_requests": 22,
+              "blocked_with_empty_alternative": 5,
+              "D_wait_sum_not_gain": 35.27416895549435,
+              "later_predecessor_exposed": 8,
+              "worst": {
+                "id": "feal-differential-cryptanalysis:9",
+                "route_origin": 102.24551414402431,
+                "P_done": 109.29651420544248,
+                "binding_age_at_P_done": 7.051000061418165,
+                "D": 3,
+                "actual_D_admit": 109.29651420544248,
+                "P_done_to_D_admit": 0.0,
+                "predicted_D_admit_at_route": 108.71188590909146,
+                "D_admit_endpoint_residual": 0.5846282963510134,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "fix-git:8",
+                        "route_origin": 96.95902571027531,
+                        "P_done": 101.94957877424392,
+                        "D_admit": 101.94957877424392,
+                        "full_end": 111.50533676761243,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "fix-code-vulnerability:8",
+                        "route_origin": 93.23011278175316,
+                        "P_done": 102.26129114338744,
+                        "D_admit": 102.26129114338744,
+                        "full_end": 117.97702327342876,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "dna-insert:8",
+                        "route_origin": 95.80131786342498,
+                        "P_done": 104.7386757625753,
+                        "D_admit": 104.7386757625753,
+                        "full_end": 123.25729004928215,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "git-multibranch:8",
+                        "route_origin": 98.26193312234254,
+                        "P_done": 104.8413451110773,
+                        "D_admit": 104.8413451110773,
+                        "full_end": 122.64376904870767,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": [
+                      {
+                        "id": "distribution-search:9",
+                        "route_origin": 100.0302257162391,
+                        "P_done": 108.03028497715795,
+                        "D_admit": 111.50863488632295,
+                        "full_end": 124.7284430910297,
+                        "admitted_after_target_route": false
+                      }
+                    ]
+                  },
+                  "3": {
+                    "holders": [
+                      {
+                        "id": "headless-terminal:8",
+                        "route_origin": 94.5496438119016,
+                        "P_done": 96.24533774858237,
+                        "D_admit": 96.24533774858237,
+                        "full_end": 122.17626482604155,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 18.336536421746075,
+                  "nominal": 52.13137371633268,
+                  "dependency": 33.79483729458661,
+                  "P": 1,
+                  "D": 3,
+                  "P_prefix": 4096,
+                  "D_prefix": 4224,
+                  "ready": 97.49450587885887,
+                  "first": 115.83104230060495,
+                  "before_P": 7.999481249241157,
+                  "P_API": 3.8025270773424467,
+                  "P_to_D": 0.5604653386270542,
+                  "D_API_to_first": 5.974062756535417
+                }
+              }
+            },
+            "ours": {
+              "blocked_D_requests": 24,
+              "blocked_with_empty_alternative": 6,
+              "D_wait_sum_not_gain": 26.85931660622057,
+              "later_predecessor_exposed": 11,
+              "worst": {
+                "id": "distribution-search:14",
+                "route_origin": 202.15294975832663,
+                "P_done": 217.44383106870444,
+                "binding_age_at_P_done": 15.290881310377813,
+                "D": 2,
+                "actual_D_admit": 217.44383106870444,
+                "P_done_to_D_admit": 0.0,
+                "predicted_D_admit_at_route": 217.32050440072416,
+                "D_admit_endpoint_residual": 0.12332666798027958,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "feal-differential-cryptanalysis:13",
+                        "route_origin": 198.63965074911872,
+                        "P_done": 209.49487863248748,
+                        "D_admit": 209.49487863248748,
+                        "full_end": 221.4194760852177,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "headless-terminal:13",
+                        "route_origin": 199.74124783917605,
+                        "P_done": 210.26878536999791,
+                        "D_admit": 210.26878536999791,
+                        "full_end": 221.57014339080064,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 16.692308558589957,
+                  "nominal": 131.90502570543003,
+                  "dependency": 115.21271714684006,
+                  "P": 0,
+                  "D": 2,
+                  "P_prefix": 5504,
+                  "D_prefix": 0,
+                  "ready": 202.1448839944657,
+                  "first": 218.83719255305564,
+                  "before_P": 7.35065029004565,
+                  "P_API": 7.948296784193113,
+                  "P_to_D": 0.5892746739369272,
+                  "D_API_to_first": 0.804086810414276
+                }
+              }
+            }
+          }
+        }
+      ]
+    },
+    {
+      "version": "dirty-scan",
+      "raw_alignment_sha256": "8e691050a22ba7051f6bf1480cd89e5f17ed5cffc3b06bc62045e8a1b27c791d",
+      "cases": [
+        {
+          "rate": 0.24516170769071072,
+          "arms": {
+            "reference": {
+              "blocked_D_requests": 6,
+              "blocked_with_empty_alternative": 4,
+              "D_wait_sum_not_gain": 5.300186236094781,
+              "later_predecessor_exposed": 9,
+              "worst": {
+                "id": "feal-differential-cryptanalysis:13",
+                "route_origin": 349.1116837031403,
+                "P_done": 364.31311147064645,
+                "binding_age_at_P_done": 15.201427767506175,
+                "D": 2,
+                "actual_D_admit": 364.31311147064645,
+                "P_done_to_D_admit": 0.0,
+                "predicted_D_admit_at_route": 364.3028170788482,
+                "D_admit_endpoint_residual": 0.01029439179825431,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [
+                      {
+                        "id": "fix-git:13",
+                        "route_origin": 351.8969690116876,
+                        "P_done": 355.12422362114097,
+                        "D_admit": 355.12422362114097,
+                        "full_end": 367.53634944886676,
+                        "admitted_after_target_route": true
+                      }
+                    ],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 16.54117966023898,
+                  "nominal": 28.000649892948502,
+                  "dependency": 11.45947023270952,
+                  "P": 0,
+                  "D": 2,
+                  "P_prefix": 2816,
+                  "D_prefix": 0,
+                  "ready": 349.1025855290898,
+                  "first": 365.6437651893288,
+                  "before_P": 4.795729772734035,
+                  "P_API": 10.41479616882257,
+                  "P_to_D": 0.48144922333773366,
+                  "D_API_to_first": 0.8492044953446225
+                }
+              }
+            },
+            "ours": {
+              "blocked_D_requests": 14,
+              "blocked_with_empty_alternative": 10,
+              "D_wait_sum_not_gain": 18.499749759873175,
+              "later_predecessor_exposed": 5,
+              "worst": {
+                "id": "dna-insert:13",
+                "route_origin": 337.6484019014127,
+                "P_done": 347.4392313142078,
+                "binding_age_at_P_done": 9.79082941279512,
+                "D": 2,
+                "actual_D_admit": 350.7428688940551,
+                "P_done_to_D_admit": 3.3036375798473046,
+                "predicted_D_admit_at_route": 347.1504464886896,
+                "D_admit_endpoint_residual": 3.5924224053654825,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "fix-git:12",
+                        "route_origin": 329.9306927947821,
+                        "P_done": 336.48342930662346,
+                        "D_admit": 336.48342930662346,
+                        "full_end": 350.7347842168953,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "headless-terminal:12",
+                        "route_origin": 334.77077104429935,
+                        "P_done": 340.9102077037257,
+                        "D_admit": 340.9102077037257,
+                        "full_end": 355.84439998039494,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "git-multibranch:12",
+                        "route_origin": 333.9697034022363,
+                        "P_done": 342.4022635721163,
+                        "D_admit": 342.4022635721163,
+                        "full_end": 358.8837839643042,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "distribution-search:13",
+                        "route_origin": 336.0546935641239,
+                        "P_done": 344.84819125688205,
+                        "D_admit": 344.88182476624695,
+                        "full_end": 362.8644485660647,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 14.171942709952248,
+                  "nominal": 16.642563841197386,
+                  "dependency": 2.4706211312451387,
+                  "P": 1,
+                  "D": 2,
+                  "P_prefix": 5760,
+                  "D_prefix": 0,
+                  "ready": 337.6400957212857,
+                  "first": 351.81203843123797,
+                  "before_P": 4.76279670311601,
+                  "P_API": 5.036338889806053,
+                  "P_to_D": 3.8669057516848966,
+                  "D_API_to_first": 0.5059013653452666
+                }
+              }
+            }
+          }
+        },
+        {
+          "rate": 0.49032341538142143,
+          "arms": {
+            "reference": {
+              "blocked_D_requests": 21,
+              "blocked_with_empty_alternative": 10,
+              "D_wait_sum_not_gain": 32.1542299880894,
+              "later_predecessor_exposed": 7,
+              "worst": {
+                "id": "distribution-search:11",
+                "route_origin": 161.4810667980494,
+                "P_done": 172.28212842041228,
+                "binding_age_at_P_done": 10.80106162236288,
+                "D": 2,
+                "actual_D_admit": 176.26221458353007,
+                "P_done_to_D_admit": 3.9800861631177895,
+                "predicted_D_admit_at_route": 176.60372330735794,
+                "D_admit_endpoint_residual": -0.34150872382787156,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "fix-code-vulnerability:10",
+                        "route_origin": 156.3262522479607,
+                        "P_done": 166.65864571359168,
+                        "D_admit": 166.65864571359168,
+                        "full_end": 176.25557731296772,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "git-multibranch:10",
+                        "route_origin": 158.13063223599036,
+                        "P_done": 167.03636406709703,
+                        "D_admit": 167.03636406709703,
+                        "full_end": 176.58292070259222,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "dna-insert:11",
+                        "route_origin": 160.32085740453968,
+                        "P_done": 167.6894674194117,
+                        "D_admit": 167.6894674194117,
+                        "full_end": 176.6727402299689,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "headless-terminal:10",
+                        "route_origin": 159.07620560329562,
+                        "P_done": 167.90406272083203,
+                        "D_admit": 167.90406272083203,
+                        "full_end": 176.8193358845093,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 15.935056890670324,
+                  "nominal": 25.852093840423066,
+                  "dependency": 9.917036949752742,
+                  "P": 1,
+                  "D": 2,
+                  "P_prefix": 6784,
+                  "D_prefix": 0,
+                  "ready": 161.47546485737283,
+                  "first": 177.41052174804315,
+                  "before_P": 6.429224874519917,
+                  "P_API": 4.377438688519527,
+                  "P_to_D": 4.7368923208613865,
+                  "D_API_to_first": 0.39150100676948796
+                }
+              }
+            },
+            "ours": {
+              "blocked_D_requests": 23,
+              "blocked_with_empty_alternative": 5,
+              "D_wait_sum_not_gain": 44.03819155481437,
+              "later_predecessor_exposed": 5,
+              "worst": {
+                "id": "headless-terminal:10",
+                "route_origin": 158.8971087588418,
+                "P_done": 165.0011037472864,
+                "binding_age_at_P_done": 6.103994988444612,
+                "D": 2,
+                "actual_D_admit": 165.0011037472864,
+                "P_done_to_D_admit": 0.0,
+                "predicted_D_admit_at_route": 165.02152179508224,
+                "D_admit_endpoint_residual": -0.020418047795828898,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "feal-differential-cryptanalysis:10",
+                        "route_origin": 149.48387059059965,
+                        "P_done": 155.32647640373878,
+                        "D_admit": 156.96652882817108,
+                        "full_end": 167.18898600522203,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "fix-git:10",
+                        "route_origin": 150.93852387617025,
+                        "P_done": 157.08895636158692,
+                        "D_admit": 158.59994040066977,
+                        "full_end": 167.87344982458842,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "fix-code-vulnerability:10",
+                        "route_origin": 156.96652882817108,
+                        "P_done": 163.21299409372114,
+                        "D_admit": 163.21299409372114,
+                        "full_end": 174.221124734224,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 18.0398335717353,
+                  "nominal": 34.85717067417943,
+                  "dependency": 16.817337102444128,
+                  "P": 1,
+                  "D": 2,
+                  "P_prefix": 0,
+                  "D_prefix": 640,
+                  "ready": 158.59437118946244,
+                  "first": 176.63420476119774,
+                  "before_P": 1.7956541646969413,
+                  "P_API": 4.611078393127041,
+                  "P_to_D": 10.979884506021762,
+                  "D_API_to_first": 0.6532165078895673
+                }
+              }
+            }
+          }
+        },
+        {
+          "rate": 0.9806468307628429,
+          "arms": {
+            "reference": {
+              "blocked_D_requests": 35,
+              "blocked_with_empty_alternative": 10,
+              "D_wait_sum_not_gain": 65.38084706481855,
+              "later_predecessor_exposed": 2,
+              "worst": {
+                "id": "distribution-search:12",
+                "route_origin": 161.3004816787401,
+                "P_done": 174.37332521007505,
+                "binding_age_at_P_done": 13.07284353133494,
+                "D": 2,
+                "actual_D_admit": 176.07893081457595,
+                "P_done_to_D_admit": 1.705605604500903,
+                "predicted_D_admit_at_route": 173.92186508428097,
+                "D_admit_endpoint_residual": 2.1570657302949883,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "feal-differential-cryptanalysis:11",
+                        "route_origin": 153.35333856378034,
+                        "P_done": 161.59037612231984,
+                        "D_admit": 161.59037612231984,
+                        "full_end": 176.07141935901026,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "git-multibranch:11",
+                        "route_origin": 154.6709656213403,
+                        "P_done": 165.86707469528469,
+                        "D_admit": 165.86707469528469,
+                        "full_end": 179.10973185206169,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "dna-insert:12",
+                        "route_origin": 157.0461471147132,
+                        "P_done": 166.85973753132595,
+                        "D_admit": 166.85973753132595,
+                        "full_end": 181.31276020620723,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "fix-git:12",
+                        "route_origin": 160.3755007038571,
+                        "P_done": 168.33865077514542,
+                        "D_admit": 168.33865077514542,
+                        "full_end": 181.95597055155193,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 16.075074695447313,
+                  "nominal": 96.8793238823436,
+                  "dependency": 80.80424918689629,
+                  "P": 1,
+                  "D": 2,
+                  "P_prefix": 640,
+                  "D_prefix": 0,
+                  "ready": 161.05349657600485,
+                  "first": 177.12857127145216,
+                  "before_P": 4.814204470032848,
+                  "P_API": 8.50562416403736,
+                  "P_to_D": 2.179507244407631,
+                  "D_API_to_first": 0.5757388169694764
+                }
+              }
+            },
+            "ours": {
+              "blocked_D_requests": 31,
+              "blocked_with_empty_alternative": 6,
+              "D_wait_sum_not_gain": 50.20653303038789,
+              "later_predecessor_exposed": 8,
+              "worst": {
+                "id": "headless-terminal:11",
+                "route_origin": 181.00831427157954,
+                "P_done": 194.22096729630826,
+                "binding_age_at_P_done": 13.212653024728723,
+                "D": 3,
+                "actual_D_admit": 194.22096729630826,
+                "P_done_to_D_admit": 0.0,
+                "predicted_D_admit_at_route": 194.0053351816777,
+                "D_admit_endpoint_residual": 0.21563211463055154,
+                "later_predecessors": [],
+                "observed_slots_at_P_done": {
+                  "2": {
+                    "holders": [
+                      {
+                        "id": "git-multibranch:12",
+                        "route_origin": 177.5527953233074,
+                        "P_done": 187.33392885021814,
+                        "D_admit": 187.33392885021814,
+                        "full_end": 203.44367469838437,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "feal-differential-cryptanalysis:12",
+                        "route_origin": 176.01117401161287,
+                        "P_done": 188.08377015187338,
+                        "D_admit": 188.08377015187338,
+                        "full_end": 203.30480744549388,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "fix-git:13",
+                        "route_origin": 178.64679488063132,
+                        "P_done": 189.37734045535507,
+                        "D_admit": 189.37734045535507,
+                        "full_end": 204.59309026423273,
+                        "admitted_after_target_route": false
+                      },
+                      {
+                        "id": "distribution-search:13",
+                        "route_origin": 179.71308401228777,
+                        "P_done": 193.37970469166072,
+                        "D_admit": 193.37970469166072,
+                        "full_end": 206.3009824913455,
+                        "admitted_after_target_route": false
+                      }
+                    ],
+                    "waiting": []
+                  },
+                  "3": {
+                    "holders": [],
+                    "waiting": []
+                  }
+                },
+                "path": {
+                  "TTFT": 20.53415834693743,
+                  "nominal": 122.56175081312037,
+                  "dependency": 102.02759246618294,
+                  "P": 0,
+                  "D": 3,
+                  "P_prefix": 640,
+                  "D_prefix": 9600,
+                  "ready": 181.00086049561486,
+                  "first": 201.5350188425523,
+                  "before_P": 8.377145221150386,
+                  "P_API": 4.842961579543027,
+                  "P_to_D": 0.9588964984100699,
+                  "D_API_to_first": 6.355155047833961
+                }
+              }
+            }
+          }
+        }
+      ]
+    }
+  ]
+}

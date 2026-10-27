@@ -1,0 +1,21 @@
+{
+  "CPU_only": true,
+  "no_future_world_cost": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "recomputed_choices": 211,
+      "non_extending_companions": 0
+    },
+    {
+      "rate": 0.49032341538142143,
+      "recomputed_choices": 409,
+      "non_extending_companions": 0
+    },
+    {
+      "rate": 0.9806468307628429,
+      "recomputed_choices": 468,
+      "non_extending_companions": 0
+    }
+  ]
+}

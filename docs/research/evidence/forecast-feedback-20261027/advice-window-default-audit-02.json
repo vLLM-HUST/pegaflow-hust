@@ -1,0 +1,69 @@
+{
+  "CPU_only": true,
+  "all_checks_passed": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "reference_advice": {
+        "calls": 46,
+        "moves": 3,
+        "partial_searches": 6,
+        "CPU_wall": 10.720385459251702,
+        "all_checks_passed": true
+      },
+      "ours_advice": {
+        "calls": 42,
+        "moves": 1,
+        "partial_searches": 6,
+        "CPU_wall": 9.036463254131377,
+        "all_checks_passed": true
+      },
+      "checks": 44,
+      "skips": 2,
+      "trigger_CPU_wall": 0.009853027760982513,
+      "all_checks_passed": true
+    },
+    {
+      "rate": 0.49032341538142143,
+      "reference_advice": {
+        "calls": 35,
+        "moves": 4,
+        "partial_searches": 1,
+        "CPU_wall": 8.656136929057539,
+        "all_checks_passed": true
+      },
+      "ours_advice": {
+        "calls": 36,
+        "moves": 0,
+        "partial_searches": 1,
+        "CPU_wall": 5.04905008431524,
+        "all_checks_passed": true
+      },
+      "checks": 37,
+      "skips": 1,
+      "trigger_CPU_wall": 0.00812601950019598,
+      "all_checks_passed": true
+    },
+    {
+      "rate": 0.9806468307628429,
+      "reference_advice": {
+        "calls": 38,
+        "moves": 2,
+        "partial_searches": 6,
+        "CPU_wall": 10.164954549632967,
+        "all_checks_passed": true
+      },
+      "ours_advice": {
+        "calls": 36,
+        "moves": 0,
+        "partial_searches": 7,
+        "CPU_wall": 4.7846650024876,
+        "all_checks_passed": true
+      },
+      "checks": 36,
+      "skips": 0,
+      "trigger_CPU_wall": 0.00817989744246006,
+      "all_checks_passed": true
+    }
+  ]
+}

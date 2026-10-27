@@ -1,0 +1,163 @@
+{
+  "CPU_only": true,
+  "diagnostic_not_net_TTFT_gain": true,
+  "source_sha256": "c73c359bc2ee4e9a6f3772565cff47df98db4101824b9aaeacdeae9b7ed4a62a",
+  "cases": {
+    "default": {
+      "equality": [
+        {
+          "rate": 0.24516170769071072,
+          "requests": 95,
+          "equal_fields": [
+            "per_request",
+            "stages",
+            "resource_events",
+            "batch_iterations",
+            "decisions",
+            "initial_cache_forecasts_except_method_label"
+          ]
+        },
+        {
+          "rate": 0.49032341538142143,
+          "requests": 95,
+          "equal_fields": [
+            "per_request",
+            "stages",
+            "resource_events",
+            "batch_iterations",
+            "decisions",
+            "initial_cache_forecasts_except_method_label"
+          ]
+        },
+        {
+          "rate": 0.9806468307628429,
+          "requests": 95,
+          "equal_fields": [
+            "per_request",
+            "stages",
+            "resource_events",
+            "batch_iterations",
+            "decisions",
+            "initial_cache_forecasts_except_method_label"
+          ]
+        }
+      ],
+      "activation": {
+        "all_checks_passed": true,
+        "cases": [
+          {
+            "rate": 0.24516170769071072,
+            "reference": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 5
+            },
+            "ours": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 5
+            }
+          },
+          {
+            "rate": 0.49032341538142143,
+            "reference": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 31
+            },
+            "ours": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 31
+            }
+          },
+          {
+            "rate": 0.9806468307628429,
+            "reference": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 3
+            },
+            "ours": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 3
+            }
+          }
+        ]
+      }
+    },
+    "sharing": {
+      "equality": [
+        {
+          "rate": 0.24516170769071072,
+          "requests": 95,
+          "equal_fields": [
+            "per_request",
+            "stages",
+            "resource_events",
+            "batch_iterations",
+            "decisions",
+            "initial_cache_forecasts_except_method_label"
+          ]
+        },
+        {
+          "rate": 0.49032341538142143,
+          "requests": 95,
+          "equal_fields": [
+            "per_request",
+            "stages",
+            "resource_events",
+            "batch_iterations",
+            "decisions",
+            "initial_cache_forecasts_except_method_label"
+          ]
+        },
+        {
+          "rate": 0.9806468307628429,
+          "requests": 95,
+          "equal_fields": [
+            "per_request",
+            "stages",
+            "resource_events",
+            "batch_iterations",
+            "decisions",
+            "initial_cache_forecasts_except_method_label"
+          ]
+        }
+      ],
+      "activation": {
+        "all_checks_passed": true,
+        "cases": [
+          {
+            "rate": 0.24516170769071072,
+            "reference": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 13
+            },
+            "ours": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 13
+            }
+          },
+          {
+            "rate": 0.49032341538142143,
+            "reference": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 18
+            },
+            "ours": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 18
+            }
+          },
+          {
+            "rate": 0.9806468307628429,
+            "reference": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 8
+            },
+            "ours": {
+              "selected_forecasts": 95,
+              "actual_removal_calls": 8
+            }
+          }
+        ]
+      }
+    }
+  }
+}

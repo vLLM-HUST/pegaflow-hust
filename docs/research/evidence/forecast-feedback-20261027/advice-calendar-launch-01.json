@@ -1,0 +1,24 @@
+{
+  "pid": 502011,
+  "pgid": 502011,
+  "started": 1793081842.9160888,
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "/root/advice-calendar-pipeline-01.py"
+  ],
+  "cwd": "/root/issue23-advice-calendar-source-01",
+  "source_sha256": "db9523e651348d50cc9e4e0976ac22482787fe68791d9e1ff825c9f1741af4c0",
+  "runner_sha256": "2599ac1dd34c8985c64187d19cb21788b67dc4872a7f96bff552b12145f51b33",
+  "root": "/root/issue23-advice-calendar-charged-pipeline-01",
+  "outputs": [
+    "/root/issue23-advice-calendar-charged-default-01",
+    "/root/issue23-advice-calendar-charged-sharing-01"
+  ],
+  "policy": "advice-calendar",
+  "expected_revision": "advice-calendar-window-01",
+  "limit_seconds": 4500,
+  "matrix_limit_seconds": 1800,
+  "workers": 3,
+  "CPU_only": true,
+  "console": "/root/advice-calendar-pipeline-01-console.log"
+}

@@ -1,0 +1,4535 @@
+{
+  "CPU_only": true,
+  "trace_conditioned_diagnostic_NOT_new_policy_performance": true,
+  "FIFO_dequeue_not_logged": true,
+  "gate_exposure_not_RDMA_congestion": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "raw_sha256": "71f15411d25deab74b2b45e89a198efb0384ac18c114e4799e9f22af7e864cc5",
+      "arms": {
+        "reference": {
+          "copies": 15,
+          "copy_execution_seconds_sum": 7.057280655950308,
+          "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.06131504686923961,
+          "partition_sums_NOT_wall_gain": {
+            "source_gate": 0.06131504686923961
+          },
+          "younger_source_blocked_copies": 0,
+          "largest_waits": [
+            {
+              "id": "headless-terminal:8",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 245.55797891847945,
+              "route_completed": 246.96403046773545,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 249.06238923431272,
+              "copy_start": 249.09379397534457,
+              "copy_end": 249.16227903325733,
+              "copy_seconds": 0.06848505791276693,
+              "post_FIFO_lower_bound_wait": 0.031404741031849426,
+              "partition": {
+                "source_gate": 0.031404741031849426
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:8"
+                  ],
+                  "operation": "compute",
+                  "start": 249.01264694480105,
+                  "end": 249.09379397534457,
+                  "overlap": 0.031404741031849426,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 275.80846677464825,
+              "route_completed": 277.40132630745916,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 277.40132630745916,
+              "copy_start": 277.4179284451923,
+              "copy_end": 279.4039951246625,
+              "copy_seconds": 1.986066679470241,
+              "post_FIFO_lower_bound_wait": 0.01660213773311625,
+              "partition": {
+                "source_gate": 0.01660213773311625
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:9",
+                    "git-multibranch:9",
+                    "headless-terminal:9"
+                  ],
+                  "operation": "compute",
+                  "start": 277.35846217128915,
+                  "end": 277.4179284451923,
+                  "overlap": 0.01660213773311625,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 104.48057018342102,
+              "route_completed": 106.04910658620548,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 106.04910658620548,
+              "copy_start": 106.06241475430976,
+              "copy_end": 106.382011691236,
+              "copy_seconds": 0.3195969369262457,
+              "post_FIFO_lower_bound_wait": 0.013308168104273932,
+              "partition": {
+                "source_gate": 0.013308168104273932
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:4",
+                    "distribution-search:5",
+                    "feal-differential-cryptanalysis:5"
+                  ],
+                  "operation": "compute",
+                  "start": 106.00369538865068,
+                  "end": 106.06241475430976,
+                  "overlap": 0.013308168104273932,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:5",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 99.59100673897001,
+              "route_completed": 100.75619292355528,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 100.75619292355528,
+              "copy_start": 100.75619292355528,
+              "copy_end": 101.08885535135319,
+              "copy_seconds": 0.33266242779791355,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:6",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 145.97064709713356,
+              "route_completed": 146.77211890246036,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 146.77211890246036,
+              "copy_start": 146.77211890246036,
+              "copy_end": 147.16020089729938,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            }
+          ],
+          "requests": [
+            {
+              "id": "feal-differential-cryptanalysis:5",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 99.59100673897001,
+              "route_completed": 100.75619292355528,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 100.75619292355528,
+              "copy_start": 100.75619292355528,
+              "copy_end": 101.08885535135319,
+              "copy_seconds": 0.33266242779791355,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 104.48057018342102,
+              "route_completed": 106.04910658620548,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 106.04910658620548,
+              "copy_start": 106.06241475430976,
+              "copy_end": 106.382011691236,
+              "copy_seconds": 0.3195969369262457,
+              "post_FIFO_lower_bound_wait": 0.013308168104273932,
+              "partition": {
+                "source_gate": 0.013308168104273932
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:4",
+                    "distribution-search:5",
+                    "feal-differential-cryptanalysis:5"
+                  ],
+                  "operation": "compute",
+                  "start": 106.00369538865068,
+                  "end": 106.06241475430976,
+                  "overlap": 0.013308168104273932,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:6",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 145.97064709713356,
+              "route_completed": 146.77211890246036,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 146.77211890246036,
+              "copy_start": 146.77211890246036,
+              "copy_end": 147.16020089729938,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 188.14876304819444,
+              "route_completed": 188.81721620154406,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 188.81721620154406,
+              "copy_start": 188.81721620154406,
+              "copy_end": 189.84449207023556,
+              "copy_seconds": 1.027275868691504,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-code-vulnerability:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 196.95396665024901,
+              "route_completed": 197.67262800988715,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 197.67262800988715,
+              "copy_start": 197.67262800988715,
+              "copy_end": 197.7867697730751,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 198.86913872442975,
+              "route_completed": 199.7285692844674,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 199.7285692844674,
+              "copy_start": 199.7285692844674,
+              "copy_end": 200.1166512793064,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 203.6622215154468,
+              "route_completed": 204.44799036255483,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 204.44799036255483,
+              "copy_start": 204.44799036255483,
+              "copy_end": 204.56213212574278,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 205.38269982967546,
+              "route_completed": 206.41467808866537,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 206.41467808866537,
+              "copy_start": 206.41467808866537,
+              "copy_end": 206.48316314657814,
+              "copy_seconds": 0.06848505791276693,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "feal-differential-cryptanalysis:8",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 221.02490153855788,
+              "route_completed": 222.04243586824063,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 222.74873603260968,
+              "copy_start": 222.74873603260968,
+              "copy_end": 223.35535575388823,
+              "copy_seconds": 0.6066197212785482,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:8",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 245.55797891847945,
+              "route_completed": 246.96403046773545,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 249.06238923431272,
+              "copy_start": 249.09379397534457,
+              "copy_end": 249.16227903325733,
+              "copy_seconds": 0.06848505791276693,
+              "post_FIFO_lower_bound_wait": 0.031404741031849426,
+              "partition": {
+                "source_gate": 0.031404741031849426
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:8"
+                  ],
+                  "operation": "compute",
+                  "start": 249.01264694480105,
+                  "end": 249.09379397534457,
+                  "overlap": 0.031404741031849426,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:9",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 257.8526451484095,
+              "route_completed": 258.81225207542457,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 261.52064122509006,
+              "copy_start": 261.52064122509006,
+              "copy_end": 262.38811862531844,
+              "copy_seconds": 0.8674774002283812,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:10",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 275.0059718984347,
+              "route_completed": 275.80846677464825,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 275.80846677464825,
+              "copy_start": 275.80846677464825,
+              "copy_end": 276.26503382740003,
+              "copy_seconds": 0.45656705275177956,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 275.80846677464825,
+              "route_completed": 277.40132630745916,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 277.40132630745916,
+              "copy_start": 277.4179284451923,
+              "copy_end": 279.4039951246625,
+              "copy_seconds": 1.986066679470241,
+              "post_FIFO_lower_bound_wait": 0.01660213773311625,
+              "partition": {
+                "source_gate": 0.01660213773311625
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:9",
+                    "git-multibranch:9",
+                    "headless-terminal:9"
+                  ],
+                  "operation": "compute",
+                  "start": 277.35846217128915,
+                  "end": 277.4179284451923,
+                  "overlap": 0.01660213773311625,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:11",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 304.47422089665724,
+              "route_completed": 305.2109594519174,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 305.2109594519174,
+              "copy_start": 305.2109594519174,
+              "copy_end": 305.4164146256557,
+              "copy_seconds": 0.2054551737383008,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:15",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 393.6951786344998,
+              "route_completed": 394.38400481934644,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 394.38400481934644,
+              "copy_start": 394.38400481934644,
+              "copy_end": 394.4981465825344,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            }
+          ]
+        },
+        "parent": {
+          "copies": 17,
+          "copy_execution_seconds_sum": 8.720592794939876,
+          "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.667041638470721,
+          "partition_sums_NOT_wall_gain": {
+            "source_gate": 0.659659642330837,
+            "unexplained_or_bookkeeping": 0.007381996139883995
+          },
+          "younger_source_blocked_copies": 1,
+          "largest_waits": [
+            {
+              "id": "dna-insert:8",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 220.20837294524105,
+              "route_completed": 220.95753882399904,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 222.75823150887047,
+              "copy_start": 223.2818216801903,
+              "copy_end": 224.3972192322186,
+              "copy_seconds": 1.1153975520282984,
+              "post_FIFO_lower_bound_wait": 0.5235901713198245,
+              "partition": {
+                "source_gate": 0.5229625837704361,
+                "unexplained_or_bookkeeping": 0.0006275875493884087
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "feal-differential-cryptanalysis:8",
+                  "operation": "P_api",
+                  "start": 221.92880027328405,
+                  "end": 223.2811940926409,
+                  "overlap": 0.5229625837704361,
+                  "owner_route_after_target_route": true
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:9",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 264.37297384836353,
+              "route_completed": 266.13240434358113,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 266.13240434358113,
+              "copy_start": 266.17591194715055,
+              "copy_end": 267.45429969485554,
+              "copy_seconds": 1.2783877477049828,
+              "post_FIFO_lower_bound_wait": 0.043507603569423736,
+              "partition": {
+                "source_gate": 0.043507603569423736
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:8",
+                    "distribution-search:9",
+                    "dna-insert:9",
+                    "feal-differential-cryptanalysis:9"
+                  ],
+                  "operation": "compute",
+                  "start": 266.11671739008995,
+                  "end": 266.17591194715055,
+                  "overlap": 0.043507603569423736,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:11",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 317.6423197647546,
+              "route_completed": 320.1071482831007,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 322.6229536730233,
+              "copy_start": 322.6654722674625,
+              "copy_end": 322.916584146476,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.04251859443922967,
+              "partition": {
+                "source_gate": 0.03576418584873409,
+                "unexplained_or_bookkeeping": 0.006754408590495586
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:11"
+                  ],
+                  "operation": "save",
+                  "start": 322.5737862205474,
+                  "end": 322.658717858872,
+                  "overlap": 0.03576418584873409,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:13",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 344.45418683070915,
+              "route_completed": 347.2224682198638,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 353.3560738743603,
+              "copy_start": 353.386116935536,
+              "copy_end": 353.774198930375,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.030043061175717867,
+              "partition": {
+                "source_gate": 0.030043061175717867
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "headless-terminal:12"
+                  ],
+                  "operation": "compute",
+                  "start": 353.32626861248826,
+                  "end": 353.386116935536,
+                  "overlap": 0.030043061175717867,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:9",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 254.3784319812243,
+              "route_completed": 255.73754360425835,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 258.97606594227426,
+              "copy_start": 259.0034481502408,
+              "copy_end": 259.46001520299257,
+              "copy_seconds": 0.45656705275177956,
+              "post_FIFO_lower_bound_wait": 0.02738220796652513,
+              "partition": {
+                "source_gate": 0.02738220796652513
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:8",
+                    "headless-terminal:8",
+                    "git-multibranch:8"
+                  ],
+                  "operation": "compute",
+                  "start": 258.94394648790285,
+                  "end": 259.0034481502408,
+                  "overlap": 0.02738220796652513,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "id": "feal-differential-cryptanalysis:5",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 99.57698341781524,
+              "route_completed": 100.79405601005897,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 100.79405601005897,
+              "copy_start": 100.79405601005897,
+              "copy_end": 101.12671843785688,
+              "copy_seconds": 0.33266242779791355,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 104.54184967081179,
+              "route_completed": 106.30588207301444,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 106.30588207301444,
+              "copy_start": 106.30588207301444,
+              "copy_end": 106.57983936649508,
+              "copy_seconds": 0.2739572934806347,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:6",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 146.02126096425252,
+              "route_completed": 146.822524090924,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 146.822524090924,
+              "copy_start": 146.822524090924,
+              "copy_end": 147.210606085763,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 188.14876304819444,
+              "route_completed": 188.8216609301495,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 188.8216609301495,
+              "copy_start": 188.8216609301495,
+              "copy_end": 189.848936798841,
+              "copy_seconds": 1.027275868691504,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-code-vulnerability:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 196.95396665024901,
+              "route_completed": 197.6826447045521,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 197.6826447045521,
+              "copy_start": 197.6826447045521,
+              "copy_end": 197.79678646774005,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 198.86913872442975,
+              "route_completed": 199.7242415709555,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 199.7242415709555,
+              "copy_start": 199.7242415709555,
+              "copy_end": 200.11232356579453,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 203.6622215154468,
+              "route_completed": 204.41754697079216,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 204.41754697079216,
+              "copy_start": 204.41754697079216,
+              "copy_end": 204.5316887339801,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 205.37037073742619,
+              "route_completed": 206.34208673638886,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 206.34208673638886,
+              "copy_start": 206.34208673638886,
+              "copy_end": 206.41057179430163,
+              "copy_seconds": 0.06848505791276693,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:8",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 220.20837294524105,
+              "route_completed": 220.95753882399904,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 222.75823150887047,
+              "copy_start": 223.2818216801903,
+              "copy_end": 224.3972192322186,
+              "copy_seconds": 1.1153975520282984,
+              "post_FIFO_lower_bound_wait": 0.5235901713198245,
+              "partition": {
+                "source_gate": 0.5229625837704361,
+                "unexplained_or_bookkeeping": 0.0006275875493884087
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "feal-differential-cryptanalysis:8",
+                  "operation": "P_api",
+                  "start": 221.92880027328405,
+                  "end": 223.2811940926409,
+                  "overlap": 0.5229625837704361,
+                  "owner_route_after_target_route": true
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:9",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 254.3784319812243,
+              "route_completed": 255.73754360425835,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 258.97606594227426,
+              "copy_start": 259.0034481502408,
+              "copy_end": 259.46001520299257,
+              "copy_seconds": 0.45656705275177956,
+              "post_FIFO_lower_bound_wait": 0.02738220796652513,
+              "partition": {
+                "source_gate": 0.02738220796652513
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:8",
+                    "headless-terminal:8",
+                    "git-multibranch:8"
+                  ],
+                  "operation": "compute",
+                  "start": 258.94394648790285,
+                  "end": 259.0034481502408,
+                  "overlap": 0.02738220796652513,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:9",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 264.37297384836353,
+              "route_completed": 266.13240434358113,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 266.13240434358113,
+              "copy_start": 266.17591194715055,
+              "copy_end": 267.45429969485554,
+              "copy_seconds": 1.2783877477049828,
+              "post_FIFO_lower_bound_wait": 0.043507603569423736,
+              "partition": {
+                "source_gate": 0.043507603569423736
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:8",
+                    "distribution-search:9",
+                    "dna-insert:9",
+                    "feal-differential-cryptanalysis:9"
+                  ],
+                  "operation": "compute",
+                  "start": 266.11671739008995,
+                  "end": 266.17591194715055,
+                  "overlap": 0.043507603569423736,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:10",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 283.5540681740366,
+              "route_completed": 284.6907912343243,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 284.6907912343243,
+              "copy_start": 284.6907912343243,
+              "copy_end": 284.7592762922371,
+              "copy_seconds": 0.06848505791276693,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:10",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 280.95629734482674,
+              "route_completed": 281.91777378828897,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 287.4168629229837,
+              "copy_start": 287.4168629229837,
+              "copy_end": 288.4441387916752,
+              "copy_seconds": 1.027275868691504,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:11",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 317.6423197647546,
+              "route_completed": 320.1071482831007,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 322.6229536730233,
+              "copy_start": 322.6654722674625,
+              "copy_end": 322.916584146476,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.04251859443922967,
+              "partition": {
+                "source_gate": 0.03576418584873409,
+                "unexplained_or_bookkeeping": 0.006754408590495586
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:11"
+                  ],
+                  "operation": "save",
+                  "start": 322.5737862205474,
+                  "end": 322.658717858872,
+                  "overlap": 0.03576418584873409,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:12",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 332.6369497728741,
+              "route_completed": 334.6454639090769,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 342.4509589116871,
+              "copy_start": 342.4509589116871,
+              "copy_end": 343.3315359264463,
+              "copy_seconds": 0.8805770147591829,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:13",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 344.45418683070915,
+              "route_completed": 347.2224682198638,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 353.3560738743603,
+              "copy_start": 353.386116935536,
+              "copy_end": 353.774198930375,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.030043061175717867,
+              "partition": {
+                "source_gate": 0.030043061175717867
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "headless-terminal:12"
+                  ],
+                  "operation": "compute",
+                  "start": 353.32626861248826,
+                  "end": 353.386116935536,
+                  "overlap": 0.030043061175717867,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:14",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 371.1614067601259,
+              "route_completed": 371.9920838616413,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 377.9088243231283,
+              "copy_start": 377.9088243231283,
+              "copy_end": 378.4567047864304,
+              "copy_seconds": 0.5478804633021355,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            }
+          ]
+        },
+        "ours": {
+          "copies": 15,
+          "copy_execution_seconds_sum": 6.545311097986996,
+          "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 10.787465986213206,
+          "partition_sums_NOT_wall_gain": {
+            "source_gate": 10.781397163177033,
+            "unexplained_or_bookkeeping": 0.0012492379173636436,
+            "destination_gate+source_gate": 0.004819585118809755
+          },
+          "younger_source_blocked_copies": 1,
+          "largest_waits": [
+            {
+              "id": "headless-terminal:10",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 284.30813266661215,
+              "route_completed": 286.5882698526776,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 291.2515490784143,
+              "copy_start": 297.765863166949,
+              "copy_end": 297.8049999231605,
+              "copy_seconds": 0.03913675621151924,
+              "post_FIFO_lower_bound_wait": 6.514314088534661,
+              "partition": {
+                "source_gate": 6.513690565276988,
+                "unexplained_or_bookkeeping": 0.0006235232576727867
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "git-multibranch:10",
+                  "operation": "P_api",
+                  "start": 290.00213598530223,
+                  "end": 297.7652396436913,
+                  "overlap": 6.513690565276988,
+                  "owner_route_after_target_route": true
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:13",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 343.1932518622573,
+              "route_completed": 344.0022477164936,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 344.55561937503506,
+              "copy_start": 348.7522878088728,
+              "copy_end": 349.92639049521836,
+              "copy_seconds": 1.1741026863455772,
+              "post_FIFO_lower_bound_wait": 4.196668433837715,
+              "partition": {
+                "source_gate": 4.191223134059214,
+                "destination_gate+source_gate": 0.004819585118809755,
+                "unexplained_or_bookkeeping": 0.0006257146596908569
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "git-multibranch:12",
+                  "operation": "P_api",
+                  "start": 339.9941642026282,
+                  "end": 348.7516620942131,
+                  "overlap": 4.196042719178024,
+                  "owner_route_after_target_route": false
+                },
+                {
+                  "kind": "destination_gate",
+                  "owner": "headless-terminal:12",
+                  "operation": "handoff",
+                  "start": 345.10945856631184,
+                  "end": 345.11427815143065,
+                  "overlap": 0.004819585118809755,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:14",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 375.0542648414516,
+              "route_completed": 375.83585968797604,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 375.83585968797604,
+              "copy_start": 375.89395166301205,
+              "copy_end": 376.0309217788376,
+              "copy_seconds": 0.13697011582553387,
+              "post_FIFO_lower_bound_wait": 0.058091975036006716,
+              "partition": {
+                "source_gate": 0.058091975036006716
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "headless-terminal:13",
+                    "dna-insert:14"
+                  ],
+                  "operation": "compute",
+                  "start": 375.83450376261527,
+                  "end": 375.89395166301205,
+                  "overlap": 0.058091975036006716,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 104.5332029455402,
+              "route_completed": 106.12049042567861,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 106.12049042567861,
+              "copy_start": 106.13228279543769,
+              "copy_end": 106.45187973236393,
+              "copy_seconds": 0.3195969369262457,
+              "post_FIFO_lower_bound_wait": 0.01179236975907827,
+              "partition": {
+                "source_gate": 0.01179236975907827
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:4",
+                    "distribution-search:5",
+                    "feal-differential-cryptanalysis:5"
+                  ],
+                  "operation": "compute",
+                  "start": 106.07356441232393,
+                  "end": 106.13228279543769,
+                  "overlap": 0.01179236975907827,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:4",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 95.48929789466084,
+              "route_completed": 96.28587259913671,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 96.28587259913671,
+              "copy_start": 96.29247171818245,
+              "copy_end": 96.31530007082004,
+              "copy_seconds": 0.022828352637588978,
+              "post_FIFO_lower_bound_wait": 0.006599119045745283,
+              "partition": {
+                "source_gate": 0.006599119045745283
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:4",
+                    "git-leak-recovery:4"
+                  ],
+                  "operation": "compute",
+                  "start": 96.23396380966514,
+                  "end": 96.29247171818245,
+                  "overlap": 0.006599119045745283,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "id": "headless-terminal:4",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 95.48929789466084,
+              "route_completed": 96.28587259913671,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 96.28587259913671,
+              "copy_start": 96.29247171818245,
+              "copy_end": 96.31530007082004,
+              "copy_seconds": 0.022828352637588978,
+              "post_FIFO_lower_bound_wait": 0.006599119045745283,
+              "partition": {
+                "source_gate": 0.006599119045745283
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:4",
+                    "git-leak-recovery:4"
+                  ],
+                  "operation": "compute",
+                  "start": 96.23396380966514,
+                  "end": 96.29247171818245,
+                  "overlap": 0.006599119045745283,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:5",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 99.61079804589781,
+              "route_completed": 100.78052651326557,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 100.78052651326557,
+              "copy_start": 100.78052651326557,
+              "copy_end": 101.11318894106348,
+              "copy_seconds": 0.33266242779791355,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 104.5332029455402,
+              "route_completed": 106.12049042567861,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 106.12049042567861,
+              "copy_start": 106.13228279543769,
+              "copy_end": 106.45187973236393,
+              "copy_seconds": 0.3195969369262457,
+              "post_FIFO_lower_bound_wait": 0.01179236975907827,
+              "partition": {
+                "source_gate": 0.01179236975907827
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:4",
+                    "distribution-search:5",
+                    "feal-differential-cryptanalysis:5"
+                  ],
+                  "operation": "compute",
+                  "start": 106.07356441232393,
+                  "end": 106.13228279543769,
+                  "overlap": 0.01179236975907827,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:6",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 145.973954110906,
+              "route_completed": 146.78108466199848,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 146.78108466199848,
+              "copy_start": 146.78108466199848,
+              "copy_end": 147.1691666568375,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 188.14876304819444,
+              "route_completed": 188.82335550510163,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 188.82335550510163,
+              "copy_start": 188.82335550510163,
+              "copy_end": 189.85063137379314,
+              "copy_seconds": 1.027275868691504,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-code-vulnerability:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 196.95396665024901,
+              "route_completed": 197.67863624935012,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 197.67863624935012,
+              "copy_start": 197.67863624935012,
+              "copy_end": 197.79277801253807,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 203.6622215154468,
+              "route_completed": 204.3774020038769,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 204.3774020038769,
+              "copy_start": 204.3774020038769,
+              "copy_end": 204.8111407039911,
+              "copy_seconds": 0.4337387001141906,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 205.350124018416,
+              "route_completed": 206.38678070557899,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 206.38678070557899,
+              "copy_start": 206.38678070557899,
+              "copy_end": 206.45526576349175,
+              "copy_seconds": 0.06848505791276693,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:9",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 254.3784319812243,
+              "route_completed": 255.46983767479276,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 258.9234599184262,
+              "copy_start": 258.9234599184262,
+              "copy_end": 259.380026971178,
+              "copy_seconds": 0.45656705275177956,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:9",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 257.8526451484095,
+              "route_completed": 259.0305847823752,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 259.7114749291817,
+              "copy_start": 259.7114749291817,
+              "copy_end": 260.9670343242491,
+              "copy_seconds": 1.2555593950673938,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:10",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 282.2859394581485,
+              "route_completed": 284.30813266661215,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 286.08088228069056,
+              "copy_start": 286.08088228069056,
+              "copy_end": 286.2406807491537,
+              "copy_seconds": 0.15979846846312284,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:10",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 284.30813266661215,
+              "route_completed": 286.5882698526776,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 291.2515490784143,
+              "copy_start": 297.765863166949,
+              "copy_end": 297.8049999231605,
+              "copy_seconds": 0.03913675621151924,
+              "post_FIFO_lower_bound_wait": 6.514314088534661,
+              "partition": {
+                "source_gate": 6.513690565276988,
+                "unexplained_or_bookkeeping": 0.0006235232576727867
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "git-multibranch:10",
+                  "operation": "P_api",
+                  "start": 290.00213598530223,
+                  "end": 297.7652396436913,
+                  "overlap": 6.513690565276988,
+                  "owner_route_after_target_route": true
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:13",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 343.1932518622573,
+              "route_completed": 344.0022477164936,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 344.55561937503506,
+              "copy_start": 348.7522878088728,
+              "copy_end": 349.92639049521836,
+              "copy_seconds": 1.1741026863455772,
+              "post_FIFO_lower_bound_wait": 4.196668433837715,
+              "partition": {
+                "source_gate": 4.191223134059214,
+                "destination_gate+source_gate": 0.004819585118809755,
+                "unexplained_or_bookkeeping": 0.0006257146596908569
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "git-multibranch:12",
+                  "operation": "P_api",
+                  "start": 339.9941642026282,
+                  "end": 348.7516620942131,
+                  "overlap": 4.196042719178024,
+                  "owner_route_after_target_route": false
+                },
+                {
+                  "kind": "destination_gate",
+                  "owner": "headless-terminal:12",
+                  "operation": "handoff",
+                  "start": 345.10945856631184,
+                  "end": 345.11427815143065,
+                  "overlap": 0.004819585118809755,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:14",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 369.56715950684753,
+              "route_completed": 370.3911462505512,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 370.3911462505512,
+              "copy_start": 370.3911462505512,
+              "copy_end": 371.0075117717661,
+              "copy_seconds": 0.6163655212149024,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "feal-differential-cryptanalysis:14",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 375.0542648414516,
+              "route_completed": 375.83585968797604,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 375.83585968797604,
+              "copy_start": 375.89395166301205,
+              "copy_end": 376.0309217788376,
+              "copy_seconds": 0.13697011582553387,
+              "post_FIFO_lower_bound_wait": 0.058091975036006716,
+              "partition": {
+                "source_gate": 0.058091975036006716
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "headless-terminal:13",
+                    "dna-insert:14"
+                  ],
+                  "operation": "compute",
+                  "start": 375.83450376261527,
+                  "end": 375.89395166301205,
+                  "overlap": 0.058091975036006716,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "raw_sha256": "8d34fef092e4b84600e6f33feb1caa6ad687908cc308a19c90b34c4fc329f5bc",
+      "arms": {
+        "reference": {
+          "copies": 15,
+          "copy_execution_seconds_sum": 10.386900450102985,
+          "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.4334075589402602,
+          "partition_sums_NOT_wall_gain": {
+            "source_gate": 0.41618634994640047,
+            "direction_slot+source_gate": 0.017221208993859705
+          },
+          "younger_source_blocked_copies": 0,
+          "largest_waits": [
+            {
+              "id": "fix-code-vulnerability:6",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 72.6740228968674,
+              "route_completed": 73.42662717107343,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 73.42662717107343,
+              "copy_start": 73.48074753954671,
+              "copy_end": 73.59488930273466,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.054120368473277836,
+              "partition": {
+                "source_gate": 0.054120368473277836
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "headless-terminal:5",
+                    "distribution-search:6",
+                    "dna-insert:6"
+                  ],
+                  "operation": "compute",
+                  "start": 73.42195629364824,
+                  "end": 73.48074753954671,
+                  "overlap": 0.054120368473277836,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:11",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 178.04285080049024,
+              "route_completed": 179.60598427878173,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 179.60598427878173,
+              "copy_start": 179.65859819690994,
+              "copy_end": 179.9097100759234,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.05261391812820193,
+              "partition": {
+                "source_gate": 0.05261391812820193
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:11"
+                  ],
+                  "operation": "compute",
+                  "start": 179.59879339368703,
+                  "end": 179.65859819690994,
+                  "overlap": 0.05261391812820193,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:8",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 122.65387749062066,
+              "route_completed": 124.02423938604794,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 124.09679167234158,
+              "copy_start": 124.14892056778119,
+              "copy_end": 125.24468149438546,
+              "copy_seconds": 1.095760926604271,
+              "post_FIFO_lower_bound_wait": 0.052128895439608414,
+              "partition": {
+                "source_gate": 0.052128895439608414
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:8",
+                    "fix-code-vulnerability:8"
+                  ],
+                  "operation": "compute",
+                  "start": 124.09050109204408,
+                  "end": 124.14892056778119,
+                  "overlap": 0.052128895439608414,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:5",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 54.05137129962899,
+              "route_completed": 55.416588327010224,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 55.416588327010224,
+              "copy_start": 55.46440221721051,
+              "copy_end": 55.6926857435864,
+              "copy_seconds": 0.22828352637588978,
+              "post_FIFO_lower_bound_wait": 0.047813890200288256,
+              "partition": {
+                "source_gate": 0.047813890200288256
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:4",
+                    "git-multibranch:4"
+                  ],
+                  "operation": "compute",
+                  "start": 55.40568630117025,
+                  "end": 55.46440221721051,
+                  "overlap": 0.047813890200288256,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:6",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 79.9818015350348,
+              "route_completed": 81.0664202172034,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 81.0664202172034,
+              "copy_start": 81.11192136472226,
+              "copy_end": 82.20768229132653,
+              "copy_seconds": 1.095760926604271,
+              "post_FIFO_lower_bound_wait": 0.045501147518862695,
+              "partition": {
+                "source_gate": 0.045501147518862695
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:6",
+                    "dna-insert:6",
+                    "feal-differential-cryptanalysis:6",
+                    "fix-git:6"
+                  ],
+                  "operation": "compute",
+                  "start": 81.05310146433611,
+                  "end": 81.11192136472226,
+                  "overlap": 0.045501147518862695,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "id": "feal-differential-cryptanalysis:5",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 52.16781560400752,
+              "route_completed": 53.49094884458825,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 54.6837627680872,
+              "copy_start": 54.72388846153006,
+              "copy_end": 55.11197045636907,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.04012569344286021,
+              "partition": {
+                "source_gate": 0.04012569344286021
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:4",
+                    "git-multibranch:4"
+                  ],
+                  "operation": "compute",
+                  "start": 54.66517192616028,
+                  "end": 54.72388846153006,
+                  "overlap": 0.04012569344286021,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:5",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 54.05137129962899,
+              "route_completed": 55.416588327010224,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 55.416588327010224,
+              "copy_start": 55.46440221721051,
+              "copy_end": 55.6926857435864,
+              "copy_seconds": 0.22828352637588978,
+              "post_FIFO_lower_bound_wait": 0.047813890200288256,
+              "partition": {
+                "source_gate": 0.047813890200288256
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:4",
+                    "git-multibranch:4"
+                  ],
+                  "operation": "compute",
+                  "start": 55.40568630117025,
+                  "end": 55.46440221721051,
+                  "overlap": 0.047813890200288256,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:6",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 64.61936664197124,
+              "route_completed": 66.21498708707387,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 66.21498708707387,
+              "copy_start": 66.24579100401739,
+              "copy_end": 67.11326840424577,
+              "copy_seconds": 0.8674774002283812,
+              "post_FIFO_lower_bound_wait": 0.030803916943526133,
+              "partition": {
+                "source_gate": 0.030803916943526133
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:5"
+                  ],
+                  "operation": "compute",
+                  "start": 66.18615614966198,
+                  "end": 66.24579100401739,
+                  "overlap": 0.030803916943526133,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-code-vulnerability:6",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 72.6740228968674,
+              "route_completed": 73.42662717107343,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 73.42662717107343,
+              "copy_start": 73.48074753954671,
+              "copy_end": 73.59488930273466,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.054120368473277836,
+              "partition": {
+                "source_gate": 0.054120368473277836
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "headless-terminal:5",
+                    "distribution-search:6",
+                    "dna-insert:6"
+                  ],
+                  "operation": "compute",
+                  "start": 73.42195629364824,
+                  "end": 73.48074753954671,
+                  "overlap": 0.054120368473277836,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-leak-recovery:6",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 79.12562359021798,
+              "route_completed": 79.9818015350348,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 79.9818015350348,
+              "copy_start": 79.9818015350348,
+              "copy_end": 80.415540235149,
+              "copy_seconds": 0.4337387001141906,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-multibranch:6",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 79.9818015350348,
+              "route_completed": 81.0664202172034,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 81.0664202172034,
+              "copy_start": 81.11192136472226,
+              "copy_end": 82.20768229132653,
+              "copy_seconds": 1.095760926604271,
+              "post_FIFO_lower_bound_wait": 0.045501147518862695,
+              "partition": {
+                "source_gate": 0.045501147518862695
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:6",
+                    "dna-insert:6",
+                    "feal-differential-cryptanalysis:6",
+                    "fix-git:6"
+                  ],
+                  "operation": "compute",
+                  "start": 81.05310146433611,
+                  "end": 81.11192136472226,
+                  "overlap": 0.045501147518862695,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:6",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 82.7980666015268,
+              "route_completed": 83.72340624642842,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 83.72340624642842,
+              "copy_start": 83.72340624642842,
+              "copy_end": 83.83754800961637,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 99.43456936221487,
+              "route_completed": 100.45150062141502,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 100.45150062141502,
+              "copy_start": 100.45150062141502,
+              "copy_end": 100.56564238460297,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:8",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 110.10418647262053,
+              "route_completed": 111.62279627312336,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 112.53206199210778,
+              "copy_start": 112.5612917116681,
+              "copy_end": 113.70270934354755,
+              "copy_seconds": 1.141417631879449,
+              "post_FIFO_lower_bound_wait": 0.029229719560319722,
+              "partition": {
+                "source_gate": 0.029229719560319722
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:7",
+                    "git-leak-recovery:7",
+                    "git-multibranch:7"
+                  ],
+                  "operation": "compute",
+                  "start": 112.50211179474054,
+                  "end": 112.5612917116681,
+                  "overlap": 0.029229719560319722,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:8",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 122.65387749062066,
+              "route_completed": 124.02423938604794,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 124.09679167234158,
+              "copy_start": 124.14892056778119,
+              "copy_end": 125.24468149438546,
+              "copy_seconds": 1.095760926604271,
+              "post_FIFO_lower_bound_wait": 0.052128895439608414,
+              "partition": {
+                "source_gate": 0.052128895439608414
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:8",
+                    "fix-code-vulnerability:8"
+                  ],
+                  "operation": "compute",
+                  "start": 124.09050109204408,
+                  "end": 124.14892056778119,
+                  "overlap": 0.052128895439608414,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:8",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 124.02423938604794,
+              "route_completed": 125.2274602853916,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 125.2274602853916,
+              "copy_start": 125.24792573224562,
+              "copy_end": 126.38934336412507,
+              "copy_seconds": 1.141417631879449,
+              "post_FIFO_lower_bound_wait": 0.02046544685401841,
+              "partition": {
+                "direction_slot+source_gate": 0.017221208993859705,
+                "source_gate": 0.003244237860158705
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:8"
+                  ],
+                  "operation": "compute",
+                  "start": 125.18882134719178,
+                  "end": 125.24792573224562,
+                  "overlap": 0.02046544685401841,
+                  "owner_route_after_target_route": false
+                },
+                {
+                  "kind": "direction_slot",
+                  "owner": "git-multibranch:8",
+                  "operation": "history",
+                  "start": 124.14892056778119,
+                  "end": 125.24468149438546,
+                  "overlap": 0.017221208993859705,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:9",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 128.52677039529442,
+              "route_completed": 129.52221341450587,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 129.52221341450587,
+              "copy_start": 129.52221341450587,
+              "copy_end": 131.05171304122433,
+              "copy_seconds": 1.5294996267184615,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:9",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 134.95970895591398,
+              "route_completed": 136.10620380096918,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 136.10620380096918,
+              "copy_start": 136.14540123111047,
+              "copy_end": 137.17267709980197,
+              "copy_seconds": 1.027275868691504,
+              "post_FIFO_lower_bound_wait": 0.03919743014128585,
+              "partition": {
+                "source_gate": 0.03919743014128585
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:8",
+                    "headless-terminal:8",
+                    "distribution-search:9"
+                  ],
+                  "operation": "compute",
+                  "start": 136.0862063834772,
+                  "end": 136.14540123111047,
+                  "overlap": 0.03919743014128585,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:11",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 178.04285080049024,
+              "route_completed": 179.60598427878173,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 179.60598427878173,
+              "copy_start": 179.65859819690994,
+              "copy_end": 179.9097100759234,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.05261391812820193,
+              "partition": {
+                "source_gate": 0.05261391812820193
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:11"
+                  ],
+                  "operation": "compute",
+                  "start": 179.59879339368703,
+                  "end": 179.65859819690994,
+                  "overlap": 0.05261391812820193,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:13",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 207.99887431952064,
+              "route_completed": 208.7903564413311,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 210.84526875262472,
+              "copy_start": 210.86667588486273,
+              "copy_end": 211.71132493245352,
+              "copy_seconds": 0.8446490475907922,
+              "post_FIFO_lower_bound_wait": 0.021407132238010718,
+              "partition": {
+                "source_gate": 0.021407132238010718
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:12",
+                    "git-multibranch:12",
+                    "headless-terminal:12"
+                  ],
+                  "operation": "compute",
+                  "start": 210.80698343563404,
+                  "end": 210.86667588486273,
+                  "overlap": 0.021407132238010718,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ]
+        },
+        "parent": {
+          "copies": 12,
+          "copy_execution_seconds_sum": 10.706514448858798,
+          "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.17663173452351089,
+          "partition_sums_NOT_wall_gain": {
+            "source_gate": 0.17663173452351089
+          },
+          "younger_source_blocked_copies": 0,
+          "largest_waits": [
+            {
+              "id": "git-multibranch:5",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 60.68626387078753,
+              "route_completed": 62.12834989326157,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 62.12834989326157,
+              "copy_start": 62.17507367916508,
+              "copy_end": 63.13386448994382,
+              "copy_seconds": 0.9587908107787371,
+              "post_FIFO_lower_bound_wait": 0.04672378590350945,
+              "partition": {
+                "source_gate": 0.04672378590350945
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:5",
+                    "dna-insert:5",
+                    "fix-git:5",
+                    "fix-code-vulnerability:5"
+                  ],
+                  "operation": "compute",
+                  "start": 62.115589407600325,
+                  "end": 62.17507367916508,
+                  "overlap": 0.04672378590350945,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:14",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 233.5413079832539,
+              "route_completed": 234.336602579263,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 234.336602579263,
+              "copy_start": 234.37842197265797,
+              "copy_end": 235.9764066572892,
+              "copy_seconds": 1.5979846846312284,
+              "post_FIFO_lower_bound_wait": 0.04181939339497376,
+              "partition": {
+                "source_gate": 0.04181939339497376
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:13",
+                    "fix-git:13",
+                    "headless-terminal:13"
+                  ],
+                  "operation": "compute",
+                  "start": 234.31862975579884,
+                  "end": 234.37842197265797,
+                  "overlap": 0.04181939339497376,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:9",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 127.70285245956525,
+              "route_completed": 130.29663432489394,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 133.09885351105967,
+              "copy_start": 133.1319375037317,
+              "copy_end": 134.27335513561115,
+              "copy_seconds": 1.141417631879449,
+              "post_FIFO_lower_bound_wait": 0.03308399267203299,
+              "partition": {
+                "source_gate": 0.03308399267203299
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:8"
+                  ],
+                  "operation": "compute",
+                  "start": 133.0752513223455,
+                  "end": 133.1319375037317,
+                  "overlap": 0.03308399267203299,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:7",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 99.43456936221487,
+              "route_completed": 100.38725009912187,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 101.18276626494755,
+              "copy_start": 101.2082740698881,
+              "copy_end": 101.87029629637819,
+              "copy_seconds": 0.6620222264900804,
+              "post_FIFO_lower_bound_wait": 0.02550780494055971,
+              "partition": {
+                "source_gate": 0.02550780494055971
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:7",
+                    "dna-insert:7"
+                  ],
+                  "operation": "compute",
+                  "start": 101.14937283034818,
+                  "end": 101.2082740698881,
+                  "overlap": 0.02550780494055971,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:10",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 146.62782591310818,
+              "route_completed": 148.10870551991408,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 151.99724850126591,
+              "copy_start": 152.01816283313886,
+              "copy_end": 153.29655058084384,
+              "copy_seconds": 1.2783877477049828,
+              "post_FIFO_lower_bound_wait": 0.020914331872944558,
+              "partition": {
+                "source_gate": 0.020914331872944558
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:9"
+                  ],
+                  "operation": "compute",
+                  "start": 151.95876032962767,
+                  "end": 152.01816283313886,
+                  "overlap": 0.020914331872944558,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "id": "git-leak-recovery:3",
+              "source": 0,
+              "destination": 1,
+              "route_origin": 26.370534884070413,
+              "route_completed": 27.481656039518843,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 27.481656039518843,
+              "copy_start": 27.481656039518843,
+              "copy_end": 27.501224417624602,
+              "copy_seconds": 0.01956837810575962,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 57.384471655338054,
+              "route_completed": 59.379085238664565,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 59.379085238664565,
+              "copy_start": 59.379085238664565,
+              "copy_end": 59.63347415403944,
+              "copy_seconds": 0.25438891537487507,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-multibranch:5",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 60.68626387078753,
+              "route_completed": 62.12834989326157,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 62.12834989326157,
+              "copy_start": 62.17507367916508,
+              "copy_end": 63.13386448994382,
+              "copy_seconds": 0.9587908107787371,
+              "post_FIFO_lower_bound_wait": 0.04672378590350945,
+              "partition": {
+                "source_gate": 0.04672378590350945
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:5",
+                    "dna-insert:5",
+                    "fix-git:5",
+                    "fix-code-vulnerability:5"
+                  ],
+                  "operation": "compute",
+                  "start": 62.115589407600325,
+                  "end": 62.17507367916508,
+                  "overlap": 0.04672378590350945,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 91.41356014915385,
+              "route_completed": 92.08168657871182,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 92.08168657871182,
+              "copy_start": 92.08168657871182,
+              "copy_end": 93.06330574212815,
+              "copy_seconds": 0.981619163416326,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:7",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 99.43456936221487,
+              "route_completed": 100.38725009912187,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 101.18276626494755,
+              "copy_start": 101.2082740698881,
+              "copy_end": 101.87029629637819,
+              "copy_seconds": 0.6620222264900804,
+              "post_FIFO_lower_bound_wait": 0.02550780494055971,
+              "partition": {
+                "source_gate": 0.02550780494055971
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:7",
+                    "dna-insert:7"
+                  ],
+                  "operation": "compute",
+                  "start": 101.14937283034818,
+                  "end": 101.2082740698881,
+                  "overlap": 0.02550780494055971,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 103.90209255946456,
+              "route_completed": 105.32517411499516,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 105.77813084418588,
+              "copy_start": 105.77813084418588,
+              "copy_end": 105.89227260737383,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:9",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 127.70285245956525,
+              "route_completed": 130.29663432489394,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 133.09885351105967,
+              "copy_start": 133.1319375037317,
+              "copy_end": 134.27335513561115,
+              "copy_seconds": 1.141417631879449,
+              "post_FIFO_lower_bound_wait": 0.03308399267203299,
+              "partition": {
+                "source_gate": 0.03308399267203299
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:8"
+                  ],
+                  "operation": "compute",
+                  "start": 133.0752513223455,
+                  "end": 133.1319375037317,
+                  "overlap": 0.03308399267203299,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:9",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 140.1703621010564,
+              "route_completed": 141.77274523327588,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 141.77274523327588,
+              "copy_start": 141.7762579394499,
+              "copy_end": 142.91767557132934,
+              "copy_seconds": 1.141417631879449,
+              "post_FIFO_lower_bound_wait": 0.0035127061740070076,
+              "partition": {
+                "source_gate": 0.0035127061740070076
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:8",
+                    "dna-insert:9"
+                  ],
+                  "operation": "compute",
+                  "start": 141.7161438576015,
+                  "end": 141.7762579394499,
+                  "overlap": 0.0035127061740070076,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:10",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 146.62782591310818,
+              "route_completed": 148.10870551991408,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 151.99724850126591,
+              "copy_start": 152.01816283313886,
+              "copy_end": 153.29655058084384,
+              "copy_seconds": 1.2783877477049828,
+              "post_FIFO_lower_bound_wait": 0.020914331872944558,
+              "partition": {
+                "source_gate": 0.020914331872944558
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:9"
+                  ],
+                  "operation": "compute",
+                  "start": 151.95876032962767,
+                  "end": 152.01816283313886,
+                  "overlap": 0.020914331872944558,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 149.028990030543,
+              "route_completed": 151.49859175682928,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 154.0587618266311,
+              "copy_start": 154.06383154619658,
+              "copy_end": 156.04989822566682,
+              "copy_seconds": 1.986066679470241,
+              "post_FIFO_lower_bound_wait": 0.00506971956548341,
+              "partition": {
+                "source_gate": 0.00506971956548341
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:9",
+                    "git-multibranch:9"
+                  ],
+                  "operation": "compute",
+                  "start": 154.00436603411532,
+                  "end": 154.06383154619658,
+                  "overlap": 0.00506971956548341,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:14",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 233.5413079832539,
+              "route_completed": 234.336602579263,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 234.336602579263,
+              "copy_start": 234.37842197265797,
+              "copy_end": 235.9764066572892,
+              "copy_seconds": 1.5979846846312284,
+              "post_FIFO_lower_bound_wait": 0.04181939339497376,
+              "partition": {
+                "source_gate": 0.04181939339497376
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:13",
+                    "fix-git:13",
+                    "headless-terminal:13"
+                  ],
+                  "operation": "compute",
+                  "start": 234.31862975579884,
+                  "end": 234.37842197265797,
+                  "overlap": 0.04181939339497376,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:16",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 269.8573060506959,
+              "route_completed": 270.46711473514944,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 270.46711473514944,
+              "copy_start": 270.46711473514944,
+              "copy_end": 271.03782355108916,
+              "copy_seconds": 0.5707088159397244,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            }
+          ]
+        },
+        "ours": {
+          "copies": 15,
+          "copy_execution_seconds_sum": 10.426105453632772,
+          "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.31989032538499274,
+          "partition_sums_NOT_wall_gain": {
+            "source_gate": 0.31989032538499274
+          },
+          "younger_source_blocked_copies": 0,
+          "largest_waits": [
+            {
+              "id": "git-multibranch:11",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 169.27639573352178,
+              "route_completed": 171.01771364472216,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 172.7829695023584,
+              "copy_start": 172.8417184366917,
+              "copy_end": 173.09283031570519,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.058748934333294756,
+              "partition": {
+                "source_gate": 0.058748934333294756
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:11"
+                  ],
+                  "operation": "compute",
+                  "start": 172.78122181328357,
+                  "end": 172.8417184366917,
+                  "overlap": 0.058748934333294756,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:5",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 54.034706433682864,
+              "route_completed": 55.236921747721134,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 55.236921747721134,
+              "copy_start": 55.29472034212424,
+              "copy_end": 55.52300386850013,
+              "copy_seconds": 0.22828352637588978,
+              "post_FIFO_lower_bound_wait": 0.05779859440310986,
+              "partition": {
+                "source_gate": 0.05779859440310986
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:4",
+                    "git-multibranch:4"
+                  ],
+                  "operation": "compute",
+                  "start": 55.23599222948354,
+                  "end": 55.29472034212424,
+                  "overlap": 0.05779859440310986,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-leak-recovery:3",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 26.370534884070413,
+              "route_completed": 27.135723153514395,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 27.135723153514395,
+              "copy_start": 27.19033696667099,
+              "copy_end": 27.21316531930858,
+              "copy_seconds": 0.022828352637588978,
+              "post_FIFO_lower_bound_wait": 0.05461381315659608,
+              "partition": {
+                "source_gate": 0.05461381315659608
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:3",
+                    "feal-differential-cryptanalysis:3",
+                    "fix-git:3"
+                  ],
+                  "operation": "compute",
+                  "start": 27.131679977186458,
+                  "end": 27.19033696667099,
+                  "overlap": 0.05461381315659608,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 154.84533012547516,
+              "route_completed": 156.3818613169212,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 156.3818613169212,
+              "copy_start": 156.43113315608042,
+              "copy_end": 157.5040657300471,
+              "copy_seconds": 1.072932573966682,
+              "post_FIFO_lower_bound_wait": 0.049271839159217734,
+              "partition": {
+                "source_gate": 0.049271839159217734
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "headless-terminal:9"
+                  ],
+                  "operation": "compute",
+                  "start": 156.37097107327457,
+                  "end": 156.43113315608042,
+                  "overlap": 0.049271839159217734,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:11",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 167.18845337808256,
+              "route_completed": 169.27639573352178,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 169.27639573352178,
+              "copy_start": 169.31220761396682,
+              "copy_end": 170.1796850141952,
+              "copy_seconds": 0.8674774002283812,
+              "post_FIFO_lower_bound_wait": 0.03581188044503847,
+              "partition": {
+                "source_gate": 0.03581188044503847
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:11"
+                  ],
+                  "operation": "compute",
+                  "start": 169.2517087302388,
+                  "end": 169.31220761396682,
+                  "overlap": 0.03581188044503847,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "id": "git-leak-recovery:3",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 26.370534884070413,
+              "route_completed": 27.135723153514395,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 27.135723153514395,
+              "copy_start": 27.19033696667099,
+              "copy_end": 27.21316531930858,
+              "copy_seconds": 0.022828352637588978,
+              "post_FIFO_lower_bound_wait": 0.05461381315659608,
+              "partition": {
+                "source_gate": 0.05461381315659608
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:3",
+                    "feal-differential-cryptanalysis:3",
+                    "fix-git:3"
+                  ],
+                  "operation": "compute",
+                  "start": 27.131679977186458,
+                  "end": 27.19033696667099,
+                  "overlap": 0.05461381315659608,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:4",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 47.94373357420242,
+              "route_completed": 48.9203369314506,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 48.9203369314506,
+              "copy_start": 48.9203369314506,
+              "copy_end": 48.988821989363366,
+              "copy_seconds": 0.06848505791276693,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:5",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 54.034706433682864,
+              "route_completed": 55.236921747721134,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 55.236921747721134,
+              "copy_start": 55.29472034212424,
+              "copy_end": 55.52300386850013,
+              "copy_seconds": 0.22828352637588978,
+              "post_FIFO_lower_bound_wait": 0.05779859440310986,
+              "partition": {
+                "source_gate": 0.05779859440310986
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:4",
+                    "git-multibranch:4"
+                  ],
+                  "operation": "compute",
+                  "start": 55.23599222948354,
+                  "end": 55.29472034212424,
+                  "overlap": 0.05779859440310986,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-code-vulnerability:5",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 55.236921747721134,
+              "route_completed": 57.473961751609615,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 57.473961751609615,
+              "copy_start": 57.473961751609615,
+              "copy_end": 58.60892768174367,
+              "copy_seconds": 1.134965930134058,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-multibranch:6",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 80.20829412903103,
+              "route_completed": 81.46700471282979,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 81.46700471282979,
+              "copy_start": 81.49645905003328,
+              "copy_end": 82.7063617398255,
+              "copy_seconds": 1.2099026897922158,
+              "post_FIFO_lower_bound_wait": 0.029454337203489445,
+              "partition": {
+                "source_gate": 0.029454337203489445
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:6",
+                    "fix-code-vulnerability:6"
+                  ],
+                  "operation": "compute",
+                  "start": 81.43730213154396,
+                  "end": 81.49645905003328,
+                  "overlap": 0.029454337203489445,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 91.41356014915385,
+              "route_completed": 92.17803136447664,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 92.17803136447664,
+              "copy_start": 92.17803136447664,
+              "copy_end": 93.04550876470502,
+              "copy_seconds": 0.8674774002283812,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "feal-differential-cryptanalysis:7",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 97.55891364759283,
+              "route_completed": 98.29426283441578,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 98.29426283441578,
+              "copy_start": 98.3087218853272,
+              "copy_end": 98.42286364851515,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.01445905091142663,
+              "partition": {
+                "source_gate": 0.01445905091142663
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:7"
+                  ],
+                  "operation": "compute",
+                  "start": 98.24983924092864,
+                  "end": 98.3087218853272,
+                  "overlap": 0.01445905091142663,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 101.8311107577234,
+              "route_completed": 102.8901932091267,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 102.8901932091267,
+              "copy_start": 102.8901932091267,
+              "copy_end": 103.3239319092409,
+              "copy_seconds": 0.4337387001141906,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:7",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 104.54639650622039,
+              "route_completed": 107.2222093402897,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 107.2222093402897,
+              "copy_start": 107.24194121606251,
+              "copy_end": 108.26921708475402,
+              "copy_seconds": 1.027275868691504,
+              "post_FIFO_lower_bound_wait": 0.019731875772819762,
+              "partition": {
+                "source_gate": 0.019731875772819762
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:7",
+                    "feal-differential-cryptanalysis:7",
+                    "fix-git:7"
+                  ],
+                  "operation": "compute",
+                  "start": 107.18210881748293,
+                  "end": 107.24194121606251,
+                  "overlap": 0.019731875772819762,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:9",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 143.09848573703752,
+              "route_completed": 143.88477486377658,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 146.2279184422449,
+              "copy_start": 146.2279184422449,
+              "copy_end": 146.4790303212584,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 154.84533012547516,
+              "route_completed": 156.3818613169212,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 156.3818613169212,
+              "copy_start": 156.43113315608042,
+              "copy_end": 157.5040657300471,
+              "copy_seconds": 1.072932573966682,
+              "post_FIFO_lower_bound_wait": 0.049271839159217734,
+              "partition": {
+                "source_gate": 0.049271839159217734
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "headless-terminal:9"
+                  ],
+                  "operation": "compute",
+                  "start": 156.37097107327457,
+                  "end": 156.43113315608042,
+                  "overlap": 0.049271839159217734,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:11",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 158.61663600512588,
+              "route_completed": 159.4661293905453,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 159.4661293905453,
+              "copy_start": 159.4661293905453,
+              "copy_end": 160.8814872540758,
+              "copy_seconds": 1.4153578635305166,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:10",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 159.4661293905453,
+              "route_completed": 160.70404939554658,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 161.86877970144056,
+              "copy_start": 161.86877970144056,
+              "copy_end": 163.32979427024625,
+              "copy_seconds": 1.4610145688056946,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "distribution-search:11",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 167.18845337808256,
+              "route_completed": 169.27639573352178,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 169.27639573352178,
+              "copy_start": 169.31220761396682,
+              "copy_end": 170.1796850141952,
+              "copy_seconds": 0.8674774002283812,
+              "post_FIFO_lower_bound_wait": 0.03581188044503847,
+              "partition": {
+                "source_gate": 0.03581188044503847
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:11"
+                  ],
+                  "operation": "compute",
+                  "start": 169.2517087302388,
+                  "end": 169.31220761396682,
+                  "overlap": 0.03581188044503847,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:11",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 169.27639573352178,
+              "route_completed": 171.01771364472216,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 172.7829695023584,
+              "copy_start": 172.8417184366917,
+              "copy_end": 173.09283031570519,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.058748934333294756,
+              "partition": {
+                "source_gate": 0.058748934333294756
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:11"
+                  ],
+                  "operation": "compute",
+                  "start": 172.78122181328357,
+                  "end": 172.8417184366917,
+                  "overlap": 0.058748934333294756,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ]
+        }
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "raw_sha256": "ff2032b40bd02a5dbbebd784a773d2a44358e2248a15f68c88b6f4a613b93214",
+      "arms": {
+        "reference": {
+          "copies": 19,
+          "copy_execution_seconds_sum": 11.094579381868243,
+          "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.8867930853176986,
+          "partition_sums_NOT_wall_gain": {
+            "source_gate": 0.8859175266135608,
+            "unexplained_or_bookkeeping": 0.0008755587041378021
+          },
+          "younger_source_blocked_copies": 0,
+          "largest_waits": [
+            {
+              "id": "fix-git:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 72.557844568343,
+              "route_completed": 73.79212907744319,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 73.79212907744319,
+              "copy_start": 74.31871320756738,
+              "copy_end": 74.43285497075533,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.526584130124192,
+              "partition": {
+                "source_gate": 0.526584130124192
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:7"
+                  ],
+                  "operation": "restore",
+                  "start": 72.99420676658488,
+                  "end": 74.31871320756738,
+                  "overlap": 0.526584130124192,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:5",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 34.50817336562194,
+              "route_completed": 35.915174293934655,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 35.915174293934655,
+              "copy_start": 35.96511753453346,
+              "copy_end": 36.581483055748365,
+              "copy_seconds": 0.6163655212149024,
+              "post_FIFO_lower_bound_wait": 0.04994324059880739,
+              "partition": {
+                "source_gate": 0.04906768189466959,
+                "unexplained_or_bookkeeping": 0.0008755587041378021
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:4"
+                  ],
+                  "operation": "save",
+                  "start": 35.88083773548537,
+                  "end": 35.964241975829324,
+                  "overlap": 0.04906768189466959,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:7",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 65.68952766165353,
+              "route_completed": 67.12899096986139,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 68.17639582343145,
+              "copy_start": 68.21661328256299,
+              "copy_end": 69.40368761971762,
+              "copy_seconds": 1.1870743371546268,
+              "post_FIFO_lower_bound_wait": 0.04021745913154007,
+              "partition": {
+                "source_gate": 0.04021745913154007
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:6",
+                    "fix-git:6"
+                  ],
+                  "operation": "compute",
+                  "start": 68.1578444658592,
+                  "end": 68.21661328256299,
+                  "overlap": 0.04021745913154007,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 69.55734658245811,
+              "route_completed": 70.756111815744,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 70.756111815744,
+              "copy_start": 70.79615313638094,
+              "copy_end": 71.75494394715967,
+              "copy_seconds": 0.9587908107787371,
+              "post_FIFO_lower_bound_wait": 0.04004132063693078,
+              "partition": {
+                "source_gate": 0.04004132063693078
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:6"
+                  ],
+                  "operation": "compute",
+                  "start": 70.73716438144217,
+                  "end": 70.79615313638094,
+                  "overlap": 0.04004132063693078,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:6",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 55.206677151524524,
+              "route_completed": 57.179910303832266,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 57.179910303832266,
+              "copy_start": 57.219234723785426,
+              "copy_end": 57.447518250161316,
+              "copy_seconds": 0.22828352637588978,
+              "post_FIFO_lower_bound_wait": 0.03932441995316083,
+              "partition": {
+                "source_gate": 0.03932441995316083
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:6"
+                  ],
+                  "operation": "compute",
+                  "start": 57.13913202157251,
+                  "end": 57.219234723785426,
+                  "overlap": 0.03932441995316083,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "id": "git-leak-recovery:4",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 30.121803892871895,
+              "route_completed": 31.209958379379245,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 31.209958379379245,
+              "copy_start": 31.209958379379245,
+              "copy_end": 31.3012717899296,
+              "copy_seconds": 0.09131341055035591,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:4",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 33.04720942710986,
+              "route_completed": 34.50817336562194,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 34.50817336562194,
+              "copy_start": 34.51025842781434,
+              "copy_end": 34.53308678045193,
+              "copy_seconds": 0.022828352637588978,
+              "post_FIFO_lower_bound_wait": 0.002085062192399789,
+              "partition": {
+                "source_gate": 0.002085062192399789
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:4",
+                    "feal-differential-cryptanalysis:4",
+                    "fix-git:4"
+                  ],
+                  "operation": "compute",
+                  "start": 34.45161133484668,
+                  "end": 34.51025842781434,
+                  "overlap": 0.002085062192399789,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:5",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 34.50817336562194,
+              "route_completed": 35.915174293934655,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 35.915174293934655,
+              "copy_start": 35.96511753453346,
+              "copy_end": 36.581483055748365,
+              "copy_seconds": 0.6163655212149024,
+              "post_FIFO_lower_bound_wait": 0.04994324059880739,
+              "partition": {
+                "source_gate": 0.04906768189466959,
+                "unexplained_or_bookkeeping": 0.0008755587041378021
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:4"
+                  ],
+                  "operation": "save",
+                  "start": 35.88083773548537,
+                  "end": 35.964241975829324,
+                  "overlap": 0.04906768189466959,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:6",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 53.53029575619929,
+              "route_completed": 55.206677151524524,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 55.206677151524524,
+              "copy_start": 55.206677151524524,
+              "copy_end": 56.11981125702808,
+              "copy_seconds": 0.9131341055035591,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-git:6",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 55.206677151524524,
+              "route_completed": 57.179910303832266,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 57.179910303832266,
+              "copy_start": 57.219234723785426,
+              "copy_end": 57.447518250161316,
+              "copy_seconds": 0.22828352637588978,
+              "post_FIFO_lower_bound_wait": 0.03932441995316083,
+              "partition": {
+                "source_gate": 0.03932441995316083
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:6"
+                  ],
+                  "operation": "compute",
+                  "start": 57.13913202157251,
+                  "end": 57.219234723785426,
+                  "overlap": 0.03932441995316083,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:7",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 65.68952766165353,
+              "route_completed": 67.12899096986139,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 68.17639582343145,
+              "copy_start": 68.21661328256299,
+              "copy_end": 69.40368761971762,
+              "copy_seconds": 1.1870743371546268,
+              "post_FIFO_lower_bound_wait": 0.04021745913154007,
+              "partition": {
+                "source_gate": 0.04021745913154007
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:6",
+                    "fix-git:6"
+                  ],
+                  "operation": "compute",
+                  "start": 68.1578444658592,
+                  "end": 68.21661328256299,
+                  "overlap": 0.04021745913154007,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 69.55734658245811,
+              "route_completed": 70.756111815744,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 70.756111815744,
+              "copy_start": 70.79615313638094,
+              "copy_end": 71.75494394715967,
+              "copy_seconds": 0.9587908107787371,
+              "post_FIFO_lower_bound_wait": 0.04004132063693078,
+              "partition": {
+                "source_gate": 0.04004132063693078
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:6"
+                  ],
+                  "operation": "compute",
+                  "start": 70.73716438144217,
+                  "end": 70.79615313638094,
+                  "overlap": 0.04004132063693078,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 72.557844568343,
+              "route_completed": 73.79212907744319,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 73.79212907744319,
+              "copy_start": 74.31871320756738,
+              "copy_end": 74.43285497075533,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.526584130124192,
+              "partition": {
+                "source_gate": 0.526584130124192
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:7"
+                  ],
+                  "operation": "restore",
+                  "start": 72.99420676658488,
+                  "end": 74.31871320756738,
+                  "overlap": 0.526584130124192,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 79.70319578377958,
+              "route_completed": 81.99123988267107,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 81.99123988267107,
+              "copy_start": 82.00492099885402,
+              "copy_end": 82.37017464105544,
+              "copy_seconds": 0.36525364220142365,
+              "post_FIFO_lower_bound_wait": 0.013681116182951314,
+              "partition": {
+                "source_gate": 0.013681116182951314
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:7",
+                    "dna-insert:7"
+                  ],
+                  "operation": "compute",
+                  "start": 81.94570503769155,
+                  "end": 82.00492099885402,
+                  "overlap": 0.013681116182951314,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 81.99123988267107,
+              "route_completed": 83.66533519120604,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 87.50530414822941,
+              "copy_start": 87.5221933342561,
+              "copy_end": 87.61350674480646,
+              "copy_seconds": 0.09131341055035591,
+              "post_FIFO_lower_bound_wait": 0.016889186026688208,
+              "partition": {
+                "source_gate": 0.016889186026688208
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:7",
+                    "dna-insert:7"
+                  ],
+                  "operation": "compute",
+                  "start": 87.46297752210525,
+                  "end": 87.5221933342561,
+                  "overlap": 0.016889186026688208,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-code-vulnerability:8",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 94.35680113846158,
+              "route_completed": 96.04320104266814,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 96.04320104266814,
+              "copy_start": 96.07098137241435,
+              "copy_end": 98.4679583993612,
+              "copy_seconds": 2.3969770269468427,
+              "post_FIFO_lower_bound_wait": 0.027780329746207144,
+              "partition": {
+                "source_gate": 0.027780329746207144
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:7",
+                    "headless-terminal:7"
+                  ],
+                  "operation": "compute",
+                  "start": 96.01187313435506,
+                  "end": 96.07098137241435,
+                  "overlap": 0.027780329746207144,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:9",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 102.39335023303086,
+              "route_completed": 103.33282755857479,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 103.33282755857479,
+              "copy_start": 103.33282755857479,
+              "copy_end": 103.9263647271521,
+              "copy_seconds": 0.5935371685773134,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:8",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 104.04648142249415,
+              "route_completed": 105.44424303202626,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 105.44424303202626,
+              "copy_start": 105.44424303202626,
+              "copy_end": 105.55838479521421,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "fix-code-vulnerability:9",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 111.06723503595259,
+              "route_completed": 112.32863782837673,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 112.32863782837673,
+              "copy_start": 112.36677362387579,
+              "copy_end": 112.89182573454033,
+              "copy_seconds": 0.5250521106645465,
+              "post_FIFO_lower_bound_wait": 0.0381357954990591,
+              "partition": {
+                "source_gate": 0.0381357954990591
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:8",
+                    "headless-terminal:8"
+                  ],
+                  "operation": "compute",
+                  "start": 112.30774990655658,
+                  "end": 112.36677362387579,
+                  "overlap": 0.0381357954990591,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:9",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 113.09887762538986,
+              "route_completed": 114.4269634084544,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 114.4269634084544,
+              "copy_start": 114.45308560470917,
+              "copy_end": 114.68136913108506,
+              "copy_seconds": 0.22828352637588978,
+              "post_FIFO_lower_bound_wait": 0.026122196254775076,
+              "partition": {
+                "source_gate": 0.026122196254775076
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:9"
+                  ],
+                  "operation": "compute",
+                  "start": 114.39627552482634,
+                  "end": 114.45308560470917,
+                  "overlap": 0.026122196254775076,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:9",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 114.43559485005073,
+              "route_completed": 115.61513290456931,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 115.61513290456931,
+              "copy_start": 115.64726184973799,
+              "copy_end": 115.78423196556352,
+              "copy_seconds": 0.13697011582553387,
+              "post_FIFO_lower_bound_wait": 0.03212894516867948,
+              "partition": {
+                "source_gate": 0.03212894516867948
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:9"
+                  ],
+                  "operation": "compute",
+                  "start": 115.59045419874442,
+                  "end": 115.64726184973799,
+                  "overlap": 0.03212894516867948,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:10",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 126.55176611391134,
+              "route_completed": 127.49918257324839,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 127.49918257324839,
+              "copy_start": 127.49918257324839,
+              "copy_end": 127.77312280489946,
+              "copy_seconds": 0.27394023165106773,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 128.99576779585726,
+              "route_completed": 130.77714878743552,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 130.77714878743552,
+              "copy_start": 130.7970396632379,
+              "copy_end": 132.78310634270815,
+              "copy_seconds": 1.986066679470241,
+              "post_FIFO_lower_bound_wait": 0.01989087580238902,
+              "partition": {
+                "source_gate": 0.01989087580238902
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:9",
+                    "distribution-search:10",
+                    "headless-terminal:9",
+                    "fix-git:10"
+                  ],
+                  "operation": "compute",
+                  "start": 130.7376232835057,
+                  "end": 130.7970396632379,
+                  "overlap": 0.01989087580238902,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:10",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 133.22783566327433,
+              "route_completed": 135.15310133881178,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 135.15310133881178,
+              "copy_start": 135.1670703468117,
+              "copy_end": 135.41818222582518,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.013969007999918404,
+              "partition": {
+                "source_gate": 0.013969007999918404
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:10"
+                  ],
+                  "operation": "compute",
+                  "start": 135.1079591540039,
+                  "end": 135.1670703468117,
+                  "overlap": 0.013969007999918404,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ]
+        },
+        "parent": {
+          "copies": 13,
+          "copy_execution_seconds_sum": 7.908466714434326,
+          "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.5273697595282627,
+          "partition_sums_NOT_wall_gain": {
+            "source_gate": 0.5267096250488592,
+            "unexplained_or_bookkeeping": 0.0006601344794034958
+          },
+          "younger_source_blocked_copies": 0,
+          "largest_waits": [
+            {
+              "id": "headless-terminal:14",
+              "source": 0,
+              "destination": 1,
+              "route_origin": 207.35504014285212,
+              "route_completed": 208.34551427766255,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 213.99531972697096,
+              "copy_start": 214.3590077042233,
+              "copy_end": 214.78951202255,
+              "copy_seconds": 0.43050431832671165,
+              "post_FIFO_lower_bound_wait": 0.36368797725234003,
+              "partition": {
+                "source_gate": 0.36302784277293654,
+                "unexplained_or_bookkeeping": 0.0006601344794034958
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "distribution-search:14",
+                  "operation": "P_api",
+                  "start": 206.4100507855508,
+                  "end": 214.3583475697439,
+                  "overlap": 0.36302784277293654,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:10",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 121.89480097691846,
+              "route_completed": 123.38043905348479,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 123.75886367746102,
+              "copy_start": 123.80843946855803,
+              "copy_end": 124.31066322658499,
+              "copy_seconds": 0.5022237580269575,
+              "post_FIFO_lower_bound_wait": 0.04957579109701271,
+              "partition": {
+                "source_gate": 0.04957579109701271
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:9",
+                    "feal-differential-cryptanalysis:9"
+                  ],
+                  "operation": "compute",
+                  "start": 123.74939718338348,
+                  "end": 123.80843946855803,
+                  "overlap": 0.04957579109701271,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 75.76356292696906,
+              "route_completed": 76.92219603534669,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 76.92219603534669,
+              "copy_start": 76.95813142907335,
+              "copy_end": 77.50601189237548,
+              "copy_seconds": 0.5478804633021355,
+              "post_FIFO_lower_bound_wait": 0.035935393726660436,
+              "partition": {
+                "source_gate": 0.035935393726660436
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:6",
+                    "headless-terminal:6"
+                  ],
+                  "operation": "compute",
+                  "start": 76.8984057395885,
+                  "end": 76.95813142907335,
+                  "overlap": 0.035935393726660436,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:3",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 10.764565322133768,
+              "route_completed": 11.731070352430683,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 11.731070352430683,
+              "copy_start": 11.754658604345279,
+              "copy_end": 11.800315309620457,
+              "copy_seconds": 0.045656705275177956,
+              "post_FIFO_lower_bound_wait": 0.023588251914596015,
+              "partition": {
+                "source_gate": 0.023588251914596015
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:2",
+                    "headless-terminal:2"
+                  ],
+                  "operation": "compute",
+                  "start": 11.69620208289141,
+                  "end": 11.754658604345279,
+                  "overlap": 0.023588251914596015,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:9",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 117.13814763175694,
+              "route_completed": 118.84819730207339,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 118.84819730207339,
+              "copy_start": 118.87160910823934,
+              "copy_end": 119.96737003484361,
+              "copy_seconds": 1.095760926604271,
+              "post_FIFO_lower_bound_wait": 0.023411806165952953,
+              "partition": {
+                "source_gate": 0.023411806165952953
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:9"
+                  ],
+                  "operation": "compute",
+                  "start": 118.81479472844018,
+                  "end": 118.87160910823934,
+                  "overlap": 0.023411806165952953,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "id": "dna-insert:3",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 10.764565322133768,
+              "route_completed": 11.731070352430683,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 11.731070352430683,
+              "copy_start": 11.754658604345279,
+              "copy_end": 11.800315309620457,
+              "copy_seconds": 0.045656705275177956,
+              "post_FIFO_lower_bound_wait": 0.023588251914596015,
+              "partition": {
+                "source_gate": 0.023588251914596015
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:2",
+                    "headless-terminal:2"
+                  ],
+                  "operation": "compute",
+                  "start": 11.69620208289141,
+                  "end": 11.754658604345279,
+                  "overlap": 0.023588251914596015,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:6",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 50.295342414745384,
+              "route_completed": 51.85286470060186,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 52.58314931913664,
+              "copy_start": 52.58314931913664,
+              "copy_end": 53.3267476871555,
+              "copy_seconds": 0.7435983680188656,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "distribution-search:7",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 68.31613880776919,
+              "route_completed": 69.61961302461798,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 69.61961302461798,
+              "copy_start": 69.63845921074761,
+              "copy_end": 70.93967531109018,
+              "copy_seconds": 1.3012161003425717,
+              "post_FIFO_lower_bound_wait": 0.018846186129636067,
+              "partition": {
+                "source_gate": 0.018846186129636067
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:6",
+                    "fix-code-vulnerability:6",
+                    "git-multibranch:6"
+                  ],
+                  "operation": "compute",
+                  "start": 69.57930085243359,
+                  "end": 69.63845921074761,
+                  "overlap": 0.018846186129636067,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 75.76356292696906,
+              "route_completed": 76.92219603534669,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 76.92219603534669,
+              "copy_start": 76.95813142907335,
+              "copy_end": 77.50601189237548,
+              "copy_seconds": 0.5478804633021355,
+              "post_FIFO_lower_bound_wait": 0.035935393726660436,
+              "partition": {
+                "source_gate": 0.035935393726660436
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:6",
+                    "headless-terminal:6"
+                  ],
+                  "operation": "compute",
+                  "start": 76.8984057395885,
+                  "end": 76.95813142907335,
+                  "overlap": 0.035935393726660436,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 80.32040801795739,
+              "route_completed": 81.29121077504193,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 81.29121077504193,
+              "copy_start": 81.29121077504193,
+              "copy_end": 81.54232265405541,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:7",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 81.29121077504193,
+              "route_completed": 82.44482485661112,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 86.66668835188555,
+              "copy_start": 86.66668835188555,
+              "copy_end": 87.87659104167777,
+              "copy_seconds": 1.2099026897922158,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "dna-insert:9",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 101.75718561462533,
+              "route_completed": 102.69324501891671,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 106.81765796863188,
+              "copy_start": 106.81765796863188,
+              "copy_end": 107.68513536886026,
+              "copy_seconds": 0.8674774002283812,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-multibranch:9",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 115.99577478316407,
+              "route_completed": 117.13814763175694,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 117.13814763175694,
+              "copy_start": 117.14333304020238,
+              "copy_end": 117.39444491921586,
+              "copy_seconds": 0.25111187901347876,
+              "post_FIFO_lower_bound_wait": 0.005185408445441908,
+              "partition": {
+                "source_gate": 0.005185408445441908
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:9"
+                  ],
+                  "operation": "compute",
+                  "start": 117.08652600015643,
+                  "end": 117.14333304020238,
+                  "overlap": 0.005185408445441908,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:9",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 117.13814763175694,
+              "route_completed": 118.84819730207339,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 118.84819730207339,
+              "copy_start": 118.87160910823934,
+              "copy_end": 119.96737003484361,
+              "copy_seconds": 1.095760926604271,
+              "post_FIFO_lower_bound_wait": 0.023411806165952953,
+              "partition": {
+                "source_gate": 0.023411806165952953
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:9"
+                  ],
+                  "operation": "compute",
+                  "start": 118.81479472844018,
+                  "end": 118.87160910823934,
+                  "overlap": 0.023411806165952953,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:10",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 121.89480097691846,
+              "route_completed": 123.38043905348479,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 123.75886367746102,
+              "copy_start": 123.80843946855803,
+              "copy_end": 124.31066322658499,
+              "copy_seconds": 0.5022237580269575,
+              "post_FIFO_lower_bound_wait": 0.04957579109701271,
+              "partition": {
+                "source_gate": 0.04957579109701271
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:9",
+                    "feal-differential-cryptanalysis:9"
+                  ],
+                  "operation": "compute",
+                  "start": 123.74939718338348,
+                  "end": 123.80843946855803,
+                  "overlap": 0.04957579109701271,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:11",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 137.79082554092633,
+              "route_completed": 139.39111029442046,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 140.55283071160665,
+              "copy_start": 140.55996965640327,
+              "copy_end": 140.7197681248664,
+              "copy_seconds": 0.15979846846312284,
+              "post_FIFO_lower_bound_wait": 0.007138944796622582,
+              "partition": {
+                "source_gate": 0.007138944796622582
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:9",
+                    "distribution-search:10",
+                    "fix-git:10"
+                  ],
+                  "operation": "compute",
+                  "start": 140.5001990799738,
+                  "end": 140.55996965640327,
+                  "overlap": 0.007138944796622582,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:12",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 165.96978759537657,
+              "route_completed": 167.37989405699855,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 172.50415086321104,
+              "copy_start": 172.50415086321104,
+              "copy_end": 173.006374621238,
+              "copy_seconds": 0.5022237580269575,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:14",
+              "source": 0,
+              "destination": 1,
+              "route_origin": 207.35504014285212,
+              "route_completed": 208.34551427766255,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 213.99531972697096,
+              "copy_start": 214.3590077042233,
+              "copy_end": 214.78951202255,
+              "copy_seconds": 0.43050431832671165,
+              "post_FIFO_lower_bound_wait": 0.36368797725234003,
+              "partition": {
+                "source_gate": 0.36302784277293654,
+                "unexplained_or_bookkeeping": 0.0006601344794034958
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "distribution-search:14",
+                  "operation": "P_api",
+                  "start": 206.4100507855508,
+                  "end": 214.3583475697439,
+                  "overlap": 0.36302784277293654,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ]
+        },
+        "ours": {
+          "copies": 18,
+          "copy_execution_seconds_sum": 9.84561671409756,
+          "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 4.585400226318429,
+          "partition_sums_NOT_wall_gain": {
+            "source_gate": 3.7966592693102132,
+            "direction_slot+source_gate": 0.45289416169588037,
+            "unexplained_or_bookkeeping": 0.0009035523980855942,
+            "direction_slot": 0.3349432429142496
+          },
+          "younger_source_blocked_copies": 1,
+          "largest_waits": [
+            {
+              "id": "git-leak-recovery:3",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 16.53860083350559,
+              "route_completed": 17.684341805532945,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 17.684341805532945,
+              "copy_start": 19.57530445995678,
+              "copy_end": 19.59813281259437,
+              "copy_seconds": 0.022828352637588978,
+              "post_FIFO_lower_bound_wait": 1.8909626544238343,
+              "partition": {
+                "source_gate": 1.8909626544238343
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:3"
+                  ],
+                  "operation": "restore",
+                  "start": 17.523852151120177,
+                  "end": 19.57530445995678,
+                  "overlap": 1.8909626544238343,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:10",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 129.56591186299983,
+              "route_completed": 130.40853221820373,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 130.40853221820373,
+              "copy_start": 131.84837505628693,
+              "copy_end": 132.7876572053634,
+              "copy_seconds": 0.9392821490764618,
+              "post_FIFO_lower_bound_wait": 1.4398428380831945,
+              "partition": {
+                "source_gate": 1.43920986935197,
+                "unexplained_or_bookkeeping": 0.0006329687312245369
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "fix-git:10",
+                  "operation": "P_api",
+                  "start": 127.89336022641531,
+                  "end": 131.8477420875557,
+                  "overlap": 1.43920986935197,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:7",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 68.24521971058661,
+              "route_completed": 69.9337312145738,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 72.63174947449892,
+              "copy_start": 73.08477785281632,
+              "copy_end": 74.38599395315889,
+              "copy_seconds": 1.3012161003425717,
+              "post_FIFO_lower_bound_wait": 0.4530283783173985,
+              "partition": {
+                "direction_slot+source_gate": 0.45289416169588037,
+                "unexplained_or_bookkeeping": 0.00013421662151813507
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "feal-differential-cryptanalysis:7",
+                  "operation": "history",
+                  "start": 72.4682781149799,
+                  "end": 73.0846436361948,
+                  "overlap": 0.45289416169588037,
+                  "owner_route_after_target_route": true
+                },
+                {
+                  "kind": "direction_slot",
+                  "owner": "feal-differential-cryptanalysis:7",
+                  "operation": "history",
+                  "start": 72.4682781149799,
+                  "end": 73.0846436361948,
+                  "overlap": 0.45289416169588037,
+                  "owner_route_after_target_route": true
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 71.81498794127106,
+              "route_completed": 74.05105071024464,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 74.05105071024464,
+              "copy_start": 74.38612649991903,
+              "copy_end": 75.29926060542259,
+              "copy_seconds": 0.9131341055035591,
+              "post_FIFO_lower_bound_wait": 0.33507578967439144,
+              "partition": {
+                "direction_slot": 0.3349432429142496,
+                "unexplained_or_bookkeeping": 0.00013254676014184952
+              },
+              "blockers": [
+                {
+                  "kind": "direction_slot",
+                  "owner": "distribution-search:7",
+                  "operation": "history",
+                  "start": 73.08477785281632,
+                  "end": 74.38599395315889,
+                  "overlap": 0.3349432429142496,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:4",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 24.814451684743243,
+              "route_completed": 26.036123697340738,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 26.687583489364588,
+              "copy_start": 26.853819029740038,
+              "copy_end": 27.01361749820316,
+              "copy_seconds": 0.15979846846312284,
+              "post_FIFO_lower_bound_wait": 0.16623554037544963,
+              "partition": {
+                "source_gate": 0.16623554037544963
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:4"
+                  ],
+                  "operation": "restore",
+                  "start": 24.939724740607264,
+                  "end": 26.853819029740038,
+                  "overlap": 0.16623554037544963,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ],
+          "requests": [
+            {
+              "id": "dna-insert:3",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 10.727440865295994,
+              "route_completed": 11.683578048545163,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 11.683578048545163,
+              "copy_start": 11.698209125880545,
+              "copy_end": 11.743865831155723,
+              "copy_seconds": 0.045656705275177956,
+              "post_FIFO_lower_bound_wait": 0.014631077335382159,
+              "partition": {
+                "source_gate": 0.014631077335382159
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:2",
+                    "headless-terminal:2"
+                  ],
+                  "operation": "compute",
+                  "start": 11.639752034457262,
+                  "end": 11.698209125880545,
+                  "overlap": 0.014631077335382159,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-leak-recovery:3",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 16.53860083350559,
+              "route_completed": 17.684341805532945,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 17.684341805532945,
+              "copy_start": 19.57530445995678,
+              "copy_end": 19.59813281259437,
+              "copy_seconds": 0.022828352637588978,
+              "post_FIFO_lower_bound_wait": 1.8909626544238343,
+              "partition": {
+                "source_gate": 1.8909626544238343
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:3"
+                  ],
+                  "operation": "restore",
+                  "start": 17.523852151120177,
+                  "end": 19.57530445995678,
+                  "overlap": 1.8909626544238343,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:4",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 24.814451684743243,
+              "route_completed": 26.036123697340738,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 26.687583489364588,
+              "copy_start": 26.853819029740038,
+              "copy_end": 27.01361749820316,
+              "copy_seconds": 0.15979846846312284,
+              "post_FIFO_lower_bound_wait": 0.16623554037544963,
+              "partition": {
+                "source_gate": 0.16623554037544963
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "distribution-search:4"
+                  ],
+                  "operation": "restore",
+                  "start": 24.939724740607264,
+                  "end": 26.853819029740038,
+                  "overlap": 0.16623554037544963,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:4",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 29.92429784846287,
+              "route_completed": 30.942120957061633,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 30.942120957061633,
+              "copy_start": 30.942120957061633,
+              "copy_end": 31.056262720249578,
+              "copy_seconds": 0.11414176318794489,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "source": 0,
+              "destination": 1,
+              "route_origin": 44.83740315291386,
+              "route_completed": 46.13099877999095,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 46.13099877999095,
+              "copy_start": 46.13099877999095,
+              "copy_end": 46.38538769536583,
+              "copy_seconds": 0.25438891537487507,
+              "post_FIFO_lower_bound_wait": 0.0,
+              "partition": {},
+              "blockers": []
+            },
+            {
+              "id": "headless-terminal:5",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 46.13099877999095,
+              "route_completed": 47.849290373833334,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 47.849290373833334,
+              "copy_start": 47.87954395455865,
+              "copy_end": 47.92520065983383,
+              "copy_seconds": 0.045656705275177956,
+              "post_FIFO_lower_bound_wait": 0.030253580725315032,
+              "partition": {
+                "source_gate": 0.030253580725315032
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "dna-insert:5"
+                  ],
+                  "operation": "compute",
+                  "start": 47.82290391873592,
+                  "end": 47.87954395455865,
+                  "overlap": 0.030253580725315032,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:6",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 53.31930570072867,
+              "route_completed": 54.86250026677752,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 54.86250026677752,
+              "copy_start": 54.9099346084898,
+              "copy_end": 55.36650166124158,
+              "copy_seconds": 0.45656705275177956,
+              "post_FIFO_lower_bound_wait": 0.04743434171227534,
+              "partition": {
+                "source_gate": 0.04743434171227534
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:5",
+                    "git-leak-recovery:5",
+                    "headless-terminal:5",
+                    "fix-code-vulnerability:5"
+                  ],
+                  "operation": "compute",
+                  "start": 54.85092728164988,
+                  "end": 54.9099346084898,
+                  "overlap": 0.04743434171227534,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:6",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 66.32757012284345,
+              "route_completed": 68.24521971058661,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 68.24521971058661,
+              "copy_start": 68.3044846142451,
+              "copy_end": 69.51438730403731,
+              "copy_seconds": 1.2099026897922158,
+              "post_FIFO_lower_bound_wait": 0.059264903658487356,
+              "partition": {
+                "source_gate": 0.059264903658487356
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-git:6"
+                  ],
+                  "operation": "compute",
+                  "start": 68.24483548219723,
+                  "end": 68.3044846142451,
+                  "overlap": 0.059264903658487356,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "feal-differential-cryptanalysis:7",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 69.9337312145738,
+              "route_completed": 71.81498794127106,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 72.44569108946916,
+              "copy_start": 72.4682781149799,
+              "copy_end": 73.0846436361948,
+              "copy_seconds": 0.6163655212149024,
+              "post_FIFO_lower_bound_wait": 0.022587025510730996,
+              "partition": {
+                "source_gate": 0.022587025510730996
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-leak-recovery:6",
+                    "headless-terminal:6"
+                  ],
+                  "operation": "compute",
+                  "start": 72.40943696708253,
+                  "end": 72.4682781149799,
+                  "overlap": 0.022587025510730996,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "distribution-search:7",
+              "source": 2,
+              "destination": 0,
+              "route_origin": 68.24521971058661,
+              "route_completed": 69.9337312145738,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 72.63174947449892,
+              "copy_start": 73.08477785281632,
+              "copy_end": 74.38599395315889,
+              "copy_seconds": 1.3012161003425717,
+              "post_FIFO_lower_bound_wait": 0.4530283783173985,
+              "partition": {
+                "direction_slot+source_gate": 0.45289416169588037,
+                "unexplained_or_bookkeeping": 0.00013421662151813507
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "feal-differential-cryptanalysis:7",
+                  "operation": "history",
+                  "start": 72.4682781149799,
+                  "end": 73.0846436361948,
+                  "overlap": 0.45289416169588037,
+                  "owner_route_after_target_route": true
+                },
+                {
+                  "kind": "direction_slot",
+                  "owner": "feal-differential-cryptanalysis:7",
+                  "operation": "history",
+                  "start": 72.4682781149799,
+                  "end": 73.0846436361948,
+                  "overlap": 0.45289416169588037,
+                  "owner_route_after_target_route": true
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 71.81498794127106,
+              "route_completed": 74.05105071024464,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 74.05105071024464,
+              "copy_start": 74.38612649991903,
+              "copy_end": 75.29926060542259,
+              "copy_seconds": 0.9131341055035591,
+              "post_FIFO_lower_bound_wait": 0.33507578967439144,
+              "partition": {
+                "direction_slot": 0.3349432429142496,
+                "unexplained_or_bookkeeping": 0.00013254676014184952
+              },
+              "blockers": [
+                {
+                  "kind": "direction_slot",
+                  "owner": "distribution-search:7",
+                  "operation": "history",
+                  "start": 73.08477785281632,
+                  "end": 74.38599395315889,
+                  "overlap": 0.3349432429142496,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 76.08219678874198,
+              "route_completed": 77.72440822981945,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 77.72440822981945,
+              "copy_start": 77.75271266634529,
+              "copy_end": 77.77554101898288,
+              "copy_seconds": 0.022828352637588978,
+              "post_FIFO_lower_bound_wait": 0.028304436525843357,
+              "partition": {
+                "source_gate": 0.028304436525843357
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "feal-differential-cryptanalysis:7"
+                  ],
+                  "operation": "compute",
+                  "start": 77.69366702712944,
+                  "end": 77.75271266634529,
+                  "overlap": 0.028304436525843357,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:7",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 79.18138140128066,
+              "route_completed": 80.92486755809463,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 80.92486755809463,
+              "copy_start": 80.95030217311248,
+              "copy_end": 82.00040639444157,
+              "copy_seconds": 1.050104221329093,
+              "post_FIFO_lower_bound_wait": 0.025434615017843498,
+              "partition": {
+                "source_gate": 0.025434615017843498
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:6",
+                    "fix-code-vulnerability:6",
+                    "distribution-search:7",
+                    "dna-insert:7"
+                  ],
+                  "operation": "compute",
+                  "start": 80.89114300361649,
+                  "end": 80.95030217311248,
+                  "overlap": 0.025434615017843498,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "dna-insert:8",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 89.51023461165646,
+              "route_completed": 90.86695157524582,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 90.86695157524582,
+              "copy_start": 90.89584927318937,
+              "copy_end": 91.28393126802838,
+              "copy_seconds": 0.3880819948390126,
+              "post_FIFO_lower_bound_wait": 0.028897697943548906,
+              "partition": {
+                "source_gate": 0.028897697943548906
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "fix-code-vulnerability:6",
+                    "headless-terminal:7",
+                    "git-multibranch:7"
+                  ],
+                  "operation": "compute",
+                  "start": 90.83669104526051,
+                  "end": 90.89584927318937,
+                  "overlap": 0.028897697943548906,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "fix-git:8",
+              "source": 3,
+              "destination": 1,
+              "route_origin": 93.17291491105826,
+              "route_completed": 94.31135876768518,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 94.31135876768518,
+              "copy_start": 94.31136258797038,
+              "copy_end": 95.06469822501082,
+              "copy_seconds": 0.7533356370404363,
+              "post_FIFO_lower_bound_wait": 3.820285201072693e-06,
+              "partition": {
+                "unexplained_or_bookkeeping": 3.820285201072693e-06
+              },
+              "blockers": []
+            },
+            {
+              "id": "feal-differential-cryptanalysis:9",
+              "source": 2,
+              "destination": 1,
+              "route_origin": 106.59526064293046,
+              "route_completed": 108.00595426897681,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 108.00595426897681,
+              "copy_start": 108.00901449422147,
+              "copy_end": 108.46558154697325,
+              "copy_seconds": 0.45656705275177956,
+              "post_FIFO_lower_bound_wait": 0.003060225244666981,
+              "partition": {
+                "source_gate": 0.003060225244666981
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "git-multibranch:8"
+                  ],
+                  "operation": "compute",
+                  "start": 108.00592954343134,
+                  "end": 108.00901449422147,
+                  "overlap": 0.003060225244666981,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "headless-terminal:10",
+              "source": 1,
+              "destination": 0,
+              "route_origin": 129.56591186299983,
+              "route_completed": 130.40853221820373,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 130.40853221820373,
+              "copy_start": 131.84837505628693,
+              "copy_end": 132.7876572053634,
+              "copy_seconds": 0.9392821490764618,
+              "post_FIFO_lower_bound_wait": 1.4398428380831945,
+              "partition": {
+                "source_gate": 1.43920986935197,
+                "unexplained_or_bookkeeping": 0.0006329687312245369
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": "fix-git:10",
+                  "operation": "P_api",
+                  "start": 127.89336022641531,
+                  "end": 131.8477420875557,
+                  "overlap": 1.43920986935197,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            },
+            {
+              "id": "git-multibranch:10",
+              "source": 3,
+              "destination": 0,
+              "route_origin": 143.23923479501096,
+              "route_completed": 144.7554949711035,
+              "FIFO_ready_lower_bound_not_exact_dequeue": 144.7554949711035,
+              "copy_start": 144.79587827258837,
+              "copy_end": 145.89163919919264,
+              "copy_seconds": 1.095760926604271,
+              "post_FIFO_lower_bound_wait": 0.0403833014848658,
+              "partition": {
+                "source_gate": 0.0403833014848658
+              },
+              "blockers": [
+                {
+                  "kind": "source_gate",
+                  "owner": [
+                    "headless-terminal:10"
+                  ],
+                  "operation": "compute",
+                  "start": 144.73676373454333,
+                  "end": 144.79587827258837,
+                  "overlap": 0.0403833014848658,
+                  "owner_route_after_target_route": false
+                }
+              ]
+            }
+          ]
+        }
+      }
+    }
+  ]
+}

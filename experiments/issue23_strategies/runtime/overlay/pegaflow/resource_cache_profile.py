@@ -50,6 +50,7 @@ class CacheForecast:
         self.pending_copies = {}
         self.events = []
         self.api_quotes = {}
+        self.reclaim_removal_calls = 0
         self.memo = memo
         if memo is not None and "node_indexes" in memo:
             from pegaflow.projection_index import IndexedLayout
@@ -99,6 +100,12 @@ class CacheForecast:
         return (Operation(api_name, first + self.costs.decode_tail(node, demand.tokens),
                           (f"gate{node}",), first),)
 
+    @staticmethod
+    def remove_victims(units, victims):
+        for unit in victims:
+            units.remove(unit)
+        return units
+
     def save(self, node, demand):
         node_state = (self.memo["node_indexes"].get(self.layout.units[node])
                       if self.memo is not None and "node_indexes" in self.memo
@@ -139,8 +146,9 @@ class CacheForecast:
                     count += len(unit.keys)
                     if count >= self.reclaim_batch:
                         break
+                units = self.remove_victims(units, victims)
+                self.reclaim_removal_calls += 1
                 for unit in victims:
-                    units.remove(unit)
                     used -= unit.charged
                     present.difference_update(unit.keys)
                 self.events.append(dict(kind="forecast_native_reclaim", node=node,

@@ -1,0 +1,335 @@
+{
+  "kind": "completed-CPU-screen-accounting-not-real-output-audit",
+  "screen_sha256": "be3235e7b6b792952f49c124d136bc0d07c38a15b86eaf401d500bc49ff0b488",
+  "validated_arms": 9,
+  "requests_per_arm": 95,
+  "real_parallel_serving_validated": false,
+  "summary": [
+    {
+      "rate": 0.24516170769071072,
+      "max_sequences": 4,
+      "shared_fraction": 0.0,
+      "native": {
+        "TTFT": {
+          "n": 95,
+          "mean": 14.51214778304185,
+          "p50": 5.442796586950067,
+          "p90": 49.93359893049836,
+          "p95": 62.54099804350068,
+          "p99": 69.7329935554468,
+          "max": 69.7329935554468
+        },
+        "makespan": 614.789372629649,
+        "planning_wall": 0.0,
+        "boundary_CPU_wall": 0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2025848832
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4205838336
+          }
+        },
+        "P_distribution": [
+          48,
+          47
+        ],
+        "D_distribution": [
+          48,
+          47
+        ]
+      },
+      "reference": {
+        "TTFT": {
+          "n": 95,
+          "mean": 12.930813303009534,
+          "p50": 10.457871252738414,
+          "p90": 25.202609128847143,
+          "p95": 27.73892213210985,
+          "p99": 35.194858887788314,
+          "max": 35.194858887788314
+        },
+        "makespan": 522.0045800498624,
+        "planning_wall": 0.0,
+        "boundary_CPU_wall": 0.0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3831496704
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2752512000
+          }
+        },
+        "P_distribution": [
+          29,
+          66
+        ],
+        "D_distribution": [
+          57,
+          38
+        ]
+      },
+      "ours": {
+        "TTFT": {
+          "n": 95,
+          "mean": 12.930813303009534,
+          "p50": 10.457871252738414,
+          "p90": 25.202609128847143,
+          "p95": 27.73892213210985,
+          "p99": 35.194858887788314,
+          "max": 35.194858887788314
+        },
+        "makespan": 522.0045800498624,
+        "planning_wall": 0.0,
+        "boundary_CPU_wall": 0.0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3831496704
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2752512000
+          }
+        },
+        "P_distribution": [
+          29,
+          66
+        ],
+        "D_distribution": [
+          57,
+          38
+        ]
+      },
+      "gain": 0.49529115138583824
+    },
+    {
+      "rate": 0.49032341538142143,
+      "max_sequences": 4,
+      "shared_fraction": 0.0,
+      "native": {
+        "TTFT": {
+          "n": 95,
+          "mean": 17.2597618773383,
+          "p50": 5.672227486018869,
+          "p90": 63.351757407761966,
+          "p95": 72.69028864404277,
+          "p99": 78.6350300145375,
+          "max": 78.6350300145375
+        },
+        "makespan": 632.9283712181464,
+        "planning_wall": 0.0,
+        "boundary_CPU_wall": 0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2040528896
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4462739456
+          }
+        },
+        "P_distribution": [
+          48,
+          47
+        ],
+        "D_distribution": [
+          48,
+          47
+        ]
+      },
+      "reference": {
+        "TTFT": {
+          "n": 95,
+          "mean": 12.877878362605985,
+          "p50": 12.973375439888628,
+          "p90": 24.131041206871373,
+          "p95": 27.387493669762307,
+          "p99": 28.06512177500383,
+          "max": 28.06512177500383
+        },
+        "makespan": 500.50461589261795,
+        "planning_wall": 0.0,
+        "boundary_CPU_wall": 0.0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4073717760
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3229614080
+          }
+        },
+        "P_distribution": [
+          36,
+          59
+        ],
+        "D_distribution": [
+          56,
+          39
+        ]
+      },
+      "ours": {
+        "TTFT": {
+          "n": 95,
+          "mean": 12.877878362605985,
+          "p50": 12.973375439888628,
+          "p90": 24.131041206871373,
+          "p95": 27.387493669762307,
+          "p99": 28.06512177500383,
+          "max": 28.06512177500383
+        },
+        "makespan": 500.50461589261795,
+        "planning_wall": 0.0,
+        "boundary_CPU_wall": 0.0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4073717760
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3229614080
+          }
+        },
+        "P_distribution": [
+          36,
+          59
+        ],
+        "D_distribution": [
+          56,
+          39
+        ]
+      },
+      "gain": 0.6430964448056375
+    },
+    {
+      "rate": 0.9806468307628429,
+      "max_sequences": 4,
+      "shared_fraction": 0.0,
+      "native": {
+        "TTFT": {
+          "n": 95,
+          "mean": 16.425588910629184,
+          "p50": 6.244009329196615,
+          "p90": 48.88505096727164,
+          "p95": 67.52871253716364,
+          "p99": 71.01071896108448,
+          "max": 71.01071896108448
+        },
+        "makespan": 619.0684665606278,
+        "planning_wall": 0.0,
+        "boundary_CPU_wall": 0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2099249152
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4580179968
+          }
+        },
+        "P_distribution": [
+          48,
+          47
+        ],
+        "D_distribution": [
+          48,
+          47
+        ]
+      },
+      "reference": {
+        "TTFT": {
+          "n": 95,
+          "mean": 12.635037787032031,
+          "p50": 10.253045056673272,
+          "p90": 25.015274433753575,
+          "p95": 27.362575690864986,
+          "p99": 31.07562970176363,
+          "max": 31.07562970176363
+        },
+        "makespan": 496.77684736082364,
+        "planning_wall": 0.0,
+        "boundary_CPU_wall": 0.0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4029677568
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2466250752
+          }
+        },
+        "P_distribution": [
+          50,
+          45
+        ],
+        "D_distribution": [
+          56,
+          39
+        ]
+      },
+      "ours": {
+        "TTFT": {
+          "n": 95,
+          "mean": 12.635037787032031,
+          "p50": 10.253045056673272,
+          "p90": 25.015274433753575,
+          "p95": 27.362575690864986,
+          "p99": 31.07562970176363,
+          "max": 31.07562970176363
+        },
+        "makespan": 496.77684736082364,
+        "planning_wall": 0.0,
+        "boundary_CPU_wall": 0.0,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4029677568
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2466250752
+          }
+        },
+        "P_distribution": [
+          50,
+          45
+        ],
+        "D_distribution": [
+          56,
+          39
+        ]
+      },
+      "gain": 0.5623811425033762
+    }
+  ],
+  "exact_equal_control_requests": 285,
+  "not_performance_evidence": true
+}

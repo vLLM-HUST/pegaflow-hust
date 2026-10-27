@@ -1,0 +1,38 @@
+{
+  "all_checks_passed": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "reference": {
+        "verified_actual_selected_forecasts": 95,
+        "arithmetic": "float"
+      },
+      "ours": {
+        "verified_actual_selected_forecasts": 95,
+        "arithmetic": "binary64-exact-dyadic"
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "reference": {
+        "verified_actual_selected_forecasts": 95,
+        "arithmetic": "float"
+      },
+      "ours": {
+        "verified_actual_selected_forecasts": 95,
+        "arithmetic": "binary64-exact-dyadic"
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "reference": {
+        "verified_actual_selected_forecasts": 95,
+        "arithmetic": "float"
+      },
+      "ours": {
+        "verified_actual_selected_forecasts": 95,
+        "arithmetic": "binary64-exact-dyadic"
+      }
+    }
+  ]
+}

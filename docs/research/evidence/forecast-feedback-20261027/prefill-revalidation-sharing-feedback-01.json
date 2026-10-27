@@ -1,0 +1,779 @@
+{
+  "CPU_only": true,
+  "trace_conditioned_NOT_causal_ablation": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "raw_sha256": "55c16eb70d3f88ad0685dfb28f7025cec70f3475d765d6c6c88bec29aa381563",
+      "metrics": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 6.864177653337216,
+            "p50": 6.220335981721831,
+            "p90": 13.22333989583126,
+            "p95": 14.146604707826612,
+            "p99": 18.41939230072643,
+            "max": 18.41939230072643
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 8.687642736018741,
+            "p50": 6.375303171736448,
+            "p90": 20.650294562818658,
+            "p95": 26.564144107205948,
+            "p99": 36.50171921100349,
+            "max": 36.50171921100349
+          },
+          "makespan": 427.7525582149027,
+          "planning_wall": 47.3741126190871,
+          "boundary_CPU_wall": 25.10298073478043,
+          "fit_CPU_wall": 0.4976335782557726,
+          "iteration_scheduler_wall_charged": 0.23430005554109812,
+          "decode_advice_CPU_wall": 0.27755668200552464,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 0,
+          "copy_wait_diagnostic": {
+            "copies": 9,
+            "copy_execution_seconds_sum": 3.6232563676312566,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.0,
+            "partition_sums_NOT_wall_gain": {},
+            "younger_source_blocked_copies": 0
+          }
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.519724154715063,
+            "p50": 6.103072836698914,
+            "p90": 14.99495454774069,
+            "p95": 17.84901911674541,
+            "p99": 21.52207610931282,
+            "max": 21.52207610931282
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 9.442503813324885,
+            "p50": 6.103072836698914,
+            "p90": 24.49536741553476,
+            "p95": 27.38516035056739,
+            "p99": 36.52428378239085,
+            "max": 36.52428378239085
+          },
+          "makespan": 428.2561816399092,
+          "planning_wall": 52.82306235842407,
+          "boundary_CPU_wall": 32.564796638675034,
+          "fit_CPU_wall": 0.5069524273276329,
+          "iteration_scheduler_wall_charged": 0.2520986022427678,
+          "decode_advice_CPU_wall": 0.1800156095996499,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 0,
+          "copy_wait_diagnostic": {
+            "copies": 14,
+            "copy_execution_seconds_sum": 6.861571282148361,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.11844557911715015,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 0.11844557911715015
+            },
+            "younger_source_blocked_copies": 0
+          }
+        }
+      },
+      "p99_reduction_percent": -16.84465892212974,
+      "P_decisions": 0,
+      "P_changes": 0,
+      "no_P_decision_does_not_identify_a_revalidation_effect": true,
+      "worst": {
+        "reference": "fix-git:13",
+        "ours": "dna-insert:10"
+      },
+      "aligned": {
+        "dna-insert:10": {
+          "reference": {
+            "TTFT": 6.7063588854470595,
+            "nominal": 6.7063588854470595,
+            "dependency": 0.0,
+            "P": 1,
+            "D": 3,
+            "P_prefix": 8576,
+            "D_prefix": 8576,
+            "ready": 274.36941361172177,
+            "first": 281.0757724971688,
+            "before_P": 2.054919422598232,
+            "P_API": 0.6344445476409061,
+            "P_to_D": 1.5307703048270582,
+            "D_API_to_first": 2.486224610380873
+          },
+          "ours": {
+            "TTFT": 21.52207610931282,
+            "nominal": 21.52207610931282,
+            "dependency": 0.0,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 5760,
+            "D_prefix": 1920,
+            "ready": 274.36941361172177,
+            "first": 295.8914897210346,
+            "before_P": 1.687891194590975,
+            "P_API": 1.935779599321057,
+            "P_to_D": 16.9657825268672,
+            "D_API_to_first": 0.9326227885335925
+          }
+        },
+        "fix-git:13": {
+          "reference": {
+            "TTFT": 18.41939230072643,
+            "nominal": 26.98462565141773,
+            "dependency": 8.565233350691301,
+            "P": 1,
+            "D": 3,
+            "P_prefix": 0,
+            "D_prefix": 0,
+            "ready": 349.8250502008292,
+            "first": 368.2444425015556,
+            "before_P": 4.5989363146734945,
+            "P_API": 5.578030207944568,
+            "P_to_D": 0.7800567832123875,
+            "D_API_to_first": 7.462368994895996
+          },
+          "ours": {
+            "TTFT": 17.340930181327167,
+            "nominal": 25.696285746786714,
+            "dependency": 8.355355565459547,
+            "P": 1,
+            "D": 3,
+            "P_prefix": 7680,
+            "D_prefix": 0,
+            "ready": 349.61517241559744,
+            "first": 366.9561025969246,
+            "before_P": 6.444079781916344,
+            "P_API": 2.074076057767069,
+            "P_to_D": 1.3537130255531906,
+            "D_API_to_first": 7.469061316090574
+          }
+        }
+      },
+      "actions": [],
+      "first_original_route_difference_by_reference_ready": {
+        "id": "fix-code-vulnerability:2",
+        "records": {
+          "reference": {
+            "id": "fix-code-vulnerability:2",
+            "CPU_wall": 0.12821330036967993,
+            "model_latest": 9.125637386059816,
+            "origin": 12.049779586120387,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 1,
+              "d": 2,
+              "source": 0,
+              "P_prefix_command": 640,
+              "D_prefix_command": 0,
+              "P_end": 13.30913963060582,
+              "first": 13.897985744881774,
+              "full": 21.572124505256937,
+              "origin": 12.049779586120387,
+              "latest_completed": 9.125637386059816,
+              "not_after_P_revised_forecast": true
+            }
+          },
+          "ours": {
+            "id": "fix-code-vulnerability:2",
+            "CPU_wall": 0.12388410978019238,
+            "model_latest": 9.114959253995176,
+            "origin": 12.049779586120387,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 0,
+              "d": 2,
+              "source": 0,
+              "P_prefix_command": 640,
+              "D_prefix_command": 0,
+              "P_end": 13.363594310011639,
+              "first": 13.956391592026247,
+              "full": 21.630491901624907,
+              "origin": 12.049779586120387,
+              "latest_completed": 9.114959253995176,
+              "not_after_P_revised_forecast": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "raw_sha256": "8c110c41a9f3a61d29461fb79931cf5593a4660a631f83878df41a74c301ac6a",
+      "metrics": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.891471106911332,
+            "p50": 7.431521869947396,
+            "p90": 13.896365640526739,
+            "p95": 15.099891904871754,
+            "p99": 18.01361579730647,
+            "max": 18.01361579730647
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 21.446449469903968,
+            "p50": 9.905742316751002,
+            "p90": 65.660995169265,
+            "p95": 74.20199644810631,
+            "p99": 96.90878870948947,
+            "max": 96.90878870948947
+          },
+          "makespan": 302.0400624966537,
+          "planning_wall": 61.375479927286506,
+          "boundary_CPU_wall": 38.640135407447815,
+          "fit_CPU_wall": 0.4572168346494436,
+          "iteration_scheduler_wall_charged": 0.2747822143137455,
+          "decode_advice_CPU_wall": 2.9225600585341454,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 0,
+          "copy_wait_diagnostic": {
+            "copies": 15,
+            "copy_execution_seconds_sum": 7.533356370404363,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 1.153139685060566,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 1.1514777203683906,
+              "unexplained_or_bookkeeping": 0.0016619646921753883
+            },
+            "younger_source_blocked_copies": 0
+          }
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.8900878451610374,
+            "p50": 7.571680609434594,
+            "p90": 14.774816668835484,
+            "p95": 16.194910088377867,
+            "p99": 17.70929652490932,
+            "max": 17.70929652490932
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 23.760628606647884,
+            "p50": 11.74030364568965,
+            "p90": 67.57484596745158,
+            "p95": 76.3954073755099,
+            "p99": 89.2243277015732,
+            "max": 89.2243277015732
+          },
+          "makespan": 292.2640574764344,
+          "planning_wall": 67.28777042217553,
+          "boundary_CPU_wall": 32.560111035592854,
+          "fit_CPU_wall": 0.45576921105384827,
+          "iteration_scheduler_wall_charged": 0.3096440862864256,
+          "decode_advice_CPU_wall": 4.9497127290815115,
+          "P_revalidation_CPU_wall": 0.04858553875237703,
+          "D_moves": 0,
+          "copy_wait_diagnostic": {
+            "copies": 15,
+            "copy_execution_seconds_sum": 10.305443741381168,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 3.181460218790704,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 3.0739371555224864,
+              "direction_slot+source_gate": 0.10673804029420353,
+              "unexplained_or_bookkeeping": 0.0007850229740142822
+            },
+            "younger_source_blocked_copies": 0
+          }
+        }
+      },
+      "p99_reduction_percent": 1.689384717768072,
+      "P_decisions": 1,
+      "P_changes": 0,
+      "no_P_decision_does_not_identify_a_revalidation_effect": false,
+      "worst": {
+        "reference": "headless-terminal:12",
+        "ours": "feal-differential-cryptanalysis:10"
+      },
+      "aligned": {
+        "dna-insert:13": {
+          "reference": {
+            "TTFT": 14.858412568366987,
+            "nominal": 65.69568327234776,
+            "dependency": 50.83727070398078,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 218.42200799900107,
+            "first": 233.28042056736805,
+            "before_P": 6.465141168144697,
+            "P_API": 7.402402620133599,
+            "P_to_D": 0.47411634328778973,
+            "D_API_to_first": 0.516752436800914
+          },
+          "ours": {
+            "TTFT": 9.936819814983664,
+            "nominal": 58.277653699517714,
+            "dependency": 48.34083388453405,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 8320,
+            "D_prefix": 384,
+            "ready": 215.92557117955434,
+            "first": 225.862390994538,
+            "before_P": 5.303559188129697,
+            "P_API": 3.7944516326307487,
+            "P_to_D": 0.5042107302975296,
+            "D_API_to_first": 0.3345982639256988
+          }
+        },
+        "feal-differential-cryptanalysis:10": {
+          "reference": {
+            "TTFT": 10.851865109959704,
+            "nominal": 21.51561692322656,
+            "dependency": 10.663751813266856,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 9216,
+            "D_prefix": 0,
+            "ready": 147.86880635899874,
+            "first": 158.72067146895844,
+            "before_P": 4.985356639817269,
+            "P_API": 4.7937801848086545,
+            "P_to_D": 0.4846046354901432,
+            "D_API_to_first": 0.5881236498436238
+          },
+          "ours": {
+            "TTFT": 17.70929652490932,
+            "nominal": 33.89760412826246,
+            "dependency": 16.188307603353138,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 4096,
+            "D_prefix": 0,
+            "ready": 153.39336214908502,
+            "first": 171.10265867399434,
+            "before_P": 8.205897717766987,
+            "P_API": 7.087738939020754,
+            "P_to_D": 1.792834554501411,
+            "D_API_to_first": 0.6228253136201545
+          }
+        },
+        "headless-terminal:12": {
+          "reference": {
+            "TTFT": 18.01361579730647,
+            "nominal": 45.853802042692934,
+            "dependency": 27.840186245386462,
+            "P": 1,
+            "D": 3,
+            "P_prefix": 9600,
+            "D_prefix": 10752,
+            "ready": 194.87534283342757,
+            "first": 212.88895863073404,
+            "before_P": 10.240502487597894,
+            "P_API": 1.3213392672185287,
+            "P_to_D": 0.9316451998707294,
+            "D_API_to_first": 5.520128842619329
+          },
+          "ours": {
+            "TTFT": 14.774816668835484,
+            "nominal": 49.57963938916964,
+            "dependency": 34.80482272033416,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 5888,
+            "D_prefix": 0,
+            "ready": 201.83997930837526,
+            "first": 216.61479597721075,
+            "before_P": 6.419371087152598,
+            "P_API": 3.036735471706,
+            "P_to_D": 4.975948066260457,
+            "D_API_to_first": 0.3427620437164194
+          }
+        }
+      },
+      "actions": [
+        {
+          "id": "dna-insert:13",
+          "node": 0,
+          "source": 1,
+          "source_owner": [
+            "git-multibranch:12",
+            "P_api"
+          ],
+          "origin": 217.19573420777647,
+          "model_latest": 217.19510789893297,
+          "initial_prefix": 65,
+          "selected_prefix": 65,
+          "selected_source": 1,
+          "predicted_CPU": 0.0,
+          "CPU_latest": null,
+          "completed_CPU_samples": 0,
+          "evaluations": [
+            {
+              "kind": "keep",
+              "prefix": 65,
+              "objective": [
+                15.209971716741535,
+                [
+                  15.209971716741535,
+                  14.316020660433452,
+                  10.082601830900387
+                ],
+                [
+                  27.47081042485607,
+                  26.34122367367445,
+                  25.179190842890705,
+                  23.527946382283346,
+                  20.055222998248524,
+                  17.975952113123554
+                ],
+                [
+                  12.677418595143138,
+                  11.651976550159276,
+                  11.20524279966125,
+                  9.456106558858608,
+                  8.767211240021027,
+                  6.469006584409954
+                ]
+              ],
+              "first": 226.00817301045473,
+              "P_end": 224.69278241957537,
+              "delay": 0.0
+            },
+            {
+              "kind": "local",
+              "prefix": 5,
+              "objective": [
+                15.209971716741535,
+                [
+                  15.209971716741535,
+                  14.316020660433452,
+                  10.321411466580628
+                ],
+                [
+                  27.47081042485607,
+                  26.34122367367445,
+                  25.179190842890705,
+                  23.527946382283346,
+                  20.055222998248524,
+                  18.213141851526274
+                ],
+                [
+                  12.677418595143138,
+                  11.651976550159276,
+                  11.20524279966125,
+                  9.456106558858608,
+                  9.013849552961261,
+                  6.469006584409954
+                ]
+              ],
+              "first": 226.24698264613497,
+              "P_end": 224.9394207325156,
+              "delay": 0.41992161351259943
+            },
+            {
+              "kind": "local",
+              "prefix": 0,
+              "objective": [
+                15.209971716741535,
+                [
+                  15.209971716741535,
+                  14.316020660433452,
+                  10.619923511180929
+                ],
+                [
+                  27.47081042485607,
+                  26.34122367367445,
+                  25.179190842890705,
+                  23.527946382283346,
+                  20.055222998248524,
+                  18.50962902452966
+                ],
+                [
+                  12.677418595143138,
+                  11.651976550159276,
+                  11.20524279966125,
+                  9.456106558858608,
+                  9.300297102451594,
+                  6.469006584409954
+                ]
+              ],
+              "first": 226.54549469073527,
+              "P_end": 225.22586828200593,
+              "delay": 0.41992161351259943
+            }
+          ],
+          "queue_before": [
+            "dna-insert:13"
+          ],
+          "search": {
+            "considered": 0,
+            "full": 0,
+            "refresh_reused": 0,
+            "refresh_full": 1,
+            "route_reused": 0,
+            "calendar_reused": 0,
+            "calendar_full": 3,
+            "bound_checks": 0,
+            "pruned_calendars": 0,
+            "pruned_proof_reused": 0,
+            "pruned_route_reused": 0
+          },
+          "CPU_wall": 0.04823329392820597,
+          "RPC_seconds": 0.41992161351259943,
+          "decision_ready": 217.66388911521727,
+          "status": "keep",
+          "queue_after": [
+            "dna-insert:13"
+          ],
+          "commit_CPU_wall": 0.0003522448241710663,
+          "resolved": 217.66424136004144
+        }
+      ],
+      "first_original_route_difference_by_reference_ready": {
+        "id": "fix-git:3",
+        "records": {
+          "reference": {
+            "id": "fix-git:3",
+            "CPU_wall": 0.20787260681390762,
+            "model_latest": 24.38771018159418,
+            "origin": 25.177438033105705,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 0,
+              "d": 2,
+              "source": 0,
+              "P_prefix_command": 640,
+              "D_prefix_command": 0,
+              "P_end": 26.53039280210201,
+              "first": 27.137616932819018,
+              "full": 34.95744970803534,
+              "origin": 25.177438033105705,
+              "latest_completed": 24.38771018159418,
+              "not_after_P_revised_forecast": true
+            }
+          },
+          "ours": {
+            "id": "fix-git:3",
+            "CPU_wall": 0.17734394408762455,
+            "model_latest": 25.164008872958135,
+            "origin": 25.177438033105705,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 0,
+              "d": 2,
+              "source": 0,
+              "P_prefix_command": 0,
+              "D_prefix_command": 0,
+              "P_end": 26.806667757289755,
+              "first": 27.44163910020858,
+              "full": 35.223839710330125,
+              "origin": 25.177438033105705,
+              "latest_completed": 25.164008872958135,
+              "not_after_P_revised_forecast": true
+            }
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "raw_sha256": "363d4a6f000f9e4f9d98f8fee031f6c6d0986f3b318d1067a8de1f102854ea63",
+      "metrics": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.287252970266074,
+            "p50": 9.003969480846607,
+            "p90": 12.655182629893034,
+            "p95": 13.653965297346247,
+            "p99": 17.071371586423112,
+            "max": 17.071371586423112
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 51.97211312557462,
+            "p50": 41.1226178396355,
+            "p90": 120.38076945562239,
+            "p95": 133.7397678888506,
+            "p99": 154.19765671235717,
+            "max": 154.19765671235717
+          },
+          "makespan": 260.5932826795183,
+          "planning_wall": 86.17097132187337,
+          "boundary_CPU_wall": 38.69152806419879,
+          "fit_CPU_wall": 0.46966187842190266,
+          "iteration_scheduler_wall_charged": 0.2882348923012614,
+          "decode_advice_CPU_wall": 4.645841556601226,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 0,
+          "copy_wait_diagnostic": {
+            "copies": 16,
+            "copy_execution_seconds_sum": 6.763763515278697,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.33330960423883127,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 0.3264047199973099,
+              "unexplained_or_bookkeeping": 0.0069048842415213585
+            },
+            "younger_source_blocked_copies": 0
+          }
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.13713649786812,
+            "p50": 8.0459760570387,
+            "p90": 12.868071590383522,
+            "p95": 16.659086606371517,
+            "p99": 21.313285852528168,
+            "max": 21.313285852528168
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 51.66268145217601,
+            "p50": 38.182487782945586,
+            "p90": 121.37678701847719,
+            "p95": 141.78988956024386,
+            "p99": 161.0269196928523,
+            "max": 161.0269196928523
+          },
+          "makespan": 267.42074628612596,
+          "planning_wall": 76.38649856671691,
+          "boundary_CPU_wall": 40.64510102849454,
+          "fit_CPU_wall": 0.45146067440509796,
+          "iteration_scheduler_wall_charged": 0.31196761317551136,
+          "decode_advice_CPU_wall": 2.650173214264214,
+          "P_revalidation_CPU_wall": 0,
+          "D_moves": 1,
+          "copy_wait_diagnostic": {
+            "copies": 10,
+            "copy_execution_seconds_sum": 6.962647554464638,
+            "post_FIFO_lower_bound_wait_sum_NOT_wall_gain": 0.27292014301967704,
+            "partition_sums_NOT_wall_gain": {
+              "source_gate": 0.27291347288739765,
+              "unexplained_or_bookkeeping": 6.670132279396057e-06
+            },
+            "younger_source_blocked_copies": 0
+          }
+        }
+      },
+      "p99_reduction_percent": -24.848116301789467,
+      "P_decisions": 0,
+      "P_changes": 0,
+      "no_P_decision_does_not_identify_a_revalidation_effect": true,
+      "worst": {
+        "reference": "headless-terminal:11",
+        "ours": "dna-insert:14"
+      },
+      "aligned": {
+        "dna-insert:14": {
+          "reference": {
+            "TTFT": 12.636083144750415,
+            "nominal": 128.46087414214597,
+            "dependency": 115.82479099739555,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 203.87382580695416,
+            "first": 216.50990895170457,
+            "before_P": 2.8517324092487115,
+            "P_API": 8.685777403497276,
+            "P_to_D": 0.49381042013880005,
+            "D_API_to_first": 0.6047629118656346
+          },
+          "ours": {
+            "TTFT": 21.313285852528168,
+            "nominal": 126.83241922966283,
+            "dependency": 105.51913337713466,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 193.56816818669327,
+            "first": 214.88145403922144,
+            "before_P": 6.233184593112384,
+            "P_API": 8.685777403497276,
+            "P_to_D": 5.7902239603643295,
+            "D_API_to_first": 0.6040998955541852
+          }
+        },
+        "headless-terminal:11": {
+          "reference": {
+            "TTFT": 17.071371586423112,
+            "nominal": 87.46228508046977,
+            "dependency": 70.39091349404666,
+            "P": 0,
+            "D": 3,
+            "P_prefix": 640,
+            "D_prefix": 6528,
+            "ready": 149.36418152347858,
+            "first": 166.4355531099017,
+            "before_P": 3.6485280369074644,
+            "P_API": 4.842961579543027,
+            "P_to_D": 1.0754169870447754,
+            "D_API_to_first": 7.504464982927857
+          },
+          "ours": {
+            "TTFT": 18.52042542715418,
+            "nominal": 90.1393163564268,
+            "dependency": 71.61889092927262,
+            "P": 0,
+            "D": 3,
+            "P_prefix": 9600,
+            "D_prefix": 9600,
+            "ready": 150.59215895870454,
+            "first": 169.11258438585872,
+            "before_P": 10.34579063983253,
+            "P_API": 0.7744381753527665,
+            "P_to_D": 1.045071275187695,
+            "D_API_to_first": 6.355125336781185
+          }
+        }
+      },
+      "actions": [],
+      "first_original_route_difference_by_reference_ready": {
+        "id": "dna-insert:3",
+        "records": {
+          "reference": {
+            "id": "dna-insert:3",
+            "CPU_wall": 0.5608673496171832,
+            "model_latest": 10.691705799264223,
+            "origin": 10.691870051038773,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 1,
+              "d": 2,
+              "source": 1,
+              "P_prefix_command": 896,
+              "D_prefix_command": 0,
+              "P_end": 12.265716513311613,
+              "first": 12.959256855605108,
+              "full": 20.72337112434307,
+              "origin": 10.691870051038773,
+              "latest_completed": 10.691705799264223,
+              "not_after_P_revised_forecast": true
+            }
+          },
+          "ours": {
+            "id": "dna-insert:3",
+            "CPU_wall": 0.45942473597824574,
+            "model_latest": 10.674017431839395,
+            "origin": 10.71113890274899,
+            "candidates": 64,
+            "initial_forecast": {
+              "p": 0,
+              "d": 2,
+              "source": 2,
+              "P_prefix_command": 896,
+              "D_prefix_command": 0,
+              "P_end": 12.35319567292385,
+              "first": 13.023879296429634,
+              "full": 20.788610181144378,
+              "origin": 10.71113890274899,
+              "latest_completed": 10.674017431839395,
+              "not_after_P_revised_forecast": true
+            }
+          }
+        }
+      }
+    }
+  ]
+}

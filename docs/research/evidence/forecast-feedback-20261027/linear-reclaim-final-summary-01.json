@@ -1,0 +1,757 @@
+{
+  "CPU_only": true,
+  "candidate": "linear-reclaim-calendar-01",
+  "reference": "same-round exact-binary-calendar-02",
+  "retained_default_unchanged": "TimedMemo-normal-910B2",
+  "all_measured_control_charged": true,
+  "single_exposed_95_requests_p99_is_max": true,
+  "status": "mixed, not promoted",
+  "worlds": {
+    "default": {
+      "analysis_file": "linear-reclaim-charged-default-analysis-02.json",
+      "analysis_sha256": "0c6da1e97a2ca321dc5141ed0518580cb96e4f00b15de01495ff824e7a242324",
+      "cases": [
+        {
+          "rate": 0.24516170769071072,
+          "p99_reduction_percent": 5.390107131118082,
+          "requests_faster": 51,
+          "metrics": {
+            "reference": {
+              "TTFT": {
+                "n": 95,
+                "mean": 7.445149481871354,
+                "p50": 7.458091747755049,
+                "p90": 12.972209642891414,
+                "p95": 14.121146555773521,
+                "p99": 19.186765546955883,
+                "max": 19.186765546955883
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 29.002599884491705,
+                "p50": 14.922401830147948,
+                "p90": 78.73891135596256,
+                "p95": 106.9375049038702,
+                "p99": 131.90296997080605,
+                "max": 131.90296997080605
+              },
+              "makespan": 522.5610648233971,
+              "route_wall": 61.45181326195598,
+              "boundary_wall": 35.12677158135921
+            },
+            "ours": {
+              "TTFT": {
+                "n": 95,
+                "mean": 7.907290350495472,
+                "p50": 7.2844818370720645,
+                "p90": 14.473283200004346,
+                "p95": 16.32471107756851,
+                "p99": 18.152578328978507,
+                "max": 18.152578328978507
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 31.199212475848213,
+                "p50": 16.490319580645433,
+                "p90": 86.46073458655604,
+                "p95": 117.65773640963789,
+                "p99": 141.9972784698727,
+                "max": 141.9972784698727
+              },
+              "makespan": 544.6076677349337,
+              "route_wall": 59.751165660098195,
+              "boundary_wall": 31.889801594428718
+            }
+          },
+          "accepted_cache_tokens": {
+            "reference": {
+              "P": 535936,
+              "D": 126080
+            },
+            "ours": {
+              "P": 505856,
+              "D": 119552
+            }
+          },
+          "worst": {
+            "reference": "git-multibranch:12",
+            "ours": "distribution-search:14"
+          }
+        },
+        {
+          "rate": 0.49032341538142143,
+          "p99_reduction_percent": -2.251912888273888,
+          "requests_faster": 52,
+          "metrics": {
+            "reference": {
+              "TTFT": {
+                "n": 95,
+                "mean": 8.059553033203871,
+                "p50": 7.956653364985129,
+                "p90": 14.151428551735762,
+                "p95": 15.728973180811352,
+                "p99": 17.10195134481455,
+                "max": 17.10195134481455
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 110.50869177148994,
+                "p50": 92.39986661341126,
+                "p90": 236.68948004071603,
+                "p95": 273.3714167198956,
+                "p99": 298.3541529506119,
+                "max": 298.3541529506119
+              },
+              "makespan": 502.7557601601441,
+              "route_wall": 65.18165524862707,
+              "boundary_wall": 41.818347982130945
+            },
+            "ours": {
+              "TTFT": {
+                "n": 95,
+                "mean": 8.098847578691462,
+                "p50": 8.111060986695307,
+                "p90": 13.459495181121724,
+                "p95": 15.840942159500685,
+                "p99": 17.48707239129476,
+                "max": 17.48707239129476
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 111.43675120984452,
+                "p50": 94.67656681471293,
+                "p90": 241.08754605036947,
+                "p95": 280.39384488529333,
+                "p99": 307.86721041103806,
+                "max": 307.86721041103806
+              },
+              "makespan": 517.4704580691841,
+              "route_wall": 65.21494820807129,
+              "boundary_wall": 33.43027200456709
+            }
+          },
+          "accepted_cache_tokens": {
+            "reference": {
+              "P": 537600,
+              "D": 141440
+            },
+            "ours": {
+              "P": 532224,
+              "D": 76800
+            }
+          },
+          "worst": {
+            "reference": "fix-code-vulnerability:11",
+            "ours": "dna-insert:15"
+          }
+        },
+        {
+          "rate": 0.9806468307628429,
+          "p99_reduction_percent": 0.5153928457341195,
+          "requests_faster": 35,
+          "metrics": {
+            "reference": {
+              "TTFT": {
+                "n": 95,
+                "mean": 8.323182743808875,
+                "p50": 8.003382784231263,
+                "p90": 14.572594902574394,
+                "p95": 15.921063295299462,
+                "p99": 22.298820387324525,
+                "max": 22.298820387324525
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 158.1875328622076,
+                "p50": 139.32162605830703,
+                "p90": 319.69335771167204,
+                "p95": 370.78380851273596,
+                "p99": 402.0594552370854,
+                "max": 402.0594552370854
+              },
+              "makespan": 509.74165512954517,
+              "route_wall": 63.174953372217715,
+              "boundary_wall": 45.928038412705064
+            },
+            "ours": {
+              "TTFT": {
+                "n": 95,
+                "mean": 8.332027808371203,
+                "p50": 8.003529076381284,
+                "p90": 14.533303772198167,
+                "p95": 15.806041151451353,
+                "p99": 22.183893862365153,
+                "max": 22.183893862365153
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 158.18737647691324,
+                "p50": 139.5260037668135,
+                "p90": 319.6646228848624,
+                "p95": 369.8062988008145,
+                "p99": 401.1571861014386,
+                "max": 401.1571861014386
+              },
+              "makespan": 508.9584366611568,
+              "route_wall": 63.54103560373187,
+              "boundary_wall": 46.850124560296535
+            }
+          },
+          "accepted_cache_tokens": {
+            "reference": {
+              "P": 460032,
+              "D": 93312
+            },
+            "ours": {
+              "P": 460672,
+              "D": 93312
+            }
+          },
+          "worst": {
+            "reference": "fix-code-vulnerability:9",
+            "ours": "fix-code-vulnerability:9"
+          }
+        }
+      ]
+    },
+    "sharing": {
+      "analysis_file": "linear-reclaim-charged-sharing-analysis-01.json",
+      "analysis_sha256": "8ab7d89465272a5ebe7aaafb7c05e327bae739e601fd6d58f3aa9dbb68c56ea4",
+      "cases": [
+        {
+          "rate": 0.24516170769071072,
+          "p99_reduction_percent": -37.8752751671638,
+          "requests_faster": 46,
+          "metrics": {
+            "reference": {
+              "TTFT": {
+                "n": 95,
+                "mean": 6.8171481707569574,
+                "p50": 5.823288438147387,
+                "p90": 13.518206812071867,
+                "p95": 14.651820467038306,
+                "p99": 15.511383145346258,
+                "max": 15.511383145346258
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 8.46477741314125,
+                "p50": 6.340451694992765,
+                "p90": 20.832732748330614,
+                "p95": 22.864960705666476,
+                "p99": 30.358614721062395,
+                "max": 30.358614721062395
+              },
+              "makespan": 419.59058550697546,
+              "route_wall": 51.501513606868684,
+              "boundary_wall": 28.96840829681605
+            },
+            "ours": {
+              "TTFT": {
+                "n": 95,
+                "mean": 7.194015563679021,
+                "p50": 6.885809002526443,
+                "p90": 13.434722470885674,
+                "p95": 14.441717808849319,
+                "p99": 21.386362193879222,
+                "max": 21.386362193879222
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 9.145594687478466,
+                "p50": 7.695813121246488,
+                "p90": 21.036144847635455,
+                "p95": 23.922616269421553,
+                "p99": 32.10802559510125,
+                "max": 32.10802559510125
+              },
+              "makespan": 419.47446217445605,
+              "route_wall": 59.215709961019456,
+              "boundary_wall": 28.70002839807421
+            }
+          },
+          "accepted_cache_tokens": {
+            "reference": {
+              "P": 319744,
+              "D": 61824
+            },
+            "ours": {
+              "P": 286720,
+              "D": 74752
+            }
+          },
+          "worst": {
+            "reference": "feal-differential-cryptanalysis:11",
+            "ours": "git-multibranch:10"
+          }
+        },
+        {
+          "rate": 0.49032341538142143,
+          "p99_reduction_percent": 12.46388820808959,
+          "requests_faster": 45,
+          "metrics": {
+            "reference": {
+              "TTFT": {
+                "n": 95,
+                "mean": 7.936517487729903,
+                "p50": 7.4176368768972765,
+                "p90": 15.250008105864197,
+                "p95": 16.036335906584696,
+                "p99": 18.504625072233296,
+                "max": 18.504625072233296
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 20.861057101878394,
+                "p50": 10.258701752971675,
+                "p90": 66.41800624450909,
+                "p95": 69.76322349710523,
+                "p99": 84.62654347993319,
+                "max": 84.62654347993319
+              },
+              "makespan": 289.757179528132,
+              "route_wall": 69.4573625754565,
+              "boundary_wall": 35.962419390678406
+            },
+            "ours": {
+              "TTFT": {
+                "n": 95,
+                "mean": 7.957603655039709,
+                "p50": 8.034491507171957,
+                "p90": 13.941863134656415,
+                "p95": 14.713629938720317,
+                "p99": 16.19822928990402,
+                "max": 16.19822928990402
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 21.16429266804122,
+                "p50": 11.703808118151997,
+                "p90": 59.75805826829645,
+                "p95": 69.3585318926464,
+                "p99": 79.12219553666944,
+                "max": 79.12219553666944
+              },
+              "makespan": 283.58995171487754,
+              "route_wall": 70.27762752585113,
+              "boundary_wall": 34.811534656211734
+            }
+          },
+          "accepted_cache_tokens": {
+            "reference": {
+              "P": 333440,
+              "D": 78720
+            },
+            "ours": {
+              "P": 270464,
+              "D": 67968
+            }
+          },
+          "worst": {
+            "reference": "distribution-search:15",
+            "ours": "feal-differential-cryptanalysis:12"
+          }
+        },
+        {
+          "rate": 0.9806468307628429,
+          "p99_reduction_percent": -28.297697104798726,
+          "requests_faster": 32,
+          "metrics": {
+            "reference": {
+              "TTFT": {
+                "n": 95,
+                "mean": 7.246266089327617,
+                "p50": 7.262261539465953,
+                "p90": 11.735711088807392,
+                "p95": 13.015206490207902,
+                "p99": 14.284359602208866,
+                "max": 14.284359602208866
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 47.557670683447355,
+                "p50": 36.31949849542938,
+                "p90": 107.03586672356624,
+                "p95": 123.99632134743851,
+                "p99": 149.60397702222207,
+                "max": 149.60397702222207
+              },
+              "makespan": 255.99730954980126,
+              "route_wall": 70.2143600480631,
+              "boundary_wall": 30.29516606219113
+            },
+            "ours": {
+              "TTFT": {
+                "n": 95,
+                "mean": 8.13616475233162,
+                "p50": 8.540313639407145,
+                "p90": 12.418500804165348,
+                "p95": 13.653816404303882,
+                "p99": 18.326504415802162,
+                "max": 18.326504415802162
+              },
+              "nominal": {
+                "n": 95,
+                "mean": 50.39278221266359,
+                "p50": 35.08568243967993,
+                "p90": 117.19373752685588,
+                "p95": 135.82719154885712,
+                "p99": 150.66102733851693,
+                "max": 150.66102733851693
+              },
+              "makespan": 257.1532472389408,
+              "route_wall": 85.78690360672772,
+              "boundary_wall": 36.72120742406696
+            }
+          },
+          "accepted_cache_tokens": {
+            "reference": {
+              "P": 432000,
+              "D": 54528
+            },
+            "ours": {
+              "P": 343936,
+              "D": 70400
+            }
+          },
+          "worst": {
+            "reference": "feal-differential-cryptanalysis:14",
+            "ours": "feal-differential-cryptanalysis:11"
+          }
+        }
+      ]
+    }
+  },
+  "pipeline_result": {
+    "started": 1793072087.7095494,
+    "finished": 1793072668.8283188,
+    "steps": [
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "-m",
+          "pytest",
+          "-q",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/test_linear_reclaim.py"
+        ],
+        "pid": 367294,
+        "started": 1793072087.7099683,
+        "finished": 1793072089.0271473,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 60
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+          "--repo",
+          "/root/issue23-linear-reclaim-source-01",
+          "--inputs",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+          "--seed",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-default-01",
+          "--policy",
+          "linear-reclaim",
+          "--workers",
+          "3",
+          "--residual-world",
+          "--phase-residual-world",
+          "--decode-sharing-fraction",
+          "0"
+        ],
+        "pid": 367296,
+        "started": 1793072089.0278165,
+        "finished": 1793072345.0773149,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 1800
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/analyze_control_work.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-default-01",
+          "--inputs",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+          "--source-receipt",
+          "/root/linear-reclaim-source-receipt-01.json",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-default-01/source-control-audit.json"
+        ],
+        "pid": 370869,
+        "started": 1793072345.0779357,
+        "finished": 1793072354.307775,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-default-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-default-01/work-conservation-audit.json"
+        ],
+        "pid": 370871,
+        "started": 1793072354.3083239,
+        "finished": 1793072356.8778229,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-default-01",
+          "--inputs",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+          "--seed",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-default-01/release-estimate-audit.json"
+        ],
+        "pid": 370890,
+        "started": 1793072356.87839,
+        "finished": 1793072360.3495727,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-default-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-default-01/feedback-alignment.json"
+        ],
+        "pid": 371092,
+        "started": 1793072360.350409,
+        "finished": 1793072362.7197635,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/audit_prefill_revalidation.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-default-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-default-01/prefill-revalidation-audit.json"
+        ],
+        "pid": 371093,
+        "started": 1793072362.7204165,
+        "finished": 1793072364.7389653,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/analyze_prefill_feedback.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-default-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-default-01/numerical-feedback.json"
+        ],
+        "pid": 371094,
+        "started": 1793072364.7395265,
+        "finished": 1793072367.6092775,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/audit_linear_reclaim.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-default-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-default-01/linear-reclaim-activation-audit.json"
+        ],
+        "pid": 371095,
+        "started": 1793072367.6098752,
+        "finished": 1793072369.5285914,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+          "--repo",
+          "/root/issue23-linear-reclaim-source-01",
+          "--inputs",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+          "--seed",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-sharing-01",
+          "--policy",
+          "linear-reclaim",
+          "--workers",
+          "3",
+          "--residual-world",
+          "--phase-residual-world",
+          "--decode-sharing-fraction",
+          "1"
+        ],
+        "pid": 371508,
+        "started": 1793072381.638487,
+        "finished": 1793072637.1619494,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 1800
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/analyze_control_work.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-sharing-01",
+          "--inputs",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+          "--source-receipt",
+          "/root/linear-reclaim-source-receipt-01.json",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-sharing-01/source-control-audit.json"
+        ],
+        "pid": 375083,
+        "started": 1793072637.162759,
+        "finished": 1793072645.542705,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-sharing-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-sharing-01/work-conservation-audit.json"
+        ],
+        "pid": 375085,
+        "started": 1793072645.5432165,
+        "finished": 1793072647.812376,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-sharing-01",
+          "--inputs",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+          "--seed",
+          "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-sharing-01/release-estimate-audit.json"
+        ],
+        "pid": 375087,
+        "started": 1793072647.812865,
+        "finished": 1793072650.2819927,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-sharing-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-sharing-01/feedback-alignment.json"
+        ],
+        "pid": 375088,
+        "started": 1793072650.2825458,
+        "finished": 1793072652.3013356,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/audit_prefill_revalidation.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-sharing-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-sharing-01/prefill-revalidation-audit.json"
+        ],
+        "pid": 375089,
+        "started": 1793072652.3018472,
+        "finished": 1793072653.9696903,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/analyze_prefill_feedback.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-sharing-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-sharing-01/numerical-feedback.json"
+        ],
+        "pid": 375090,
+        "started": 1793072653.9701507,
+        "finished": 1793072656.289421,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      },
+      {
+        "command": [
+          "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+          "/root/issue23-linear-reclaim-source-01/experiments/issue23_strategies/audit_linear_reclaim.py",
+          "--result",
+          "/root/issue23-linear-reclaim-charged-sharing-01",
+          "--output",
+          "/root/issue23-linear-reclaim-charged-sharing-01/linear-reclaim-activation-audit.json"
+        ],
+        "pid": 375109,
+        "started": 1793072656.2898428,
+        "finished": 1793072657.9578938,
+        "exit_code": 0,
+        "stop": null,
+        "limit_seconds": 120
+      }
+    ],
+    "archives": [
+      {
+        "path": "/root/issue23-linear-reclaim-charged-default-01-full.tar.gz",
+        "sha256": "1c7b9d6aae6b22d2027bfde5f8011b5338245164963dfecbffea6e4533d62cf0",
+        "bytes": 19222400
+      },
+      {
+        "path": "/root/issue23-linear-reclaim-charged-sharing-01-full.tar.gz",
+        "sha256": "ac2e4a166def11ab8db07fd15086309f1fc94e49fc3015633e0960a80ac123cb",
+        "bytes": 17527063
+      }
+    ],
+    "failure": null,
+    "no_gpu_work": true
+  },
+  "source_sha256": "ff32196d32766d5f52712432effc99abbf0938f5b31c5911aba70326999429dc"
+}

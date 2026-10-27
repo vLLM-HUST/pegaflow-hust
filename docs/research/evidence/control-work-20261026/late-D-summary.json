@@ -1,0 +1,11 @@
+{
+  "scope": "zero-control causal diagnostic; RPC retained; snapshot-local forecasts, NOT policy benefit",
+  "request_count": 95,
+  "changed_D": 2,
+  "positive_predicted_tail_gain": 2,
+  "gain_above_diagnostic_wall": 1,
+  "max_predicted_gain": 0.5212811565427415,
+  "total_diagnostic_wall": 13.10234503261745,
+  "script_sha256": "e8cc3241678fd341c3dfd6717e7a9994ea19a69dff199b05a12fb448fc435d07",
+  "source_archive_sha256": "6a22f7e617de7a8b4bf5cf2aeda116e4d625b47cd0caae540f18e2ae1ddd6cc9"
+}

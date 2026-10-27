@@ -1,0 +1,1847 @@
+{
+  "scope": "Archived CPU mechanisms, not pure queue attribution or counterfactual strategy benefit",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "arms": {
+        "reference": {
+          "worst": "feal-differential-cryptanalysis:11",
+          "path": {
+            "TTFT": 32.19004930322188,
+            "nominal": 69.2381663975699,
+            "dependency": 37.048117094348015,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 6656,
+            "D_prefix": 0,
+            "ready": 342.5034189056257,
+            "first": 374.6934682088476,
+            "before_P": 1.6458228930236487,
+            "P_API": 7.06384134335531,
+            "P_to_D": 3.026094030985405,
+            "D_API_to_first": 20.454291035857523
+          },
+          "initial": {
+            "p": 1,
+            "d": 2,
+            "source": 1,
+            "P_prefix_command": 6656,
+            "D_prefix_command": 0,
+            "P_end": 351.6241113150169,
+            "first": 374.6934494701108,
+            "full": 382.34334106215806,
+            "origin": 342.5034189056257,
+            "latest_completed": 341.552610547891,
+            "not_after_P_revised_forecast": true
+          },
+          "same_request_other": {
+            "TTFT": 23.927942514470374,
+            "nominal": 39.3021679609073,
+            "dependency": 15.374225446436924,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 4096,
+            "D_prefix": 0,
+            "ready": 320.82952725771463,
+            "first": 344.757469772185,
+            "before_P": 1.7891000929625989,
+            "P_API": 8.139225258144648,
+            "P_to_D": 1.269497500946784,
+            "D_API_to_first": 12.73011966241637
+          },
+          "inflight_exclusive_at_route_origin": [
+            {
+              "key": "git-leak-recovery:3",
+              "origin": 52.741069768140825,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.23371107660933177,
+                  "remaining_trace": 1.817735732767467,
+                  "owned": [
+                    "fix-git:3"
+                  ]
+                },
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.2051434760759534,
+                  "remaining_trace": 1.4101121090912656,
+                  "owned": [
+                    "fix-code-vulnerability:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:3",
+              "origin": 54.026598920444115,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.5192402289126221,
+                  "remaining_trace": 0.5322065804641767,
+                  "owned": [
+                    "fix-git:3"
+                  ]
+                },
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.4906726283792437,
+                  "remaining_trace": 0.12458295678797526,
+                  "owned": [
+                    "fix-code-vulnerability:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-leak-recovery:4",
+              "origin": 92.70086785882219,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 2.401631959620829,
+                  "remaining_trace": 3.0683932046064797,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                },
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.8888027483686756,
+                  "remaining_trace": 0.2505836678923714,
+                  "owned": [
+                    "fix-git:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:4",
+              "origin": 94.24117436669387,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 3.9419384674925055,
+                  "remaining_trace": 1.5280866967348032,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:4",
+              "origin": 95.51769569752003,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 5.218459798318662,
+                  "remaining_trace": 0.25156536590864675,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:5",
+              "origin": 129.56790931418766,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.0003122644691018195,
+                  "remaining_trace": 2.8725031530518663,
+                  "owned": [
+                    "fix-code-vulnerability:5"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:5",
+              "origin": 131.69430631618434,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 2.126709266465781,
+                  "remaining_trace": 0.7461061510551872,
+                  "owned": [
+                    "fix-code-vulnerability:5"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "dna-insert:6",
+              "origin": 137.52301262793887,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.3801528358451378,
+                  "remaining_trace": 1.1080160746039098,
+                  "owned": [
+                    "git-multibranch:5"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-leak-recovery:6",
+              "origin": 169.6104986093126,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.931538438780592,
+                  "remaining_trace": 2.7948475205799355,
+                  "owned": [
+                    "fix-code-vulnerability:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:6",
+              "origin": 179.69123510847223,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.9369328716922212,
+                  "remaining_trace": 2.568258525233176,
+                  "owned": [
+                    "git-multibranch:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "feal-differential-cryptanalysis:7",
+              "origin": 195.11782729518566,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 4.094192784390657,
+                  "remaining_trace": 0.3203756222942218,
+                  "owned": [
+                    "dna-insert:7"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-git:7",
+              "origin": 198.86913872442975,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.2761194284350381,
+                  "remaining_trace": 0.9049046238987444,
+                  "owned": [
+                    "feal-differential-cryptanalysis:7"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-leak-recovery:7",
+              "origin": 203.6622215154468,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 2.5025101274847827,
+                  "remaining_trace": 0.07488457892040401,
+                  "owned": [
+                    "fix-git:7"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "distribution-search:8",
+              "origin": 228.89897624214532,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 4.222045622035921,
+                  "remaining_trace": 1.1145076099012101,
+                  "owned": [
+                    "headless-terminal:7"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "feal-differential-cryptanalysis:8",
+              "origin": 241.59638318060007,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 3.8228324834492184,
+                  "remaining_trace": 0.9496251738973456,
+                  "owned": [
+                    "dna-insert:8"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:8",
+              "origin": 257.9409116331956,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.0388445869633074,
+                  "remaining_trace": 1.7610024859026794,
+                  "owned": [
+                    "headless-terminal:8"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:9",
+              "origin": 292.60164083028184,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.7244119396644351,
+                  "remaining_trace": 3.5580973837173246,
+                  "owned": [
+                    "fix-code-vulnerability:9"
+                  ]
+                }
+              ]
+            }
+          ],
+          "CPU_total": 98.52255306113511,
+          "model_CPU": 0.06449231039732695
+        },
+        "ours": {
+          "worst": "feal-differential-cryptanalysis:12",
+          "path": {
+            "TTFT": 32.202934525404316,
+            "nominal": 59.09216536608909,
+            "dependency": 26.889230840684775,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 352.82410035112935,
+            "first": 385.02703487653366,
+            "before_P": 4.253593622800622,
+            "P_API": 10.776700340407148,
+            "P_to_D": 1.2594198502879976,
+            "D_API_to_first": 15.913220711908536
+          },
+          "initial": {
+            "p": 1,
+            "d": 2,
+            "source": 1,
+            "P_prefix_command": 640,
+            "D_prefix_command": 0,
+            "P_end": 367.5638367025798,
+            "first": 385.00692966614787,
+            "full": 392.67046832194853,
+            "origin": 352.828376811166,
+            "latest_completed": 352.82410035112935,
+            "not_after_P_revised_forecast": true
+          },
+          "same_request_other": {
+            "TTFT": 29.930394268239525,
+            "nominal": 89.10836153117214,
+            "dependency": 59.17796726293261,
+            "P": 0,
+            "D": 3,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 385.1128367733772,
+            "first": 415.0432310416167,
+            "before_P": 2.959120712132915,
+            "P_API": 10.530255155565698,
+            "P_to_D": 0.4847138256114363,
+            "D_API_to_first": 15.956304574929504
+          },
+          "inflight_exclusive_at_route_origin": [
+            {
+              "key": "git-leak-recovery:3",
+              "origin": 52.741069768140825,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.31026860458763394,
+                  "remaining_trace": 1.3049869097990694,
+                  "owned": [
+                    "fix-code-vulnerability:3"
+                  ]
+                },
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.27892589610012664,
+                  "remaining_trace": 1.7725214646196363,
+                  "owned": [
+                    "fix-git:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:3",
+              "origin": 54.026598920444115,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.5957977568909243,
+                  "remaining_trace": 0.01945775749577905,
+                  "owned": [
+                    "fix-code-vulnerability:3"
+                  ]
+                },
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.564455048403417,
+                  "remaining_trace": 0.486992312316346,
+                  "owned": [
+                    "fix-git:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-leak-recovery:4",
+              "origin": 92.70086785882219,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 2.4425879796738315,
+                  "remaining_trace": 3.0274373642987342,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                },
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.8699325565786893,
+                  "remaining_trace": 0.26945517005322017,
+                  "owned": [
+                    "fix-git:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:4",
+              "origin": 94.24117436669387,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 3.982894487545508,
+                  "remaining_trace": 1.4871308564270578,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:4",
+              "origin": 95.48929789466084,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 5.2310180155124755,
+                  "remaining_trace": 0.2390073284600902,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "feal-differential-cryptanalysis:5",
+              "origin": 99.00169805077671,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.7657244751850385,
+                  "remaining_trace": 2.5769727240267173,
+                  "owned": [
+                    "git-multibranch:4"
+                  ]
+                },
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.2854853278674909,
+                  "remaining_trace": 0.2507579348052502,
+                  "owned": [
+                    "headless-terminal:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "feal-differential-cryptanalysis:6",
+              "origin": 131.1590156785145,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.03256345545702288,
+                  "remaining_trace": 3.0794347663479584,
+                  "owned": [
+                    "git-leak-recovery:5"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "dna-insert:7",
+              "origin": 188.14876304819444,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 2.1498025291287775,
+                  "remaining_trace": 0.9245435391721912,
+                  "owned": [
+                    "git-multibranch:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "dna-insert:8",
+              "origin": 234.42719630137324,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.1741103885225357,
+                  "remaining_trace": 2.5796980095498725,
+                  "owned": [
+                    "feal-differential-cryptanalysis:8"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-code-vulnerability:8",
+              "origin": 240.74268879961073,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 3.4179705740763495,
+                  "remaining_trace": 1.6685767218640137,
+                  "owned": [
+                    "dna-insert:8"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:9",
+              "origin": 273.9007904546668,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.4958275678904442,
+                  "remaining_trace": 1.801760820816753,
+                  "owned": [
+                    "git-multibranch:8"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-git:10",
+              "origin": 310.18679934666426,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.5634064048097684,
+                  "remaining_trace": 0.7959910138843611,
+                  "owned": [
+                    "dna-insert:10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "CPU_total": 125.54332699719816,
+          "model_CPU": 0.3867374798282981
+        }
+      },
+      "largest_regressions": [
+        {
+          "key": "feal-differential-cryptanalysis:7",
+          "delta": 9.543962635726416,
+          "before_delta": -0.6077672846091104,
+          "P_delta": -0.07637202243967689,
+          "between_delta": 2.4634367084067037,
+          "Dfirst_delta": 7.764665234368493
+        },
+        {
+          "key": "feal-differential-cryptanalysis:10",
+          "delta": 8.669749278431084,
+          "before_delta": 1.5086814569326634,
+          "P_delta": 1.1109268890483257,
+          "between_delta": -0.2975277313962579,
+          "Dfirst_delta": 6.347668663846321
+        },
+        {
+          "key": "headless-terminal:11",
+          "delta": 8.520429094325436,
+          "before_delta": 2.6539962020827943,
+          "P_delta": 0.180175321779946,
+          "between_delta": 0.8285223171114922,
+          "Dfirst_delta": 4.857735253351223
+        },
+        {
+          "key": "fix-code-vulnerability:10",
+          "delta": 8.048202565869076,
+          "before_delta": 0.8272827970246226,
+          "P_delta": 6.44233890680154,
+          "between_delta": -0.7247321167960763,
+          "Dfirst_delta": 1.5033129788390056
+        },
+        {
+          "key": "git-multibranch:7",
+          "delta": 7.175649777055128,
+          "before_delta": 0.25664916168898344,
+          "P_delta": 0.07737732400028052,
+          "between_delta": 0.22897849325491393,
+          "Dfirst_delta": 6.612644798110949
+        }
+      ]
+    },
+    {
+      "rate": 0.49032341538142143,
+      "arms": {
+        "reference": {
+          "worst": "fix-code-vulnerability:11",
+          "path": {
+            "TTFT": 32.2811765928829,
+            "nominal": 235.16503099408237,
+            "dependency": 202.88385440119947,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 355.81731859200045,
+            "first": 388.09849518488335,
+            "before_P": 9.618988536649681,
+            "P_API": 9.13608152175289,
+            "P_to_D": 0.5217049952876209,
+            "D_API_to_first": 13.004401539192713
+          },
+          "initial": {
+            "p": 0,
+            "d": 2,
+            "source": 1,
+            "P_prefix_command": 640,
+            "D_prefix_command": 0,
+            "P_end": 374.7610758670582,
+            "first": 388.1066278705048,
+            "full": 395.7475839423342,
+            "origin": 357.1156901408872,
+            "latest_completed": 355.97562098432576,
+            "not_after_P_revised_forecast": true
+          },
+          "same_request_other": {
+            "TTFT": 24.27218227996434,
+            "nominal": 214.62875767889,
+            "dependency": 190.35657539892566,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 343.29003958972663,
+            "first": 367.562221869691,
+            "before_P": 2.4157690984533815,
+            "P_API": 9.13608152175289,
+            "P_to_D": 0.6303593453299641,
+            "D_API_to_first": 12.08997231442811
+          },
+          "inflight_exclusive_at_route_origin": [
+            {
+              "key": "git-leak-recovery:3",
+              "origin": 40.95513631180418,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.08956232300116795,
+                  "remaining_trace": 1.5256930619316975,
+                  "owned": [
+                    "fix-code-vulnerability:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:3",
+              "origin": 41.99970608923898,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.1341321004359628,
+                  "remaining_trace": 0.48112328449690267,
+                  "owned": [
+                    "fix-code-vulnerability:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-git:4",
+              "origin": 76.33166565059307,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "save",
+                  "age": 0.025002530546316848,
+                  "remaining_trace": 0.05838264003659788,
+                  "owned": [
+                    "git-leak-recovery:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:4",
+              "origin": 78.69001974621631,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.6303639512021704,
+                  "remaining_trace": 4.839662553198323,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                },
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.09611764265247302,
+                  "remaining_trace": 1.8687751951166263,
+                  "owned": [
+                    "fix-git:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:4",
+              "origin": 80.84709220149747,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 2.7874364064833372,
+                  "remaining_trace": 2.6825900979171564,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:6",
+              "origin": 156.80089143975212,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.9370016582195717,
+                  "remaining_trace": 0.15505202310822597,
+                  "owned": [
+                    "fix-git:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "distribution-search:7",
+              "origin": 163.71782507489635,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.947086033225986,
+                  "remaining_trace": 2.4233721274733284,
+                  "owned": [
+                    "fix-code-vulnerability:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:6",
+              "origin": 166.9589992212456,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 2.6122904659247865,
+                  "remaining_trace": 1.8929014618544784,
+                  "owned": [
+                    "git-multibranch:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:7",
+              "origin": 197.12720733315217,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.0150881583570026,
+                  "remaining_trace": 1.1618870119175142,
+                  "owned": [
+                    "fix-git:7"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-leak-recovery:7",
+              "origin": 205.36455784715506,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 3.092529846133857,
+                  "remaining_trace": 1.2869157447071018,
+                  "owned": [
+                    "git-multibranch:7"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "dna-insert:8",
+              "origin": 237.514098385136,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.014834514745928118,
+                  "remaining_trace": 2.071607623455151,
+                  "owned": [
+                    "fix-git:8"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "distribution-search:9",
+              "origin": 244.93038127090583,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.019780234242830375,
+                  "remaining_trace": 2.0039287699702015,
+                  "owned": [
+                    "dna-insert:8"
+                  ]
+                }
+              ]
+            }
+          ],
+          "CPU_total": 117.09980274923146,
+          "model_CPU": 0.06575839500874281
+        },
+        "ours": {
+          "worst": "git-multibranch:12",
+          "path": {
+            "TTFT": 32.343367749683125,
+            "nominal": 235.8784980364761,
+            "dependency": 203.53513028679296,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 896,
+            "D_prefix": 0,
+            "ready": 367.44846926121124,
+            "first": 399.79183701089437,
+            "before_P": 9.230296611483766,
+            "P_API": 8.639194705068522,
+            "P_to_D": 0.4532897968124985,
+            "D_API_to_first": 14.020586636318342
+          },
+          "initial": {
+            "p": 1,
+            "d": 2,
+            "source": 1,
+            "P_prefix_command": 896,
+            "D_prefix_command": 0,
+            "P_end": 385.44318318243705,
+            "first": 399.77305318482854,
+            "full": 407.4056843599843,
+            "origin": 367.4525875361086,
+            "latest_completed": 367.44846926121124,
+            "not_after_P_revised_forecast": true
+          },
+          "same_request_other": {
+            "TTFT": 26.789287401853528,
+            "nominal": 247.992590250213,
+            "dependency": 221.20330284835947,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 385.11664182277775,
+            "first": 411.9059292246313,
+            "before_P": 2.3072845816017775,
+            "P_API": 8.544000368231139,
+            "P_to_D": 0.4812647367176055,
+            "D_API_to_first": 15.456737715303007
+          },
+          "inflight_exclusive_at_route_origin": [
+            {
+              "key": "git-leak-recovery:3",
+              "origin": 40.94289719549743,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.11276312271221656,
+                  "remaining_trace": 1.5024935716601888,
+                  "owned": [
+                    "fix-code-vulnerability:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:3",
+              "origin": 42.028460806909365,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.1983267341241515,
+                  "remaining_trace": 0.4169299602482539,
+                  "owned": [
+                    "fix-code-vulnerability:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-git:4",
+              "origin": 76.34486590170302,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "save",
+                  "age": 0.0718090172511694,
+                  "remaining_trace": 0.011576352634776299,
+                  "owned": [
+                    "git-leak-recovery:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:4",
+              "origin": 78.7866777997486,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.17071433131972924,
+                  "remaining_trace": 5.299313163076661,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:4",
+              "origin": 80.31573209328442,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.699768624855551,
+                  "remaining_trace": 3.7702588695408394,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                },
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.7789135512214784,
+                  "remaining_trace": 1.3604745339696223,
+                  "owned": [
+                    "fix-git:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-leak-recovery:6",
+              "origin": 154.47314781357545,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.8350257985735539,
+                  "remaining_trace": 1.5684674326804213,
+                  "owned": [
+                    "fix-git:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "feal-differential-cryptanalysis:7",
+              "origin": 166.69826368686108,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.4918296217684883,
+                  "remaining_trace": 2.3153905811197433,
+                  "owned": [
+                    "git-multibranch:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "distribution-search:9",
+              "origin": 240.43993740252648,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.5340607905989145,
+                  "remaining_trace": 1.2197482780257474,
+                  "owned": [
+                    "feal-differential-cryptanalysis:8"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-code-vulnerability:9",
+              "origin": 282.98122624616366,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.632388532974062,
+                  "remaining_trace": 1.7228470720501718,
+                  "owned": [
+                    "distribution-search:10"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-git:11",
+              "origin": 326.9612414583357,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.741590847038367,
+                  "remaining_trace": 1.104496802115932,
+                  "owned": [
+                    "distribution-search:11"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:11",
+              "origin": 361.41668164659814,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.12148165893978558,
+                  "remaining_trace": 2.568979003830293,
+                  "owned": [
+                    "dna-insert:11"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:12",
+              "origin": 367.4525875361086,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.2280055660750122,
+                  "remaining_trace": 1.2155754183345948,
+                  "owned": [
+                    "distribution-search:12"
+                  ]
+                }
+              ]
+            }
+          ],
+          "CPU_total": 135.8013626812026,
+          "model_CPU": 0.3156254505738616
+        }
+      },
+      "largest_regressions": [
+        {
+          "key": "dna-insert:13",
+          "delta": 14.526409728230078,
+          "before_delta": 1.349852723069489,
+          "P_delta": 2.9060881458501857,
+          "between_delta": 0.4524932775407251,
+          "Dfirst_delta": 9.817975581769701
+        },
+        {
+          "key": "dna-insert:9",
+          "delta": 14.059280973107093,
+          "before_delta": 4.423185593104392,
+          "P_delta": 0.08081229197885786,
+          "between_delta": 1.4771454712614513,
+          "Dfirst_delta": 8.078137616762376
+        },
+        {
+          "key": "feal-differential-cryptanalysis:7",
+          "delta": 11.568134789642869,
+          "before_delta": 0.29360390591719465,
+          "P_delta": -3.053014250316994,
+          "between_delta": 15.037288032483133,
+          "Dfirst_delta": -0.7097428984404814
+        },
+        {
+          "key": "feal-differential-cryptanalysis:8",
+          "delta": 10.425342603100262,
+          "before_delta": 0.5036827235651344,
+          "P_delta": -0.05812176291700366,
+          "between_delta": 10.021228408600138,
+          "Dfirst_delta": -0.041446766147998915
+        },
+        {
+          "key": "headless-terminal:11",
+          "delta": 8.066455402305508,
+          "before_delta": 9.04561945900258,
+          "P_delta": 0.24138657572050537,
+          "between_delta": -0.16893666703253984,
+          "Dfirst_delta": -1.0516139653850018
+        }
+      ]
+    },
+    {
+      "rate": 0.9806468307628429,
+      "arms": {
+        "reference": {
+          "worst": "distribution-search:12",
+          "path": {
+            "TTFT": 28.251049455103043,
+            "nominal": 315.77526061503073,
+            "dependency": 287.5242111599277,
+            "P": 0,
+            "D": 3,
+            "P_prefix": 0,
+            "D_prefix": 8192,
+            "ready": 367.77345854903626,
+            "first": 396.0245080041393,
+            "before_P": 3.1584823112376057,
+            "P_API": 8.733486476670235,
+            "P_to_D": 1.8427492792066573,
+            "D_API_to_first": 14.516331387988544
+          },
+          "initial": {
+            "p": 0,
+            "d": 3,
+            "source": 0,
+            "P_prefix_command": 0,
+            "D_prefix_command": 8192,
+            "P_end": 379.0447417103699,
+            "first": 396.2085634667158,
+            "full": 406.74588735056096,
+            "origin": 368.0015436644055,
+            "latest_completed": 363.4700660136636,
+            "not_after_P_revised_forecast": true
+          },
+          "same_request_other": {
+            "TTFT": 26.69680592693379,
+            "nominal": 298.30146389658137,
+            "dependency": 271.6046579696476,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 5504,
+            "D_prefix": 0,
+            "ready": 351.85390535875615,
+            "first": 378.55071128568994,
+            "before_P": 2.0218414823862076,
+            "P_API": 6.110744742266121,
+            "P_to_D": 0.477698036683762,
+            "D_API_to_first": 18.08652166559773
+          },
+          "inflight_exclusive_at_route_origin": [
+            {
+              "key": "headless-terminal:2",
+              "origin": 7.459932472545112,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.1853109357415823,
+                  "remaining_trace": 1.6399873823332003,
+                  "owned": [
+                    "git-leak-recovery:2"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:3",
+              "origin": 41.79007828636254,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.37005174429044274,
+                  "remaining_trace": 1.6813916052229914,
+                  "owned": [
+                    "fix-git:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:3",
+              "origin": 42.87137648597163,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.4513499438995368,
+                  "remaining_trace": 0.6000934056138973,
+                  "owned": [
+                    "fix-git:3"
+                  ]
+                },
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.0922500056913762,
+                  "remaining_trace": 0.7039495462646741,
+                  "owned": [
+                    "git-leak-recovery:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:4",
+              "origin": 78.39645532942275,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.1595488447734681,
+                  "remaining_trace": 1.9798385512389274,
+                  "owned": [
+                    "fix-git:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:4",
+              "origin": 79.99812858336148,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.7612220987121958,
+                  "remaining_trace": 0.37816529730019965,
+                  "owned": [
+                    "fix-git:4"
+                  ]
+                },
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.8003578737949937,
+                  "remaining_trace": 4.6696685812454035,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-code-vulnerability:5",
+              "origin": 118.34913351762638,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.5340338431934981,
+                  "remaining_trace": 0.16888420577562613,
+                  "owned": [
+                    "git-leak-recovery:5"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:6",
+              "origin": 150.38858115953207,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.7203378791486159,
+                  "remaining_trace": 0.6577368442493139,
+                  "owned": [
+                    "fix-git:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-git:7",
+              "origin": 175.38968224011413,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 2.066655471521983,
+                  "remaining_trace": 1.1781047459711544,
+                  "owned": [
+                    "git-multibranch:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "feal-differential-cryptanalysis:8",
+              "origin": 224.87773683218506,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "save",
+                  "age": 0.06443676235716111,
+                  "remaining_trace": 0.016225789677321245,
+                  "owned": [
+                    "fix-code-vulnerability:7"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "feal-differential-cryptanalysis:9",
+              "origin": 259.08790007857175,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 3.217120305853058,
+                  "remaining_trace": 0.4447258094360791,
+                  "owned": [
+                    "distribution-search:9"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "dna-insert:10",
+              "origin": 281.8001593484432,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.11952040912586881,
+                  "remaining_trace": 1.9776641572879612,
+                  "owned": [
+                    "fix-git:9"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "feal-differential-cryptanalysis:10",
+              "origin": 292.56688502987504,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.6155760317991508,
+                  "remaining_trace": 1.9839508427665464,
+                  "owned": [
+                    "distribution-search:10"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "dna-insert:11",
+              "origin": 311.0607157018918,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.3059293181891576,
+                  "remaining_trace": 1.3418644865685678,
+                  "owned": [
+                    "fix-code-vulnerability:10"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "feal-differential-cryptanalysis:11",
+              "origin": 324.40576716728225,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "save",
+                  "age": 0.03741065939880173,
+                  "remaining_trace": 0.05717968064368506,
+                  "owned": [
+                    "distribution-search:10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "CPU_total": 124.21604323014617,
+          "model_CPU": 0.06413183640688658
+        },
+        "ours": {
+          "worst": "git-multibranch:11",
+          "path": {
+            "TTFT": 32.02855063673252,
+            "nominal": 307.9592039523612,
+            "dependency": 275.93065331562866,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 768,
+            "D_prefix": 0,
+            "ready": 354.62310982523525,
+            "first": 386.65166046196777,
+            "before_P": 5.364012472172476,
+            "P_API": 7.932834664291883,
+            "P_to_D": 0.49483672457751027,
+            "D_API_to_first": 18.236866775690658
+          },
+          "initial": {
+            "p": 0,
+            "d": 2,
+            "source": 3,
+            "P_prefix_command": 768,
+            "D_prefix_command": 0,
+            "P_end": 367.74183926701187,
+            "first": 386.6360690596193,
+            "full": 394.2596817197776,
+            "origin": 354.6266616194513,
+            "latest_completed": 354.62310982523525,
+            "not_after_P_revised_forecast": true
+          },
+          "same_request_other": {
+            "TTFT": 21.138534439653313,
+            "nominal": 279.29434456844757,
+            "dependency": 258.15581012879426,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 0,
+            "D_prefix": 0,
+            "ready": 336.84826663840084,
+            "first": 357.98680107805416,
+            "before_P": 1.320234838068643,
+            "P_API": 8.388409310484711,
+            "P_to_D": 0.6854709985014438,
+            "D_API_to_first": 10.744419292598536
+          },
+          "inflight_exclusive_at_route_origin": [
+            {
+              "key": "fix-code-vulnerability:2",
+              "origin": 3.0124448965300967,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.29973355547139935,
+                  "remaining_trace": 0.0006946282367441547,
+                  "owned": [
+                    "dna-insert:2"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:2",
+              "origin": 7.440063940349424,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.1377890279053835,
+                  "remaining_trace": 1.687508920434337,
+                  "owned": [
+                    "git-leak-recovery:2"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:3",
+              "origin": 41.79054113971228,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.3415938763774946,
+                  "remaining_trace": 1.7098508440427693,
+                  "owned": [
+                    "fix-git:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:3",
+              "origin": 42.919710188580574,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.4707629252457863,
+                  "remaining_trace": 0.5806817951744776,
+                  "owned": [
+                    "fix-git:3"
+                  ]
+                },
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.15650555092498308,
+                  "remaining_trace": 0.6396945411981605,
+                  "owned": [
+                    "git-leak-recovery:3"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-code-vulnerability:4",
+              "origin": 71.21946747288646,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 2.8054284210139855,
+                  "remaining_trace": 0.13662831866054148,
+                  "owned": [
+                    "dna-insert:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-git:4",
+              "origin": 76.72991724582279,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 1.7413738013009379,
+                  "remaining_trace": 3.728652173177011,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:4",
+              "origin": 78.20619519775227,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 3.217651753230413,
+                  "remaining_trace": 2.2523742212475355,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:4",
+              "origin": 79.59255007456126,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 4.604006630039407,
+                  "remaining_trace": 0.8660193444385413,
+                  "owned": [
+                    "fix-code-vulnerability:4"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-code-vulnerability:5",
+              "origin": 111.82861099278465,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.5980324299927702,
+                  "remaining_trace": 0.10488662014812178,
+                  "owned": [
+                    "git-leak-recovery:5"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "git-multibranch:5",
+              "origin": 118.08859758512989,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 2.598914122122963,
+                  "remaining_trace": 0.2739023459298835,
+                  "owned": [
+                    "fix-code-vulnerability:5"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:5",
+              "origin": 119.26128426827076,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 0.4136566220431348,
+                  "remaining_trace": 1.43923754747847,
+                  "owned": [
+                    "fix-git:5"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:6",
+              "origin": 168.97472572789638,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 0.052946384324940254,
+                  "remaining_trace": 5.193912807428575,
+                  "owned": [
+                    "git-multibranch:6"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "headless-terminal:7",
+              "origin": 208.10657022624667,
+              "phases": [
+                {
+                  "node": 2,
+                  "kind": "restore",
+                  "age": 3.7395072453109606,
+                  "remaining_trace": 0.6159796195217098,
+                  "owned": [
+                    "fix-code-vulnerability:7"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "distribution-search:9",
+              "origin": 248.72245434592455,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 2.2082599810695456,
+                  "remaining_trace": 0.5658474020782762,
+                  "owned": [
+                    "git-multibranch:8"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "fix-code-vulnerability:9",
+              "origin": 270.61232724327004,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 2.067330829365744,
+                  "remaining_trace": 0.06643328769791879,
+                  "owned": [
+                    "dna-insert:9"
+                  ]
+                }
+              ]
+            },
+            {
+              "key": "distribution-search:11",
+              "origin": 310.66075281309907,
+              "phases": [
+                {
+                  "node": 3,
+                  "kind": "restore",
+                  "age": 1.0217803333900406,
+                  "remaining_trace": 0.29389847877837383,
+                  "owned": [
+                    "fix-git:10"
+                  ]
+                }
+              ]
+            }
+          ],
+          "CPU_total": 106.91548325587064,
+          "model_CPU": 0.3202080260962248
+        }
+      },
+      "largest_regressions": [
+        {
+          "key": "fix-git:12",
+          "delta": 15.954089299793168,
+          "before_delta": 0.13423950411379337,
+          "P_delta": -1.9520025775202257,
+          "between_delta": 1.3275596164166927,
+          "Dfirst_delta": 16.444292756782886
+        },
+        {
+          "key": "distribution-search:15",
+          "delta": 15.695865866638314,
+          "before_delta": 0.8089180048555136,
+          "P_delta": 3.686461346975581,
+          "between_delta": 0.012822462245821953,
+          "Dfirst_delta": 11.187664052561388
+        },
+        {
+          "key": "dna-insert:10",
+          "delta": 12.834036481763462,
+          "before_delta": 8.249527734885419,
+          "P_delta": -2.428090449551754,
+          "between_delta": -0.11132440902292728,
+          "Dfirst_delta": 7.123923605452717
+        },
+        {
+          "key": "git-multibranch:9",
+          "delta": 12.170344334995548,
+          "before_delta": 5.772321060113143,
+          "P_delta": 2.3829922795971514,
+          "between_delta": 1.9796282062307,
+          "Dfirst_delta": 2.035402789054558
+        },
+        {
+          "key": "git-multibranch:11",
+          "delta": 10.890016197079206,
+          "before_delta": 4.043777634103833,
+          "P_delta": -0.4555746461928276,
+          "between_delta": -0.1906342739239335,
+          "Dfirst_delta": 7.492447483092121
+        }
+      ]
+    }
+  ],
+  "high_same_cold_request": {
+    "key": "git-multibranch:11",
+    "arms": {
+      "reference": {
+        "stage": {
+          "id": "git-multibranch:11",
+          "node": 2,
+          "tokens": 17623,
+          "prefix": 0,
+          "first": 10.744419292598536,
+          "full": 18.816168022787906,
+          "completed": 366.0585498082435,
+          "restore_path_not_pure_H2D": 0.0,
+          "synchronous_finish_seconds": 0.08337839986779727,
+          "trained_as_singleton": false
+        },
+        "observed_interval_overlaps": {
+          "compute other": 2.5450115300860148,
+          "restore containing_request": 1.3710930943489075e-05,
+          "save other": 0.1618021963222418,
+          "compute containing_request": 8.037591855259336
+        },
+        "mixed_compute_interval_is_not_isolated_own_compute": true
+      },
+      "ours": {
+        "stage": {
+          "id": "git-multibranch:11",
+          "node": 2,
+          "tokens": 17623,
+          "prefix": 0,
+          "first": 18.236866775690658,
+          "full": 28.22476366339771,
+          "completed": 396.6395573496748,
+          "restore_path_not_pure_H2D": 0.0,
+          "synchronous_finish_seconds": 0.08337839986779727,
+          "trained_as_singleton": false
+        },
+        "observed_interval_overlaps": {
+          "compute other": 9.958232164843594,
+          "restore containing_request": 1.3820827007293701e-05,
+          "save other": 0.25016060887719505,
+          "compute containing_request": 8.017384609032149,
+          "restore other": 2.4850480258464813e-05
+        },
+        "mixed_compute_interval_is_not_isolated_own_compute": true
+      }
+    }
+  }
+}

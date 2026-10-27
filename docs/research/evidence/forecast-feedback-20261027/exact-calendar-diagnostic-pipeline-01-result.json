@@ -1,0 +1,303 @@
+{
+  "started": 1793067298.7034278,
+  "finished": 1793067852.2548554,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/test_binary_timeline.py",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/test_continuous_batch_calendar.py",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/test_prefill_revalidation_search.py"
+      ],
+      "pid": 298040,
+      "started": 1793067298.7038734,
+      "finished": 1793067302.524431,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 60
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-exact-calendar-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-default-01",
+        "--policy",
+        "exact-binary-calendar",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "0",
+        "--fixed-control-diagnostic"
+      ],
+      "pid": 298041,
+      "started": 1793067302.5250936,
+      "finished": 1793067546.3456929,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-default-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/exact-calendar-source-receipt-01.json",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-default-01/source-control-audit.json"
+      ],
+      "pid": 301306,
+      "started": 1793067546.3463001,
+      "finished": 1793067555.4276416,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-default-01",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-default-01/work-conservation-audit.json"
+      ],
+      "pid": 301520,
+      "started": 1793067555.4283087,
+      "finished": 1793067557.9472475,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-default-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-default-01/release-estimate-audit.json"
+      ],
+      "pid": 301522,
+      "started": 1793067557.9477208,
+      "finished": 1793067561.4185224,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-default-01",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-default-01/feedback-alignment.json"
+      ],
+      "pid": 301523,
+      "started": 1793067561.4190617,
+      "finished": 1793067563.6375895,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/audit_prefill_revalidation.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-default-01",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-default-01/prefill-revalidation-audit.json"
+      ],
+      "pid": 301524,
+      "started": 1793067563.6380553,
+      "finished": 1793067565.5063915,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/analyze_prefill_feedback.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-default-01",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-default-01/numerical-feedback.json"
+      ],
+      "pid": 301525,
+      "started": 1793067565.5068986,
+      "finished": 1793067568.1269708,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-exact-calendar-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01",
+        "--policy",
+        "exact-binary-calendar",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1",
+        "--fixed-control-diagnostic"
+      ],
+      "pid": 301835,
+      "started": 1793067577.7848053,
+      "finished": 1793067824.6968052,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/exact-calendar-source-receipt-01.json",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01/source-control-audit.json"
+      ],
+      "pid": 305480,
+      "started": 1793067824.6976304,
+      "finished": 1793067832.5769305,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01/work-conservation-audit.json"
+      ],
+      "pid": 305694,
+      "started": 1793067832.5774968,
+      "finished": 1793067834.797271,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01/release-estimate-audit.json"
+      ],
+      "pid": 305804,
+      "started": 1793067834.7978528,
+      "finished": 1793067837.3671734,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01/feedback-alignment.json"
+      ],
+      "pid": 305805,
+      "started": 1793067837.3677104,
+      "finished": 1793067839.336469,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/audit_prefill_revalidation.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01/prefill-revalidation-audit.json"
+      ],
+      "pid": 305807,
+      "started": 1793067839.3370092,
+      "finished": 1793067841.005153,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-exact-calendar-source-01/experiments/issue23_strategies/analyze_prefill_feedback.py",
+        "--result",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01",
+        "--output",
+        "/root/issue23-exact-calendar-diagnostic-sharing-01/numerical-feedback.json"
+      ],
+      "pid": 305905,
+      "started": 1793067841.005681,
+      "finished": 1793067843.625313,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/issue23-exact-calendar-diagnostic-default-01-full.tar.gz",
+      "sha256": "63512cb28508f0b6593673567f5ffaf4634f2ff33ed06d2e00cd98deb9643b28",
+      "bytes": 13002073
+    },
+    {
+      "path": "/root/issue23-exact-calendar-diagnostic-sharing-01-full.tar.gz",
+      "sha256": "b1eed9a48f7246ec770716c82f3136c89693246e462acdf030d1b73d1f7ae080",
+      "bytes": 11796088
+    }
+  ],
+  "failure": null,
+  "no_gpu_work": true
+}

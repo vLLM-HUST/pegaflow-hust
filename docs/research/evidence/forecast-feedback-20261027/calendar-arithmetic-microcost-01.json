@@ -1,0 +1,192 @@
+{
+  "platform": "Windows local CPU",
+  "mechanism_fixture_only": true,
+  "not_end_to_end_performance": true,
+  "rows": [
+    {
+      "repetition": 0,
+      "exact": false,
+      "wall": 0.04610399999364745,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 2,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 0,
+      "exact": true,
+      "wall": 0.05246240000997204,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 1,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 1,
+      "exact": true,
+      "wall": 0.051340499994694255,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 1,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 1,
+      "exact": false,
+      "wall": 0.04373789999226574,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 2,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 2,
+      "exact": false,
+      "wall": 0.04370480000216048,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 2,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 2,
+      "exact": true,
+      "wall": 0.05195889998867642,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 1,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 3,
+      "exact": true,
+      "wall": 0.05069379998894874,
+      "cpu": 0.0625,
+      "endpoints": {
+        "True": 1,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 3,
+      "exact": false,
+      "wall": 0.043642700009513646,
+      "cpu": 0.03125,
+      "endpoints": {
+        "True": 2,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 4,
+      "exact": false,
+      "wall": 0.04216059998725541,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 2,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 4,
+      "exact": true,
+      "wall": 0.052350800004205666,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 1,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 5,
+      "exact": true,
+      "wall": 0.052639699992141686,
+      "cpu": 0.0625,
+      "endpoints": {
+        "True": 1,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 5,
+      "exact": false,
+      "wall": 0.04500420000113081,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 2,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 6,
+      "exact": false,
+      "wall": 0.0773019999905955,
+      "cpu": 0.078125,
+      "endpoints": {
+        "True": 2,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 6,
+      "exact": true,
+      "wall": 0.07672789999924134,
+      "cpu": 0.0625,
+      "endpoints": {
+        "True": 1,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 7,
+      "exact": true,
+      "wall": 0.06575409999641124,
+      "cpu": 0.078125,
+      "endpoints": {
+        "True": 1,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 7,
+      "exact": false,
+      "wall": 0.04519119999895338,
+      "cpu": 0.046875,
+      "endpoints": {
+        "True": 2,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 8,
+      "exact": false,
+      "wall": 0.04341430000204127,
+      "cpu": 0.03125,
+      "endpoints": {
+        "True": 2,
+        "False": 1
+      }
+    },
+    {
+      "repetition": 8,
+      "exact": true,
+      "wall": 0.050827300001401454,
+      "cpu": 0.0625,
+      "endpoints": {
+        "True": 1,
+        "False": 1
+      }
+    }
+  ],
+  "median_wall": {
+    "False": 0.04373789999226574,
+    "True": 0.052350800004205666
+  },
+  "no_gain_claim": true
+}

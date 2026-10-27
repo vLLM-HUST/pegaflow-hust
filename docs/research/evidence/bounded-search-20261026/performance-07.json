@@ -1,0 +1,275 @@
+{
+  "directory": "/root/issue23-bounded-calendar-07",
+  "screen_sha256": "9b625afd5e2dcb4e55b8f3d450859bbdc8a9d2e917f85e2e507a8316c257b3ac",
+  "audit": "completed-CPU-screen-accounting-not-real-output-audit",
+  "validated_arms": 9,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "arms": {
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.515491822005004,
+            "p50": 5.445171767783165,
+            "p90": 49.93915522984952,
+            "p95": 62.54182524793674,
+            "p99": 69.73956772983604,
+            "max": 69.73956772983604
+          },
+          "makespan": 614.8522478362313,
+          "planning_seconds": 0.054522717371582985,
+          "boundary_seconds": 0,
+          "planning_plus_boundary_seconds": 0.054522717371582985,
+          "iteration_cpu_seconds": 0.1937724445015192,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 0,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ]
+        },
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.41659862185221,
+            "p50": 14.831567363301957,
+            "p90": 24.73372053777007,
+            "p95": 27.74092265480573,
+            "p99": 38.162641421982016,
+            "max": 38.162641421982016
+          },
+          "makespan": 501.677204779509,
+          "planning_seconds": 91.83271934371442,
+          "boundary_seconds": 64.40593297407031,
+          "planning_plus_boundary_seconds": 156.23865231778473,
+          "iteration_cpu_seconds": 0.18704717885702848,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 5791,
+          "P_counts": [
+            43,
+            52
+          ],
+          "D_counts": [
+            58,
+            37
+          ]
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.009666096798554,
+            "p50": 12.692356294869,
+            "p90": 25.73919144315846,
+            "p95": 29.701068390015166,
+            "p99": 33.82164483926755,
+            "max": 33.82164483926755
+          },
+          "makespan": 505.9601169430442,
+          "planning_seconds": 69.54748257063329,
+          "boundary_seconds": 18.40618442930281,
+          "planning_plus_boundary_seconds": 87.9536669999361,
+          "iteration_cpu_seconds": 0.18280370347201824,
+          "pruned_calendars": 5608,
+          "bound_checks": 776972,
+          "calendar_full": 673,
+          "P_counts": [
+            41,
+            54
+          ],
+          "D_counts": [
+            59,
+            36
+          ]
+        }
+      },
+      "net_p99_reduction_vs_reference_percent": 11.374989835514937,
+      "search_wall_reduction_percent": 43.70556472732433,
+      "exact_mechanism_equivalence": null
+    },
+    {
+      "rate": 0.49032341538142143,
+      "arms": {
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 17.26163135212105,
+            "p50": 5.674617428314718,
+            "p90": 63.3536437913923,
+            "p95": 72.69401837395583,
+            "p99": 78.63934381409013,
+            "max": 78.63934381409013
+          },
+          "makespan": 632.9998436571299,
+          "planning_seconds": 0.056212302297353745,
+          "boundary_seconds": 0,
+          "planning_plus_boundary_seconds": 0.056212302297353745,
+          "iteration_cpu_seconds": 0.185067193582654,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 0,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ]
+        },
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.803909679637714,
+            "p50": 16.199426402354703,
+            "p90": 26.590200821615383,
+            "p95": 29.456695272472274,
+            "p99": 32.29612218661208,
+            "max": 32.29612218661208
+          },
+          "makespan": 503.52150284033223,
+          "planning_seconds": 102.22286967281252,
+          "boundary_seconds": 65.55287173110992,
+          "planning_plus_boundary_seconds": 167.77574140392244,
+          "iteration_cpu_seconds": 0.18277252465486526,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 5966,
+          "P_counts": [
+            38,
+            57
+          ],
+          "D_counts": [
+            57,
+            38
+          ]
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.744761785457857,
+            "p50": 13.446238334836778,
+            "p90": 26.897260384863216,
+            "p95": 29.127973796398578,
+            "p99": 36.24958588559468,
+            "max": 36.24958588559468
+          },
+          "makespan": 512.4503018929117,
+          "planning_seconds": 91.28093739133328,
+          "boundary_seconds": 40.22757323551923,
+          "planning_plus_boundary_seconds": 131.5085106268525,
+          "iteration_cpu_seconds": 0.17840140778571367,
+          "pruned_calendars": 7141,
+          "bound_checks": 1202063,
+          "calendar_full": 795,
+          "P_counts": [
+            42,
+            53
+          ],
+          "D_counts": [
+            58,
+            37
+          ]
+        }
+      },
+      "net_p99_reduction_vs_reference_percent": -12.241295336136226,
+      "search_wall_reduction_percent": 21.616492630931706,
+      "exact_mechanism_equivalence": null
+    },
+    {
+      "rate": 0.9806468307628429,
+      "arms": {
+        "native": {
+          "TTFT": {
+            "n": 95,
+            "mean": 16.427364030180883,
+            "p50": 6.2472781550181935,
+            "p90": 48.89041194499583,
+            "p95": 67.53549975086145,
+            "p99": 71.01013713965773,
+            "max": 71.01013713965773
+          },
+          "makespan": 619.1414212525741,
+          "planning_seconds": 0.06229161471128464,
+          "boundary_seconds": 0,
+          "planning_plus_boundary_seconds": 0.06229161471128464,
+          "iteration_cpu_seconds": 0.18713707942515612,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 0,
+          "P_counts": [
+            48,
+            47
+          ],
+          "D_counts": [
+            48,
+            47
+          ]
+        },
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 14.703902306712727,
+            "p50": 16.8713904237772,
+            "p90": 24.67361787343478,
+            "p95": 27.45188495612649,
+            "p99": 32.13539609770112,
+            "max": 32.13539609770112
+          },
+          "makespan": 509.53045700490475,
+          "planning_seconds": 107.28245811909437,
+          "boundary_seconds": 59.15918636880815,
+          "planning_plus_boundary_seconds": 166.44164448790252,
+          "iteration_cpu_seconds": 0.18438659980893135,
+          "pruned_calendars": 0,
+          "bound_checks": 0,
+          "calendar_full": 5962,
+          "P_counts": [
+            35,
+            60
+          ],
+          "D_counts": [
+            58,
+            37
+          ]
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 12.680006570252614,
+            "p50": 13.507433039556105,
+            "p90": 21.949889351930608,
+            "p95": 22.635598144951302,
+            "p99": 24.59018537680464,
+            "max": 24.59018537680464
+          },
+          "makespan": 490.65477378265354,
+          "planning_seconds": 78.07146023213863,
+          "boundary_seconds": 34.9797753226012,
+          "planning_plus_boundary_seconds": 113.05123555473983,
+          "iteration_cpu_seconds": 0.18529533874243498,
+          "pruned_calendars": 7201,
+          "bound_checks": 984051,
+          "calendar_full": 675,
+          "P_counts": [
+            43,
+            52
+          ],
+          "D_counts": [
+            56,
+            39
+          ]
+        }
+      },
+      "net_p99_reduction_vs_reference_percent": 23.47943898981921,
+      "search_wall_reduction_percent": 32.07755432688197,
+      "exact_mechanism_equivalence": null
+    }
+  ]
+}

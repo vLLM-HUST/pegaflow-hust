@@ -1,0 +1,11 @@
+{
+  "pid": 4126654,
+  "started": 1793040136.0526102,
+  "limit_seconds": 4500,
+  "runner_sha256": "f2608c91dbfe010c8720680d811ab34576b8873c2f60b4ff562bef75fd71f247",
+  "command": [
+    "python3",
+    "/root/delta-protection-pipeline-02.py"
+  ],
+  "CPU_only": true
+}

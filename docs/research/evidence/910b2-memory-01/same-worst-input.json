@@ -1,0 +1,61 @@
+{
+  "kind": "same-input CPU trace accounting, not isolated causal effect",
+  "id": "feal-differential-cryptanalysis:13",
+  "arms": {
+    "native": {
+      "TTFT": 71.01025052073061,
+      "P": 1,
+      "D": 3,
+      "accepted_P_prefix": 6656,
+      "accepted_D_prefix": 4096,
+      "tokens": 24891,
+      "before_P": 0.6181531415343215,
+      "P_API": 8.919082665427661,
+      "P_to_D": 13.22874974756877,
+      "D_API_to_first": 48.244264966199864,
+      "D_occupied": {
+        "participating_restore": 1.6820762138395935,
+        "other_compute": 18.092527705425425,
+        "other_save": 0.2503728253650479,
+        "other_restore": 4.243558802393068,
+        "participating_compute": 23.97572941917673
+      }
+    },
+    "reference": {
+      "TTFT": 18.413987817314876,
+      "P": 1,
+      "D": 2,
+      "accepted_P_prefix": 4096,
+      "accepted_D_prefix": 0,
+      "tokens": 24891,
+      "before_P": 2.5690357369021513,
+      "P_API": 10.102114530591436,
+      "P_to_D": 2.1637212878372907,
+      "D_API_to_first": 3.579116261983984,
+      "D_occupied": {
+        "other_compute": 0.03135190047123615,
+        "participating_restore": 1.1369585990905762e-05,
+        "participating_compute": 3.4643555418556957,
+        "other_restore": 1.1510215699672699e-05,
+        "other_save": 0.08338593985536136
+      }
+    },
+    "ours": {
+      "TTFT": 35.64780969223625,
+      "P": 1,
+      "D": 3,
+      "accepted_P_prefix": 4096,
+      "accepted_D_prefix": 4096,
+      "tokens": 24891,
+      "before_P": 4.243075530283079,
+      "P_API": 10.102114530591436,
+      "P_to_D": 1.9042059305651833,
+      "D_API_to_first": 19.39841370079654,
+      "D_occupied": {
+        "participating_restore": 1.6820790944203168,
+        "participating_compute": 17.63287718760057,
+        "other_save": 0.0834574187756516
+      }
+    }
+  }
+}

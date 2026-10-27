@@ -1,0 +1,3379 @@
+{
+  "CPU_only": true,
+  "diagnostic_control_cost": 0,
+  "net_performance_claim": false,
+  "not_reconstruction_of_previous_measured_timeline": true,
+  "input_sha256": "2b91a55f74a49837867145881d2b696a773fb964a2789ba1cc3acff281020dea",
+  "source_sha256": "1696fefee40d43a4091d89139429496e4d7ec2f7e7bf1695a495f8ee2cdfda23",
+  "target": {
+    "id": "headless-terminal:13",
+    "origin": 216.31390592311985,
+    "ready": 216.31390592311985,
+    "inventory_prefix_tokens": [
+      768,
+      7680,
+      11904,
+      0
+    ],
+    "live_requests": [
+      "git-multibranch:12",
+      "distribution-search:13",
+      "feal-differential-cryptanalysis:13",
+      "fix-git:12",
+      "dna-insert:14"
+    ],
+    "selected": {
+      "p": 1,
+      "d": 2,
+      "source": 1,
+      "p_blocks": 60,
+      "d_blocks": 0,
+      "predicted_first": 229.14999176062227,
+      "predicted_p_end": 228.21237422677711,
+      "predicted_end": 237.03885059689554,
+      "extra_bytes": 0,
+      "calendar": {
+        "available": {
+          "npu1": 220.91921787740893,
+          "copy1": 220.91921787740893,
+          "npu2": 228.95608944772698,
+          "copy2": 221.3591754770308
+        }
+      },
+      "p_service_seconds": 4.605311954289078,
+      "d_first_service_seconds": 0.439957599621863,
+      "d_service_seconds": 8.036871570318056,
+      "predicted_system_p99": 12.857722555776036,
+      "operation_model_version": 255,
+      "model_latest_completed_seconds": 216.31390592311985,
+      "forecast_origin_seconds": 216.31390592311985,
+      "objective_scope": "pending-first continuous-D-batch resource calendar",
+      "predicted_tail_profile": [
+        12.857722555776036,
+        12.836085837502424,
+        10.58440769297971,
+        6.095217519944271
+      ],
+      "predicted_full_profile": [
+        23.442680052302848,
+        22.475892616584247,
+        21.661440801454347,
+        20.724944673775695,
+        18.86108041410651,
+        15.731495713341047
+      ],
+      "predicted_P_release_profile": [
+        12.9583695364513,
+        12.396424707396562,
+        11.898468303657268,
+        11.525515279135249,
+        9.546106385289477,
+        5.405735496960716
+      ],
+      "p_headroom": false,
+      "d_headroom": false
+    },
+    "functions": [
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 41,
+        "function": "schedule_batched",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 0.10628256800000001,
+        "cumulative_seconds": 0.661134791
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/sparse_cache_search.py",
+        "line": 18,
+        "function": "sync_protection",
+        "primitive_calls": 552,
+        "calls": 552,
+        "self_seconds": 0.039201780000000006,
+        "cumulative_seconds": 0.10290442400000001
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+        "line": 1540,
+        "function": "replace",
+        "primitive_calls": 5275,
+        "calls": 5275,
+        "self_seconds": 0.034154653,
+        "cumulative_seconds": 0.072824794
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 43,
+        "function": "protected",
+        "primitive_calls": 49993,
+        "calls": 49993,
+        "self_seconds": 0.027784471,
+        "cumulative_seconds": 0.0447486
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 153,
+        "function": "begin",
+        "primitive_calls": 4888,
+        "calls": 4888,
+        "self_seconds": 0.025209370000000002,
+        "cumulative_seconds": 0.055257386000000006
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'get' of 'dict' objects>",
+        "primitive_calls": 64962,
+        "calls": 64962,
+        "self_seconds": 0.023393208000000002,
+        "cumulative_seconds": 0.023393208000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 102,
+        "function": "save",
+        "primitive_calls": 298,
+        "calls": 298,
+        "self_seconds": 0.020241553000000002,
+        "cumulative_seconds": 0.082912312
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.max>",
+        "primitive_calls": 27402,
+        "calls": 27402,
+        "self_seconds": 0.019779455,
+        "cumulative_seconds": 0.019835606000000002
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.sorted>",
+        "primitive_calls": 5726,
+        "calls": 5726,
+        "self_seconds": 0.019644974000000003,
+        "cumulative_seconds": 0.037284391
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 141,
+        "function": "admit",
+        "primitive_calls": 9776,
+        "calls": 9776,
+        "self_seconds": 0.016949817000000002,
+        "cumulative_seconds": 0.033378892
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.sum>",
+        "primitive_calls": 9003,
+        "calls": 9003,
+        "self_seconds": 0.016200874,
+        "cumulative_seconds": 0.025222308000000002
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.getattr>",
+        "primitive_calls": 37304,
+        "calls": 43646,
+        "self_seconds": 0.015893565000000002,
+        "cumulative_seconds": 0.019028882
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/slot_release_search.py",
+        "line": 39,
+        "function": "begin",
+        "primitive_calls": 4888,
+        "calls": 4888,
+        "self_seconds": 0.013035038,
+        "cumulative_seconds": 0.086943062
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.hash>",
+        "primitive_calls": 614,
+        "calls": 14075,
+        "self_seconds": 0.012719845,
+        "cumulative_seconds": 0.021212856000000002
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.any>",
+        "primitive_calls": 6894,
+        "calls": 6894,
+        "self_seconds": 0.012239085,
+        "cumulative_seconds": 0.031026883
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.min>",
+        "primitive_calls": 7025,
+        "calls": 7025,
+        "self_seconds": 0.010179476,
+        "cumulative_seconds": 0.012409539
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'values' of 'dict' objects>",
+        "primitive_calls": 18545,
+        "calls": 18545,
+        "self_seconds": 0.008135987,
+        "cumulative_seconds": 0.008135987
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/timed_recovery_search.py",
+        "line": 59,
+        "function": "completed_iteration_overhead",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 0.007732363000000001,
+        "cumulative_seconds": 0.008130021000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 249,
+        "function": "<genexpr>",
+        "primitive_calls": 18671,
+        "calls": 18671,
+        "self_seconds": 0.007417454,
+        "cumulative_seconds": 0.014249030000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 154,
+        "function": "<lambda>",
+        "primitive_calls": 15897,
+        "calls": 15897,
+        "self_seconds": 0.0073681120000000004,
+        "cumulative_seconds": 0.0073681120000000004
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 132,
+        "function": "<genexpr>",
+        "primitive_calls": 990,
+        "calls": 990,
+        "self_seconds": 0.007277240000000001,
+        "cumulative_seconds": 0.007277240000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.len>",
+        "primitive_calls": 24313,
+        "calls": 24313,
+        "self_seconds": 0.006440059000000001,
+        "cumulative_seconds": 0.006440059000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 205,
+        "function": "finish",
+        "primitive_calls": 1477,
+        "calls": 1477,
+        "self_seconds": 0.006311313000000001,
+        "cumulative_seconds": 0.008266513000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'extend' of 'list' objects>",
+        "primitive_calls": 3911,
+        "calls": 3911,
+        "self_seconds": 0.006018196,
+        "cumulative_seconds": 0.007944764
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/bounded_search.py",
+        "line": 26,
+        "function": "first_lower_bound",
+        "primitive_calls": 1821,
+        "calls": 1821,
+        "self_seconds": 0.005906913000000001,
+        "cumulative_seconds": 0.020800534000000002
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'remove' of 'list' objects>",
+        "primitive_calls": 2610,
+        "calls": 2610,
+        "self_seconds": 0.005585892,
+        "cumulative_seconds": 0.014814624
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/bounded_search.py",
+        "line": 29,
+        "function": "<genexpr>",
+        "primitive_calls": 9105,
+        "calls": 9105,
+        "self_seconds": 0.005226513,
+        "cumulative_seconds": 0.00803707
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'items' of 'dict' objects>",
+        "primitive_calls": 11271,
+        "calls": 11271,
+        "self_seconds": 0.005088604,
+        "cumulative_seconds": 0.005088604
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 86,
+        "function": "_dot",
+        "primitive_calls": 1796,
+        "calls": 1796,
+        "self_seconds": 0.005047909000000001,
+        "cumulative_seconds": 0.010876845000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'append' of 'list' objects>",
+        "primitive_calls": 10676,
+        "calls": 10676,
+        "self_seconds": 0.00420784,
+        "cumulative_seconds": 0.00420784
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 67,
+        "function": "fits",
+        "primitive_calls": 976,
+        "calls": 976,
+        "self_seconds": 0.004035432,
+        "cumulative_seconds": 0.008614072
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 139,
+        "function": "<genexpr>",
+        "primitive_calls": 1119,
+        "calls": 1119,
+        "self_seconds": 0.003949809,
+        "cumulative_seconds": 0.003949809
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 16,
+        "function": "<genexpr>",
+        "primitive_calls": 14985,
+        "calls": 14985,
+        "self_seconds": 0.003822003,
+        "cumulative_seconds": 0.003822003
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 187,
+        "function": "guard",
+        "primitive_calls": 1821,
+        "calls": 1821,
+        "self_seconds": 0.0037353520000000004,
+        "cumulative_seconds": 0.024535886
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+        "line": 1296,
+        "function": "_is_dataclass_instance",
+        "primitive_calls": 5516,
+        "calls": 5516,
+        "self_seconds": 0.0036866670000000002,
+        "cumulative_seconds": 0.005867789
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 66,
+        "function": "prefill_features",
+        "primitive_calls": 863,
+        "calls": 863,
+        "self_seconds": 0.0034445820000000003,
+        "cumulative_seconds": 0.006693779
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/slot_release_search.py",
+        "line": 79,
+        "function": "<lambda>",
+        "primitive_calls": 4888,
+        "calls": 4888,
+        "self_seconds": 0.00331078,
+        "cumulative_seconds": 0.004572378
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 14,
+        "function": "keys",
+        "primitive_calls": 64,
+        "calls": 64,
+        "self_seconds": 0.003080436,
+        "cumulative_seconds": 0.006902439000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 69,
+        "function": "<genexpr>",
+        "primitive_calls": 4880,
+        "calls": 4880,
+        "self_seconds": 0.0030598960000000003,
+        "cumulative_seconds": 0.0030598960000000003
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 45,
+        "function": "get",
+        "primitive_calls": 2387,
+        "calls": 2387,
+        "self_seconds": 0.0029944380000000003,
+        "cumulative_seconds": 0.005089006
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'intersection' of 'frozenset' objects>",
+        "primitive_calls": 1676,
+        "calls": 1676,
+        "self_seconds": 0.002938772,
+        "cumulative_seconds": 0.002938772
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 95,
+        "function": "compute",
+        "primitive_calls": 863,
+        "calls": 863,
+        "self_seconds": 0.0029193500000000002,
+        "cumulative_seconds": 0.018332556
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 92,
+        "function": "compute",
+        "primitive_calls": 863,
+        "calls": 863,
+        "self_seconds": 0.0028862220000000004,
+        "cumulative_seconds": 0.030867199
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.hasattr>",
+        "primitive_calls": 7082,
+        "calls": 7082,
+        "self_seconds": 0.002856426,
+        "cumulative_seconds": 0.002856426
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 93,
+        "function": "add",
+        "primitive_calls": 416,
+        "calls": 416,
+        "self_seconds": 0.002764191,
+        "cumulative_seconds": 0.007109205
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 137,
+        "function": "prefix",
+        "primitive_calls": 603,
+        "calls": 603,
+        "self_seconds": 0.0027108040000000003,
+        "cumulative_seconds": 0.012771423
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 45,
+        "function": "api",
+        "primitive_calls": 423,
+        "calls": 423,
+        "self_seconds": 0.002638117,
+        "cumulative_seconds": 0.026622353
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 299,
+        "function": "<genexpr>",
+        "primitive_calls": 7610,
+        "calls": 7610,
+        "self_seconds": 0.002603128,
+        "cumulative_seconds": 0.002603128
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 65,
+        "function": "admit",
+        "primitive_calls": 416,
+        "calls": 416,
+        "self_seconds": 0.002602778,
+        "cumulative_seconds": 0.049430070000000007
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 141,
+        "function": "<genexpr>",
+        "primitive_calls": 12422,
+        "calls": 12422,
+        "self_seconds": 0.0025325680000000002,
+        "cumulative_seconds": 0.0025325680000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_schedule.py",
+        "line": 36,
+        "function": "__post_init__",
+        "primitive_calls": 846,
+        "calls": 846,
+        "self_seconds": 0.002367391,
+        "cumulative_seconds": 0.0030101670000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 272,
+        "function": "evaluate_route",
+        "primitive_calls": 64,
+        "calls": 64,
+        "self_seconds": 0.002346609,
+        "cumulative_seconds": 0.012560918
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 88,
+        "function": "<genexpr>",
+        "primitive_calls": 7114,
+        "calls": 7114,
+        "self_seconds": 0.002270326,
+        "cumulative_seconds": 0.002270326
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'update' of 'dict' objects>",
+        "primitive_calls": 1999,
+        "calls": 1999,
+        "self_seconds": 0.0022332520000000002,
+        "cumulative_seconds": 0.0022332520000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 168,
+        "function": "copy_package",
+        "primitive_calls": 20,
+        "calls": 20,
+        "self_seconds": 0.002204002,
+        "cumulative_seconds": 0.01711771
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 137,
+        "function": "finish",
+        "primitive_calls": 457,
+        "calls": 457,
+        "self_seconds": 0.0021614520000000003,
+        "cumulative_seconds": 0.152075116
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 251,
+        "function": "<genexpr>",
+        "primitive_calls": 11206,
+        "calls": 11206,
+        "self_seconds": 0.002153501,
+        "cumulative_seconds": 0.002153501
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+        "line": 1332,
+        "function": "_asdict_inner",
+        "primitive_calls": 55,
+        "calls": 1507,
+        "self_seconds": 0.002111472,
+        "cumulative_seconds": 0.003936818
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 307,
+        "function": "<genexpr>",
+        "primitive_calls": 3714,
+        "calls": 3714,
+        "self_seconds": 0.002074031,
+        "cumulative_seconds": 0.002230063
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 120,
+        "function": "start",
+        "primitive_calls": 575,
+        "calls": 575,
+        "self_seconds": 0.002058561,
+        "cumulative_seconds": 0.060768871
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_phase_release.py",
+        "line": 16,
+        "function": "__getattr__",
+        "primitive_calls": 5231,
+        "calls": 5231,
+        "self_seconds": 0.002047203,
+        "cumulative_seconds": 0.010702963000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_headroom_profile.py",
+        "line": 48,
+        "function": "__getattr__",
+        "primitive_calls": 5219,
+        "calls": 5219,
+        "self_seconds": 0.001965999,
+        "cumulative_seconds": 0.005299361000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 307,
+        "function": "best_route",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 0.001886202,
+        "cumulative_seconds": 0.711030397
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 90,
+        "function": "restore",
+        "primitive_calls": 2719,
+        "calls": 2719,
+        "self_seconds": 0.001751879,
+        "cumulative_seconds": 0.006075995000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_queue.py",
+        "line": 72,
+        "function": "_remaining_operation",
+        "primitive_calls": 88,
+        "calls": 88,
+        "self_seconds": 0.001720563,
+        "cumulative_seconds": 0.001949537
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 99,
+        "function": "decode_tail",
+        "primitive_calls": 538,
+        "calls": 538,
+        "self_seconds": 0.001692815,
+        "cumulative_seconds": 0.009956199
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 323,
+        "function": "<genexpr>",
+        "primitive_calls": 5118,
+        "calls": 5118,
+        "self_seconds": 0.001680779,
+        "cumulative_seconds": 0.001680779
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 24,
+        "function": "acquire",
+        "primitive_calls": 423,
+        "calls": 423,
+        "self_seconds": 0.0016442800000000001,
+        "cumulative_seconds": 0.009272858
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 24,
+        "function": "sequence_for",
+        "primitive_calls": 240,
+        "calls": 240,
+        "self_seconds": 0.0016129270000000001,
+        "cumulative_seconds": 0.018186715000000003
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_release_search.py",
+        "line": 27,
+        "function": "admit",
+        "primitive_calls": 416,
+        "calls": 416,
+        "self_seconds": 0.0015559270000000001,
+        "cumulative_seconds": 0.051916534
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 84,
+        "function": "restore",
+        "primitive_calls": 1103,
+        "calls": 1103,
+        "self_seconds": 0.0015143,
+        "cumulative_seconds": 0.005272131
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 259,
+        "function": "memo_scope",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 0.001451409,
+        "cumulative_seconds": 0.0014701290000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 67,
+        "function": "<genexpr>",
+        "primitive_calls": 3452,
+        "calls": 3452,
+        "self_seconds": 0.0014447510000000002,
+        "cumulative_seconds": 0.0014447510000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 68,
+        "function": "keys",
+        "primitive_calls": 1995,
+        "calls": 1995,
+        "self_seconds": 0.0014304740000000002,
+        "cumulative_seconds": 0.012187142000000002
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.next>",
+        "primitive_calls": 2535,
+        "calls": 2605,
+        "self_seconds": 0.0014248770000000002,
+        "cumulative_seconds": 0.019479426
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'difference_update' of 'set' objects>",
+        "primitive_calls": 2610,
+        "calls": 2610,
+        "self_seconds": 0.0013184240000000001,
+        "cumulative_seconds": 0.0013184240000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method math.ceil>",
+        "primitive_calls": 3325,
+        "calls": 3325,
+        "self_seconds": 0.001296897,
+        "cumulative_seconds": 0.001296897
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/slot_release_search.py",
+        "line": 33,
+        "function": "set_context",
+        "primitive_calls": 4888,
+        "calls": 4888,
+        "self_seconds": 0.001261598,
+        "cumulative_seconds": 0.001261598
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 201,
+        "function": "<genexpr>",
+        "primitive_calls": 398,
+        "calls": 398,
+        "self_seconds": 0.001231909,
+        "cumulative_seconds": 0.0028692540000000003
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'hex' of 'bytes' objects>",
+        "primitive_calls": 2680,
+        "calls": 2680,
+        "self_seconds": 0.001230435,
+        "cumulative_seconds": 0.001230435
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 175,
+        "function": "predict_batch",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 0.001207247,
+        "cumulative_seconds": 0.668358604
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method _heapq.heappop>",
+        "primitive_calls": 1832,
+        "calls": 1832,
+        "self_seconds": 0.001198132,
+        "cumulative_seconds": 0.001198132
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 107,
+        "function": "reservation",
+        "primitive_calls": 626,
+        "calls": 626,
+        "self_seconds": 0.0010699420000000002,
+        "cumulative_seconds": 0.0012798050000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 415,
+        "function": "forecast",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 0.0010624290000000002,
+        "cumulative_seconds": 0.6886068230000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_context.py",
+        "line": 9,
+        "function": "decode_features",
+        "primitive_calls": 538,
+        "calls": 538,
+        "self_seconds": 0.0010433180000000001,
+        "cumulative_seconds": 0.0010433180000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_queue.py",
+        "line": 29,
+        "function": "copied",
+        "primitive_calls": 102,
+        "calls": 102,
+        "self_seconds": 0.001006808,
+        "cumulative_seconds": 0.001576315
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method _heapq.heappush>",
+        "primitive_calls": 1866,
+        "calls": 1866,
+        "self_seconds": 0.000985584,
+        "cumulative_seconds": 0.000985584
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/detached_calendar.py",
+        "line": 21,
+        "function": "token",
+        "primitive_calls": 321,
+        "calls": 321,
+        "self_seconds": 0.00096984,
+        "cumulative_seconds": 0.002248655
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 36,
+        "function": "__eq__",
+        "primitive_calls": 474,
+        "calls": 474,
+        "self_seconds": 0.0009385180000000001,
+        "cumulative_seconds": 0.001616561
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 86,
+        "function": "__post_init__",
+        "primitive_calls": 246,
+        "calls": 246,
+        "self_seconds": 0.0009091910000000001,
+        "cumulative_seconds": 0.001207698
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'add' of 'set' objects>",
+        "primitive_calls": 2275,
+        "calls": 2275,
+        "self_seconds": 0.0008687180000000001,
+        "cumulative_seconds": 0.0008687180000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 176,
+        "function": "<genexpr>",
+        "primitive_calls": 1324,
+        "calls": 1324,
+        "self_seconds": 0.000854123,
+        "cumulative_seconds": 0.005967502
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_phase_release.py",
+        "line": 19,
+        "function": "decode_tail",
+        "primitive_calls": 538,
+        "calls": 538,
+        "self_seconds": 0.0008534860000000001,
+        "cumulative_seconds": 0.0018968040000000002
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.id>",
+        "primitive_calls": 2577,
+        "calls": 2577,
+        "self_seconds": 0.0008531610000000001,
+        "cumulative_seconds": 0.0008531610000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 134,
+        "function": "submit",
+        "primitive_calls": 240,
+        "calls": 240,
+        "self_seconds": 0.000845976,
+        "cumulative_seconds": 0.001882734
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_work_search.py",
+        "line": 16,
+        "function": "fit_control",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 0.0008368270000000001,
+        "cumulative_seconds": 0.0028015650000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 27,
+        "function": "<genexpr>",
+        "primitive_calls": 6096,
+        "calls": 6096,
+        "self_seconds": 0.0008334750000000001,
+        "cumulative_seconds": 0.0008334750000000001
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/functools.py",
+        "line": 982,
+        "function": "__get__",
+        "primitive_calls": 308,
+        "calls": 308,
+        "self_seconds": 0.0007863210000000001,
+        "cumulative_seconds": 0.032025429
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/detached_calendar.py",
+        "line": 22,
+        "function": "<genexpr>",
+        "primitive_calls": 2568,
+        "calls": 2568,
+        "self_seconds": 0.00077926,
+        "cumulative_seconds": 0.001278815
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 34,
+        "function": "release",
+        "primitive_calls": 305,
+        "calls": 305,
+        "self_seconds": 0.0007685350000000001,
+        "cumulative_seconds": 0.0012510070000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 39,
+        "function": "effective_route",
+        "primitive_calls": 240,
+        "calls": 240,
+        "self_seconds": 0.000744975,
+        "cumulative_seconds": 0.011541842
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_schedule.py",
+        "line": 84,
+        "function": "__post_init__",
+        "primitive_calls": 156,
+        "calls": 156,
+        "self_seconds": 0.000719642,
+        "cumulative_seconds": 0.001209662
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_queue.py",
+        "line": 28,
+        "function": "build_work",
+        "primitive_calls": 51,
+        "calls": 51,
+        "self_seconds": 0.0007061610000000001,
+        "cumulative_seconds": 0.010124729
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/resource_reservation.py",
+        "line": 12,
+        "function": "permitted",
+        "primitive_calls": 576,
+        "calls": 576,
+        "self_seconds": 0.0006615900000000001,
+        "cumulative_seconds": 0.0015819200000000001
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 2191,
+        "function": "lstsq",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 0.000661345,
+        "cumulative_seconds": 0.000981838
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 231,
+        "function": "stage",
+        "primitive_calls": 168,
+        "calls": 168,
+        "self_seconds": 0.000620605,
+        "cumulative_seconds": 0.001154235
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 109,
+        "function": "<genexpr>",
+        "primitive_calls": 297,
+        "calls": 297,
+        "self_seconds": 0.000592005,
+        "cumulative_seconds": 0.0038151430000000004
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method math.isfinite>",
+        "primitive_calls": 1870,
+        "calls": 1870,
+        "self_seconds": 0.000578554,
+        "cumulative_seconds": 0.000578554
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 103,
+        "function": "remaining_prefill",
+        "primitive_calls": 1280,
+        "calls": 1280,
+        "self_seconds": 0.00057205,
+        "cumulative_seconds": 0.00057205
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'popleft' of 'collections.deque' objects>",
+        "primitive_calls": 1241,
+        "calls": 1241,
+        "self_seconds": 0.000543346,
+        "cumulative_seconds": 0.000543346
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 117,
+        "function": "keys",
+        "primitive_calls": 2214,
+        "calls": 2214,
+        "self_seconds": 0.0005308520000000001,
+        "cumulative_seconds": 0.0005308520000000001
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+        "line": 1278,
+        "function": "fields",
+        "primitive_calls": 110,
+        "calls": 110,
+        "self_seconds": 0.000527219,
+        "cumulative_seconds": 0.0008598980000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.all>",
+        "primitive_calls": 407,
+        "calls": 407,
+        "self_seconds": 0.000519024,
+        "cumulative_seconds": 0.0016845660000000002
+      },
+      {
+        "file": "<string>",
+        "line": 2,
+        "function": "__hash__",
+        "primitive_calls": 300,
+        "calls": 300,
+        "self_seconds": 0.0005181820000000001,
+        "cumulative_seconds": 0.0017331990000000002
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method math.floor>",
+        "primitive_calls": 1348,
+        "calls": 1348,
+        "self_seconds": 0.000511547,
+        "cumulative_seconds": 0.000511547
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'pop' of 'dict' objects>",
+        "primitive_calls": 616,
+        "calls": 616,
+        "self_seconds": 0.00050622,
+        "cumulative_seconds": 0.00050622
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 18,
+        "function": "payload",
+        "primitive_calls": 12,
+        "calls": 12,
+        "self_seconds": 0.0004957410000000001,
+        "cumulative_seconds": 0.0017432550000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 111,
+        "function": "decode_seconds",
+        "primitive_calls": 198,
+        "calls": 198,
+        "self_seconds": 0.0004886290000000001,
+        "cumulative_seconds": 0.0006791820000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 129,
+        "function": "remove",
+        "primitive_calls": 20,
+        "calls": 20,
+        "self_seconds": 0.000442018,
+        "cumulative_seconds": 0.001721113
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 157,
+        "function": "<genexpr>",
+        "primitive_calls": 32,
+        "calls": 32,
+        "self_seconds": 0.00043749900000000005,
+        "cumulative_seconds": 0.00043749900000000005
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 123,
+        "function": "finish_stage",
+        "primitive_calls": 298,
+        "calls": 298,
+        "self_seconds": 0.00043722000000000005,
+        "cumulative_seconds": 0.0016031650000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/bounded_search.py",
+        "line": 177,
+        "function": "forecast",
+        "primitive_calls": 48,
+        "calls": 48,
+        "self_seconds": 0.00042508700000000005,
+        "cumulative_seconds": 0.689888787
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 33,
+        "function": "__hash__",
+        "primitive_calls": 596,
+        "calls": 596,
+        "self_seconds": 0.000408517,
+        "cumulative_seconds": 0.020960704
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 28,
+        "function": "__init__",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 0.00040113000000000003,
+        "cumulative_seconds": 0.001369917
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 143,
+        "function": "<genexpr>",
+        "primitive_calls": 1424,
+        "calls": 1424,
+        "self_seconds": 0.000398894,
+        "cumulative_seconds": 0.000398894
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 96,
+        "function": "<genexpr>",
+        "primitive_calls": 846,
+        "calls": 846,
+        "self_seconds": 0.00039659900000000003,
+        "cumulative_seconds": 0.00039659900000000003
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'append' of 'collections.deque' objects>",
+        "primitive_calls": 780,
+        "calls": 780,
+        "self_seconds": 0.000393472,
+        "cumulative_seconds": 0.000393472
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 147,
+        "function": "<genexpr>",
+        "primitive_calls": 2624,
+        "calls": 2624,
+        "self_seconds": 0.00036349600000000004,
+        "cumulative_seconds": 0.00036349600000000004
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 131,
+        "function": "<genexpr>",
+        "primitive_calls": 1778,
+        "calls": 1778,
+        "self_seconds": 0.000361328,
+        "cumulative_seconds": 0.000361328
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/slot_release_search.py",
+        "line": 25,
+        "function": "__init__",
+        "primitive_calls": 88,
+        "calls": 88,
+        "self_seconds": 0.000350205,
+        "cumulative_seconds": 0.000506895
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+        "line": 1382,
+        "function": "<genexpr>",
+        "primitive_calls": 305,
+        "calls": 305,
+        "self_seconds": 0.00033539700000000003,
+        "cumulative_seconds": 0.000514229
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/profile_release_forecast.py",
+        "line": 66,
+        "function": "traced",
+        "primitive_calls": 48,
+        "calls": 48,
+        "self_seconds": 0.000327347,
+        "cumulative_seconds": 0.694926758
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 134,
+        "function": "<genexpr>",
+        "primitive_calls": 1778,
+        "calls": 1778,
+        "self_seconds": 0.00032177700000000003,
+        "cumulative_seconds": 0.00032177700000000003
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_context_profile.py",
+        "line": 12,
+        "function": "context_work",
+        "primitive_calls": 50,
+        "calls": 50,
+        "self_seconds": 0.00031696700000000003,
+        "cumulative_seconds": 0.014017227
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/resource_reservation.py",
+        "line": 13,
+        "function": "<genexpr>",
+        "primitive_calls": 664,
+        "calls": 664,
+        "self_seconds": 0.000301666,
+        "cumulative_seconds": 0.000420007
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/phase_release_calendar.py",
+        "line": 23,
+        "function": "_remaining_operation",
+        "primitive_calls": 88,
+        "calls": 88,
+        "self_seconds": 0.000289178,
+        "cumulative_seconds": 0.002238715
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 45,
+        "function": "__init__",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 0.00028833600000000004,
+        "cumulative_seconds": 0.000526919
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 64,
+        "function": "__getattr__",
+        "primitive_calls": 577,
+        "calls": 577,
+        "self_seconds": 0.000277603,
+        "cumulative_seconds": 0.002539159
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 186,
+        "function": "<genexpr>",
+        "primitive_calls": 1324,
+        "calls": 1324,
+        "self_seconds": 0.00027602400000000004,
+        "cumulative_seconds": 0.00027602400000000004
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 107,
+        "function": "decode_seconds",
+        "primitive_calls": 99,
+        "calls": 99,
+        "self_seconds": 0.000274377,
+        "cumulative_seconds": 0.00408952
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'startswith' of 'str' objects>",
+        "primitive_calls": 200,
+        "calls": 200,
+        "self_seconds": 0.00026202500000000004,
+        "cumulative_seconds": 0.00026202500000000004
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 83,
+        "function": "__getattr__",
+        "primitive_calls": 546,
+        "calls": 546,
+        "self_seconds": 0.00025651300000000004,
+        "cumulative_seconds": 0.000479008
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 232,
+        "function": "<genexpr>",
+        "primitive_calls": 480,
+        "calls": 480,
+        "self_seconds": 0.000256483,
+        "cumulative_seconds": 0.00041624800000000003
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 219,
+        "function": "<genexpr>",
+        "primitive_calls": 528,
+        "calls": 528,
+        "self_seconds": 0.000251718,
+        "cumulative_seconds": 0.000513743
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.isinstance>",
+        "primitive_calls": 689,
+        "calls": 689,
+        "self_seconds": 0.000251373,
+        "cumulative_seconds": 0.000251373
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+        "line": 1293,
+        "function": "<genexpr>",
+        "primitive_calls": 950,
+        "calls": 950,
+        "self_seconds": 0.000247947,
+        "cumulative_seconds": 0.000247947
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/memo_search.py",
+        "line": 28,
+        "function": "forecast",
+        "primitive_calls": 45,
+        "calls": 45,
+        "self_seconds": 0.000247804,
+        "cumulative_seconds": 0.68901451
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 115,
+        "function": "<genexpr>",
+        "primitive_calls": 436,
+        "calls": 436,
+        "self_seconds": 0.000245789,
+        "cumulative_seconds": 0.000245789
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 33,
+        "function": "optional_work",
+        "primitive_calls": 50,
+        "calls": 50,
+        "self_seconds": 0.000245466,
+        "cumulative_seconds": 0.016115828000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 225,
+        "function": "forecast",
+        "primitive_calls": 48,
+        "calls": 48,
+        "self_seconds": 0.000237137,
+        "cumulative_seconds": 0.690358247
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 179,
+        "function": "<genexpr>",
+        "primitive_calls": 308,
+        "calls": 308,
+        "self_seconds": 0.000234021,
+        "cumulative_seconds": 0.002053001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 190,
+        "function": "<genexpr>",
+        "primitive_calls": 796,
+        "calls": 796,
+        "self_seconds": 0.00021631300000000001,
+        "cumulative_seconds": 0.00021631300000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 177,
+        "function": "finished",
+        "primitive_calls": 7,
+        "calls": 7,
+        "self_seconds": 0.00021301700000000002,
+        "cumulative_seconds": 0.011760842
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 313,
+        "function": "candidates",
+        "primitive_calls": 68,
+        "calls": 68,
+        "self_seconds": 0.00019958400000000002,
+        "cumulative_seconds": 0.000647703
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 113,
+        "function": "<genexpr>",
+        "primitive_calls": 594,
+        "calls": 594,
+        "self_seconds": 0.00019055300000000002,
+        "cumulative_seconds": 0.00019055300000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 173,
+        "function": "<genexpr>",
+        "primitive_calls": 20,
+        "calls": 20,
+        "self_seconds": 0.000189144,
+        "cumulative_seconds": 0.000189144
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 158,
+        "function": "after_copy",
+        "primitive_calls": 311,
+        "calls": 311,
+        "self_seconds": 0.00018402200000000002,
+        "cumulative_seconds": 0.0008323050000000001
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 1499,
+        "function": "svd",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 0.000176882,
+        "cumulative_seconds": 0.000210554
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method numpy.array>",
+        "primitive_calls": 6,
+        "calls": 6,
+        "self_seconds": 0.000173623,
+        "cumulative_seconds": 0.000173623
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'reduce' of 'numpy.ufunc' objects>",
+        "primitive_calls": 20,
+        "calls": 20,
+        "self_seconds": 0.000162654,
+        "cumulative_seconds": 0.000162654
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.setattr>",
+        "primitive_calls": 445,
+        "calls": 445,
+        "self_seconds": 0.000160934,
+        "cumulative_seconds": 0.000160934
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/copy.py",
+        "line": 118,
+        "function": "deepcopy",
+        "primitive_calls": 1,
+        "calls": 65,
+        "self_seconds": 0.000160933,
+        "cumulative_seconds": 0.000376287
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 141,
+        "function": "bytes_for",
+        "primitive_calls": 32,
+        "calls": 32,
+        "self_seconds": 0.00015539200000000002,
+        "cumulative_seconds": 0.001239014
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method fromkeys>",
+        "primitive_calls": 20,
+        "calls": 20,
+        "self_seconds": 0.00015393200000000002,
+        "cumulative_seconds": 0.00015393200000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 319,
+        "function": "from_source",
+        "primitive_calls": 80,
+        "calls": 80,
+        "self_seconds": 0.000148423,
+        "cumulative_seconds": 0.000270186
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_schedule.py",
+        "line": 92,
+        "function": "<genexpr>",
+        "primitive_calls": 468,
+        "calls": 468,
+        "self_seconds": 0.000144993,
+        "cumulative_seconds": 0.000146933
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 109,
+        "function": "<lambda>",
+        "primitive_calls": 264,
+        "calls": 264,
+        "self_seconds": 0.00014288200000000002,
+        "cumulative_seconds": 0.00014288200000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+        "line": 117,
+        "function": "<genexpr>",
+        "primitive_calls": 266,
+        "calls": 266,
+        "self_seconds": 0.000140433,
+        "cumulative_seconds": 0.00022219600000000003
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/acquired_phase_search.py",
+        "line": 92,
+        "function": "forecast",
+        "primitive_calls": 48,
+        "calls": 48,
+        "self_seconds": 0.00013941300000000002,
+        "cumulative_seconds": 0.6954894970000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_release_search.py",
+        "line": 65,
+        "function": "forecast",
+        "primitive_calls": 48,
+        "calls": 48,
+        "self_seconds": 0.000138651,
+        "cumulative_seconds": 0.6951294100000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 239,
+        "function": "transfer",
+        "primitive_calls": 64,
+        "calls": 64,
+        "self_seconds": 0.000132392,
+        "cumulative_seconds": 0.000539512
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 171,
+        "function": "refresh",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 0.000129521,
+        "cumulative_seconds": 0.002066889
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 29,
+        "function": "signature",
+        "primitive_calls": 174,
+        "calls": 174,
+        "self_seconds": 0.00012251500000000002,
+        "cumulative_seconds": 0.020004961
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 229,
+        "function": "<genexpr>",
+        "primitive_calls": 518,
+        "calls": 518,
+        "self_seconds": 0.00011766100000000001,
+        "cumulative_seconds": 0.00011766100000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 103,
+        "function": "payload_maps",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 0.000115073,
+        "cumulative_seconds": 0.000409078
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 71,
+        "function": "usage",
+        "primitive_calls": 66,
+        "calls": 66,
+        "self_seconds": 0.000114622,
+        "cumulative_seconds": 0.00234254
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/bounded_search.py",
+        "line": 74,
+        "function": "forecast",
+        "primitive_calls": 45,
+        "calls": 45,
+        "self_seconds": 0.00011424200000000001,
+        "cumulative_seconds": 0.689131053
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 228,
+        "function": "<genexpr>",
+        "primitive_calls": 518,
+        "calls": 518,
+        "self_seconds": 0.00011345200000000001,
+        "cumulative_seconds": 0.00011345200000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_work_search.py",
+        "line": 55,
+        "function": "forecast",
+        "primitive_calls": 48,
+        "calls": 48,
+        "self_seconds": 0.00010972400000000001,
+        "cumulative_seconds": 0.695304844
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 228,
+        "function": "clone",
+        "primitive_calls": 64,
+        "calls": 64,
+        "self_seconds": 0.000108672,
+        "cumulative_seconds": 0.000129142
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/detached_control.py",
+        "line": 62,
+        "function": "forecast",
+        "primitive_calls": 48,
+        "calls": 48,
+        "self_seconds": 0.00010435300000000001,
+        "cumulative_seconds": 0.6956525410000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/slot_release_search.py",
+        "line": 76,
+        "function": "configure_projection",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 0.000104012,
+        "cumulative_seconds": 0.00034963700000000003
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 1825,
+        "function": "matrix_rank",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 0.00010346300000000001,
+        "cumulative_seconds": 0.00046258000000000003
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/detached_control.py",
+        "line": 28,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 0.000103201,
+        "cumulative_seconds": 0.000578211
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 126,
+        "function": "<genexpr>",
+        "primitive_calls": 32,
+        "calls": 32,
+        "self_seconds": 0.00010300100000000001,
+        "cumulative_seconds": 0.000239785
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/release_cobatch_search.py",
+        "line": 40,
+        "function": "configure_projection",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 0.000102841,
+        "cumulative_seconds": 0.00045247800000000003
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_context_profile.py",
+        "line": 15,
+        "function": "<genexpr>",
+        "primitive_calls": 116,
+        "calls": 116,
+        "self_seconds": 9.8863e-05,
+        "cumulative_seconds": 0.0009609350000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 64,
+        "function": "wrap",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 9.578200000000001e-05,
+        "cumulative_seconds": 0.000238583
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/acquired_phase_search.py",
+        "line": 87,
+        "function": "configure_projection",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 9.466200000000001e-05,
+        "cumulative_seconds": 0.000164913
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/memo_search.py",
+        "line": 19,
+        "function": "refresh",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 9.4462e-05,
+        "cumulative_seconds": 0.001937368
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+        "line": 1308,
+        "function": "asdict",
+        "primitive_calls": 55,
+        "calls": 55,
+        "self_seconds": 9.406200000000001e-05,
+        "cumulative_seconds": 0.00409841
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 185,
+        "function": "<genexpr>",
+        "primitive_calls": 220,
+        "calls": 220,
+        "self_seconds": 9.2354e-05,
+        "cumulative_seconds": 9.2354e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_release_search.py",
+        "line": 91,
+        "function": "control_profile",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 8.778200000000001e-05,
+        "cumulative_seconds": 0.000283186
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 102,
+        "function": "copy_seconds",
+        "primitive_calls": 31,
+        "calls": 31,
+        "self_seconds": 8.7452e-05,
+        "cumulative_seconds": 0.000290156
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/python/pegaflow/strategies/continuous_batch.py",
+        "line": 135,
+        "function": "<genexpr>",
+        "primitive_calls": 284,
+        "calls": 284,
+        "self_seconds": 8.7321e-05,
+        "cumulative_seconds": 8.7321e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/pending_planner.py",
+        "line": 20,
+        "function": "pending_profile",
+        "primitive_calls": 6,
+        "calls": 6,
+        "self_seconds": 8.3132e-05,
+        "cumulative_seconds": 0.000220885
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method fromhex>",
+        "primitive_calls": 264,
+        "calls": 264,
+        "self_seconds": 8.176300000000001e-05,
+        "cumulative_seconds": 8.176300000000001e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/pending_first_search.py",
+        "line": 21,
+        "function": "configure_projection",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 8.071200000000001e-05,
+        "cumulative_seconds": 0.000245625
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 25,
+        "function": "charged",
+        "primitive_calls": 56,
+        "calls": 56,
+        "self_seconds": 7.9221e-05,
+        "cumulative_seconds": 0.0019421800000000002
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'setdefault' of 'dict' objects>",
+        "primitive_calls": 137,
+        "calls": 137,
+        "self_seconds": 7.864200000000001e-05,
+        "cumulative_seconds": 7.864200000000001e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_schedule.py",
+        "line": 45,
+        "function": "merge_operations",
+        "primitive_calls": 10,
+        "calls": 10,
+        "self_seconds": 7.8361e-05,
+        "cumulative_seconds": 9.960100000000001e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/live_adapter.py",
+        "line": 16,
+        "function": "controlled_route",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 7.7161e-05,
+        "cumulative_seconds": 0.72585284
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/dataclasses.py",
+        "line": 1373,
+        "function": "<genexpr>",
+        "primitive_calls": 133,
+        "calls": 133,
+        "self_seconds": 7.546e-05,
+        "cumulative_seconds": 0.00011211000000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 182,
+        "function": "<genexpr>",
+        "primitive_calls": 418,
+        "calls": 418,
+        "self_seconds": 7.2625e-05,
+        "cumulative_seconds": 7.2625e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_release_search.py",
+        "line": 49,
+        "function": "configure_projection",
+        "primitive_calls": 44,
+        "calls": 44,
+        "self_seconds": 7.0251e-05,
+        "cumulative_seconds": 7.0251e-05
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method _hashlib.openssl_sha256>",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 6.8803e-05,
+        "cumulative_seconds": 6.8803e-05
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'astype' of 'numpy.ndarray' objects>",
+        "primitive_calls": 46,
+        "calls": 46,
+        "self_seconds": 6.4441e-05,
+        "cumulative_seconds": 6.4441e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+        "line": 189,
+        "function": "choose",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 6.1912e-05,
+        "cumulative_seconds": 0.7268905910000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+        "line": 112,
+        "function": "item",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 6.145e-05,
+        "cumulative_seconds": 0.00030174600000000003
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 166,
+        "function": "freeze",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 6.0751e-05,
+        "cumulative_seconds": 0.00010309200000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 35,
+        "function": "chain",
+        "primitive_calls": 100,
+        "calls": 100,
+        "self_seconds": 6.0313000000000003e-05,
+        "cumulative_seconds": 8.8925e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 159,
+        "function": "_commonType",
+        "primitive_calls": 16,
+        "calls": 16,
+        "self_seconds": 5.9453e-05,
+        "cumulative_seconds": 0.000117683
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'disable' of '_lsprof.Profiler' objects>",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 5.7831e-05,
+        "cumulative_seconds": 5.7831e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_release_search.py",
+        "line": 17,
+        "function": "completed_mean",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 5.554e-05,
+        "cumulative_seconds": 0.00019131400000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 115,
+        "function": "<genexpr>",
+        "primitive_calls": 266,
+        "calls": 266,
+        "self_seconds": 5.1061000000000005e-05,
+        "cumulative_seconds": 5.1061000000000005e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 120,
+        "function": "usage",
+        "primitive_calls": 80,
+        "calls": 80,
+        "self_seconds": 4.2850000000000005e-05,
+        "cumulative_seconds": 0.000157402
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'digest' of '_hashlib.HASH' objects>",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 4.0561e-05,
+        "cumulative_seconds": 4.0561e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 124,
+        "function": "<genexpr>",
+        "primitive_calls": 35,
+        "calls": 35,
+        "self_seconds": 3.5691e-05,
+        "cumulative_seconds": 0.0007455350000000001
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 135,
+        "function": "_makearray",
+        "primitive_calls": 30,
+        "calls": 30,
+        "self_seconds": 3.554e-05,
+        "cumulative_seconds": 5.5620000000000006e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_state_profile.py",
+        "line": 10,
+        "function": "refresh_work",
+        "primitive_calls": 5,
+        "calls": 5,
+        "self_seconds": 3.5181e-05,
+        "cumulative_seconds": 0.000306685
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 80,
+        "function": "<genexpr>",
+        "primitive_calls": 35,
+        "calls": 35,
+        "self_seconds": 3.477e-05,
+        "cumulative_seconds": 0.0018663870000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_release_search.py",
+        "line": 20,
+        "function": "<genexpr>",
+        "primitive_calls": 171,
+        "calls": 171,
+        "self_seconds": 3.2672e-05,
+        "cumulative_seconds": 3.2672e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_state_profile.py",
+        "line": 22,
+        "function": "refresh",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 3.2290000000000004e-05,
+        "cumulative_seconds": 0.001784685
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_work_search.py",
+        "line": 78,
+        "function": "visible_work",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 3.2000000000000005e-05,
+        "cumulative_seconds": 0.000109462
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/acquired_phase_search.py",
+        "line": 101,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 3.1661e-05,
+        "cumulative_seconds": 0.012350154
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 2383,
+        "function": "norm",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 3.1501e-05,
+        "cumulative_seconds": 5.8472000000000005e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_work_search.py",
+        "line": 104,
+        "function": "control_profile",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 3.0811e-05,
+        "cumulative_seconds": 0.003228154
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_context.py",
+        "line": 49,
+        "function": "freeze",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 3.038e-05,
+        "cumulative_seconds": 0.00015234300000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_work_search.py",
+        "line": 24,
+        "function": "<genexpr>",
+        "primitive_calls": 171,
+        "calls": 171,
+        "self_seconds": 3.0361000000000003e-05,
+        "cumulative_seconds": 3.0361000000000003e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/copy.py",
+        "line": 217,
+        "function": "_deepcopy_dict",
+        "primitive_calls": 1,
+        "calls": 4,
+        "self_seconds": 2.947e-05,
+        "cumulative_seconds": 0.000317316
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_work_search.py",
+        "line": 20,
+        "function": "<genexpr>",
+        "primitive_calls": 171,
+        "calls": 171,
+        "self_seconds": 2.9360000000000003e-05,
+        "cumulative_seconds": 2.9360000000000003e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+        "line": 122,
+        "function": "<genexpr>",
+        "primitive_calls": 5,
+        "calls": 5,
+        "self_seconds": 2.9291e-05,
+        "cumulative_seconds": 0.000144602
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 153,
+        "function": "_realType",
+        "primitive_calls": 46,
+        "calls": 46,
+        "self_seconds": 2.769e-05,
+        "cumulative_seconds": 4.579e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 78,
+        "function": "payload_maps",
+        "primitive_calls": 7,
+        "calls": 7,
+        "self_seconds": 2.737e-05,
+        "cumulative_seconds": 0.001893757
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'any' of 'numpy.ndarray' objects>",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 2.6821000000000003e-05,
+        "cumulative_seconds": 0.00011384200000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_release_search.py",
+        "line": 22,
+        "function": "<genexpr>",
+        "primitive_calls": 171,
+        "calls": 171,
+        "self_seconds": 2.6791e-05,
+        "cumulative_seconds": 2.6791e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_continuous_batch.py",
+        "line": 120,
+        "function": "progress",
+        "primitive_calls": 3,
+        "calls": 3,
+        "self_seconds": 2.674e-05,
+        "cumulative_seconds": 0.000191293
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.issubclass>",
+        "primitive_calls": 87,
+        "calls": 87,
+        "self_seconds": 2.674e-05,
+        "cumulative_seconds": 2.674e-05
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'squeeze' of 'numpy.ndarray' objects>",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 2.5690000000000003e-05,
+        "cumulative_seconds": 2.5690000000000003e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/copy.py",
+        "line": 191,
+        "function": "_deepcopy_list",
+        "primitive_calls": 7,
+        "calls": 11,
+        "self_seconds": 2.532e-05,
+        "cumulative_seconds": 0.000100581
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/copy.py",
+        "line": 247,
+        "function": "_reconstruct",
+        "primitive_calls": 1,
+        "calls": 3,
+        "self_seconds": 2.4991000000000002e-05,
+        "cumulative_seconds": 0.00034193600000000004
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/pending_planner.py",
+        "line": 21,
+        "function": "<genexpr>",
+        "primitive_calls": 30,
+        "calls": 30,
+        "self_seconds": 2.487e-05,
+        "cumulative_seconds": 2.487e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_phase_release.py",
+        "line": 47,
+        "function": "freeze",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 2.4290000000000003e-05,
+        "cumulative_seconds": 0.00021175300000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/timed_recovery_search.py",
+        "line": 90,
+        "function": "choose",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 2.4160000000000002e-05,
+        "cumulative_seconds": 0.726915061
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 62,
+        "function": "snapshot",
+        "primitive_calls": 36,
+        "calls": 36,
+        "self_seconds": 2.343e-05,
+        "cumulative_seconds": 2.343e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 143,
+        "function": "freeze",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 2.3251e-05,
+        "cumulative_seconds": 0.000253635
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 269,
+        "function": "decision",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 2.301e-05,
+        "cumulative_seconds": 0.0015324100000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 332,
+        "function": "<genexpr>",
+        "primitive_calls": 20,
+        "calls": 20,
+        "self_seconds": 2.2552e-05,
+        "cumulative_seconds": 2.6062000000000002e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 27,
+        "function": "check_budget",
+        "primitive_calls": 65,
+        "calls": 65,
+        "self_seconds": 2.038e-05,
+        "cumulative_seconds": 2.038e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 242,
+        "function": "new_memo",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 2.023e-05,
+        "cumulative_seconds": 2.135e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/resource_forecast.py",
+        "line": 22,
+        "function": "candidate_work",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.9591000000000003e-05,
+        "cumulative_seconds": 9.3892e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/core/numeric.py",
+        "line": 415,
+        "function": "count_nonzero",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 1.95e-05,
+        "cumulative_seconds": 7.7562e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 246,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.9381e-05,
+        "cumulative_seconds": 0.005188392
+      },
+      {
+        "file": "<string>",
+        "line": 2,
+        "function": "__eq__",
+        "primitive_calls": 8,
+        "calls": 8,
+        "self_seconds": 1.9071e-05,
+        "cumulative_seconds": 1.9071e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 123,
+        "function": "feasible",
+        "primitive_calls": 7,
+        "calls": 7,
+        "self_seconds": 1.897e-05,
+        "cumulative_seconds": 0.000783206
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/detached_control.py",
+        "line": 50,
+        "function": "decision",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 1.896e-05,
+        "cumulative_seconds": 0.013941955
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/copy.py",
+        "line": 231,
+        "function": "_keep_alive",
+        "primitive_calls": 18,
+        "calls": 18,
+        "self_seconds": 1.87e-05,
+        "cumulative_seconds": 2.922e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 140,
+        "function": "isComplexType",
+        "primitive_calls": 46,
+        "calls": 46,
+        "self_seconds": 1.845e-05,
+        "cumulative_seconds": 2.858e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/model.py",
+        "line": 41,
+        "function": "__post_init__",
+        "primitive_calls": 6,
+        "calls": 6,
+        "self_seconds": 1.826e-05,
+        "cumulative_seconds": 2.7110000000000003e-05
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method numpy.zeros>",
+        "primitive_calls": 16,
+        "calls": 16,
+        "self_seconds": 1.775e-05,
+        "cumulative_seconds": 1.775e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/acquired_phase_search.py",
+        "line": 118,
+        "function": "acquired_phases",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.7670000000000002e-05,
+        "cumulative_seconds": 0.003881087
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_state_profile.py",
+        "line": 12,
+        "function": "chain",
+        "primitive_calls": 10,
+        "calls": 10,
+        "self_seconds": 1.699e-05,
+        "cumulative_seconds": 0.00011659100000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/detached_control.py",
+        "line": 68,
+        "function": "reserve",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.675e-05,
+        "cumulative_seconds": 0.0005600210000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/model.py",
+        "line": 9,
+        "function": "nonnegative",
+        "primitive_calls": 21,
+        "calls": 21,
+        "self_seconds": 1.6610000000000002e-05,
+        "cumulative_seconds": 2.161e-05
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'encode' of 'str' objects>",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 1.652e-05,
+        "cumulative_seconds": 1.652e-05
+      },
+      {
+        "file": "<string>",
+        "line": 2,
+        "function": "__init__",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.6261000000000002e-05,
+        "cumulative_seconds": 2.7591e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_headroom_profile.py",
+        "line": 68,
+        "function": "freeze",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 1.6100000000000002e-05,
+        "cumulative_seconds": 0.000175383
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/phase_release_calendar.py",
+        "line": 78,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.607e-05,
+        "cumulative_seconds": 0.0006021420000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 321,
+        "function": "reserve",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.4991000000000001e-05,
+        "cumulative_seconds": 0.000541391
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 76,
+        "function": "latest_completed_seconds",
+        "primitive_calls": 13,
+        "calls": 13,
+        "self_seconds": 1.4760000000000001e-05,
+        "cumulative_seconds": 5.191e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_queue.py",
+        "line": 15,
+        "function": "direction",
+        "primitive_calls": 31,
+        "calls": 31,
+        "self_seconds": 1.426e-05,
+        "cumulative_seconds": 1.426e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 130,
+        "function": "get_linalg_error_extobj",
+        "primitive_calls": 16,
+        "calls": 16,
+        "self_seconds": 1.3611e-05,
+        "cumulative_seconds": 1.3611e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/pending_planner.py",
+        "line": 27,
+        "function": "<genexpr>",
+        "primitive_calls": 42,
+        "calls": 42,
+        "self_seconds": 1.3611e-05,
+        "cumulative_seconds": 1.3611e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/memo_search.py",
+        "line": 91,
+        "function": "reserve",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.3300000000000001e-05,
+        "cumulative_seconds": 0.0005964620000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/pending_planner.py",
+        "line": 26,
+        "function": "<genexpr>",
+        "primitive_calls": 42,
+        "calls": 42,
+        "self_seconds": 1.319e-05,
+        "cumulative_seconds": 1.319e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_continuous_batch.py",
+        "line": 110,
+        "function": "workers",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.3061e-05,
+        "cumulative_seconds": 0.00039341800000000003
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/contextlib.py",
+        "line": 104,
+        "function": "__init__",
+        "primitive_calls": 4,
+        "calls": 4,
+        "self_seconds": 1.29e-05,
+        "cumulative_seconds": 1.613e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_queue.py",
+        "line": 59,
+        "function": "decision",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 1.2721e-05,
+        "cumulative_seconds": 1.3971e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/resource_schedule.py",
+        "line": 36,
+        "function": "__post_init__",
+        "primitive_calls": 5,
+        "calls": 5,
+        "self_seconds": 1.2620000000000001e-05,
+        "cumulative_seconds": 1.5850000000000002e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_work_search.py",
+        "line": 119,
+        "function": "choose",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.2441e-05,
+        "cumulative_seconds": 0.7269308120000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__array_prepare__' of 'numpy.ndarray' objects>",
+        "primitive_calls": 28,
+        "calls": 28,
+        "self_seconds": 1.239e-05,
+        "cumulative_seconds": 1.239e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 80,
+        "function": "version",
+        "primitive_calls": 12,
+        "calls": 12,
+        "self_seconds": 1.234e-05,
+        "cumulative_seconds": 3.6301000000000004e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_queue.py",
+        "line": 41,
+        "function": "reserve",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.196e-05,
+        "cumulative_seconds": 2.271e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_release_search.py",
+        "line": 76,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.166e-05,
+        "cumulative_seconds": 0.008432816000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/pending_planner.py",
+        "line": 22,
+        "function": "<genexpr>",
+        "primitive_calls": 30,
+        "calls": 30,
+        "self_seconds": 1.1551e-05,
+        "cumulative_seconds": 1.1551e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/core/getlimits.py",
+        "line": 484,
+        "function": "__new__",
+        "primitive_calls": 16,
+        "calls": 16,
+        "self_seconds": 1.145e-05,
+        "cumulative_seconds": 1.866e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_continuous_batch.py",
+        "line": 111,
+        "function": "<genexpr>",
+        "primitive_calls": 5,
+        "calls": 5,
+        "self_seconds": 1.1210000000000001e-05,
+        "cumulative_seconds": 7.0271e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/detached_calendar.py",
+        "line": 97,
+        "function": "reserve",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.111e-05,
+        "cumulative_seconds": 0.000582492
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/timed_recovery_search.py",
+        "line": 23,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.108e-05,
+        "cumulative_seconds": 0.005135111
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'to_bytes' of 'int' objects>",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 1.09e-05,
+        "cumulative_seconds": 1.09e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/contextlib.py",
+        "line": 299,
+        "function": "helper",
+        "primitive_calls": 4,
+        "calls": 4,
+        "self_seconds": 1.081e-05,
+        "cumulative_seconds": 2.6940000000000003e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/core/_methods.py",
+        "line": 55,
+        "function": "_any",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 1.061e-05,
+        "cumulative_seconds": 8.7021e-05
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__exit__' of '_thread.RLock' objects>",
+        "primitive_calls": 17,
+        "calls": 17,
+        "self_seconds": 1.037e-05,
+        "cumulative_seconds": 1.037e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/core/numerictypes.py",
+        "line": 357,
+        "function": "issubdtype",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 1.02e-05,
+        "cumulative_seconds": 2.25e-05
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'join' of 'str' objects>",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 1.0121e-05,
+        "cumulative_seconds": 1.0121e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 197,
+        "function": "_assert_2d",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 1.0110000000000001e-05,
+        "cumulative_seconds": 1.0110000000000001e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/pending_first_search.py",
+        "line": 28,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 9.881e-06,
+        "cumulative_seconds": 0.012360035
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method numpy.asarray>",
+        "primitive_calls": 34,
+        "calls": 34,
+        "self_seconds": 9.610000000000001e-06,
+        "cumulative_seconds": 9.610000000000001e-06
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/contextlib.py",
+        "line": 141,
+        "function": "__exit__",
+        "primitive_calls": 1,
+        "calls": 4,
+        "self_seconds": 9.58e-06,
+        "cumulative_seconds": 0.001666483
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'max' of 'numpy.ndarray' objects>",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 9.410000000000001e-06,
+        "cumulative_seconds": 6.053100000000001e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_queue.py",
+        "line": 93,
+        "function": "reserve",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 9.271e-06,
+        "cumulative_seconds": 0.00022528400000000002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_context_profile.py",
+        "line": 22,
+        "function": "reserve",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 9.070000000000001e-06,
+        "cumulative_seconds": 0.00052181
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/completed_phase_search.py",
+        "line": 148,
+        "function": "<genexpr>",
+        "primitive_calls": 6,
+        "calls": 6,
+        "self_seconds": 8.721e-06,
+        "cumulative_seconds": 1.1601000000000001e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/bounded_search.py",
+        "line": 130,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 8.48e-06,
+        "cumulative_seconds": 0.005147041000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 343,
+        "function": "<genexpr>",
+        "primitive_calls": 5,
+        "calls": 5,
+        "self_seconds": 8.32e-06,
+        "cumulative_seconds": 9.22e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+        "line": 120,
+        "function": "workers",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 8.281e-06,
+        "cumulative_seconds": 0.000310086
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method '__reduce_ex__' of 'object' objects>",
+        "primitive_calls": 3,
+        "calls": 3,
+        "self_seconds": 7.97e-06,
+        "cumulative_seconds": 7.97e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 223,
+        "function": "<genexpr>",
+        "primitive_calls": 24,
+        "calls": 24,
+        "self_seconds": 7.860000000000001e-06,
+        "cumulative_seconds": 7.860000000000001e-06
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'sum' of 'numpy.ndarray' objects>",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 7.4e-06,
+        "cumulative_seconds": 3.1432e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 41,
+        "function": "__post_init__",
+        "primitive_calls": 3,
+        "calls": 3,
+        "self_seconds": 7.360000000000001e-06,
+        "cumulative_seconds": 8.94e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/model.py",
+        "line": 70,
+        "function": "__post_init__",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 7.22e-06,
+        "cumulative_seconds": 1.3470000000000001e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/resource_forecast.py",
+        "line": 14,
+        "function": "copy_resources",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 7.180000000000001e-06,
+        "cumulative_seconds": 1.106e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 249,
+        "function": "record_memo",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 7.100000000000001e-06,
+        "cumulative_seconds": 9.250000000000001e-06
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/core/numerictypes.py",
+        "line": 283,
+        "function": "issubclass_",
+        "primitive_calls": 4,
+        "calls": 4,
+        "self_seconds": 6.820000000000001e-06,
+        "cumulative_seconds": 1.143e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/detached_calendar.py",
+        "line": 92,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 6.791000000000001e-06,
+        "cumulative_seconds": 0.000585002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_profile.py",
+        "line": 33,
+        "function": "route_order",
+        "primitive_calls": 7,
+        "calls": 7,
+        "self_seconds": 6.570000000000001e-06,
+        "cumulative_seconds": 6.570000000000001e-06
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/copy.py",
+        "line": 172,
+        "function": "_deepcopy_atomic",
+        "primitive_calls": 47,
+        "calls": 47,
+        "self_seconds": 6.570000000000001e-06,
+        "cumulative_seconds": 6.570000000000001e-06
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/core/_methods.py",
+        "line": 39,
+        "function": "_amax",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 6.561e-06,
+        "cumulative_seconds": 5.1121e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/batch_calendar.py",
+        "line": 515,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 6.52e-06,
+        "cumulative_seconds": 0.0006720830000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/resource_schedule.py",
+        "line": 84,
+        "function": "__post_init__",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 6.46e-06,
+        "cumulative_seconds": 1.133e-05
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 162,
+        "function": "<genexpr>",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 6.220000000000001e-06,
+        "cumulative_seconds": 6.220000000000001e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 311,
+        "function": "<genexpr>",
+        "primitive_calls": 5,
+        "calls": 5,
+        "self_seconds": 5.9e-06,
+        "cumulative_seconds": 6.7971e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/contextlib.py",
+        "line": 132,
+        "function": "__enter__",
+        "primitive_calls": 1,
+        "calls": 4,
+        "self_seconds": 5.7000000000000005e-06,
+        "cumulative_seconds": 0.012457946000000001
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method builtins.iter>",
+        "primitive_calls": 24,
+        "calls": 24,
+        "self_seconds": 5.64e-06,
+        "cumulative_seconds": 5.64e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/memo_search.py",
+        "line": 71,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 5.54e-06,
+        "cumulative_seconds": 0.0006780330000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_cost.py",
+        "line": 179,
+        "function": "<genexpr>",
+        "primitive_calls": 10,
+        "calls": 10,
+        "self_seconds": 5.420000000000001e-06,
+        "cumulative_seconds": 9.52e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_headroom_profile.py",
+        "line": 51,
+        "function": "version",
+        "primitive_calls": 12,
+        "calls": 12,
+        "self_seconds": 5.171e-06,
+        "cumulative_seconds": 5.171e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/model.py",
+        "line": 91,
+        "function": "__post_init__",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 5.150000000000001e-06,
+        "cumulative_seconds": 6.4900000000000005e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_policy.py",
+        "line": 113,
+        "function": "usage_values",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 5.09e-06,
+        "cumulative_seconds": 0.00011068200000000001
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_schedule.py",
+        "line": 62,
+        "function": "<genexpr>",
+        "primitive_calls": 20,
+        "calls": 20,
+        "self_seconds": 4.9000000000000005e-06,
+        "cumulative_seconds": 4.9000000000000005e-06
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'tolist' of 'numpy.ndarray' objects>",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 4.78e-06,
+        "cumulative_seconds": 4.78e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/sparse_cache_search.py",
+        "line": 41,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 4.61e-06,
+        "cumulative_seconds": 0.005193002
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_work_search.py",
+        "line": 64,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 4.59e-06,
+        "cumulative_seconds": 0.008437406
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/release_cobatch_search.py",
+        "line": 47,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 4.35e-06,
+        "cumulative_seconds": 0.012368425
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 2187,
+        "function": "_lstsq_dispatcher",
+        "primitive_calls": 14,
+        "calls": 14,
+        "self_seconds": 4.14e-06,
+        "cumulative_seconds": 4.14e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/bounded_search.py",
+        "line": 191,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 4.13e-06,
+        "cumulative_seconds": 0.005153371
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+        "line": 192,
+        "function": "<genexpr>",
+        "primitive_calls": 3,
+        "calls": 3,
+        "self_seconds": 4.13e-06,
+        "cumulative_seconds": 4.13e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/slot_release_search.py",
+        "line": 86,
+        "function": "planning_snapshot",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 4.04e-06,
+        "cumulative_seconds": 0.012364075
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/cache_evolving_search.py",
+        "line": 259,
+        "function": "<lambda>",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 3.7600000000000004e-06,
+        "cumulative_seconds": 3.7600000000000004e-06
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'conj' of 'numpy.ndarray' objects>",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 3.6300000000000004e-06,
+        "cumulative_seconds": 3.6300000000000004e-06
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/copy.py",
+        "line": 252,
+        "function": "<genexpr>",
+        "primitive_calls": 6,
+        "calls": 6,
+        "self_seconds": 3.31e-06,
+        "cumulative_seconds": 1.46e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/copyreg.py",
+        "line": 98,
+        "function": "__newobj__",
+        "primitive_calls": 3,
+        "calls": 3,
+        "self_seconds": 3.2900000000000003e-06,
+        "cumulative_seconds": 4.77e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/joint_queue.py",
+        "line": 47,
+        "function": "<genexpr>",
+        "primitive_calls": 5,
+        "calls": 5,
+        "self_seconds": 3.2400000000000003e-06,
+        "cumulative_seconds": 4.33e-06
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<method 'copy' of 'dict' objects>",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 3.1000000000000004e-06,
+        "cumulative_seconds": 3.1000000000000004e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_phase_release.py",
+        "line": 49,
+        "function": "<genexpr>",
+        "primitive_calls": 6,
+        "calls": 6,
+        "self_seconds": 3.08e-06,
+        "cumulative_seconds": 5.31e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/operation_context.py",
+        "line": 53,
+        "function": "<genexpr>",
+        "primitive_calls": 6,
+        "calls": 6,
+        "self_seconds": 3.0300000000000002e-06,
+        "cumulative_seconds": 5.2600000000000005e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+        "line": 109,
+        "function": "frozen",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 3e-06,
+        "cumulative_seconds": 0.000256635
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py",
+        "line": 323,
+        "function": "<genexpr>",
+        "primitive_calls": 8,
+        "calls": 8,
+        "self_seconds": 2.99e-06,
+        "cumulative_seconds": 4.59e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/model.py",
+        "line": 22,
+        "function": "__post_init__",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 2.92e-06,
+        "cumulative_seconds": 8.63e-06
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method __new__ of type object at 0xffffb866c828>",
+        "primitive_calls": 4,
+        "calls": 4,
+        "self_seconds": 2.5400000000000002e-06,
+        "cumulative_seconds": 2.5400000000000002e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/control_work_search.py",
+        "line": 80,
+        "function": "<genexpr>",
+        "primitive_calls": 5,
+        "calls": 5,
+        "self_seconds": 1.991e-06,
+        "cumulative_seconds": 2.871e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_continuous_batch.py",
+        "line": 113,
+        "function": "<genexpr>",
+        "primitive_calls": 6,
+        "calls": 6,
+        "self_seconds": 1.79e-06,
+        "cumulative_seconds": 1.79e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+        "line": 127,
+        "function": "<genexpr>",
+        "primitive_calls": 5,
+        "calls": 5,
+        "self_seconds": 1.7700000000000002e-06,
+        "cumulative_seconds": 1.7700000000000002e-06
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/core/_methods.py",
+        "line": 47,
+        "function": "_sum",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 1.68e-06,
+        "cumulative_seconds": 2.4032000000000003e-05
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 203,
+        "function": "_assert_stacked_2d",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 1.67e-06,
+        "cumulative_seconds": 1.67e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/profile_release_forecast.py",
+        "line": 44,
+        "function": "<lambda>",
+        "primitive_calls": 6,
+        "calls": 6,
+        "self_seconds": 1.6000000000000001e-06,
+        "cumulative_seconds": 1.6000000000000001e-06
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/threading.py",
+        "line": 124,
+        "function": "RLock",
+        "primitive_calls": 1,
+        "calls": 1,
+        "self_seconds": 1.59e-06,
+        "cumulative_seconds": 1.59e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/simulate_policy_feedback.py",
+        "line": 195,
+        "function": "<genexpr>",
+        "primitive_calls": 4,
+        "calls": 4,
+        "self_seconds": 1.43e-06,
+        "cumulative_seconds": 1.43e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/projection_index.py",
+        "line": 41,
+        "function": "__init__",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 1.12e-06,
+        "cumulative_seconds": 1.12e-06
+      },
+      {
+        "file": "~",
+        "line": 0,
+        "function": "<built-in method numpy.asanyarray>",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 1.1e-06,
+        "cumulative_seconds": 1.1e-06
+      },
+      {
+        "file": "/root/issue23-forecast-profile-source-02/experiments/issue23_strategies/runtime/overlay/pegaflow/strategies/resource_schedule.py",
+        "line": 92,
+        "function": "<genexpr>",
+        "primitive_calls": 3,
+        "calls": 3,
+        "self_seconds": 1.0700000000000001e-06,
+        "cumulative_seconds": 1.0700000000000001e-06
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 1495,
+        "function": "_svd_dispatcher",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 7.7e-07,
+        "cumulative_seconds": 7.7e-07
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/core/numeric.py",
+        "line": 411,
+        "function": "_count_nonzero_dispatcher",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 6.900000000000001e-07,
+        "cumulative_seconds": 6.900000000000001e-07
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 2379,
+        "function": "_norm_dispatcher",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 5.900000000000001e-07,
+        "cumulative_seconds": 5.900000000000001e-07
+      },
+      {
+        "file": "/usr/local/python3.12.13/lib/python3.12/site-packages/numpy/linalg/linalg.py",
+        "line": 1821,
+        "function": "_matrix_rank_dispatcher",
+        "primitive_calls": 2,
+        "calls": 2,
+        "self_seconds": 5.800000000000001e-07,
+        "cumulative_seconds": 5.800000000000001e-07
+      }
+    ],
+    "total_profile_seconds": 0.6653267560000001,
+    "search_stats": {
+      "considered": 45,
+      "full": 6,
+      "refresh_reused": 43,
+      "refresh_full": 1,
+      "route_reused": 1,
+      "calendar_reused": 0,
+      "calendar_full": 6,
+      "bound_checks": 1821,
+      "pruned_calendars": 38,
+      "pruned_proof_reused": 0,
+      "pruned_route_reused": 3
+    }
+  },
+  "exact_zero_control_state_only": true
+}

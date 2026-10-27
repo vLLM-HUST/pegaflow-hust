@@ -1,0 +1,14 @@
+{
+  "pid": 249825,
+  "pgid": 249825,
+  "started_unix": 1793063769.1426573,
+  "source_sha256": "a6b4a3ecbf6c4c1f0f994f43a392b6dd4373db1bdf0af9ad4cc6b4f9e2e4f8c5",
+  "runner_sha256": "e3e9bf06950a2be8453ec891f7e69e8cf2dcc50084b65082b427c9fcd052bb33",
+  "command": [
+    "python3",
+    "/root/prefill-revalidation-pipeline-01.py"
+  ],
+  "pipeline": "/root/issue23-prefill-revalidation-pipeline-01",
+  "no_gpu_work": true,
+  "root_free": 34483695616
+}

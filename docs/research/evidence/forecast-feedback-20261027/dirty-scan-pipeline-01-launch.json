@@ -1,0 +1,17 @@
+{
+  "pid": 79235,
+  "started": 1793051121.823283,
+  "limit_seconds": 4500,
+  "source_sha256": "cac23a4f0a0ac46ebefe8c99ea100d1f28dc2319d9df6bf2d08ec39e0ad61741",
+  "runner_sha256": "598f8073480f262bf63234c52a02e51e9b49b1aa46868d01fea7e3eeafc8bbc1",
+  "CPU_only": true,
+  "quota": [
+    "400000",
+    "100000"
+  ],
+  "stages": [
+    "zero-equivalence",
+    "charged-strong-sharing"
+  ],
+  "no_simultaneous_matrix": true
+}

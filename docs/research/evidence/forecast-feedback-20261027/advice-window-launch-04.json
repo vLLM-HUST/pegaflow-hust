@@ -1,0 +1,22 @@
+{
+  "pid": 464967,
+  "pgid": 464967,
+  "started": 1793079111.81262,
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "/root/advice-window-pipeline-04.py"
+  ],
+  "cwd": "/root/issue23-advice-window-source-01",
+  "source_sha256": "caa91cd838efe30be16628052e364c03ed412ac76b6f1e7f52d55bdc1caa33dc",
+  "runner_sha256": "d1b060b24443bc070e1a7994c883f2bc35b09d7c30c81f672b46d90728ca1386",
+  "policy": "advice-window",
+  "expected_revision": "advice-release-window-01",
+  "limit_seconds": 4500,
+  "workers": 3,
+  "CPU_only": true,
+  "prior_wrong_policy_archive": {
+    "path": "/root/advice-window-wrong-policy-02-full.tar.gz",
+    "sha256": "92dc4bea6fe299b644e20ecccfd36ec1be5cc581e06c9cd2aa8c0a4081004bdc",
+    "bytes": 18838052
+  }
+}

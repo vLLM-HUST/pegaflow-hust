@@ -1,0 +1,30 @@
+{
+  "kind": "zero-controller-cost mechanism diagnostic; NOT net performance",
+  "all_285_requests_match_retained_reference": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "requests": 95,
+      "exact_four_trace_fields": true,
+      "reference_sha256": "562aad3ae985295203365233ca559211be4aea8cc22aded435ad144d28ef848f",
+      "output_sha256": "64fde1b4b3b8882dc7eae00ccdf30b5d97c585e9b6f64ed66fbbcea11312cb73",
+      "reused_rejection_proofs": 955
+    },
+    {
+      "rate": 0.49032341538142143,
+      "requests": 95,
+      "exact_four_trace_fields": true,
+      "reference_sha256": "95039a6fbb2c3b0d353738445ab0db43861a3b4f368a069308eb5485bcc94372",
+      "output_sha256": "de0f1aa68de987c2f03e4a680f231dc16f6434af5db27f163299287044bd2396",
+      "reused_rejection_proofs": 1492
+    },
+    {
+      "rate": 0.9806468307628429,
+      "requests": 95,
+      "exact_four_trace_fields": true,
+      "reference_sha256": "3ee423e3500b99b92e4287a13098e0a1988be76835fc1e8c5a77d1e34aa9f8b8",
+      "output_sha256": "99384c0daafe353c414ece8b0ce537692fe2225a905b375208ab4fe2d32c3354",
+      "reused_rejection_proofs": 1170
+    }
+  ]
+}

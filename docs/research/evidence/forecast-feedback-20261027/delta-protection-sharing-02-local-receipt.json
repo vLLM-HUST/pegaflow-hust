@@ -1,0 +1,10 @@
+{
+  "remote": {
+    "path": "/root/issue23-delta-protection-sharing-02-full.tar.gz",
+    "bytes": 17096189,
+    "sha256": "30346b691d7423d01f4beb6bd37009c2ae9aeeefdf527db01113f4a92bc146ea"
+  },
+  "local_path": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\issue23-delta-protection-sharing-02-full.tar.gz",
+  "sha256_verified": true,
+  "extracted_to": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\result-delta-protection-sharing-02\\issue23-delta-protection-sharing-02"
+}

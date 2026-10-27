@@ -1,0 +1,252 @@
+{
+  "started": 1793055719.73221,
+  "finished": 1793056294.414033,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-progress-decode-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-progress-decode-default-01",
+        "--policy",
+        "progress-decode",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "0"
+      ],
+      "pid": 141992,
+      "started": 1793055719.7326462,
+      "finished": 1793055961.184481,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-progress-decode-default-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/progress-decode-source-receipt-01.json",
+        "--output",
+        "/root/issue23-progress-decode-default-01/source-control-audit.json"
+      ],
+      "pid": 145666,
+      "started": 1793055961.1850972,
+      "finished": 1793055970.0632527,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-progress-decode-default-01",
+        "--output",
+        "/root/issue23-progress-decode-default-01/work-conservation-audit.json"
+      ],
+      "pid": 145668,
+      "started": 1793055970.063807,
+      "finished": 1793055972.4322689,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-progress-decode-default-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-progress-decode-default-01/release-estimate-audit.json"
+      ],
+      "pid": 145669,
+      "started": 1793055972.4328446,
+      "finished": 1793055975.70305,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-progress-decode-default-01",
+        "--output",
+        "/root/issue23-progress-decode-default-01/feedback-alignment.json"
+      ],
+      "pid": 145670,
+      "started": 1793055975.703619,
+      "finished": 1793055977.8721244,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/audit_progress_decode.py",
+        "--result",
+        "/root/issue23-progress-decode-default-01",
+        "--output",
+        "/root/issue23-progress-decode-default-01/progress-decode-audit.json"
+      ],
+      "pid": 145672,
+      "started": 1793055977.872895,
+      "finished": 1793055979.6906877,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-progress-decode-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-progress-decode-sharing-01",
+        "--policy",
+        "progress-decode",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1"
+      ],
+      "pid": 145886,
+      "started": 1793055991.0945733,
+      "finished": 1793056267.1115663,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-progress-decode-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/progress-decode-source-receipt-01.json",
+        "--output",
+        "/root/issue23-progress-decode-sharing-01/source-control-audit.json"
+      ],
+      "pid": 149493,
+      "started": 1793056267.1122334,
+      "finished": 1793056275.4909248,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-progress-decode-sharing-01",
+        "--output",
+        "/root/issue23-progress-decode-sharing-01/work-conservation-audit.json"
+      ],
+      "pid": 149501,
+      "started": 1793056275.4914434,
+      "finished": 1793056277.7615435,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-progress-decode-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-progress-decode-sharing-01/release-estimate-audit.json"
+      ],
+      "pid": 149503,
+      "started": 1793056277.762059,
+      "finished": 1793056280.2313676,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-progress-decode-sharing-01",
+        "--output",
+        "/root/issue23-progress-decode-sharing-01/feedback-alignment.json"
+      ],
+      "pid": 149522,
+      "started": 1793056280.2320042,
+      "finished": 1793056282.2004633,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-progress-decode-source-01/experiments/issue23_strategies/audit_progress_decode.py",
+        "--result",
+        "/root/issue23-progress-decode-sharing-01",
+        "--output",
+        "/root/issue23-progress-decode-sharing-01/progress-decode-audit.json"
+      ],
+      "pid": 149717,
+      "started": 1793056282.2009532,
+      "finished": 1793056283.9188485,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/issue23-progress-decode-default-01-full.tar.gz",
+      "sha256": "cd7ab310041353d438bf32cf94b301cc8d96eeb7eefdb8ccfad2298f446f0f00",
+      "bytes": 18130206
+    },
+    {
+      "path": "/root/issue23-progress-decode-sharing-01-full.tar.gz",
+      "sha256": "79df36a33f87a9604c1f887fce4beeae1c4fa81740863a49a0024626542c8c29",
+      "bytes": 17080716
+    }
+  ],
+  "failure": null,
+  "no_gpu_work": true
+}

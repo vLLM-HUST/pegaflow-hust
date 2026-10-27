@@ -1,0 +1,18 @@
+[
+  {
+    "job": "issue23-bounded-calendar-07",
+    "archive_sha256": "ae6e9f2acb0f40c2af99f83d2af3a10e0c746554bb5bdfff710a3be868ff4cce",
+    "full_archive": true,
+    "source_manifest_verified": true,
+    "validated_CPU_arms": 9,
+    "real_serving_or_output_audit": false
+  },
+  {
+    "job": "issue23-bounded-proof-memo-09",
+    "archive_sha256": "dd7cc9a413ad005b4c0791aaa3a6fa18c971773889ca4c435094f2371fb35399",
+    "full_archive": true,
+    "source_manifest_verified": true,
+    "validated_CPU_arms": 12,
+    "real_serving_or_output_audit": false
+  }
+]

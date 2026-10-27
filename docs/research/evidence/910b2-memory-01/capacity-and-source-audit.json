@@ -1,0 +1,9 @@
+{
+  "executed_source_hashes_verified": 68,
+  "all_9_arms_same_device_and_host_capacity": true,
+  "device_KV_bytes": 39379271680,
+  "largest_observed_KV_bytes": 4580179968,
+  "no_GPU_measurement_claimed": true,
+  "full_archive_sha256": "059b82c86268461b2f2db5a1e608800f08be95a3b7166ce7d95f8672a40eb2f9",
+  "executed_source_archive_sha256": "bf31b5ebec3996d7cd06cda3e416f6d0cccc5b89dda0ea19b49626afdc3eb16c"
+}

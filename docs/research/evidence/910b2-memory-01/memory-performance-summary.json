@@ -1,0 +1,215 @@
+[
+  {
+    "rate": 0.24516170769071072,
+    "KV_GiB_per_instance": 36.6748046875,
+    "arms": {
+      "native": {
+        "p50": 5.445500041295588,
+        "p95": 62.541443234317796,
+        "p99": 69.73785336055391,
+        "mean": 14.514320320200664,
+        "planning_and_boundary_wall": 0.04632376227527857,
+        "iteration_scheduler_wall": 0.14235578570514917,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2025848832
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4205838336
+          }
+        },
+        "makespan": 614.8351566541708
+      },
+      "reference": {
+        "p50": 9.28975163294865,
+        "p95": 30.270596663648632,
+        "p99": 37.17384969572606,
+        "mean": 12.800237834554153,
+        "planning_and_boundary_wall": 113.71503678150475,
+        "iteration_scheduler_wall": 0.13828333001583815,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3662675968
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2370830336
+          }
+        },
+        "makespan": 513.6784043970351
+      },
+      "ours": {
+        "p50": 13.856776535279835,
+        "p95": 25.24468087320497,
+        "p99": 32.29533435031925,
+        "mean": 13.695309668285674,
+        "planning_and_boundary_wall": 111.75712318252772,
+        "iteration_scheduler_wall": 0.24403634760528803,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4249878528
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2400190464
+          }
+        },
+        "makespan": 509.51120297595315
+      }
+    },
+    "gain_vs_native": 0.5369038077018502,
+    "gain_vs_reference": 0.13123513936108966
+  },
+  {
+    "rate": 0.49032341538142143,
+    "KV_GiB_per_instance": 36.6748046875,
+    "arms": {
+      "native": {
+        "p50": 5.673977841605279,
+        "p95": 72.69299197359089,
+        "p99": 78.63825342348241,
+        "mean": 17.261140708399783,
+        "planning_and_boundary_wall": 0.040683893486857414,
+        "iteration_scheduler_wall": 0.13613918889313936,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2040528896
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4462739456
+          }
+        },
+        "makespan": 632.9811817231788
+      },
+      "reference": {
+        "p50": 14.677253367742878,
+        "p95": 28.14429033456929,
+        "p99": 30.80024435290744,
+        "mean": 13.945875471437569,
+        "planning_and_boundary_wall": 98.72159242257476,
+        "iteration_scheduler_wall": 0.12859761994332075,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3699376128
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2664431616
+          }
+        },
+        "makespan": 503.142765846617
+      },
+      "ours": {
+        "p50": 13.057349949141098,
+        "p95": 26.593865967735724,
+        "p99": 28.46199755802502,
+        "mean": 13.842779694799662,
+        "planning_and_boundary_wall": 145.04032915178686,
+        "iteration_scheduler_wall": 0.22620497830212116,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4213178368
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2260729856
+          }
+        },
+        "makespan": 525.1186580352911
+      }
+    },
+    "gain_vs_native": 0.6380642204150748,
+    "gain_vs_reference": 0.07591650144365492
+  },
+  {
+    "rate": 0.9806468307628429,
+    "KV_GiB_per_instance": 36.6748046875,
+    "arms": {
+      "native": {
+        "p50": 6.246397864264054,
+        "p95": 67.53514028622374,
+        "p99": 71.01025052073061,
+        "mean": 16.42687657272002,
+        "planning_and_boundary_wall": 0.04129123780876398,
+        "iteration_scheduler_wall": 0.13648365624248981,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2099249152
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 4580179968
+          }
+        },
+        "makespan": 619.1215433354411
+      },
+      "reference": {
+        "p50": 15.53681077617685,
+        "p95": 27.40108983792453,
+        "p99": 33.23841219828205,
+        "mean": 14.369118664678513,
+        "planning_and_boundary_wall": 142.93165510986,
+        "iteration_scheduler_wall": 0.1342025874182582,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3670016000
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2143289344
+          }
+        },
+        "makespan": 497.59347711449567
+      },
+      "ours": {
+        "p50": 15.716374086806468,
+        "p95": 28.59601301369554,
+        "p99": 35.64780969223625,
+        "mean": 15.020084957319437,
+        "planning_and_boundary_wall": 160.47782124392688,
+        "iteration_scheduler_wall": 0.2720924085006118,
+        "D_summary": {
+          "2": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 3992977408
+          },
+          "3": {
+            "peak_active": 4,
+            "peak_iteration_sequences": 4,
+            "peak_kv_bytes": 2532311040
+          }
+        },
+        "makespan": 507.90170234230686
+      }
+    },
+    "gain_vs_native": 0.49799065021141853,
+    "gain_vs_reference": -0.07248834509846813
+  }
+]

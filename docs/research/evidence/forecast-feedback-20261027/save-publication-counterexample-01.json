@@ -1,0 +1,19 @@
+{
+  "source_contract_diagnostic_only": true,
+  "native_binary_executed": false,
+  "all_new_blocks_fit": true,
+  "pool_blocks": 12,
+  "initial_old_blocks": 10,
+  "new_blocks": 6,
+  "reclaim_batch_unchanged": 512,
+  "current_model_usable_new_prefix": 0,
+  "current_model_retained_new_blocks": 4,
+  "staged_source_contract_new_prefix": 6,
+  "mechanism": "Current model inserts new save blocks into eviction candidates before remaining allocations finish; native source owns unpublished allocation references until copy/insert.",
+  "source_sha256": {
+    "pegaflow-core/src/offload.rs": "b37a78319145dcdfbcf98460acaf7a6b145cc438be5e3970aede39f3c01bc252",
+    "pegaflow-core/src/storage/mod.rs": "aded1176a5cf7615cc7c75423c98d2592c955941773e2497dbbb18c3943d6723",
+    "experiments/issue23_strategies/runtime/overlay/pegaflow/resource_cache_profile.py": "606b8254a095db4d1322f47ad3e40b4d620ff6d0392f463ddbc6275110bee825"
+  },
+  "scope_limit": "Not yet mapped to all full-run cache collapses or the installed stable native wheel. Do not retroactively relabel old results or change capacity/costs."
+}

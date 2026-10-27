@@ -1,0 +1,331 @@
+{
+  "started": 1793073617.0429878,
+  "finished": 1793074232.270797,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "-m",
+        "pytest",
+        "-q",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/test_linear_reclaim.py"
+      ],
+      "pid": 389815,
+      "started": 1793073617.0433888,
+      "finished": 1793073618.3100564,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 60
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-prefix-reclaim-source-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-default-03",
+        "--policy",
+        "prefix-reclaim",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "0"
+      ],
+      "pid": 389817,
+      "started": 1793073618.312515,
+      "finished": 1793073880.486132,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-default-03",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/prefix-reclaim-source-receipt-02.json",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-default-03/source-control-audit.json"
+      ],
+      "pid": 393693,
+      "started": 1793073880.4866564,
+      "finished": 1793073889.866654,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-default-03/work-conservation-audit.json"
+      ],
+      "pid": 393701,
+      "started": 1793073889.8672094,
+      "finished": 1793073892.2858388,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-default-03",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-default-03/release-estimate-audit.json"
+      ],
+      "pid": 393805,
+      "started": 1793073892.2862904,
+      "finished": 1793073895.872581,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-default-03/feedback-alignment.json"
+      ],
+      "pid": 393806,
+      "started": 1793073895.8732862,
+      "finished": 1793073898.0416648,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_prefill_revalidation.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-default-03/prefill-revalidation-audit.json"
+      ],
+      "pid": 393826,
+      "started": 1793073898.0421429,
+      "finished": 1793073899.9601378,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_prefill_feedback.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-default-03/numerical-feedback.json"
+      ],
+      "pid": 394021,
+      "started": 1793073899.960649,
+      "finished": 1793073902.6300526,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_prefix_reclaim.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-default-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-default-03/prefix-reclaim-activation-audit.json"
+      ],
+      "pid": 394119,
+      "started": 1793073902.6305444,
+      "finished": 1793073904.5993912,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-prefix-reclaim-source-02",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-sharing-03",
+        "--policy",
+        "prefix-reclaim",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1"
+      ],
+      "pid": 394121,
+      "started": 1793073916.5898314,
+      "finished": 1793074201.0633173,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-sharing-03",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/prefix-reclaim-source-receipt-02.json",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-sharing-03/source-control-audit.json"
+      ],
+      "pid": 398131,
+      "started": 1793074201.0639226,
+      "finished": 1793074209.1926296,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-sharing-03/work-conservation-audit.json"
+      ],
+      "pid": 398236,
+      "started": 1793074209.193189,
+      "finished": 1793074211.4120555,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-sharing-03",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-sharing-03/release-estimate-audit.json"
+      ],
+      "pid": 398237,
+      "started": 1793074211.4126194,
+      "finished": 1793074213.881934,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-sharing-03/feedback-alignment.json"
+      ],
+      "pid": 398333,
+      "started": 1793074213.8824887,
+      "finished": 1793074215.851007,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_prefill_revalidation.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-sharing-03/prefill-revalidation-audit.json"
+      ],
+      "pid": 398334,
+      "started": 1793074215.8515234,
+      "finished": 1793074217.5696828,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/analyze_prefill_feedback.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-sharing-03/numerical-feedback.json"
+      ],
+      "pid": 398335,
+      "started": 1793074217.5702267,
+      "finished": 1793074219.939332,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-prefix-reclaim-source-02/experiments/issue23_strategies/audit_prefix_reclaim.py",
+        "--result",
+        "/root/issue23-prefix-reclaim-charged-sharing-03",
+        "--output",
+        "/root/issue23-prefix-reclaim-charged-sharing-03/prefix-reclaim-activation-audit.json"
+      ],
+      "pid": 398355,
+      "started": 1793074219.9398093,
+      "finished": 1793074221.657722,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/issue23-prefix-reclaim-charged-default-03-full.tar.gz",
+      "sha256": "9ae7aae8db2a5560a87900d558bcbcca72d4d78a20429200f61162b7b2b79882",
+      "bytes": 19273200
+    },
+    {
+      "path": "/root/issue23-prefix-reclaim-charged-sharing-03-full.tar.gz",
+      "sha256": "e8fde03439e652df99cee9bb7d9ad3e8dac70bee1cc66a22327cffc13af83890",
+      "bytes": 17436073
+    }
+  ],
+  "failure": null,
+  "no_gpu_work": true
+}

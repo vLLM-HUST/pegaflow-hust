@@ -1,0 +1,904 @@
+{
+  "CPU_only": true,
+  "real_parallel_serving_validated": false,
+  "candidate": "progress-preserving-decode-01",
+  "reference": "release-preserving-cobatch-01",
+  "not_promoted": true,
+  "cases": [
+    {
+      "setting": "default",
+      "rate": 0.24516170769071072,
+      "raw_sha256": "19cc1549e8e6ff81afd9bf332e73cfb9387cd3e01f6ad06444a86baf08c2b349",
+      "summary": {
+        "p99_gain_percent": 7.1949919888516405,
+        "calls": 38,
+        "statuses": {
+          "acquired_or_completed": 2,
+          "no_predicted_improvement": 35,
+          "move": 1
+        },
+        "advice_CPU_wall": 10.46217985637486,
+        "lane_after_D_acquisition_NOT_net_gain": 0.5180296724994271,
+        "summed_request_route_overlap_NOT_wall_gain": 2.5428379734310056,
+        "affected_initial_routes": 7
+      },
+      "arms": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.547040287127054,
+            "p50": 6.424452697985856,
+            "p90": 12.719678378517017,
+            "p95": 16.768543282367546,
+            "p99": 18.402550807747843,
+            "max": 18.402550807747843
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 28.5589656298562,
+            "p50": 11.67362741781011,
+            "p90": 87.57536069962862,
+            "p95": 103.56212344028722,
+            "p99": 125.8269943951305,
+            "max": 125.8269943951305
+          },
+          "makespan": 520.1226439243254,
+          "planning_wall": 56.48206323478371,
+          "boundary_CPU_wall": 34.02023532614112
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.324533730163541,
+            "p50": 7.079835200586615,
+            "p90": 12.567260663367279,
+            "p95": 14.72459362058487,
+            "p99": 17.078488751386033,
+            "max": 17.078488751386033
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 26.899832769767524,
+            "p50": 10.777649052844083,
+            "p90": 76.53850510376145,
+            "p95": 99.75054192909386,
+            "p99": 133.1371727796842,
+            "max": 133.1371727796842
+          },
+          "makespan": 514.7961671966227,
+          "planning_wall": 56.78629520256072,
+          "boundary_CPU_wall": 29.3784026382491
+        }
+      },
+      "worst": {
+        "reference": "distribution-search:12",
+        "ours": "feal-differential-cryptanalysis:12"
+      },
+      "worst_aligned": {
+        "distribution-search:12": {
+          "id": "distribution-search:12",
+          "path": {
+            "reference": {
+              "TTFT": 18.402550807747843,
+              "nominal": 49.74939046022649,
+              "dependency": 31.34683965247865,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 2944,
+              "D_prefix": 0,
+              "ready": 352.3438292089129,
+              "first": 370.74638001666074,
+              "before_P": 3.1877828544041904,
+              "P_API": 7.440895485389966,
+              "P_to_D": 6.914347626598953,
+              "D_API_to_first": 0.8595248413547552
+            },
+            "ours": {
+              "TTFT": 16.681624144472096,
+              "nominal": 67.08464718646849,
+              "dependency": 50.40302304199639,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 9344,
+              "D_prefix": 0,
+              "ready": 371.40001259843064,
+              "first": 388.08163674290273,
+              "before_P": 2.6350313157973915,
+              "P_API": 4.3670918547560085,
+              "P_to_D": 8.984583716870361,
+              "D_API_to_first": 0.6949172570483597
+            }
+          },
+          "actual_initial_route_origin": 372.1266687784783,
+          "observed_route_wait": 0.7266561800476552,
+          "advice_overlap": 0.7266561800476552
+        },
+        "feal-differential-cryptanalysis:12": {
+          "id": "feal-differential-cryptanalysis:12",
+          "path": {
+            "reference": {
+              "TTFT": 8.650598727374415,
+              "nominal": 87.57536069962862,
+              "dependency": 78.9247619722542,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 11776,
+              "D_prefix": 0,
+              "ready": 404.8596314826988,
+              "first": 413.5102302100732,
+              "before_P": 0.7181271613912372,
+              "P_API": 5.4736617817863715,
+              "P_to_D": 1.7142111754324674,
+              "D_API_to_first": 0.7445986087643632
+            },
+            "ours": {
+              "TTFT": 17.078488751386033,
+              "nominal": 70.67384823478494,
+              "dependency": 53.59535948339891,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6656,
+              "D_prefix": 0,
+              "ready": 379.5302289938435,
+              "first": 396.6087177452295,
+              "before_P": 1.9288860020564584,
+              "P_API": 7.9965754572722805,
+              "P_to_D": 6.054093386912655,
+              "D_API_to_first": 1.0989339051446336
+            }
+          },
+          "actual_initial_route_origin": 379.53889617788343,
+          "observed_route_wait": 0.00866718403995037,
+          "advice_overlap": 0.0
+        }
+      }
+    },
+    {
+      "setting": "default",
+      "rate": 0.49032341538142143,
+      "raw_sha256": "23a58ca9a5edf3a65523a6e06e04c8dcc5bf325e5b2a20456365d22b117be389",
+      "summary": {
+        "p99_gain_percent": 12.620451568713397,
+        "calls": 41,
+        "statuses": {
+          "no_predicted_improvement": 39,
+          "move": 2
+        },
+        "advice_CPU_wall": 7.873777873814106,
+        "lane_after_D_acquisition_NOT_net_gain": 0,
+        "summed_request_route_overlap_NOT_wall_gain": 0.8099429792617627,
+        "affected_initial_routes": 2
+      },
+      "arms": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.289488158585364,
+            "p50": 7.779839797648094,
+            "p90": 14.705122070339371,
+            "p95": 17.149176128859494,
+            "p99": 17.94108759631513,
+            "max": 17.94108759631513
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 112.48526311720506,
+            "p50": 89.61119459164588,
+            "p90": 236.51923577644575,
+            "p95": 274.185416214964,
+            "p99": 310.2630884764301,
+            "max": 310.2630884764301
+          },
+          "makespan": 515.394358003725,
+          "planning_wall": 66.60110795404762,
+          "boundary_CPU_wall": 33.98528556898236
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.608724133183618,
+            "p50": 7.8926997924234,
+            "p90": 12.751612216922013,
+            "p95": 13.577540413768475,
+            "p99": 15.676841325321732,
+            "max": 15.676841325321732
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 109.07520608295724,
+            "p50": 88.02860677020837,
+            "p90": 224.13367959288553,
+            "p95": 256.47234228295855,
+            "p99": 290.51124158069,
+            "max": 290.51124158069
+          },
+          "makespan": 495.3518549031743,
+          "planning_wall": 64.22396168671548,
+          "boundary_CPU_wall": 38.79629193712026
+        }
+      },
+      "worst": {
+        "reference": "fix-code-vulnerability:11",
+        "ours": "git-multibranch:8"
+      },
+      "worst_aligned": {
+        "git-multibranch:8": {
+          "id": "git-multibranch:8",
+          "path": {
+            "reference": {
+              "TTFT": 5.949759999316967,
+              "nominal": 132.2605956993645,
+              "dependency": 126.31083570004752,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 6784,
+              "D_prefix": 0,
+              "ready": 247.50805546566775,
+              "first": 253.45781546498472,
+              "before_P": 0.9609513004647283,
+              "P_API": 3.7207876032522997,
+              "P_to_D": 0.6760127006378411,
+              "D_API_to_first": 0.5920083949621073
+            },
+            "ours": {
+              "TTFT": 15.676841325321732,
+              "nominal": 113.21815854448703,
+              "dependency": 97.5413172191653,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 0,
+              "D_prefix": 0,
+              "ready": 218.73853698478553,
+              "first": 234.41537831010726,
+              "before_P": 1.9953690304498366,
+              "P_API": 6.886538094570098,
+              "P_to_D": 5.189924436145162,
+              "D_API_to_first": 1.605009764156648
+            }
+          },
+          "actual_initial_route_origin": 219.3353255089051,
+          "observed_route_wait": 0.5967885241195745,
+          "advice_overlap": 0.0
+        },
+        "fix-code-vulnerability:11": {
+          "id": "fix-code-vulnerability:11",
+          "path": {
+            "reference": {
+              "TTFT": 17.94108759631513,
+              "nominal": 207.4725711077141,
+              "dependency": 189.53148351139896,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 13824,
+              "D_prefix": 0,
+              "ready": 342.46494770219994,
+              "first": 360.40603529851506,
+              "before_P": 2.486753827087739,
+              "P_API": 3.2028821411303805,
+              "P_to_D": 11.482601170723626,
+              "D_API_to_first": 0.7688504573733894
+            },
+            "ours": {
+              "TTFT": 10.75349506315979,
+              "nominal": 197.19463877369174,
+              "dependency": 186.44114371053195,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 10880,
+              "D_prefix": 0,
+              "ready": 339.3746079013329,
+              "first": 350.1281029644927,
+              "before_P": 1.015859535090783,
+              "P_API": 4.56336878606872,
+              "P_to_D": 4.355878251846207,
+              "D_API_to_first": 0.8183884901540637
+            }
+          },
+          "actual_initial_route_origin": 339.3808220422473,
+          "observed_route_wait": 0.00621414091438055,
+          "advice_overlap": 0.0
+        }
+      }
+    },
+    {
+      "setting": "default",
+      "rate": 0.9806468307628429,
+      "raw_sha256": "98dd9066b2936b23f07465d610ccb734f1ca02300d8c9079b1dd271747ea1a36",
+      "summary": {
+        "p99_gain_percent": -12.137858738992936,
+        "calls": 35,
+        "statuses": {
+          "no_predicted_improvement": 31,
+          "acquired_or_completed": 1,
+          "move": 3
+        },
+        "advice_CPU_wall": 9.950012904591858,
+        "lane_after_D_acquisition_NOT_net_gain": 0.002019886223337153,
+        "summed_request_route_overlap_NOT_wall_gain": 0.8543680751460272,
+        "affected_initial_routes": 2
+      },
+      "arms": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 8.115395633709303,
+            "p50": 8.360440476788085,
+            "p90": 15.109086691505013,
+            "p95": 16.22288638750041,
+            "p99": 18.157176494388295,
+            "max": 18.157176494388295
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 157.5493067876585,
+            "p50": 143.0246469152574,
+            "p90": 312.4872249987778,
+            "p95": 346.83028319072184,
+            "p99": 399.3874908745103,
+            "max": 399.3874908745103
+          },
+          "makespan": 504.63776002514874,
+          "planning_wall": 68.21587259601802,
+          "boundary_CPU_wall": 32.286018316634
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.9308960413448535,
+            "p50": 6.721596482452014,
+            "p90": 14.999950836691909,
+            "p95": 15.376017873186385,
+            "p99": 20.361068928266775,
+            "max": 20.361068928266775
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 157.32572049041678,
+            "p50": 136.21775689027757,
+            "p90": 317.4450378530137,
+            "p95": 357.1087935677888,
+            "p99": 402.5130278279072,
+            "max": 402.5130278279072
+          },
+          "makespan": 508.9073209243838,
+          "planning_wall": 66.33731641806662,
+          "boundary_CPU_wall": 39.410427949391305
+        }
+      },
+      "worst": {
+        "reference": "distribution-search:15",
+        "ours": "headless-terminal:12"
+      },
+      "worst_aligned": {
+        "headless-terminal:12": {
+          "id": "headless-terminal:12",
+          "path": {
+            "reference": {
+              "TTFT": 11.315913606531126,
+              "nominal": 285.38172400653514,
+              "dependency": 274.065810400004,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 7680,
+              "D_prefix": 0,
+              "ready": 357.58338869402456,
+              "first": 368.8993023005557,
+              "before_P": 1.5557606798933534,
+              "P_API": 2.1507911326510785,
+              "P_to_D": 7.014617962821546,
+              "D_API_to_first": 0.5947438311651467
+            },
+            "ours": {
+              "TTFT": 20.361068928266775,
+              "nominal": 294.18097206673195,
+              "dependency": 273.8199031384652,
+              "P": 1,
+              "D": 3,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 357.33748143248573,
+              "first": 377.6985503607525,
+              "before_P": 6.653435505654386,
+              "P_API": 5.4619507952917346,
+              "P_to_D": 0.5207788238581657,
+              "D_API_to_first": 7.724903803462496
+            }
+          },
+          "actual_initial_route_origin": 359.245509091494,
+          "observed_route_wait": 1.908027659008269,
+          "advice_overlap": 0.0
+        },
+        "distribution-search:15": {
+          "id": "distribution-search:15",
+          "path": {
+            "reference": {
+              "TTFT": 18.157176494388295,
+              "nominal": 342.7377713970159,
+              "dependency": 324.5805949026276,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 7424,
+              "D_prefix": 0,
+              "ready": 421.4057975581672,
+              "first": 439.5629740525555,
+              "before_P": 0.925421035044053,
+              "P_API": 7.298805179935919,
+              "P_to_D": 8.88933629178075,
+              "D_API_to_first": 1.043613987627566
+            },
+            "ours": {
+              "TTFT": 7.593105769269869,
+              "nominal": 354.76315596098226,
+              "dependency": 347.1700501917124,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 12672,
+              "D_prefix": 0,
+              "ready": 443.995252847252,
+              "first": 451.5883586165219,
+              "before_P": 0.6618732177989273,
+              "P_API": 5.063650179641303,
+              "P_to_D": 1.0723494191002487,
+              "D_API_to_first": 0.7952329527294069
+            }
+          },
+          "actual_initial_route_origin": 444.00417564394843,
+          "observed_route_wait": 0.008922796696424484,
+          "advice_overlap": 0.0
+        }
+      }
+    },
+    {
+      "setting": "sharing",
+      "rate": 0.24516170769071072,
+      "raw_sha256": "ca50e1d1a4f36021ec46dffa50db021e8cc03c427ba54261e4983b48aa2dc247",
+      "summary": {
+        "p99_gain_percent": -16.875590509991987,
+        "calls": 5,
+        "statuses": {
+          "acquired_or_completed": 2,
+          "no_predicted_improvement": 3
+        },
+        "advice_CPU_wall": 2.2447348907589912,
+        "lane_after_D_acquisition_NOT_net_gain": 1.0649469143020553,
+        "summed_request_route_overlap_NOT_wall_gain": 0.8648089782130342,
+        "affected_initial_routes": 1
+      },
+      "arms": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 6.664808689688816,
+            "p50": 6.705394552103897,
+            "p90": 11.926929003575083,
+            "p95": 13.29455635307346,
+            "p99": 15.62621045817582,
+            "max": 15.62621045817582
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 7.922987813662245,
+            "p50": 6.705394552103897,
+            "p90": 15.859306913714704,
+            "p95": 18.528143654971473,
+            "p99": 29.403935010443547,
+            "max": 29.403935010443547
+          },
+          "makespan": 424.8774787378994,
+          "planning_wall": 47.059408912435174,
+          "boundary_CPU_wall": 23.17983410693705
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 6.672101613903575,
+            "p50": 5.96049459840026,
+            "p90": 13.07384156732735,
+            "p95": 15.197276241726172,
+            "p99": 18.263225747327112,
+            "max": 18.263225747327112
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 8.728476398093095,
+            "p50": 6.423739779991209,
+            "p90": 21.157629815756195,
+            "p95": 25.168913685007,
+            "p99": 34.05312850107339,
+            "max": 34.05312850107339
+          },
+          "makespan": 423.76756464941747,
+          "planning_wall": 49.70636212360114,
+          "boundary_CPU_wall": 32.79900874849409
+        }
+      },
+      "worst": {
+        "reference": "fix-code-vulnerability:11",
+        "ours": "headless-terminal:11"
+      },
+      "worst_aligned": {
+        "headless-terminal:11": {
+          "id": "headless-terminal:11",
+          "path": {
+            "reference": {
+              "TTFT": 10.497597841301115,
+              "nominal": 10.497597841301115,
+              "dependency": 0.0,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 1024,
+              "D_prefix": 512,
+              "ready": 315.8930721177277,
+              "first": 326.3906699590288,
+              "before_P": 4.432259057693955,
+              "P_API": 4.732528086737955,
+              "P_to_D": 0.5299042344373106,
+              "D_API_to_first": 0.8029064624319062
+            },
+            "ours": {
+              "TTFT": 18.263225747327112,
+              "nominal": 18.263225747327112,
+              "dependency": 0.0,
+              "P": 0,
+              "D": 3,
+              "P_prefix": 0,
+              "D_prefix": 1024,
+              "ready": 315.8930721177277,
+              "first": 334.1562978650548,
+              "before_P": 2.630673706794653,
+              "P_API": 5.218026880799156,
+              "P_to_D": 0.9966960830893754,
+              "D_API_to_first": 9.417829076643955
+            }
+          },
+          "actual_initial_route_origin": 316.4367096859951,
+          "observed_route_wait": 0.5436375682673997,
+          "advice_overlap": 0.0
+        },
+        "fix-code-vulnerability:11": {
+          "id": "fix-code-vulnerability:11",
+          "path": {
+            "reference": {
+              "TTFT": 15.62621045817582,
+              "nominal": 15.62621045817582,
+              "dependency": 0.0,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 305.86692838160195,
+              "first": 321.49313883977777,
+              "before_P": 5.0220883811527415,
+              "P_API": 9.295496246723813,
+              "P_to_D": 0.5239123629685878,
+              "D_API_to_first": 0.7847134673306755
+            },
+            "ours": {
+              "TTFT": 12.91013848058003,
+              "nominal": 12.91013848058003,
+              "dependency": 0.0,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 512,
+              "ready": 305.86692838160195,
+              "first": 318.777066862182,
+              "before_P": 2.899822550681904,
+              "P_API": 9.295496246723813,
+              "P_to_D": 0.6081429321598648,
+              "D_API_to_first": 0.10667675101444729
+            }
+          },
+          "actual_initial_route_origin": 307.02901275590807,
+          "observed_route_wait": 1.1620843743061187,
+          "advice_overlap": 0.0
+        }
+      }
+    },
+    {
+      "setting": "sharing",
+      "rate": 0.49032341538142143,
+      "raw_sha256": "9866b0d742f09834be62b43e003fd400cebede2796e235966a7fff3d5b22b12a",
+      "summary": {
+        "p99_gain_percent": -21.239663581434943,
+        "calls": 18,
+        "statuses": {
+          "acquired_or_completed": 8,
+          "no_predicted_improvement": 10
+        },
+        "advice_CPU_wall": 7.779315734282136,
+        "lane_after_D_acquisition_NOT_net_gain": 5.117898474757759,
+        "summed_request_route_overlap_NOT_wall_gain": 5.132378044789547,
+        "affected_initial_routes": 9
+      },
+      "arms": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 6.809196305467156,
+            "p50": 6.3721730558317375,
+            "p90": 11.8476827284683,
+            "p95": 12.639470583710192,
+            "p99": 14.58568953137933,
+            "max": 14.58568953137933
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 18.35930183411339,
+            "p50": 9.871018897838127,
+            "p90": 56.691627124729166,
+            "p95": 66.60010482368776,
+            "p99": 86.2758523546556,
+            "max": 86.2758523546556
+          },
+          "makespan": 291.4073014837836,
+          "planning_wall": 48.5724534355104,
+          "boundary_CPU_wall": 31.035751098766923
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.36508572343992,
+            "p50": 7.037837903127809,
+            "p90": 13.013214340123028,
+            "p95": 14.897269140324624,
+            "p99": 17.683640918876876,
+            "max": 17.683640918876876
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 19.699767443393817,
+            "p50": 10.53367991209933,
+            "p90": 58.801389062776224,
+            "p95": 66.83196077216888,
+            "p99": 76.30498309556717,
+            "max": 76.30498309556717
+          },
+          "makespan": 278.6230380430146,
+          "planning_wall": 57.60319379903376,
+          "boundary_CPU_wall": 31.23298497032374
+        }
+      },
+      "worst": {
+        "reference": "dna-insert:12",
+        "ours": "distribution-search:14"
+      },
+      "worst_aligned": {
+        "distribution-search:14": {
+          "id": "distribution-search:14",
+          "path": {
+            "reference": {
+              "TTFT": 9.83052771870797,
+              "nominal": 62.80798430644495,
+              "dependency": 52.97745658773698,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 5504,
+              "D_prefix": 384,
+              "ready": 226.84179028298823,
+              "first": 236.6723180016962,
+              "before_P": 0.6810028740541725,
+              "P_API": 8.163606677516405,
+              "P_to_D": 0.874813183425033,
+              "D_API_to_first": 0.11110498371235167
+            },
+            "ours": {
+              "TTFT": 17.683640918876876,
+              "nominal": 67.14182792536738,
+              "dependency": 49.458187006490505,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 5504,
+              "D_prefix": 0,
+              "ready": 223.32252070174175,
+              "first": 241.00616162061863,
+              "before_P": 7.332806200764594,
+              "P_API": 8.163606677516405,
+              "P_to_D": 1.076764085544312,
+              "D_API_to_first": 1.1104639550515572
+            }
+          },
+          "actual_initial_route_origin": 223.33520543255466,
+          "observed_route_wait": 0.012684730812907219,
+          "advice_overlap": 0.0
+        },
+        "dna-insert:12": {
+          "id": "dna-insert:12",
+          "path": {
+            "reference": {
+              "TTFT": 14.58568953137933,
+              "nominal": 39.2158338983684,
+              "dependency": 24.63014436698907,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 186.05196377012078,
+              "first": 200.6376533015001,
+              "before_P": 5.277033277652265,
+              "P_API": 5.406356817354102,
+              "P_to_D": 0.8924371755260836,
+              "D_API_to_first": 3.0098622608468872
+            },
+            "ours": {
+              "TTFT": 13.013214340123028,
+              "nominal": 41.174563171864435,
+              "dependency": 28.161348831741407,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 7040,
+              "D_prefix": 1920,
+              "ready": 189.5831682348731,
+              "first": 202.59638257499614,
+              "before_P": 1.7303032722852265,
+              "P_API": 2.362575421288132,
+              "P_to_D": 5.116229719278039,
+              "D_API_to_first": 3.804105927271621
+            }
+          },
+          "actual_initial_route_origin": 189.5907303227219,
+          "observed_route_wait": 0.007562087848782539,
+          "advice_overlap": 0.0
+        }
+      }
+    },
+    {
+      "setting": "sharing",
+      "rate": 0.9806468307628429,
+      "raw_sha256": "3506508e19af329e6be46bb1632c41a3b47281281845aca3dee5e6f694e72bfe",
+      "summary": {
+        "p99_gain_percent": -19.576709582795495,
+        "calls": 11,
+        "statuses": {
+          "acquired_or_completed": 2,
+          "no_predicted_improvement": 8,
+          "move": 1
+        },
+        "advice_CPU_wall": 4.620803805999458,
+        "lane_after_D_acquisition_NOT_net_gain": 1.2904097801717107,
+        "summed_request_route_overlap_NOT_wall_gain": 2.069625473509536,
+        "affected_initial_routes": 3
+      },
+      "arms": {
+        "reference": {
+          "TTFT": {
+            "n": 95,
+            "mean": 7.956054830270219,
+            "p50": 8.077043061548224,
+            "p90": 12.428438972537037,
+            "p95": 13.677328853242301,
+            "p99": 15.843797264142609,
+            "max": 15.843797264142609
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 49.93368233769371,
+            "p50": 38.006897347129716,
+            "p90": 120.19441117629091,
+            "p95": 130.0854788676578,
+            "p99": 148.94764693606885,
+            "max": 148.94764693606885
+          },
+          "makespan": 255.3432399483807,
+          "planning_wall": 84.00452224817127,
+          "boundary_CPU_wall": 35.14988315757364
+        },
+        "ours": {
+          "TTFT": {
+            "n": 95,
+            "mean": 9.18861770510044,
+            "p50": 9.553571426926922,
+            "p90": 14.215549262200668,
+            "p95": 15.410573708316775,
+            "p99": 18.945491441430704,
+            "max": 18.945491441430704
+          },
+          "nominal": {
+            "n": 95,
+            "mean": 54.177019228194,
+            "p50": 38.13254356042534,
+            "p90": 128.23787845466427,
+            "p95": 149.1276537995719,
+            "p99": 172.8662260745046,
+            "max": 172.8662260745046
+          },
+          "makespan": 279.25971039741887,
+          "planning_wall": 86.77116894442588,
+          "boundary_CPU_wall": 42.56174472998828
+        }
+      },
+      "worst": {
+        "reference": "feal-differential-cryptanalysis:12",
+        "ours": "headless-terminal:11"
+      },
+      "worst_aligned": {
+        "headless-terminal:11": {
+          "id": "headless-terminal:11",
+          "path": {
+            "reference": {
+              "TTFT": 6.95169538565446,
+              "nominal": 75.30397005572055,
+              "dependency": 68.3522746700661,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 256,
+              "ready": 147.32554269949802,
+              "first": 154.27723808515248,
+              "before_P": 1.3226617765822084,
+              "P_API": 4.842961579543027,
+              "P_to_D": 0.5237700792309283,
+              "D_API_to_first": 0.2623019502983084
+            },
+            "ours": {
+              "TTFT": 18.945491441430704,
+              "nominal": 108.47292344538539,
+              "dependency": 89.52743200395469,
+              "P": 1,
+              "D": 3,
+              "P_prefix": 8832,
+              "D_prefix": 9600,
+              "ready": 168.5007000333866,
+              "first": 187.4461914748173,
+              "before_P": 9.427049843109756,
+              "P_API": 1.1242808979884458,
+              "P_to_D": 2.039035148415792,
+              "D_API_to_first": 6.3551255519167
+            }
+          },
+          "actual_initial_route_origin": 169.35389298147885,
+          "observed_route_wait": 0.8531929480922429,
+          "advice_overlap": 0.0
+        },
+        "feal-differential-cryptanalysis:12": {
+          "id": "feal-differential-cryptanalysis:12",
+          "path": {
+            "reference": {
+              "TTFT": 15.843797264142609,
+              "nominal": 101.96238237609053,
+              "dependency": 86.11858511194792,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 4096,
+              "D_prefix": 0,
+              "ready": 167.60230248955907,
+              "first": 183.44609975370167,
+              "before_P": 5.397520187120449,
+              "P_API": 8.960967556806596,
+              "P_to_D": 0.6450405691098808,
+              "D_API_to_first": 0.8402689511056849
+            },
+            "ours": {
+              "TTFT": 10.954715064809847,
+              "nominal": 97.74056296614022,
+              "dependency": 86.78584790133037,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6784,
+              "D_prefix": 0,
+              "ready": 168.2695652789415,
+              "first": 179.22428034375136,
+              "before_P": 1.7201394761909228,
+              "P_API": 7.937423864014091,
+              "P_to_D": 0.5038454506826042,
+              "D_API_to_first": 0.7933062739222407
+            }
+          },
+          "actual_initial_route_origin": 168.27663078279954,
+          "observed_route_wait": 0.007065503858029842,
+          "advice_overlap": 0.0
+        }
+      }
+    }
+  ],
+  "full_diagnostics": [
+    {
+      "path": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\progress-decode-default-behavior-01.json",
+      "sha256": "5e94c1ec4e558e3d61ddc758c51bfea4451f853261685b6b92163ea434e8dde2"
+    },
+    {
+      "path": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\progress-decode-sharing-behavior-01.json",
+      "sha256": "c14a5de491566d02e9c6c21ca5f1f5b415d75dba5b5c755f957b0ff410f915a3"
+    }
+  ]
+}

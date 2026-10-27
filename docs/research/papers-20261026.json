@@ -1,0 +1,176 @@
+{
+  "as_of": "2026-10-26",
+  "papers": [
+    {
+      "id": "Strata",
+      "category": "C",
+      "publication": "OSDI 2026",
+      "reading_level": "F",
+      "primary_url": "https://www.usenix.org/conference/osdi26/presentation/xie-zhiqiang",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "CacheFlow",
+      "category": "C",
+      "publication": "preprint v2 2026-09-26",
+      "reading_level": "F",
+      "primary_url": "https://arxiv.org/html/2604.25080v2",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "Bidaw",
+      "category": "C",
+      "publication": "FAST 2026",
+      "reading_level": "F",
+      "primary_url": "https://www.usenix.org/conference/fast26/presentation/hu-shipeng",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "TurboBus",
+      "category": "C",
+      "publication": "SIGCOMM 2026",
+      "reading_level": "A",
+      "primary_url": "https://doi.org/10.1145/3789240.3829130",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "eLLM",
+      "category": "C",
+      "publication": "EuroSys 2026",
+      "reading_level": "A",
+      "primary_url": "https://doi.org/10.1145/3767295.3803570",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "DirectKV",
+      "category": "C",
+      "publication": "OSDI 2026",
+      "reading_level": "A",
+      "primary_url": "https://www.usenix.org/conference/osdi26/presentation/luo",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "ECHO",
+      "category": "C",
+      "publication": "OSDI 2026",
+      "reading_level": "A",
+      "primary_url": "https://www.usenix.org/conference/osdi26/presentation/liu-guangda",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "KVPR",
+      "category": "C",
+      "publication": "Findings ACL 2025",
+      "reading_level": "A/H",
+      "primary_url": "https://aclanthology.org/2025.findings-acl.997/",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "KVServe",
+      "category": "C",
+      "publication": "SIGCOMM 2026",
+      "reading_level": "A/H",
+      "primary_url": "https://arxiv.org/abs/2605.13734",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "KVCodec",
+      "category": "C",
+      "publication": "SIGCOMM 2026",
+      "reading_level": "A/H",
+      "primary_url": "https://arxiv.org/abs/2602.09725",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "Mooncake",
+      "category": "B",
+      "publication": "FAST 2025",
+      "reading_level": "H",
+      "primary_url": "https://www.usenix.org/conference/fast25/presentation/qin",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "SYMPHONY",
+      "category": "B",
+      "publication": "NSDI 2026",
+      "reading_level": "A/H",
+      "primary_url": "https://www.usenix.org/conference/nsdi26/presentation/agarwal",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "DualPath",
+      "category": "B",
+      "publication": "SIGCOMM 2026",
+      "reading_level": "A/H",
+      "primary_url": "https://arxiv.org/abs/2602.21548",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "SARIA",
+      "category": "B",
+      "publication": "preprint v1 2026-10-22",
+      "reading_level": "F",
+      "primary_url": "https://arxiv.org/html/2610.31169v1",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "MemServe",
+      "category": "B",
+      "publication": "preprint 2024",
+      "reading_level": "H",
+      "primary_url": "https://arxiv.org/abs/2406.17565",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "LMCache",
+      "category": "B",
+      "publication": "preprint v2 2025-12-05",
+      "reading_level": "A/H",
+      "primary_url": "https://arxiv.org/abs/2510.09665",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "LMetric",
+      "category": "A",
+      "publication": "OSDI 2026",
+      "reading_level": "A",
+      "primary_url": "https://www.usenix.org/conference/osdi26/presentation/zhang-dingyan",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "Preble",
+      "category": "A",
+      "publication": "ICLR 2025",
+      "reading_level": "H",
+      "primary_url": "https://arxiv.org/abs/2407.00023",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "Calibrate Then Route",
+      "category": "A",
+      "publication": "preprint v1 2026-09-14",
+      "reading_level": "F",
+      "primary_url": "https://arxiv.org/html/2609.16206v1",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "Compositional Performance Modeling",
+      "category": "D",
+      "publication": "preprint v1 2026-10-11",
+      "reading_level": "F",
+      "primary_url": "https://arxiv.org/html/2610.15366v1",
+      "checked_as_of": "2026-10-26"
+    },
+    {
+      "id": "Understanding Bottlenecks With KV Offloading",
+      "category": "D",
+      "publication": "preprint; ID/date discrepancy retained",
+      "reading_level": "A",
+      "primary_url": "https://arxiv.org/abs/2601.19910",
+      "checked_as_of": "2026-10-26"
+    }
+  ],
+  "inherited_full_catalogue": "archive/research-spec02-20261019.md",
+  "venue_verification": "USENIX official, SIGCOMM official program, ACM DOI or author page; preprints remain labeled",
+  "not_exhaustive": true
+}

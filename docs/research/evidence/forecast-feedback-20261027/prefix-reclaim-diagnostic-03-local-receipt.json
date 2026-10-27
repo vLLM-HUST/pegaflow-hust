@@ -1,0 +1,18 @@
+{
+  "checked_unix": 1793074028.2949018,
+  "kind": "full-local-sha-and-extraction",
+  "archives": {
+    "default": {
+      "path": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\issue23-prefix-reclaim-diagnostic-default-03-full.tar.gz",
+      "sha256": "429309bede5020ed4e8d8be7f00f264c50395e84c89a667d4a7fcd732ccf23ad",
+      "bytes": 12690730,
+      "extracted": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\result-prefix-reclaim-diagnostic-default-03\\issue23-prefix-reclaim-diagnostic-default-03"
+    },
+    "sharing": {
+      "path": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\issue23-prefix-reclaim-diagnostic-sharing-03-full.tar.gz",
+      "sha256": "a850c61a8c0260e1784068416312f7aa47365ae7f0d37b12be2deb34d5dddcd0",
+      "bytes": 11862564,
+      "extracted": "C:\\Users\\Lenovo\\Desktop\\issue23\\cache-profile-20261026\\result-prefix-reclaim-diagnostic-sharing-03\\issue23-prefix-reclaim-diagnostic-sharing-03"
+    }
+  }
+}

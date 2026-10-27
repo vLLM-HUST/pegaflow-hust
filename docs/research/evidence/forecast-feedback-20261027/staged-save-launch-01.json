@@ -1,0 +1,25 @@
+{
+  "pid": 606590,
+  "pgid": 606590,
+  "started": 1793089385.0647051,
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "/root/staged-save-pipeline-01.py"
+  ],
+  "cwd": "/root/issue23-staged-save-source-01",
+  "source_sha256": "23f40e4bb9cb529fd39fcecaddb18a11532131f06800a2f075ddefb062bdfda5",
+  "runner_sha256": "4ff2a1afba608cf00e2082160c975d437c6d684fba27dfc44fb2e35a5d62cdb1",
+  "root": "/root/issue23-staged-save-charged-pipeline-01",
+  "outputs": [
+    "/root/issue23-staged-save-charged-default-01",
+    "/root/issue23-staged-save-charged-sharing-01"
+  ],
+  "policy": "ready-prefill",
+  "expected_revision": "ready-prefill-before-restore-01",
+  "world_revision": "staged-save-publication-01",
+  "limit_seconds": 4500,
+  "matrix_limit_seconds": 1800,
+  "workers": 3,
+  "CPU_only": true,
+  "console": "/root/staged-save-pipeline-01-console.log"
+}

@@ -1,0 +1,9 @@
+{
+  "scope": "local current-source unit contracts only",
+  "command": "python -m pytest experiments/issue23_strategies/test_staged_save.py -q",
+  "exit_code": 0,
+  "passed": 9,
+  "full_matrix_passed": false,
+  "real_device_validated": false,
+  "branch": "feat/issue23-simulator-snapshot-20261027"
+}

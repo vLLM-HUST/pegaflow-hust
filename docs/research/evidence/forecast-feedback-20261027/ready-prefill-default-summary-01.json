@@ -1,0 +1,737 @@
+[
+  {
+    "rate": 0.24516170769071072,
+    "gain": -7.730922941625762,
+    "inversions": 59,
+    "first": 138.55381903100476,
+    "first_route_difference": "fix-git:5",
+    "before": true,
+    "worst": {
+      "reference": {
+        "reference": {
+          "path": {
+            "TTFT": 18.48337802957286,
+            "nominal": 79.97827260082533,
+            "dependency": 61.49489457125247,
+            "P": 0,
+            "D": 3,
+            "P_prefix": 6784,
+            "D_prefix": 0,
+            "ready": 376.2647206096789,
+            "first": 394.74809863925174,
+            "before_P": 1.1334332359360246,
+            "P_API": 5.201111807192708,
+            "P_to_D": 0.6276798716094731,
+            "D_API_to_first": 11.521153114834647
+          },
+          "Dpartition": {
+            "API_start": 383.2269455244171,
+            "first": 394.74809863925174,
+            "residence": 11.521153114834647,
+            "interval_partition_not_additional_cost": {
+              "contains_target_restore": 1.8090009689331055e-05,
+              "contains_target_compute": 11.521135024824957,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 3,
+                "start": 383.2269455244171,
+                "end": 383.2269636144268,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "git-multibranch:11",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 1020264448
+              }
+            ]
+          }
+        },
+        "ours": {
+          "path": {
+            "TTFT": 12.764455643649228,
+            "nominal": 77.31253356350976,
+            "dependency": 64.54807791986053,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 6784,
+            "D_prefix": 0,
+            "ready": 379.31790395828693,
+            "first": 392.08235960193616,
+            "before_P": 1.713428006634274,
+            "P_API": 5.307312571467186,
+            "P_to_D": 5.084397871619558,
+            "D_API_to_first": 0.6593171939281888
+          },
+          "Dpartition": {
+            "API_start": 391.423042408008,
+            "first": 392.08235960193616,
+            "residence": 0.6593171939281888,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.007859491306533073,
+              "contains_target_restore": 2.4580396711826324e-05,
+              "contains_target_compute": 0.6514331222249439,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 2,
+                "start": 391.4309018993145,
+                "end": 391.4309264797112,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "git-multibranch:11",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 4426039296
+              }
+            ]
+          }
+        }
+      },
+      "ours": {
+        "reference": {
+          "path": {
+            "TTFT": 9.43261209825181,
+            "nominal": 52.20338034867831,
+            "dependency": 42.7707682504265,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 5504,
+            "D_prefix": 0,
+            "ready": 369.93384224893646,
+            "first": 379.36645434718827,
+            "before_P": 1.2050635093410165,
+            "P_API": 3.027724727321541,
+            "P_to_D": 4.904572109669402,
+            "D_API_to_first": 0.29525175191986364
+          },
+          "Dpartition": {
+            "API_start": 379.0712025952684,
+            "first": 379.36645434718827,
+            "residence": 0.29525175191986364,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.042860492581382914,
+              "contains_target_restore": 2.7059577405452728e-05,
+              "contains_target_compute": 0.25236419976107527,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 2,
+                "start": 379.1140630878498,
+                "end": 379.1140901474272,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "fix-git:12",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 4220518400
+              }
+            ]
+          }
+        },
+        "ours": {
+          "path": {
+            "TTFT": 19.912313742048525,
+            "nominal": 61.83443140564896,
+            "dependency": 41.92211766360043,
+            "P": 1,
+            "D": 3,
+            "P_prefix": 4864,
+            "D_prefix": 0,
+            "ready": 369.0851916621104,
+            "first": 388.9975054041589,
+            "before_P": 3.9900492903234976,
+            "P_API": 3.3234826936124833,
+            "P_to_D": 0.5831056667771577,
+            "D_API_to_first": 12.015676091335365
+          },
+          "Dpartition": {
+            "API_start": 376.98182931282355,
+            "first": 388.9975054041589,
+            "residence": 12.015676091335365,
+            "interval_partition_not_additional_cost": {
+              "other_restore": 1.823264042604876,
+              "other_compute": 2.9691237211148405,
+              "contains_target_restore": 1.6369856894016266e-05,
+              "contains_target_compute": 7.2232719577587545,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 3,
+                "start": 375.228395100437,
+                "end": 378.8050933554284,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "dna-insert:13",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 932184064
+              },
+              {
+                "node": 3,
+                "start": 381.77421707654327,
+                "end": 381.77423344640016,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "fix-git:12",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 1592786944
+              }
+            ]
+          }
+        }
+      }
+    },
+    "work": {
+      "reference": {
+        "TTFT": {
+          "n": 95,
+          "mean": 7.617145316303784,
+          "p50": 7.281787459396412,
+          "p90": 13.474109565756635,
+          "p95": 14.530193158453812,
+          "p99": 18.48337802957286,
+          "max": 18.48337802957286
+        },
+        "makespan": 524.6773752090675,
+        "routeCPU": 58.81716562435031,
+        "boundaryCPU": 33.182629162445664,
+        "adviceCPU": 10.673050727695227,
+        "Pcache": 496256,
+        "Dcache": 132992,
+        "Dpartition_sum": {
+          "contains_target_restore": 49.951528400270476,
+          "contains_target_compute": 85.63802518527976,
+          "uncovered_gate_or_controller_gap": 1.4295726876163855,
+          "other_compute": 6.886623257192373,
+          "other_restore": 0.9736510165367918
+        }
+      },
+      "ours": {
+        "TTFT": {
+          "n": 95,
+          "mean": 7.446744281802994,
+          "p50": 7.023479580738353,
+          "p90": 13.42477714273923,
+          "p95": 15.197705862883197,
+          "p99": 19.912313742048525,
+          "max": 19.912313742048525
+        },
+        "makespan": 516.018317886964,
+        "routeCPU": 59.00331512000412,
+        "boundaryCPU": 38.52797912899405,
+        "adviceCPU": 6.500652230344713,
+        "Pcache": 513920,
+        "Dcache": 114816,
+        "Dpartition_sum": {
+          "contains_target_restore": 38.30296848064346,
+          "contains_target_compute": 94.64057443837814,
+          "uncovered_gate_or_controller_gap": 2.7554002068813475,
+          "other_compute": 10.073894162787315,
+          "other_restore": 1.823264042604876
+        }
+      }
+    }
+  },
+  {
+    "rate": 0.49032341538142143,
+    "gain": -6.362700969676771,
+    "inversions": 178,
+    "first": 170.69668588648017,
+    "first_route_difference": "feal-differential-cryptanalysis:4",
+    "before": true,
+    "worst": {
+      "reference": {
+        "reference": {
+          "path": {
+            "TTFT": 19.662582202039232,
+            "nominal": 158.16635422903724,
+            "dependency": 138.503772026998,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 10880,
+            "D_prefix": 0,
+            "ready": 275.65266099492084,
+            "first": 295.31524319696007,
+            "before_P": 5.2110562874679545,
+            "P_API": 1.5161159636204502,
+            "P_to_D": 12.272692210725154,
+            "D_API_to_first": 0.6627177402256734
+          },
+          "Dpartition": {
+            "API_start": 294.6525254567344,
+            "first": 295.31524319696007,
+            "residence": 0.6627177402256734,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.15981625173452585,
+              "contains_target_restore": 1.6699545085430145e-05,
+              "contains_target_compute": 0.5028847889460621,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 2,
+                "start": 294.8123417084689,
+                "end": 294.812358408014,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "distribution-search:10",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 2921332736
+              }
+            ]
+          }
+        },
+        "ours": {
+          "path": {
+            "TTFT": 9.018205655408224,
+            "nominal": 141.41797717054928,
+            "dependency": 132.39977151514105,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 10880,
+            "D_prefix": 0,
+            "ready": 269.5486604830639,
+            "first": 278.5668661384721,
+            "before_P": 0.8008913725020079,
+            "P_API": 1.5895463351632102,
+            "P_to_D": 6.049252385600539,
+            "D_API_to_first": 0.5785155621424565
+          },
+          "Dpartition": {
+            "API_start": 277.98835057632965,
+            "first": 278.5668661384721,
+            "residence": 0.5785155621424565,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.07465667234833973,
+              "contains_target_restore": 2.1589919924736023e-05,
+              "contains_target_compute": 0.503837299874192,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 2,
+                "start": 278.063007248678,
+                "end": 278.0630288385979,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "distribution-search:10",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 3435134976
+              }
+            ]
+          }
+        }
+      },
+      "ours": {
+        "reference": {
+          "path": {
+            "TTFT": 15.279134365605557,
+            "nominal": 157.96835896841438,
+            "dependency": 142.68922460280882,
+            "P": 0,
+            "D": 3,
+            "P_prefix": 12928,
+            "D_prefix": 0,
+            "ready": 283.9417062338522,
+            "first": 299.22084059945774,
+            "before_P": 1.7838666328565864,
+            "P_API": 2.001828764618736,
+            "P_to_D": 0.4956403171923398,
+            "D_API_to_first": 10.99779865093791
+          },
+          "Dpartition": {
+            "API_start": 288.22304194851984,
+            "first": 299.22084059945774,
+            "residence": 10.99779865093791,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.05161428328705142,
+              "contains_target_restore": 1.7860904335975647e-05,
+              "contains_target_compute": 10.946166506746522,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 3,
+                "start": 288.2746562318069,
+                "end": 288.2746740927112,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "git-multibranch:10",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 1526726656
+              }
+            ]
+          }
+        },
+        "ours": {
+          "path": {
+            "TTFT": 20.913653510471875,
+            "nominal": 185.9042107434701,
+            "dependency": 164.9905572329982,
+            "P": 0,
+            "D": 2,
+            "P_prefix": 640,
+            "D_prefix": 0,
+            "ready": 306.2430388640416,
+            "first": 327.15669237451345,
+            "before_P": 2.1833317383529334,
+            "P_API": 7.581518004651092,
+            "P_to_D": 10.387597558025675,
+            "D_API_to_first": 0.7612062094421503
+          },
+          "Dpartition": {
+            "API_start": 326.3954861650713,
+            "first": 327.15669237451345,
+            "residence": 0.7612062094421503,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.1481434378192148,
+              "contains_target_restore": 3.231130540370941e-05,
+              "contains_target_compute": 0.6130304603175318,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 2,
+                "start": 326.5436296028905,
+                "end": 326.5436619141959,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "git-multibranch:10",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 3603955712
+              }
+            ]
+          }
+        }
+      }
+    },
+    "work": {
+      "reference": {
+        "TTFT": {
+          "n": 95,
+          "mean": 8.778594444291953,
+          "p50": 9.11260931614413,
+          "p90": 14.60891658573837,
+          "p95": 15.824925262393151,
+          "p99": 19.662582202039232,
+          "max": 19.662582202039232
+        },
+        "makespan": 521.7562486978799,
+        "routeCPU": 71.63094673119485,
+        "boundaryCPU": 50.91904638055712,
+        "adviceCPU": 3.7613882161676884,
+        "Pcache": 545664,
+        "Dcache": 69120,
+        "Dpartition_sum": {
+          "contains_target_restore": 30.96122042722314,
+          "contains_target_compute": 131.31102726258484,
+          "uncovered_gate_or_controller_gap": 3.456944544536728,
+          "other_compute": 6.623975981255082,
+          "other_restore": 2.006788164666915,
+          "other_save": 0.08754861075431108
+        }
+      },
+      "ours": {
+        "TTFT": {
+          "n": 95,
+          "mean": 8.500134393828194,
+          "p50": 8.355967717532792,
+          "p90": 14.38634780068918,
+          "p95": 16.359631317380718,
+          "p99": 20.913653510471875,
+          "max": 20.913653510471875
+        },
+        "makespan": 511.1364484353802,
+        "routeCPU": 72.0335138188675,
+        "boundaryCPU": 41.176295693963766,
+        "adviceCPU": 5.373383958823979,
+        "Pcache": 447360,
+        "Dcache": 72960,
+        "Dpartition_sum": {
+          "contains_target_restore": 25.96641894225786,
+          "contains_target_compute": 108.49196240765116,
+          "uncovered_gate_or_controller_gap": 1.6481849707324758,
+          "other_compute": 11.91082502072014,
+          "other_restore": 0.8633527483682997
+        }
+      }
+    }
+  },
+  {
+    "rate": 0.9806468307628429,
+    "gain": 23.010096016973293,
+    "inversions": 192,
+    "first": 143.8961940554127,
+    "first_route_difference": "headless-terminal:4",
+    "before": true,
+    "worst": {
+      "reference": {
+        "reference": {
+          "path": {
+            "TTFT": 25.576928220268087,
+            "nominal": 262.83580072092445,
+            "dependency": 237.25887250065637,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 4992,
+            "D_prefix": 0,
+            "ready": 313.6226979534758,
+            "first": 339.19962617374387,
+            "before_P": 1.9781635712237744,
+            "P_API": 7.832812055711762,
+            "P_to_D": 14.888473033569824,
+            "D_API_to_first": 0.877479559762719
+          },
+          "Dpartition": {
+            "API_start": 338.32214661398115,
+            "first": 339.19962617374387,
+            "residence": 0.877479559762719,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.05605051662899996,
+              "contains_target_restore": 2.905074506998062e-05,
+              "contains_target_compute": 0.821399992388649,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 2,
+                "start": 338.37819713061015,
+                "end": 338.3782261813552,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "feal-differential-cryptanalysis:11",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 3875536896
+              }
+            ]
+          }
+        },
+        "ours": {
+          "path": {
+            "TTFT": 15.274995825514395,
+            "nominal": 231.58064764731506,
+            "dependency": 216.30565182180067,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 4992,
+            "D_prefix": 0,
+            "ready": 292.6694772746201,
+            "first": 307.9444731001345,
+            "before_P": 1.5597232665272145,
+            "P_API": 7.832812055711762,
+            "P_to_D": 4.9817603617597115,
+            "D_API_to_first": 0.9007001415156992
+          },
+          "Dpartition": {
+            "API_start": 307.0437729586188,
+            "first": 307.9444731001345,
+            "residence": 0.9007001415156992,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.07990255784801548,
+              "contains_target_restore": 2.567097544670105e-05,
+              "contains_target_compute": 0.820771912692237,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 2,
+                "start": 307.1236755164668,
+                "end": 307.12370118744224,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "feal-differential-cryptanalysis:11",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 3721396224
+              }
+            ]
+          }
+        }
+      },
+      "ours": {
+        "reference": {
+          "path": {
+            "TTFT": 15.462433656616781,
+            "nominal": 328.7351073220035,
+            "dependency": 313.2726736653867,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 10880,
+            "D_prefix": 0,
+            "ready": 397.04127255111933,
+            "first": 412.5037062077361,
+            "before_P": 2.666696138749103,
+            "P_API": 4.388857097955595,
+            "P_to_D": 7.5041248566916465,
+            "D_API_to_first": 0.9027555632204098
+          },
+          "Dpartition": {
+            "API_start": 411.6009506445157,
+            "first": 412.5037062077361,
+            "residence": 0.9027555632204098,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.15694872309370567,
+              "contains_target_restore": 1.8251128494739532e-05,
+              "contains_target_compute": 0.7457885889982094,
+              "uncovered_gate_or_controller_gap": 0
+            },
+            "barriers": [
+              {
+                "node": 2,
+                "start": 411.7578993676094,
+                "end": 411.7579176187379,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "distribution-search:13",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 4763680768
+              }
+            ]
+          }
+        },
+        "ours": {
+          "path": {
+            "TTFT": 19.69165247859206,
+            "nominal": 322.6439812635797,
+            "dependency": 302.9523287849876,
+            "P": 1,
+            "D": 2,
+            "P_prefix": 10880,
+            "D_prefix": 0,
+            "ready": 386.72092767072024,
+            "first": 406.4125801493123,
+            "before_P": 7.1557975298159135,
+            "P_API": 4.388857097955595,
+            "P_to_D": 7.314783344154421,
+            "D_API_to_first": 0.8322145066661051
+          },
+          "Dpartition": {
+            "API_start": 405.5803656426462,
+            "first": 406.4125801493123,
+            "residence": 0.8322145066661051,
+            "interval_partition_not_additional_cost": {
+              "other_compute": 0.08434420402153364,
+              "contains_target_restore": 3.278069198131561e-05,
+              "contains_target_compute": 0.7478318675621836,
+              "uncovered_gate_or_controller_gap": 5.654390406562015e-06
+            },
+            "barriers": [
+              {
+                "node": 2,
+                "start": 405.66470984666773,
+                "end": 405.6647426273597,
+                "kind": "restore",
+                "pieces": [
+                  [
+                    "distribution-search:13",
+                    0,
+                    "restore"
+                  ]
+                ],
+                "kv_bytes": 4580179968
+              }
+            ]
+          }
+        }
+      }
+    },
+    "work": {
+      "reference": {
+        "TTFT": {
+          "n": 95,
+          "mean": 8.129684526505141,
+          "p50": 7.71927004336743,
+          "p90": 14.054940139516873,
+          "p95": 15.462433656616781,
+          "p99": 25.576928220268087,
+          "max": 25.576928220268087
+        },
+        "makespan": 501.58560155823074,
+        "routeCPU": 71.53725741431117,
+        "boundaryCPU": 37.80431037675589,
+        "adviceCPU": 9.84365219809115,
+        "Pcache": 483712,
+        "Dcache": 110464,
+        "Dpartition_sum": {
+          "contains_target_restore": 39.795611844321655,
+          "contains_target_compute": 92.81757445185497,
+          "uncovered_gate_or_controller_gap": 3.104917603544894,
+          "other_compute": 5.364514895537931,
+          "other_restore": 3.3865936110268677
+        }
+      },
+      "ours": {
+        "TTFT": {
+          "n": 95,
+          "mean": 8.817327892590896,
+          "p50": 8.629654740141405,
+          "p90": 15.64265277463943,
+          "p95": 17.12180349672002,
+          "p99": 19.69165247859206,
+          "max": 19.69165247859206
+        },
+        "makespan": 508.2123975422628,
+        "routeCPU": 72.54303704109043,
+        "boundaryCPU": 40.0987002030015,
+        "adviceCPU": 10.066739584319293,
+        "Pcache": 435968,
+        "Dcache": 124800,
+        "Dpartition_sum": {
+          "contains_target_restore": 42.17787086652797,
+          "contains_target_compute": 103.88308009493662,
+          "uncovered_gate_or_controller_gap": 4.0771368413886115,
+          "other_compute": 15.601261020574587,
+          "other_restore": 4.440960537008721
+        }
+      }
+    }
+  }
+]

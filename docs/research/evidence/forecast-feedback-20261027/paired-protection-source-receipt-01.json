@@ -1,0 +1,8 @@
+{
+  "path": "cache-profile-20261026\\paired-protection-source-01.tar.gz",
+  "sha256": "d5bd6d6a9207df2c0ba3aceeb57db15c1691f03476c73aa4f3e106666c422f84",
+  "bytes": 211545,
+  "parent_sha256": "771bf0b7704732c91cd59d12e3b966d2fa435ef2169f01584b116d398c897fd1",
+  "diagnostic_only": true,
+  "script_sha256": "b75b9bf47fabc1b06fc1c4cf9f961fa31c4683077d04aff04906b62da9c2df75"
+}

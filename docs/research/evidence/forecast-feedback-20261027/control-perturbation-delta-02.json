@@ -1,0 +1,3495 @@
+{
+  "CPU_only": true,
+  "diagnostic_intervention": "all measured control/model/iteration overhead set to zero; calibrated RPC constants remain",
+  "not_a_net_gain_or_fixed_routing_counterfactual": true,
+  "limitations": "Causal arrival, route, accepted cache and conditional service samples may change. This does not isolate one overhead component or reproduce real hardware.",
+  "input_sha256": "2b91a55f74a49837867145881d2b696a773fb964a2789ba1cc3acff281020dea",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "sha256": [
+        "3b3b8024f9c29bb04933e9d6e4875ad457ce30af7ba0d467ec558ad6ed4a2c26",
+        "4920c545d0d34431e562ddedca7c56579ae822b24663fe4a357ac7af2dd423e5"
+      ],
+      "arms": {
+        "reference": {
+          "zero": {
+            "TTFT": {
+              "n": 95,
+              "mean": 5.885579054069273,
+              "p50": 4.834692474642566,
+              "p90": 12.494486112811387,
+              "p95": 12.697011700003202,
+              "p99": 15.076968280097788,
+              "max": 15.076968280097788
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 7.263251765164054,
+              "p50": 5.267914549323422,
+              "p90": 15.350657872019326,
+              "p95": 20.123600655023267,
+              "p99": 30.845982444000015,
+              "max": 30.845982444000015
+            },
+            "makespan": 418.8545695527406,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 0.0,
+              "boundary_CPU_wall": 0.0,
+              "fit_CPU_wall": 0.0,
+              "iteration_scheduler_wall_charged": 0.0
+            },
+            "P_distribution": [
+              38,
+              57
+            ],
+            "D_distribution": [
+              86,
+              9
+            ],
+            "release_choices": 144
+          },
+          "charged": {
+            "TTFT": {
+              "n": 95,
+              "mean": 6.992469609186031,
+              "p50": 6.006836014993752,
+              "p90": 14.095080612882612,
+              "p95": 15.725115527830042,
+              "p99": 17.086326653984543,
+              "max": 17.086326653984543
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 8.91877553229923,
+              "p50": 6.14650242927442,
+              "p90": 22.3499833703778,
+              "p95": 27.150261790036666,
+              "p99": 32.2583692610516,
+              "max": 32.2583692610516
+            },
+            "makespan": 419.1297319997312,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 57.59255386237055,
+              "boundary_CPU_wall": 31.552015704102814,
+              "fit_CPU_wall": 0.507299174554646,
+              "iteration_scheduler_wall_charged": 0.2435509916394949
+            },
+            "P_distribution": [
+              36,
+              59
+            ],
+            "D_distribution": [
+              83,
+              12
+            ],
+            "release_choices": 53
+          },
+          "route_or_accepted_cache_changed": 67,
+          "paired_paths": {
+            "fix-code-vulnerability:11": {
+              "zero": {
+                "TTFT": 15.076968280097788,
+                "nominal": 15.076968280097788,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 305.86692838160195,
+                "first": 320.94389666169974,
+                "before_P": 4.838562652392909,
+                "P_API": 9.13608152175289,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.6824024924393939
+              },
+              "charged": {
+                "TTFT": 15.725115527830042,
+                "nominal": 15.725115527830042,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 305.86692838160195,
+                "first": 321.592043909432,
+                "before_P": 5.378237461595461,
+                "P_API": 9.13608152175289,
+                "P_to_D": 0.5316395547520756,
+                "D_API_to_first": 0.6791569897296199
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-code-vulnerability:11",
+                  "CPU_wall": 0.0,
+                  "model_latest": 305.7631137235871,
+                  "origin": 305.9662627544701,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 319.4501025393236,
+                    "first": 320.44788025962356,
+                    "full": 328.0865953124438,
+                    "origin": 305.9662627544701,
+                    "latest_completed": 305.7631137235871,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-code-vulnerability:11",
+                  "CPU_wall": 1.5760237257927656,
+                  "model_latest": 306.82169774804504,
+                  "origin": 307.2922237240225,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 319.90487686356835,
+                    "first": 321.57271235881717,
+                    "full": 329.3035691646076,
+                    "origin": 307.2922237240225,
+                    "latest_completed": 306.82169774804504,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 0.6481472477322541,
+                "before_P": 0.5396748092025518,
+                "P_API": 0.0,
+                "P_to_D": 0.1117179412394762,
+                "D_API_to_first": -0.003245502709773973
+              }
+            },
+            "git-multibranch:10": {
+              "zero": {
+                "TTFT": 12.494486112811387,
+                "nominal": 12.494486112811387,
+                "dependency": 0.0,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 282.50496326208673,
+                "first": 294.9994493748981,
+                "before_P": 3.808101947744717,
+                "P_API": 7.76310365838907,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.5033588931650002
+              },
+              "charged": {
+                "TTFT": 17.086326653984543,
+                "nominal": 17.086326653984543,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 282.50496326208673,
+                "first": 299.5912899160713,
+                "before_P": 8.111961144205281,
+                "P_API": 7.581518004651092,
+                "P_to_D": 0.8466820989083885,
+                "D_API_to_first": 0.5461654062197567
+              },
+              "original_decisions": [
+                {
+                  "id": "git-multibranch:10",
+                  "CPU_wall": 0.0,
+                  "model_latest": 281.82631900936735,
+                  "origin": 282.50496326208673,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 293.84578549772556,
+                    "first": 294.7797084570519,
+                    "full": 302.4896595118917,
+                    "origin": 282.50496326208673,
+                    "latest_completed": 281.82631900936735,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "git-multibranch:10",
+                  "CPU_wall": 1.0964934127405286,
+                  "model_latest": 281.1421267917187,
+                  "origin": 283.27215105526346,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 297.57893559144594,
+                    "first": 299.4082412721972,
+                    "full": 307.19485485220713,
+                    "origin": 283.27215105526346,
+                    "latest_completed": 281.1421267917187,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 4.5918405411731555,
+                "before_P": 4.303859196460564,
+                "P_API": -0.18158565373797764,
+                "P_to_D": 0.42676048539578915,
+                "D_API_to_first": 0.04280651305475658
+              }
+            },
+            "fix-git:14": {
+              "zero": {
+                "TTFT": 4.26978386263977,
+                "nominal": 13.039260101218986,
+                "dependency": 8.769476238579216,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 9344,
+                "D_prefix": 1408,
+                "ready": 365.9247437887586,
+                "first": 370.19452765139835,
+                "before_P": 1.835005396172562,
+                "P_API": 1.341600512552146,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.6732563404024745
+              },
+              "charged": {
+                "TTFT": 12.173603914977662,
+                "nominal": 29.10653070956579,
+                "dependency": 16.932926794588127,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 0,
+                "D_prefix": 384,
+                "ready": 374.0881943447675,
+                "first": 386.26179825974515,
+                "before_P": 2.3830076083852987,
+                "P_API": 5.646074212592499,
+                "P_to_D": 3.8810106422659487,
+                "D_API_to_first": 0.2635114517339048
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:14",
+                  "CPU_wall": 0.0,
+                  "model_latest": 365.9247437887586,
+                  "origin": 365.9247437887586,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 3,
+                    "P_prefix_command": 9344,
+                    "D_prefix_command": 0,
+                    "P_end": 369.15214903611326,
+                    "first": 369.90226700855777,
+                    "full": 377.78222118290284,
+                    "origin": 365.9247437887586,
+                    "latest_completed": 365.9247437887586,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:14",
+                  "CPU_wall": 0.36116005294024944,
+                  "model_latest": 374.0881943447675,
+                  "origin": 374.09587445167557,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 0,
+                    "D_prefix_command": 0,
+                    "P_end": 381.90243283857086,
+                    "first": 383.84918583117167,
+                    "full": 391.7544535793132,
+                    "origin": 374.09587445167557,
+                    "latest_completed": 374.0881943447675,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 7.903820052337892,
+                "before_P": 0.5480022122127366,
+                "P_API": 4.304473700040353,
+                "P_to_D": 3.4610890287533493,
+                "D_API_to_first": -0.40974488866856973
+              }
+            },
+            "fix-git:11": {
+              "zero": {
+                "TTFT": 6.072022049681891,
+                "nominal": 6.072022049681891,
+                "dependency": 0.0,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 1024,
+                "ready": 311.1704370622003,
+                "first": 317.24245911188217,
+                "before_P": 0.5109609431924014,
+                "P_API": 4.493876698829798,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.6472627941470819
+              },
+              "charged": {
+                "TTFT": 13.23756557661136,
+                "nominal": 13.23756557661136,
+                "dependency": 0.0,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 2816,
+                "D_prefix": 2944,
+                "ready": 311.1704370622003,
+                "first": 324.40800263881164,
+                "before_P": 6.834153967858356,
+                "P_API": 3.4882996134405904,
+                "P_to_D": 1.653395629670399,
+                "D_API_to_first": 1.2617163656420303
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:11",
+                  "CPU_wall": 0.0,
+                  "model_latest": 310.70549103399486,
+                  "origin": 311.1704370622003,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 316.20284869388814,
+                    "first": 316.9114958734172,
+                    "full": 325.29794209661776,
+                    "origin": 311.1704370622003,
+                    "latest_completed": 310.70549103399486,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:11",
+                  "CPU_wall": 1.9050631476566195,
+                  "model_latest": 307.81524155371403,
+                  "origin": 311.1704370622003,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 3,
+                    "P_prefix_command": 2816,
+                    "D_prefix_command": 0,
+                    "P_end": 320.93387031084046,
+                    "first": 322.56835051266546,
+                    "full": 330.38030705070605,
+                    "origin": 311.1704370622003,
+                    "latest_completed": 307.81524155371403,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 7.1655435269294685,
+                "before_P": 6.3231930246659545,
+                "P_API": -1.0055770853892074,
+                "P_to_D": 1.2334740161577997,
+                "D_API_to_first": 0.6144535714949484
+              }
+            },
+            "feal-differential-cryptanalysis:11": {
+              "zero": {
+                "TTFT": 6.269202283138213,
+                "nominal": 6.269202283138213,
+                "dependency": 0.0,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 11776,
+                "D_prefix": 0,
+                "ready": 305.4553018112777,
+                "first": 311.7245040944159,
+                "before_P": 0.5109609431924014,
+                "P_API": 4.697777613027763,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.640542113405445
+              },
+              "charged": {
+                "TTFT": 13.218955864679799,
+                "nominal": 13.218955864679799,
+                "dependency": 0.0,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 768,
+                "D_prefix": 128,
+                "ready": 305.4553018112777,
+                "first": 318.6742576759575,
+                "before_P": 2.3612310752027383,
+                "P_API": 9.784814633231989,
+                "P_to_D": 0.6574274750706195,
+                "D_API_to_first": 0.41548268117446696
+              },
+              "original_decisions": [
+                {
+                  "id": "feal-differential-cryptanalysis:11",
+                  "CPU_wall": 0.0,
+                  "model_latest": 305.19063701358795,
+                  "origin": 305.4553018112777,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 11776,
+                    "D_prefix_command": 0,
+                    "P_end": 310.711976755546,
+                    "first": 311.86061960691273,
+                    "full": 319.59145200929015,
+                    "origin": 305.4553018112777,
+                    "latest_completed": 305.19063701358795,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "feal-differential-cryptanalysis:11",
+                  "CPU_wall": 1.3259609695523977,
+                  "model_latest": 300.00323397649123,
+                  "origin": 305.4553018112777,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 768,
+                    "D_prefix_command": 0,
+                    "P_end": 317.4688886630511,
+                    "first": 319.11335964142825,
+                    "full": 326.8461274132042,
+                    "origin": 305.4553018112777,
+                    "latest_completed": 300.00323397649123,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 6.949753581541586,
+                "before_P": 1.850270132010337,
+                "P_API": 5.087037020204225,
+                "P_to_D": 0.23750586155802011,
+                "D_API_to_first": -0.22505943223097802
+              }
+            },
+            "headless-terminal:11": {
+              "zero": {
+                "TTFT": 9.97983328483707,
+                "nominal": 9.97983328483707,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 0,
+                "D_prefix": 640,
+                "ready": 315.8930721177277,
+                "first": 325.87290540256475,
+                "before_P": 3.948500438020062,
+                "P_API": 5.218026880799156,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.39338435250527937
+              },
+              "charged": {
+                "TTFT": 15.938773157091305,
+                "nominal": 15.938773157091305,
+                "dependency": 0.0,
+                "P": 1,
+                "D": 3,
+                "P_prefix": 9600,
+                "D_prefix": 9600,
+                "ready": 315.8930721177277,
+                "first": 331.831845274819,
+                "before_P": 5.962186012095287,
+                "P_API": 0.7693713384393137,
+                "P_to_D": 2.8520792873856067,
+                "D_API_to_first": 6.355136519171083
+              },
+              "original_decisions": [
+                {
+                  "id": "headless-terminal:11",
+                  "CPU_wall": 0.0,
+                  "model_latest": 310.70549103399486,
+                  "origin": 315.8930721177277,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 0,
+                    "D_prefix_command": 0,
+                    "P_end": 324.4565706555273,
+                    "first": 325.5306923501445,
+                    "full": 333.40868947129235,
+                    "origin": 315.8930721177277,
+                    "latest_completed": 310.70549103399486,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "headless-terminal:11",
+                  "CPU_wall": 1.8363625910133123,
+                  "model_latest": 311.24390148898334,
+                  "origin": 317.019437813944,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 3,
+                    "source": 3,
+                    "P_prefix_command": 9600,
+                    "D_prefix_command": 9600,
+                    "P_end": 322.6859794939543,
+                    "first": 328.100529758387,
+                    "full": 335.8659484262479,
+                    "origin": 317.019437813944,
+                    "latest_completed": 311.24390148898334,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 5.958939872254234,
+                "before_P": 2.0136855740752253,
+                "P_API": -4.448655542359843,
+                "P_to_D": 2.4321576738730073,
+                "D_API_to_first": 5.9617521666658035
+              }
+            },
+            "fix-code-vulnerability:7": {
+              "zero": {
+                "TTFT": 7.827765892255542,
+                "nominal": 7.827765892255542,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 196.95396665024901,
+                "first": 204.78173254250456,
+                "before_P": 0.6251027063803463,
+                "P_API": 6.3456423621320655,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.4370992102305422
+              },
+              "charged": {
+                "TTFT": 2.2171676926089674,
+                "nominal": 2.2171676926089674,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 13824,
+                "D_prefix": 0,
+                "ready": 196.95396665024901,
+                "first": 199.17113434285798,
+                "before_P": 0.6802644227968244,
+                "P_API": 0.35910078168068194,
+                "P_to_D": 0.7681116016861438,
+                "D_API_to_first": 0.40969088644530416
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-code-vulnerability:7",
+                  "CPU_wall": 0.0,
+                  "model_latest": 195.82724499320503,
+                  "origin": 196.95396665024901,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 3,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 204.0096450010859,
+                    "first": 204.86889870051212,
+                    "full": 212.54893892855034,
+                    "origin": 196.95396665024901,
+                    "latest_completed": 195.82724499320503,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-code-vulnerability:7",
+                  "CPU_wall": 0.16866816766560078,
+                  "model_latest": 195.97607990901088,
+                  "origin": 196.95396665024901,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 13824,
+                    "D_prefix_command": 0,
+                    "P_end": 198.20812524809782,
+                    "first": 199.19962887611058,
+                    "full": 206.8822435381303,
+                    "origin": 196.95396665024901,
+                    "latest_completed": 195.97607990901088,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -5.610598199646574,
+                "before_P": 0.05516171641647816,
+                "P_API": -5.986541580451384,
+                "P_to_D": 0.3481899881735444,
+                "D_API_to_first": -0.027408323785238053
+              }
+            }
+          }
+        },
+        "ours": {
+          "zero": {
+            "TTFT": {
+              "n": 95,
+              "mean": 5.885579054069273,
+              "p50": 4.834692474642566,
+              "p90": 12.494486112811387,
+              "p95": 12.697011700003202,
+              "p99": 15.076968280097788,
+              "max": 15.076968280097788
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 7.263251765164054,
+              "p50": 5.267914549323422,
+              "p90": 15.350657872019326,
+              "p95": 20.123600655023267,
+              "p99": 30.845982444000015,
+              "max": 30.845982444000015
+            },
+            "makespan": 418.8545695527406,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 0.0,
+              "boundary_CPU_wall": 0.0,
+              "fit_CPU_wall": 0.0,
+              "iteration_scheduler_wall_charged": 0.0
+            },
+            "P_distribution": [
+              38,
+              57
+            ],
+            "D_distribution": [
+              86,
+              9
+            ],
+            "release_choices": 144
+          },
+          "charged": {
+            "TTFT": {
+              "n": 95,
+              "mean": 6.722504752602353,
+              "p50": 6.277871891472472,
+              "p90": 13.511724164000157,
+              "p95": 13.92905001831889,
+              "p99": 15.372841967973102,
+              "max": 15.372841967973102
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 8.36006680604448,
+              "p50": 6.331317460155333,
+              "p90": 19.264402245821202,
+              "p95": 24.2066529251191,
+              "p99": 30.92250076433976,
+              "max": 30.92250076433976
+            },
+            "makespan": 419.05673941723427,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 54.19069193676114,
+              "boundary_CPU_wall": 31.945512785576284,
+              "fit_CPU_wall": 0.5134356878697872,
+              "iteration_scheduler_wall_charged": 0.24323851987719536
+            },
+            "P_distribution": [
+              36,
+              59
+            ],
+            "D_distribution": [
+              85,
+              10
+            ],
+            "release_choices": 80
+          },
+          "route_or_accepted_cache_changed": 62,
+          "paired_paths": {
+            "fix-code-vulnerability:11": {
+              "zero": {
+                "TTFT": 15.076968280097788,
+                "nominal": 15.076968280097788,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 305.86692838160195,
+                "first": 320.94389666169974,
+                "before_P": 4.838562652392909,
+                "P_API": 9.13608152175289,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.6824024924393939
+              },
+              "charged": {
+                "TTFT": 15.372841967973102,
+                "nominal": 15.372841967973102,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 305.86692838160195,
+                "first": 321.23977034957505,
+                "before_P": 5.088418130846833,
+                "P_API": 9.13608152175289,
+                "P_to_D": 0.4724452786427378,
+                "D_API_to_first": 0.675897036730646
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-code-vulnerability:11",
+                  "CPU_wall": 0.0,
+                  "model_latest": 305.7631137235871,
+                  "origin": 305.9662627544701,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 319.4501025393236,
+                    "first": 320.44788025962356,
+                    "full": 328.0865953124438,
+                    "origin": 305.9662627544701,
+                    "latest_completed": 305.7631137235871,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-code-vulnerability:11",
+                  "CPU_wall": 1.5523351049050689,
+                  "model_latest": 306.035182302337,
+                  "origin": 306.84717361018807,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 319.64617582289725,
+                    "first": 321.43650544410855,
+                    "full": 329.1606765924422,
+                    "origin": 306.84717361018807,
+                    "latest_completed": 306.035182302337,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 0.2958736878753143,
+                "before_P": 0.24985547845392375,
+                "P_API": 0.0,
+                "P_to_D": 0.0525236651301384,
+                "D_API_to_first": -0.0065054557087478315
+              }
+            },
+            "fix-git:13": {
+              "zero": {
+                "TTFT": 5.890982251073012,
+                "nominal": 15.005291181520988,
+                "dependency": 9.114308930447976,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 1920,
+                "D_prefix": 0,
+                "ready": 350.37412578058587,
+                "first": 356.2651080316589,
+                "before_P": 0.5109609431924014,
+                "P_API": 4.663911688506065,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.29618800586194993
+              },
+              "charged": {
+                "TTFT": 14.885937735512812,
+                "nominal": 24.764896654540337,
+                "dependency": 9.878958919027525,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 11264,
+                "D_prefix": 0,
+                "ready": 351.1387757691654,
+                "first": 366.02471350467823,
+                "before_P": 11.502131853597461,
+                "P_API": 0.4210229955647937,
+                "P_to_D": 2.62233637646699,
+                "D_API_to_first": 0.34044650988357716
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:13",
+                  "CPU_wall": 0.0,
+                  "model_latest": 350.37412578058587,
+                  "origin": 350.37412578058587,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 1920,
+                    "D_prefix_command": 0,
+                    "P_end": 355.57296358283423,
+                    "first": 356.58734008337825,
+                    "full": 364.47249027254054,
+                    "origin": 350.37412578058587,
+                    "latest_completed": 350.37412578058587,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:13",
+                  "CPU_wall": 0.487263448536396,
+                  "model_latest": 351.1387757691654,
+                  "origin": 351.1701873195877,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 3,
+                    "P_prefix_command": 11264,
+                    "D_prefix_command": 0,
+                    "P_end": 362.61136769877356,
+                    "first": 366.25881368619076,
+                    "full": 374.1600909846392,
+                    "origin": 351.1701873195877,
+                    "latest_completed": 351.1387757691654,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 8.9949554844398,
+                "before_P": 10.99117091040506,
+                "P_API": -4.242888692941271,
+                "P_to_D": 2.2024147629543904,
+                "D_API_to_first": 0.04425850402162723
+              }
+            },
+            "fix-git:9": {
+              "zero": {
+                "TTFT": 4.224146291637624,
+                "nominal": 4.224146291637624,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 1920,
+                "D_prefix": 1408,
+                "ready": 257.8526451484095,
+                "first": 262.07679144004715,
+                "before_P": 0.5109609431924014,
+                "P_API": 3.1643153580770456,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.12894837685558969
+              },
+              "charged": {
+                "TTFT": 12.534050482161945,
+                "nominal": 12.534050482161945,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 2816,
+                "D_prefix": 512,
+                "ready": 257.8526451484095,
+                "first": 270.38669563057147,
+                "before_P": 1.455542096994975,
+                "P_API": 2.7574630176580186,
+                "P_to_D": 8.260992026574684,
+                "D_API_to_first": 0.06005334093424608
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:9",
+                  "CPU_wall": 0.0,
+                  "model_latest": 256.74671973279607,
+                  "origin": 257.8526451484095,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 1920,
+                    "D_prefix_command": 0,
+                    "P_end": 261.6322021884911,
+                    "first": 262.2968474041851,
+                    "full": 270.12916683218765,
+                    "origin": 257.8526451484095,
+                    "latest_completed": 256.74671973279607,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:9",
+                  "CPU_wall": 0.9439439522102475,
+                  "model_latest": 257.3194846850598,
+                  "origin": 257.8526451484095,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 2816,
+                    "D_prefix_command": 0,
+                    "P_end": 262.1886881421983,
+                    "first": 263.65565317763406,
+                    "full": 271.40766075236616,
+                    "origin": 257.8526451484095,
+                    "latest_completed": 257.3194846850598,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 8.309904190524321,
+                "before_P": 0.9445811538025737,
+                "P_API": -0.40685234041902696,
+                "P_to_D": 7.841070413062084,
+                "D_API_to_first": -0.0688950359213436
+              }
+            },
+            "dna-insert:12": {
+              "zero": {
+                "TTFT": 5.9923866147205445,
+                "nominal": 5.9923866147205445,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 10112,
+                "D_prefix": 640,
+                "ready": 322.8436388062634,
+                "first": 328.83602542098396,
+                "before_P": 3.905258725465046,
+                "P_API": 0.9676531112800422,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.6995531644628841
+              },
+              "charged": {
+                "TTFT": 13.691541321288867,
+                "nominal": 13.691541321288867,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 4096,
+                "D_prefix": 3968,
+                "ready": 322.8436388062634,
+                "first": 336.5351801275523,
+                "before_P": 5.894222709289238,
+                "P_API": 3.6993759683792167,
+                "P_to_D": 2.259429953275287,
+                "D_API_to_first": 1.8385126903451123
+              },
+              "original_decisions": [
+                {
+                  "id": "dna-insert:12",
+                  "CPU_wall": 0.0,
+                  "model_latest": 321.02727506156754,
+                  "origin": 322.8436388062634,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 3,
+                    "P_prefix_command": 10112,
+                    "D_prefix_command": 640,
+                    "P_end": 327.4182926839784,
+                    "first": 328.40001174679753,
+                    "full": 336.78130113989977,
+                    "origin": 322.8436388062634,
+                    "latest_completed": 321.02727506156754,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "dna-insert:12",
+                  "CPU_wall": 0.39230840001255274,
+                  "model_latest": 321.88941633152234,
+                  "origin": 322.8436388062634,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 2,
+                    "P_prefix_command": 4096,
+                    "D_prefix_command": 0,
+                    "P_end": 331.9870582289846,
+                    "first": 333.6388979415164,
+                    "full": 341.9416475920018,
+                    "origin": 322.8436388062634,
+                    "latest_completed": 321.88941633152234,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 7.699154706568322,
+                "before_P": 1.988963983824192,
+                "P_API": 2.7317228570991743,
+                "P_to_D": 1.8395083397626877,
+                "D_API_to_first": 1.1389595258822283
+              }
+            },
+            "fix-code-vulnerability:7": {
+              "zero": {
+                "TTFT": 7.827765892255542,
+                "nominal": 7.827765892255542,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 196.95396665024901,
+                "first": 204.78173254250456,
+                "before_P": 0.6251027063803463,
+                "P_API": 6.3456423621320655,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.4370992102305422
+              },
+              "charged": {
+                "TTFT": 2.351656295212564,
+                "nominal": 2.351656295212564,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 13824,
+                "D_prefix": 0,
+                "ready": 196.95396665024901,
+                "first": 199.30562294546158,
+                "before_P": 0.715414582878509,
+                "P_API": 0.35910078168068194,
+                "P_to_D": 0.841191574214065,
+                "D_API_to_first": 0.4359493564392949
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-code-vulnerability:7",
+                  "CPU_wall": 0.0,
+                  "model_latest": 195.82724499320503,
+                  "origin": 196.95396665024901,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 3,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 204.0096450010859,
+                    "first": 204.86889870051212,
+                    "full": 212.54893892855034,
+                    "origin": 196.95396665024901,
+                    "latest_completed": 195.82724499320503,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-code-vulnerability:7",
+                  "CPU_wall": 0.20382347889244556,
+                  "model_latest": 196.0191416739217,
+                  "origin": 196.95396665024901,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 13824,
+                    "D_prefix_command": 0,
+                    "P_end": 198.2206633723582,
+                    "first": 199.1995123498915,
+                    "full": 206.88198212970866,
+                    "origin": 196.95396665024901,
+                    "latest_completed": 196.0191416739217,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -5.476109597042978,
+                "before_P": 0.09031187649816275,
+                "P_API": -5.986541580451384,
+                "P_to_D": 0.4212699607014656,
+                "D_API_to_first": -0.001149853791247324
+              }
+            },
+            "feal-differential-cryptanalysis:8": {
+              "zero": {
+                "TTFT": 2.9724875275907436,
+                "nominal": 2.9724875275907436,
+                "dependency": 0.0,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 6784,
+                "D_prefix": 0,
+                "ready": 220.22853556805396,
+                "first": 223.2010230956447,
+                "before_P": 1.0017592635718984,
+                "P_API": 1.3523938193568548,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.19841283114939756
+              },
+              "charged": {
+                "TTFT": 7.79796440739085,
+                "nominal": 7.79796440739085,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 220.22853556805396,
+                "first": 228.0264999754448,
+                "before_P": 2.698744410330164,
+                "P_API": 4.189115596006827,
+                "P_to_D": 0.6274132777285217,
+                "D_API_to_first": 0.28269112332534974
+              },
+              "original_decisions": [
+                {
+                  "id": "feal-differential-cryptanalysis:8",
+                  "CPU_wall": 0.0,
+                  "model_latest": 220.58924467184957,
+                  "origin": 220.71933388843345,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 6784,
+                    "D_prefix_command": 0,
+                    "P_end": 222.61803832887932,
+                    "first": 223.30382900167936,
+                    "full": 230.95969431634754,
+                    "origin": 220.71933388843345,
+                    "latest_completed": 220.58924467184957,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "feal-differential-cryptanalysis:8",
+                  "CPU_wall": 0.5353682022541761,
+                  "model_latest": 220.45294190479896,
+                  "origin": 220.9355341973077,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 2,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 226.65633905293015,
+                    "first": 227.67379204055484,
+                    "full": 235.4100228059992,
+                    "origin": 220.9355341973077,
+                    "latest_completed": 220.45294190479896,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 4.825476879800107,
+                "before_P": 1.6969851467582657,
+                "P_API": 2.8367217766499726,
+                "P_to_D": 0.20749166421592236,
+                "D_API_to_first": 0.08427829217595217
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "sha256": [
+        "5ab45317d320d1c001bac4c6b191ffec3e7ab253cf6c1a19152b2c4ef8b37fc9",
+        "3fd4407ae2e3e155b61d4294826cf4d93647873b5e4ed4700064186806a86737"
+      ],
+      "arms": {
+        "reference": {
+          "zero": {
+            "TTFT": {
+              "n": 95,
+              "mean": 6.7865117065012655,
+              "p50": 5.480284842773017,
+              "p90": 13.857864866372353,
+              "p95": 14.541946007287521,
+              "p99": 37.4440809507156,
+              "max": 37.4440809507156
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 18.24594437105428,
+              "p50": 7.663321837948317,
+              "p90": 55.51146998903238,
+              "p95": 64.93224301169448,
+              "p99": 76.81197964242594,
+              "max": 76.81197964242594
+            },
+            "makespan": 269.8520252614315,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 0.0,
+              "boundary_CPU_wall": 0.0,
+              "fit_CPU_wall": 0.0,
+              "iteration_scheduler_wall_charged": 0.0
+            },
+            "P_distribution": [
+              35,
+              60
+            ],
+            "D_distribution": [
+              81,
+              14
+            ],
+            "release_choices": 275
+          },
+          "charged": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.882637618298932,
+              "p50": 7.547651607340306,
+              "p90": 13.90244405261592,
+              "p95": 15.384547578614871,
+              "p99": 17.3925678025511,
+              "max": 17.3925678025511
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 21.033546131896067,
+              "p50": 10.578656072699445,
+              "p90": 58.77312872076649,
+              "p95": 69.27084330046134,
+              "p99": 80.79239986894981,
+              "max": 80.79239986894981
+            },
+            "makespan": 285.3710413766497,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 71.5692973062396,
+              "boundary_CPU_wall": 36.703952917829156,
+              "fit_CPU_wall": 0.42699511628597975,
+              "iteration_scheduler_wall_charged": 0.30232713371515274
+            },
+            "P_distribution": [
+              33,
+              62
+            ],
+            "D_distribution": [
+              80,
+              15
+            ],
+            "release_choices": 287
+          },
+          "route_or_accepted_cache_changed": 69,
+          "paired_paths": {
+            "fix-git:10": {
+              "zero": {
+                "TTFT": 37.4440809507156,
+                "nominal": 49.34825302872238,
+                "dependency": 11.90417207800678,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 152.38232075042015,
+                "first": 189.82640170113575,
+                "before_P": 0.5109609431924014,
+                "P_API": 4.131539942063645,
+                "P_to_D": 32.60043149434739,
+                "D_API_to_first": 0.20114857111215656
+              },
+              "charged": {
+                "TTFT": 12.95075096599578,
+                "nominal": 22.771711188859513,
+                "dependency": 9.820960222863732,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 3712,
+                "D_prefix": 1280,
+                "ready": 150.2991088952771,
+                "first": 163.24985986127288,
+                "before_P": 6.162818494450931,
+                "P_API": 2.8305015892347933,
+                "P_to_D": 3.0519885486538385,
+                "D_API_to_first": 0.9054423336562252
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:10",
+                  "CPU_wall": 0.0,
+                  "model_latest": 152.38232075042015,
+                  "origin": 152.38232075042015,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 157.10994377613113,
+                    "first": 158.2203320740474,
+                    "full": 166.1006599598654,
+                    "origin": 152.38232075042015,
+                    "latest_completed": 152.38232075042015,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:10",
+                  "CPU_wall": 0.6430986570194364,
+                  "model_latest": 150.2991088952771,
+                  "origin": 150.3034732730961,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 3712,
+                    "D_prefix_command": 0,
+                    "P_end": 159.03869712662456,
+                    "first": 163.41078113035863,
+                    "full": 171.1549328768228,
+                    "origin": 150.3034732730961,
+                    "latest_completed": 150.2991088952771,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -24.49332998471982,
+                "before_P": 5.65185755125853,
+                "P_API": -1.3010383528288516,
+                "P_to_D": -29.54844294569355,
+                "D_API_to_first": 0.7042937625440686
+              }
+            },
+            "feal-differential-cryptanalysis:11": {
+              "zero": {
+                "TTFT": 11.089908556189101,
+                "nominal": 25.443443899849683,
+                "dependency": 14.353535343660582,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 2816,
+                "D_prefix": 0,
+                "ready": 167.08118624929944,
+                "first": 178.17109480548854,
+                "before_P": 1.2010458322201316,
+                "P_API": 8.720442887314686,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.748498223141695
+              },
+              "charged": {
+                "TTFT": 17.3925678025511,
+                "nominal": 37.67813502826985,
+                "dependency": 20.28556722571875,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 173.0132181313576,
+                "first": 190.4057859339087,
+                "before_P": 6.271945925961347,
+                "P_API": 9.843966226490178,
+                "P_to_D": 0.5243801132124304,
+                "D_API_to_first": 0.7522755368871401
+              },
+              "original_decisions": [
+                {
+                  "id": "feal-differential-cryptanalysis:11",
+                  "CPU_wall": 0.0,
+                  "model_latest": 167.08118624929944,
+                  "origin": 167.08118624929944,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 2816,
+                    "D_prefix_command": 0,
+                    "P_end": 176.8626431383995,
+                    "first": 177.99224175544126,
+                    "full": 185.72350465373472,
+                    "origin": 167.08118624929944,
+                    "latest_completed": 167.08118624929944,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "feal-differential-cryptanalysis:11",
+                  "CPU_wall": 1.8035967163741589,
+                  "model_latest": 173.0132181313576,
+                  "origin": 173.52010097138722,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 188.8970546341961,
+                    "first": 190.80729080873957,
+                    "full": 198.54182966002426,
+                    "origin": 173.52010097138722,
+                    "latest_completed": 173.0132181313576,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 6.302659246361998,
+                "before_P": 5.070900093741216,
+                "P_API": 1.1235233391754917,
+                "P_to_D": 0.10445849969983101,
+                "D_API_to_first": 0.003777313745445099
+              }
+            },
+            "fix-git:11": {
+              "zero": {
+                "TTFT": 5.989260052017386,
+                "nominal": 49.05361732949257,
+                "dependency": 43.06435727747518,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 0,
+                "D_prefix": 0,
+                "ready": 198.64957580857532,
+                "first": 204.6388358605927,
+                "before_P": 0.5109609431924014,
+                "P_API": 4.796023901347858,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.2623535939645194
+              },
+              "charged": {
+                "TTFT": 15.273367609685607,
+                "nominal": 31.364172893760866,
+                "dependency": 16.09080528407526,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 3712,
+                "D_prefix": 0,
+                "ready": 171.6760238151754,
+                "first": 186.949391424861,
+                "before_P": 7.609119142099303,
+                "P_API": 3.0260362900836393,
+                "P_to_D": 4.356382805521605,
+                "D_API_to_first": 0.28182937198104696
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:11",
+                  "CPU_wall": 0.0,
+                  "model_latest": 198.64957580857532,
+                  "origin": 198.64957580857532,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 0,
+                    "D_prefix_command": 0,
+                    "P_end": 203.89139755167812,
+                    "first": 204.87331185555942,
+                    "full": 212.68313299940087,
+                    "origin": 198.64957580857532,
+                    "latest_completed": 198.64957580857532,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:11",
+                  "CPU_wall": 0.9719241932034492,
+                  "model_latest": 171.6760238151754,
+                  "origin": 172.03721583499137,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 3712,
+                    "D_prefix_command": 0,
+                    "P_end": 182.18205350245793,
+                    "first": 184.4920245775582,
+                    "full": 192.24351809019464,
+                    "origin": 172.03721583499137,
+                    "latest_completed": 171.6760238151754,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 9.284107557668221,
+                "before_P": 7.098158198906901,
+                "P_API": -1.7699876112642183,
+                "P_to_D": 3.9364611920090056,
+                "D_API_to_first": 0.019475778016527556
+              }
+            },
+            "headless-terminal:12": {
+              "zero": {
+                "TTFT": 8.192371399389486,
+                "nominal": 39.94460350990815,
+                "dependency": 31.752232110518662,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 7680,
+                "D_prefix": 0,
+                "ready": 198.78738869855977,
+                "first": 206.97976009794925,
+                "before_P": 5.231348802167133,
+                "P_API": 2.208613166091359,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.33248781761838586
+              },
+              "charged": {
+                "TTFT": 15.384547578614871,
+                "nominal": 43.49260092313895,
+                "dependency": 28.10805334452408,
+                "P": 1,
+                "D": 3,
+                "P_prefix": 9600,
+                "D_prefix": 0,
+                "ready": 195.14320993256518,
+                "first": 210.52775751118006,
+                "before_P": 3.9325143306153905,
+                "P_API": 1.3213392672185287,
+                "P_to_D": 2.485023890836203,
+                "D_API_to_first": 7.645670089944758
+              },
+              "original_decisions": [
+                {
+                  "id": "headless-terminal:12",
+                  "CPU_wall": 0.0,
+                  "model_latest": 198.78738869855977,
+                  "origin": 199.16053675176772,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 7680,
+                    "D_prefix_command": 0,
+                    "P_end": 206.04789334939477,
+                    "first": 206.84990164196233,
+                    "full": 214.72510803259223,
+                    "origin": 199.16053675176772,
+                    "latest_completed": 198.78738869855977,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "headless-terminal:12",
+                  "CPU_wall": 0.4891491523012519,
+                  "model_latest": 195.14320993256518,
+                  "origin": 195.1490435360069,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 3,
+                    "source": 1,
+                    "P_prefix_command": 9600,
+                    "D_prefix_command": 0,
+                    "P_end": 200.1959862960801,
+                    "first": 209.03410513422497,
+                    "full": 216.71805995543255,
+                    "origin": 195.1490435360069,
+                    "latest_completed": 195.14320993256518,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 7.192176179225385,
+                "before_P": -1.2988344715517428,
+                "P_API": -0.8872738988728304,
+                "P_to_D": 2.0651022773236036,
+                "D_API_to_first": 7.313182272326372
+              }
+            },
+            "fix-code-vulnerability:8": {
+              "zero": {
+                "TTFT": 4.4374569893576705,
+                "nominal": 4.4374569893576705,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 10880,
+                "D_prefix": 0,
+                "ready": 120.37134439980537,
+                "first": 124.80880138916304,
+                "before_P": 0.5109609431924156,
+                "P_API": 3.0612071756891934,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.4453672569634648
+              },
+              "charged": {
+                "TTFT": 11.39111747772209,
+                "nominal": 12.441686295990934,
+                "dependency": 1.050568818268843,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 121.42191321807421,
+                "first": 132.8130306957963,
+                "before_P": 1.4199569024049339,
+                "P_API": 7.710948209049491,
+                "P_to_D": 1.7426014321204661,
+                "D_API_to_first": 0.5176109341471999
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-code-vulnerability:8",
+                  "CPU_wall": 0.0,
+                  "model_latest": 117.37205924585155,
+                  "origin": 120.37134439980537,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 10880,
+                    "D_prefix_command": 0,
+                    "P_end": 124.01994214331944,
+                    "first": 124.88523101379593,
+                    "full": 132.5028811150601,
+                    "origin": 120.37134439980537,
+                    "latest_completed": 117.37205924585155,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-code-vulnerability:8",
+                  "CPU_wall": 0.4514377759769559,
+                  "model_latest": 121.42191321807421,
+                  "origin": 121.87884117066693,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 130.92125827829184,
+                    "first": 132.1042872297317,
+                    "full": 139.80886668035998,
+                    "origin": 121.87884117066693,
+                    "latest_completed": 121.42191321807421,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 6.95366048836442,
+                "before_P": 0.9089959592125183,
+                "P_API": 4.649741033360297,
+                "P_to_D": 1.3226798186078668,
+                "D_API_to_first": 0.07224367718373514
+              }
+            },
+            "distribution-search:11": {
+              "zero": {
+                "TTFT": 7.265459710305748,
+                "nominal": 17.51812877518637,
+                "dependency": 10.252669064880621,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 5504,
+                "D_prefix": 0,
+                "ready": 161.8110969725007,
+                "first": 169.07655668280646,
+                "before_P": 1.4165845759106332,
+                "P_API": 4.968954621101414,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.4599988997811124
+              },
+              "charged": {
+                "TTFT": 14.123203695324719,
+                "nominal": 29.60837277759282,
+                "dependency": 15.4851690822681,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 5504,
+                "D_prefix": 256,
+                "ready": 167.0435969898882,
+                "first": 181.1668006852129,
+                "before_P": 5.8951166002989055,
+                "P_API": 4.968954621101414,
+                "P_to_D": 1.7876713669207334,
+                "D_API_to_first": 1.4714611070036767
+              },
+              "original_decisions": [
+                {
+                  "id": "distribution-search:11",
+                  "CPU_wall": 0.0,
+                  "model_latest": 161.8110969725007,
+                  "origin": 161.8110969725007,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 3,
+                    "P_prefix_command": 5504,
+                    "D_prefix_command": 0,
+                    "P_end": 168.25533840394766,
+                    "first": 172.32731580425752,
+                    "full": 180.10642924214594,
+                    "origin": 161.8110969725007,
+                    "latest_completed": 161.8110969725007,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "distribution-search:11",
+                  "CPU_wall": 0.9362284680828452,
+                  "model_latest": 167.0435969898882,
+                  "origin": 167.04911548778736,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 5504,
+                    "D_prefix_command": 0,
+                    "P_end": 177.2747690772355,
+                    "first": 178.78931213185,
+                    "full": 186.58091896471345,
+                    "origin": 167.04911548778736,
+                    "latest_completed": 167.0435969898882,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 6.8577439850189705,
+                "before_P": 4.478532024388272,
+                "P_API": 0.0,
+                "P_to_D": 1.367749753408134,
+                "D_API_to_first": 1.0114622072225643
+              }
+            }
+          }
+        },
+        "ours": {
+          "zero": {
+            "TTFT": {
+              "n": 95,
+              "mean": 6.7865117065012655,
+              "p50": 5.480284842773017,
+              "p90": 13.857864866372353,
+              "p95": 14.541946007287521,
+              "p99": 37.4440809507156,
+              "max": 37.4440809507156
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 18.24594437105428,
+              "p50": 7.663321837948317,
+              "p90": 55.51146998903238,
+              "p95": 64.93224301169448,
+              "p99": 76.81197964242594,
+              "max": 76.81197964242594
+            },
+            "makespan": 269.8520252614315,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 0.0,
+              "boundary_CPU_wall": 0.0,
+              "fit_CPU_wall": 0.0,
+              "iteration_scheduler_wall_charged": 0.0
+            },
+            "P_distribution": [
+              35,
+              60
+            ],
+            "D_distribution": [
+              81,
+              14
+            ],
+            "release_choices": 275
+          },
+          "charged": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.379857298487973,
+              "p50": 7.787894006677703,
+              "p90": 12.032607107857018,
+              "p95": 13.961680025392695,
+              "p99": 17.985468945108067,
+              "max": 17.985468945108067
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 21.148365606370298,
+              "p50": 10.878597462953934,
+              "p90": 59.992656436105875,
+              "p95": 69.92348367255633,
+              "p99": 77.64759044218226,
+              "max": 77.64759044218226
+            },
+            "makespan": 278.18812623343524,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 70.69230006355792,
+              "boundary_CPU_wall": 45.332128438167274,
+              "fit_CPU_wall": 0.4421599553897977,
+              "iteration_scheduler_wall_charged": 0.2912057861685753
+            },
+            "P_distribution": [
+              35,
+              60
+            ],
+            "D_distribution": [
+              80,
+              15
+            ],
+            "release_choices": 397
+          },
+          "route_or_accepted_cache_changed": 69,
+          "paired_paths": {
+            "fix-git:10": {
+              "zero": {
+                "TTFT": 37.4440809507156,
+                "nominal": 49.34825302872238,
+                "dependency": 11.90417207800678,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 152.38232075042015,
+                "first": 189.82640170113575,
+                "before_P": 0.5109609431924014,
+                "P_API": 4.131539942063645,
+                "P_to_D": 32.60043149434739,
+                "D_API_to_first": 0.20114857111215656
+              },
+              "charged": {
+                "TTFT": 8.510146952703337,
+                "nominal": 25.26694044256442,
+                "dependency": 16.75679348986108,
+                "P": 1,
+                "D": 3,
+                "P_prefix": 7680,
+                "D_prefix": 6400,
+                "ready": 157.23494216227445,
+                "first": 165.7450891149778,
+                "before_P": 2.0473724598898855,
+                "P_API": 0.9968021982309445,
+                "P_to_D": 1.685333190700078,
+                "D_API_to_first": 3.780639103882436
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:10",
+                  "CPU_wall": 0.0,
+                  "model_latest": 152.38232075042015,
+                  "origin": 152.38232075042015,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 157.10994377613113,
+                    "first": 158.2203320740474,
+                    "full": 166.1006599598654,
+                    "origin": 152.38232075042015,
+                    "latest_completed": 152.38232075042015,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:10",
+                  "CPU_wall": 1.2222481900826097,
+                  "model_latest": 157.23494216227445,
+                  "origin": 157.2400122218347,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 3,
+                    "source": 1,
+                    "P_prefix_command": 7680,
+                    "D_prefix_command": 7680,
+                    "P_end": 160.08513430990953,
+                    "first": 165.1257753486262,
+                    "full": 172.88207552910887,
+                    "origin": 157.2400122218347,
+                    "latest_completed": 157.23494216227445,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -28.933933998012265,
+                "before_P": 1.536411516697484,
+                "P_API": -3.1347377438327007,
+                "P_to_D": -30.915098303647312,
+                "D_API_to_first": 3.5794905327702793
+              }
+            },
+            "headless-terminal:12": {
+              "zero": {
+                "TTFT": 8.192371399389486,
+                "nominal": 39.94460350990815,
+                "dependency": 31.752232110518662,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 7680,
+                "D_prefix": 0,
+                "ready": 198.78738869855977,
+                "first": 206.97976009794925,
+                "before_P": 5.231348802167133,
+                "P_API": 2.208613166091359,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.33248781761838586
+              },
+              "charged": {
+                "TTFT": 17.985468945108067,
+                "nominal": 51.45164860305155,
+                "dependency": 33.466179657943485,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 1280,
+                "D_prefix": 0,
+                "ready": 200.5013362459846,
+                "first": 218.48680519109266,
+                "before_P": 8.651586584063182,
+                "P_API": 5.166192829000791,
+                "P_to_D": 3.8278658155273035,
+                "D_API_to_first": 0.3398237165168041
+              },
+              "original_decisions": [
+                {
+                  "id": "headless-terminal:12",
+                  "CPU_wall": 0.0,
+                  "model_latest": 198.78738869855977,
+                  "origin": 199.16053675176772,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 7680,
+                    "D_prefix_command": 0,
+                    "P_end": 206.04789334939477,
+                    "first": 206.84990164196233,
+                    "full": 214.72510803259223,
+                    "origin": 199.16053675176772,
+                    "latest_completed": 198.78738869855977,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "headless-terminal:12",
+                  "CPU_wall": 1.0515708979219198,
+                  "model_latest": 200.5013362459846,
+                  "origin": 200.5065042480834,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 1280,
+                    "D_prefix_command": 0,
+                    "P_end": 213.96474841817013,
+                    "first": 215.7022212341986,
+                    "full": 223.40633274552127,
+                    "origin": 200.5065042480834,
+                    "latest_completed": 200.5013362459846,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 9.793097545718581,
+                "before_P": 3.4202377818960485,
+                "P_API": 2.957579662909432,
+                "P_to_D": 3.407944202014704,
+                "D_API_to_first": 0.007335898898418236
+              }
+            },
+            "distribution-search:13": {
+              "zero": {
+                "TTFT": 14.541946007287521,
+                "nominal": 47.146953380988805,
+                "dependency": 32.605007373701284,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 5504,
+                "D_prefix": 0,
+                "ready": 200.14220514516649,
+                "first": 214.684151152454,
+                "before_P": 6.085145521651782,
+                "P_API": 6.873224014799519,
+                "P_to_D": 0.8809119846323199,
+                "D_API_to_first": 0.7026644862039007
+              },
+              "charged": {
+                "TTFT": 6.831022368369531,
+                "nominal": 59.71447135910205,
+                "dependency": 52.88344899073252,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 10880,
+                "D_prefix": 0,
+                "ready": 220.42064676219772,
+                "first": 227.25166913056725,
+                "before_P": 1.2785392414184003,
+                "P_API": 4.388857097955595,
+                "P_to_D": 0.5111943261977672,
+                "D_API_to_first": 0.6524317027977702
+              },
+              "original_decisions": [
+                {
+                  "id": "distribution-search:13",
+                  "CPU_wall": 0.0,
+                  "model_latest": 200.14220514516649,
+                  "origin": 200.18245863815253,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 5504,
+                    "D_prefix_command": 0,
+                    "P_end": 213.20036062131325,
+                    "first": 214.39947615648336,
+                    "full": 222.20280052827607,
+                    "origin": 200.18245863815253,
+                    "latest_completed": 200.14220514516649,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "distribution-search:13",
+                  "CPU_wall": 0.7590550072491169,
+                  "model_latest": 220.42064676219772,
+                  "origin": 220.42853840226482,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 10880,
+                    "D_prefix_command": 0,
+                    "P_end": 226.29184179816002,
+                    "first": 228.15725938937558,
+                    "full": 235.8814209599503,
+                    "origin": 220.42853840226482,
+                    "latest_completed": 220.42064676219772,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -7.71092363891799,
+                "before_P": -4.806606280233382,
+                "P_API": -2.484366916843924,
+                "P_to_D": -0.36971765843455273,
+                "D_API_to_first": -0.050232783406130466
+              }
+            },
+            "headless-terminal:7": {
+              "zero": {
+                "TTFT": 5.899344534590597,
+                "nominal": 5.899344534590597,
+                "dependency": 0.0,
+                "P": 1,
+                "D": 3,
+                "P_prefix": 6784,
+                "D_prefix": 7168,
+                "ready": 102.58928222033916,
+                "first": 108.48862675492975,
+                "before_P": 0.7747113669614833,
+                "P_API": 0.6223193455186702,
+                "P_to_D": 0.4616982726788308,
+                "D_API_to_first": 4.040615549431607
+              },
+              "charged": {
+                "TTFT": 12.146333970481436,
+                "nominal": 12.146333970481436,
+                "dependency": 0.0,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 1280,
+                "D_prefix": 256,
+                "ready": 102.58928222033916,
+                "first": 114.7356161908206,
+                "before_P": 4.58153665180761,
+                "P_API": 3.1658378556207825,
+                "P_to_D": 1.0893800149020194,
+                "D_API_to_first": 3.309579448151027
+              },
+              "original_decisions": [
+                {
+                  "id": "headless-terminal:7",
+                  "CPU_wall": 0.0,
+                  "model_latest": 102.74742726801972,
+                  "origin": 102.85303264410823,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 3,
+                    "source": 1,
+                    "P_prefix_command": 6784,
+                    "D_prefix_command": 6656,
+                    "P_end": 104.01652555618155,
+                    "first": 108.04134256872248,
+                    "full": 115.79456824143256,
+                    "origin": 102.85303264410823,
+                    "latest_completed": 102.74742726801972,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "headless-terminal:7",
+                  "CPU_wall": 1.555205525830388,
+                  "model_latest": 104.7412762739672,
+                  "origin": 105.10401734264224,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 3,
+                    "P_prefix_command": 1280,
+                    "D_prefix_command": 0,
+                    "P_end": 109.7273053160733,
+                    "first": 110.74304993023834,
+                    "full": 118.80432927199071,
+                    "origin": 105.10401734264224,
+                    "latest_completed": 104.7412762739672,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 6.246989435890839,
+                "before_P": 3.806825284846127,
+                "P_API": 2.5435185101021123,
+                "P_to_D": 0.6276817422231886,
+                "D_API_to_first": -0.7310361012805799
+              }
+            },
+            "fix-code-vulnerability:8": {
+              "zero": {
+                "TTFT": 4.4374569893576705,
+                "nominal": 4.4374569893576705,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 10880,
+                "D_prefix": 0,
+                "ready": 120.37134439980537,
+                "first": 124.80880138916304,
+                "before_P": 0.5109609431924156,
+                "P_API": 3.0612071756891934,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.4453672569634648
+              },
+              "charged": {
+                "TTFT": 10.415863482246522,
+                "nominal": 10.415863482246522,
+                "dependency": 0.0,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 120.37134439980537,
+                "first": 130.7872078820519,
+                "before_P": 1.2793318239377527,
+                "P_API": 7.710948209049491,
+                "P_to_D": 0.9779801026266455,
+                "D_API_to_first": 0.4476033466326328
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-code-vulnerability:8",
+                  "CPU_wall": 0.0,
+                  "model_latest": 117.37205924585155,
+                  "origin": 120.37134439980537,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 10880,
+                    "D_prefix_command": 0,
+                    "P_end": 124.01994214331944,
+                    "first": 124.88523101379593,
+                    "full": 132.5028811150601,
+                    "origin": 120.37134439980537,
+                    "latest_completed": 117.37205924585155,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-code-vulnerability:8",
+                  "CPU_wall": 0.767720109783113,
+                  "model_latest": 118.9395025975434,
+                  "origin": 120.37134439980537,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 129.40832030437736,
+                    "first": 130.64401488132023,
+                    "full": 138.26449025426248,
+                    "origin": 120.37134439980537,
+                    "latest_completed": 118.9395025975434,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 5.978406492888851,
+                "before_P": 0.7683708807453371,
+                "P_API": 4.649741033360297,
+                "P_to_D": 0.5580584891140461,
+                "D_API_to_first": 0.0022360896691679955
+              }
+            }
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "sha256": [
+        "8a8889a52276d8d86e6d4c9ae4e2a66fd6925ec8c2a63e426f5118203f07b697",
+        "732ed4194e755bf0bee131d1aadc21a01ab14c49a851a29b72ac0c80a8fceed5"
+      ],
+      "arms": {
+        "reference": {
+          "zero": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.617327790782614,
+              "p50": 7.11613600802653,
+              "p90": 13.564862339797799,
+              "p95": 16.473549543315187,
+              "p99": 17.8826417828744,
+              "max": 17.8826417828744
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 43.84798409008627,
+              "p50": 29.720812930657445,
+              "p90": 110.97677130645098,
+              "p95": 127.22358493085552,
+              "p99": 140.67466740334925,
+              "max": 140.67466740334925
+            },
+            "makespan": 247.23930674895215,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 0.0,
+              "boundary_CPU_wall": 0.0,
+              "fit_CPU_wall": 0.0,
+              "iteration_scheduler_wall_charged": 0.0
+            },
+            "P_distribution": [
+              43,
+              52
+            ],
+            "D_distribution": [
+              75,
+              20
+            ],
+            "release_choices": 315
+          },
+          "charged": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.642899536565358,
+              "p50": 7.324767511584042,
+              "p90": 12.643925206417492,
+              "p95": 13.230750821860227,
+              "p99": 18.336536421746075,
+              "max": 18.336536421746075
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 51.1779495051766,
+              "p50": 35.7008405616679,
+              "p90": 117.41309347446588,
+              "p95": 132.53766773759642,
+              "p99": 152.33930935999228,
+              "max": 152.33930935999228
+            },
+            "makespan": 258.7318742840549,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 79.61679804511368,
+              "boundary_CPU_wall": 37.80331104435027,
+              "fit_CPU_wall": 0.42002327274531126,
+              "iteration_scheduler_wall_charged": 0.29353490844368935
+            },
+            "P_distribution": [
+              35,
+              60
+            ],
+            "D_distribution": [
+              73,
+              22
+            ],
+            "release_choices": 444
+          },
+          "route_or_accepted_cache_changed": 76,
+          "paired_paths": {
+            "headless-terminal:13": {
+              "zero": {
+                "TTFT": 17.8826417828744,
+                "nominal": 119.86602337918166,
+                "dependency": 101.98338159630725,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 1280,
+                "D_prefix": 0,
+                "ready": 187.9495698826952,
+                "first": 205.8322116655696,
+                "before_P": 9.381292002791895,
+                "P_API": 7.526809508998415,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.5546186575714955
+              },
+              "charged": {
+                "TTFT": 10.313117556272289,
+                "nominal": 117.41309347446588,
+                "dependency": 107.09997591819359,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 384,
+                "ready": 193.06616420458153,
+                "first": 203.37928176085381,
+                "before_P": 1.834258482300811,
+                "P_API": 7.649510490335174,
+                "P_to_D": 0.46980586110618106,
+                "D_API_to_first": 0.3595427225301364
+              },
+              "original_decisions": [
+                {
+                  "id": "headless-terminal:13",
+                  "CPU_wall": 0.0,
+                  "model_latest": 187.9495698826952,
+                  "origin": 187.9495698826952,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 1280,
+                    "D_prefix_command": 0,
+                    "P_end": 204.38373184259166,
+                    "first": 205.32414667964656,
+                    "full": 213.11703199744866,
+                    "origin": 187.9495698826952,
+                    "latest_completed": 187.9495698826952,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "headless-terminal:13",
+                  "CPU_wall": 0.2907806569710374,
+                  "model_latest": 193.06616420458153,
+                  "origin": 193.07293316601857,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 202.269662764865,
+                    "first": 203.79403972890623,
+                    "full": 211.5816431384767,
+                    "origin": 193.07293316601857,
+                    "latest_completed": 193.06616420458153,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -7.5695242266021125,
+                "before_P": -7.547033520491084,
+                "P_API": 0.12270098133675855,
+                "P_to_D": 0.049884247593581676,
+                "D_API_to_first": -0.19507593504135912
+              }
+            },
+            "feal-differential-cryptanalysis:9": {
+              "zero": {
+                "TTFT": 9.75568663375266,
+                "nominal": 42.160700209923014,
+                "dependency": 32.405013576170354,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 4096,
+                "D_prefix": 0,
+                "ready": 96.10468216044262,
+                "first": 105.86036879419528,
+                "before_P": 4.961584654191995,
+                "P_API": 3.809826418458737,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.5643539475893249
+              },
+              "charged": {
+                "TTFT": 18.336536421746075,
+                "nominal": 52.13137371633268,
+                "dependency": 33.79483729458661,
+                "P": 1,
+                "D": 3,
+                "P_prefix": 4096,
+                "D_prefix": 4224,
+                "ready": 97.49450587885887,
+                "first": 115.83104230060495,
+                "before_P": 7.999481249241157,
+                "P_API": 3.8025270773424467,
+                "P_to_D": 0.5604653386270542,
+                "D_API_to_first": 5.974062756535417
+              },
+              "original_decisions": [
+                {
+                  "id": "feal-differential-cryptanalysis:9",
+                  "CPU_wall": 0.0,
+                  "model_latest": 96.10468216044262,
+                  "origin": 96.4860365812329,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 4096,
+                    "D_prefix_command": 0,
+                    "P_end": 104.35844148376371,
+                    "first": 105.14521728030824,
+                    "full": 113.19507619863427,
+                    "origin": 96.4860365812329,
+                    "latest_completed": 96.10468216044262,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "feal-differential-cryptanalysis:9",
+                  "CPU_wall": 2.7367340866476297,
+                  "model_latest": 101.94902637422862,
+                  "origin": 102.24551414402431,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 3,
+                    "source": 1,
+                    "P_prefix_command": 4096,
+                    "D_prefix_command": 4096,
+                    "P_end": 108.71188590909146,
+                    "first": 116.47481796189389,
+                    "full": 124.24544266810835,
+                    "origin": 102.24551414402431,
+                    "latest_completed": 101.94902637422862,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 8.580849787993415,
+                "before_P": 3.037896595049162,
+                "P_API": -0.007299341116290492,
+                "P_to_D": 0.1405437251144548,
+                "D_API_to_first": 5.4097088089460925
+              }
+            },
+            "git-multibranch:11": {
+              "zero": {
+                "TTFT": 16.871717225858816,
+                "nominal": 88.60713498792465,
+                "dependency": 71.73541776206584,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 896,
+                "D_prefix": 256,
+                "ready": 150.42787427167244,
+                "first": 167.29959149753125,
+                "before_P": 8.05957869832568,
+                "P_API": 8.028285861343864,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.36393105267666215
+              },
+              "charged": {
+                "TTFT": 6.562745247818555,
+                "nominal": 88.96806802684269,
+                "dependency": 82.40532277902413,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 12928,
+                "D_prefix": 640,
+                "ready": 161.09777928863073,
+                "first": 167.6605245364493,
+                "before_P": 1.4981121002351188,
+                "P_API": 2.4680360950741305,
+                "P_to_D": 2.0244655468681003,
+                "D_API_to_first": 0.5721315056412095
+              },
+              "original_decisions": [
+                {
+                  "id": "git-multibranch:11",
+                  "CPU_wall": 0.0,
+                  "model_latest": 150.42787427167244,
+                  "origin": 150.42787427167244,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 896,
+                    "D_prefix_command": 0,
+                    "P_end": 166.03110012536104,
+                    "first": 166.98314870835657,
+                    "full": 174.6890977325502,
+                    "origin": 150.42787427167244,
+                    "latest_completed": 150.42787427167244,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "git-multibranch:11",
+                  "CPU_wall": 0.9731806498020887,
+                  "model_latest": 161.09777928863073,
+                  "origin": 161.10367417402918,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 16640,
+                    "D_prefix_command": 0,
+                    "P_end": 165.43415003146006,
+                    "first": 168.34097697781655,
+                    "full": 176.23153833765036,
+                    "origin": 161.10367417402918,
+                    "latest_completed": 161.09777928863073,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -10.308971978040262,
+                "before_P": -6.561466598090561,
+                "P_API": -5.560249766269734,
+                "P_to_D": 1.604543933355501,
+                "D_API_to_first": 0.20820045296454737
+              }
+            },
+            "fix-git:7": {
+              "zero": {
+                "TTFT": 2.862919979457729,
+                "nominal": 23.478762461514954,
+                "dependency": 20.615842482057225,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 3712,
+                "D_prefix": 0,
+                "ready": 70.33312716316466,
+                "first": 73.19604714262239,
+                "before_P": 0.5109609431924156,
+                "P_API": 0.6869212032874932,
+                "P_to_D": 1.4493335710534723,
+                "D_API_to_first": 0.2157042619243441
+              },
+              "charged": {
+                "TTFT": 13.039269340147072,
+                "nominal": 31.764619889042287,
+                "dependency": 18.725350548895214,
+                "P": 0,
+                "D": 3,
+                "P_prefix": 640,
+                "D_prefix": 3584,
+                "ready": 68.44263523000265,
+                "first": 81.48190457014972,
+                "before_P": 4.96765460928691,
+                "P_API": 2.0450221894212643,
+                "P_to_D": 0.8341732260119556,
+                "D_API_to_first": 5.192419315426946
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:7",
+                  "CPU_wall": 0.0,
+                  "model_latest": 70.33312716316466,
+                  "origin": 70.33312716316466,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 3712,
+                    "D_prefix_command": 0,
+                    "P_end": 72.44318728908117,
+                    "first": 75.23199546160673,
+                    "full": 83.07288079439931,
+                    "origin": 70.33312716316466,
+                    "latest_completed": 70.33312716316466,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:7",
+                  "CPU_wall": 1.4216274060308933,
+                  "model_latest": 71.12976660324117,
+                  "origin": 71.47704912747373,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 3,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 3712,
+                    "P_end": 75.40124303850551,
+                    "first": 78.7212862943489,
+                    "full": 86.56253840683527,
+                    "origin": 71.47704912747373,
+                    "latest_completed": 71.12976660324117,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 10.176349360689343,
+                "before_P": 4.456693666094495,
+                "P_API": 1.3581009861337712,
+                "P_to_D": -0.6151603450415166,
+                "D_API_to_first": 4.976715053502602
+              }
+            },
+            "headless-terminal:12": {
+              "zero": {
+                "TTFT": 17.44254794620943,
+                "nominal": 95.9640404830159,
+                "dependency": 78.52149253680648,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 1280,
+                "D_prefix": 0,
+                "ready": 162.03907083082703,
+                "first": 179.48161877703646,
+                "before_P": 11.499340909769188,
+                "P_API": 5.166192829000791,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.35709259392686477
+              },
+              "charged": {
+                "TTFT": 7.985135017579097,
+                "nominal": 100.18707428899398,
+                "dependency": 92.20193927141489,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 0,
+                "D_prefix": 256,
+                "ready": 175.71951756543544,
+                "first": 183.70465258301454,
+                "before_P": 1.627704850320697,
+                "P_API": 5.753338385786744,
+                "P_to_D": 0.4922019906621813,
+                "D_API_to_first": 0.11188979080947092
+              },
+              "original_decisions": [
+                {
+                  "id": "headless-terminal:12",
+                  "CPU_wall": 0.0,
+                  "model_latest": 162.03907083082703,
+                  "origin": 162.48912669033237,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 3,
+                    "P_prefix_command": 1280,
+                    "D_prefix_command": 0,
+                    "P_end": 178.34951998145198,
+                    "first": 179.15504757389462,
+                    "full": 187.01624713636093,
+                    "origin": 162.48912669033237,
+                    "latest_completed": 162.03907083082703,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "headless-terminal:12",
+                  "CPU_wall": 0.9210827900096774,
+                  "model_latest": 175.71951756543544,
+                  "origin": 175.91463091214328,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 0,
+                    "D_prefix_command": 10624,
+                    "P_end": 183.1254745978909,
+                    "first": 184.7232507951265,
+                    "full": 193.20372074278518,
+                    "origin": 175.91463091214328,
+                    "latest_completed": 175.71951756543544,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -9.457412928630333,
+                "before_P": -9.871636059448491,
+                "P_API": 0.5871455567859529,
+                "P_to_D": 0.07228037714958191,
+                "D_API_to_first": -0.24520280311739384
+              }
+            },
+            "fix-git:13": {
+              "zero": {
+                "TTFT": 16.473549543315187,
+                "nominal": 96.7801093168016,
+                "dependency": 80.30655977348641,
+                "P": 0,
+                "D": 3,
+                "P_prefix": 9856,
+                "D_prefix": 4736,
+                "ready": 165.6215139860209,
+                "first": 182.09506352933607,
+                "before_P": 9.286436239307449,
+                "P_API": 1.0603623876518347,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 5.7068293028433175
+              },
+              "charged": {
+                "TTFT": 7.494775123791015,
+                "nominal": 103.6240009882975,
+                "dependency": 96.12922586450648,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 256,
+                "ready": 181.44418007704095,
+                "first": 188.93895520083197,
+                "before_P": 1.6570233165893171,
+                "P_API": 5.245129317676103,
+                "P_to_D": 0.4739081656840085,
+                "D_API_to_first": 0.11871432384157288
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:13",
+                  "CPU_wall": 0.0,
+                  "model_latest": 165.6215139860209,
+                  "origin": 165.6215139860209,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 3,
+                    "source": 0,
+                    "P_prefix_command": 11264,
+                    "D_prefix_command": 11264,
+                    "P_end": 175.61444780562712,
+                    "first": 179.95746169231032,
+                    "full": 187.63827300573845,
+                    "origin": 165.6215139860209,
+                    "latest_completed": 165.6215139860209,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:13",
+                  "CPU_wall": 0.3522134404629469,
+                  "model_latest": 181.44418007704095,
+                  "origin": 181.4503722275667,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 188.267736491279,
+                    "first": 189.73561269646234,
+                    "full": 197.63860323555556,
+                    "origin": 181.4503722275667,
+                    "latest_completed": 181.44418007704095,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -8.978774419524171,
+                "before_P": -7.6294129227181315,
+                "P_API": 4.184766930024268,
+                "P_to_D": 0.05398655217140913,
+                "D_API_to_first": -5.588114979001745
+              }
+            }
+          }
+        },
+        "ours": {
+          "zero": {
+            "TTFT": {
+              "n": 95,
+              "mean": 7.617327790782614,
+              "p50": 7.11613600802653,
+              "p90": 13.564862339797799,
+              "p95": 16.473549543315187,
+              "p99": 17.8826417828744,
+              "max": 17.8826417828744
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 43.84798409008627,
+              "p50": 29.720812930657445,
+              "p90": 110.97677130645098,
+              "p95": 127.22358493085552,
+              "p99": 140.67466740334925,
+              "max": 140.67466740334925
+            },
+            "makespan": 247.23930674895215,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 0.0,
+              "boundary_CPU_wall": 0.0,
+              "fit_CPU_wall": 0.0,
+              "iteration_scheduler_wall_charged": 0.0
+            },
+            "P_distribution": [
+              43,
+              52
+            ],
+            "D_distribution": [
+              75,
+              20
+            ],
+            "release_choices": 315
+          },
+          "charged": {
+            "TTFT": {
+              "n": 95,
+              "mean": 8.451210913255993,
+              "p50": 8.524322462297121,
+              "p90": 13.57286992983012,
+              "p95": 14.514270791490105,
+              "p99": 16.692308558589957,
+              "max": 16.692308558589957
+            },
+            "nominal": {
+              "n": 95,
+              "mean": 53.358437092885936,
+              "p50": 38.82744848114947,
+              "p90": 126.60609391522905,
+              "p95": 139.2111999394744,
+              "p99": 157.39331082647635,
+              "max": 157.39331082647635
+            },
+            "makespan": 263.7864006038951,
+            "control_components_not_added_to_TTFT": {
+              "planning_wall": 78.18970013130456,
+              "boundary_CPU_wall": 40.04914648272097,
+              "fit_CPU_wall": 0.4225451033562422,
+              "iteration_scheduler_wall_charged": 0.27100849710404873
+            },
+            "P_distribution": [
+              36,
+              59
+            ],
+            "D_distribution": [
+              77,
+              18
+            ],
+            "release_choices": 343
+          },
+          "route_or_accepted_cache_changed": 80,
+          "paired_paths": {
+            "headless-terminal:13": {
+              "zero": {
+                "TTFT": 17.8826417828744,
+                "nominal": 119.86602337918166,
+                "dependency": 101.98338159630725,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 1280,
+                "D_prefix": 0,
+                "ready": 187.9495698826952,
+                "first": 205.8322116655696,
+                "before_P": 9.381292002791895,
+                "P_API": 7.526809508998415,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.5546186575714955
+              },
+              "charged": {
+                "TTFT": 12.837818223176527,
+                "nominal": 126.60609391522905,
+                "dependency": 113.76827569205253,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 0,
+                "D_prefix": 0,
+                "ready": 199.73446397844046,
+                "first": 212.57228220161699,
+                "before_P": 2.45769295711915,
+                "P_API": 8.076628434438302,
+                "P_to_D": 1.6948909798916816,
+                "D_API_to_first": 0.6086058517273898
+              },
+              "original_decisions": [
+                {
+                  "id": "headless-terminal:13",
+                  "CPU_wall": 0.0,
+                  "model_latest": 187.9495698826952,
+                  "origin": 187.9495698826952,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 1280,
+                    "D_prefix_command": 0,
+                    "P_end": 204.38373184259166,
+                    "first": 205.32414667964656,
+                    "full": 213.11703199744866,
+                    "origin": 187.9495698826952,
+                    "latest_completed": 187.9495698826952,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "headless-terminal:13",
+                  "CPU_wall": 0.48630976490676403,
+                  "model_latest": 199.73446397844046,
+                  "origin": 199.74124783917605,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 0,
+                    "D_prefix_command": 0,
+                    "P_end": 210.04364243537793,
+                    "first": 211.7094792335308,
+                    "full": 219.5529245015953,
+                    "origin": 199.74124783917605,
+                    "latest_completed": 199.73446397844046,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -5.044823559697875,
+                "before_P": -6.923599045672745,
+                "P_API": 0.5498189254398866,
+                "P_to_D": 1.2749693663790822,
+                "D_API_to_first": 0.05398719415589426
+              }
+            },
+            "distribution-search:14": {
+              "zero": {
+                "TTFT": 10.32451526341589,
+                "nominal": 127.22358493085552,
+                "dependency": 116.89906966743963,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 4096,
+                "D_prefix": 0,
+                "ready": 203.83123651506526,
+                "first": 214.15575177848115,
+                "before_P": 0.5109609431924014,
+                "P_API": 8.587636176280155,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.8059965304307468
+              },
+              "charged": {
+                "TTFT": 16.692308558589957,
+                "nominal": 131.90502570543003,
+                "dependency": 115.21271714684006,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 5504,
+                "D_prefix": 0,
+                "ready": 202.1448839944657,
+                "first": 218.83719255305564,
+                "before_P": 7.35065029004565,
+                "P_API": 7.948296784193113,
+                "P_to_D": 0.5892746739369272,
+                "D_API_to_first": 0.804086810414276
+              },
+              "original_decisions": [
+                {
+                  "id": "distribution-search:14",
+                  "CPU_wall": 0.0,
+                  "model_latest": 203.83123651506526,
+                  "origin": 203.83123651506526,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 4096,
+                    "D_prefix_command": 0,
+                    "P_end": 213.00437921803655,
+                    "first": 214.20918535302587,
+                    "full": 221.9479908429968,
+                    "origin": 203.83123651506526,
+                    "latest_completed": 203.83123651506526,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "distribution-search:14",
+                  "CPU_wall": 0.403248499147594,
+                  "model_latest": 202.1448839944657,
+                  "origin": 202.15294975832663,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 5504,
+                    "D_prefix_command": 0,
+                    "P_end": 217.32050440072416,
+                    "first": 219.2022119452839,
+                    "full": 227.0302566513041,
+                    "origin": 202.15294975832663,
+                    "latest_completed": 202.1448839944657,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 6.367793295174067,
+                "before_P": 6.839689346853248,
+                "P_API": -0.6393393920870416,
+                "P_to_D": 0.16935306042432785,
+                "D_API_to_first": -0.0019097200164708283
+              }
+            },
+            "fix-git:13": {
+              "zero": {
+                "TTFT": 16.473549543315187,
+                "nominal": 96.7801093168016,
+                "dependency": 80.30655977348641,
+                "P": 0,
+                "D": 3,
+                "P_prefix": 9856,
+                "D_prefix": 4736,
+                "ready": 165.6215139860209,
+                "first": 182.09506352933607,
+                "before_P": 9.286436239307449,
+                "P_API": 1.0603623876518347,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 5.7068293028433175
+              },
+              "charged": {
+                "TTFT": 7.311393064876171,
+                "nominal": 117.98204009022257,
+                "dependency": 110.6706470253464,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 195.98560123788087,
+                "first": 203.29699430275704,
+                "before_P": 0.8785946910606413,
+                "P_API": 5.327413686967446,
+                "P_to_D": 0.4944566984009384,
+                "D_API_to_first": 0.6109279884471448
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:13",
+                  "CPU_wall": 0.0,
+                  "model_latest": 165.6215139860209,
+                  "origin": 165.6215139860209,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 3,
+                    "source": 0,
+                    "P_prefix_command": 11264,
+                    "D_prefix_command": 11264,
+                    "P_end": 175.61444780562712,
+                    "first": 179.95746169231032,
+                    "full": 187.63827300573845,
+                    "origin": 165.6215139860209,
+                    "latest_completed": 165.6215139860209,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:13",
+                  "CPU_wall": 0.3601314229890704,
+                  "model_latest": 195.98560123788087,
+                  "origin": 195.99245232054858,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 202.5431603888603,
+                    "first": 203.63560218647,
+                    "full": 211.4279147844504,
+                    "origin": 195.99245232054858,
+                    "latest_completed": 195.98560123788087,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -9.162156478439016,
+                "before_P": -8.407841548246807,
+                "P_API": 4.267051299315612,
+                "P_to_D": 0.07453508488833904,
+                "D_API_to_first": -5.095901314396173
+              }
+            },
+            "fix-git:7": {
+              "zero": {
+                "TTFT": 2.862919979457729,
+                "nominal": 23.478762461514954,
+                "dependency": 20.615842482057225,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 3712,
+                "D_prefix": 0,
+                "ready": 70.33312716316466,
+                "first": 73.19604714262239,
+                "before_P": 0.5109609431924156,
+                "P_API": 0.6869212032874932,
+                "P_to_D": 1.4493335710534723,
+                "D_API_to_first": 0.2157042619243441
+              },
+              "charged": {
+                "TTFT": 11.223012803283282,
+                "nominal": 31.804241084700543,
+                "dependency": 20.58122828141726,
+                "P": 1,
+                "D": 3,
+                "P_prefix": 3712,
+                "D_prefix": 4864,
+                "ready": 70.2985129625247,
+                "first": 81.52152576580798,
+                "before_P": 5.161595102645151,
+                "P_API": 0.6869212032874932,
+                "P_to_D": 0.9466471033213821,
+                "D_API_to_first": 4.427849394029252
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:7",
+                  "CPU_wall": 0.0,
+                  "model_latest": 70.33312716316466,
+                  "origin": 70.33312716316466,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 3712,
+                    "D_prefix_command": 0,
+                    "P_end": 72.44318728908117,
+                    "first": 75.23199546160673,
+                    "full": 83.07288079439931,
+                    "origin": 70.33312716316466,
+                    "latest_completed": 70.33312716316466,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:7",
+                  "CPU_wall": 1.5782376369461417,
+                  "model_latest": 73.35498800287337,
+                  "origin": 73.3691316515981,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 3,
+                    "source": 1,
+                    "P_prefix_command": 3712,
+                    "D_prefix_command": 3712,
+                    "P_end": 75.89273756111675,
+                    "first": 81.73136033646855,
+                    "full": 89.4568375375946,
+                    "origin": 73.3691316515981,
+                    "latest_completed": 73.35498800287337,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 8.360092823825553,
+                "before_P": 4.650634159452736,
+                "P_API": 0.0,
+                "P_to_D": -0.5026864677320901,
+                "D_API_to_first": 4.212145132104908
+              }
+            },
+            "dna-insert:13": {
+              "zero": {
+                "TTFT": 16.286193845005812,
+                "nominal": 94.39546156876052,
+                "dependency": 78.10926772375471,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 7936,
+                "D_prefix": 2688,
+                "ready": 161.90163637126486,
+                "first": 178.18783021627067,
+                "before_P": 9.037496932681705,
+                "P_API": 3.96881692138176,
+                "P_to_D": 1.1215979066628563,
+                "D_API_to_first": 2.1582820842794774
+              },
+              "charged": {
+                "TTFT": 8.018939960101278,
+                "nominal": 113.44328388493783,
+                "dependency": 105.42434392483655,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 5760,
+                "D_prefix": 0,
+                "ready": 189.2167125723467,
+                "first": 197.23565253244797,
+                "before_P": 0.9528043997810869,
+                "P_API": 4.956886890970824,
+                "P_to_D": 1.6178878514140536,
+                "D_API_to_first": 0.49136081793531616
+              },
+              "original_decisions": [
+                {
+                  "id": "dna-insert:13",
+                  "CPU_wall": 0.0,
+                  "model_latest": 161.90163637126486,
+                  "origin": 161.97816574713997,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 7936,
+                    "D_prefix_command": 0,
+                    "P_end": 175.00245018938506,
+                    "first": 175.90859847030077,
+                    "full": 183.8050551380256,
+                    "origin": 161.97816574713997,
+                    "latest_completed": 161.90163637126486,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "dna-insert:13",
+                  "CPU_wall": 0.43339831568300724,
+                  "model_latest": 189.2167125723467,
+                  "origin": 189.2245042218969,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 5760,
+                    "D_prefix_command": 0,
+                    "P_end": 195.4727162869523,
+                    "first": 197.2564822920841,
+                    "full": 205.13821150945586,
+                    "origin": 189.2245042218969,
+                    "latest_completed": 189.2167125723467,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": -8.267253884904534,
+                "before_P": -8.084692532900618,
+                "P_API": 0.988069969589064,
+                "P_to_D": 0.49628994475119725,
+                "D_API_to_first": -1.6669212663441613
+              }
+            },
+            "fix-git:12": {
+              "zero": {
+                "TTFT": 6.1695520245778255,
+                "nominal": 76.1161109093986,
+                "dependency": 69.94655888482077,
+                "P": 0,
+                "D": 3,
+                "P_prefix": 9856,
+                "D_prefix": 11264,
+                "ready": 151.73732738444826,
+                "first": 157.9068794090261,
+                "before_P": 1.8041238500490522,
+                "P_API": 0.8969936218769332,
+                "P_to_D": 0.4367901614284051,
+                "D_API_to_first": 3.0316443912234377
+              },
+              "charged": {
+                "TTFT": 14.330683134944962,
+                "nominal": 104.76139265861357,
+                "dependency": 90.43070952366861,
+                "P": 0,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 512,
+                "ready": 172.2214780232961,
+                "first": 186.55216115824106,
+                "before_P": 5.358506504544209,
+                "P_API": 5.081760551901201,
+                "P_to_D": 0.7315467594026472,
+                "D_API_to_first": 3.158869319096908
+              },
+              "original_decisions": [
+                {
+                  "id": "fix-git:12",
+                  "CPU_wall": 0.0,
+                  "model_latest": 151.73732738444826,
+                  "origin": 151.73732738444826,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 3,
+                    "source": 2,
+                    "P_prefix_command": 9856,
+                    "D_prefix_command": 9856,
+                    "P_end": 154.41914636423928,
+                    "first": 159.1250287419453,
+                    "full": 166.80542761936334,
+                    "origin": 151.73732738444826,
+                    "latest_completed": 151.73732738444826,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "fix-git:12",
+                  "CPU_wall": 0.40987513680011034,
+                  "model_latest": 172.37693727587535,
+                  "origin": 172.95678109895218,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 0,
+                    "d": 2,
+                    "source": 0,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 9600,
+                    "P_end": 182.60048160078367,
+                    "first": 184.41451293661763,
+                    "full": 192.98057876349804,
+                    "origin": 172.95678109895218,
+                    "latest_completed": 172.37693727587535,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 8.161131110367137,
+                "before_P": 3.554382654495157,
+                "P_API": 4.184766930024268,
+                "P_to_D": 0.29475659797424214,
+                "D_API_to_first": 0.1272249278734705
+              }
+            },
+            "headless-terminal:9": {
+              "zero": {
+                "TTFT": 6.685780346719497,
+                "nominal": 48.29468023844339,
+                "dependency": 41.608899891723894,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 640,
+                "D_prefix": 0,
+                "ready": 107.06911925313335,
+                "first": 113.75489959985285,
+                "before_P": 1.9640541232188156,
+                "P_API": 4.000403914188464,
+                "P_to_D": 0.4199216135125994,
+                "D_API_to_first": 0.3014006957996145
+              },
+              "charged": {
+                "TTFT": 13.89833507052451,
+                "nominal": 56.948034069188,
+                "dependency": 43.04969899866349,
+                "P": 1,
+                "D": 2,
+                "P_prefix": 5376,
+                "D_prefix": 0,
+                "ready": 108.50991836007294,
+                "first": 122.40825343059745,
+                "before_P": 9.749532531936495,
+                "P_API": 1.811794963635483,
+                "P_to_D": 2.1217306059389074,
+                "D_API_to_first": 0.21527696901362958
+              },
+              "original_decisions": [
+                {
+                  "id": "headless-terminal:9",
+                  "CPU_wall": 0.0,
+                  "model_latest": 107.06911925313335,
+                  "origin": 107.06911925313335,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 640,
+                    "D_prefix_command": 0,
+                    "P_end": 112.81037032879209,
+                    "first": 114.94543503065326,
+                    "full": 122.73498995471596,
+                    "origin": 107.06911925313335,
+                    "latest_completed": 107.06911925313335,
+                    "not_after_P_revised_forecast": true
+                  }
+                },
+                {
+                  "id": "headless-terminal:9",
+                  "CPU_wall": 0.818607029505074,
+                  "model_latest": 108.50991836007294,
+                  "origin": 108.81802961003383,
+                  "candidates": 64,
+                  "initial_forecast": {
+                    "p": 1,
+                    "d": 2,
+                    "source": 1,
+                    "P_prefix_command": 8192,
+                    "D_prefix_command": 0,
+                    "P_end": 119.63219311089236,
+                    "first": 122.2331721620359,
+                    "full": 130.07588454673052,
+                    "origin": 108.81802961003383,
+                    "latest_completed": 108.50991836007294,
+                    "not_after_P_revised_forecast": true
+                  }
+                }
+              ],
+              "charged_minus_zero_components": {
+                "TTFT": 7.212554723805013,
+                "before_P": 7.78547840871768,
+                "P_API": -2.1886089505529807,
+                "P_to_D": 1.701808992426308,
+                "D_API_to_first": -0.0861237267859849
+              }
+            }
+          }
+        }
+      }
+    }
+  ]
+}

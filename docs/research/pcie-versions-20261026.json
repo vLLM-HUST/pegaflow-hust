@@ -1,0 +1,942 @@
+{
+  "as_of": "2026-10-27",
+  "base_git": "9abb470db94851bc401064121caf2dd45ac1e04e",
+  "base_source_sha256": "460abdae989a941179b5cf16c9f8d6f7853be77e934f9f2640b14626d237d45d",
+  "same_rates": [
+    0.24516170769071072,
+    0.49032341538142143,
+    0.9806468307628429
+  ],
+  "requests": 95,
+  "sessions": 8,
+  "CPU_only": true,
+  "real_parallel_serving_validated": false,
+  "per_rate_version_selection_forbidden": true,
+  "versions": [
+    {
+      "version": "lower-bound",
+      "source_delta": "pcie-search-source-02.tar.gz",
+      "status": "rejected: aggregate bound exceeded full forecast",
+      "sha256": "a3f31a8494b4c1408d355adb14fcd2299eb87373986f5b0be19bda8479b25b12",
+      "evidence": null
+    },
+    {
+      "version": "memo",
+      "source_delta": "pcie-memo-source-01.tar.gz",
+      "status": "reference: exact snapshot reuse; mixed closed-loop gains",
+      "sha256": "84b3756a73642fede9e4efdf9403221c16ff0ad978a4b7ad4bda152f5d34780c",
+      "evidence": "issue23-pcie-memo-01",
+      "evidence_archive_sha256": "31f417d33b22d537e4524fb278f7296b48208fdb246df7292f082de6ffc74bf2"
+    },
+    {
+      "version": "age",
+      "source_delta": "pcie-causal-prefill-source-01.tar.gz",
+      "status": "not promoted: changed ordering, no convincing three-rate gain",
+      "sha256": "6ac94399cac7658d89fa4e549fb08e734c3b278d5ea82c1d10071679cb3c5ecd",
+      "evidence": "issue23-pcie-causal-prefill-02",
+      "evidence_archive_sha256": "14bbba9460473f15f0336f00a4da7b2b874bd30c04c8e164891abc4d335df4f3"
+    },
+    {
+      "version": "laxity",
+      "source_delta": "pcie-laxity-source-01.tar.gz",
+      "status": "diagnostic candidate; old world/forecast arbitration mismatch",
+      "sha256": "5e46b336cb769138186e89355f77f6eca6f52f0605a90864f2daf07c57f8074e",
+      "evidence": "issue23-pcie-laxity-01",
+      "evidence_archive_sha256": "cbc2e776708c59cb3b449b867fb23905a1ea8efd80f5cab19779183ebe10e15e"
+    },
+    {
+      "version": "fair-laxity",
+      "source_delta": "pcie-fair-endpoint-source-01.tar.gz",
+      "status": "partial tail gain; low rate still worse than reference",
+      "sha256": "7538e80eef25e9af40e127011684e8341555fc8fff408a787597b7b7ebb1700a",
+      "evidence": "issue23-pcie-fair-endpoint-01",
+      "evidence_archive_sha256": "51654dafc4167df38fa69fa49132330976c2c02817b995c65bd88461f1bbbdce"
+    },
+    {
+      "version": "reservation-01",
+      "source_delta": "pcie-reservation-source-01.tar.gz",
+      "status": "invalidated: directed nonpreemption test failed",
+      "sha256": "bf440602518df47771c36f44f6d6616bcddd09efde1301d58755c2550f68bab2",
+      "evidence": "issue23-pcie-reservation-01",
+      "evidence_archive_sha256": "0ffed36b814ff1bb1116395deb8e38494045036225d87ace0478091d2d490244"
+    },
+    {
+      "version": "reservation-02",
+      "source_delta": "pcie-reservation-source-02.tar.gz",
+      "status": "not promoted: high-rate p99 regressed 9.3%; complete three-rate screen retained",
+      "sha256": "103a608ffb3dea242a585719674b87434448a9b46b8144f7a1ba7b44d25d2ddd",
+      "evidence": "issue23-pcie-reservation-02",
+      "evidence_archive_sha256": "81b64c97f2b0a00f4ec167a0d04b64c849f3870bc4424eed4d87af40f3a89e31"
+    },
+    {
+      "version": "TimedMemo-normal-910B2",
+      "status": "retained default reference; mixed cross-run CPU tails; no new real parallel-serving result",
+      "source_delta": "service-portfolio-source-05.tar.gz",
+      "sha256": "d6047a808188cfca9441d1012859e4dd614ec9409ef1e986708cb6d30399b35e",
+      "evidence": [
+        "issue23-paper-baselines-03/reference",
+        "issue23-service-portfolio-05/reference",
+        "issue23-bounded-calendar-07/reference",
+        "issue23-bounded-proof-memo-09/reference"
+      ]
+    },
+    {
+      "version": "bounded-calendar-01",
+      "parent": "TimedMemo-normal-910B2",
+      "status": "retain partial-success branch; middle regression and high-rate repeat instability; NOT promoted",
+      "source_delta": "bounded-calendar-source-07.tar.gz",
+      "sha256": "5807c9358dd57c8bcbb1c91435d393ea15405e1bcdfe4522593a4ae81acbad72",
+      "evidence": [
+        "issue23-bounded-calendar-07/ours",
+        "issue23-bounded-proof-memo-09/bounded"
+      ],
+      "evidence_archive_sha256": [
+        "ae6e9f2acb0f40c2af99f83d2af3a10e0c746554bb5bdfff710a3be868ff4cce",
+        "dd7cc9a413ad005b4c0791aaa3a6fa18c971773889ca4c435094f2371fb35399"
+      ],
+      "same_control_cost_285_requests_exact": true
+    },
+    {
+      "version": "bounded-proof-memo-02",
+      "parent": "bounded-calendar-01",
+      "status": "retain promising solver-efficiency branch; high-rate p99 regressed; pending real feedback; NOT default",
+      "source_delta": "bounded-calendar-source-09.tar.gz",
+      "sha256": "15efbd10a7d5ace7d756350b9e43934fdf8e6c1cfbbe93045a8b44261d0fa154",
+      "evidence": [
+        "issue23-bounded-proof-memo-09/ours"
+      ],
+      "evidence_archive_sha256": [
+        "dd7cc9a413ad005b4c0791aaa3a6fa18c971773889ca4c435094f2371fb35399"
+      ],
+      "same_control_cost_285_requests_exact": true,
+      "net_p99_reduction_percent": [
+        2.29003740748156,
+        9.718752341663194,
+        -9.87550932556005
+      ],
+      "performance_description": "descriptive same-round CPU comparison, no significance or hardware claim",
+      "search_wall_reduction_percent": [
+        38.52983319117398,
+        42.621716253852796,
+        37.5630701820816
+      ]
+    },
+    {
+      "version": "cache-evolving-batch-01",
+      "parent": "bounded-proof-memo-02",
+      "status": "retain promising physical-model correction; reverse-order low p99 regressed 2.24%; NOT a stable three-rate winner",
+      "source_delta": [
+        "cache-evolution-source-01.tar.gz",
+        "cache-evolution-source-02.tar.gz"
+      ],
+      "sha256": [
+        "8e48f7ca479bf0781488ce3f10706a0a6ae8b4c7a064c8db224050ca605f2cd2",
+        "3fde192016fb1c215b0254f4b1c7c32b52991c04497eb4dd83d14f653c49c0db"
+      ],
+      "evidence": [
+        "issue23-cache-evolution-01",
+        "issue23-cache-evolution-02"
+      ],
+      "evidence_archive_sha256": [
+        "4aa3450d223b3659ca1012872acbe6804d6f2169c94c6ad94f927e5b143dec76",
+        "c321999d1e8346ba4155b9e779316cb53b0f7ce318e497fdb189fafe3010ef0c"
+      ],
+      "net_p99_reduction_percent": [
+        [
+          8.808837855658746,
+          7.269224506222671,
+          11.786912474651956
+        ],
+        [
+          -2.238250152524346,
+          29.907692479882787,
+          1.6289574167790644
+        ]
+      ],
+      "real_serving_validated": false
+    },
+    {
+      "version": "sparse-cache-protection-01",
+      "parent": "cache-evolving-batch-01",
+      "status": "retain exact CPU optimization, NOT tail winner; reverse-order high p99 regressed 58.13%",
+      "source_delta": "sparse-cache-source-01.tar.gz",
+      "sha256": "62d0b94fd315149f5c3dfacf28762bd12cd5a36c4585c841104014027ef8980a",
+      "evidence": [
+        "issue23-sparse-cache-01",
+        "issue23-sparse-cache-02"
+      ],
+      "evidence_archive_sha256": [
+        "aca9fda1889b88945ed82a59e08375249b7b6977f7b30719c64c4e383aaa238a",
+        "9c7f45e46f84b29872010c3a474a826ecf85c8196640d06d3588ac3a3ee6c999"
+      ],
+      "net_p99_reduction_percent": [
+        [
+          -1.4511685092091664,
+          -3.13531591745706,
+          0.4913330605406552
+        ],
+        [
+          1.1010837754911518,
+          16.663615369971495,
+          -58.13201427398687
+        ]
+      ],
+      "real_serving_validated": false
+    },
+    {
+      "version": "control-release-calendar-01",
+      "parent": "sparse-cache-protection-01",
+      "status": "retain release-model candidate; low-rate win both runs, middle/high regressions; NOT promoted",
+      "source_delta": "control-release-source-01.tar.gz",
+      "sha256": "82c057cec11f991f6cc1e1907ba3f9d6b27a4b344dc2a44102d97299ba4834dc",
+      "evidence": [
+        "issue23-control-release-01",
+        "issue23-control-release-02"
+      ],
+      "evidence_archive_sha256": [
+        "dcc8067c3312d0ba7e7574a9b05a43560c63ad9a428b0750cbc05fe391bf6c3d",
+        "c1f41a365107cedf7a6d601c0692ab1ae26854e33d87c4710c6a5d8e11aace46"
+      ],
+      "net_p99_reduction_percent": [
+        [
+          3.3809401527657656,
+          0.8968070301828557,
+          -28.898095688781122
+        ],
+        [
+          11.553387138968896,
+          -9.382157476149855,
+          -3.4025722109466194
+        ]
+      ],
+      "real_serving_validated": false
+    },
+    {
+      "version": "control-visible-work-01",
+      "parent": "control-release-calendar-01",
+      "status": "retain completed-work cost model; high-rate regression in both mean rounds and aggregate-residual sensitivity; NOT promoted",
+      "source_delta": "control-work-source-01.tar.gz",
+      "sha256": "6a22f7e617de7a8b4bf5cf2aeda116e4d625b47cd0caae540f18e2ae1ddd6cc9",
+      "evidence": [
+        "issue23-control-work-01",
+        "issue23-control-work-02",
+        "issue23-control-work-residual-01"
+      ],
+      "evidence_archive_sha256": [
+        "1e8bb27131bda45f9f6765b24a949cf31d099368b15e0beb702b180dabe69e5f",
+        "8cd66136620c34488b2be43e6c47a082d7dc2a03cbd17a692e1f21adf24c63a5",
+        "69ffb43a341ed23bc6f4986c99ed4667ef42aac5bdeb79ebea15c6bcfbf29841"
+      ],
+      "net_p99_reduction_percent": [
+        [
+          19.17841897714052,
+          13.454411367727781,
+          -2.446656989217022
+        ],
+        [
+          3.3550080365500445,
+          -6.56020635175627,
+          -9.74082348037879
+        ],
+        [
+          -7.4728463002112555,
+          36.220462491139706,
+          -16.465720614426303
+        ]
+      ],
+      "real_serving_validated": false,
+      "comparisons": "within each row only; execution worlds differ across sensitivity rows"
+    },
+    {
+      "version": "completed-exclusive-D-01",
+      "parent": "control-visible-work-01",
+      "status": "retain partial-success phase-feedback branch; all-rate first win not reproduced in reverse order; NOT promoted",
+      "source_delta": "completed-phase-source-01.tar.gz",
+      "sha256": "5c000d44159e35e9dd15a050cf45f25e230c432a0f1d07e5b336c9c10565b610",
+      "evidence": [
+        "issue23-completed-phase-01",
+        "issue23-completed-phase-02"
+      ],
+      "evidence_archive_sha256": [
+        "7881d5d86e58009c94cd94d8ec30045362bd37998f5201d8d04b9dd00a19fa84",
+        "bfd23758741cb93b2bf70ffe0118fac2a69fa1d576dee98da5523832f74c9725"
+      ],
+      "net_p99_reduction_percent": [
+        [
+          7.611819561947875,
+          12.41432195145904,
+          15.12464059897779
+        ],
+        [
+          -0.040028587906326685,
+          -0.1926545540286595,
+          -13.371188874355733
+        ]
+      ],
+      "real_serving_validated": false,
+      "comparisons": "within each row only; execution worlds differ across sensitivity rows"
+    },
+    {
+      "version": "acquired-exclusive-phase-01",
+      "parent": "completed-exclusive-D-01",
+      "status": "retain acquired-resource model repair; mixed p99; NOT promoted",
+      "source_delta": "acquired-phase-source-01.tar.gz",
+      "sha256": "b3e36360450a26b1dbd914299d909bc2a4a6e4ac7ad92cf33a25ae634a147e55",
+      "evidence": [
+        "issue23-acquired-phase-01"
+      ],
+      "evidence_archive_sha256": [
+        "3a1bdf6da3de1114b12ef096a9b1af9b596893226c474366d5dab325a0446bb2"
+      ],
+      "net_p99_reduction_percent": [
+        -1.6932884525873826,
+        11.6111068162014,
+        -11.287043777723515
+      ],
+      "real_serving_validated": false
+    },
+    {
+      "version": "pending-first-compute-01",
+      "parent": "acquired-exclusive-phase-01",
+      "status": "preserve promising CPU TTFT candidate; both parent orders and retained-reference improve all three rates; decode/session release regressions remain; NOT production promoted",
+      "source_delta": "pending-first-source-01.tar.gz",
+      "sha256": "48fb548365ace3bcc80520b1970ba81a7efbc745148669009279439df40ff90d",
+      "reference_extension_source": "pending-first-source-02.tar.gz",
+      "reference_extension_sha256": "92698d6453bba5f28eda34a05a70a079a7be92ea5f90f1d54b2f7c3e00ae2a5f",
+      "algorithm_unchanged_in_reference_extension": true,
+      "evidence": [
+        "issue23-pending-first-01",
+        "issue23-pending-first-02",
+        "issue23-pending-first-reference-01"
+      ],
+      "evidence_archive_sha256": [
+        "61def19bdd0d18eb6d8bfc1dbfeb0b58d07eccc10bc7673d5f1e46961ee7a5d8",
+        "526a4b377e91b1c6de06801a28c292da5dfc673d7751cd771fc8e35606ca8d90",
+        "b20c60bdfec1b229bce0627d29d6ed586f14d0458e4b7a1214f39632bf964ef7"
+      ],
+      "net_p99_reduction_percent": [
+        [
+          38.26286613595209,
+          38.5899365861703,
+          35.17096255914509
+        ],
+        [
+          42.36509203728337,
+          37.23707776336958,
+          15.886875143155542
+        ],
+        [
+          33.51756952249124,
+          13.80324953561437,
+          33.25546098547865
+        ]
+      ],
+      "comparison_rows": [
+        "immediate parent, reference first",
+        "immediate parent, candidate first",
+        "TimedMemo-normal-910B2, same phase world"
+      ],
+      "real_serving_validated": false
+    },
+    {
+      "version": "slot-release-first-01",
+      "parent": "pending-first-compute-01",
+      "status": "preserve promising zero-sharing CPU TTFT branch; both arm orders improve three rates; full-release regressions and strong-sharing failures retained; NOT production promoted",
+      "source_delta": "slot-release-source-01.tar.gz",
+      "sha256": "f4d68a5ff0e703096c3c1bbe763d31c62adfd6f6a17942b52634e97a21a34cbf",
+      "sharing_extension_source": "slot-release-source-02.tar.gz",
+      "sharing_extension_sha256": "3fbf11672615b71e07a3585b7af8dea20ac299f50fc5abad53f4a21ba857bacb",
+      "evidence": [
+        "slot-release-01",
+        "slot-release-02",
+        "slot-release-sharing-01"
+      ],
+      "evidence_archive_sha256": [
+        "ea3b94e6a69268a3a84530195257071870ee69793f8c5e72b5cfe6400e13c95a",
+        "e55ced1c4dadc2132cc6d1d1b77d4107014df9089f47bc55ef38dee6dabb161f",
+        "678cbcf34d3b330fe6276935b61669dd76b2493e3dbb73b2968cde04d41bba99"
+      ],
+      "net_p99_reduction_percent": [
+        [
+          20.416709132450638,
+          9.241955052001439,
+          20.014322690464624
+        ],
+        [
+          26.134085501739477,
+          24.472371253099702,
+          10.407468616764003
+        ],
+        [
+          -38.06657059467702,
+          -16.370547099590137,
+          17.566380527699355
+        ]
+      ],
+      "comparison_rows": [
+        "zero sharing, parent first",
+        "zero sharing, candidate first",
+        "max-sharing sensitivity, parent first"
+      ],
+      "real_serving_validated": false
+    },
+    {
+      "version": "release-preserving-cobatch-01",
+      "parent": "slot-release-first-01",
+      "comparison_reference": "pending-first-compute-01",
+      "status": "retain model-directed follow-up; zero-sharing wins but middle/high strong-sharing regressions; NOT promoted",
+      "source_delta": "release-cobatch-source-01.tar.gz",
+      "sha256": "40bd4bda8282b4d0917d3f5b8d2a17c7a3f91f591ae214f7d765a0fc8265b336",
+      "evidence": [
+        "release-cobatch-sharing-01",
+        "release-cobatch-01"
+      ],
+      "evidence_archive_sha256": [
+        "1c483dab51fc3932084de0aeb849d5624e03239988f321a6873faefc20be8cee",
+        "ec5894402aa1d8de1b34a4228c5fbc0063f3fcf4cbbe4cd0d054c31badec31a7"
+      ],
+      "net_p99_reduction_percent": [
+        [
+          4.795126110389236,
+          -30.112980334416072,
+          -4.195200619222783
+        ],
+        [
+          13.763050802134547,
+          30.17872053755489,
+          42.453583507151734
+        ]
+      ],
+      "comparison_rows": [
+        "max-sharing sensitivity",
+        "zero sharing"
+      ],
+      "real_serving_validated": false
+    },
+    {
+      "version": "delta-protection-cobatch-01",
+      "parent": "release-preserving-cobatch-01",
+      "status": "FAILED exact zero-control equivalence: inherited wrong projection and omitted D_control; charged stage NOT started; do not use performance",
+      "source_delta": "delta-protection-source-01.tar.gz",
+      "sha256": "5fa5df2a135b3c984171a24deb31a55b210b82d766f914ec3ff264657e9e5325",
+      "real_serving_validated": false,
+      "failure_archive_sha256": "d29f5e75b56fd15df60fd9e4f721ce3b3020cc5e07c2ab0bce7ce6a292d85420"
+    },
+    {
+      "version": "delta-protection-cobatch-02",
+      "parent": "release-preserving-cobatch-01",
+      "status": "Exact tested zero-control equivalence and all 18 arms source/work audits passed; charged strong-sharing low/high p99 wins, middle loses; NOT promoted",
+      "source_delta": "delta-protection-source-02.tar.gz",
+      "sha256": "771bf0b7704732c91cd59d12e3b966d2fa435ef2169f01584b116d398c897fd1",
+      "real_serving_validated": false,
+      "evidence": [
+        "delta-protection-equivalence-02",
+        "delta-protection-sharing-02"
+      ],
+      "evidence_archive_sha256": [
+        "1b1b5e34c97331850d70002d303c79113709b8236ec977813a0329c05bdf7a34",
+        "30346b691d7423d01f4beb6bd37009c2ae9aeeefdf527db01113f4a92bc146ea"
+      ],
+      "net_p99_reduction_percent": [
+        10.028397096176633,
+        -3.408933915266976,
+        8.9669489664698
+      ],
+      "comparison_reference": "release-preserving-cobatch-01",
+      "comparison_scope": "sharing=1 sensitivity, measured control costs, one development replay per rate"
+    },
+    {
+      "version": "dirty-scan-cobatch-01",
+      "parent": "release-preserving-cobatch-01",
+      "motivation": "Paired fixed-state delta02 position-index overhead exceeded benefit; remove index, retain dirty lease identities and full publication reconciliation",
+      "status": "Completed 18 arms/source/work/release audit passed; exact zero-control equality; charged sharing1 low wins but middle/high regress, NOT promoted",
+      "source_delta": "dirty-scan-source-01.tar.gz",
+      "sha256": "cac23a4f0a0ac46ebefe8c99ea100d1f28dc2319d9df6bf2d08ec39e0ad61741",
+      "real_serving_validated": false,
+      "evidence_archive_sha256": [
+        "7cd5ea6aa2d7be05ca2a76ee81b04b05696e42aacf7b12e8588b874011ff6ff0",
+        "e85cb41ad8a72fdd9ef57235a8978197f7a9909183f545726d44057a89eefa5e"
+      ],
+      "net_p99_reduction_percent": [
+        14.323264718427609,
+        -13.20846668766702,
+        -27.739116215447467
+      ]
+    },
+    {
+      "version": "late-decode-reconsider-01",
+      "parent": "release-preserving-cobatch-01",
+      "status": "Completed 18 audited CPU arms; default middle/high improve but low regresses; sharing sensitivity mixed; not promoted",
+      "source_delta": "late-decode-source-01.tar.gz",
+      "sha256": "578834dcd8a35c6f57b886526d659167e43430d5aa257f97d556edcf03043c98",
+      "motivation": "Observed P-to-D destination staleness and slot overtaking; reprice only unacquired D suffix after P publication, with measured selection/RPC cost and current state",
+      "real_serving_validated": false,
+      "comparison_reference": "release-preserving-cobatch-01",
+      "launch_receipt": "evidence/forecast-feedback-20261027/late-decode-pipeline-01-launch.json",
+      "net_p99_reduction_percent": {
+        "default": [
+          -0.7360536495612635,
+          2.0624319581903694,
+          6.959687063483299
+        ],
+        "sharing": [
+          -12.482444685935734,
+          19.21081202982893,
+          -1.9749042958858265
+        ]
+      },
+      "evidence_archive_sha256": [
+        "aa09a15e9b6751b5dbdf7fc7772ab6a1bba19f6060f1ab69c1a50496f2b33a98",
+        "fe08e6ff6fa9785c98b0bea8ec1abb08097869cfcc26085e7830323fa8b8a156"
+      ],
+      "analysis": "evidence/forecast-feedback-20261027/late-decode-completed-summary-01.json"
+    },
+    {
+      "version": "progress-preserving-decode-01",
+      "parent": "release-preserving-cobatch-01",
+      "motivation": "Late reconsideration often retained D and withheld enqueue past an observed slot release; preserve original FIFO, compare immediate no-op and serialize cancellable advice with initial routing CPU",
+      "status": "Completed 18 CPU arms; all source/work/cost/ownership audits passed; default low/middle wins but high loses, sharing1 all lose; not promoted",
+      "sha256": "6d6d2f2d86e9ff64555b5bd13bb0bcf4e49f964a8130f08235ebc7905d1971da",
+      "source_delta": "progress-decode-source-01.tar.gz",
+      "real_serving_validated": false,
+      "comparison_reference": "release-preserving-cobatch-01",
+      "launch_receipt": "evidence/forecast-feedback-20261027/progress-decode-pipeline-01-launch.json",
+      "net_p99_reduction_percent": {
+        "default": [
+          7.1949919888516405,
+          12.620451568713397,
+          -12.137858738992936
+        ],
+        "sharing": [
+          -16.875590509991987,
+          -21.239663581434943,
+          -19.576709582795495
+        ]
+      },
+      "evidence_archive_sha256": [
+        "cd7ab310041353d438bf32cf94b301cc8d96eeb7eefdb8ccfad2298f446f0f00",
+        "79df36a33f87a9604c1f887fce4beeae1c4fa81740863a49a0024626542c8c29"
+      ],
+      "analysis": "evidence/forecast-feedback-20261027/progress-decode-completed-summary-01.json"
+    },
+    {
+      "version": "yielding-decode-advice-01",
+      "parent": "progress-preserving-decode-01",
+      "comparison_reference": "release-preserving-cobatch-01",
+      "same_round_parent_arm": true,
+      "status": "FAILED before any completed candidate arm: acquired snapshot epoch != pre-setup forecast epoch; no valid candidate performance. Reproduced, guard retained; independent02 fixes epoch only.",
+      "sha256": "b6dc255dd8886b0d3146f2532c994d7876e69d2f9c39f20d951140b460260a94",
+      "source_delta": "yielding-decode-source-01.tar.gz",
+      "real_serving_validated": false,
+      "motivation": "Observed obsolete whole-search control occupation; cancel between candidates on acquisition or a newly eligible causal route, retain no-op and charge all spent work",
+      "launch_receipt": "evidence/forecast-feedback-20261027/yielding-decode-pipeline-01-launch.json",
+      "failure_archive_sha256": "d1069321aba1f83caced279e32bd38c6e2badd554bb5728f9223deb56eecfe08",
+      "candidate_valid_samples": 0
+    },
+    {
+      "version": "yielding-decode-advice-02",
+      "parent": "progress-preserving-decode-01",
+      "comparison_reference": "release-preserving-cobatch-01",
+      "same_round_parent_arm": true,
+      "status": "Completed 24 CPU arms; strict source/input/work/control audits passed. Default three-rate gains, sharing1 low/middle losses; not promoted.",
+      "sha256": "e86aa21d266acce5158d4afbf252af2451e90f2527a08f5abe1d02a7934994ad",
+      "source_delta": "yielding-decode-source-02.tar.gz",
+      "real_serving_validated": false,
+      "motivation": "Observed obsolete whole-search control occupation; cancel between candidates on acquisition or a newly eligible causal route, retain no-op and charge all spent work",
+      "launch_receipt": "evidence/forecast-feedback-20261027/yielding-decode-pipeline-02-launch.json",
+      "repair_of": "yielding-decode-advice-01",
+      "fix": "Separate post-setup snapshot/forecast epoch from controller admission epoch; setup remains charged; completed-only checks use forecast epoch",
+      "local_focused_checks": 14,
+      "net_p99_reduction_percent": {
+        "default": [
+          6.422516497896202,
+          7.542669201939312,
+          28.978722307371275
+        ],
+        "sharing": [
+          -20.8614361498735,
+          -13.448388364535479,
+          17.658853774419892
+        ]
+      },
+      "same_round_parent_reduction_percent": {
+        "default": [
+          4.0903634666056625,
+          0.02318728785801749,
+          9.873240693561158
+        ],
+        "sharing": [
+          -13.26952883903214,
+          -4.483309725877116,
+          4.230203235555341
+        ]
+      },
+      "analysis": "evidence/forecast-feedback-20261027/yielding-decode-completed-summary-02.json",
+      "evidence_archive_sha256": [
+        "ce1bef6c3b3fe6ac69deb1a73d33dbcd1c84c5b20d69c4d0b33b16afd5d78b16",
+        "7876fb17b6872baa3b82f568006a017bf6ab3a3c1842a9d9cb4d6510ce658620"
+      ]
+    },
+    {
+      "version": "prefill-source-revalidation-01",
+      "parent": "yielding-decode-advice-02",
+      "comparison_reference": "yielding-decode-advice-02",
+      "status": "Completed18 CPU arms and source/work/control audits; mixed/mostly negative. Only2 calls/1change across6 candidate arms, so no-action differences are not revalidation effects. Independent coalescing roundoff reproduced. Retain diagnostic candidate, do not promote.",
+      "sha256": "a6b4a3ecbf6c4c1f0f994f43a392b6dd4373db1bdf0af9ad4cc6b4f9e2e4f8c5",
+      "source_delta": "prefill-revalidation-source-01.tar.gz",
+      "real_serving_validated": false,
+      "motivation": "A queued remote-P recovery quote becomes stale when a later issued source API occupies its gate; reconsider only at unacquired P FIFO head, with local/zero alternatives and global pending-first profile, charged serial control and preserved FIFO",
+      "local_focused_checks": 17,
+      "launch_receipt": "evidence/forecast-feedback-20261027/prefill-revalidation-pipeline-01-launch.json",
+      "net_p99_reduction_percent": {
+        "default": [
+          0.9198894937934687,
+          -20.064256828834104,
+          -24.585057635874463
+        ],
+        "sharing": [
+          -16.84465892212974,
+          1.689384717768072,
+          -24.848116301789467
+        ]
+      },
+      "evidence_archive_sha256": [
+        "6751780fb4682f4fbec4fb400b60160a38c92aaf0fb133a5ed7e56202717cd9b",
+        "6d76d703a4028c7e67416cb22540f71e54b85897eb2445ce32edc6bb3aeb15f6"
+      ],
+      "analysis": "evidence/forecast-feedback-20261027/prefill-revalidation-default-feedback-01.json",
+      "sensitivity_analysis": "evidence/forecast-feedback-20261027/prefill-revalidation-sharing-feedback-01.json"
+    },
+    {
+      "version": "exact-binary-calendar-01",
+      "parent": "prefill-source-revalidation-01",
+      "status": "Completed18 source/work-audited arms but FAILED numerical activation; never ran charged stage",
+      "source": "exact-calendar-source-01.tar.gz",
+      "sha256": "aae8a6e171ab4ac245344a18e97faa119112dc696bb3e0c38271dfb525c0eace",
+      "hypothesis": "Exact dyadic clock sums remove horizon/grouping-dependent numerical false improvements, with no fitted gain tolerance",
+      "tests": "20 passed +1 explicit frozen-input integration skipped locally",
+      "reference": "same-round prefill-source-revalidation-01",
+      "not_promoted": true,
+      "activation_failure": "ControlReleaseSnapshot dictionary override dropped option; observed0/68 enabled original-input calendars",
+      "evidence_archives": [
+        {
+          "world": "default",
+          "sha256": "63512cb28508f0b6593673567f5ffaf4634f2ff33ed06d2e00cd98deb9643b28"
+        },
+        {
+          "world": "sharing",
+          "sha256": "b1eed9a48f7246ec770716c82f3136c89693246e462acdf030d1b73d1f7ae080"
+        }
+      ]
+    },
+    {
+      "version": "exact-binary-calendar-02",
+      "parent": "prefill-source-revalidation-01",
+      "fixes": "source01 activation defect; preserve old failed diagnostic",
+      "status": "Completed18 fully charged CPU arms plus18 mechanism arms; source/work/history/activation audited. Mixed gains, not promoted.",
+      "source": "exact-calendar-source-02.tar.gz",
+      "sha256": "1a3be47bff9d6e5867727c0ae51a70b95febd07ef078ced3cd8168b371f95261",
+      "tests": "18 scoped local checks including original-input selected forecast activation, all pass",
+      "not_promoted": true,
+      "diagnostic_not_net_gain": {
+        "default": [
+          8.64468429671681,
+          10.52162065774429,
+          1.8339962108655072
+        ],
+        "sharing": [
+          -3.4193863036014793,
+          6.168714191015967,
+          21.260073577561823
+        ]
+      },
+      "evidence": "evidence/forecast-feedback-20261027/exact-calendar-diagnostic-summary-02.json",
+      "net_p99_reduction_percent": {
+        "default": [
+          8.119582983901719,
+          8.397460496933162,
+          -1.588722879150195
+        ],
+        "sharing": [
+          17.316245222817315,
+          -6.1340121043524265,
+          -0.9257785545332409
+        ]
+      },
+      "charged_evidence": "evidence/forecast-feedback-20261027/exact-calendar-charged-summary-02.json",
+      "charged_archive_sha256": [
+        "17978296fa1f8a13e6449b869ae183f38b5365b97f95f7ef3949bda8f1b657da",
+        "0575b1bd1ca69f109403e9486b7eee484e7ace897737c9fb16f2ad421ea1b479"
+      ]
+    },
+    {
+      "version": "linear-reclaim-calendar-01",
+      "parent": "exact-binary-calendar-02",
+      "status": "diagnostic18 and fully charged18 arms complete; mixed, not promoted",
+      "source_sha256": "ff32196d32766d5f52712432effc99abbf0938f5b31c5911aba70326999429dc",
+      "method": "Count equal reclaim victims and scan survivors once; exact policy/physics/cost seed unchanged.",
+      "hypothesis_evidence": "evidence/forecast-feedback-20261027/numerical-choice-profile-summary-05.json",
+      "fast_checks": "2 focused tests (100 randomized owner layouts plus duplicate identity/alias contract), scoped Ruff pass",
+      "diagnostic": "/root/issue23-linear-reclaim-diagnostic-pipeline-01",
+      "charged": "/root/issue23-linear-reclaim-charged-pipeline-01",
+      "documentation": "linear-reclaim-20261027.md",
+      "diagnostic_default": "9 arms pass; full traces/forecasts equal; source/flow/work/reclaim activation audited",
+      "diagnostic_default_archive_sha256": "d26b04c15a0c97ec4bb9b4bb39768497f1f5ed4c386ac19520a0e8e2f9c3699b",
+      "charged_evidence": "evidence/forecast-feedback-20261027/linear-reclaim-final-summary-01.json",
+      "net_p99_reduction_percent": {
+        "default": [
+          5.390107131118082,
+          -2.251912888273888,
+          0.5153928457341195
+        ],
+        "sharing": [
+          -37.8752751671638,
+          12.46388820808959,
+          -28.297697104798726
+        ]
+      },
+      "complete_archives_sha256": [
+        "1c7b9d6aae6b22d2027bfde5f8011b5338245164963dfecbffea6e4533d62cf0",
+        "ac2e4a166def11ab8db07fd15086309f1fc94e49fc3015633e0960a80ac123cb"
+      ]
+    },
+    {
+      "version": "prefix-reclaim-calendar-02",
+      "parent": "exact-binary-calendar-02",
+      "motivation": "linear01 Counter bookkeeping did not reliably reduce fixed-state runtime; use actual eligible-prefix invariant with identity scan and legacy fallback.",
+      "status": "diagnostic18 and charged18 completed/audited/archived P+local; mixed, not promoted",
+      "sha256": "c73c359bc2ee4e9a6f3772565cff47df98db4101824b9aaeacdeae9b7ed4a62a",
+      "source": "prefix-reclaim-source-02.tar.gz",
+      "diagnostic": "/root/issue23-prefix-reclaim-diagnostic-pipeline-03",
+      "gated_charged": "/root/issue23-prefix-reclaim-charged-pipeline-03",
+      "prior_launcher02_failure": "zero samples, nonexistent runtime path; evidence preserved",
+      "fast_checks": "3 tests including100 owner layouts plus alias/precondition invariants; scoped Ruff pass",
+      "fixed_state_profile": "evidence/forecast-feedback-20261027/profile-prefix-reclaim-local-02-summary.json",
+      "documentation": "prefix-reclaim-20261027.md",
+      "not_promoted": true,
+      "charged_evidence": "evidence/forecast-feedback-20261027/prefix-reclaim-final-summary-03.json",
+      "net_p99_reduction_percent": {
+        "default": [
+          -6.279276281438428,
+          8.64434967408777,
+          25.334285690052926
+        ],
+        "sharing": [
+          -10.116785625808822,
+          -18.827351322144015,
+          39.008554772913996
+        ]
+      }
+    },
+    {
+      "version": "no-decode-advice-01",
+      "parent": "prefix-reclaim-calendar-02",
+      "status": "18 full-cost CPU arms completed, independently audited and SHA archived P+local; mixed, not promoted",
+      "documentation": "no-decode-advice-20261027.md",
+      "source_sha256": "c58d7e557029a9d3759c8fad8aa5eb0a2354e2fa52795f3d21b01563d3bbcaf6",
+      "runner_sha256": "66e7479a3e5b5bcf3398cc735a13e7b255784d61e10fbdf6f9749b9e54c75371",
+      "hypothesis": "Quantify marginal value and control/cache/session feedback of optional post-P rerouting; do not change initial routing or boundary execution",
+      "tests": "7 scoped checks passed locally; remote pipeline reruns same checks",
+      "not_promoted": true,
+      "full_cost_evidence": "evidence/forecast-feedback-20261027/no-advice-final-summary-01.json",
+      "net_p99_reduction_percent": {
+        "default": [
+          11.600613331358245,
+          17.251324296469907,
+          -9.493655323667017
+        ],
+        "sharing": [
+          12.28150535942466,
+          -7.636576213042345,
+          -5.20256639617136
+        ]
+      },
+      "complete_archives_sha256": [
+        "ddd24d035a331fe5a2ece838e74e64433bfa66fb5ba7999f235a7796034ae852",
+        "37491b391dd88c9d2b13af927369a2a4df0f37031d426199f6b8ee01f726ce6f"
+      ],
+      "analysis_failure": "Missing offline helper repaired in separate support; default samples not rerun or changed",
+      "attribution_limit": "Default middle and sharing high first initial route difference precedes first advice; all gains cannot be isolated to switch"
+    },
+    {
+      "version": "advice-release-window-01",
+      "parent": "prefix-reclaim-calendar-02",
+      "status": "FINAL:18 fully charged arms audited and full archives SHA verified local/P; mixed; not promoted",
+      "source_sha256": "caa91cd838efe30be16628052e364c03ed412ac76b6f1e7f52d55bdc1caa33dc",
+      "source": "advice-window-source-01.tar.gz",
+      "documentation": "advice-window-20261027.md",
+      "hypothesis": "Skip optional head rerouting when completed-only full-search CPU+RPC exceeds predicted original-slot remaining decode+sync release; uncertain state retains parent",
+      "tests": "14 focused checks passed local and P; trigger work charged; no future duration read",
+      "failures": [
+        {
+          "launcher": "01",
+          "candidate_samples": 0,
+          "reason": "incorrect predecessor path",
+          "archive_sha256": "8be1383c3cb526f137dd60eec15106d7af6373e10e85a18d57f8220f17ff5b27"
+        },
+        {
+          "launcher": "02",
+          "candidate_samples": 0,
+          "actual_wrong_policy_CPU_arms": 9,
+          "reason": "retained old --policy and audit; invalid as candidate evidence",
+          "archive_sha256": "92dc4bea6fe299b644e20ecccfd36ec1be5cc581e06c9cd2aa8c0a4081004bdc"
+        },
+        {
+          "launcher": "03",
+          "started": false,
+          "reason": "prelaunch guard rejected unexpected prior step count; no output or samples"
+        }
+      ],
+      "not_promoted": true,
+      "net_p99_reduction_percent": {
+        "default": [
+          -2.447651312668686,
+          -32.76290529357957,
+          10.476847290984391
+        ],
+        "sharing1_sensitivity": [
+          15.91660971197606,
+          -4.833850073329549,
+          -15.138655828553027
+        ]
+      },
+      "actual_trigger": {
+        "checks": 151,
+        "skips": 7,
+        "default": [
+          2,
+          1,
+          0
+        ],
+        "sharing": [
+          1,
+          1,
+          2
+        ]
+      },
+      "complete_archives_sha256": [
+        "756a9a518bdba5f2fb99d728084c473c2c8befd6d88a1deb2ffe930d77a8a552",
+        "ce7e2123bc73fa5f6f304030add91211fb117107ede6ce468dbf3f437f179ab6"
+      ],
+      "analysis": "advice-window-20261027.md FINAL;570 aligned requests; source gate blocking release, initial route drift before trigger in3cases; no RDMA congestion claim"
+    },
+    {
+      "version": "advice-calendar-window-01",
+      "parent": "prefix-reclaim-calendar-02",
+      "source_sha256": "db9523e651348d50cc9e4e0976ac22482787fe68791d9e1ff825c9f1741af4c0",
+      "source": "advice-calendar-source-01.tar.gz",
+      "documentation": "advice-calendar-20261027.md",
+      "status": "completed18 full-cost arms/audited/P+localSHA; mixed not promoted; original offline summary failure preserved",
+      "hypothesis": "Reuse full known resource DAG incumbent FIFO acquisition after keep quantum; cancel remaining candidates if completed-only remaining CPU+commit cannot finish before acquisition",
+      "not_promoted": true,
+      "net_p99_reduction_percent": {
+        "default": [
+          45.8496541845,
+          15.762278246,
+          -0.5301545874
+        ],
+        "sharing1_sensitivity": [
+          -42.9889006568,
+          -29.6017194411,
+          -68.2563672076
+        ]
+      },
+      "actual_cancellations": {
+        "default": [
+          1,
+          3,
+          1
+        ],
+        "sharing": [
+          0,
+          0,
+          0
+        ]
+      },
+      "complete_archives_sha256": [
+        "97a1e0bda2848b981315b619b4dfe2774df320dd86f1752aecb181e6d489660b",
+        "cea99ec9aef0e6997dc0e60ce1d0f817ad28fa31d06675aa4ea1eb2b6b6012c4"
+      ],
+      "analysis": "advice-calendar-20261027.md FINAL;570 request alignments; later restore overtakes older prefill in raw D timeline; sharing worst upstream P wait/cache remains"
+    },
+    {
+      "version": "ready-prefill-before-restore-01",
+      "parent": "prefix-reclaim-calendar-02",
+      "source": "ready-prefill-source-01.tar.gz",
+      "source_sha256": "e409d33886ca206a49eba847719a4cce999a4f576dd81d794ad6fc54474dfc8d",
+      "documentation": "ready-prefill-20261027.md",
+      "status": "18 complete full-cost arms/audit/P+localSHA; mixed, not promoted; save-publication model limitation found",
+      "hypothesis": "At idle D, prevent first later restore overtaking older ready FIFO prefill; preserve first save and running operation; same forecast/execution phase rule",
+      "not_promoted": true,
+      "net_p99_reduction_percent": {
+        "default": [
+          -7.730922941625762,
+          -6.362700969676771,
+          23.010096016973293
+        ],
+        "sharing": [
+          -0.9318219951373719,
+          -7.907518688072335,
+          -12.68665324199587
+        ]
+      },
+      "phase_reorder_records": {
+        "default": [
+          59,
+          178,
+          192
+        ],
+        "sharing": [
+          327,
+          151,
+          171
+        ]
+      },
+      "complete_archives_sha256": [
+        "8a0c03f87c280191f3532db7932a7bfd7d5ac1dc1204d1477b6a08e6e47d4b98",
+        "3bb92839f2db4abb59e313f024bc6c8ea8031882fc125c8d7845bce09b20f1a7"
+      ]
+    }
+  ],
+  "retained_default": "TimedMemo-normal-910B2",
+  "latest_review": "README.md",
+  "automation": "ACTIVE hourly by explicit user request",
+  "repository_update": {
+    "commit": "2b4b8028993aee093bff27367a4ac3bd98d35e98",
+    "uncommitted_changes_preserved": true
+  },
+  "simulation_worlds": [
+    {
+      "version": "joint-phase-residual-01",
+      "source": "phase-residual-source-01.tar.gz",
+      "sha256": "f7a70b711424b4583edcda267c98048f68c2c6ad972e9d0b908b07814934a376",
+      "status": "explicit optional sensitivity; no real parallel-phase validation",
+      "aggregate_service_preserved_at_fixed_coordinates": true,
+      "evidence": "issue23-phase-residual-01",
+      "archive_sha256": "a15154204b962937dcb814c397173f0f75173d0b62c8d381e8fc92b3469fb537"
+    },
+    {
+      "version": "staged-save-publication-01",
+      "status": "failed; no complete performance matrix",
+      "source_sha256": "23f40e4bb9cb529fd39fcecaddb18a11532131f06800a2f075ddefb062bdfda5",
+      "failed_output_archive_sha256": "29517f5f482499d4b717872b6b0b2d0ffecbeab543cbd176db55155659d9ea1d",
+      "documentation": "staged-save-20261027.md"
+    },
+    {
+      "version": "staged-save-publication-02",
+      "status": "incomplete development snapshot; not frozen or full-matrix validated",
+      "documentation": "README.md",
+      "branch": "feat/issue23-simulator-snapshot-20261027",
+      "local_unit_contracts_passed": 9
+    }
+  ],
+  "latest_receipt": "evidence/forecast-feedback-20261027/staged-save-pipeline01-result.json",
+  "promising_CPU_TTFT_candidate": "slot-release-first-01",
+  "promising_candidate_scope": "zero-sharing scenario only; strong-sharing limitation retained",
+  "active_experiment": null,
+  "next_hypothesis": "Complete incremental P publication and precise restore/copy lease lifecycle; reconcile execution/forecast and callback CPU, update stale incremental-save audit/integration assertions, freeze new world and compare same-world full-cost three rates. No capacity inflation or hidden allocation failure.",
+  "repository_snapshot": {
+    "branch": "feat/issue23-simulator-snapshot-20261027",
+    "scope": "source/simulator/evidence; includes explicitly marked incomplete prototype"
+  }
+}

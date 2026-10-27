@@ -1,0 +1,15 @@
+{
+  "source03": "93d31112145a35ed44641c235e728225ddd8f98e8b947ccf3e381015d391a0d4",
+  "source04": "5a2b67076d849c77cdd675bcdcacb26b37e96e0e4d4f2d1f6d7525b4f4307480",
+  "archives": {
+    "issue23-paper-baselines-03-evidence.tar.gz": "6dfc3f9c9da48b4617e70e810a92fda739193283b9afb0f883df55193d9e1779",
+    "issue23-strata-repair-04-evidence.tar.gz": "bd54a24f82f5d8b88ac6f606b69e9aad5763bac9f4f9b2fc41e2ff31a2631ebe",
+    "issue23-service-portfolio-05-evidence.tar.gz": "0940478d453493b33d54678735c14c37fc2ecf248e52c3b50486760cf94992ac"
+  },
+  "raw03_valid_accounting_arms": 18,
+  "raw03_strata_mechanism_invalid_arms": 3,
+  "repair04_valid_accounting_arms": 6,
+  "non_strata03_unchanged": true,
+  "source05": "d6047a808188cfca9441d1012859e4dd614ec9409ef1e986708cb6d30399b35e",
+  "portfolio05_valid_accounting_arms": 9
+}

@@ -1,0 +1,3085 @@
+{
+  "CPU_only": true,
+  "fixed_trace_NOT_feedback_performance": true,
+  "P_FIFO_checkpoint_is_lower_bound": true,
+  "remote_feasibility_conditional": true,
+  "new_control_cost_and_global_tail_not_evaluated": true,
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "raw_sha256": "71f15411d25deab74b2b45e89a198efb0384ac18c114e4799e9f22af7e864cc5",
+      "arms": {
+        "reference": {
+          "requests": [
+            {
+              "id": "feal-differential-cryptanalysis:5",
+              "origin_lower_bound": 100.75619292355528,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 100.18115291276958,
+              "model_version": 90,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.33266242779791355,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "origin_lower_bound": 106.04910658620548,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 105.83029787966001,
+              "model_version": 96,
+              "observed_copy_wait": 0.013308168104273932,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3195969369262457,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-multibranch:4",
+                      "distribution-search:5",
+                      "feal-differential-cryptanalysis:5"
+                    ],
+                    "operation": "compute",
+                    "start": 106.00369538865068,
+                    "end": 106.06241475430976,
+                    "overlap": 0.013308168104273932,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:6",
+              "origin_lower_bound": 146.77211890246036,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 132.99948628744056,
+              "model_version": 103,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3880819948390126,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:7",
+              "origin_lower_bound": 188.81721620154406,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 187.60113410621727,
+              "model_version": 110,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.027275868691504,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-code-vulnerability:7",
+              "origin_lower_bound": 197.67262800988715,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 191.04139688726326,
+              "model_version": 112,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:7",
+              "origin_lower_bound": 199.7285692844674,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 198.88634272619436,
+              "model_version": 114,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3880819948390126,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "origin_lower_bound": 204.44799036255483,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 204.1331670718054,
+              "model_version": 119,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:7",
+              "origin_lower_bound": 206.41467808866537,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 205.49661088288815,
+              "model_version": 121,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.06848505791276693,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:8",
+              "origin_lower_bound": 222.74873603260968,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 222.74873603260968,
+              "model_version": 126,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.6066197212785482,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:8",
+              "origin_lower_bound": 249.06238923431272,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 249.06238923431272,
+              "model_version": 131,
+              "observed_copy_wait": 0.031404741031849426,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.06848505791276693,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-git:8"
+                    ],
+                    "operation": "compute",
+                    "start": 249.01264694480105,
+                    "end": 249.09379397534457,
+                    "overlap": 0.031404741031849426,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:9",
+              "origin_lower_bound": 261.52064122509006,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 261.52064122509006,
+              "model_version": 137,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.8674774002283812,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:10",
+              "origin_lower_bound": 275.80846677464825,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 272.3810977713732,
+              "model_version": 142,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.45656705275177956,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "origin_lower_bound": 277.40132630745916,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 277.0185218773225,
+              "model_version": 144,
+              "observed_copy_wait": 0.01660213773311625,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.986066679470241,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:9",
+                      "git-multibranch:9",
+                      "headless-terminal:9"
+                    ],
+                    "operation": "compute",
+                    "start": 277.35846217128915,
+                    "end": 277.4179284451923,
+                    "overlap": 0.01660213773311625,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:11",
+              "origin_lower_bound": 305.2109594519174,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 295.78713552307715,
+              "model_version": 152,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.2054551737383008,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:15",
+              "origin_lower_bound": 394.38400481934644,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 387.31770843859766,
+              "model_version": 177,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            }
+          ],
+          "quoted": 0,
+          "positive_cold_margins": 0
+        },
+        "parent": {
+          "requests": [
+            {
+              "id": "feal-differential-cryptanalysis:5",
+              "origin_lower_bound": 100.79405601005897,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 100.16712346258095,
+              "model_version": 90,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.33266242779791355,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "origin_lower_bound": 106.30588207301444,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 105.90003672157009,
+              "model_version": 96,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.2739572934806347,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:6",
+              "origin_lower_bound": 146.822524090924,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 132.99950536651482,
+              "model_version": 103,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3880819948390126,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:7",
+              "origin_lower_bound": 188.8216609301495,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 187.60412021696413,
+              "model_version": 110,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.027275868691504,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-code-vulnerability:7",
+              "origin_lower_bound": 197.6826447045521,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 191.0458213307317,
+              "model_version": 112,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:7",
+              "origin_lower_bound": 199.7242415709555,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 198.8868577429215,
+              "model_version": 114,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3880819948390126,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "origin_lower_bound": 204.41754697079216,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 204.14319609252462,
+              "model_version": 118,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:7",
+              "origin_lower_bound": 206.34208673638886,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 205.46616657470406,
+              "model_version": 120,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.06848505791276693,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:8",
+              "origin_lower_bound": 222.75823150887047,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 222.75823150887047,
+              "model_version": 124,
+              "observed_copy_wait": 0.5235901713198245,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.1153975520282984,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": "feal-differential-cryptanalysis:8",
+                    "operation": "P_api",
+                    "start": 221.92880027328405,
+                    "end": 223.2811940926409,
+                    "overlap": 0.5229625837704361,
+                    "owner_route_after_target_route": true
+                  }
+                ]
+              },
+              "status": "conditional_quote_not_global_decision",
+              "live_source_request": "feal-differential-cryptanalysis:8",
+              "live_age": 0.8294312355864122,
+              "issued_source_seconds": 1.3829035862404138,
+              "completed_residual_samples": 51,
+              "prefix_command": 7936,
+              "payload_upper_bound": 455081984,
+              "source_remaining": 0.455528917305171,
+              "copy_quote": 1.2132394425570965,
+              "warm_P_including_H2D_sync": 0.4382673451811816,
+              "cold_P_including_sync": 4.026581157570164,
+              "remote_P_completion": 2.107035705043449,
+              "cold_P_completion": 4.026581157570164,
+              "cold_margin_before_new_control_NOT_net_TTFT": -1.919545452526715
+            },
+            {
+              "id": "dna-insert:9",
+              "origin_lower_bound": 258.97606594227426,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 258.97606594227426,
+              "model_version": 134,
+              "observed_copy_wait": 0.02738220796652513,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.45656705275177956,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:8",
+                      "headless-terminal:8",
+                      "git-multibranch:8"
+                    ],
+                    "operation": "compute",
+                    "start": 258.94394648790285,
+                    "end": 259.0034481502408,
+                    "overlap": 0.02738220796652513,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:9",
+              "origin_lower_bound": 266.13240434358113,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 262.6569101143185,
+              "model_version": 138,
+              "observed_copy_wait": 0.043507603569423736,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.2783877477049828,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-multibranch:8",
+                      "distribution-search:9",
+                      "dna-insert:9",
+                      "feal-differential-cryptanalysis:9"
+                    ],
+                    "operation": "compute",
+                    "start": 266.11671739008995,
+                    "end": 266.17591194715055,
+                    "overlap": 0.043507603569423736,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:10",
+              "origin_lower_bound": 284.6907912343243,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 281.7820028612197,
+              "model_version": 144,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.06848505791276693,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:10",
+              "origin_lower_bound": 287.4168629229837,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 287.4168629229837,
+              "model_version": 146,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.027275868691504,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:11",
+              "origin_lower_bound": 322.6229536730233,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 322.6229536730233,
+              "model_version": 156,
+              "observed_copy_wait": 0.04251859443922967,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.25111187901347876,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:11"
+                    ],
+                    "operation": "save",
+                    "start": 322.5737862205474,
+                    "end": 322.658717858872,
+                    "overlap": 0.03576418584873409,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:12",
+              "origin_lower_bound": 342.4509589116871,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 342.4509589116871,
+              "model_version": 163,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.8805770147591829,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:13",
+              "origin_lower_bound": 353.3560738743603,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 353.3560738743603,
+              "model_version": 166,
+              "observed_copy_wait": 0.030043061175717867,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3880819948390126,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "headless-terminal:12"
+                    ],
+                    "operation": "compute",
+                    "start": 353.32626861248826,
+                    "end": 353.386116935536,
+                    "overlap": 0.030043061175717867,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:14",
+              "origin_lower_bound": 377.9088243231283,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 377.9088243231283,
+              "model_version": 175,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.5478804633021355,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            }
+          ],
+          "quoted": 1,
+          "positive_cold_margins": 0
+        },
+        "ours": {
+          "requests": [
+            {
+              "id": "headless-terminal:4",
+              "origin_lower_bound": 96.28587259913671,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 94.10170144397038,
+              "model_version": 86,
+              "observed_copy_wait": 0.006599119045745283,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.022828352637588978,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-git:4",
+                      "git-leak-recovery:4"
+                    ],
+                    "operation": "compute",
+                    "start": 96.23396380966514,
+                    "end": 96.29247171818245,
+                    "overlap": 0.006599119045745283,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:5",
+              "origin_lower_bound": 100.78052651326557,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 100.20095353664841,
+              "model_version": 91,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.33266242779791355,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "origin_lower_bound": 106.12049042567861,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 105.91058099380254,
+              "model_version": 97,
+              "observed_copy_wait": 0.01179236975907827,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3195969369262457,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-multibranch:4",
+                      "distribution-search:5",
+                      "feal-differential-cryptanalysis:5"
+                    ],
+                    "operation": "compute",
+                    "start": 106.07356441232393,
+                    "end": 106.13228279543769,
+                    "overlap": 0.01179236975907827,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:6",
+              "origin_lower_bound": 146.78108466199848,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 132.99582791825702,
+              "model_version": 104,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3880819948390126,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:7",
+              "origin_lower_bound": 188.82335550510163,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 187.60398560173655,
+              "model_version": 111,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.027275868691504,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-code-vulnerability:7",
+              "origin_lower_bound": 197.67863624935012,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 191.047520941345,
+              "model_version": 113,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "origin_lower_bound": 204.3774020038769,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 204.1391916624988,
+              "model_version": 119,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.4337387001141906,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:7",
+              "origin_lower_bound": 206.38678070557899,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 205.74174577205616,
+              "model_version": 121,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.06848505791276693,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:9",
+              "origin_lower_bound": 258.9234599184262,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 258.9234599184262,
+              "model_version": 134,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.45656705275177956,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:9",
+              "origin_lower_bound": 259.7114749291817,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 259.7114749291817,
+              "model_version": 136,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.2555593950673938,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:10",
+              "origin_lower_bound": 286.08088228069056,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 286.08088228069056,
+              "model_version": 145,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.15979846846312284,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:10",
+              "origin_lower_bound": 291.2515490784143,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 291.2515490784143,
+              "model_version": 149,
+              "observed_copy_wait": 6.514314088534661,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.03913675621151924,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": "git-multibranch:10",
+                    "operation": "P_api",
+                    "start": 290.00213598530223,
+                    "end": 297.7652396436913,
+                    "overlap": 6.513690565276988,
+                    "owner_route_after_target_route": true
+                  }
+                ]
+              },
+              "status": "conditional_quote_not_global_decision",
+              "live_source_request": "git-multibranch:10",
+              "live_age": 1.2494130931120822,
+              "issued_source_seconds": 7.739058698505258,
+              "completed_residual_samples": 64,
+              "prefix_command": 1024,
+              "payload_upper_bound": 58720256,
+              "source_remaining": 5.99313364669006,
+              "copy_quote": 0.15654702484607697,
+              "warm_P_including_H2D_sync": 4.161174104861293,
+              "cold_P_including_sync": 4.620341023855019,
+              "remote_P_completion": 10.31085477639743,
+              "cold_P_completion": 4.620341023855019,
+              "cold_margin_before_new_control_NOT_net_TTFT": 5.690513752542412
+            },
+            {
+              "id": "dna-insert:13",
+              "origin_lower_bound": 344.55561937503506,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 344.55561937503506,
+              "model_version": 164,
+              "observed_copy_wait": 4.196668433837715,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.1741026863455772,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": "git-multibranch:12",
+                    "operation": "P_api",
+                    "start": 339.9941642026282,
+                    "end": 348.7516620942131,
+                    "overlap": 4.196042719178024,
+                    "owner_route_after_target_route": false
+                  },
+                  {
+                    "kind": "destination_gate",
+                    "owner": "headless-terminal:12",
+                    "operation": "handoff",
+                    "start": 345.10945856631184,
+                    "end": 345.11427815143065,
+                    "overlap": 0.004819585118809755,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "conditional_quote_not_global_decision",
+              "live_source_request": "git-multibranch:12",
+              "live_age": 4.561455172406852,
+              "issued_source_seconds": 8.77808644615061,
+              "completed_residual_samples": 72,
+              "prefix_command": 8320,
+              "payload_upper_bound": 477102080,
+              "source_remaining": 3.7171414358752957,
+              "copy_quote": 1.2719445768743756,
+              "warm_P_including_H2D_sync": 3.817568205863858,
+              "cold_P_including_sync": 7.5897073444886445,
+              "remote_P_completion": 8.806654218613529,
+              "cold_P_completion": 7.5897073444886445,
+              "cold_margin_before_new_control_NOT_net_TTFT": 1.2169468741248846
+            },
+            {
+              "id": "dna-insert:14",
+              "origin_lower_bound": 370.3911462505512,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 365.3765772839296,
+              "model_version": 172,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.6163655212149024,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:14",
+              "origin_lower_bound": 375.83585968797604,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 374.547877503689,
+              "model_version": 175,
+              "observed_copy_wait": 0.058091975036006716,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.13697011582553387,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "headless-terminal:13",
+                      "dna-insert:14"
+                    ],
+                    "operation": "compute",
+                    "start": 375.83450376261527,
+                    "end": 375.89395166301205,
+                    "overlap": 0.058091975036006716,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            }
+          ],
+          "quoted": 2,
+          "positive_cold_margins": 2
+        }
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "raw_sha256": "8d34fef092e4b84600e6f33feb1caa6ad687908cc308a19c90b34c4fc329f5bc",
+      "arms": {
+        "reference": {
+          "requests": [
+            {
+              "id": "feal-differential-cryptanalysis:5",
+              "origin_lower_bound": 54.6837627680872,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 54.6837627680872,
+              "model_version": 92,
+              "observed_copy_wait": 0.04012569344286021,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3880819948390126,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-leak-recovery:4",
+                      "git-multibranch:4"
+                    ],
+                    "operation": "compute",
+                    "start": 54.66517192616028,
+                    "end": 54.72388846153006,
+                    "overlap": 0.04012569344286021,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:5",
+              "origin_lower_bound": 55.416588327010224,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 55.112088588118404,
+              "model_version": 93,
+              "observed_copy_wait": 0.047813890200288256,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.22828352637588978,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-leak-recovery:4",
+                      "git-multibranch:4"
+                    ],
+                    "operation": "compute",
+                    "start": 55.40568630117025,
+                    "end": 55.46440221721051,
+                    "overlap": 0.047813890200288256,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:6",
+              "origin_lower_bound": 66.21498708707387,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 63.08190539008111,
+              "model_version": 99,
+              "observed_copy_wait": 0.030803916943526133,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.8674774002283812,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-leak-recovery:5"
+                    ],
+                    "operation": "compute",
+                    "start": 66.18615614966198,
+                    "end": 66.24579100401739,
+                    "overlap": 0.030803916943526133,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-code-vulnerability:6",
+              "origin_lower_bound": 73.42662717107343,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 71.35070537258748,
+              "model_version": 104,
+              "observed_copy_wait": 0.054120368473277836,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "headless-terminal:5",
+                      "distribution-search:6",
+                      "dna-insert:6"
+                    ],
+                    "operation": "compute",
+                    "start": 73.42195629364824,
+                    "end": 73.48074753954671,
+                    "overlap": 0.054120368473277836,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:6",
+              "origin_lower_bound": 79.9818015350348,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 79.97073378744497,
+              "model_version": 107,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.4337387001141906,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:6",
+              "origin_lower_bound": 81.0664202172034,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 80.41567101798418,
+              "model_version": 108,
+              "observed_copy_wait": 0.045501147518862695,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.095760926604271,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:6",
+                      "dna-insert:6",
+                      "feal-differential-cryptanalysis:6",
+                      "fix-git:6"
+                    ],
+                    "operation": "compute",
+                    "start": 81.05310146433611,
+                    "end": 81.11192136472226,
+                    "overlap": 0.045501147518862695,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:6",
+              "origin_lower_bound": 83.72340624642842,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 82.20779040483893,
+              "model_version": 110,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:7",
+              "origin_lower_bound": 100.45150062141502,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 95.35315714694494,
+              "model_version": 115,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:8",
+              "origin_lower_bound": 112.53206199210778,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 112.53206199210778,
+              "model_version": 124,
+              "observed_copy_wait": 0.029229719560319722,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.141417631879449,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:7",
+                      "git-leak-recovery:7",
+                      "git-multibranch:7"
+                    ],
+                    "operation": "compute",
+                    "start": 112.50211179474054,
+                    "end": 112.5612917116681,
+                    "overlap": 0.029229719560319722,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:8",
+              "origin_lower_bound": 124.09679167234158,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 124.09679167234158,
+              "model_version": 130,
+              "observed_copy_wait": 0.052128895439608414,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.095760926604271,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:8",
+                      "fix-code-vulnerability:8"
+                    ],
+                    "operation": "compute",
+                    "start": 124.09050109204408,
+                    "end": 124.14892056778119,
+                    "overlap": 0.052128895439608414,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:8",
+              "origin_lower_bound": 125.2274602853916,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 124.09679167234158,
+              "model_version": 130,
+              "observed_copy_wait": 0.02046544685401841,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.141417631879449,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:8"
+                    ],
+                    "operation": "compute",
+                    "start": 125.18882134719178,
+                    "end": 125.24792573224562,
+                    "overlap": 0.02046544685401841,
+                    "owner_route_after_target_route": false
+                  },
+                  {
+                    "kind": "direction_slot",
+                    "owner": "git-multibranch:8",
+                    "operation": "history",
+                    "start": 124.14892056778119,
+                    "end": 125.24468149438546,
+                    "overlap": 0.017221208993859705,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:9",
+              "origin_lower_bound": 129.52221341450587,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 126.83341031273744,
+              "model_version": 134,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.5294996267184615,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:9",
+              "origin_lower_bound": 136.10620380096918,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 132.48893642475988,
+              "model_version": 138,
+              "observed_copy_wait": 0.03919743014128585,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.027275868691504,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-multibranch:8",
+                      "headless-terminal:8",
+                      "distribution-search:9"
+                    ],
+                    "operation": "compute",
+                    "start": 136.0862063834772,
+                    "end": 136.14540123111047,
+                    "overlap": 0.03919743014128585,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:11",
+              "origin_lower_bound": 179.60598427878173,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 179.2840372538617,
+              "model_version": 157,
+              "observed_copy_wait": 0.05261391812820193,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.25111187901347876,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:11"
+                    ],
+                    "operation": "compute",
+                    "start": 179.59879339368703,
+                    "end": 179.65859819690994,
+                    "overlap": 0.05261391812820193,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:13",
+              "origin_lower_bound": 210.84526875262472,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 210.84526875262472,
+              "model_version": 169,
+              "observed_copy_wait": 0.021407132238010718,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.8446490475907922,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:12",
+                      "git-multibranch:12",
+                      "headless-terminal:12"
+                    ],
+                    "operation": "compute",
+                    "start": 210.80698343563404,
+                    "end": 210.86667588486273,
+                    "overlap": 0.021407132238010718,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            }
+          ],
+          "quoted": 0,
+          "positive_cold_margins": 0
+        },
+        "parent": {
+          "requests": [
+            {
+              "id": "git-leak-recovery:3",
+              "origin_lower_bound": 27.481656039518843,
+              "source": 0,
+              "destination": 1,
+              "model_latest": 26.89554887363943,
+              "model_version": 77,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.01956837810575962,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "origin_lower_bound": 59.379085238664565,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 58.917527860997474,
+              "model_version": 95,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.25438891537487507,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:5",
+              "origin_lower_bound": 62.12834989326157,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 60.10392814487614,
+              "model_version": 97,
+              "observed_copy_wait": 0.04672378590350945,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.9587908107787371,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:5",
+                      "dna-insert:5",
+                      "fix-git:5",
+                      "fix-code-vulnerability:5"
+                    ],
+                    "operation": "compute",
+                    "start": 62.115589407600325,
+                    "end": 62.17507367916508,
+                    "overlap": 0.04672378590350945,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:7",
+              "origin_lower_bound": 92.08168657871182,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 84.34446163030614,
+              "model_version": 109,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.981619163416326,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:7",
+              "origin_lower_bound": 101.18276626494755,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 101.18276626494755,
+              "model_version": 113,
+              "observed_copy_wait": 0.02550780494055971,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.6620222264900804,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "distribution-search:7",
+                      "dna-insert:7"
+                    ],
+                    "operation": "compute",
+                    "start": 101.14937283034818,
+                    "end": 101.2082740698881,
+                    "overlap": 0.02550780494055971,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:7",
+              "origin_lower_bound": 105.77813084418588,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 105.77813084418588,
+              "model_version": 117,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:9",
+              "origin_lower_bound": 133.09885351105967,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 133.09885351105967,
+              "model_version": 128,
+              "observed_copy_wait": 0.03308399267203299,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.141417631879449,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-git:8"
+                    ],
+                    "operation": "compute",
+                    "start": 133.0752513223455,
+                    "end": 133.1319375037317,
+                    "overlap": 0.03308399267203299,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:9",
+              "origin_lower_bound": 141.77274523327588,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 140.34511639879392,
+              "model_version": 133,
+              "observed_copy_wait": 0.0035127061740070076,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.141417631879449,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-git:8",
+                      "dna-insert:9"
+                    ],
+                    "operation": "compute",
+                    "start": 141.7161438576015,
+                    "end": 141.7762579394499,
+                    "overlap": 0.0035127061740070076,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:10",
+              "origin_lower_bound": 151.99724850126591,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 151.99724850126591,
+              "model_version": 138,
+              "observed_copy_wait": 0.020914331872944558,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.2783877477049828,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:9"
+                    ],
+                    "operation": "compute",
+                    "start": 151.95876032962767,
+                    "end": 152.01816283313886,
+                    "overlap": 0.020914331872944558,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "origin_lower_bound": 154.0587618266311,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 154.0587618266311,
+              "model_version": 140,
+              "observed_copy_wait": 0.00506971956548341,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.986066679470241,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:9",
+                      "git-multibranch:9"
+                    ],
+                    "operation": "compute",
+                    "start": 154.00436603411532,
+                    "end": 154.06383154619658,
+                    "overlap": 0.00506971956548341,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:14",
+              "origin_lower_bound": 234.336602579263,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 230.69186490020903,
+              "model_version": 167,
+              "observed_copy_wait": 0.04181939339497376,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.5979846846312284,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:13",
+                      "fix-git:13",
+                      "headless-terminal:13"
+                    ],
+                    "operation": "compute",
+                    "start": 234.31862975579884,
+                    "end": 234.37842197265797,
+                    "overlap": 0.04181939339497376,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:16",
+              "origin_lower_bound": 270.46711473514944,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 260.9145604560604,
+              "model_version": 176,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.5707088159397244,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            }
+          ],
+          "quoted": 0,
+          "positive_cold_margins": 0
+        },
+        "ours": {
+          "requests": [
+            {
+              "id": "git-leak-recovery:3",
+              "origin_lower_bound": 27.135723153514395,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 26.907809409371342,
+              "model_version": 78,
+              "observed_copy_wait": 0.05461381315659608,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.022828352637588978,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:3",
+                      "feal-differential-cryptanalysis:3",
+                      "fix-git:3"
+                    ],
+                    "operation": "compute",
+                    "start": 27.131679977186458,
+                    "end": 27.19033696667099,
+                    "overlap": 0.05461381315659608,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:4",
+              "origin_lower_bound": 48.9203369314506,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 47.76612122680817,
+              "model_version": 89,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.06848505791276693,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:5",
+              "origin_lower_bound": 55.236921747721134,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 55.23419425614188,
+              "model_version": 96,
+              "observed_copy_wait": 0.05779859440310986,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.22828352637588978,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-leak-recovery:4",
+                      "git-multibranch:4"
+                    ],
+                    "operation": "compute",
+                    "start": 55.23599222948354,
+                    "end": 55.29472034212424,
+                    "overlap": 0.05779859440310986,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-code-vulnerability:5",
+              "origin_lower_bound": 57.473961751609615,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 56.06165249633633,
+              "model_version": 98,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.134965930134058,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:6",
+              "origin_lower_bound": 81.46700471282979,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 81.10684959075195,
+              "model_version": 111,
+              "observed_copy_wait": 0.029454337203489445,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.2099026897922158,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-git:6",
+                      "fix-code-vulnerability:6"
+                    ],
+                    "operation": "compute",
+                    "start": 81.43730213154396,
+                    "end": 81.49645905003328,
+                    "overlap": 0.029454337203489445,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:7",
+              "origin_lower_bound": 92.17803136447664,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 86.37814104492695,
+              "model_version": 114,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.8674774002283812,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:7",
+              "origin_lower_bound": 98.29426283441578,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 94.97539437851442,
+              "model_version": 116,
+              "observed_copy_wait": 0.01445905091142663,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "distribution-search:7"
+                    ],
+                    "operation": "compute",
+                    "start": 98.24983924092864,
+                    "end": 98.3087218853272,
+                    "overlap": 0.01445905091142663,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "origin_lower_bound": 102.8901932091267,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 102.71687623399147,
+              "model_version": 120,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.4337387001141906,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:7",
+              "origin_lower_bound": 107.2222093402897,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 104.99280934407254,
+              "model_version": 124,
+              "observed_copy_wait": 0.019731875772819762,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.027275868691504,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:7",
+                      "feal-differential-cryptanalysis:7",
+                      "fix-git:7"
+                    ],
+                    "operation": "compute",
+                    "start": 107.18210881748293,
+                    "end": 107.24194121606251,
+                    "overlap": 0.019731875772819762,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:9",
+              "origin_lower_bound": 146.2279184422449,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 146.2279184422449,
+              "model_version": 144,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.25111187901347876,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "origin_lower_bound": 156.3818613169212,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 155.80663385666062,
+              "model_version": 149,
+              "observed_copy_wait": 0.049271839159217734,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.072932573966682,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "headless-terminal:9"
+                    ],
+                    "operation": "compute",
+                    "start": 156.37097107327457,
+                    "end": 156.43113315608042,
+                    "overlap": 0.049271839159217734,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:11",
+              "origin_lower_bound": 159.4661293905453,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 157.50419695712316,
+              "model_version": 150,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.4153578635305166,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:10",
+              "origin_lower_bound": 161.86877970144056,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 161.86877970144056,
+              "model_version": 152,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.4610145688056946,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:11",
+              "origin_lower_bound": 169.27639573352178,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 168.49726945426903,
+              "model_version": 157,
+              "observed_copy_wait": 0.03581188044503847,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.8674774002283812,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:11"
+                    ],
+                    "operation": "compute",
+                    "start": 169.2517087302388,
+                    "end": 169.31220761396682,
+                    "overlap": 0.03581188044503847,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:11",
+              "origin_lower_bound": 172.7829695023584,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 172.7829695023584,
+              "model_version": 159,
+              "observed_copy_wait": 0.058748934333294756,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.25111187901347876,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:11"
+                    ],
+                    "operation": "compute",
+                    "start": 172.78122181328357,
+                    "end": 172.8417184366917,
+                    "overlap": 0.058748934333294756,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            }
+          ],
+          "quoted": 0,
+          "positive_cold_margins": 0
+        }
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "raw_sha256": "ff2032b40bd02a5dbbebd784a773d2a44358e2248a15f68c88b6f4a613b93214",
+      "arms": {
+        "reference": {
+          "requests": [
+            {
+              "id": "git-leak-recovery:4",
+              "origin_lower_bound": 31.209958379379245,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 29.516562419108578,
+              "model_version": 85,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.09131341055035591,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:4",
+              "origin_lower_bound": 34.50817336562194,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 32.8285618009306,
+              "model_version": 89,
+              "observed_copy_wait": 0.002085062192399789,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.022828352637588978,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:4",
+                      "feal-differential-cryptanalysis:4",
+                      "fix-git:4"
+                    ],
+                    "operation": "compute",
+                    "start": 34.45161133484668,
+                    "end": 34.51025842781434,
+                    "overlap": 0.002085062192399789,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:5",
+              "origin_lower_bound": 35.915174293934655,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 35.05185780825534,
+              "model_version": 92,
+              "observed_copy_wait": 0.04994324059880739,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.6163655212149024,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:4"
+                    ],
+                    "operation": "save",
+                    "start": 35.88083773548537,
+                    "end": 35.964241975829324,
+                    "overlap": 0.04906768189466959,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:6",
+              "origin_lower_bound": 55.206677151524524,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 54.022102688145125,
+              "model_version": 104,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.9131341055035591,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:6",
+              "origin_lower_bound": 57.179910303832266,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 56.881271589787865,
+              "model_version": 107,
+              "observed_copy_wait": 0.03932441995316083,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.22828352637588978,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:6"
+                    ],
+                    "operation": "compute",
+                    "start": 57.13913202157251,
+                    "end": 57.219234723785426,
+                    "overlap": 0.03932441995316083,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:7",
+              "origin_lower_bound": 68.17639582343145,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 68.17639582343145,
+              "model_version": 112,
+              "observed_copy_wait": 0.04021745913154007,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.1870743371546268,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:6",
+                      "fix-git:6"
+                    ],
+                    "operation": "compute",
+                    "start": 68.1578444658592,
+                    "end": 68.21661328256299,
+                    "overlap": 0.04021745913154007,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:7",
+              "origin_lower_bound": 70.756111815744,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 70.61471393773347,
+              "model_version": 116,
+              "observed_copy_wait": 0.04004132063693078,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.9587908107787371,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-leak-recovery:6"
+                    ],
+                    "operation": "compute",
+                    "start": 70.73716438144217,
+                    "end": 70.79615313638094,
+                    "overlap": 0.04004132063693078,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:7",
+              "origin_lower_bound": 73.79212907744319,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 73.13682660083116,
+              "model_version": 120,
+              "observed_copy_wait": 0.526584130124192,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:7"
+                    ],
+                    "operation": "restore",
+                    "start": 72.99420676658488,
+                    "end": 74.31871320756738,
+                    "overlap": 0.526584130124192,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:7",
+              "origin_lower_bound": 81.99123988267107,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 81.53942023084825,
+              "model_version": 126,
+              "observed_copy_wait": 0.013681116182951314,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.36525364220142365,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:7",
+                      "dna-insert:7"
+                    ],
+                    "operation": "compute",
+                    "start": 81.94570503769155,
+                    "end": 82.00492099885402,
+                    "overlap": 0.013681116182951314,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:7",
+              "origin_lower_bound": 87.50530414822941,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 87.50530414822941,
+              "model_version": 129,
+              "observed_copy_wait": 0.016889186026688208,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.09131341055035591,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:7",
+                      "dna-insert:7"
+                    ],
+                    "operation": "compute",
+                    "start": 87.46297752210525,
+                    "end": 87.5221933342561,
+                    "overlap": 0.016889186026688208,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-code-vulnerability:8",
+              "origin_lower_bound": 96.04320104266814,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 90.68251100724672,
+              "model_version": 132,
+              "observed_copy_wait": 0.027780329746207144,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 2.3969770269468427,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-multibranch:7",
+                      "headless-terminal:7"
+                    ],
+                    "operation": "compute",
+                    "start": 96.01187313435506,
+                    "end": 96.07098137241435,
+                    "overlap": 0.027780329746207144,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:9",
+              "origin_lower_bound": 103.33282755857479,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 101.95558115909752,
+              "model_version": 137,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.5935371685773134,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:8",
+              "origin_lower_bound": 105.44424303202626,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 105.00855040204002,
+              "model_version": 139,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-code-vulnerability:9",
+              "origin_lower_bound": 112.32863782837673,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 112.20388230300321,
+              "model_version": 143,
+              "observed_copy_wait": 0.0381357954990591,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.5250521106645465,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:8",
+                      "headless-terminal:8"
+                    ],
+                    "operation": "compute",
+                    "start": 112.30774990655658,
+                    "end": 112.36677362387579,
+                    "overlap": 0.0381357954990591,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:9",
+              "origin_lower_bound": 114.4269634084544,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 113.8226557296236,
+              "model_version": 145,
+              "observed_copy_wait": 0.026122196254775076,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.22828352637588978,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "distribution-search:9"
+                    ],
+                    "operation": "compute",
+                    "start": 114.39627552482634,
+                    "end": 114.45308560470917,
+                    "overlap": 0.026122196254775076,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:9",
+              "origin_lower_bound": 115.61513290456931,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 115.14779020760868,
+              "model_version": 147,
+              "observed_copy_wait": 0.03212894516867948,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.13697011582553387,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "distribution-search:9"
+                    ],
+                    "operation": "compute",
+                    "start": 115.59045419874442,
+                    "end": 115.64726184973799,
+                    "overlap": 0.03212894516867948,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:10",
+              "origin_lower_bound": 127.49918257324839,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 127.01750078087477,
+              "model_version": 153,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.27394023165106773,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:10",
+              "origin_lower_bound": 130.77714878743552,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 130.3427986980412,
+              "model_version": 157,
+              "observed_copy_wait": 0.01989087580238902,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.986066679470241,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-multibranch:9",
+                      "distribution-search:10",
+                      "headless-terminal:9",
+                      "fix-git:10"
+                    ],
+                    "operation": "compute",
+                    "start": 130.7376232835057,
+                    "end": 130.7970396632379,
+                    "overlap": 0.01989087580238902,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:10",
+              "origin_lower_bound": 135.15310133881178,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 132.78322486468164,
+              "model_version": 158,
+              "observed_copy_wait": 0.013969007999918404,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.25111187901347876,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:10"
+                    ],
+                    "operation": "compute",
+                    "start": 135.1079591540039,
+                    "end": 135.1670703468117,
+                    "overlap": 0.013969007999918404,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            }
+          ],
+          "quoted": 0,
+          "positive_cold_margins": 0
+        },
+        "parent": {
+          "requests": [
+            {
+              "id": "dna-insert:3",
+              "origin_lower_bound": 11.731070352430683,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 9.070451974113316,
+              "model_version": 72,
+              "observed_copy_wait": 0.023588251914596015,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.045656705275177956,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:2",
+                      "headless-terminal:2"
+                    ],
+                    "operation": "compute",
+                    "start": 11.69620208289141,
+                    "end": 11.754658604345279,
+                    "overlap": 0.023588251914596015,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:6",
+              "origin_lower_bound": 52.58314931913664,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 52.58314931913664,
+              "model_version": 100,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.7435983680188656,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:7",
+              "origin_lower_bound": 69.61961302461798,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 66.42280443755844,
+              "model_version": 109,
+              "observed_copy_wait": 0.018846186129636067,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.3012161003425717,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:6",
+                      "fix-code-vulnerability:6",
+                      "git-multibranch:6"
+                    ],
+                    "operation": "compute",
+                    "start": 69.57930085243359,
+                    "end": 69.63845921074761,
+                    "overlap": 0.018846186129636067,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:7",
+              "origin_lower_bound": 76.92219603534669,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 72.31712825249573,
+              "model_version": 112,
+              "observed_copy_wait": 0.035935393726660436,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.5478804633021355,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-leak-recovery:6",
+                      "headless-terminal:6"
+                    ],
+                    "operation": "compute",
+                    "start": 76.8984057395885,
+                    "end": 76.95813142907335,
+                    "overlap": 0.035935393726660436,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:7",
+              "origin_lower_bound": 81.29121077504193,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 79.45985354917269,
+              "model_version": 116,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.25111187901347876,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:7",
+              "origin_lower_bound": 86.66668835188555,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 86.66668835188555,
+              "model_version": 118,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.2099026897922158,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:9",
+              "origin_lower_bound": 106.81765796863188,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 106.81765796863188,
+              "model_version": 129,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.8674774002283812,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:9",
+              "origin_lower_bound": 117.13814763175694,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 113.31022460193302,
+              "model_version": 134,
+              "observed_copy_wait": 0.005185408445441908,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.25111187901347876,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "distribution-search:9"
+                    ],
+                    "operation": "compute",
+                    "start": 117.08652600015643,
+                    "end": 117.14333304020238,
+                    "overlap": 0.005185408445441908,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:9",
+              "origin_lower_bound": 118.84819730207339,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 117.39457550554198,
+              "model_version": 135,
+              "observed_copy_wait": 0.023411806165952953,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.095760926604271,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "distribution-search:9"
+                    ],
+                    "operation": "compute",
+                    "start": 118.81479472844018,
+                    "end": 118.87160910823934,
+                    "overlap": 0.023411806165952953,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:10",
+              "origin_lower_bound": 123.75886367746102,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 123.75886367746102,
+              "model_version": 138,
+              "observed_copy_wait": 0.04957579109701271,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.5022237580269575,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-git:9",
+                      "feal-differential-cryptanalysis:9"
+                    ],
+                    "operation": "compute",
+                    "start": 123.74939718338348,
+                    "end": 123.80843946855803,
+                    "overlap": 0.04957579109701271,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:11",
+              "origin_lower_bound": 140.55283071160665,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 140.55283071160665,
+              "model_version": 145,
+              "observed_copy_wait": 0.007138944796622582,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.15979846846312284,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:9",
+                      "distribution-search:10",
+                      "fix-git:10"
+                    ],
+                    "operation": "compute",
+                    "start": 140.5001990799738,
+                    "end": 140.55996965640327,
+                    "overlap": 0.007138944796622582,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:12",
+              "origin_lower_bound": 172.50415086321104,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 172.50415086321104,
+              "model_version": 157,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.5022237580269575,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:14",
+              "origin_lower_bound": 213.99531972697096,
+              "source": 0,
+              "destination": 1,
+              "model_latest": 213.99531972697096,
+              "model_version": 170,
+              "observed_copy_wait": 0.36368797725234003,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.43050431832671165,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": "distribution-search:14",
+                    "operation": "P_api",
+                    "start": 206.4100507855508,
+                    "end": 214.3583475697439,
+                    "overlap": 0.36302784277293654,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "conditional_quote_not_global_decision",
+              "live_source_request": "distribution-search:14",
+              "live_age": 7.585268941420168,
+              "issued_source_seconds": 8.015324317403598,
+              "completed_residual_samples": 58,
+              "prefix_command": 9600,
+              "payload_upper_bound": 550502400,
+              "source_remaining": 0.8895106291415222,
+              "copy_quote": 1.4676283579319715,
+              "warm_P_including_H2D_sync": 3.7932334345447933,
+              "cold_P_including_sync": 8.221247006970907,
+              "remote_P_completion": 6.150372421618288,
+              "cold_P_completion": 8.221247006970907,
+              "cold_margin_before_new_control_NOT_net_TTFT": -2.0708745853526196
+            }
+          ],
+          "quoted": 1,
+          "positive_cold_margins": 0
+        },
+        "ours": {
+          "requests": [
+            {
+              "id": "dna-insert:3",
+              "origin_lower_bound": 11.683578048545163,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 9.072915005673499,
+              "model_version": 72,
+              "observed_copy_wait": 0.014631077335382159,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.045656705275177956,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:2",
+                      "headless-terminal:2"
+                    ],
+                    "operation": "compute",
+                    "start": 11.639752034457262,
+                    "end": 11.698209125880545,
+                    "overlap": 0.014631077335382159,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:3",
+              "origin_lower_bound": 17.684341805532945,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 17.523852151120177,
+              "model_version": 79,
+              "observed_copy_wait": 1.8909626544238343,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.022828352637588978,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-git:3"
+                    ],
+                    "operation": "restore",
+                    "start": 17.523852151120177,
+                    "end": 19.57530445995678,
+                    "overlap": 1.8909626544238343,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:4",
+              "origin_lower_bound": 26.687583489364588,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 26.687583489364588,
+              "model_version": 86,
+              "observed_copy_wait": 0.16623554037544963,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.15979846846312284,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "distribution-search:4"
+                    ],
+                    "operation": "restore",
+                    "start": 24.939724740607264,
+                    "end": 26.853819029740038,
+                    "overlap": 0.16623554037544963,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:4",
+              "origin_lower_bound": 30.942120957061633,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 27.724031968436474,
+              "model_version": 88,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.11414176318794489,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:5",
+              "origin_lower_bound": 46.13099877999095,
+              "source": 0,
+              "destination": 1,
+              "model_latest": 45.398209888607255,
+              "model_version": 99,
+              "observed_copy_wait": 0.0,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.25438891537487507,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:5",
+              "origin_lower_bound": 47.849290373833334,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 46.81735111194002,
+              "model_version": 101,
+              "observed_copy_wait": 0.030253580725315032,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.045656705275177956,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "dna-insert:5"
+                    ],
+                    "operation": "compute",
+                    "start": 47.82290391873592,
+                    "end": 47.87954395455865,
+                    "overlap": 0.030253580725315032,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:6",
+              "origin_lower_bound": 54.86250026677752,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 53.336110423133576,
+              "model_version": 106,
+              "observed_copy_wait": 0.04743434171227534,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.45656705275177956,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-git:5",
+                      "git-leak-recovery:5",
+                      "headless-terminal:5",
+                      "fix-code-vulnerability:5"
+                    ],
+                    "operation": "compute",
+                    "start": 54.85092728164988,
+                    "end": 54.9099346084898,
+                    "overlap": 0.04743434171227534,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-multibranch:6",
+              "origin_lower_bound": 68.24521971058661,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 66.3882383937471,
+              "model_version": 113,
+              "observed_copy_wait": 0.059264903658487356,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.2099026897922158,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-git:6"
+                    ],
+                    "operation": "compute",
+                    "start": 68.24483548219723,
+                    "end": 68.3044846142451,
+                    "overlap": 0.059264903658487356,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:7",
+              "origin_lower_bound": 72.44569108946916,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 72.44569108946916,
+              "model_version": 115,
+              "observed_copy_wait": 0.022587025510730996,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.6163655212149024,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-leak-recovery:6",
+                      "headless-terminal:6"
+                    ],
+                    "operation": "compute",
+                    "start": 72.40943696708253,
+                    "end": 72.4682781149799,
+                    "overlap": 0.022587025510730996,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "distribution-search:7",
+              "origin_lower_bound": 72.63174947449892,
+              "source": 2,
+              "destination": 0,
+              "model_latest": 72.63174947449892,
+              "model_version": 116,
+              "observed_copy_wait": 0.4530283783173985,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.3012161003425717,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": "feal-differential-cryptanalysis:7",
+                    "operation": "history",
+                    "start": 72.4682781149799,
+                    "end": 73.0846436361948,
+                    "overlap": 0.45289416169588037,
+                    "owner_route_after_target_route": true
+                  },
+                  {
+                    "kind": "direction_slot",
+                    "owner": "feal-differential-cryptanalysis:7",
+                    "operation": "history",
+                    "start": 72.4682781149799,
+                    "end": 73.0846436361948,
+                    "overlap": 0.45289416169588037,
+                    "owner_route_after_target_route": true
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:7",
+              "origin_lower_bound": 74.05105071024464,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 73.37414896849545,
+              "model_version": 118,
+              "observed_copy_wait": 0.33507578967439144,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.9131341055035591,
+                "blockers": [
+                  {
+                    "kind": "direction_slot",
+                    "owner": "distribution-search:7",
+                    "operation": "history",
+                    "start": 73.08477785281632,
+                    "end": 74.38599395315889,
+                    "overlap": 0.3349432429142496,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "git-leak-recovery:7",
+              "origin_lower_bound": 77.72440822981945,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 76.53491253837808,
+              "model_version": 123,
+              "observed_copy_wait": 0.028304436525843357,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.022828352637588978,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "feal-differential-cryptanalysis:7"
+                    ],
+                    "operation": "compute",
+                    "start": 77.69366702712944,
+                    "end": 77.75271266634529,
+                    "overlap": 0.028304436525843357,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:7",
+              "origin_lower_bound": 80.92486755809463,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 79.00191041986001,
+              "model_version": 126,
+              "observed_copy_wait": 0.025434615017843498,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.050104221329093,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-multibranch:6",
+                      "fix-code-vulnerability:6",
+                      "distribution-search:7",
+                      "dna-insert:7"
+                    ],
+                    "operation": "compute",
+                    "start": 80.89114300361649,
+                    "end": 80.95030217311248,
+                    "overlap": 0.025434615017843498,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "dna-insert:8",
+              "origin_lower_bound": 90.86695157524582,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 90.42496117642656,
+              "model_version": 130,
+              "observed_copy_wait": 0.028897697943548906,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.3880819948390126,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "fix-code-vulnerability:6",
+                      "headless-terminal:7",
+                      "git-multibranch:7"
+                    ],
+                    "operation": "compute",
+                    "start": 90.83669104526051,
+                    "end": 90.89584927318937,
+                    "overlap": 0.028897697943548906,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "fix-git:8",
+              "origin_lower_bound": 94.31135876768518,
+              "source": 3,
+              "destination": 1,
+              "model_latest": 93.56673641862386,
+              "model_version": 133,
+              "observed_copy_wait": 3.820285201072693e-06,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.7533356370404363,
+                "blockers": []
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "feal-differential-cryptanalysis:9",
+              "origin_lower_bound": 108.00595426897681,
+              "source": 2,
+              "destination": 1,
+              "model_latest": 107.12703893372249,
+              "model_version": 140,
+              "observed_copy_wait": 0.003060225244666981,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.45656705275177956,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "git-multibranch:8"
+                    ],
+                    "operation": "compute",
+                    "start": 108.00592954343134,
+                    "end": 108.00901449422147,
+                    "overlap": 0.003060225244666981,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            },
+            {
+              "id": "headless-terminal:10",
+              "origin_lower_bound": 130.40853221820373,
+              "source": 1,
+              "destination": 0,
+              "model_latest": 128.70711788100664,
+              "model_version": 149,
+              "observed_copy_wait": 1.4398428380831945,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 0.9392821490764618,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": "fix-git:10",
+                    "operation": "P_api",
+                    "start": 127.89336022641531,
+                    "end": 131.8477420875557,
+                    "overlap": 1.43920986935197,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "conditional_quote_not_global_decision",
+              "live_source_request": "fix-git:10",
+              "live_age": 2.5151719917884208,
+              "issued_source_seconds": 3.965288742284525,
+              "completed_residual_samples": 56,
+              "prefix_command": 6784,
+              "payload_upper_bound": 389021696,
+              "source_remaining": 1.2050185509203075,
+              "copy_quote": 1.03712403960526,
+              "warm_P_including_H2D_sync": 1.5428988550855471,
+              "cold_P_including_sync": 4.6237481258173245,
+              "remote_P_completion": 3.7850414456111148,
+              "cold_P_completion": 4.6237481258173245,
+              "cold_margin_before_new_control_NOT_net_TTFT": -0.8387066802062098
+            },
+            {
+              "id": "git-multibranch:10",
+              "origin_lower_bound": 144.7554949711035,
+              "source": 3,
+              "destination": 0,
+              "model_latest": 143.17852430044786,
+              "model_version": 155,
+              "observed_copy_wait": 0.0403833014848658,
+              "observation_NOT_policy_input": {
+                "copy_seconds": 1.095760926604271,
+                "blockers": [
+                  {
+                    "kind": "source_gate",
+                    "owner": [
+                      "headless-terminal:10"
+                    ],
+                    "operation": "compute",
+                    "start": 144.73676373454333,
+                    "end": 144.79587827258837,
+                    "overlap": 0.0403833014848658,
+                    "owner_route_after_target_route": false
+                  }
+                ]
+              },
+              "status": "outside_active_P_source_scope"
+            }
+          ],
+          "quoted": 1,
+          "positive_cold_margins": 0
+        }
+      }
+    }
+  ]
+}

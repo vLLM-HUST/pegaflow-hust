@@ -1,0 +1,12 @@
+{
+  "supervisor_pid": 141990,
+  "started": 1793055719.5486372,
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "-u",
+    "/root/progress-decode-pipeline-01.py"
+  ],
+  "source_sha256": "6d6d2f2d86e9ff64555b5bd13bb0bcf4e49f964a8130f08235ebc7905d1971da",
+  "CPU_only": true,
+  "limit_seconds": 4500
+}

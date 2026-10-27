@@ -1,0 +1,16 @@
+{
+  "command": [
+    "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+    "-m",
+    "pytest",
+    "-q",
+    "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/test_ready_prefill.py",
+    "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/test_pending_first_search.py",
+    "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/test_acquired_phase_search.py",
+    "/root/issue23-ready-prefill-source-01/experiments/issue23_strategies/test_yielding_decode_search.py"
+  ],
+  "exit_code": 0,
+  "stdout": "...............                                                          [100%]\n15 passed in 0.77s\n",
+  "stderr": "",
+  "source_sha256": "e409d33886ca206a49eba847719a4cce999a4f576dd81d794ad6fc54474dfc8d"
+}

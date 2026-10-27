@@ -1,0 +1,56 @@
+[
+  {
+    "setting": "default",
+    "rate": 0.24516170769071072,
+    "raw_sha256": "f2a12525b2c260c8b669f34cea588771b3086426b9f15a8f2319c6c5dce288b5",
+    "calls": 41,
+    "moves": 0,
+    "CPU_wall": 9.262701334431767,
+    "all_checks_passed": true
+  },
+  {
+    "setting": "default",
+    "rate": 0.49032341538142143,
+    "raw_sha256": "29b7c65f601555f104cd239f08ff33a103099c64a1434b6f49fffdbcb3d2fe86",
+    "calls": 39,
+    "moves": 3,
+    "CPU_wall": 6.154869445599616,
+    "all_checks_passed": true
+  },
+  {
+    "setting": "default",
+    "rate": 0.9806468307628429,
+    "raw_sha256": "9ac49c303fafcf181c73e09fe90ef75d9cb89f00f40af158285dcd46893b2024",
+    "calls": 40,
+    "moves": 0,
+    "CPU_wall": 7.118336704559624,
+    "all_checks_passed": true
+  },
+  {
+    "setting": "sharing",
+    "rate": 0.24516170769071072,
+    "raw_sha256": "71f15411d25deab74b2b45e89a198efb0384ac18c114e4799e9f22af7e864cc5",
+    "calls": 8,
+    "moves": 1,
+    "CPU_wall": 2.835459403693676,
+    "all_checks_passed": true
+  },
+  {
+    "setting": "sharing",
+    "rate": 0.49032341538142143,
+    "raw_sha256": "8d34fef092e4b84600e6f33feb1caa6ad687908cc308a19c90b34c4fc329f5bc",
+    "calls": 15,
+    "moves": 0,
+    "CPU_wall": 6.171109199523926,
+    "all_checks_passed": true
+  },
+  {
+    "setting": "sharing",
+    "rate": 0.9806468307628429,
+    "raw_sha256": "ff2032b40bd02a5dbbebd784a773d2a44358e2248a15f68c88b6f4a613b93214",
+    "calls": 20,
+    "moves": 1,
+    "CPU_wall": 7.757421842776239,
+    "all_checks_passed": true
+  }
+]

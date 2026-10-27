@@ -1,0 +1,473 @@
+{
+  "scope": "Retrospective observed simulated paths; not causal attribution or hardware timers",
+  "cases": [
+    {
+      "rate": 0.24516170769071072,
+      "arms": {
+        "reference": {
+          "fix-git:9": {
+            "path": {
+              "TTFT": 22.60990755903373,
+              "nominal": 45.535385502903466,
+              "dependency": 22.925477943869737,
+              "P": 1,
+              "D": 3,
+              "P_prefix": 1664,
+              "D_prefix": 1664,
+              "ready": 280.77812309227926,
+              "first": 303.388030651313,
+              "before_P": 1.2364271619694023,
+              "P_API": 3.3972073392695084,
+              "P_to_D": 0.747927434025371,
+              "D_API_to_first": 17.228345623769428
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.747927434025371,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "git-multibranch:8",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 0.0502299198029732
+              },
+              {
+                "request": "distribution-search:9",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 4.245680490385325
+              },
+              {
+                "request": "headless-terminal:9",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 35.73341435061013
+              }
+            ],
+            "ready_to_full_completion": 51.26944681007194,
+            "D_first_to_full_completion": 28.65953925103821
+          },
+          "feal-differential-cryptanalysis:13": {
+            "path": {
+              "TTFT": 33.1749173661774,
+              "nominal": 89.19859929534829,
+              "dependency": 56.02368192917089,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 6784,
+              "ready": 393.6667972255512,
+              "first": 426.8417145917286,
+              "before_P": 2.0532116006465344,
+              "P_API": 11.402866138411634,
+              "P_to_D": 2.7096077019628524,
+              "D_API_to_first": 17.00923192515637
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 2.7096077019628524,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "git-multibranch:12",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 1.171840322250489
+              },
+              {
+                "request": "distribution-search:12",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 12.581451823444525
+              }
+            ],
+            "ready_to_full_completion": 44.31586864446638,
+            "D_first_to_full_completion": 11.14095127828898
+          }
+        },
+        "ours": {
+          "dna-insert:13": {
+            "path": {
+              "TTFT": 17.344476581307845,
+              "nominal": 63.35811404827814,
+              "dependency": 46.013637466970295,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 0,
+              "D_prefix": 896,
+              "ready": 381.1831120570109,
+              "first": 398.5275886383187,
+              "before_P": 0.7920600642787008,
+              "P_API": 7.657663278952592,
+              "P_to_D": 8.36436179492972,
+              "D_API_to_first": 0.5303914431468115
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 3.0103598350938796,
+              "control_end_to_D_API": 5.354001959835841
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "headless-terminal:11",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 7.749499055598164
+              },
+              {
+                "request": "git-multibranch:11",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 16.467914866077763
+              }
+            ],
+            "ready_to_full_completion": 48.11594672597096,
+            "D_first_to_full_completion": 30.771470144663112
+          },
+          "git-multibranch:12": {
+            "path": {
+              "TTFT": 19.12033309070364,
+              "nominal": 97.39440540818703,
+              "dependency": 78.27407231748339,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6784,
+              "D_prefix": 0,
+              "ready": 406.10075026631995,
+              "first": 425.2210833570236,
+              "before_P": 0.9610938039945154,
+              "P_API": 5.918221415191844,
+              "P_to_D": 11.43588130999035,
+              "D_API_to_first": 0.8051365615269219
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 10.826190024247865,
+              "D_control_interval": 0.6096912857424854,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "feal-differential-cryptanalysis:12",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 10.817486225260893
+              },
+              {
+                "request": "dna-insert:13",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 16.318993297475515
+              },
+              {
+                "request": "distribution-search:12",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 16.757099661518225
+              },
+              {
+                "request": "headless-terminal:12",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 20.757899474331282
+              }
+            ],
+            "ready_to_full_completion": 40.55503488283483,
+            "D_first_to_full_completion": 21.434701792131193
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.49032341538142143,
+      "arms": {
+        "reference": {
+          "feal-differential-cryptanalysis:7": {
+            "path": {
+              "TTFT": 15.502572424269289,
+              "nominal": 85.22923207932264,
+              "dependency": 69.72665965505335,
+              "P": 0,
+              "D": 3,
+              "P_prefix": 0,
+              "D_prefix": 6656,
+              "ready": 167.28557330264618,
+              "first": 182.78814572691547,
+              "before_P": 8.618185280445033,
+              "P_API": 3.3677561565302203,
+              "P_to_D": 0.9901910053845882,
+              "D_API_to_first": 2.526439981909448
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.9901910053845882,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "fix-git:6",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 1.0920292273503378
+              },
+              {
+                "request": "git-leak-recovery:6",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 2.6447148065334147
+              },
+              {
+                "request": "distribution-search:7",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 38.74326664487518
+              }
+            ],
+            "ready_to_full_completion": 51.02751731891897,
+            "D_first_to_full_completion": 35.52494489464968
+          },
+          "feal-differential-cryptanalysis:12": {
+            "path": {
+              "TTFT": 33.35885068542939,
+              "nominal": 229.1327784003677,
+              "dependency": 195.7739277149383,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6784,
+              "D_prefix": 0,
+              "ready": 358.7413624701606,
+              "first": 392.10021315559,
+              "before_P": 5.51361001194357,
+              "P_API": 7.937423864014091,
+              "P_to_D": 0.49400741162713757,
+              "D_API_to_first": 19.413809397844602
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.49400741162713757,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "dna-insert:11",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 4.283392785868216
+              },
+              {
+                "request": "headless-terminal:12",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 13.190946078265085
+              },
+              {
+                "request": "fix-git:11",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 19.676389136055775
+              }
+            ],
+            "ready_to_full_completion": 45.05987725211958,
+            "D_first_to_full_completion": 11.701026566690189
+          }
+        },
+        "ours": {
+          "feal-differential-cryptanalysis:11": {
+            "path": {
+              "TTFT": 19.385724353486182,
+              "nominal": 196.18737052346088,
+              "dependency": 176.8016461699747,
+              "P": 1,
+              "D": 2,
+              "P_prefix": 6656,
+              "D_prefix": 0,
+              "ready": 329.52929707561356,
+              "first": 348.91502142909974,
+              "before_P": 0.9494126049207239,
+              "P_API": 7.06384134335531,
+              "P_to_D": 10.416719094110817,
+              "D_API_to_first": 0.9557513110993341
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 9.664659416280813,
+              "D_control_interval": 0.7520596778300046,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "git-multibranch:10",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 9.658804036654658
+              },
+              {
+                "request": "distribution-search:11",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 15.251540940042105
+              },
+              {
+                "request": "fix-git:11",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 22.689448213371634
+              }
+            ],
+            "ready_to_full_completion": 50.31488587264204,
+            "D_first_to_full_completion": 30.929161519155855
+          },
+          "fix-git:12": {
+            "path": {
+              "TTFT": 20.936989514729703,
+              "nominal": 217.58745175273594,
+              "dependency": 196.65046223800624,
+              "P": 1,
+              "D": 3,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 360.2319992372612,
+              "first": 381.1689887519909,
+              "before_P": 5.695450624002206,
+              "P_API": 5.275485271132709,
+              "P_to_D": 0.5209750507306694,
+              "D_API_to_first": 9.445078568864119
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.5209750507306694,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "dna-insert:13",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 25.805831787161026
+              }
+            ],
+            "ready_to_full_completion": 36.926713831979555,
+            "D_first_to_full_completion": 15.989724317249852
+          }
+        }
+      }
+    },
+    {
+      "rate": 0.9806468307628429,
+      "arms": {
+        "reference": {
+          "git-multibranch:8": {
+            "path": {
+              "TTFT": 21.836305030801384,
+              "nominal": 190.07348322887262,
+              "dependency": 168.23717819807123,
+              "P": 0,
+              "D": 3,
+              "P_prefix": 0,
+              "D_prefix": 6016,
+              "ready": 228.83578808088134,
+              "first": 250.67209311168273,
+              "before_P": 1.574739542916575,
+              "P_API": 6.886538094570098,
+              "P_to_D": 1.0314854832645892,
+              "D_API_to_first": 12.343541910050135
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 1.0314854832645892,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "headless-terminal:7",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 0.4788950994309005
+              },
+              {
+                "request": "feal-differential-cryptanalysis:8",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 22.129064941739955
+              }
+            ],
+            "ready_to_full_completion": 52.64743846679767,
+            "D_first_to_full_completion": 30.811133435996283
+          },
+          "feal-differential-cryptanalysis:13": {
+            "path": {
+              "TTFT": 32.726404490072866,
+              "nominal": 310.65507723047705,
+              "dependency": 277.9286727404042,
+              "P": 0,
+              "D": 2,
+              "P_prefix": 640,
+              "D_prefix": 0,
+              "ready": 362.33945156449926,
+              "first": 395.0658560545721,
+              "before_P": 8.193502611227188,
+              "P_API": 11.402866138411634,
+              "P_to_D": 0.600569363897705,
+              "D_API_to_first": 12.529466376536334
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.600569363897705,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "distribution-search:13",
+                "first_already_observed": true,
+                "observed_release_after_target_P": 7.295330795171594
+              },
+              {
+                "request": "headless-terminal:11",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 12.826806203083493
+              }
+            ],
+            "ready_to_full_completion": 40.732037394402084,
+            "D_first_to_full_completion": 8.005632904329218
+          }
+        },
+        "ours": {
+          "distribution-search:12": {
+            "path": {
+              "TTFT": 27.52720146989094,
+              "nominal": 281.91388654281496,
+              "dependency": 254.38668507292402,
+              "P": 1,
+              "D": 3,
+              "P_prefix": 7296,
+              "D_prefix": 0,
+              "ready": 334.6359324620326,
+              "first": 362.16313393192354,
+              "before_P": 3.4090734967581966,
+              "P_API": 5.429741314611551,
+              "P_to_D": 0.48126813138839,
+              "D_API_to_first": 18.20711852713282
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.48126813138839,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [
+              {
+                "request": "git-multibranch:11",
+                "first_already_observed": false,
+                "observed_release_after_target_P": 72.18305168342727
+              }
+            ],
+            "ready_to_full_completion": 81.11075711629383,
+            "D_first_to_full_completion": 53.583555646402885
+          },
+          "git-multibranch:11": {
+            "path": {
+              "TTFT": 18.29465893609688,
+              "nominal": 271.38749036002747,
+              "dependency": 253.0928314239306,
+              "P": 1,
+              "D": 3,
+              "P_prefix": 6784,
+              "D_prefix": 0,
+              "ready": 331.7852879335372,
+              "first": 350.07994686963406,
+              "before_P": 0.9517962943168072,
+              "P_API": 5.307312571467186,
+              "P_to_D": 0.4881573293637871,
+              "D_API_to_first": 11.547392740949078
+            },
+            "P_to_D_parts": {
+              "P_complete_to_D_control_start": 0.0,
+              "D_control_interval": 0.4881573293637871,
+              "control_end_to_D_API": 0.0
+            },
+            "D_API_holders_at_target_P_end": [],
+            "ready_to_full_completion": 83.87251102329242,
+            "D_first_to_full_completion": 65.57785208719554
+          }
+        }
+      }
+    }
+  ]
+}

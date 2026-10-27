@@ -1,0 +1,197 @@
+{
+  "started": 1793085013.4759338,
+  "finished": 1793085356.9801888,
+  "steps": [
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "-c",
+        "import simulate_continuous_batch; from advice_calendar_search import AdviceCalendarSimulation; from no_decode_advice_search import NoDecodeAdviceSimulation; assert not issubclass(AdviceCalendarSimulation, NoDecodeAdviceSimulation); import analyze_advice_calendar, audit_advice_calendar; print(\"calendar class and auditors imported\")"
+      ],
+      "pid": 544676,
+      "started": 1793085025.62838,
+      "finished": 1793085026.0943227,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 30
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-advice-calendar-source-01/experiments/issue23_strategies/run_pcie_matrix.py",
+        "--repo",
+        "/root/issue23-advice-calendar-source-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-advice-calendar-charged-sharing-01",
+        "--policy",
+        "advice-calendar",
+        "--workers",
+        "3",
+        "--residual-world",
+        "--phase-residual-world",
+        "--decode-sharing-fraction",
+        "1"
+      ],
+      "pid": 544677,
+      "started": 1793085026.095087,
+      "finished": 1793085318.3605242,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 1800
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-advice-calendar-source-01/experiments/issue23_strategies/analyze_control_work.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--source-receipt",
+        "/root/advice-calendar-source-receipt-01.json",
+        "--output",
+        "/root/issue23-advice-calendar-charged-sharing-01/source-control-audit.json"
+      ],
+      "pid": 548980,
+      "started": 1793085319.9190688,
+      "finished": 1793085328.248404,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-advice-calendar-source-01/experiments/issue23_strategies/analyze_pending_first.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-sharing-01",
+        "--output",
+        "/root/issue23-advice-calendar-charged-sharing-01/work-conservation-audit.json"
+      ],
+      "pid": 548982,
+      "started": 1793085328.2489173,
+      "finished": 1793085330.4675536,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-advice-calendar-source-01/experiments/issue23_strategies/audit_release_estimates.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-sharing-01",
+        "--inputs",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_handoff/simulation-inputs.json",
+        "--seed",
+        "/root/issue23-batch-inputs-20261026/experiments/issue23_strategies/runtime/calibration-seed",
+        "--output",
+        "/root/issue23-advice-calendar-charged-sharing-01/release-estimate-audit.json"
+      ],
+      "pid": 549195,
+      "started": 1793085330.4680545,
+      "finished": 1793085332.8376617,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-advice-calendar-source-01/experiments/issue23_strategies/analyze_release_feedback.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-sharing-01",
+        "--output",
+        "/root/issue23-advice-calendar-charged-sharing-01/feedback-alignment.json"
+      ],
+      "pid": 549196,
+      "started": 1793085332.838176,
+      "finished": 1793085334.8067365,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-advice-calendar-source-01/experiments/issue23_strategies/audit_prefill_revalidation.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-sharing-01",
+        "--output",
+        "/root/issue23-advice-calendar-charged-sharing-01/prefill-revalidation-audit.json"
+      ],
+      "pid": 549197,
+      "started": 1793085334.8072345,
+      "finished": 1793085336.5250082,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/issue23-advice-calendar-source-01/experiments/issue23_strategies/analyze_prefill_feedback.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-sharing-01",
+        "--output",
+        "/root/issue23-advice-calendar-charged-sharing-01/numerical-feedback.json"
+      ],
+      "pid": 549198,
+      "started": 1793085336.5254915,
+      "finished": 1793085338.8947577,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/advice-calendar-analysis-support-02/audit_advice_calendar.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-sharing-01",
+        "--output",
+        "/root/issue23-advice-calendar-charged-sharing-01/advice-calendar-audit-02.json"
+      ],
+      "pid": 549200,
+      "started": 1793085338.8952327,
+      "finished": 1793085340.6132627,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    },
+    {
+      "command": [
+        "/root/issue23-tools/pegaflow-joint-pipeline-01/.venv/bin/python",
+        "/root/advice-calendar-analysis-support-02/analyze_advice_calendar.py",
+        "--result",
+        "/root/issue23-advice-calendar-charged-sharing-01",
+        "--output",
+        "/root/issue23-advice-calendar-charged-sharing-01/charged-feedback.json"
+      ],
+      "pid": 549201,
+      "started": 1793085340.613753,
+      "finished": 1793085346.3395946,
+      "exit_code": 0,
+      "stop": null,
+      "limit_seconds": 120
+    }
+  ],
+  "archives": [
+    {
+      "path": "/root/advice-calendar-completed-default-01-full.tar.gz",
+      "sha256": "97a1e0bda2848b981315b619b4dfe2774df320dd86f1752aecb181e6d489660b",
+      "bytes": 19411328
+    },
+    {
+      "path": "/root/advice-calendar-completed-sharing-01-full.tar.gz",
+      "sha256": "cea99ec9aef0e6997dc0e60ce1d0f817ad28fa31d06675aa4ea1eb2b6b6012c4",
+      "bytes": 17388609
+    }
+  ],
+  "failure": null,
+  "no_gpu_work": true
+}

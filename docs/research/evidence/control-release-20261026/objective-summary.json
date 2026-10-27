@@ -1,0 +1,111 @@
+{
+  "requests": 95,
+  "max_live": 7,
+  "p99": 32.02993042834515,
+  "scope": "CPU cost fixed to zero for reproducible objective diagnosis; RPC retained; NOT net performance evidence",
+  "selfish_vs_system_tradeoffs": [
+    {
+      "request": "fix-git:3",
+      "extra_predicted_request_seconds": 2.3238146497957217,
+      "chosen_system_p99": 6.6965247072430785,
+      "selfish_system_p99": 9.478387071846036
+    },
+    {
+      "request": "git-leak-recovery:4",
+      "extra_predicted_request_seconds": 0.21283383949402435,
+      "chosen_system_p99": 13.601768585037533,
+      "selfish_system_p99": 14.737169485285321
+    },
+    {
+      "request": "git-leak-recovery:5",
+      "extra_predicted_request_seconds": 1.7315169871553735,
+      "chosen_system_p99": 15.74561382962355,
+      "selfish_system_p99": 16.83978880518191
+    },
+    {
+      "request": "fix-git:7",
+      "extra_predicted_request_seconds": 3.96059433467164,
+      "chosen_system_p99": 13.976777675025062,
+      "selfish_system_p99": 14.154876558680002
+    },
+    {
+      "request": "headless-terminal:7",
+      "extra_predicted_request_seconds": 1.403784478590012,
+      "chosen_system_p99": 15.279120228774332,
+      "selfish_system_p99": 15.28108287126733
+    },
+    {
+      "request": "dna-insert:10",
+      "extra_predicted_request_seconds": 2.815896269589075,
+      "chosen_system_p99": 24.376783236830647,
+      "selfish_system_p99": 32.14252282770127
+    },
+    {
+      "request": "git-multibranch:11",
+      "extra_predicted_request_seconds": 1.2245382192952547,
+      "chosen_system_p99": 28.565306776854754,
+      "selfish_system_p99": 31.74609905818005
+    },
+    {
+      "request": "fix-git:11",
+      "extra_predicted_request_seconds": 9.232217259279707,
+      "chosen_system_p99": 28.539651260790265,
+      "selfish_system_p99": 32.30701947536022
+    },
+    {
+      "request": "dna-insert:11",
+      "extra_predicted_request_seconds": 0.26302785917329174,
+      "chosen_system_p99": 32.145243468790625,
+      "selfish_system_p99": 32.14524346879074
+    },
+    {
+      "request": "headless-terminal:11",
+      "extra_predicted_request_seconds": 1.315347070733253,
+      "chosen_system_p99": 32.02993042834504,
+      "selfish_system_p99": 32.02993042834538
+    },
+    {
+      "request": "fix-git:12",
+      "extra_predicted_request_seconds": 5.455592442908767,
+      "chosen_system_p99": 32.02993042834407,
+      "selfish_system_p99": 32.02993042834407
+    },
+    {
+      "request": "dna-insert:12",
+      "extra_predicted_request_seconds": 2.103079799548709,
+      "chosen_system_p99": 20.60437082684325,
+      "selfish_system_p99": 20.606721645118625
+    },
+    {
+      "request": "headless-terminal:12",
+      "extra_predicted_request_seconds": 5.059119728306257,
+      "chosen_system_p99": 24.846412616965097,
+      "selfish_system_p99": 32.69473751672547
+    },
+    {
+      "request": "dna-insert:13",
+      "extra_predicted_request_seconds": 0.1796250043525447,
+      "chosen_system_p99": 24.796590361778385,
+      "selfish_system_p99": 24.796590361778385
+    },
+    {
+      "request": "feal-differential-cryptanalysis:14",
+      "extra_predicted_request_seconds": 0.6163655212152435,
+      "chosen_system_p99": 23.44432264997664,
+      "selfish_system_p99": 23.444322649976755
+    },
+    {
+      "request": "headless-terminal:13",
+      "extra_predicted_request_seconds": 8.533400319115742,
+      "chosen_system_p99": 27.314036715057114,
+      "selfish_system_p99": 30.27493759662167
+    },
+    {
+      "request": "fix-git:14",
+      "extra_predicted_request_seconds": 8.346370085744809,
+      "chosen_system_p99": 26.02524778755395,
+      "selfish_system_p99": 27.69646817748395
+    }
+  ],
+  "same_hardware_or_performance_claim": false
+}
