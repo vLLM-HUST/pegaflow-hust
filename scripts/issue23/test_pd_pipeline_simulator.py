@@ -3,10 +3,9 @@
 import copy
 
 import pytest
-
 from fit_pipeline_profile import robust_fit
-from pd_pipeline_simulator import PipelineSimulation
-from step_simulator import features
+from pd_pipeline_simulator import PipelineSimulation, ReservedHandoffPool
+from step_simulator import Job, Request, features
 from test_pd_multinode_simulator import fixture
 
 
@@ -86,3 +85,79 @@ def test_copy_capability_is_an_explicit_resource_input():
     a, b = fast["copy_batches"][0], slow["copy_batches"][0]
     assert b["end"] - b["start"] == pytest.approx(2 * (a["end"] - a["start"]))
     assert slow["summary"]["TTFT"]["mean"] > fast["summary"]["TTFT"]["mean"]
+
+
+def test_pending_restores_reserve_pages_before_they_publish_cache_hits():
+    pool = ReservedHandoffPool(6, 128)
+    job = Job(Request("pending", 0, 257, 1, ("a", "b"), "model"))
+    pool.reserve_restore(job, 2)
+    assert len(pool.free) == 3
+    assert not pool.cached
+    second = Job(Request("other", 0, 257, 1, ("a", "b"), "model"))
+    assert pool.prefix(second) == []
+    pool.publish_restore(job)
+    assert len(pool.prefix(second)) == 2
+    assert pool.allocate(job, 1, prefix=pool.prefix(job))
+    assert all(pool.blocks[index].references == 1 for index in job.blocks)
+    pool.release(job)
+    assert len(pool.free) == 5
+
+
+@pytest.mark.parametrize("sharing", ["fifo", "processor_sharing"])
+def test_reserved_handoff_with_concurrent_network_flows_drains(sharing):
+    workload, profile = setup()
+    profile["reserve_restore_pages"] = True
+    profile["network_seconds_per_byte"] = 1e-9
+    result = PipelineSimulation(
+        workload, profile, {"D": 2, "network_sharing": sharing}
+    ).run()
+    assert result["summary"]["requests"] == 12
+    assert result["summary"]["D_uncached_tokens"] == 12
+    assert all(
+        row["stages"]["D"]["completion_feedback_s"] >= 0
+        for row in result["per_request"]
+        if row["stages"]["D"]["restore_bytes"]
+    )
+
+
+def test_device_copy_capability_overrides_shared_host_default():
+    workload, profile = setup()
+    workload["requests"] = workload["requests"][:2]
+    for i, row in enumerate(workload["requests"]):
+        row.update(P=0, D=i)
+    profile["restore_model"] = {
+        "kind": "capacity",
+        "coefficients": [0, 1, 0],
+        "default_copy_GBps": 1,
+        "busy_slowdown": 1,
+    }
+    result = PipelineSimulation(
+        workload,
+        profile,
+        {
+            "P": 1,
+            "D": 2,
+            "engine_hosts": ["P-host", "D-host", "D-host"],
+            "device_copy_GBps": {"1": 1, "2": 2},
+        },
+    ).run()
+    by_node = {batch["node"]: batch for batch in result["copy_batches"]}
+    assert by_node[1]["work_s"] == pytest.approx(2 * by_node[2]["work_s"])
+
+
+@pytest.mark.parametrize("gate", [False, True])
+def test_source_publication_is_distinct_from_prefill_response(gate):
+    workload, profile = setup()
+    workload["requests"] = workload["requests"][:1]
+    profile["P_publish_model"] = {
+        "default_curve": [{"blocks": 2, "seconds": 0.2}],
+        "baseline_s": 0.001,
+    }
+    result = PipelineSimulation(workload, profile, {"source_publish_gate": gate}).run()
+    row = result["per_request"][0]
+    assert row["stages"]["P"]["publish_end"] == pytest.approx(
+        row["stages"]["P"]["engine_end"] + 0.2
+    )
+    assert row["stages"]["D"]["restore_start"] >= row["stages"]["P"]["publish_end"]
+    if gate:
+        assert row["stages"]["D"]["prepare"] >= row["stages"]["P"]["publish_end"]

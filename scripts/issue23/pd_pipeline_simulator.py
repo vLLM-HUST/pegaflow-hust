@@ -7,9 +7,26 @@ import json
 from collections import defaultdict, deque
 from pathlib import Path
 
-from pd_multinode_simulator import CalibratedPD
+from pd_multinode_simulator import CalibratedPD, HandoffPool
 from pd_serving_simulator import BLOCK_BYTES, seed_gpu
 from step_simulator import Job, vector
+
+
+def curve_duration(points, blocks):
+    """Interpolate deployment component probes without request identities."""
+    if not points or blocks <= 0:
+        return 0.0
+    curve = sorted([(0, 0.0), *((p["blocks"], p["seconds"]) for p in points)])
+    below = max((p for p in curve if p[0] <= blocks), default=curve[0])
+    above = min((p for p in curve if p[0] >= blocks), default=curve[-1])
+    if below == above:
+        if blocks == below[0]:
+            return below[1]
+        below, above = curve[-2:]
+    return max(
+        0,
+        below[1] + (above[1] - below[1]) * (blocks - below[0]) / (above[0] - below[0]),
+    )
 
 
 def graph_vector(row):
@@ -30,8 +47,9 @@ def graph_vector(row):
 
 
 class GraphCost:
-    def __init__(self, data):
+    def __init__(self, data, restore_active=None):
         self.data = data
+        self.restore_active = restore_active or (lambda: False)
 
     def duration(self, row):
         kind = "decode" if row["prefill_tokens"] == 0 else "prefill"
@@ -39,17 +57,100 @@ class GraphCost:
         inputs = (
             graph_vector(row) if model.get("kind") == "graph_shape" else vector(row)
         )
-        return max(
+        duration = max(
             1e-6, sum(a * b for a, b in zip(model["coefficients"], inputs, strict=True))
         )
+        if self.restore_active():
+            duration *= model.get("restore_busy_slowdown", 1)
+        return duration
+
+
+class ReservedHandoffPool(HandoffPool):
+    """Keep actual destination and existing prefix pages alive during async loads."""
+
+    def __init__(self, *args, **kwargs):
+        super().__init__(*args, **kwargs)
+        self.reservations = {}
+
+    def reserve_restore(self, job, target, gpu=None):
+        prefix = (
+            super().prefix(job)
+            if gpu is None
+            else [next(iter(self.cached[self.key(job, i)])) for i in range(gpu)]
+        )
+        needed = target - len(prefix)
+        if needed + sum(self.blocks[b].references == 0 for b in prefix) > len(
+            self.free
+        ):
+            raise ValueError(
+                "Pending GPU restoration requires an uncalibrated preemption"
+            )
+        pages = list(prefix)
+        for index in prefix:
+            block = self.blocks[index]
+            if block.references == 0:
+                del self.free[index]
+            block.references += 1
+        for _ in range(needed):
+            index, _ = self.free.popitem(last=False)
+            block = self.blocks[index]
+            if block.key is not None:
+                options = self.cached[block.key]
+                del options[index]
+                if not options:
+                    del self.cached[block.key]
+                self.evictions += 1
+            block.key = None
+            block.references = 1
+            pages.append(index)
+        self.reservations[job.request.id] = (pages, len(prefix))
+        self.peak_active = max(
+            self.peak_active, sum(b.references > 0 for b in self.blocks)
+        )
+
+    def publish_restore(self, job):
+        pages, existing = self.reservations[job.request.id]
+        for position, index in enumerate(pages[existing:], existing):
+            key = self.key(job, position)
+            self.blocks[index].key = key
+            self.cached.setdefault(key, {}).update({index: None})
+
+    def prefix(self, job):
+        if job.request.id in self.reservations:
+            return self.reservations[job.request.id][0]
+        return super().prefix(job)
+
+    def allocate(self, job, tokens, prefix=()):
+        result = super().allocate(job, tokens, prefix)
+        if result and job.request.id in self.reservations:
+            pages, _ = self.reservations.pop(job.request.id)
+            for index in pages:
+                self.blocks[index].references -= 1
+        return result
 
 
 class PipelineSimulation(CalibratedPD):
     def __init__(self, workload, profile, config=None):
         super().__init__(workload, profile, config)
+        self.reserve_pages = profile.get("reserve_restore_pages", True)
+        if self.reserve_pages:
+            self.pools = [
+                ReservedHandoffPool(
+                    len(pool.blocks), pool.block_size, pool.enable_caching
+                )
+                for pool in self.pools
+            ]
         if profile.get("graph_models"):
             self.role_models = {
-                role: GraphCost(model)
+                role: GraphCost(
+                    model,
+                    lambda: (
+                        self.current_compute_node in self.flow
+                        or any(
+                            n == self.current_compute_node for n, _ in self.publications
+                        )
+                    ),
+                )
                 for role, model in profile["graph_models"].items()
             }
         self.incoming = defaultdict(deque)
@@ -65,6 +166,11 @@ class PipelineSimulation(CalibratedPD):
         self.copy_batches = []
         self.idle_poll = profile.get("idle_poll_s", 0.001)
         self.restore_model = profile["restore_model"]
+        self.frontend_free = defaultdict(float)
+        self.network_flows = {}
+        self.network_sequence = 0
+        self.current_compute_node = None
+        self.publications = {}
 
     def api_delay(self, role, tokens):
         a, b = self.profile.get("api_inbound", {}).get(role, [0, 0])
@@ -78,7 +184,11 @@ class PipelineSimulation(CalibratedPD):
             delay = self.api_delay(role, self.rows[key]["tokens"])
             if role == "D":
                 delay += self.profile.get("client_handoff_gap_s", 0)
-            self.event(self.now + delay, "api_delivered", key, node)
+            start = self.now
+            if self.config.get("frontend_serialization", False):
+                start = max(start, self.frontend_free[node])
+                self.frontend_free[node] = start + delay
+            self.event(start + delay, "api_delivered", key, node)
             return
         if role == "P":
             return super().prepare(key, node)
@@ -117,8 +227,17 @@ class PipelineSimulation(CalibratedPD):
         while self.loaded[node]:
             batch = self.loaded[node].popleft()
             for key, gpu, target in batch["items"]:
-                seed_gpu(self.pools[node], self.rows[key]["hashes"][gpu:target])
-                self.jobs[key]["stages"]["D"]["restore_end"] = batch["end"]
+                if self.reserve_pages:
+                    self.pools[node].publish_restore(
+                        self.jobs[key]["engine_jobs"][node]
+                    )
+                else:
+                    seed_gpu(self.pools[node], self.rows[key]["hashes"][gpu:target])
+                self.jobs[key]["stages"]["D"].update(
+                    restore_end=batch["end"],
+                    restore_observed=self.now,
+                    completion_feedback_s=self.now - batch["end"],
+                )
                 self.admit(key, node)
         limit = self.config.get(
             "D_max_sequences", self.config.get("max_sequences", 128)
@@ -144,7 +263,6 @@ class PipelineSimulation(CalibratedPD):
                         or row["hashes"][target] in self.host[source].keys
                     ):
                         target += 1
-                job.external_prefix = target
                 live["stages"]["D"].update(
                     NPU_initial_prefix_blocks=gpu,
                     target_prefix_blocks=target,
@@ -152,6 +270,7 @@ class PipelineSimulation(CalibratedPD):
                     query_start=self.now,
                 )
                 if target == gpu:
+                    job.external_prefix = target
                     self.admit(key, node)
                     continue
                 missing = [
@@ -160,7 +279,11 @@ class PipelineSimulation(CalibratedPD):
                     if h not in self.host[node].keys
                 ]
                 if any(h not in self.host[source].keys for h in missing):
+                    if (source, key) in self.publications:
+                        remaining.append(key)
+                        continue
                     raise ValueError("P cache cannot supply the required prefix")
+                job.external_prefix = target
                 if missing:
                     self.host[source].pins.update(missing)
                     a, b = self.profile.get("discovery_model", {}).get(
@@ -181,6 +304,11 @@ class PipelineSimulation(CalibratedPD):
             if self.fetch_ready[node]:
                 items = list(self.fetch_ready[node])
                 self.fetch_ready[node].clear()
+                if self.reserve_pages:
+                    for key, gpu, target in items:
+                        self.pools[node].reserve_restore(
+                            self.jobs[key]["engine_jobs"][node], target, gpu
+                        )
                 self.copy_sequence += 1
                 batch = {
                     "batch": self.copy_sequence,
@@ -203,9 +331,17 @@ class PipelineSimulation(CalibratedPD):
             return
         batch = self.copy_queue[node].popleft()
         coefficients = self.restore_model["coefficients"]
-        if self.restore_model.get("kind") == "capacity":
-            rate = self.config.get("host_copy_GBps", {}).get(
-                self.hosts[node], self.restore_model["default_copy_GBps"]
+        if self.restore_model.get("kind") == "curve_capacity":
+            curve = self.config.get("device_restore_curves", {}).get(
+                str(node), self.restore_model["default_curve"]
+            )
+            size = curve_duration(curve, batch["blocks"])
+        elif self.restore_model.get("kind") == "capacity":
+            rate = self.config.get("device_copy_GBps", {}).get(
+                str(node),
+                self.config.get("host_copy_GBps", {}).get(
+                    self.hosts[node], self.restore_model["default_copy_GBps"]
+                ),
             )
             size = batch["blocks"] * BLOCK_BYTES / (rate * 1e9)
         else:
@@ -247,6 +383,7 @@ class PipelineSimulation(CalibratedPD):
         self.advance_copy(node)
 
     def schedule(self, node):
+        self.current_compute_node = node
         if node < self.p_count:
             return super().schedule(node)
         if node in self.engine_busy:
@@ -265,9 +402,75 @@ class PipelineSimulation(CalibratedPD):
         if node >= self.p_count and not self.running[node]:
             self.set_compute(node, False)
 
+    def engine_done(self, key, node):
+        model = self.profile.get("P_publish_model")
+        if node >= self.p_count or model is None:
+            return super().engine_done(key, node)
+        live = self.jobs[key]
+        stage = live["stages"]["P"]
+        stage["engine_end"] = self.now
+        missing = [h for h in self.rows[key]["hashes"] if h not in self.host[node].keys]
+        curve = self.config.get("device_publish_curves", {}).get(
+            str(node), model["default_curve"]
+        )
+        delay = (
+            curve_duration(curve, len(missing))
+            if missing
+            else model.get("baseline_s", 0)
+        )
+        live["D"] = self.p_count + self.route(key, "D")
+        self.publications[node, key] = live["engine_jobs"][node]
+        stage.update(publish_queued=self.now, publish_blocks=len(missing))
+        if missing:
+            self.resource(
+                f"P-publication:{node}",
+                delay,
+                "P_publish",
+                key,
+                (node, missing),
+                payload=len(missing) * BLOCK_BYTES,
+            )
+        else:
+            self.event(self.now + delay, "P_publish", key, (node, missing))
+        if not self.config.get("source_publish_gate", False):
+            self.prepare(key, live["D"])
+
     def extra_event(self, kind, key, data):
+        if kind == "P_publish":
+            node, missing = data
+            self.host[node].add(missing)
+            job = self.publications.pop((node, key))
+            self.pools[node].release(job)
+            live = self.jobs.get(key) or self.finished[key]
+            live["stages"]["P"]["publish_end"] = self.now
+            if key in self.jobs:
+                if self.config.get("source_publish_gate", False):
+                    self.prepare(key, live["D"])
+                else:
+                    self.ensure_cycle(live["D"], immediate=True)
+            return True
         if kind == "pipeline_fetch":
             payload = len(data[4]) * BLOCK_BYTES
+            if self.config.get("network_sharing", "fifo") == "processor_sharing":
+                self.advance_network()
+                self.network_sequence += 1
+                target, _, _, source, _ = data
+                self.network_flows[self.network_sequence] = {
+                    "id": key,
+                    "data": data,
+                    "bytes": payload,
+                    "remaining": float(payload),
+                    "queued": self.now,
+                    "start": self.now,
+                    "last": self.now,
+                    "endpoints": (
+                        f"{self.hosts[source]}:out",
+                        f"{self.hosts[target]}:in",
+                    ),
+                    "generation": 0,
+                }
+                self.schedule_network()
+                return True
             self.resource(
                 "RDMA:P-to-D",
                 payload * self.network_s_per_byte,
@@ -276,6 +479,29 @@ class PipelineSimulation(CalibratedPD):
                 data,
                 payload=payload,
             )
+            return True
+        if kind == "network_complete":
+            identifier, generation = data
+            flow = self.network_flows.get(identifier)
+            if flow is None or flow["generation"] != generation:
+                return True
+            self.advance_network()
+            flow = self.network_flows.pop(identifier)
+            target, gpu, count, source, missing = flow["data"]
+            self.host[target].add(missing)
+            self.host[source].pins.subtract(missing)
+            self.transfers.append(
+                {
+                    "id": flow["id"],
+                    "resource": f"RDMA:{self.hosts[source]}->{self.hosts[target]}",
+                    "queued": flow["queued"],
+                    "start": flow["start"],
+                    "end": self.now,
+                    "bytes": flow["bytes"],
+                }
+            )
+            self.restore(flow["id"], target, gpu, count)
+            self.schedule_network()
             return True
         if kind == "api_delivered":
             self.prepare(key, data)
@@ -328,14 +554,74 @@ class PipelineSimulation(CalibratedPD):
             return True
         return False
 
+    def advance_network(self):
+        for flow in self.network_flows.values():
+            flow["remaining"] = max(
+                0, flow["remaining"] - (self.now - flow["last"]) * flow.get("rate", 0)
+            )
+            flow["last"] = self.now
+
+    def schedule_network(self):
+        capacity = (
+            self.config["network_Gbps"] * 1e9 / 8
+            if "network_Gbps" in self.config
+            else 1 / max(self.network_s_per_byte, 1e-15)
+        )
+        active = set(self.network_flows)
+        budgets = {
+            endpoint: capacity
+            for flow in self.network_flows.values()
+            for endpoint in flow["endpoints"]
+        }
+        rates = dict.fromkeys(active, 0.0)
+        while active:
+            counts = defaultdict(int)
+            for identifier in active:
+                for endpoint in self.network_flows[identifier]["endpoints"]:
+                    counts[endpoint] += 1
+            increments = {
+                endpoint: budgets[endpoint] / count
+                for endpoint, count in counts.items()
+            }
+            delta = min(increments.values())
+            for identifier in active:
+                rates[identifier] += delta
+            for endpoint, count in counts.items():
+                budgets[endpoint] = max(0, budgets[endpoint] - delta * count)
+            saturated = {
+                endpoint
+                for endpoint, value in increments.items()
+                if value <= delta + 1e-6
+            }
+            active = {
+                identifier
+                for identifier in active
+                if not saturated.intersection(
+                    self.network_flows[identifier]["endpoints"]
+                )
+            }
+        for identifier, flow in self.network_flows.items():
+            flow["rate"] = rates[identifier]
+            flow["generation"] += 1
+            self.event(
+                self.now + flow["remaining"] / flow["rate"],
+                "network_complete",
+                flow["id"],
+                (identifier, flow["generation"]),
+            )
+
     def run(self):
         result = super().run()
-        result["schema"] = "pegaflow-pd-pipeline-simulation/v2"
+        result["schema"] = "pegaflow-pd-pipeline-simulation/v3"
         result["copy_batches"] = self.copy_batches
         result["settings"]["transfer_model"] = (
             "engine-iteration discovery, asynchronous prefetch, native copy cohorts and completion feedback"
         )
         result["settings"]["idle_poll_s"] = self.idle_poll
+        result["settings"]["reserve_restore_pages"] = self.reserve_pages
+        result["settings"]["network_sharing"] = self.config.get(
+            "network_sharing", "fifo"
+        )
         result["settings"]["restore_busy_slowdown"] = self.restore_model.get(
             "busy_slowdown", 1
         )
@@ -354,6 +640,7 @@ class PipelineSimulation(CalibratedPD):
             result["coverage"]["classification"] = "extrapolated"
         if self.restore_model.get("kind") == "capacity" and any(
             self.hosts[n] not in self.config.get("host_copy_GBps", {})
+            and str(n) not in self.config.get("device_copy_GBps", {})
             for n in range(self.p_count, self.node_count)
         ):
             result["coverage"]["extrapolations"].append(

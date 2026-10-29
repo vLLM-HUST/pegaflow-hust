@@ -13,8 +13,7 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 import numpy as np
-
-from pd_pipeline_simulator import graph_vector
+from pd_pipeline_simulator import curve_duration, graph_vector
 from pd_serving_simulator import BLOCK_BYTES, interpolate
 from step_simulator import vector
 
@@ -84,42 +83,121 @@ def folds(rows):
 def select_compute(rows):
     records = []
     for name, function in [("linear", vector), ("graph_shape", graph_vector)]:
-        scores = []
-        for label, train, test in folds(rows):
-            c = robust_fit(
-                [function(r) for r in train],
-                [r["duration_s"] for r in train],
-                [r["case"] for r in train],
+        factors = (
+            [1, 1.25, 2, 4]
+            if any(
+                r.get("copy_active_at_start", r.get("restore_active_at_start"))
+                for r in rows
             )
-            score = group_error(test, [np.dot(c, function(r)) for r in test])
-            scores.append({"fold": label, "relative_error": score})
-        records.append(
-            {
-                "name": name,
-                "folds": scores,
-                "score": statistics.mean(s["relative_error"] for s in scores),
-            }
+            else [1]
         )
+        for slowdown in factors:
+            factor = lambda row, slowdown=slowdown: (
+                slowdown
+                if row.get("copy_active_at_start", row.get("restore_active_at_start"))
+                else 1
+            )
+            scores = []
+            for label, train, test in folds(rows):
+                c = robust_fit(
+                    [function(r) for r in train],
+                    [r["duration_s"] / factor(r) for r in train],
+                    [r["case"] for r in train],
+                )
+                score = group_error(
+                    test, [np.dot(c, function(r)) * factor(r) for r in test]
+                )
+                scores.append({"fold": label, "relative_error": score})
+            records.append(
+                {
+                    "name": name,
+                    "restore_busy_slowdown": slowdown,
+                    "folds": scores,
+                    "score": statistics.mean(s["relative_error"] for s in scores),
+                }
+            )
     # Prefer the lower-dimensional model unless the gain exceeds five percent.
-    chosen = (
-        records[1] if records[1]["score"] < 0.95 * records[0]["score"] else records[0]
-    )
+    best = min(r["score"] for r in records)
+    chosen = next(r for r in records if r["score"] <= best * 1.05)
     function = graph_vector if chosen["name"] == "graph_shape" else vector
     c = robust_fit(
         [function(r) for r in rows],
-        [r["duration_s"] for r in rows],
+        [
+            r["duration_s"]
+            / (
+                chosen["restore_busy_slowdown"]
+                if r.get("copy_active_at_start", r.get("restore_active_at_start"))
+                else 1
+            )
+            for r in rows
+        ],
         [r["case"] for r in rows],
     )
     return {
         "kind": chosen["name"],
         "coefficients": c,
         "training_steps": len(rows),
+        "restore_busy_slowdown": chosen["restore_busy_slowdown"],
     }, records
 
 
 def restore_vector(row, kind="raw"):
-    size = row["capacity_s"] if kind == "capacity" else row["blocks"] / 64
+    size = (
+        row["curve_s"]
+        if kind == "curve_capacity"
+        else row["capacity_s"]
+        if kind == "capacity"
+        else row["blocks"] / 64
+    )
     return [1, size, max(0, row["request_count"] - 1) / 4]
+
+
+def component_curves(rows, value="seconds"):
+    grouped = defaultdict(lambda: defaultdict(list))
+    for row in rows:
+        grouped[row["phase"], row["node"]][row["blocks"]].append(row[value])
+    return {
+        key: [
+            {
+                "blocks": blocks,
+                "seconds": statistics.median(values),
+                "repeats": len(values),
+                "range_s": [min(values), max(values)],
+            }
+            for blocks, values in sorted(points.items())
+        ]
+        for key, points in grouped.items()
+    }
+
+
+def average_curve(curves):
+    grouped = defaultdict(list)
+    for points in curves.values():
+        for point in points:
+            grouped[point["blocks"]].append(point["seconds"])
+    return [
+        {"blocks": n, "seconds": statistics.median(v)}
+        for n, v in sorted(grouped.items())
+    ]
+
+
+def capability_scale(rows, kind, slowdown):
+    counts = Counter(r["case"] for r in rows)
+    ratios = sorted(
+        (
+            (r["idle_s"] + r["busy_s"] / slowdown)
+            / max(1e-9, restore_vector(r, kind)[1]),
+            1 / counts[r["case"]],
+        )
+        for r in rows
+    )
+    half = sum(weight for _, weight in ratios) / 2
+    total = 0
+    for ratio, weight in ratios:
+        total += weight
+        if total >= half:
+            return [0, ratio, 0]
+    raise ValueError("Restoration calibration requires nonempty conditions")
 
 
 def fit_restore(rows):
@@ -128,28 +206,32 @@ def fit_restore(rows):
     probes = defaultdict(list)
     for r in rows:
         if "geometry-b128-" in r["case"]:
-            probes[r["phase"]].append(r["blocks"] * BLOCK_BYTES / r["seconds"] / 1e9)
+            probes[(r["phase"], r["node"])].append(
+                r["blocks"] * BLOCK_BYTES / r["seconds"] / 1e9
+            )
     capacities = {phase: statistics.median(v) for phase, v in probes.items()}
+    curves = component_curves([r for r in rows if "geometry-" in r["case"]])
     selected_rows = [
-        {**r, "capacity_s": r["blocks"] * BLOCK_BYTES / (capacities[r["phase"]] * 1e9)}
+        {
+            **r,
+            "capacity_s": r["blocks"]
+            * BLOCK_BYTES
+            / (capacities[r["phase"], r["node"]] * 1e9),
+            "curve_s": curve_duration(curves[r["phase"], r["node"]], r["blocks"]),
+        }
         for r in rows
-        if "geometry-b128-" not in r["case"]
+        if "geometry-" not in r["case"]
     ]
     results = []
-    for kind in ["raw", "capacity"]:
-        for slowdown in [1, 2, 4]:
+    for kind in ["raw", "capacity", "curve_capacity"]:
+        for slowdown in [1, 1.25, 2, 4]:
             scores = []
-            for phase in sorted(capacities):
+            for phase in sorted({r["phase"] for r in selected_rows}):
                 train = [r for r in selected_rows if r["phase"] != phase]
                 test = [r for r in selected_rows if r["phase"] == phase]
                 if not train:
                     continue
-                work = [r["idle_s"] + r["busy_s"] / slowdown for r in train]
-                c = robust_fit(
-                    [restore_vector(r, kind) for r in train],
-                    work,
-                    [r["case"] for r in train],
-                )
+                c = capability_scale(train, kind, slowdown)
                 predicted = [
                     np.dot(c, restore_vector(r, kind))
                     / (
@@ -178,19 +260,29 @@ def fit_restore(rows):
     best = min(r["score"] for r in results)
     selected = next(r for r in results if r["score"] <= best * 1.05)
     kind, slowdown = selected["kind"], selected["busy_slowdown"]
-    c = robust_fit(
-        [restore_vector(r, kind) for r in selected_rows],
-        [r["idle_s"] + r["busy_s"] / slowdown for r in selected_rows],
-        [r["case"] for r in selected_rows],
-    )
+    c = capability_scale(selected_rows, kind, slowdown)
     return {
         "kind": kind,
         "coefficients": c,
         "busy_slowdown": slowdown,
         "samples": len(selected_rows),
+        "fit": "Condition-weighted median of dimensionless capability ratios",
         "default_copy_GBps": statistics.median(capacities.values()),
-        "component_probe_GBps": capacities,
-        "capability_scope": "128-block isolated native H2D; two repeats, excluded from coefficient fit and CV score",
+        "component_probe_GBps": {
+            phase: statistics.median(
+                v for (p, _), v in capacities.items() if p == phase
+            )
+            for phase in sorted({p for p, _ in capacities})
+        },
+        "device_component_probe_GBps": {
+            "/".join(key): value for key, value in capacities.items()
+        },
+        "component_probe_ranges_GBps": {
+            "/".join(key): [min(values), max(values)] for key, values in probes.items()
+        },
+        "device_component_curves": {"/".join(k): v for k, v in curves.items()},
+        "default_curve": average_curve(curves),
+        "capability_scope": "Repeated isolated native H2D geometry curves; all geometry probes excluded from coefficient fit and CV score",
     }, results
 
 
@@ -208,7 +300,9 @@ def fit_discovery(sources, transport):
                     "case": q["case"],
                     "phase": source["phase"],
                     "blocks": blocks,
-                    "duration_s": q["wait_ms"] / 1000,
+                    "duration_s": max(
+                        0.000001, q["wait_ms"] / 1000 - q.get("source_wait_s", 0)
+                    ),
                     "baseline": baseline,
                 }
             )
@@ -324,6 +418,27 @@ def build(sources, reference):
         cpu.update(response_delay_s=0, dispatch_gap_s=0)
         profile["CPU_models"][role] = cpu
     profile["restore_model"], selection["restore"] = fit_restore(batches)
+    saves = [
+        r
+        for source in sources
+        for r in source.get("save_probes", [])
+        if r.get("publish_wait_s") is not None
+    ]
+    if saves:
+        # Remaining publication after P's HTTP response is distinct from work
+        # already observed inside a scheduled producer compute step.
+        curves = component_curves(saves, "publish_wait_s")
+        hot = [
+            r["source_publish_wait_s"]
+            for r in requests
+            if "curve-" in r["case"] and r.get("source_publish_wait_s") is not None
+        ]
+        profile["P_publish_model"] = {
+            "default_curve": average_curve(curves),
+            "component_curves": {"/".join(k): v for k, v in curves.items()},
+            "baseline_s": statistics.median(hot) if hot else 0,
+            "scope": "Post-response source KV publication; isolated geometry component probes",
+        }
     profile["restore_coverage"] = {
         key: [min(r[key] for r in batches), max(r[key] for r in batches)]
         for key in ["blocks", "request_count"]

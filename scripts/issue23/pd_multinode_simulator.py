@@ -10,10 +10,10 @@ import random
 from pathlib import Path
 
 from pd_serving_simulator import (
-    ServingSimulation,
-    HostCache,
-    DOMAIN,
     BLOCK_BYTES,
+    DOMAIN,
+    HostCache,
+    ServingSimulation,
     interpolate,
 )
 from step_simulator import CostModel, Job, KVPool, Request
@@ -52,6 +52,12 @@ class CalibratedPD(ServingSimulation):
             "network_Gbps",
             "host_memory_GBps",
             "host_copy_GBps",
+            "device_copy_GBps",
+            "network_sharing",
+            "frontend_serialization",
+            "source_publish_gate",
+            "device_restore_curves",
+            "device_publish_curves",
             "P_routing",
             "D_routing",
             "engine_policy",
@@ -98,9 +104,15 @@ class CalibratedPD(ServingSimulation):
         self.profile = profile
         if any(
             not math.isfinite(v) or v <= 0
-            for v in self.config.get("host_copy_GBps", {}).values()
+            for field in ["host_copy_GBps", "device_copy_GBps"]
+            for v in self.config.get(field, {}).values()
         ):
-            raise ValueError("host_copy_GBps requires positive finite capacities")
+            raise ValueError("Copy capabilities require positive finite capacities")
+        if self.config.get("network_sharing", "fifo") not in [
+            "fifo",
+            "processor_sharing",
+        ]:
+            raise ValueError("Unknown network sharing policy")
         requests = workload["requests"]
         known = {r["id"] for r in requests}
         if len(known) != len(requests) or not requests:
