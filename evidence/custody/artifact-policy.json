@@ -1,0 +1,11 @@
+{
+  "schema_version": "pegaflow.artifact-custody-policy/v1",
+  "expected_artifact_count": 42,
+  "formal": [],
+  "exploratory": [
+    {
+      "glob": "results/**/trace_audit.json",
+      "reason": "exploratory/history-only: exact PegaFlow execution commit is not retained by a current long-lived ref; no paper, end-to-end performance, or cross-system claim is admitted"
+    }
+  ]
+}
