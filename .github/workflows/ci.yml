@@ -391,7 +391,8 @@ jobs:
             scripts/issue23/test_pd_multinode_simulator.py \
             scripts/issue23/test_pd_pipeline_simulator.py \
             scripts/issue23/test_pd_geometry_topology.py \
-            scripts/issue23/test_pd_simulator_comparison.py
+            scripts/issue23/test_pd_simulator_comparison.py \
+            scripts/issue23/test_native_vllm_adapter.py
           python scripts/issue23/verify_step_evidence.py \
             --root .step-evidence/reports/pegaflow-step-simulator-20261026
 

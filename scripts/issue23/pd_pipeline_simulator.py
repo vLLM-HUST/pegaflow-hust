@@ -59,7 +59,8 @@ class GraphCost:
             graph_vector(row) if model.get("kind") == "graph_shape" else vector(row)
         )
         duration = max(
-            1e-6, sum(a * b for a, b in zip(model["coefficients"], inputs, strict=True))
+            1e-6,
+            sum(a * b for a, b in zip(model["coefficients"], inputs, strict=True)),
         )
         if self.restore_active():
             duration *= model.get("restore_busy_slowdown", 1)
@@ -369,7 +370,11 @@ class PipelineSimulation(CalibratedPD):
         vector = [1, size, max(0, batch["request_count"] - 1) / 4]
         work = max(1e-6, sum(a * b for a, b in zip(coefficients, vector, strict=True)))
         batch.update(
-            start=self.now, work_s=work, remaining=work, last=self.now, generation=0
+            start=self.now,
+            work_s=work,
+            remaining=work,
+            last=self.now,
+            generation=0,
         )
         self.flow[node] = batch
         self.copy_busy[node] += 1
@@ -594,7 +599,8 @@ class PipelineSimulation(CalibratedPD):
     def advance_network(self):
         for flow in self.network_flows.values():
             flow["remaining"] = max(
-                0, flow["remaining"] - (self.now - flow["last"]) * flow.get("rate", 0)
+                0,
+                flow["remaining"] - (self.now - flow["last"]) * flow.get("rate", 0),
             )
             flow["last"] = self.now
 
@@ -669,6 +675,14 @@ class PipelineSimulation(CalibratedPD):
         return result
 
 
+def create_pipeline_simulation(workload, profile, config=None):
+    if (config or {}).get("scheduler_backend", "approximate") == "vllm":
+        from native_vllm_pipeline import NativePipelineSimulation
+
+        return NativePipelineSimulation(workload, profile, config)
+    return PipelineSimulation(workload, profile, config)
+
+
 if __name__ == "__main__":
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--profile", type=Path, required=True)
@@ -676,7 +690,7 @@ if __name__ == "__main__":
     parser.add_argument("--config", type=Path)
     parser.add_argument("--output", type=Path, required=True)
     args = parser.parse_args()
-    result = PipelineSimulation(
+    result = create_pipeline_simulation(
         json.loads(args.workload.read_text()),
         json.loads(args.profile.read_text()),
         json.loads(args.config.read_text()) if args.config else None,

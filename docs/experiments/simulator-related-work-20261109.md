@@ -33,7 +33,7 @@
 
 [论文 v3](https://arxiv.org/abs/2605.07985v3)通过区分模型固定维度和请求变化维度，为可复用的算子签名建立测量数据库。DoolySim 的 [DoolySim 类](https://github.com/dooly-project/doolysim/blob/9efd9f6549595bb45814f5cff3cd3cd0cb70292a/doolysim/core/dooly_sim.py)实际取得 vLLM scheduler 并调用 `schedule()`，结合预测耗时和模拟输出推进状态。
 
-这是值得后续采用的方向：保留我们的 PegaFlow 与多节点资源模型，将调度决策接到目标版本 vLLM 的 CPU 侧适配器。这样可以减少手写调度器与引擎在 chunked prefill、APC、抢占等规则上的差异。该适配器需要针对 vLLM 0.23 及连接器状态实现并验证，本轮尚未接入。
+已据此接入 vLLM 0.23 原生调度后端，保留 PegaFlow 与多节点资源模型，将分块 prefill、APC 和抢占交给安装环境的原生调度器。36 个真实模型请求、687 轮调度的逐步对照通过；具体配置、接口范围和耗时预测边界见[适配验收报告](native-vllm-scheduler-20261109.md)。
 
 Dooly 报告的 TTFT MAPE 低于 5%、TPOT 低于 8%，对应论文中的硬件、引擎及 workload 范围，不能直接视为我们跨节点逐请求尾延迟的目标已达成。
 
@@ -87,7 +87,7 @@ block_tokens × layers_per_worker × kv_heads_per_worker × head_dim × dtype_by
 
 ## 后续实施顺序
 
-1. 针对 vLLM 0.23 建立调度器适配层：先比较每步 request IDs、scheduled tokens、缓存命中及抢占，再校准耗时。
+1. 使用已验收的 vLLM 0.23 调度后端，继续按计算、发布、网络与恢复部件校准耗时，并保留逐请求验证。
 2. 给测量数据库增加模型/KV 布局、引擎版本、算子形状和物理路径身份，优先复用未变化的部件。
 3. 有实测资源时，分别验证本地 CPU 池拷贝、跨节点池传输、H2D 恢复及其重叠；按会话和部署保留验证，报告逐请求误差及尾部分位数。
 4. 研究重点进入交换机拥塞控制时，再接更细的网络 backend；当前先以可解释的共享资源模型验证瓶颈位置。

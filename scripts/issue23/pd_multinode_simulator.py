@@ -28,6 +28,7 @@ class HandoffPool(KVPool):
 
 class CalibratedPD(ServingSimulation):
     supports_network_topology = False
+    supports_native_scheduler = False
 
     def __init__(self, workload, profile, config=None):
         self.config = dict(config or {})
@@ -65,6 +66,9 @@ class CalibratedPD(ServingSimulation):
             "engine_policy",
             "handoff_policy",
             "execution_mode",
+            "scheduler_backend",
+            "native_model_path",
+            "native_scheduler_options",
         }
         if set(self.config) - allowed:
             raise ValueError(
@@ -73,6 +77,13 @@ class CalibratedPD(ServingSimulation):
             )
         if "network_topology" in self.config and not self.supports_network_topology:
             raise ValueError("network_topology requires PipelineSimulation")
+        backend = self.config.get("scheduler_backend", "approximate")
+        if backend not in {"approximate", "vllm"}:
+            raise ValueError("Unknown scheduler_backend")
+        if backend == "vllm" and not self.supports_native_scheduler:
+            raise ValueError(
+                "Use create_pipeline_simulation for the native vLLM backend"
+            )
         layout = KVLayout.from_profile(profile)
         if workload.get("block_tokens", 128) != layout.block_tokens:
             raise ValueError(
@@ -108,7 +119,10 @@ class CalibratedPD(ServingSimulation):
                 not math.isfinite(self.config[field]) or self.config[field] <= 0
             ):
                 raise ValueError(field + " requires a positive finite value")
-        if self.config.get("handoff_policy", "full") not in ["full", "best_effort"]:
+        if self.config.get("handoff_policy", "full") not in [
+            "full",
+            "best_effort",
+        ]:
             raise ValueError("Unknown handoff policy")
         self.profile = profile
         if any(
@@ -218,7 +232,9 @@ class CalibratedPD(ServingSimulation):
                 host_bytes[node] = int(self.config[role + "_CPU_GiB"] * 2**30)
         self.pools = [
             HandoffPool(
-                n, self.block_tokens, enable_caching=self.config.get("GPU_APC", True)
+                n,
+                self.block_tokens,
+                enable_caching=self.config.get("GPU_APC", True),
             )
             for n in blocks
         ]
@@ -464,6 +480,9 @@ class CalibratedPD(ServingSimulation):
         if len(self.steps) == before:
             return
         step = self.steps[-1]
+        self.reserve_cpu_step(node, role, step)
+
+    def reserve_cpu_step(self, node, role, step):
         if role not in self.cpu_models:
             return
         cpu = self.cpu_models[role].duration(step)
@@ -616,7 +635,8 @@ def main():
     args.output.write_text(json.dumps(result, indent=2), encoding="utf-8")
     print(
         json.dumps(
-            {"summary": result["summary"], "coverage": result["coverage"]}, indent=2
+            {"summary": result["summary"], "coverage": result["coverage"]},
+            indent=2,
         )
     )
 

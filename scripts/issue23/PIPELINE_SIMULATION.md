@@ -16,6 +16,75 @@ python scripts/issue23/pd_pipeline_simulator.py \
 The output includes per-request stages, compute iterations, restore cohorts,
 resource occupancy, summary percentiles, and calibration coverage warnings.
 
+## Native vLLM scheduling
+
+Select the installed vLLM 0.23 scheduler in the configuration:
+
+```json
+{
+  "scheduler_backend": "vllm",
+  "native_model_path": "/data/shared_models/Qwen2.5-7B-Instruct",
+  "P": 2,
+  "D": 2,
+  "P_token_budget": 4096,
+  "D_token_budget": 2048,
+  "P_max_sequences": 16,
+  "D_max_sequences": 16,
+  "native_scheduler_options": {"policy": "fcfs"}
+}
+```
+
+Run the CLI above with `PYTHONHASHSEED=17`. Python callers use
+`create_pipeline_simulation(workload, profile, config)`. Each P/D engine owns a
+real `Scheduler` and `KVCacheManager`. Native code selects requests, allocates
+pages, matches APC prefixes, chunks prefill and preempts. The simulator supplies
+model outputs and advances its clock using calibrated compute and transfer costs.
+It does not load model weights or execute model kernels for simulated requests.
+
+The connector adapter uses native asynchronous-KV interfaces. CPU prefetch must
+complete before destination page reservation; the native request waits for H2D
+completion feedback before using those pages. Producer pages remain referenced
+until CPU publication finishes. A block-aligned prompt retains its logits suffix.
+
+This backend supports synchronous scheduling, one TP=1 full-attention KV group,
+and `copy_compute_overlap=true`. Hybrid/recurrent, sliding-window, speculative
+decoding, multimodal and asynchronous scheduling need separate adapters. A local
+model configuration and an importable vLLM 0.23 runtime are required. Validation
+used the installed Ascend runtime; a device-free runtime has not been accepted.
+Unsupported versions/settings fail explicitly. Omitting `scheduler_backend`
+retains the portable approximate backend, which requires neither vLLM nor torch.
+
+NPU page counts come from the measured profile/KV layout, including the native
+reserved null page. Scheduler-only KV metadata allocates no tensors; it is not
+a model-memory estimator. Inputs may contain actual `prompt_token_ids`, or logical
+prefix identities in `hashes`. Simulated generation uses synthetic token IDs with
+the requested output length. Answer content, EOS behavior and reuse of generated
+text require real token outputs. Use actual token IDs and sampled outputs when
+replaying observed traces.
+
+Results record the installed scheduler class, version, source SHA256, hash seed,
+options, per-step selections and preemption counts. `D_total_prefill_tokens`
+includes repeated compute after preemption. Native eviction counts are currently
+null. Exact decision replay does not establish TTFT/TPOT timing accuracy.
+
+Optional runtime checks:
+
+```sh
+NATIVE_VLLM_MODEL=/data/shared_models/Qwen2.5-7B-Instruct PYTHONHASHSEED=17 \
+  python -m pytest -c python/pyproject.toml -m integration -q \
+  scripts/issue23/test_native_vllm_adapter.py
+
+PYTHONHASHSEED=17 python scripts/issue23/replay_native_trace.py \
+  --trace observed-scheduler.jsonl --model /data/shared_models/Qwen2.5-7B-Instruct \
+  --output parity.json
+```
+
+The replay accepts scheduler observation events (`config`, `add_request`,
+`schedule`, `update`, optional reset and connector events); the report links the
+capture scripts and full examples. It checks every token selection, request state,
+preemption count and physical block ID. See the
+[adaptation report](../../docs/experiments/native-vllm-scheduler-20261109.md).
+
 ## Cache publication and restoration
 
 P engine completion and CPU KV publication are distinct events. A
