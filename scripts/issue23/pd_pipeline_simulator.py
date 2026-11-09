@@ -8,7 +8,8 @@ from collections import defaultdict, deque
 from pathlib import Path
 
 from pd_multinode_simulator import CalibratedPD, HandoffPool
-from pd_serving_simulator import BLOCK_BYTES, seed_gpu
+from pd_network import NetworkTopology, max_min_rates
+from pd_serving_simulator import seed_gpu
 from step_simulator import Job, vector
 
 
@@ -130,6 +131,8 @@ class ReservedHandoffPool(HandoffPool):
 
 
 class PipelineSimulation(CalibratedPD):
+    supports_network_topology = True
+
     def __init__(self, workload, profile, config=None):
         super().__init__(workload, profile, config)
         self.reserve_pages = profile.get("reserve_restore_pages", True)
@@ -171,6 +174,19 @@ class PipelineSimulation(CalibratedPD):
         self.network_sequence = 0
         self.current_compute_node = None
         self.publications = {}
+        self.network = NetworkTopology(
+            self.config.get("network_topology"),
+            default_bytes_per_s=(
+                self.config["network_Gbps"] * 1e9 / 8
+                if "network_Gbps" in self.config
+                else 1 / max(self.network_s_per_byte, 1e-15)
+            ),
+        )
+        if (
+            self.network.explicit
+            and self.config.get("network_sharing", "fifo") != "processor_sharing"
+        ):
+            raise ValueError("Explicit network_topology requires processor_sharing")
 
     def api_delay(self, role, tokens):
         a, b = self.profile.get("api_inbound", {}).get(role, [0, 0])
@@ -232,7 +248,11 @@ class PipelineSimulation(CalibratedPD):
                         self.jobs[key]["engine_jobs"][node]
                     )
                 else:
-                    seed_gpu(self.pools[node], self.rows[key]["hashes"][gpu:target])
+                    seed_gpu(
+                        self.pools[node],
+                        self.rows[key]["hashes"][gpu:target],
+                        self.cache_domain,
+                    )
                 self.jobs[key]["stages"]["D"].update(
                     restore_end=batch["end"],
                     restore_observed=self.now,
@@ -266,7 +286,7 @@ class PipelineSimulation(CalibratedPD):
                 live["stages"]["D"].update(
                     NPU_initial_prefix_blocks=gpu,
                     target_prefix_blocks=target,
-                    restore_bytes=(target - gpu) * BLOCK_BYTES,
+                    restore_bytes=(target - gpu) * self.block_bytes,
                     query_start=self.now,
                 )
                 if target == gpu:
@@ -343,7 +363,7 @@ class PipelineSimulation(CalibratedPD):
                     self.hosts[node], self.restore_model["default_copy_GBps"]
                 ),
             )
-            size = batch["blocks"] * BLOCK_BYTES / (rate * 1e9)
+            size = batch["blocks"] * self.block_bytes / (rate * 1e9)
         else:
             size = batch["blocks"] / 64
         vector = [1, size, max(0, batch["request_count"] - 1) / 4]
@@ -428,7 +448,7 @@ class PipelineSimulation(CalibratedPD):
                 "P_publish",
                 key,
                 (node, missing),
-                payload=len(missing) * BLOCK_BYTES,
+                payload=len(missing) * self.block_bytes,
             )
         else:
             self.event(self.now + delay, "P_publish", key, (node, missing))
@@ -450,26 +470,19 @@ class PipelineSimulation(CalibratedPD):
                     self.ensure_cycle(live["D"], immediate=True)
             return True
         if kind == "pipeline_fetch":
-            payload = len(data[4]) * BLOCK_BYTES
+            payload = len(data[4]) * self.block_bytes
             if self.config.get("network_sharing", "fifo") == "processor_sharing":
-                self.advance_network()
-                self.network_sequence += 1
                 target, _, _, source, _ = data
-                self.network_flows[self.network_sequence] = {
-                    "id": key,
-                    "data": data,
-                    "bytes": payload,
-                    "remaining": float(payload),
-                    "queued": self.now,
-                    "start": self.now,
-                    "last": self.now,
-                    "endpoints": (
-                        f"{self.hosts[source]}:out",
-                        f"{self.hosts[target]}:in",
-                    ),
-                    "generation": 0,
-                }
-                self.schedule_network()
+                path = self.network.path(self.hosts[source], self.hosts[target])
+                if path.latency_s:
+                    self.event(
+                        self.now + path.latency_s,
+                        "network_begin",
+                        key,
+                        (data, path, self.now),
+                    )
+                else:
+                    self.begin_network(key, data, path, self.now)
                 return True
             self.resource(
                 "RDMA:P-to-D",
@@ -479,6 +492,10 @@ class PipelineSimulation(CalibratedPD):
                 data,
                 payload=payload,
             )
+            return True
+        if kind == "network_begin":
+            fetch, path, queued = data
+            self.begin_network(key, fetch, path, queued)
             return True
         if kind == "network_complete":
             identifier, generation = data
@@ -493,11 +510,14 @@ class PipelineSimulation(CalibratedPD):
             self.transfers.append(
                 {
                     "id": flow["id"],
-                    "resource": f"RDMA:{self.hosts[source]}->{self.hosts[target]}",
+                    "resource": f"{flow['path'].transport.upper()}:{self.hosts[source]}->{self.hosts[target]}",
                     "queued": flow["queued"],
                     "start": flow["start"],
                     "end": self.now,
                     "bytes": flow["bytes"],
+                    "links": list(flow["path"].links),
+                    "transport": flow["path"].transport,
+                    "path_latency_s": flow["path"].latency_s,
                 }
             )
             self.restore(flow["id"], target, gpu, count)
@@ -544,7 +564,7 @@ class PipelineSimulation(CalibratedPD):
                     "queued": flow["queued"],
                     "start": flow["start"],
                     "end": self.now,
-                    "bytes": flow["blocks"] * BLOCK_BYTES,
+                    "bytes": flow["blocks"] * self.block_bytes,
                 }
             )
             self.loaded[node].append(flow)
@@ -554,6 +574,23 @@ class PipelineSimulation(CalibratedPD):
             return True
         return False
 
+    def begin_network(self, key, data, path, queued):
+        self.advance_network()
+        self.network_sequence += 1
+        payload = len(data[4]) * self.block_bytes
+        self.network_flows[self.network_sequence] = {
+            "id": key,
+            "data": data,
+            "bytes": payload,
+            "remaining": float(payload),
+            "queued": queued,
+            "start": self.now,
+            "last": self.now,
+            "path": path,
+            "generation": 0,
+        }
+        self.schedule_network()
+
     def advance_network(self):
         for flow in self.network_flows.values():
             flow["remaining"] = max(
@@ -562,44 +599,13 @@ class PipelineSimulation(CalibratedPD):
             flow["last"] = self.now
 
     def schedule_network(self):
-        capacity = (
-            self.config["network_Gbps"] * 1e9 / 8
-            if "network_Gbps" in self.config
-            else 1 / max(self.network_s_per_byte, 1e-15)
+        rates = max_min_rates(
+            {
+                identifier: flow["path"].links
+                for identifier, flow in self.network_flows.items()
+            },
+            self.network.capacities,
         )
-        active = set(self.network_flows)
-        budgets = {
-            endpoint: capacity
-            for flow in self.network_flows.values()
-            for endpoint in flow["endpoints"]
-        }
-        rates = dict.fromkeys(active, 0.0)
-        while active:
-            counts = defaultdict(int)
-            for identifier in active:
-                for endpoint in self.network_flows[identifier]["endpoints"]:
-                    counts[endpoint] += 1
-            increments = {
-                endpoint: budgets[endpoint] / count
-                for endpoint, count in counts.items()
-            }
-            delta = min(increments.values())
-            for identifier in active:
-                rates[identifier] += delta
-            for endpoint, count in counts.items():
-                budgets[endpoint] = max(0, budgets[endpoint] - delta * count)
-            saturated = {
-                endpoint
-                for endpoint, value in increments.items()
-                if value <= delta + 1e-6
-            }
-            active = {
-                identifier
-                for identifier in active
-                if not saturated.intersection(
-                    self.network_flows[identifier]["endpoints"]
-                )
-            }
         for identifier, flow in self.network_flows.items():
             flow["rate"] = rates[identifier]
             flow["generation"] += 1
@@ -612,7 +618,14 @@ class PipelineSimulation(CalibratedPD):
 
     def run(self):
         result = super().run()
-        result["schema"] = "pegaflow-pd-pipeline-simulation/v3"
+        result["schema"] = "pegaflow-pd-pipeline-simulation/v4"
+        result["settings"]["network_topology"] = (
+            "explicit_paths" if self.network.explicit else "shared_endpoint_NICs"
+        )
+        result["summary"]["network_link_bytes"] = {
+            link: sum(t["bytes"] for t in self.transfers if link in t.get("links", []))
+            for link in self.network.capacities
+        }
         result["copy_batches"] = self.copy_batches
         result["settings"]["transfer_model"] = (
             "engine-iteration discovery, asynchronous prefetch, native copy cohorts and completion feedback"

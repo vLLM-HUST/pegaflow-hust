@@ -53,6 +53,84 @@ The network model shares source outgoing and destination incoming capacities.
 It does not model packet-level queues, ECN or PFC. Copy/compute interaction and
 native runtime interference require measured component calibration.
 
+## KV page geometry
+
+A profile can declare the per-worker KV layout explicitly:
+
+```json
+{
+  "kv_layout": {
+    "block_tokens": 128,
+    "cache_domain": "Qwen2.5-7B-Instruct:BF16",
+    "dense_attention": {
+      "layers_per_worker": 28,
+      "kv_heads_per_worker": 4,
+      "head_dim": 128,
+      "dtype_bytes": 2
+    }
+  }
+}
+```
+
+Dense attention pages include both K and V. These dimensions describe one worker;
+the simulator does not infer KV-head sharding or replication from a TP count.
+Alternatively, supply an explicit integer `bytes_per_block` and `cache_domain`
+for a measured fixed-size page layout. This does not implement the separate
+allocation and lifetime rules of recurrent or hybrid cache groups.
+
+The layout controls CPU eviction capacity, NPU page capacity, recovered prefix
+tokens, payload accounting and capacity-based copy service. Compute and empirical
+service curves still require profiles for the requested model, precision and
+deployment. Profiles without a layout retain the historical Qwen2.5 BF16 layout;
+a profile identifying another model must supply its geometry.
+
+`prepare_pd_workload.py --block-tokens 64` creates hashes and workload metadata for
+64-token pages. The workload page size must match the profile. The historical
+experiment acquisition scripts remain deployment-specific; normalize new
+measurements with the corresponding layout before fitting another deployment.
+
+## Explicit transfer paths
+
+Set `network_sharing` to `processor_sharing` and supply `network_topology` to model
+directed paths with shared bottlenecks. For example:
+
+```json
+{
+  "network_sharing": "processor_sharing",
+  "engine_hosts": ["81", "81", "91", "91"],
+  "network_topology": {
+    "links": {
+      "81-tx": {"bandwidth_GBps": 12.5},
+      "fabric": {"bandwidth_GBps": 10, "latency_us": 4},
+      "91-rx": {"bandwidth_GBps": 12.5},
+      "81-cpu-copy": {"bandwidth_GBps": 30}
+    },
+    "routes": [
+      {"source": "81", "target": "91", "links": ["81-tx", "fabric", "91-rx"]},
+      {"source": "81", "target": "81", "links": ["81-cpu-copy"], "transport": "cpu_copy"}
+    ]
+  }
+}
+```
+
+The example capacities are illustrative. `bandwidth_GBps` uses decimal **bytes**
+per second; `network_Gbps` in the legacy endpoint model uses decimal **bits** per
+second. Explicit paths are authoritative and do not inherit a second NIC limit
+from `network_Gbps`. Every used source/target host pair needs a route.
+
+Reusing a link ID makes flows contend for the same capacity. Separate IDs model
+independent paths or full-duplex directions. Max-min allocation is recomputed on
+flow arrival and completion, including flows limited by other links. Route startup
+latency precedes payload service; it is not counted as bandwidth occupancy. Results
+record link paths, transport labels, startup latency and transferred bytes per link.
+
+Same-host CPU-pool movement needs a CPU-copy path. Placement on one host alone
+does not imply a GPU-to-GPU NVLink transfer. H2D restoration remains a separate
+device service; this path model does not add shared CPU-memory/DMA arbitration
+between H2D and RDMA, packet queues, QP scheduling or congestion-control protocols.
+
+Architecture and source review: [related simulators](../../docs/experiments/simulator-related-work-20261109.md).
+
 ## Calibration
 
 `fit_pipeline_profile.py` accepts multiple normalized evidence files. Compute

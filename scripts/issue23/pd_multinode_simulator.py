@@ -9,9 +9,8 @@ import math
 import random
 from pathlib import Path
 
+from kv_layout import KVLayout
 from pd_serving_simulator import (
-    BLOCK_BYTES,
-    DOMAIN,
     HostCache,
     ServingSimulation,
     interpolate,
@@ -28,6 +27,8 @@ class HandoffPool(KVPool):
 
 
 class CalibratedPD(ServingSimulation):
+    supports_network_topology = False
+
     def __init__(self, workload, profile, config=None):
         self.config = dict(config or {})
         allowed = {
@@ -54,6 +55,7 @@ class CalibratedPD(ServingSimulation):
             "host_copy_GBps",
             "device_copy_GBps",
             "network_sharing",
+            "network_topology",
             "frontend_serialization",
             "source_publish_gate",
             "device_restore_curves",
@@ -68,6 +70,13 @@ class CalibratedPD(ServingSimulation):
             raise ValueError(
                 "Unknown configuration fields: "
                 + str(sorted(set(self.config) - allowed))
+            )
+        if "network_topology" in self.config and not self.supports_network_topology:
+            raise ValueError("network_topology requires PipelineSimulation")
+        layout = KVLayout.from_profile(profile)
+        if workload.get("block_tokens", 128) != layout.block_tokens:
+            raise ValueError(
+                "Workload prefix hashes and profile KV block_tokens differ"
             )
         mode = profile.get("execution_mode", "graph")
         if self.config.get("execution_mode", mode) != mode:
@@ -184,6 +193,8 @@ class CalibratedPD(ServingSimulation):
             p_tokens=self.config.get("P_token_budget", 8192),
             d_tokens=self.config.get("D_token_budget", 2048),
             max_sequences=self.config.get("max_sequences", 128),
+            kv_layout=layout,
+            initial_blocks=min(profile["D_blocks"], *profile["P_blocks"]),
         )
         self.specs = {r["id"]: r for r in workload["requests"]}
         self.role_models = {k: CostModel(v) for k, v in profile["models"].items()}
@@ -201,15 +212,17 @@ class CalibratedPD(ServingSimulation):
             role = "P" if node < p_count else "D"
             if role + "_NPU_KV_GiB" in self.config:
                 blocks[node] = int(
-                    self.config[role + "_NPU_KV_GiB"] * 2**30 // BLOCK_BYTES
+                    self.config[role + "_NPU_KV_GiB"] * 2**30 // self.block_bytes
                 )
             if role + "_CPU_GiB" in self.config:
                 host_bytes[node] = int(self.config[role + "_CPU_GiB"] * 2**30)
         self.pools = [
-            HandoffPool(n, 128, enable_caching=self.config.get("GPU_APC", True))
+            HandoffPool(
+                n, self.block_tokens, enable_caching=self.config.get("GPU_APC", True)
+            )
             for n in blocks
         ]
-        self.host = [HostCache(n) for n in host_bytes]
+        self.host = [HostCache(n, self.block_bytes) for n in host_bytes]
         self.budget = {"CPU_pool_bytes": host_bytes, "NPU_blocks": blocks}
         self.overlap = self.config.get(
             "copy_compute_overlap", profile.get("copy_compute_overlap", True)
@@ -380,12 +393,12 @@ class CalibratedPD(ServingSimulation):
                 "node": node,
                 "NPU_initial_prefix_blocks": gpu,
                 "target_prefix_blocks": target,
-                "restore_bytes": (target - gpu) * BLOCK_BYTES,
+                "restore_bytes": (target - gpu) * self.block_bytes,
             }
             job.external_prefix = target
             self.host[source].pins.update(missing)
             if missing:
-                payload = len(missing) * BLOCK_BYTES
+                payload = len(missing) * self.block_bytes
                 query = interpolate(
                     self.native, self.rows[key]["tokens"], "query_seconds"
                 )
@@ -422,7 +435,7 @@ class CalibratedPD(ServingSimulation):
             row["tokens"],
             1 if node < self.p_count else self.specs[key]["output_tokens"],
             tuple(row["hashes"]),
-            DOMAIN,
+            self.cache_domain,
             task=row["task"],
         )
 
@@ -439,7 +452,7 @@ class CalibratedPD(ServingSimulation):
                     self.waiting[node],
                     key=lambda j: (
                         j.request.prompt_tokens
-                        - len(self.pools[node].prefix(j)) * 128
+                        - len(self.pools[node].prefix(j)) * self.block_tokens
                         + j.request.output_tokens
                     ),
                 )

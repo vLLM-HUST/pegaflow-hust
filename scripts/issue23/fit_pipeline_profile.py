@@ -13,8 +13,9 @@ from collections import Counter, defaultdict
 from pathlib import Path
 
 import numpy as np
+from kv_layout import KVLayout
 from pd_pipeline_simulator import curve_duration, graph_vector
-from pd_serving_simulator import BLOCK_BYTES, interpolate
+from pd_serving_simulator import interpolate
 from step_simulator import vector
 
 
@@ -200,14 +201,15 @@ def capability_scale(rows, kind, slowdown):
     raise ValueError("Restoration calibration requires nonempty conditions")
 
 
-def fit_restore(rows):
+def fit_restore(rows, layout=None):
+    layout = layout or KVLayout()
     # Standard 128-block component probes supply a deployment capability input.
     # Their durations are excluded from coefficient fitting and CV scoring.
     probes = defaultdict(list)
     for r in rows:
         if "geometry-b128-" in r["case"]:
             probes[(r["phase"], r["node"])].append(
-                r["blocks"] * BLOCK_BYTES / r["seconds"] / 1e9
+                r["blocks"] * layout.bytes_per_block / r["seconds"] / 1e9
             )
     capacities = {phase: statistics.median(v) for phase, v in probes.items()}
     curves = component_curves([r for r in rows if "geometry-" in r["case"]])
@@ -215,7 +217,7 @@ def fit_restore(rows):
         {
             **r,
             "capacity_s": r["blocks"]
-            * BLOCK_BYTES
+            * layout.bytes_per_block
             / (capacities[r["phase"], r["node"]] * 1e9),
             "curve_s": curve_duration(curves[r["phase"], r["node"]], r["blocks"]),
         }
@@ -286,15 +288,20 @@ def fit_restore(rows):
     }, results
 
 
-def fit_discovery(sources, transport):
+def fit_discovery(sources, transport, layout=None):
+    layout = layout or KVLayout()
     rows = []
     for source in sources:
         requests = {r["request_id"]: r for r in source["requests"]}
         for q in source["queries"]:
             if "geometry-" not in q["case"]:
                 continue
-            blocks = (requests[q["client_id"]]["prompt_tokens"] - 1) // 128
-            baseline = blocks * BLOCK_BYTES * transport + source["idle_poll_s"]
+            blocks = (
+                requests[q["client_id"]]["prompt_tokens"] - 1
+            ) // layout.block_tokens
+            baseline = (
+                blocks * layout.bytes_per_block * transport + source["idle_poll_s"]
+            )
             rows.append(
                 {
                     "case": q["case"],
@@ -356,6 +363,10 @@ def fit_discovery(sources, transport):
 
 def build(sources, reference):
     profile = copy.deepcopy(reference)
+    layout = KVLayout.from_profile(profile)
+    for source in sources:
+        if "kv_layout" in source and KVLayout.from_profile(source) != layout:
+            raise ValueError("Calibration evidence and profile KV layouts differ")
     steps = [r for source in sources for r in source["steps"]]
     batches = [r for source in sources for r in source["restore_batches"]]
     requests = [r for source in sources for r in source["requests"]]
@@ -417,7 +428,7 @@ def build(sources, reference):
             }
         cpu.update(response_delay_s=0, dispatch_gap_s=0)
         profile["CPU_models"][role] = cpu
-    profile["restore_model"], selection["restore"] = fit_restore(batches)
+    profile["restore_model"], selection["restore"] = fit_restore(batches, layout)
     saves = [
         r
         for source in sources
@@ -445,20 +456,24 @@ def build(sources, reference):
     }
     services = defaultdict(list)
     for row in batches:
-        services[row["blocks"] * 128].append(row["seconds"])
+        services[row["blocks"] * layout.block_tokens].append(row["seconds"])
     query_groups = defaultdict(list)
     for source in sources:
         records = {r["request_id"]: r for r in source["requests"]}
         for q in source["queries"]:
             if "geometry-" in q["case"]:
-                tokens = (records[q["client_id"]]["prompt_tokens"] - 1) // 128 * 128
+                tokens = (
+                    (records[q["client_id"]]["prompt_tokens"] - 1)
+                    // layout.block_tokens
+                    * layout.block_tokens
+                )
                 query_groups[tokens].append(
                     max(
                         0,
                         q["wait_ms"] / 1000
                         - tokens
-                        / 128
-                        * BLOCK_BYTES
+                        / layout.block_tokens
+                        * layout.bytes_per_block
                         * profile["network_seconds_per_byte"],
                     )
                 )
@@ -486,7 +501,7 @@ def build(sources, reference):
     profile["idle_poll_s"] = statistics.median(s["idle_poll_s"] for s in sources)
     profile["query_fixed_s"] = 0
     profile["discovery_model"], selection["discovery"] = fit_discovery(
-        sources, profile["network_seconds_per_byte"]
+        sources, profile["network_seconds_per_byte"], layout
     )
     profile["copy_lanes"] = 1
     profile["calibration_cases"] = sorted({r["case"] for r in steps})

@@ -9,11 +9,12 @@ import math
 from collections import Counter, OrderedDict, deque
 from pathlib import Path
 
+from kv_layout import KVLayout
 from pd_serial_simulator import input_path, quantiles, read, write
 from step_simulator import CostModel, Job, KVPool, Request, features
 
-BLOCK_BYTES = 128 * 57344
-DOMAIN = "Qwen2.5-7B-Instruct:BF16"
+BLOCK_BYTES = KVLayout.bytes_per_block
+DOMAIN = KVLayout.cache_domain
 
 
 def interpolate(rows, tokens, field):
@@ -48,8 +49,9 @@ def memory_budget(
 
 
 class HostCache:
-    def __init__(self, capacity):
+    def __init__(self, capacity, block_bytes=BLOCK_BYTES):
         self.capacity = capacity
+        self.block_bytes = block_bytes
         self.keys = OrderedDict()
         self.pins = Counter()
         self.peak, self.evictions = 0, 0
@@ -65,20 +67,20 @@ class HostCache:
             if key in self.keys:
                 self.keys.move_to_end(key)
                 continue
-            while (len(self.keys) + 1) * BLOCK_BYTES > self.capacity:
+            while (len(self.keys) + 1) * self.block_bytes > self.capacity:
                 victim = next((key for key in self.keys if not self.pins[key]), None)
                 if victim is None:
                     raise ValueError("Pinned CPU cache cannot fit handoff")
                 del self.keys[victim]
                 self.evictions += 1
             self.keys[key] = None
-        self.peak = max(self.peak, len(self.keys) * BLOCK_BYTES)
+        self.peak = max(self.peak, len(self.keys) * self.block_bytes)
 
 
-def seed_gpu(pool, hashes):
+def seed_gpu(pool, hashes, domain=DOMAIN):
     """Publish a completed host-to-device restore into unreferenced GPU pages."""
     for logical in hashes:
-        key = (DOMAIN, logical)
+        key = (domain, logical)
         if pool.cached.get(key):
             continue
         if not pool.free:
@@ -111,7 +113,13 @@ class ServingSimulation:
         npu_gib=None,
         p_count=2,
         d_count=2,
+        kv_layout=None,
+        initial_blocks=None,
     ):
+        self.kv_layout = kv_layout or KVLayout()
+        self.block_tokens = self.kv_layout.block_tokens
+        self.block_bytes = self.kv_layout.bytes_per_block
+        self.cache_domain = self.kv_layout.cache_domain
         self.rows = {row["id"]: row for row in bundle["rows"]}
         if any(
             set(row) != {"id", "task", "tokens", "hashes"} for row in bundle["rows"]
@@ -135,10 +143,16 @@ class ServingSimulation:
         self.budget = memory_budget()
         if npu_gib is not None:
             self.budget["NPU_KV_GiB"] = npu_gib
-        blocks = int(self.budget["NPU_KV_GiB"] * 2**30 // BLOCK_BYTES)
-        self.pools = [KVPool(blocks, 128) for _ in range(self.node_count)]
+        blocks = (
+            initial_blocks
+            if initial_blocks is not None
+            else int(self.budget["NPU_KV_GiB"] * 2**30 // self.block_bytes)
+        )
+        self.pools = [KVPool(blocks, self.block_tokens) for _ in range(self.node_count)]
         self.host = [
-            HostCache(self.budget["CPU_pool_GiB_per_instance"] * 2**30)
+            HostCache(
+                self.budget["CPU_pool_GiB_per_instance"] * 2**30, self.block_bytes
+            )
             for _ in range(self.node_count)
         ]
         for node, payload in enumerate(bundle["initial_inventory"]):
@@ -228,7 +242,7 @@ class ServingSimulation:
             row["tokens"],
             1 if node < self.p_count else 128,
             tuple(row["hashes"]),
-            DOMAIN,
+            self.cache_domain,
             task=row["task"],
         )
         job = Job(request)
@@ -245,7 +259,7 @@ class ServingSimulation:
             "node": node,
             "NPU_initial_prefix_blocks": gpu,
             "target_prefix_blocks": target,
-            "restore_bytes": (target - gpu) * BLOCK_BYTES,
+            "restore_bytes": (target - gpu) * self.block_bytes,
         }
         if node >= self.p_count:
             missing = [
@@ -256,7 +270,7 @@ class ServingSimulation:
                 raise ValueError("P completed without publishing the required handoff")
             self.host[source].pins.update(missing)
             if missing:
-                payload = len(missing) * BLOCK_BYTES
+                payload = len(missing) * self.block_bytes
                 query = interpolate(
                     self.native, min(row["tokens"], 24576), "query_seconds"
                 )
@@ -275,7 +289,7 @@ class ServingSimulation:
         if target == gpu:
             self.admit(key, node)
             return
-        tokens = (target - gpu) * 128
+        tokens = (target - gpu) * self.block_tokens
         seconds = interpolate(self.native, tokens, "load_complete_seconds")
         self.resource(
             f"H2D:{node}",
@@ -283,7 +297,7 @@ class ServingSimulation:
             "restore_done",
             key,
             (node, gpu, target),
-            payload=tokens * 57344,
+            payload=(target - gpu) * self.block_bytes,
             node=node,
         )
 
@@ -311,7 +325,7 @@ class ServingSimulation:
         while self.waiting[node] and budget and len(running) < self.max_sequences:
             job = self.waiting[node][0]
             prefix = pool.prefix(job)
-            computed = len(prefix) * 128
+            computed = len(prefix) * self.block_tokens
             take = min(budget, job.request.prompt_tokens + job.generated - computed)
             if not pool.allocate(job, take, prefix):
                 break
@@ -384,14 +398,16 @@ class ServingSimulation:
         live["stages"]["P" if node < self.p_count else "D"]["engine_end"] = self.now
         if node < self.p_count:
             missing = [h for h in row["hashes"] if h not in self.host[node].keys]
-            seconds = interpolate(self.native, len(missing) * 128, "save_RPC_seconds")
+            seconds = interpolate(
+                self.native, len(missing) * self.block_tokens, "save_RPC_seconds"
+            )
             self.resource(
                 f"D2H:{node}",
                 seconds,
                 "save_done",
                 key,
                 (node, missing),
-                payload=len(missing) * BLOCK_BYTES,
+                payload=len(missing) * self.block_bytes,
                 node=node,
             )
         else:
@@ -422,7 +438,11 @@ class ServingSimulation:
             elif kind == "restore_done":
                 node, gpu, target = data
                 self.copy_busy[node] -= 1
-                seed_gpu(self.pools[node], self.rows[key]["hashes"][gpu:target])
+                seed_gpu(
+                    self.pools[node],
+                    self.rows[key]["hashes"][gpu:target],
+                    self.cache_domain,
+                )
                 self.admit(key, node)
             elif kind == "save_done":
                 node, missing = data
@@ -443,7 +463,8 @@ class ServingSimulation:
             self.submit_ready()
             for node in range(self.node_count):
                 self.peak_resident[node] = max(
-                    self.peak_resident[node], len(self.pools[node].cached) * BLOCK_BYTES
+                    self.peak_resident[node],
+                    len(self.pools[node].cached) * self.block_bytes,
                 )
                 self.schedule(node)
         if (
@@ -461,7 +482,8 @@ class ServingSimulation:
                 "P": self.p_count,
                 "D": self.d_count,
                 "TP": 1,
-                "model": DOMAIN,
+                "model": self.cache_domain,
+                "kv_layout": self.kv_layout.to_dict(),
                 "graph_mode": True,
                 "P_token_budget": self.p_tokens,
                 "D_token_budget": self.d_tokens,

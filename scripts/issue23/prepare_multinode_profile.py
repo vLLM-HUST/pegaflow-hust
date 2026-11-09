@@ -46,11 +46,19 @@ def delta(folder, fragment):
     return sum(v - a.get(k, 0) for k, v in b.items() if k.startswith(fragment + "{"))
 
 
-def hashes(tokens, salt):
+def hashes(tokens, salt, block_tokens=128):
+    if (
+        not isinstance(block_tokens, int)
+        or isinstance(block_tokens, bool)
+        or block_tokens < 1
+    ):
+        raise ValueError("block_tokens requires a positive integer")
     parent = hashlib.sha256(salt.encode()).digest()
     result = []
-    for start in range(0, len(tokens) - 128, 128):
-        block = b"".join(t.to_bytes(4, "little") for t in tokens[start : start + 128])
+    for start in range(0, len(tokens) - block_tokens, block_tokens):
+        block = b"".join(
+            t.to_bytes(4, "little") for t in tokens[start : start + block_tokens]
+        )
         parent = hashlib.sha256(parent + block).digest()
         result.append(parent.hex())
     return result
