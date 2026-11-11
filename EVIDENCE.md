@@ -82,3 +82,15 @@ export BENCHMARK_ISSUE28_SOURCE_ROOT=/absolute/new/external/issue28-source
 Only read those archived files for the original LF-normalized hashes; never execute them.
 The policy feedback simulator requires an explicit `--seed` pointing to
 `$BENCHMARK_COLLECTION_ROOT/experiments/issue23_strategies/runtime/calibration-seed`.
+
+## Ascend DMA restore experiments (2026-11-11)
+
+[Progress and before/after results](docs/experiments/issue23-dma-restore-20261111.md)
+cover the local registration crossover and six real-model replay conditions.
+Maintained build, finite probe, replay and telemetry tools live under
+`scripts/issue23/dma_restore_*`; the experimental C implementations are in
+`scripts/issue23/dma_restore_sources/`.
+
+[Canonical report and raw archive manifests](https://github.com/vLLM-HUST/vllm-hust-benchmark/tree/d67aea6eb3eb0dee271a01b4d66acce8b65bd034/reports/pegaflow-restore-causal-20261110)
+preserve executed source, launch parameters, failures and per-request measurements.
+New experiment outputs belong outside this checkout; publish them in benchmark.
