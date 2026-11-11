@@ -647,6 +647,19 @@ def resolve_instance_id(vllm_config, dp_rank_suffix: bool = True) -> str:
     return instance_id
 
 
+def resolve_model_identity(vllm_config) -> str:
+    # Resolve an explicit identity for byte-identical staged model files.
+    extra = getattr(vllm_config, "kv_transfer_config", None)
+    alias = extra.get_from_extra_config("pegaflow.model_identity", None) if extra else None
+    if alias is None:
+        return vllm_config.model_config.model
+    if not isinstance(alias, str) or not alias.strip():
+        raise ValueError("pegaflow.model_identity must be a nonempty string")
+    if resolve_model_revision(vllm_config) is None:
+        raise ValueError("Explicit model identity requires an immutable model revision")
+    return alias.strip()
+
+
 def derive_namespace(
     vllm_config,
     tp_size: int,
@@ -677,7 +690,7 @@ def derive_namespace(
     additional_config = getattr(vllm_config, "additional_config", None) or {}
 
     factors = {
-        "model": model_config.model,
+        "model": resolve_model_identity(vllm_config),
         "model_revision": resolve_model_revision(vllm_config),
         "block_size": getattr(cache_config, "block_size", None),
         "dtype": str(model_config.dtype),

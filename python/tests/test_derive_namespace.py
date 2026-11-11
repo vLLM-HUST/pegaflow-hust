@@ -9,6 +9,8 @@ from __future__ import annotations
 
 from types import SimpleNamespace
 
+import pytest
+
 from .unit_stubs import install_connector_unit_stubs
 
 install_connector_unit_stubs()
@@ -60,3 +62,36 @@ def test_missing_additional_config_defaults_to_no_split():
     cfg = _make_vllm_config(pp_size=4)
     cfg.additional_config = None
     assert derive_namespace(cfg, tp_size=8) == _ns(pp_size=4, mla_layer_split=False)
+
+
+def _staged_config(path, identity=None, revision=None):
+    cfg = _make_vllm_config()
+    cfg.model_config.model = path
+    extras = {"pegaflow.model_identity": identity, "pegaflow.model_revision": revision}
+    cfg.kv_transfer_config = SimpleNamespace(get_from_extra_config=extras.get)
+    return cfg
+
+
+def test_explicit_identity_shares_namespace_for_staged_identical_models():
+    original = _staged_config("/shared/model", revision="fixed-revision")
+    staged = _staged_config("/local/model", "/shared/model", "fixed-revision")
+    assert derive_namespace(original, 1) == derive_namespace(staged, 1)
+    staged.cache_config.cache_dtype = "bfloat16"
+    assert derive_namespace(original, 1) != derive_namespace(staged, 1)
+
+
+def test_identity_keeps_revision_and_default_path_isolation():
+    first = _staged_config("/first", "shared-model", "revision-1")
+    second = _staged_config("/second", "shared-model", "revision-2")
+    assert derive_namespace(first, 1) != derive_namespace(second, 1)
+    assert derive_namespace(_staged_config("/first"), 1) != derive_namespace(
+        _staged_config("/second"), 1
+    )
+
+
+@pytest.mark.parametrize(
+    "identity,revision", [("", "fixed"), (123, "fixed"), ("m", None), ("m", "main")]
+)
+def test_invalid_explicit_identity_is_rejected(identity, revision):
+    with pytest.raises(ValueError):
+        derive_namespace(_staged_config("/local", identity, revision), 1)
