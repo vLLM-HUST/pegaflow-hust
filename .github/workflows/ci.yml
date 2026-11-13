@@ -114,6 +114,19 @@ jobs:
         run: |
           cargo fmt --all -- --check
 
+  npu-numa-unit-tests:
+    name: NPU NUMA device discovery unit tests
+    runs-on: ubuntu-latest
+    env:
+      RUSTC_WRAPPER: ""
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          persist-credentials: false
+      - uses: dtolnay/rust-toolchain@1.97.0
+      - name: Test sparse container device discovery without NPU hardware
+        run: cargo test -p pegaflow-common --lib sparse_container_device_tests
+
   rust-clippy-check:
     name: rust clippy check
     runs-on: ubuntu-latest
