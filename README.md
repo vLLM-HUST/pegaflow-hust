@@ -42,6 +42,30 @@ Chen Yanbo (`@cybber695`) is the current topic owner and executor. Chen Zijia's
 (`@mynameisczj`) earlier contributions remain part of the Git and paper-evidence
 history, but he is not a current owner or executor.
 
+### Contribution provenance (verified 2026-11-13)
+
+The current topic owner is distinct from the authors of the software and
+experiments below. PR submitters and Git commit authors are listed separately
+where they differ; the original Git authorship and license notices remain
+authoritative.
+
+| Component or evidence | Verified attribution and fixed references |
+| --- | --- |
+| Upstream storage/transfer system and vLLM connector foundation | [Novita Labs PegaFlow](https://github.com/novitalabs/pegaflow); retain upstream and third-party license/copyright notices. This table does not claim a newly verified exact upstream import anchor. |
+| Initial Ascend backend, device abstraction, NPU NUMA and IPC/transfer support | Chen Zijia (`mynameisczj`): [PR #1](https://github.com/vLLM-HUST/pegaflow-hust/pull/1), merge `1f24ff18dda66df846dd8656ae6906704e48a39f`; NUMA/pinned-memory follow-up [PR #2](https://github.com/vLLM-HUST/pegaflow-hust/pull/2), merge `f81a12447d403f6e70dd1b48ab452b9d8bcd0a1a`. |
+| Qwen3.5 cache-group recovery, packaging and September Frontier evidence | [PR #30](https://github.com/vLLM-HUST/pegaflow-hust/pull/30), submitted by `ShuhaoZhangTony`, includes earlier connector/cache-group commits authored by `mynameisczj` and recovery/packaging/evidence commits authored as `Codex`. The recorded serving revision is `cd64ecc283ff856a44437a9a25659929ef3a0653`; the evidence addition is `e14d905fe691d4dddbbe06f21cd67e9079683956`. These records do not by themselves identify the human operator of every measurement. |
+| Current TP query/rank acknowledgement and sparse hybrid checkpoint recovery | Zhang Shengxiang (`zhangshengxiang682`): [PR #34](https://github.com/vLLM-HUST/pegaflow-hust/pull/34), merge `06ccdc8e950d087b961066304eb61aa0a555771b`; [PR #36](https://github.com/vLLM-HUST/pegaflow-hust/pull/36), merge `f3cfb1904d967a00780b63a370c15e6c274fc396`. |
+| November 13 sparse-device compatibility patch and interrupted rerun | Submitted by `cybber695` with Codex assistance against `2e4cd2e9a244f7aefd732a442f9662a2acc88049`. The NUMA patch permits startup with physical devices 0/7 mapped to logical 0/1. The rerun stopped at an unresolved output-repeatability check and later lost its workspace; it supplies no new 900-second throughput comparison or performance claim. |
+
+Public experiment configurations, diagnostic extracts, raw-data references and
+results belong in the
+[`vllm-hust-benchmark` evidence repository](https://github.com/vLLM-HUST/vllm-hust-benchmark/tree/main/reports).
+The November 17 submission is tracked by
+[benchmark #664](https://github.com/vLLM-HUST/vllm-hust-benchmark/issues/664)
+and [PegaFlow #18](https://github.com/vLLM-HUST/pegaflow-hust/issues/18).
+Historical exploratory records and failed runs retain their classifications;
+this provenance update does not admit them as new formal evidence.
+
 ## News
 
 - **2026-05-18** — [vLLM x Novita AI: PegaFlow for Production-Grade External KV Cache](https://vllm.ai/blog/2026-05-18-pegaflow), a joint blog post with the vLLM team.
